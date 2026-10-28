@@ -74,3 +74,25 @@ missing. Some requested models exist only as guarded research challengers.
 No forward sample, untouched later seasons, certified sharp close or return
 confidence interval can be created by running more code today. A model cannot
 be safely promoted on the present evidence.
+
+## Winner-only mode and slate UI — October 28, 2026
+
+The daily public board now ranks and freezes up to three team-Elo winner
+forecasts per ET game date without sportsbook odds or value thresholds. It can
+select a positive-moneyline team when its Elo estimate favors that team; a
+fixture verifies a +210 selection. All scheduled games with available ratings
+show a predicted winner in a compact, filtered upcoming slate. The slate opens
+to today's games, with NBA/NFL filters, six rows per page and a bounded scroll
+area. Each row expands to show odds and available injury context. Prices never
+change the winner forecast. The new accuracy counter counts this winner-only
+record; old research selections are kept separately.
+
+The full master prompt remains **incomplete**. Injury reports and all-position
+status counts can be displayed, but player-level replacement impact and
+conditional questionable-player availability are not inputs to the Elo
+forecast. NBA upstream data rights, verified pregame historical availability,
+calibrated machine learning, an outperforming simulation/ensemble and a
+market-matched untouched test remain unresolved. The independent NBA scoring
+unit and NFL drive challenger was implemented, tested and found inferior to
+Elo on the exploratory matched samples. Neither the top-three rank nor a
+positive sportsbook moneyline establishes a validated edge or reliable win.

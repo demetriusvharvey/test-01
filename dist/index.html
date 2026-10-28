@@ -55,7 +55,13 @@
       <div class="list-header"><p id="freshness" aria-live="polite">Loading today’s winners…</p><span id="count"></span></div>
       <section id="picks" class="pick-list" aria-label="Predicted winners" aria-live="polite"><div class="loading">Loading winners…</div></section>
       <section id="saved-section" class="watch-section" hidden><h2>Saved earlier</h2><p>Previous forecasts appear in the date history. This section shows any earlier selections separately.</p><div id="saved-list" class="pick-list"></div></section>
-      <details id="slate-section" class="manual-tool" hidden><summary>Upcoming game slate</summary><p>The model’s likely winner for each scheduled game. Odds are optional context; the model has not been calibrated to guarantee outcomes.</p><div id="game-slate" class="pick-list"></div></details>
+      <details id="slate-section" class="manual-tool slate-tool" hidden>
+        <summary>Upcoming slate <span class="slate-summary-note">Tap for other game forecasts</span></summary>
+        <div class="slate-toolbar"><label for="slate-filter">Show</label><select id="slate-filter" aria-label="Filter upcoming games"><option value="today">Today</option><option value="nba">Upcoming NBA</option><option value="nfl">Upcoming NFL</option></select><span id="slate-count" aria-live="polite"></span></div>
+        <div id="game-slate" class="slate-list" aria-label="Upcoming model forecasts"></div>
+        <button type="button" id="slate-more" class="slate-more" hidden>Show more games</button>
+        <p class="slate-note">Predicted winners use team results, not sportsbook odds. Player absences are shown in details when reported; they do not yet change the forecast.</p>
+      </details>
       <section id="watch-section" class="watch-section" hidden><h2>Watching</h2><p>Games you asked to follow; not included in the pick record.</p><div id="watchlist" class="pick-list"></div></section>
       <details class="manual-tool"><summary>Check a FanDuel price</summary>
         <p>Enter a price you see on FanDuel. It is saved only in this browser as your observation; it is not a live quote or a recommended bet.</p>

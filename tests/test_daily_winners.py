@@ -30,6 +30,16 @@ class WinnerForecastTests(unittest.TestCase):
         self.assertTrue(all(x['books'][0]['odds'] is None for x in board['picks']))
         self.assertEqual(board['games'][0]['predicted_winner'],'A')
 
+    def test_positive_moneyline_model_winner_is_not_screened_out(self):
+        underdog=self.scheduled[0]
+        underdog['books']={'FanDuel':{'home':+210,'away':-240,'as_of':self.now.isoformat()}}
+        forecasts=make_daily_winners([underdog],{'NBA':self.model},self.now,[])
+        self.assertEqual(len(forecasts),1)
+        self.assertEqual(forecasts[0]['team'],'A')
+        board={'games':[underdog],'history':[],'errors':[]}
+        render_winners(board,forecasts,self.now,{'NBA':self.model})
+        self.assertEqual(board['picks'][0]['books'][0]['odds'],+210)
+
     def test_price_cannot_change_winner_and_pregame_forecast_is_frozen(self):
         first=make_daily_winners(self.scheduled,{'NBA':self.model},self.now,[])
         self.scheduled[0]['books']={'FanDuel':{'home':-10000,'away':+5000,'as_of':self.now.isoformat()}}

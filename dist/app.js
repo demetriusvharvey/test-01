@@ -35,7 +35,7 @@
     'Believe in what you’re building.',
     'Fresh day, fresh energy, clear goals.'
   ];
-  let board=null,selectedDay=dayString(),followToday=true;
+  let board=null,selectedDay=dayString(),followToday=true,slateLimit=6;
   const today=()=>dayString();
   function setDailyDetails(){
     const day=today();if(followToday)selectedDay=day;
@@ -146,15 +146,17 @@
   }
   function slateMarkup(g){
     const books=Object.entries(g.books||{});
-    const each=side=>{
+    const best=side=>{
       const quotes=books.filter(([,b])=>Number.isFinite(b[side])).sort((a,b)=>b[1][side]-a[1][side]);
-      if(!quotes.length)return 'Price unavailable';
+      if(!quotes.length)return 'Odds unavailable';
       const [name,b]=quotes[0];return `${odds(b[side])} · ${escape(name)} · observed ${displayTime(b.as_of)}`;
     };
-    const simulation=g.simulation;
-    const simulated=simulation?`<p>Score research: ${Number(simulation.draws).toLocaleString()} seeded score draws; median ${escape(g.home)} ${Number(simulation.median_home_score)}–${escape(g.away)} ${Number(simulation.median_away_score)}. This score model does not include injuries or change picks.</p>`:'';
-    return `<article class="pick"><div class="pick-head"><div class="team-info"><h3>${escape(g.away)} at ${escape(g.home)}</h3><p>${escape(g.league)} · ${displayTime(g.starts_at)}</p><p>Model winner: <strong>${escape(g.predicted_winner||'Unavailable')}</strong>${g.prediction_uncertain?' · close forecast':''}</p></div></div><div class="slate-prices"><p>${escape(g.away)}: ${each('away')}</p><p>${escape(g.home)}: ${each('home')}</p></div><details class="pick-context"><summary>Game details</summary>${availabilityMarkup(g)}${simulated}</details></article>`;
+    const gameDay=dayString(new Date(g.starts_at));
+    const when=gameDay===today()?displayTime(g.starts_at):`${displayDay(gameDay)} · ${displayTime(g.starts_at)}`;
+    return `<details class="slate-row"><summary><span class="slate-matchup"><strong>${escape(g.away)} at ${escape(g.home)}</strong><small>${escape(g.league)} · ${when}</small></span><span class="slate-winner">${g.predicted_winner?`Model: ${escape(g.predicted_winner)}${g.prediction_uncertain?' · close call':''}`:'Model unavailable'}</span></summary><div class="slate-row-detail"><p>${escape(g.away)}: ${best('away')}</p><p>${escape(g.home)}: ${best('home')}</p>${availabilityMarkup(g)}</div></details>`;
   }
+  $('slate-filter').addEventListener('change',()=>{slateLimit=6;render();});
+  $('slate-more').addEventListener('click',()=>{slateLimit+=6;render();});
   function render(){
     setDailyDetails();renderDates();renderFactors();if(!board)return;
     const gameSelect=$('manual-game'),prior=gameSelect.value;
@@ -195,9 +197,13 @@
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
     $('saved-section').hidden=!earlier.length;
     $('saved-list').innerHTML=earlier.map(p=>pickMarkup(Object.assign({},p,{current:false}))).join('');
-    const slate=selectedDay===today()&&!stale?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now):[];
-    $('slate-section').hidden=!slate.length;
-    $('game-slate').innerHTML=slate.map(slateMarkup).join('');
+    const allSlate=selectedDay===today()&&!stale?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now):[];
+    const filter=$('slate-filter').value;
+    const slate=allSlate.filter(g=>filter==='today'?dayString(new Date(g.starts_at))===today():g.league===filter.toUpperCase());
+    $('slate-section').hidden=!allSlate.length;
+    $('slate-count').textContent=`${slate.length} game${slate.length===1?'':'s'}`;
+    $('game-slate').innerHTML=slate.length?slate.slice(0,slateLimit).map(slateMarkup).join(''):'<p class="slate-empty">No games in this view.</p>';
+    $('slate-more').hidden=slateLimit>=slate.length;
     const watched=selectedDay===today()&&!stale?(Array.isArray(board.watchlist)?board.watchlist:[]).filter(p=>{
       const stamps=(p.books||[]).filter(b=>Number.isFinite(b.odds)).map(b=>new Date(b.as_of).valueOf());
       return new Date(p.starts_at)>now&&!picks.some(x=>x.id===p.id)&&stamps.length>0&&stamps.every(t=>Number.isFinite(t)&&t<=now.valueOf()+5*60*1000&&now.valueOf()-t<=95*60*1000);

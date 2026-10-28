@@ -81,7 +81,7 @@
     }).join('');
   }
   function booksMarkup(books){
-    const available=books.map(b=>b.odds).filter(Number.isFinite),best=available.length?Math.max(...available):null;
+    const available=books.map(b=>b.odds).filter(Number.isFinite),best=available.length>=2?Math.max(...available):null;
     return `<div class="odds" aria-label="Sportsbook odds">${books.map(b=>{const isBest=b.odds!=null&&b.odds===best,price=Number.isFinite(b.odds)?odds(b.odds):'unavailable';return `<div role="group" aria-label="${escape(b.name)}: ${price}${isBest?' — best odds':''}" class="book ${isBest?'best':''}"><span class="book-name">${escape(b.name)}</span><div class="book-amount"><strong class="book-odds">${Number.isFinite(b.odds)?price:'—'}</strong>${isBest?'<span class="best-label">Best</span>':''}</div></div>`;}).join('')}</div>`;
   }
   function lineHistoryMarkup(history){

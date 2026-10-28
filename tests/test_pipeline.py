@@ -32,6 +32,13 @@ class PipelineTests(unittest.TestCase):
     def test_stale_odds_are_not_used(self):
         item={'id':'a','league':'NBA','home':'LAL','away':'POR','home_name':'Los Angeles Lakers','away_name':'Portland Trail Blazers','starts_at':(self.now+timedelta(hours=2)).isoformat(),'book':'FanDuel','home_odds':-126,'away_odds':108,'as_of':(self.now-timedelta(hours=3)).isoformat()}
         self.assertEqual(build_market([item],self.now),{})
+    def test_prices_from_different_snapshot_windows_are_not_compared(self):
+        base={'id':'a','league':'NBA','home':'LAL','away':'POR','home_name':'Los Angeles Lakers','away_name':'Portland Trail Blazers','starts_at':(self.now+timedelta(hours=2)).isoformat(),'home_odds':-126,'away_odds':108}
+        rows=[{**base,'book':'FanDuel','as_of':(self.now-timedelta(hours=1)).isoformat()},
+              {**base,'book':'DraftKings','as_of':self.now.isoformat()},
+              {**base,'book':'Caesars','as_of':(self.now-timedelta(minutes=10)).isoformat()}]
+        markets=build_market(rows,self.now)
+        self.assertEqual(set(markets['a']['books']),{'DraftKings','Caesars'})
     def test_selection_is_frozen_once_and_shows_best_book(self):
         from scripts.pipeline import BOOKS
         start=self.now+timedelta(hours=2)

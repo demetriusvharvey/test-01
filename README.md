@@ -18,7 +18,7 @@ The preregistered validation bar requires at least 300 settled prospective paper
 
 ## Data and architecture
 
-The standard-library Python program is `scripts/pipeline.py`, a compatibility entry point to `scripts/line_lab/` components. GitHub Actions updates approximately hourly; the static Vercel page checks for a newer snapshot each minute, but the underlying AgentBets source itself updates about hourly. Runs may be delayed, and stale, incomplete, conflicting or unverified prices suppress affected picks.
+The standard-library Python program is `scripts/pipeline.py`, a compatibility entry point to `scripts/line_lab/` components. GitHub Actions updates approximately hourly; the static Vercel page checks for a newer snapshot each minute, but the underlying AgentBets source itself updates about hourly. Runs may be delayed, and stale, incomplete, conflicting or unverified prices suppress affected picks. To compare books fairly, a game displays only prices within 15 minutes of its most recent available source snapshot; the raw observed quotes are separately retained for research.
 
 `data/observations` is a separate Git branch containing date-partitioned append-only SQLite quote observations, paper forecasts and clearly labeled last-observed pregame price proxies. The proxy is not necessarily the true closing line or a sharp close. The branch also stores attributed retrospective source files in season/dataset SQLite shards. Run the separate GitHub Actions backfill workflow, or set `PICKS_DATA_ROOT` to a research-data checkout and run `python scripts/backfill.py`. Historical backfill is **retrospective**, not a record of what was known at prediction time.
 

@@ -19,6 +19,12 @@ def build_market(events,now):
         rec=merged.setdefault(x['id'],{k:x[k] for k in ('id','league','home','away','home_name','away_name','starts_at')})
         rec.setdefault('books',{})[x['book']]={'home':x['home_odds'],'away':x['away_odds'],'as_of':x['as_of'],
                                               'fetched_at':x.get('fetched_at'),'provider':x.get('provider')}
+    # Do not compare an older book snapshot with an hour-newer one as though
+    # they were simultaneous. The full verified feed is archived separately.
+    for event in merged.values():
+        latest=max(datetime.fromisoformat(book['as_of']) for book in event['books'].values())
+        event['books']={name:book for name,book in event['books'].items()
+                        if latest-datetime.fromisoformat(book['as_of'])<=timedelta(minutes=15)}
     return merged
 
 def choose_candidates(markets,models,now,ledger):

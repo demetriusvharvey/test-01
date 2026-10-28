@@ -69,10 +69,11 @@ class AvailabilityModelTests(unittest.TestCase):
         snapshot=position_availability_snapshot(self.event,context,self.now.isoformat())
         self.assertEqual(snapshot['features']['WR']['out'],1)
         self.assertEqual(snapshot['features']['CB']['questionable'],-1)
-        self.assertTrue(snapshot['training_eligible']);self.assertFalse(snapshot['used_in_prediction'])
+        self.assertTrue(snapshot['position_fields_complete']);self.assertFalse(snapshot['training_eligible'])
+        self.assertTrue(snapshot['rights_review_required']);self.assertFalse(snapshot['used_in_prediction'])
         context['incomplete']=True
         snapshot=position_availability_snapshot(self.event,context,self.now.isoformat())
-        self.assertFalse(snapshot['training_eligible']);self.assertIsNone(snapshot['features'])
+        self.assertFalse(snapshot['position_fields_complete']);self.assertIsNone(snapshot['features'])
         context['observed_at']=(self.now+timedelta(seconds=1)).isoformat()
         self.assertIsNone(position_availability_snapshot(self.event,context,self.now.isoformat()))
 

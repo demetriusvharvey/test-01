@@ -21,6 +21,12 @@ The NFL shadow job also captures recent [nflverse injury and practice reports](h
 
 The optional [PropLine NBA/NFL injury, schedule and score endpoints](https://prop-line.com/docs) are disabled until the user obtains a key and accepts [its terms](https://prop-line.com/terms). As checked October 28, 2026, the free tier lists 1,000 daily requests and the provider describes its injury source as ESPN with ten-minute refreshes. The board's roughly hourly update remains the limiting cadence. A response is reduced to aggregate status counts by team and reported position, with observed time and an incomplete-data warning; the raw player-level response is never committed. Scores are used only with an explicit `final` status, held in memory, and filtered before publishing individual selection results. A local daily limit of 200 attempts keeps ordinary use below the free quota; a failed run may not persist its reservations. Source failure never silently falls back to direct ESPN. The injury status is not a prediction input, a confirmed starting lineup, or a guarantee of full report coverage. Upstream rights still require review for any broader model or dataset use. Setup: [docs/NBA_AVAILABILITY.md](docs/NBA_AVAILABILITY.md).
 
+The earliest `position-status-v1` snapshots used `training_eligible` to mean
+field completeness, not approved data rights. A true value in those historical
+snapshots is not authorization to train. Later snapshots set it to false and
+store completeness separately; any training requires its own documented rights
+decision and the preregistered time-order and holdout checks.
+
 The H016 availability challenger additionally captures aggregate status
 differences before the forecast, with its source and first-observed time. It
 requires nonempty reports for both teams, rejects conflicting or future values

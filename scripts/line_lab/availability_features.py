@@ -27,17 +27,18 @@ def position_availability_snapshot(event,context,prediction_at):
             totals={name:sum(counts[name] for counts in positions.values()) for name in statuses}
             if totals!=value['counts'] or sum(totals.values())>80:return None
             teams[side]={'team':value['team'],'positions':positions,'counts':totals}
-        eligible=(context.get('incomplete') is False and unknown==0
-                  and all(sum(teams[side]['counts'].values())>0 for side in ('home','away')))
+        fields_complete=(context.get('incomplete') is False and unknown==0
+                         and all(sum(teams[side]['counts'].values())>0 for side in ('home','away')))
         differences=None
-        if eligible:
+        if fields_complete:
             positions=set(teams['home']['positions'])|set(teams['away']['positions'])
             differences={position:{status:teams['home']['positions'].get(position,{}).get(status,0)-
                                      teams['away']['positions'].get(position,{}).get(status,0)
                                    for status in statuses} for position in sorted(positions)}
         return {'schema':'position-status-v1','source':context['source'],'observed_at':observed.isoformat(),
                 'teams':teams,'incomplete':context.get('incomplete') is not False,
-                'unknown_position_count':unknown,'training_eligible':eligible,
+                'unknown_position_count':unknown,'position_fields_complete':fields_complete,
+                'training_eligible':False,'rights_review_required':True,
                 'features':differences,'used_in_prediction':False}
     except (KeyError,TypeError,ValueError,OverflowError):return None
 

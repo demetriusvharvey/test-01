@@ -129,7 +129,8 @@ The provider's observed time is the time this system received a report, not a
 claimed publication time. Only aggregated status counts are retained.
 
 The recording process produces a versioned, time-qualified snapshot, with a
-separate eligibility flag; it does not train a model or change predictions.
+separate position completeness flag. Training eligibility remains false until
+rights are reviewed; the process does not train a model or change predictions.
 Future analysis is part of the H007/H016 availability family and must preserve
 its sample, multiple-testing, time-order, rights, replication and untouched
 holdout gates. Do not train on a source until its relevant usage rights are

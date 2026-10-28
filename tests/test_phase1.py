@@ -203,7 +203,8 @@ class StorageAndSourceTests(unittest.TestCase):
         with closing(sqlite3.connect(path)) as db:
             snapshot=json.loads(db.execute('SELECT feature_snapshot FROM forecasts').fetchone()[0])
         positions=snapshot['shadow_context']['position_availability']
-        self.assertTrue(positions['training_eligible']);self.assertFalse(positions['used_in_prediction'])
+        self.assertTrue(positions['position_fields_complete']);self.assertFalse(positions['training_eligible'])
+        self.assertFalse(positions['used_in_prediction'])
         self.assertEqual(positions['features']['C']['out'],1)
 
     def test_cancelled_score_status_overrides_stale_upcoming_schedule(self):

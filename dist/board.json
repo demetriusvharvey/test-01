@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T18:07:46.948714+00:00",
+  "generated_at": "2026-10-28T18:10:36.399773+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -19,23 +19,23 @@
       "books": [
         {
           "name": "FanDuel",
-          "odds": -230,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -220,
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "DraftKings",
-          "odds": -225,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -218,
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "BetMGM",
           "odds": -220,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "Caesars",
-          "odds": -225,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -210,
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "Fanatics",
@@ -45,17 +45,17 @@
         {
           "name": "BetRivers",
           "odds": -215,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         }
       ],
-      "best": -215,
+      "best": -210,
       "predicted_at": "2026-10-28T04:03:40.108458+00:00",
       "model": "elo-market-v2",
       "mode": "legacy",
       "model_probability": null,
       "estimated_ev": null,
-      "retail_reference_probability": 0.6608838911555599,
-      "retail_price_edge": -0.021655791384122658,
+      "retail_reference_probability": 0.6549445096495269,
+      "retail_price_edge": -0.022474845189182746,
       "model_edge_vs_retail": null,
       "prediction_integrity": "not_available",
       "schedule_context": {
@@ -74,7 +74,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:07:46.948714+00:00",
+        "observed_at": "2026-10-28T18:10:36.399773+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -84,19 +84,19 @@
         "crew_chief": "James Williams (#60)",
         "referee": "Marat Kogut (#32)",
         "umpire": "Brandon Adair (#67)",
-        "observed_at": "2026-10-28T18:07:45.143941+00:00",
+        "observed_at": "2026-10-28T18:10:35.622166+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
       },
       "line_history": {
-        "book": "Fanatics",
+        "book": "Caesars",
         "provider": "agentbets",
         "points": [
           {
             "as_of": "2026-10-28T04:00:00+00:00",
-            "odds": -220,
-            "implied": 0.6875
+            "odds": -225,
+            "implied": 0.6923076923076923
           },
           {
             "as_of": "2026-10-28T08:00:00+00:00",
@@ -120,13 +120,13 @@
           },
           {
             "as_of": "2026-10-28T17:00:00+00:00",
-            "odds": -215,
-            "implied": 0.6825396825396826
+            "odds": -225,
+            "implied": 0.6923076923076923
           },
           {
             "as_of": "2026-10-28T18:00:00+00:00",
-            "odds": -215,
-            "implied": 0.6825396825396826
+            "odds": -210,
+            "implied": 0.6774193548387096
           }
         ],
         "history_type": "observed_not_opener_or_close",
@@ -143,22 +143,22 @@
         {
           "name": "FanDuel",
           "odds": -168,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "DraftKings",
           "odds": -170,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "BetMGM",
-          "odds": -170,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -175,
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "Caesars",
           "odds": -165,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "Fanatics",
@@ -168,7 +168,7 @@
         {
           "name": "BetRivers",
           "odds": -165,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         }
       ],
       "best": -165,
@@ -177,8 +177,8 @@
       "mode": "legacy",
       "model_probability": null,
       "estimated_ev": null,
-      "retail_reference_probability": 0.6017699115044248,
-      "retail_price_edge": -0.02087159792953741,
+      "retail_reference_probability": 0.6022369481620796,
+      "retail_price_edge": -0.020404561271882615,
       "model_edge_vs_retail": null,
       "prediction_integrity": "not_available",
       "schedule_context": {
@@ -197,7 +197,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:07:46.948714+00:00",
+        "observed_at": "2026-10-28T18:10:36.399773+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -207,12 +207,54 @@
         "crew_chief": "Curtis Blair (#74)",
         "referee": "Andy Nagy (#18)",
         "umpire": "Ashley Moyer-Gleich (#13)",
-        "observed_at": "2026-10-28T18:07:45.143941+00:00",
+        "observed_at": "2026-10-28T18:10:35.622166+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
       },
-      "line_history": null
+      "line_history": {
+        "book": "Caesars",
+        "provider": "agentbets",
+        "points": [
+          {
+            "as_of": "2026-10-28T04:00:00+00:00",
+            "odds": -155,
+            "implied": 0.6078431372549019
+          },
+          {
+            "as_of": "2026-10-28T08:00:00+00:00",
+            "odds": -160,
+            "implied": 0.6153846153846154
+          },
+          {
+            "as_of": "2026-10-28T12:00:00+00:00",
+            "odds": -165,
+            "implied": 0.6226415094339622
+          },
+          {
+            "as_of": "2026-10-28T13:00:00+00:00",
+            "odds": -165,
+            "implied": 0.6226415094339622
+          },
+          {
+            "as_of": "2026-10-28T15:00:00+00:00",
+            "odds": -165,
+            "implied": 0.6226415094339622
+          },
+          {
+            "as_of": "2026-10-28T17:00:00+00:00",
+            "odds": -165,
+            "implied": 0.6226415094339622
+          },
+          {
+            "as_of": "2026-10-28T18:00:00+00:00",
+            "odds": -165,
+            "implied": 0.6226415094339622
+          }
+        ],
+        "history_type": "observed_not_opener_or_close",
+        "price_movement_is_evidence_of_edge": false
+      }
     },
     {
       "id": "nba:2026-10-28:MIA:ATL",
@@ -224,22 +266,22 @@
         {
           "name": "FanDuel",
           "odds": -126,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "DraftKings",
           "odds": -135,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "BetMGM",
           "odds": -135,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "Caesars",
           "odds": -130,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "Fanatics",
@@ -249,7 +291,7 @@
         {
           "name": "BetRivers",
           "odds": -141,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "as_of": "2026-10-28T18:00:00+00:00"
         }
       ],
       "best": -126,
@@ -278,7 +320,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:07:46.948714+00:00",
+        "observed_at": "2026-10-28T18:10:36.399773+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -288,12 +330,54 @@
         "crew_chief": "Ben Taylor (#46)",
         "referee": "JB DeRosa (#14)",
         "umpire": "Brandon Schwab (#49)",
-        "observed_at": "2026-10-28T18:07:45.143941+00:00",
+        "observed_at": "2026-10-28T18:10:35.622166+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
       },
-      "line_history": null
+      "line_history": {
+        "book": "FanDuel",
+        "provider": "agentbets",
+        "points": [
+          {
+            "as_of": "2026-10-28T04:00:00+00:00",
+            "odds": -146,
+            "implied": 0.5934959349593496
+          },
+          {
+            "as_of": "2026-10-28T08:00:00+00:00",
+            "odds": -148,
+            "implied": 0.5967741935483871
+          },
+          {
+            "as_of": "2026-10-28T12:00:00+00:00",
+            "odds": -148,
+            "implied": 0.5967741935483871
+          },
+          {
+            "as_of": "2026-10-28T13:00:00+00:00",
+            "odds": -146,
+            "implied": 0.5934959349593496
+          },
+          {
+            "as_of": "2026-10-28T15:00:00+00:00",
+            "odds": -130,
+            "implied": 0.5652173913043478
+          },
+          {
+            "as_of": "2026-10-28T17:00:00+00:00",
+            "odds": -126,
+            "implied": 0.5575221238938053
+          },
+          {
+            "as_of": "2026-10-28T18:00:00+00:00",
+            "odds": -126,
+            "implied": 0.5575221238938053
+          }
+        ],
+        "history_type": "observed_not_opener_or_close",
+        "price_movement_is_evidence_of_edge": false
+      }
     }
   ],
   "history": [
@@ -534,23 +618,23 @@
       "books": [
         {
           "name": "FanDuel",
-          "odds": -215,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -250,
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "DraftKings",
-          "odds": -198,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -278,
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "BetMGM",
-          "odds": -210,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -275,
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "Caesars",
-          "odds": -210,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -278,
+          "as_of": "2026-10-28T18:00:00+00:00"
         },
         {
           "name": "Fanatics",
@@ -559,11 +643,11 @@
         },
         {
           "name": "BetRivers",
-          "odds": -230,
-          "as_of": "2026-10-28T17:00:00+00:00"
+          "odds": -275,
+          "as_of": "2026-10-28T18:00:00+00:00"
         }
       ],
-      "best": -198,
+      "best": -250,
       "watching": true,
       "schedule_context": {
         "teams": {
@@ -581,7 +665,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:07:46.948714+00:00",
+        "observed_at": "2026-10-28T18:10:36.399773+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -591,12 +675,54 @@
         "crew_chief": "Courtney Kirkland (#61)",
         "referee": "Aaron Smith (#51)",
         "umpire": "Phenizee Ransom (#70)",
-        "observed_at": "2026-10-28T18:07:45.143941+00:00",
+        "observed_at": "2026-10-28T18:10:35.622166+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
       },
-      "line_history": null
+      "line_history": {
+        "book": "FanDuel",
+        "provider": "agentbets",
+        "points": [
+          {
+            "as_of": "2026-10-28T04:00:00+00:00",
+            "odds": -166,
+            "implied": 0.6240601503759399
+          },
+          {
+            "as_of": "2026-10-28T08:00:00+00:00",
+            "odds": -184,
+            "implied": 0.647887323943662
+          },
+          {
+            "as_of": "2026-10-28T12:00:00+00:00",
+            "odds": -184,
+            "implied": 0.647887323943662
+          },
+          {
+            "as_of": "2026-10-28T13:00:00+00:00",
+            "odds": -184,
+            "implied": 0.647887323943662
+          },
+          {
+            "as_of": "2026-10-28T15:00:00+00:00",
+            "odds": -200,
+            "implied": 0.6666666666666666
+          },
+          {
+            "as_of": "2026-10-28T17:00:00+00:00",
+            "odds": -215,
+            "implied": 0.6825396825396826
+          },
+          {
+            "as_of": "2026-10-28T18:00:00+00:00",
+            "odds": -250,
+            "implied": 0.7142857142857143
+          }
+        ],
+        "history_type": "observed_not_opener_or_close",
+        "price_movement_is_evidence_of_edge": false
+      }
     }
   ],
   "study": {
@@ -1221,10 +1347,10 @@
     "status": "descriptive_research_only"
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T18:07:46.948714+00:00",
+    "pipeline_generated_at": "2026-10-28T18:10:36.399773+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T18:00:00+00:00",
-    "oldest_quote_at": "2026-10-28T17:00:00+00:00",
+    "oldest_quote_at": "2026-10-28T18:00:00+00:00",
     "source_freshness": "within_window",
     "drift": {
       "NBA": {

@@ -7,7 +7,7 @@ import json
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 
-from .constants import NBA_TEAMS, normalize_code
+from .constants import NBA_TEAMS, NFL_TEAMS, normalize_code
 from .history import aware
 
 URL = 'https://api.prop-line.com/v1/sports/basketball_nba/injuries'
@@ -15,11 +15,11 @@ STATUSES = {'out', 'out_first_half', 'doubtful', 'questionable', 'probable',
             'game_time_decision', 'day_to_day', 'injured_list', 'suspended', 'other'}
 
 
-def fetch_nba_injuries(key, enabled, opener=urlopen):
+def _fetch_injuries(key, enabled, url, opener):
     """Fetch once per run, never with a key in the URL or in an error message."""
     if not key or str(enabled).strip().lower() != 'true':
         return None
-    request = Request(URL, headers={'X-API-Key': key, 'Accept': 'application/json'})
+    request = Request(url, headers={'X-API-Key': key, 'Accept': 'application/json'})
     with opener(request, timeout=15) as response:
         body = response.read(5_000_001)
     if len(body) > 5_000_000:
@@ -27,7 +27,15 @@ def fetch_nba_injuries(key, enabled, opener=urlopen):
     return json.loads(body), datetime.now(timezone.utc).isoformat()
 
 
-def summarize_by_team(payload, observed_at):
+def fetch_nba_injuries(key, enabled, opener=urlopen):
+    return _fetch_injuries(key, enabled, URL, opener)
+
+
+def fetch_nfl_injuries(key, enabled, opener=urlopen):
+    return _fetch_injuries(key, enabled, 'https://api.prop-line.com/v1/sports/football_nfl/injuries', opener)
+
+
+def summarize_by_team(payload, observed_at, league='NBA'):
     """Count eligible rows by team, keeping names and raw response out of Git.
 
     An empty or partial report is not evidence that anyone is healthy. Reject
@@ -35,12 +43,13 @@ def summarize_by_team(payload, observed_at):
     player-impact estimate.
     """
     observed = aware(observed_at)
-    if not isinstance(payload, dict) or payload.get('sport') != 'basketball_nba':
+    sport={'NBA':'basketball_nba','NFL':'football_nfl'}.get(league)
+    if not sport or not isinstance(payload, dict) or payload.get('sport') != sport:
         raise ValueError('unexpected injury sport')
     rows = payload.get('players')
     if not isinstance(rows, list) or isinstance(payload.get('count'), bool) or payload.get('count') != len(rows):
         raise ValueError('incomplete injury response')
-    teams = set(NBA_TEAMS.values())
+    teams = set((NBA_TEAMS if league=='NBA' else NFL_TEAMS).values())
     candidates = {}
     incomplete = False
     for row in rows:
@@ -95,3 +104,25 @@ def attach_nba_summaries(board, markets, payload, observed_at):
             }
         except (KeyError, TypeError, ValueError):
             continue
+
+
+def attach_nfl_summaries(board, markets, payload, observed_at):
+    """Attach current aggregate NFL status counts, not starter assumptions."""
+    summaries, incomplete = summarize_by_team(payload, observed_at, league='NFL')
+    observed = aware(observed_at)
+    for pick in list(board.get('picks', [])) + list(board.get('watchlist', [])):
+        event = markets.get(pick.get('id'))
+        if not event or event.get('league') != 'NFL':continue
+        try:
+            if observed >= aware(event['starts_at']):continue
+            sides = {}
+            for side in ('away','home'):
+                code=event[side]
+                if code not in summaries:raise ValueError('unknown team')
+                sides[side]={'team':event[side+'_name'],'counts':summaries[code]}
+            pick['nfl_provider_availability_context']={
+                'teams':sides,'source':'PropLine, ESPN-sourced',
+                'observed_at':observed.isoformat(),'incomplete':incomplete,
+                'used_in_prediction':False,
+            }
+        except (KeyError,TypeError,ValueError):continue

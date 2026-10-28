@@ -28,7 +28,7 @@ from .availability_features import availability_features
 from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
 from .watchlist import render_watchlist
-from .nba_injury_feed import fetch_nba_injuries, attach_nba_summaries
+from .nba_injury_feed import fetch_nba_injuries, fetch_nfl_injuries, attach_nba_summaries, attach_nfl_summaries
 from .propline_scores import fetch_scores, fetch_events, parse_scores, parse_event_starts, restrict_public_results, use_provider, reserve_call
 
 
@@ -179,6 +179,13 @@ def main():
                 raise ValueError('provider request budget unavailable')
             injury_payload,injury_observed_at=fetch_nba_injuries(nba_injury_key,True)
         except Exception as e:errors.append('NBA injury context unavailable ('+type(e).__name__+')')
+    nfl_provider_payload=None;nfl_provider_observed_at=None
+    if propline_enabled and propline_key and any(e.get('league')=='NFL' for e in markets.values()):
+        try:
+            if not reserve_call(data_root,'injuries_nfl',datetime.now(timezone.utc).isoformat()):
+                raise ValueError('provider request budget unavailable')
+            nfl_provider_payload,nfl_provider_observed_at=fetch_nfl_injuries(propline_key,True)
+        except Exception as e:errors.append('NFL injury context unavailable ('+type(e).__name__+')')
     now=datetime.now(timezone.utc)
     if now.astimezone(ET).date()!=today and not day_rolled:
         day_rolled=True;errors.append('ET date changed during update; new picks suppressed')
@@ -258,6 +265,9 @@ def main():
     if injury_payload is not None:
         try:attach_nba_summaries(board,markets,injury_payload,injury_observed_at)
         except Exception as e:board['errors'].append('NBA injury context unavailable ('+type(e).__name__+')')
+    if nfl_provider_payload is not None:
+        try:attach_nfl_summaries(board,markets,nfl_provider_payload,nfl_provider_observed_at)
+        except Exception as e:board['errors'].append('NFL injury context unavailable ('+type(e).__name__+')')
     attach_rest_context(board,markets,models,now.isoformat())
     attach_current_officials(board,markets,ref_report,ref_observed_at,now.isoformat())
     try:
@@ -292,6 +302,7 @@ def main():
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
                             'nba_injury_context':'configured' if nba_injury_key and nba_injury_enabled else 'not_configured',
+                            'nfl_provider_injury_context':'configured' if propline_key and propline_enabled else 'not_configured',
                             'scoreboard_source':score_source,
                             'cross_check_independent':False}
     (ROOT/'dist'/'board.json').write_text(json.dumps(board,indent=2)+'\n')

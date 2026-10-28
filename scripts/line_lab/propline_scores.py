@@ -28,9 +28,9 @@ def use_provider(key,setting,injury_only=False):
     return choice in ('true','1','yes') or (bool(str(key or '').strip()) and choice in ('','auto') and not injury_only)
 
 
-def reserve_call(root,endpoint,observed_at,daily_limit=180):
+def reserve_call(root,endpoint,observed_at,daily_limit=200):
     """Reserve a conservative daily request budget before calling the provider."""
-    if not root or endpoint not in ('scores_nba','scores_nfl','events_nba','events_nfl','injuries_nba') or not isinstance(daily_limit,int) or isinstance(daily_limit,bool) or daily_limit<1:
+    if not root or endpoint not in ('scores_nba','scores_nfl','events_nba','events_nfl','injuries_nba','injuries_nfl') or not isinstance(daily_limit,int) or isinstance(daily_limit,bool) or daily_limit<1:
         return False
     now=aware(observed_at);path=Path(root)/'observations'/'propline_quota'/(now.date().isoformat()+'.sqlite')
     path.parent.mkdir(parents=True,exist_ok=True)

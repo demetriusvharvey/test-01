@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock
 
 from scripts.line_lab.nba_injury_feed import (
-    attach_nba_summaries, fetch_nba_injuries, summarize_by_team,
+    attach_nba_summaries, attach_nfl_summaries, fetch_nba_injuries, fetch_nfl_injuries, summarize_by_team,
 )
 
 
@@ -69,6 +69,26 @@ class NbaInjuryFeedTests(unittest.TestCase):
             summarize_by_team(self.payload, self.now)
         with self.assertRaises(ValueError):
             summarize_by_team({'sport': 'football_nfl', 'players': [], 'count': 0}, self.now)
+
+    def test_nfl_current_report_is_context_only_and_has_no_player_data(self):
+        payload={'sport':'football_nfl','count':2,'players':[
+            {'team_abbr':'KC','player_id':'espn:1','player_name':'Private One','position':'QB','status_code':'out','status_since':'2026-10-28T17:00:00Z'},
+            {'team_abbr':'BUF','player_id':'espn:2','player_name':'Private Two','status_code':'questionable','status_since':'2026-10-28T17:00:00Z'}]}
+        event={'id':'nfl:test','league':'NFL','away':'KC','home':'BUF','away_name':'Kansas City Chiefs','home_name':'Buffalo Bills','starts_at':'2026-10-28T23:00:00Z'}
+        board={'picks':[{'id':'nfl:test'}]}
+        attach_nfl_summaries(board,{'nfl:test':event},payload,self.now)
+        context=board['picks'][0]['nfl_provider_availability_context']
+        self.assertEqual(context['teams']['away']['counts']['out'],1)
+        self.assertEqual(context['teams']['home']['counts']['questionable'],1)
+        self.assertFalse(context['used_in_prediction']);self.assertFalse(context['incomplete'])
+        self.assertNotIn('Private One',json.dumps(board));self.assertNotIn('espn:1',json.dumps(board))
+        board={'picks':[{'id':'nfl:test'}]}
+        attach_nfl_summaries(board,{'nfl:test':event},payload,'2026-10-28T23:00:00Z')
+        self.assertNotIn('nfl_provider_availability_context',board['picks'][0])
+        opener=Mock(return_value=io.BytesIO(json.dumps(payload).encode()))
+        fetch_nfl_injuries('private-key',True,opener)
+        self.assertTrue(opener.call_args.args[0].full_url.endswith('/football_nfl/injuries'))
+        self.assertNotIn('private-key',opener.call_args.args[0].full_url)
 
 
 if __name__ == '__main__':

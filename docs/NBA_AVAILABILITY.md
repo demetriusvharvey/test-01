@@ -1,11 +1,11 @@
 # Optional NBA player-status context
 
-The board's current prediction does not use NBA injury status or lineups. A
+The board's current predictions do not use NBA or NFL injury status or lineups. A
 disabled-by-default connector can add descriptive player-status counts to
 game details; it never changes a predicted winner or a model weight. A short
 link to the NBA's current official report is always shown.
 
-The connector calls PropLine's NBA injury endpoint and the NBA and NFL schedule
+The connector calls PropLine's NBA and NFL injury endpoints and schedule
 and score endpoints during a board update, only if a user has provided their own key. As of
 October 28, 2026, the provider advertises a free tier and ESPN-sourced injury
 status, refreshed about every 10 minutes. Our board still updates about hourly,
@@ -35,9 +35,11 @@ for displayed games and does not write the raw league feed to either Git branch.
 Validated prediction effects require rights-compatible historical availability,
 lineups/minutes and outcome data, as well as forward and time-ordered tests.
 
-The integration reserves at most 180 calls per UTC day across schedule, score,
-and NBA injury requests, well below the advertised 1,000-request free limit. A
-regular hourly run makes at most five calls; errors also consume the local budget.
+The integration reserves at most 200 calls per UTC day across schedule, score,
+and injury requests, well below the advertised 1,000-request free limit. A
+regular hourly run makes at most six calls; errors also consume the local budget.
+The reservations are persisted by the workflow after an update, so a run that
+fails before the archive is committed may lose its local reservation counts.
 An exhausted or unavailable budget stops calls instead of upgrading a plan.
 An explicitly postponed or cancelled score status overrides an upcoming event.
 Provider score rows are held in memory; only individual results for recorded

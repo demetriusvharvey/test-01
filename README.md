@@ -14,7 +14,7 @@ provider setup in [docs/NBA_AVAILABILITY.md](docs/NBA_AVAILABILITY.md); NBA
 model training additionally remains blocked while upstream rights are reviewed.
 Empty, conflicting, stale or future reports never mean a healthy team.
 
-That same optional key enables the provider's NBA/NFL scoreboard and injury
+That same optional key enables the provider's NBA/NFL schedules, scores and injury
 context without any additional account. A daily request cap protects the free
 tier; current odds still come from hourly AgentBets snapshots.
 

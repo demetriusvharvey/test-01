@@ -1,6 +1,6 @@
 import unittest
 from datetime import datetime,timedelta,timezone
-from scripts.line_lab.referees import assignment_as_of, prospective_effect, retrospective_nfl_summary
+from scripts.line_lab.referees import assignment_as_of, prospective_effect, retrospective_nfl_summary, current_official_crew
 
 
 class RefereeTests(unittest.TestCase):
@@ -31,6 +31,18 @@ class RefereeTests(unittest.TestCase):
         self.assertEqual(value['n'],1);self.assertFalse(value['promoted'])
         row['market_fetched_at']=(start+timedelta(minutes=1)).isoformat()
         self.assertIsNone(prospective_effect([row],'Ref A',cutoff))
+    def test_current_nba_crew_requires_exact_match_and_prestart_observation(self):
+        event={'league':'NBA','away':'POR','home':'LAL','starts_at':'2026-10-29T02:00:00+00:00'}
+        report={'status':'ok','date_expected':'2026-10-28','games':[{'matchup':'Portland @ L.A. Lakers',
+                'crew_chief':'One','referee':'Two','umpire':'Three'}]}
+        row=current_official_crew(report,event,'2026-10-28T12:00:00+00:00','2026-10-28T13:00:00+00:00')
+        self.assertEqual(row['crew_chief'],'One');self.assertFalse(row['used_in_prediction'])
+        self.assertTrue(row['assignment_can_change'])
+        self.assertIsNone(current_official_crew(report,event,'2026-10-28T14:00:00+00:00','2026-10-28T13:00:00+00:00'))
+        report['games'][0]['matchup']='Portland @ Los Angeles'
+        self.assertIsNone(current_official_crew(report,event,'2026-10-28T12:00:00+00:00','2026-10-28T13:00:00+00:00'))
+        report['games'][0]['matchup']='Portland @ L.A. Lakers';report['games'].append(dict(report['games'][0]))
+        self.assertIsNone(current_official_crew(report,event,'2026-10-28T12:00:00+00:00','2026-10-28T13:00:00+00:00'))
 
 
 if __name__=='__main__':unittest.main()

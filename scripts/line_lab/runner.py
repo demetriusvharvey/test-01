@@ -22,6 +22,7 @@ from .validation import progress_from_ledger
 from .monitoring import build_monitoring
 from .line_movement import attach_histories
 from .schedule_context import attach_rest_context
+from .referees import attach_current_officials
 
 
 def main():
@@ -70,9 +71,11 @@ def main():
     frozen_ledger=copy.deepcopy(ledger)
     refs_path=data_dir/'referee_history.json'
     refs=json.loads(refs_path.read_text()) if refs_path.exists() else []
+    ref_report=None;ref_observed_at=None
     try:
         ref_report=parse_referees(get(NBA_REFS),today)
         observed_at=datetime.now(timezone.utc)
+        ref_observed_at=observed_at.isoformat()
         print('NBA referees:',ref_report['status'],'new/changed:',append_referee_assignments(refs,ref_report,observed_at))
     except Exception as e:
         print('NBA referee source unavailable:',type(e).__name__)
@@ -166,6 +169,7 @@ def main():
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
     attach_rest_context(board,markets,models,now.isoformat())
+    attach_current_officials(board,markets,ref_report,ref_observed_at,now.isoformat())
     try:
         if data_root:attach_histories(data_root,board,markets,ledger,now.isoformat())
     except Exception as e:

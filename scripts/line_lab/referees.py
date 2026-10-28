@@ -4,6 +4,51 @@ from collections import defaultdict
 from statistics import stdev
 from .anchors import devig, implied_american
 from .history import aware
+from .constants import ET, team_code
+
+# Exact published team-name variants only. Never guess between the LA teams.
+OFFICIAL_NBA_NAMES={
+    'atlanta':'ATL','boston':'BOS','brooklyn':'BKN','charlotte':'CHA',
+    'chicago':'CHI','cleveland':'CLE','dallas':'DAL','denver':'DEN',
+    'detroit':'DET','golden state':'GSW','houston':'HOU','indiana':'IND',
+    'l.a. clippers':'LAC','la clippers':'LAC','l.a. lakers':'LAL','la lakers':'LAL',
+    'memphis':'MEM','miami':'MIA','milwaukee':'MIL','minnesota':'MIN',
+    'new orleans':'NOP','new york':'NYK','oklahoma city':'OKC','orlando':'ORL',
+    'philadelphia':'PHI','phoenix':'PHX','portland':'POR','sacramento':'SAC',
+    'san antonio':'SAS','toronto':'TOR','utah':'UTA','washington':'WAS',
+}
+
+
+def current_official_crew(report,event,observed_at,now):
+    """Expose only an exact current official-page matchup, not a ref effect."""
+    try:
+        observed,current,start=aware(observed_at),aware(now),aware(event['starts_at'])
+        if event.get('league')!='NBA' or not observed<=current<start:return None
+        if report.get('status')!='ok' or report.get('date_expected')!=start.astimezone(ET).date().isoformat():return None
+        matches=[]
+        for game in report.get('games',[]):
+            parts=game.get('matchup','').split(' @ ')
+            if len(parts)!=2:continue
+            codes=[]
+            for name in parts:
+                normalized=' '.join(name.strip().lower().split())
+                codes.append(team_code(normalized,'NBA') or OFFICIAL_NBA_NAMES.get(normalized))
+            if codes!=[event['away'],event['home']]:continue
+            crew=[game.get('crew_chief','').strip(),game.get('referee','').strip(),game.get('umpire','').strip()]
+            if not all(crew) or len(set(crew))!=3:continue
+            matches.append(crew)
+        if len(matches)!=1:return None
+        return {'crew_chief':matches[0][0],'referee':matches[0][1],'umpire':matches[0][2],
+                'observed_at':observed.isoformat(),'source':'https://official.nba.com/referee-assignments/',
+                'assignment_can_change':True,'used_in_prediction':False}
+    except (AttributeError,KeyError,TypeError,ValueError):return None
+
+
+def attach_current_officials(board,markets,report,observed_at,now):
+    for pick in board.get('picks',[]):
+        event=markets.get(pick.get('id'))
+        if event and report and observed_at:
+            pick['referee_assignment']=current_official_crew(report,event,observed_at,now)
 
 
 def assignment_as_of(history,game_date,matchup,predicted_at,starts_at):

@@ -113,6 +113,13 @@
     const labels=['away','home'].map(side=>context.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.rest_days)} day${team.rest_days===1?'':'s'} rest${team.back_to_back?' (back-to-back)':''}`);
     return `<p>Rest from available completed-game data: ${labels.length?labels.join(' · '):'unavailable'}. Data may be incomplete; travel and time-zone changes are unknown. The market may already reflect schedule factors.</p>`;
   }
+  function refereeMarkup(p){
+    if(p.league!=='NBA')return '<p>NFL officiating crew: unconfirmed.</p>';
+    const ref=p.referee_assignment;
+    const label='<a href="https://official.nba.com/referee-assignments/" target="_blank" rel="noopener noreferrer">official NBA assignments</a>';
+    if(!ref||!ref.crew_chief||!ref.referee||!ref.umpire)return `<p>NBA officiating crew: unconfirmed. Check ${label} closer to tipoff.</p>`;
+    return `<p>NBA crew, observed ${displayTime(ref.observed_at)}: ${escape(ref.crew_chief)} (chief), ${escape(ref.referee)}, ${escape(ref.umpire)}. Assignments can change; no referee effect is used. Source: ${label}.</p>`;
+  }
   function pickMarkup(p){
     const historical=!p.current;
     const statuses={win:'WON',loss:'LOST',void:'VOID',pending:'PENDING'};
@@ -123,7 +130,7 @@
     const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}${estimate}</div></div>`;
     const pct=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'unavailable';
     const points=x=>Number.isFinite(x)?(x>=0?'+':'')+(100*x).toFixed(1)+' points':'unavailable';
-    const context=`<details class="pick-context"><summary>Research context</summary><p>Latest retail no-vig reference: ${pct(p.retail_reference_probability)} · Price difference: ${points(p.retail_price_edge)} · Frozen model difference: ${points(p.model_edge_vs_retail)}</p><p>Retail reference is not a verified sharp line; differences are not proven edges. Injuries, projected lineups, referee assignment, trust and timing: unconfirmed or not available for this pick.</p>${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
+    const context=`<details class="pick-context"><summary>Research context</summary><p>Latest retail no-vig reference: ${pct(p.retail_reference_probability)} · Price difference: ${points(p.retail_price_edge)} · Frozen model difference: ${points(p.model_edge_vs_retail)}</p><p>Retail reference is not a verified sharp line; differences are not proven edges. Injuries, projected lineups, trust and timing are unconfirmed or unavailable.</p>${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
     if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}${context}</article>`;
     const recorded=Array.isArray(p.initial_books)?p.initial_books.filter(b=>Number.isFinite(b.odds)):[];
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}

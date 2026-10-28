@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T12:46:01.302781+00:00",
+  "generated_at": "2026-10-28T12:47:31.009507+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -53,7 +53,10 @@
       "model": "elo-market-v2",
       "mode": "legacy",
       "model_probability": null,
-      "estimated_ev": null
+      "estimated_ev": null,
+      "retail_reference_probability": 0.6636481241914618,
+      "retail_price_edge": -0.01889155834822076,
+      "model_edge_vs_retail": null
     },
     {
       "id": "nba:2026-10-28:GSW:MIN",
@@ -98,7 +101,10 @@
       "model": "elo-market-v2",
       "mode": "legacy",
       "model_probability": null,
-      "estimated_ev": null
+      "estimated_ev": null,
+      "retail_reference_probability": 0.5936975159154071,
+      "retail_price_edge": -0.012601696683018138,
+      "model_edge_vs_retail": null
     },
     {
       "id": "nba:2026-10-28:MIA:ATL",
@@ -143,7 +149,10 @@
       "model": "elo-market-v2",
       "mode": "legacy",
       "model_probability": null,
-      "estimated_ev": null
+      "estimated_ev": null,
+      "retail_reference_probability": 0.581930245572613,
+      "retail_price_edge": -0.014843947975774152,
+      "model_edge_vs_retail": null
     }
   ],
   "history": [
@@ -453,7 +462,7 @@
     }
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T12:46:01.302781+00:00",
+    "pipeline_generated_at": "2026-10-28T12:47:31.009507+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T12:00:00+00:00",
     "oldest_quote_at": "2026-10-28T12:00:00+00:00",

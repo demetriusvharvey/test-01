@@ -111,12 +111,10 @@ def parse_nfl_locations(text):
 
 def elo_probability(diff): return 1/(1+10**(-max(-1200,min(1200,diff))/400))
 
-def build_ratings(games, cutoff, league):
+def build_ratings(games, cutoff, league, params=None, validation_season=None):
     # Training ends before today's ET date. This avoids training on later same-day results.
-    ratings={}; last={}; last_season=None
-    k=20 if league=='NBA' else 24
-    home_advantage=55 if league=='NBA' else 42
-    rest_weight=8 if league=='NBA' else 4
+    ratings={}; last={}; last_season=None; validation_errors=[]
+    k,home_advantage,rest_weight=params or ((20,55,0) if league=='NBA' else (24,42,0))
     for g in sorted((x for x in games if x['league']==league and x['date']<cutoff),key=lambda x:(x['date'],x['id'])):
         if last_season is not None and g['season']!=last_season:
             ratings={team:1500+(value-1500)*0.75 for team,value in ratings.items()}
@@ -126,9 +124,30 @@ def build_ratings(games, cutoff, league):
         ra=min(7,max(0,(g['date']-last[a]).days-1)) if a in last else 3
         p=elo_probability(hr-ar+(0 if g['neutral'] else home_advantage)+rest_weight*(rh-ra))
         outcome=1 if g['home_score']>g['away_score'] else 0 if g['home_score']<g['away_score'] else 0.5
+        if g['season']==validation_season and outcome!=0.5: validation_errors.append((p-outcome)**2)
         ratings[h]=hr+k*(outcome-p); ratings[a]=ar-k*(outcome-p)
         last[h]=g['date']; last[a]=g['date']
-    return {'ratings':ratings,'last':last,'home_advantage':home_advantage,'rest_weight':rest_weight}
+    return {'ratings':ratings,'last':last,'home_advantage':home_advantage,'rest_weight':rest_weight,'k':k,'validation_count':len(validation_errors),'validation_brier':sum(validation_errors)/len(validation_errors) if validation_errors else None}
+
+def train_model(games,cutoff,league):
+    # Select among small, fixed alternatives on the latest completed season using
+    # chronological pre-game predictions. This is tuning, not an independent test
+    # or evidence of profit. Prefer the baseline for marginal changes.
+    count={}
+    for g in games:
+        if g['league']==league and g['date']<cutoff and g['home_score']!=g['away_score']:
+            count[g['season']]=count.get(g['season'],0)+1
+    minimum=1000 if league=='NBA' else 200
+    completed=sorted(s for s,n in count.items() if n>=minimum)
+    if league=='NBA': candidates=[(20,55,0),(20,55,8),(20,40,0),(20,70,0),(15,55,0),(25,55,0)]
+    else: candidates=[(24,42,0),(24,42,4),(24,25,0),(24,55,0),(18,42,0),(30,42,0)]
+    if not completed: return build_ratings(games,cutoff,league,candidates[0])
+    val=completed[-1]
+    fitted=[build_ratings(games,cutoff,league,c,val) for c in candidates]
+    baseline=fitted[0]; best=min(fitted,key=lambda x:x['validation_brier'] if x['validation_brier'] is not None else float('inf'))
+    winner=best if best['validation_count']>=minimum and baseline['validation_brier']-best['validation_brier']>=0.0005 else baseline
+    winner['validation_season']=val
+    return winner
 
 def project_home(model, home, away, when, neutral=False):
     ratings=model['ratings']; last=model['last']
@@ -241,7 +260,7 @@ def main():
         if not nfl: raise ValueError('empty NFL data')
         games.extend(nfl)
     except Exception as e: errors.append('NFL historical data unavailable ('+type(e).__name__+')')
-    models={league:build_ratings(games,today,league) for league in ('NBA','NFL')}
+    models={league:train_model(games,today,league) for league in ('NBA','NFL')}
     raw=[]
     for slug,name in BOOKS:
         for league in ('NBA','NFL'):
@@ -271,6 +290,7 @@ def main():
     blocked={('NBA' if x.startswith('NBA historical') else 'NFL') for x in errors if x.startswith(('NBA historical','NFL historical'))}
     permitted={k:v for k,v in markets.items() if v['league'] not in blocked and (v['league']!='NFL' or 'neutral' in v)}
     print('Training games:', len([x for x in games if x['league']=='NBA']), 'NBA;', len([x for x in games if x['league']=='NFL']), 'NFL. Fresh matchups:', len(markets))
+    for league,model in models.items(): print('MODEL',league,'validation',model.get('validation_season'),'games',model.get('validation_count'),'brier',model.get('validation_brier'),'params',model['k'],model['home_advantage'],model['rest_weight'])
     for event in permitted.values():
         start=datetime.fromisoformat(event['starts_at'])
         if start.astimezone(ET).date()!=today or len(event['books'])<3: continue

@@ -58,3 +58,18 @@ This fixed-grid pure-Python challenger is not XGBoost, LightGBM, CatBoost or Opt
 Before any real-data fit, use the following fixed, pregame-observed inputs: model edge, price edge, source disagreement, hours to start, observed line movement, model uncertainty, hours since verified news, games played and verified available liquidity. Missing values are excluded rather than filled with a healthy-player assumption. A source-qualified independent sharp anchor must be observed before the prediction. Labels require a separately certified, rights-qualified sharp close observed before the start and certified after the start, with the certification itself available before the training cutoff. The first candidate per game and side is chosen before looking at its label.
 
 Fit a regularized logistic model for whether sharp CLV is positive, and a regularized linear model for the later change in selected-side sharp probability. Use the most recent prior eligible season for inner validation, at least 500 earlier observations and 100 validation observations over three seasons; all earlier training labels must be available before the validation period. Fixed regularization is 0.01, with no threshold search in this initial version. These models, their scores and their prospective predictions are shadow-only. Timing output is a predicted price-probability movement, not a bet-now/wait instruction or proof of expected profit. An unavailable sharp source produces `insufficient_data`, not a zero value. H012 variants and league tests remain one multiple-testing family and cannot gate stakes or promote themselves.
+
+## H013 — additional schedule and market pattern definitions
+
+Registered before implementation or evaluation. Apply the same first-eligible-pregame forecast, rights, time, direction, day-block test, minimum sample and untouched-holdout rules as H010. Test the following with H010 as one combined BH family, including all league splits. Earlier H010 runs had no eligible outcomes and therefore performed no statistical tests.
+
+1. **H013a:** exactly one team lost its previous game by at least 20 NBA points or 21 NFL points; test whether that team exceeds its pregame retail win probability (positive).
+2. **H013b:** exactly one team won its previous game by at least 20 NBA points or 21 NFL points; test whether that team falls short of its pregame retail win probability (negative).
+3. **H013c:** exactly one NFL team has at most five rest days while its opponent has more; test whether that team falls short of its retail probability (negative).
+4. **H013d:** exactly one NFL team has at least 13 rest days while its opponent has fewer; test whether that team exceeds its retail probability (positive).
+5. **H013e:** both teams have played fewer than ten games this season; test whether the pregame underdog exceeds its retail probability, separately by league (positive).
+6. **H013f:** a pregame underdog has retail no-vig probability below 35%; test whether that underdog falls short of its retail probability, separately by league (negative).
+7. **H013g:** the range of same-time book-level no-vig home probabilities is at least eight percentage points; test whether the home team falls short of the retail median, separately by league (negative).
+8. **H013h:** an NFL game begins at or after 8 p.m. ET with a non-even market favorite; test whether that favorite falls short of its retail probability (negative).
+
+Previous-game margins, team games played and all book prices must be preserved in the forecast's pregame snapshot. Missing, tied, contradictory or unverified values remain unknown. These exploratory definitions do not prove a causal mechanism, and the market may already reflect the schedule or news.

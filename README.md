@@ -1,21 +1,15 @@
-# Line Lab
+# Line Lab — daily moneylines
 
-A research desk for NBA and NFL single-game moneylines: attributed snapshots, injury and schedule notes, NBA referee assignments, and a browser-based odds calculator. No bets are placed. The current site is a dated research snapshot and does not have a trained Line Lab prediction model.
+A deliberately small NBA/NFL picks page: daily experimental moneyline selections, observed prices at six US sportsbooks, and a live-pick accuracy counter. Predictions and scores are informational. No bets are placed.
 
-## Start locally
+## How it works
 
-Serve the `dist/` folder with any static web server, for example `python -m http.server 8000 --directory dist` and open `http://localhost:8000`. No build or browser dependencies are needed.
+Every hour GitHub Actions downloads NBA historical team-game results from BoxScore Lab (CC BY 4.0; https://boxscorelab.com/downloads/), NFL schedules/results from nflverse (https://github.com/nflverse/nfldata), and bookmaker odds snapshots from AgentBets (https://agentbets.ai/odds/). AgentBets says its underlying odds update hourly, not every minute. Its pages are public and welcome automated clients. ESPN scoreboard data is used as a supplementary source of finalized scores.
 
-## Automation: what is and is not connected
+The experimental model updates Elo team ratings sequentially from past completed games and includes fixed home/rest adjustments. It combines that estimate (25%) with the median proportional no-vig market probability (75%). It selects up to three upcoming same-day games where its assumption exceeds a tracked book's break-even probability by at least one percentage point; the blend, threshold, rest coefficients and model are **not validated as profitable**. The model has no injury, quarterback or referee-specific adjustments, though the separate research feed retains official NBA referee assignments. Do not interpret its displayed probability as proven truth.
 
-- The user's existing ChatGPT morning brief runs separately and includes referee and schedule research. Its results do **not** update this website automatically.
-- `.github/workflows/refresh-feed.yml` is a GitHub Actions workflow scheduled at 14:17 and 22:17 UTC daily and available with manual dispatch. GitHub schedules can be delayed, repository Actions permissions may prevent execution, and a successful first test run on October 27, 2026 fetched the official NBA referee assignments. Scheduled future runs still depend on GitHub Actions availability.
-- `scripts/refresh_feed.py` attempts to collect the NBA's official game-day referee table and, optionally, NBA/NFL FanDuel H2H prices via The Odds API. Add `ODDS_API_KEY` as a **GitHub Actions secret** to enable odds. The key is never written to feed output. A missing key or fetch error is recorded rather than misrepresented as a live price. API access, quota and coverage depend on the provider.
-- The workflow writes `dist/feed.json` in this repository. The hosted ChatGPT Site and its dated `dist/data.js` board are **not** linked to this file: they will not update when the workflow runs. A verified data writer or a deployment/synchronization integration is needed before unattended Site updates can be claimed. A successfully saved workflow does not prove that it has run.
-- GitHub-hosted automation output is a snapshot, not a guarantee of a currently available price. Compare with the sportsbook and include source and time.
+Predictions are saved to `data/predictions.json` before the event, one per event. Inputs and the predicted side remain frozen; only an official completed result grades a prediction. Ties are void; pending/void results do not enter wins divided by wins plus losses. The page uses the running prospective record, not historical or hindsight guesses. Accuracy is not a profit metric. Failed, stale, incomplete or unrecognized inputs suppress new picks rather than inventing lines. Live book prices can differ, and availability depends on jurisdiction.
 
-## Research and validation
+The static Vercel site reads `dist/board.json` and checks for a newer deployment every minute while open. It **does not obtain minute-level odds**: the current source publishes approximately hourly, and scheduled jobs may be delayed. GitHub Actions commits snapshots; Vercel Git integration is required for those commits to update the public page.
 
-Read `RESEARCH.md`. All public model probabilities in the board are independently attributed, may have shared inputs or stale injury data, and are not proven edges. Referee and rest observations remain context only. There is no trained model, historical archive, validated strategy, backtest, ROI, or confidence interval in this project. NFL ties can affect moneyline settlement and the simple two-outcome calculator.
-
-Run the feed tests with `python -m unittest discover -s tests`. The page calculator is client-side; it has no access to or control over a betting account.
+Run locally: `python -m http.server 8000 --directory dist`. Test: `python -m unittest discover -s tests`.

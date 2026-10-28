@@ -25,6 +25,7 @@ from .schedule_context import attach_rest_context
 from .referees import attach_current_officials
 from .availability import attach_nfl_reports
 from .research_dashboard import research_dashboard
+from .reproducibility import attach_prediction_checks
 
 
 def main():
@@ -170,6 +171,7 @@ def main():
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
+    attach_prediction_checks(board,ledger)
     attach_rest_context(board,markets,models,now.isoformat())
     attach_current_officials(board,markets,ref_report,ref_observed_at,now.isoformat())
     try:

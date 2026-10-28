@@ -10,6 +10,7 @@ from scripts.line_lab.history import append_observations, finalize_closing_proxi
 from scripts.line_lab.ledger import grade_ledger
 from scripts.line_lab.ledger_v2 import attach_retail_closing_proxies, paper_breakdowns, snapshot_hash, validate_transition
 from scripts.line_lab.market import choose_candidates
+from scripts.line_lab.reproducibility import reproduce_pure_elo_v1,verify_paper_pick,attach_prediction_checks
 
 
 class LedgerV2Tests(unittest.TestCase):
@@ -43,6 +44,14 @@ class LedgerV2Tests(unittest.TestCase):
         self.assertEqual(pick['anchor_source'], 'retail_median_not_sharp')
         self.assertIsNone(pick['clv_vs_sharp'])
         self.assertFalse(pick['staking_allowed'])
+        self.assertEqual(verify_paper_pick(pick),'verified')
+        self.assertAlmostEqual(reproduce_pure_elo_v1(pick['feature_snapshot'],'home'),pick['model_only_probability'])
+
+    def test_tampered_frozen_features_hide_a_new_active_pick(self):
+        pick=copy.deepcopy(self.pick);pick['feature_snapshot']['home_rating']+=10
+        self.assertEqual(verify_paper_pick(pick),'hash_mismatch')
+        board={'picks':[{'id':pick['id']}],'errors':[]};attach_prediction_checks(board,[pick])
+        self.assertEqual(board['picks'],[]);self.assertTrue(board['errors'])
 
     def test_grade_and_append_only_transition(self):
         original = copy.deepcopy(self.pick)

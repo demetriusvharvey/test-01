@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T18:54:06.511119+00:00",
+  "generated_at": "2026-10-28T18:56:15.205313+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; PropLine scoreboard",
   "accuracy": {
@@ -114,8 +114,8 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-28T18:54:06.437549+00:00",
-        "incomplete": true,
+        "observed_at": "2026-10-28T18:56:15.044938+00:00",
+        "incomplete": false,
         "used_in_prediction": false
       },
       "schedule_context": {
@@ -134,7 +134,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:54:06.511119+00:00",
+        "observed_at": "2026-10-28T18:56:15.205313+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -144,7 +144,7 @@
         "crew_chief": "James Williams (#60)",
         "referee": "Marat Kogut (#32)",
         "umpire": "Brandon Adair (#67)",
-        "observed_at": "2026-10-28T18:54:05.861745+00:00",
+        "observed_at": "2026-10-28T18:56:14.233411+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -246,12 +246,31 @@
           "away": {
             "team": "Golden State Warriors",
             "counts": {
-              "out": 0,
+              "out": 3,
               "questionable": 0,
               "doubtful": 0,
-              "other": 0
+              "other": 1
             },
-            "positions": {}
+            "positions": {
+              "F": {
+                "out": 1,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 1
+              },
+              "C": {
+                "out": 1,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "G": {
+                "out": 1,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              }
+            }
           },
           "home": {
             "team": "Minnesota Timberwolves",
@@ -272,8 +291,8 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-28T18:54:06.437549+00:00",
-        "incomplete": true,
+        "observed_at": "2026-10-28T18:56:15.044938+00:00",
+        "incomplete": false,
         "used_in_prediction": false
       },
       "schedule_context": {
@@ -292,7 +311,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:54:06.511119+00:00",
+        "observed_at": "2026-10-28T18:56:15.205313+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -302,7 +321,7 @@
         "crew_chief": "Curtis Blair (#74)",
         "referee": "Andy Nagy (#18)",
         "umpire": "Ashley Moyer-Gleich (#13)",
-        "observed_at": "2026-10-28T18:54:05.861745+00:00",
+        "observed_at": "2026-10-28T18:56:14.233411+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -449,8 +468,8 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-28T18:54:06.437549+00:00",
-        "incomplete": true,
+        "observed_at": "2026-10-28T18:56:15.044938+00:00",
+        "incomplete": false,
         "used_in_prediction": false
       },
       "schedule_context": {
@@ -469,7 +488,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:54:06.511119+00:00",
+        "observed_at": "2026-10-28T18:56:15.205313+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -479,7 +498,7 @@
         "crew_chief": "Ben Taylor (#46)",
         "referee": "JB DeRosa (#14)",
         "umpire": "Brandon Schwab (#49)",
-        "observed_at": "2026-10-28T18:54:05.861745+00:00",
+        "observed_at": "2026-10-28T18:56:14.233411+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -854,8 +873,8 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-28T18:54:06.437549+00:00",
-        "incomplete": true,
+        "observed_at": "2026-10-28T18:56:15.044938+00:00",
+        "incomplete": false,
         "used_in_prediction": false
       },
       "schedule_context": {
@@ -874,7 +893,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:54:06.511119+00:00",
+        "observed_at": "2026-10-28T18:56:15.205313+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -884,7 +903,7 @@
         "crew_chief": "Courtney Kirkland (#61)",
         "referee": "Aaron Smith (#51)",
         "umpire": "Phenizee Ransom (#70)",
-        "observed_at": "2026-10-28T18:54:05.861745+00:00",
+        "observed_at": "2026-10-28T18:56:14.233411+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -1556,7 +1575,7 @@
     "status": "descriptive_research_only"
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T18:54:06.511119+00:00",
+    "pipeline_generated_at": "2026-10-28T18:56:15.205313+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T18:00:00+00:00",
     "oldest_quote_at": "2026-10-28T18:00:00+00:00",

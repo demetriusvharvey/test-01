@@ -7,6 +7,7 @@ on:
       - scripts/research_models.py
       - scripts/evaluate_challengers.py
       - scripts/backtest_shadow.py
+      - scripts/research_trust.py
   schedule:
     - cron: '42 10 * * 2'
 permissions:
@@ -37,11 +38,12 @@ jobs:
           python scripts/research_models.py --data-root "$PICKS_DATA_ROOT" --output reports/model_registry.md
           python scripts/evaluate_challengers.py --data-root "$PICKS_DATA_ROOT" --output reports/challenger_forward.md
           python scripts/backtest_shadow.py --data-root "$PICKS_DATA_ROOT" --output reports/paper_backtest.md
+          python scripts/research_trust.py --data-root "$PICKS_DATA_ROOT" --output reports/trust_timing.md
       - name: Append research logs
         run: |
           git -C .data-store config user.name 'github-actions[bot]'
           git -C .data-store config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git -C .data-store add observations/pattern_tests observations/model_registry.sqlite observations/challenger_tests.sqlite observations/paper_replay.sqlite
+          git -C .data-store add observations/pattern_tests observations/model_registry.sqlite observations/challenger_tests.sqlite observations/paper_replay.sqlite observations/trust_trials.sqlite
           if ! git -C .data-store diff --cached --quiet; then
             git -C .data-store commit -m 'Record weekly shadow research'
             git -C .data-store pull --rebase origin data/observations
@@ -51,7 +53,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add PATTERN_REPORT.md reports/model_registry.md reports/challenger_forward.md reports/paper_backtest.md
+          git add PATTERN_REPORT.md reports/model_registry.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md
           if ! git diff --cached --quiet; then
             git commit -m 'Update weekly research summaries'
             git pull --rebase origin main

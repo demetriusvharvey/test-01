@@ -4,6 +4,7 @@ This is descriptive context only, not a validated model input. The provider's
 terms require the user to obtain a key and agree to them before enabling calls.
 """
 import json
+import re
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
 
@@ -13,6 +14,10 @@ from .history import aware
 URL = 'https://api.prop-line.com/v1/sports/basketball_nba/injuries'
 STATUSES = {'out', 'out_first_half', 'doubtful', 'questionable', 'probable',
             'game_time_decision', 'day_to_day', 'injured_list', 'suspended', 'other'}
+
+
+def _bucket(status):
+    return status if status in ('out', 'doubtful') else 'questionable' if status in ('questionable', 'game_time_decision') else 'other'
 
 
 def _fetch_injuries(key, enabled, url, opener):
@@ -76,13 +81,75 @@ def summarize_by_team(payload, observed_at, league='NBA'):
             incomplete = True
             continue
         status = next(iter(statuses))
-        bucket = status if status in ('out', 'doubtful') else 'questionable' if status in ('questionable', 'game_time_decision') else 'other'
+        bucket = _bucket(status)
         summaries[code][bucket] += 1
     return summaries, incomplete
 
 
+def summarize_positions_by_team(payload, observed_at, league):
+    """Count listed statuses by reported position without publishing players.
+
+    Unspecified or conflicting positions remain UNKNOWN. The complete team
+    status parser is still responsible for rejecting incomplete reports.
+    """
+    observed=aware(observed_at)
+    sport={'NBA':'basketball_nba','NFL':'football_nfl'}.get(league)
+    if not sport or not isinstance(payload,dict) or payload.get('sport')!=sport:
+        raise ValueError('unexpected injury sport')
+    rows=payload.get('players')
+    if not isinstance(rows,list) or isinstance(payload.get('count'),bool) or payload.get('count')!=len(rows):
+        raise ValueError('incomplete injury response')
+    teams=set((NBA_TEAMS if league=='NBA' else NFL_TEAMS).values());candidates={}
+    for row in rows:
+        if not isinstance(row,dict):continue
+        code=normalize_code(str(row.get('team_abbr') or '').strip().upper())
+        player=row.get('player_id');status=row.get('status_code')
+        try:
+            times=[aware(value) for value in (row.get('source_updated_at'),row.get('status_since')) if value]
+            if (code not in teams or not isinstance(player,str) or not player.strip()
+                    or status not in STATUSES or not times or any(t>observed for t in times)):continue
+        except (TypeError,ValueError):continue
+        position=str(row.get('position') or '').strip().upper()
+        if not re.fullmatch(r'[A-Z]{1,5}(?:[-/][A-Z]{1,5})?',position):position='UNKNOWN'
+        candidates.setdefault((code,player),set()).add((status,position))
+    result={code:{} for code in teams}
+    for (code,_),values in candidates.items():
+        statuses={status for status,_ in values}
+        if len(statuses)!=1:continue
+        status=next(iter(statuses));positions={position for _,position in values}
+        position=next(iter(positions)) if len(positions)==1 else 'UNKNOWN'
+        counts=result[code].setdefault(position,{'out':0,'doubtful':0,'questionable':0,'other':0})
+        counts[_bucket(status)]+=1
+    return result
+
+
+def injury_quality_counts(payload,observed_at,league):
+    """Return only aggregate diagnostics, never player identifiers or names."""
+    observed=aware(observed_at)
+    sport={'NBA':'basketball_nba','NFL':'football_nfl'}.get(league)
+    rows=payload.get('players') if isinstance(payload,dict) and payload.get('sport')==sport else None
+    if not isinstance(rows,list):raise ValueError('unexpected injury response')
+    teams=set((NBA_TEAMS if league=='NBA' else NFL_TEAMS).values())
+    result={'rows':len(rows),'invalid_row':0,'unknown_team':0,'missing_player_id':0,
+            'unknown_status':0,'missing_timestamp':0,'invalid_or_future_timestamp':0,'missing_position':0}
+    for row in rows:
+        if not isinstance(row,dict):result['invalid_row']+=1;continue
+        if normalize_code(str(row.get('team_abbr') or '').strip().upper()) not in teams:result['unknown_team']+=1
+        if not isinstance(row.get('player_id'),str) or not row['player_id'].strip():result['missing_player_id']+=1
+        if row.get('status_code') not in STATUSES:result['unknown_status']+=1
+        position=str(row.get('position') or '').strip().upper()
+        if not re.fullmatch(r'[A-Z]{1,5}(?:[-/][A-Z]{1,5})?',position):result['missing_position']+=1
+        stamps=[s for s in (row.get('source_updated_at'),row.get('status_since')) if s]
+        if not stamps:result['missing_timestamp']+=1;continue
+        try:
+            if any(aware(s)>observed for s in stamps):result['invalid_or_future_timestamp']+=1
+        except (TypeError,ValueError):result['invalid_or_future_timestamp']+=1
+    return result
+
+
 def attach_nba_summaries(board, markets, payload, observed_at):
     summaries, incomplete = summarize_by_team(payload, observed_at)
+    positions = summarize_positions_by_team(payload, observed_at, 'NBA')
     observed = aware(observed_at)
     for pick in list(board.get('picks', [])) + list(board.get('watchlist', [])):
         event = markets.get(pick.get('id'))
@@ -96,7 +163,7 @@ def attach_nba_summaries(board, markets, payload, observed_at):
                 code = event[side]
                 if code not in summaries:
                     raise ValueError('unknown team')
-                sides[side] = {'team': event[side + '_name'], 'counts': summaries[code]}
+                sides[side] = {'team': event[side + '_name'], 'counts': summaries[code], 'positions': positions[code]}
             pick['nba_availability_context'] = {
                 'teams': sides, 'source': 'PropLine, ESPN-sourced',
                 'observed_at': observed.isoformat(), 'incomplete': incomplete,
@@ -109,6 +176,7 @@ def attach_nba_summaries(board, markets, payload, observed_at):
 def attach_nfl_summaries(board, markets, payload, observed_at):
     """Attach current aggregate NFL status counts, not starter assumptions."""
     summaries, incomplete = summarize_by_team(payload, observed_at, league='NFL')
+    positions = summarize_positions_by_team(payload, observed_at, 'NFL')
     observed = aware(observed_at)
     for pick in list(board.get('picks', [])) + list(board.get('watchlist', [])):
         event = markets.get(pick.get('id'))
@@ -119,7 +187,7 @@ def attach_nfl_summaries(board, markets, payload, observed_at):
             for side in ('away','home'):
                 code=event[side]
                 if code not in summaries:raise ValueError('unknown team')
-                sides[side]={'team':event[side+'_name'],'counts':summaries[code]}
+                sides[side]={'team':event[side+'_name'],'counts':summaries[code],'positions':positions[code]}
             pick['nfl_provider_availability_context']={
                 'teams':sides,'source':'PropLine, ESPN-sourced',
                 'observed_at':observed.isoformat(),'incomplete':incomplete,

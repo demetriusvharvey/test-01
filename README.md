@@ -13,6 +13,10 @@ does not estimate individual player impact. NBA collection requires the free
 provider setup in [docs/NBA_AVAILABILITY.md](docs/NBA_AVAILABILITY.md); NBA
 model training additionally remains blocked while upstream rights are reviewed.
 Empty, conflicting, stale or future reports never mean a healthy team.
+Current source reports are also grouped by all reported NBA/NFL positions,
+including NFL offense, defense and special teams, and stored as aggregate
+pregame research snapshots. Missing positions remain unknown. The position
+snapshots do not affect live predictions and have not been validated.
 
 That same optional key enables the provider's NBA/NFL schedules, scores and injury
 context without any additional account. A daily request cap protects the free

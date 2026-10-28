@@ -1,6 +1,45 @@
 """Point-in-time, aggregate player-status features for a shadow challenger."""
 from datetime import timedelta
+import re
 from .history import aware
+
+
+def position_availability_snapshot(event,context,prediction_at):
+    """Capture all reported positions as research data, never as player effects."""
+    try:
+        now,start=aware(prediction_at),aware(event['starts_at'])
+        observed=aware(context['observed_at'])
+        if (event.get('league') not in ('NBA','NFL') or context.get('source')!='PropLine, ESPN-sourced'
+                or context.get('used_in_prediction') is not False or observed>now or now>=start
+                or now-observed>timedelta(minutes=95)):return None
+        statuses=('out','doubtful','questionable','other');teams={};unknown=0
+        for side in ('away','home'):
+            value=context['teams'][side]
+            if value.get('team')!=event[side+'_name'] or not isinstance(value.get('positions'),dict):return None
+            positions={}
+            for position,counts in value['positions'].items():
+                if not isinstance(position,str) or not re.fullmatch(r'[A-Z]{1,7}(?:[-/][A-Z]{1,5})?',position):return None
+                if not isinstance(counts,dict):return None
+                values={name:counts[name] for name in statuses}
+                if any(not isinstance(n,int) or isinstance(n,bool) or n<0 or n>80 for n in values.values()):return None
+                positions[position]=values
+                if position=='UNKNOWN':unknown+=sum(values.values())
+            totals={name:sum(counts[name] for counts in positions.values()) for name in statuses}
+            if totals!=value['counts'] or sum(totals.values())>80:return None
+            teams[side]={'team':value['team'],'positions':positions,'counts':totals}
+        eligible=(context.get('incomplete') is False and unknown==0
+                  and all(sum(teams[side]['counts'].values())>0 for side in ('home','away')))
+        differences=None
+        if eligible:
+            positions=set(teams['home']['positions'])|set(teams['away']['positions'])
+            differences={position:{status:teams['home']['positions'].get(position,{}).get(status,0)-
+                                     teams['away']['positions'].get(position,{}).get(status,0)
+                                   for status in statuses} for position in sorted(positions)}
+        return {'schema':'position-status-v1','source':context['source'],'observed_at':observed.isoformat(),
+                'teams':teams,'incomplete':context.get('incomplete') is not False,
+                'unknown_position_count':unknown,'training_eligible':eligible,
+                'features':differences,'used_in_prediction':False}
+    except (KeyError,TypeError,ValueError,OverflowError):return None
 
 
 def _counts_nba(context, side):

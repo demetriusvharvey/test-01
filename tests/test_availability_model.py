@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 
-from scripts.line_lab.availability_features import availability_features
+from scripts.line_lab.availability_features import availability_features, position_availability_snapshot
 from scripts.line_lab.availability_model import fit_availability_shadow, predict_availability_shadow
 from scripts.line_lab.experiment import record_forecasts, record_outcomes
 from scripts.line_lab.model_stack import append_trial, record_challenger_forecasts
@@ -58,6 +58,23 @@ class AvailabilityModelTests(unittest.TestCase):
         self.assertIsNone(availability_features(event,context,self.now.isoformat()))
         context['teams']['away']['counts']['questionable']=1;context['observed_at']=(self.now+timedelta(seconds=1)).isoformat()
         self.assertIsNone(availability_features(event,context,self.now.isoformat()))
+
+    def test_position_snapshot_includes_offense_and_defense_without_assuming_player_effects(self):
+        out={'out':1,'doubtful':0,'questionable':0,'other':0}
+        questionable={'out':0,'doubtful':0,'questionable':1,'other':0}
+        context={'source':'PropLine, ESPN-sourced','used_in_prediction':False,'incomplete':False,
+                 'observed_at':self.now.isoformat(),'teams':{
+                     'home':{'team':'Home','counts':out,'positions':{'WR':out}},
+                     'away':{'team':'Away','counts':questionable,'positions':{'CB':questionable}}}}
+        snapshot=position_availability_snapshot(self.event,context,self.now.isoformat())
+        self.assertEqual(snapshot['features']['WR']['out'],1)
+        self.assertEqual(snapshot['features']['CB']['questionable'],-1)
+        self.assertTrue(snapshot['training_eligible']);self.assertFalse(snapshot['used_in_prediction'])
+        context['incomplete']=True
+        snapshot=position_availability_snapshot(self.event,context,self.now.isoformat())
+        self.assertFalse(snapshot['training_eligible']);self.assertIsNone(snapshot['features'])
+        context['observed_at']=(self.now+timedelta(seconds=1)).isoformat()
+        self.assertIsNone(position_availability_snapshot(self.event,context,self.now.isoformat()))
 
     def fit(self):
         return fit_availability_shadow(self.rows,'NFL',self.cutoff.isoformat(),min_training=16,min_validation=8,min_seasons=3)

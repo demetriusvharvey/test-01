@@ -115,3 +115,23 @@ the first three qualified sides under this ordering with the previous EV
 ordering using accuracy, log loss, Brier and execution-aware return; log all
 outcomes and report counts. Do not force a selection when nothing qualifies,
 and do not label a price edge proven from an unvalidated forecast.
+
+## H018 — availability by position
+
+Register before any test: compare an injury model with position-level counts
+against the identical frozen team model without those counts, on the same
+pregame games. NFL positions include offensive, defensive and specialist
+positions; NBA positions include any labels actually provided by the source.
+Position and player importance must be learned from earlier, rights-qualified
+data, not assigned by hand or inferred from final results. Incomplete reports,
+unknown positions, unconfirmed starters and missing team reports remain unknown.
+The provider's observed time is the time this system received a report, not a
+claimed publication time. Only aggregated status counts are retained.
+
+The recording process produces a versioned, time-qualified snapshot, with a
+separate eligibility flag; it does not train a model or change predictions.
+Future analysis is part of the H007/H016 availability family and must preserve
+its sample, multiple-testing, time-order, rights, replication and untouched
+holdout gates. Do not train on a source until its relevant usage rights are
+reviewed, and do not promote position features without evidence they improve
+the matched-time benchmark.

@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock
 
 from scripts.line_lab.nba_injury_feed import (
-    attach_nba_summaries, attach_nfl_summaries, fetch_nba_injuries, fetch_nfl_injuries, summarize_by_team,
+    attach_nba_summaries, attach_nfl_summaries, fetch_nba_injuries, fetch_nfl_injuries, summarize_by_team, summarize_positions_by_team, injury_quality_counts,
 )
 
 
@@ -89,6 +89,21 @@ class NbaInjuryFeedTests(unittest.TestCase):
         fetch_nfl_injuries('private-key',True,opener)
         self.assertTrue(opener.call_args.args[0].full_url.endswith('/football_nfl/injuries'))
         self.assertNotIn('private-key',opener.call_args.args[0].full_url)
+
+    def test_all_nfl_positions_are_counted_and_missing_positions_remain_unknown(self):
+        positions=['QB','RB','WR','TE','OT','G','C','DE','DT','LB','CB','S','K','P',None]
+        payload={'sport':'football_nfl','count':len(positions),'players':[
+            {'team_abbr':'KC','player_id':f'espn:{i}','position':position,'status_code':'out','status_since':'2026-10-28T17:00:00Z'}
+            for i,position in enumerate(positions)]}
+        result=summarize_positions_by_team(payload,self.now,'NFL')['KC']
+        for position in positions:
+            self.assertEqual(result[position or 'UNKNOWN']['out'],1)
+        event={'id':'nfl:test','league':'NFL','away':'KC','home':'BUF','away_name':'Kansas City Chiefs','home_name':'Buffalo Bills','starts_at':'2026-10-28T23:00:00Z'}
+        board={'picks':[{'id':'nfl:test'}]};attach_nfl_summaries(board,{'nfl:test':event},payload,self.now)
+        self.assertEqual(board['picks'][0]['nfl_provider_availability_context']['teams']['away']['counts']['out'],len(positions))
+        quality=injury_quality_counts(payload,self.now,'NFL')
+        self.assertEqual(quality['missing_position'],1);self.assertEqual(quality['rows'],len(positions))
+        self.assertNotIn('espn:',json.dumps(quality))
 
 
 if __name__ == '__main__':

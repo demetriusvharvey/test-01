@@ -1,9 +1,12 @@
-# Optional NBA player-status context
+# NBA and NFL player-status context
 
 The board's current predictions do not use NBA or NFL injury status or lineups. A
 disabled-by-default connector can add descriptive player-status counts to
 game details; it never changes a predicted winner or a model weight. A short
 link to the NBA's current official report is always shown.
+Where available, displayed counts also break out all reported positions,
+including NFL offense, defense and specialists. An unreported position is
+marked unknown; counts do not measure a player's importance.
 
 The connector calls PropLine's NBA and NFL injury endpoints and schedule
 and score endpoints during a board update, only if a user has provided their own key. As of
@@ -30,7 +33,7 @@ To activate it:
    the unverified direct ESPN endpoint.
 
 Publication and retained data must remain within the provider's terms and any
-upstream rights. The connector only publishes aggregate per-team status counts
+upstream rights. The connector only publishes aggregate team and position status counts
 for displayed games and does not write the raw league feed to either Git branch.
 Validated prediction effects require rights-compatible historical availability,
 lineups/minutes and outcome data, as well as forward and time-ordered tests.

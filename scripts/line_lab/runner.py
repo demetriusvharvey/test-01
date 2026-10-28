@@ -24,11 +24,11 @@ from .line_movement import attach_histories
 from .schedule_context import attach_rest_context
 from .referees import attach_current_officials
 from .availability import attach_nfl_reports, nfl_report_context
-from .availability_features import availability_features
+from .availability_features import availability_features, position_availability_snapshot
 from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
 from .watchlist import render_watchlist
-from .nba_injury_feed import fetch_nba_injuries, fetch_nfl_injuries, attach_nba_summaries, attach_nfl_summaries
+from .nba_injury_feed import fetch_nba_injuries, fetch_nfl_injuries, attach_nba_summaries, attach_nfl_summaries, injury_quality_counts
 from .propline_scores import fetch_scores, fetch_events, parse_scores, parse_event_starts, restrict_public_results, use_provider, reserve_call
 
 
@@ -178,6 +178,7 @@ def main():
             if not reserve_call(data_root,'injuries_nba',datetime.now(timezone.utc).isoformat()):
                 raise ValueError('provider request budget unavailable')
             injury_payload,injury_observed_at=fetch_nba_injuries(nba_injury_key,True)
+            print('NBA injury report quality:',json.dumps(injury_quality_counts(injury_payload,injury_observed_at,'NBA'),sort_keys=True))
         except Exception as e:errors.append('NBA injury context unavailable ('+type(e).__name__+')')
     nfl_provider_payload=None;nfl_provider_observed_at=None
     if propline_enabled and propline_key and any(e.get('league')=='NFL' for e in markets.values()):
@@ -185,6 +186,7 @@ def main():
             if not reserve_call(data_root,'injuries_nfl',datetime.now(timezone.utc).isoformat()):
                 raise ValueError('provider request budget unavailable')
             nfl_provider_payload,nfl_provider_observed_at=fetch_nfl_injuries(propline_key,True)
+            print('NFL injury report quality:',json.dumps(injury_quality_counts(nfl_provider_payload,nfl_provider_observed_at,'NFL'),sort_keys=True))
         except Exception as e:errors.append('NFL injury context unavailable ('+type(e).__name__+')')
     now=datetime.now(timezone.utc)
     if now.astimezone(ET).date()!=today and not day_rolled:
@@ -198,18 +200,27 @@ def main():
     # If a league's training history is missing, do not produce predictions for it.
     blocked={('NBA' if x.startswith('NBA historical') else 'NFL') for x in errors if x.startswith(('NBA historical','NFL historical'))}
     permitted={k:v for k,v in markets.items() if archive_ok and not day_rolled and v['league'] not in blocked and (v['league']!='NFL' or 'neutral' in v)}
-    status_by_game={};nba_context={}
+    status_by_game={};nba_context={};provider_context={};positions_by_game={}
     if injury_payload is not None:
         try:
             temp={'picks':[{'id':key} for key in permitted]}
             attach_nba_summaries(temp,markets,injury_payload,injury_observed_at)
             nba_context={row['id']:row['nba_availability_context'] for row in temp['picks'] if row.get('nba_availability_context')}
+            provider_context.update(nba_context)
         except Exception as exc:errors.append('NBA injury context invalid ('+type(exc).__name__+')')
+    if nfl_provider_payload is not None:
+        try:
+            temp={'picks':[{'id':key} for key in permitted]}
+            attach_nfl_summaries(temp,markets,nfl_provider_payload,nfl_provider_observed_at)
+            provider_context.update({row['id']:row['nfl_provider_availability_context'] for row in temp['picks'] if row.get('nfl_provider_availability_context')})
+        except Exception as exc:errors.append('NFL injury context invalid ('+type(exc).__name__+')')
     for key,event in permitted.items():
         try:
             context=nba_context.get(key) if event['league']=='NBA' else nfl_report_context(data_root,event,nfl_csv,nfl_observed_at,now.isoformat(),max_players=1000) if data_root and nfl_csv and nfl_observed_at else None
             features=availability_features(event,context,now.isoformat())
             if features:status_by_game[key]=features
+            position_snapshot=position_availability_snapshot(event,provider_context.get(key),now.isoformat())
+            if position_snapshot:positions_by_game[key]=position_snapshot
         except Exception as exc:errors.append(event['league']+' injury research unavailable ('+type(exc).__name__+')')
     try:
         if data_root and archive_ok:
@@ -218,8 +229,9 @@ def main():
             if nfl_csv and nfl_observed_at:
                 try:qb_shadow=build_nfl_shadow_context(data_root,nfl_csv,nfl_observed_at,now.isoformat())
                 except Exception as exc:print('NFL shadow context unavailable:',type(exc).__name__)
-            shadow={key:{'quarterback':qb_shadow.get(key),'availability':status_by_game.get(key)}
-                    for key in permitted if key in qb_shadow or key in status_by_game}
+            shadow={key:{'quarterback':qb_shadow.get(key),'availability':status_by_game.get(key),
+                         'position_availability':positions_by_game.get(key)}
+                    for key in permitted if key in qb_shadow or key in status_by_game or key in positions_by_game}
             forecast_count=record_forecasts(data_root,permitted,models,now.isoformat(),shadow)
             print('Paper study:',forecast_count,'forecasts;',result_count,'confirmed outcomes')
             challenger_count=record_challenger_forecasts(data_root,permitted,models,now.isoformat(),status_by_game)

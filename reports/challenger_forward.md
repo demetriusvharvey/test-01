@@ -1,6 +1,6 @@
 # Forward challenger comparison
 
-Run 2026-10-28T23:43:40.003712+00:00. The challenger and baseline must share the same recorded pregame timestamp.
+Run 2026-10-28T23:56:00.211151+00:00. The challenger and baseline must share the same recorded pregame timestamp.
 
 | League | Challenger | Matched settled games | Excluded first forecasts | Log loss difference | Brier difference | Adjusted p | Status |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |
@@ -8,6 +8,7 @@ Run 2026-10-28T23:43:40.003712+00:00. The challenger and baseline must share the
 | NBA | pure-elasticnet-v1 | 0 | 0 | — | — | — | insufficient_data |
 | NBA | pure-stumpboost-v1 | 0 | 0 | — | — | — | insufficient_data |
 | NFL | availability-logistic-v1 | 0 | 0 | — | — | — | insufficient_data |
+| NFL | nfl-position-status-logistic-v1 | 0 | 0 | — | — | — | insufficient_data |
 | NFL | pure-elasticnet-v1 | 0 | 0 | — | — | — | insufficient_data |
 | NFL | pure-stumpboost-v1 | 0 | 0 | — | — | — | insufficient_data |
 

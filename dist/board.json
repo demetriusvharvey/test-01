@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T12:26:42.112000+00:00",
+  "generated_at": "2026-10-28T12:30:26.989592+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -372,7 +372,9 @@
       "candidate_testing": "disabled"
     }
   },
-  "errors": [],
+  "errors": [
+    "BetRivers NFL odds unavailable (TimeoutError)"
+  ],
   "study": {
     "NBA": {
       "forecast_games": 0,

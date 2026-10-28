@@ -1,6 +1,6 @@
 # Pattern research report
 
-As of 2026-10-28T13:18:05.025711+00:00: 300 archived forecast snapshots, 0 separately observed outcomes, 0 matched rows before rights/time eligibility.
+As of 2026-10-28T13:20:33.630259+00:00: 312 archived forecast snapshots, 0 separately observed outcomes, 0 matched rows before rights/time eligibility.
 All results are shadow-only. No pattern is promoted; insufficient data is not a failure or a success. H010 is one Benjamini–Hochberg family across the definitions and leagues below. Only valid tests enter the correction.
 
 | Hypothesis | League | Definition | Games / days | Mean win-minus-market | 95% day-block interval | Raw p | Adjusted p | Holdout | Status |

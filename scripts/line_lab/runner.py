@@ -21,6 +21,7 @@ from .trust import record_candidates
 from .validation import progress_from_ledger
 from .monitoring import build_monitoring
 from .line_movement import attach_histories
+from .schedule_context import attach_rest_context
 
 
 def main():
@@ -164,6 +165,7 @@ def main():
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
+    attach_rest_context(board,markets,models,now.isoformat())
     try:
         if data_root:attach_histories(data_root,board,markets,ledger,now.isoformat())
     except Exception as e:

@@ -29,3 +29,7 @@ Record the actual baseline and ten material weaknesses, evidence/rights, assumpt
 ## Validation standard
 
 Preregister hypotheses before new tests, log every run including failures, apply Benjamini–Hochberg adjustment for the defined family, require two independent replications and a truly untouched later confirmation, and compare against a matched-time market-only benchmark. Existing previously inspected seasons are not an untouched final holdout. No profitability or validation claim until the Phase 11 forward bar is achieved.
+
+## Model-first amendment — requested after Phase 1
+
+The newly requested `docs/MODEL_FIRST_AMMENDUM.md` overrides the legacy 75:25 live decision formula. Preserve the original immutable record, create pure-model paper selections using odds only to price them, and log timestamp-matched pure/retail-reference shadow forecasts. A genuinely sharp anchor and fitted model+sharp challenger must remain unavailable until licensed data and walk-forward training exist. Keep the pre-registered gates above in force. Existing exploratory models or future source files are not automatically eligible for staking, and no automatic bet placement is added. Historical NBA coverage is under ten completed seasons; player-level NBA lineup and time-stamped injury/official sources remain missing, so a complete amendment implementation cannot be claimed without those inputs. Do not label uncalibrated Elo probabilities as calibrated.

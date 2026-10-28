@@ -152,3 +152,20 @@ No betting ROI, player impact, possessions or drives may be inferred from
 this test. The live 10,000-draw snapshot remains disabled for pick selection
 until a later untouched evaluation, matched-time market comparison and the
 same source-rights and prospective promotion gates as H016 pass.
+
+## H020 — independent possession/drive simulator concept
+
+The @rotobot_ai example motivates a possible independently built NBA
+possession/NFL drive simulator, **not** ingestion or benchmarking of RotoBot
+outputs. With source-rights-qualified, time-ordered play-by-play and pregame
+player availability, test whether an independently estimated possession/drive
+process improves paired out-of-sample log loss and Brier over Elo and a
+matched-time market baseline. Preregister feature and scenario choices,
+calibrate on prior seasons, reserve an untouched later season, and leave the
+new component disabled unless it improves both calibration and the market
+comparison. Record every failed variant. The existing score-bootstrap
+challenger lost to Elo (NBA 0.2369 vs 0.2093 Brier; NFL 0.2380 vs 0.2231),
+which is a reason to demand stronger empirical evidence, not to increase
+the simulation count. RotoBot's terms preclude automated ingestion or using
+its outputs to benchmark a competing model under the current $0/public-site
+requirements; see DATA_SOURCES.md.

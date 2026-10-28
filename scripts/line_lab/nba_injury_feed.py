@@ -21,8 +21,10 @@ def fetch_nba_injuries(key, enabled, opener=urlopen):
         return None
     request = Request(URL, headers={'X-API-Key': key, 'Accept': 'application/json'})
     with opener(request, timeout=15) as response:
-        payload = json.load(response)
-    return payload, datetime.now(timezone.utc).isoformat()
+        body = response.read(5_000_001)
+    if len(body) > 5_000_000:
+        raise ValueError('injury response too large')
+    return json.loads(body), datetime.now(timezone.utc).isoformat()
 
 
 def summarize_by_team(payload, observed_at):

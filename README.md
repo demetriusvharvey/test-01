@@ -14,6 +14,10 @@ provider setup in [docs/NBA_AVAILABILITY.md](docs/NBA_AVAILABILITY.md); NBA
 model training additionally remains blocked while upstream rights are reviewed.
 Empty, conflicting, stale or future reports never mean a healthy team.
 
+That same optional key enables the provider's NBA/NFL scoreboard and injury
+context without any additional account. A daily request cap protects the free
+tier; current odds still come from hourly AgentBets snapshots.
+
 The preregistered validation bar requires at least 300 settled prospective paper picks in the relevant segment, positive sharp closing-line value with a confidence interval excluding zero, and calibration no worse than a matched-time market benchmark. The stricter model-first protocol also requires adjusted head-to-head evidence, a nonnegative lower paper-ROI interval, two independent season replications and a later untouched holdout. An hourly retail quote is not a verified sharp close. Until these requirements are met, the model is not validated as profitable; no system action places a bet.
 
 ## Data and architecture

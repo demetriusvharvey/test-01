@@ -165,4 +165,62 @@ class StorageAndSourceTests(unittest.TestCase):
         self.assertFalse(status['used_in_prediction'])
         self.assertNotIn('Do Not Publish',snapshot);self.assertNotIn('secret-test-key',snapshot)
 
+    def test_combined_free_source_uses_one_key_without_direct_espn_requests(self):
+        from scripts.line_lab import runner
+        class FixedDateTime(datetime):
+            @classmethod
+            def now(cls,tz=None):return NOW.astimezone(tz or timezone.utc)
+        nba='game_date,home,team,opponent,points,opponent_points,season\n2026-10-26,true,LAL,POR,110,100,2026-27\n'
+        nfl='season,game_type,gameday,home_team,away_team,home_score,away_score,location\n2025,REG,2025-09-07,NE,BUF,14,21,Home\n'
+        book=(FIXTURES/'agentbets_nba.html').read_text()
+        refs='<p>October 27, 2026</p><table><tr><th>Game</th><th>Crew Chief</th><th>Referee</th><th>Umpire</th></tr><tr><td>Portland @ Lakers</td><td>A</td><td>B</td><td>C</td></tr></table>'
+        def fake_get(url,timeout=25):
+            if 'boxscorelab.com' in url:return nba
+            if 'nflverse/nfldata' in url:return nfl
+            if 'agentbets.ai/odds/' in url:return book if url.endswith('/nba') else book.replace('Portland Trail Blazers @ Los Angeles Lakers','Unknown @ Unknown')
+            if 'official.nba.com' in url:return refs
+            raise AssertionError('unexpected direct source: '+url)
+        scoreboard=[{'id':'123','sport_key':'basketball_nba','home_team':'Los Angeles Lakers',
+                     'away_team':'Portland Trail Blazers','commence_time':'2026-10-28T03:00:00Z',
+                     'status':'upcoming','home_score':None,'away_score':None}]
+        def fake_scores(key,league):return [],NOW.isoformat()
+        def fake_events(key,league):return (scoreboard if league=='NBA' else []),NOW.isoformat()
+        injuries={'sport':'basketball_nba','count':2,'players':[
+            {'team_abbr':'LAL','player_id':'espn:1','status_code':'out','status_since':NOW.isoformat()},
+            {'team_abbr':'POR','player_id':'espn:2','status_code':'questionable','status_since':NOW.isoformat()}]}
+        (self.root/'dist').mkdir();(self.root/'data').mkdir()
+        env={'PICKS_DATA_ROOT':str(self.root/'store'),'PROPLINE_API_KEY':'test-key'}
+        with patch.object(runner,'ROOT',self.root),patch.object(runner,'datetime',FixedDateTime),patch.object(runner,'get',side_effect=fake_get),patch.object(runner,'fetch_scores',side_effect=fake_scores),patch.object(runner,'fetch_events',side_effect=fake_events),patch.object(runner,'fetch_nba_injuries',return_value=(injuries,NOW.isoformat())),patch.dict('os.environ',env,clear=True):
+            runner.main()
+        board=json.loads((self.root/'dist/board.json').read_text())
+        self.assertEqual(board['source_status']['scoreboard_source'],'PropLine')
+        self.assertIn('PropLine scoreboard',board['source'])
+        self.assertEqual(len(board['picks']),1)
+        self.assertEqual(board['picks'][0]['nba_availability_context']['teams']['home']['counts']['out'],1)
+        self.assertNotIn('test-key',json.dumps(board))
+
+    def test_cancelled_score_status_overrides_stale_upcoming_schedule(self):
+        from scripts.line_lab import runner
+        class FixedDateTime(datetime):
+            @classmethod
+            def now(cls,tz=None):return NOW.astimezone(tz or timezone.utc)
+        nba='game_date,home,team,opponent,points,opponent_points,season\n2026-10-26,true,LAL,POR,110,100,2026-27\n'
+        nfl='season,game_type,gameday,home_team,away_team,home_score,away_score,location\n2025,REG,2025-09-07,NE,BUF,14,21,Home\n'
+        book=(FIXTURES/'agentbets_nba.html').read_text()
+        def fake_get(url,timeout=25):
+            if 'boxscorelab.com' in url:return nba
+            if 'nflverse/nfldata' in url:return nfl
+            if 'agentbets.ai/odds/' in url:return book if url.endswith('/nba') else book.replace('Portland Trail Blazers @ Los Angeles Lakers','Unknown @ Unknown')
+            if 'official.nba.com' in url:return '<p>October 27, 2026</p>'
+            raise AssertionError(url)
+        event={'id':'123','sport_key':'basketball_nba','home_team':'Los Angeles Lakers',
+               'away_team':'Portland Trail Blazers','commence_time':'2026-10-28T03:00:00Z'}
+        def fake_scores(key,league):return ([{**event,'status':'cancelled'}] if league=='NBA' else []),NOW.isoformat()
+        def fake_events(key,league):return ([event] if league=='NBA' else []),NOW.isoformat()
+        (self.root/'dist').mkdir();(self.root/'data').mkdir()
+        env={'PICKS_DATA_ROOT':str(self.root/'store'),'PROPLINE_API_KEY':'test-key'}
+        with patch.object(runner,'ROOT',self.root),patch.object(runner,'datetime',FixedDateTime),patch.object(runner,'get',side_effect=fake_get),patch.object(runner,'fetch_scores',side_effect=fake_scores),patch.object(runner,'fetch_events',side_effect=fake_events),patch.dict('os.environ',env,clear=True):runner.main()
+        board=json.loads((self.root/'dist/board.json').read_text())
+        self.assertEqual(board['picks'],[])
+
 if __name__=='__main__': unittest.main()

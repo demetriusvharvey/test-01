@@ -29,6 +29,7 @@ from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
 from .watchlist import render_watchlist
 from .nba_injury_feed import fetch_nba_injuries, attach_nba_summaries
+from .propline_scores import fetch_scores, fetch_events, parse_scores, parse_event_starts, restrict_public_results, use_provider, reserve_call
 
 
 def main():
@@ -87,19 +88,59 @@ def main():
         print('NBA referee source unavailable:',type(e).__name__)
     refs_path.write_text(json.dumps(refs,indent=2)+'\n')
     supplemental_finals=[{'id':g['id'],'home':g['home'],'away':g['away'],'home_score':g['home_score'],'away_score':g['away_score'],'source':'BoxScore Lab' if g['league']=='NBA' else 'nflverse'} for g in games if g['date']<=today]
-    espn_starts={}; espn_finals=[]
+    propline_key=os.environ.get('PROPLINE_API_KEY','').strip()
+    setting=os.environ.get('PROPLINE_ENABLED','').strip().lower()
+    injury_only_enabled=os.environ.get('PROPLINE_INJURY_ENABLED','').strip().lower()=='true'
+    # Providing a key enables the free integration; set the variable false to
+    # opt out. A missing key never calls the provider or accepts its terms.
+    propline_enabled=use_provider(propline_key,setting,injury_only_enabled)
+    starts_by_game={}; explicit_finals=[];score_source='PropLine' if propline_enabled else 'ESPN'
     for league,sport in [('NBA','basketball/nba'),('NFL','football/nfl')]:
-        for days_ago in range(0,4):
-            day=(today-timedelta(days=days_ago)).strftime('%Y%m%d')
+        if propline_enabled:
             try:
-                payload=json.loads(get(f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}',10))
-                result=parse_espn_results(payload,league)
-                espn_finals.extend(result); espn_starts.update(parse_espn_starts(payload,league))
-            except Exception as e: errors.append(f'{league} scores {day} unavailable ({type(e).__name__})')
+                if not propline_key or not reserve_call(data_root,'scores_'+league.lower(),datetime.now(timezone.utc).isoformat()):
+                    raise ValueError('provider key or request budget unavailable')
+                payload,observed=fetch_scores(propline_key,league)
+                starts,finished,conflicts,blocked_starts=parse_scores(payload,league,observed)
+                # A live/final/cancelled score status must never be revived as
+                # a future event if the schedule still contains it.
+                for identifier in blocked_starts:
+                    if identifier in starts and aware(starts[identifier])>aware(observed):
+                        starts.pop(identifier)
+                try:
+                    if not reserve_call(data_root,'events_'+league.lower(),datetime.now(timezone.utc).isoformat()):
+                        raise ValueError('provider request budget unavailable')
+                    event_payload,event_observed=fetch_events(propline_key,league)
+                    event_starts,event_conflicts=parse_event_starts(event_payload,league,event_observed)
+                    for identifier in event_conflicts:starts.pop(identifier,None)
+                    for identifier,start in event_starts.items():
+                        if identifier in blocked_starts or identifier in event_conflicts:continue
+                        existing=starts.get(identifier)
+                        if existing and abs((aware(existing)-aware(start)).total_seconds())>20*60:
+                            starts.pop(identifier,None);conflicts.append(identifier);continue
+                        starts[identifier]=min(existing,start) if existing else start
+                    if event_conflicts:errors.append(f'{league} schedule source conflicts: {len(event_conflicts)}')
+                except Exception as e:errors.append(f'{league} schedule source unavailable ('+type(e).__name__+')')
+                starts_by_game.update(starts);explicit_finals.extend(finished)
+                if conflicts:errors.append(f'{league} score source conflicts: {len(conflicts)}')
+            except Exception as e:errors.append(f'{league} score source unavailable ('+type(e).__name__+')')
+        else:
+            for days_ago in range(0,4):
+                day=(today-timedelta(days=days_ago)).strftime('%Y%m%d')
+                try:
+                    payload=json.loads(get(f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}',10))
+                    result=parse_espn_results(payload,league)
+                    explicit_finals.extend(result);starts_by_game.update(parse_espn_starts(payload,league))
+                except Exception as e:errors.append(f'{league} scores {day} unavailable ({type(e).__name__})')
     now=datetime.now(timezone.utc)
     day_rolled=now.astimezone(ET).date()!=today
     if day_rolled: errors.append('ET date changed during update; new picks suppressed')
-    finals,confirmed_finals,final_conflicts=qualify_final_results(supplemental_finals,espn_finals,now)
+    finals,confirmed_finals,final_conflicts=qualify_final_results(supplemental_finals,explicit_finals,now)
+    if propline_enabled:
+        # Keep only individual selected-game values from this provider in the
+        # public ledger; supplemental research outcomes come from their own sources.
+        recorded_ids={p.get('id') for p in ledger}
+        finals=restrict_public_results(finals,recorded_ids)
     if final_conflicts:errors.append(f'{len(final_conflicts)} conflicting final score(s) held for review')
     grade_ledger(ledger,finals,now)
     added_finals=apply_same_day_finals(models,confirmed_finals,today,nfl_locations,now)
@@ -107,7 +148,7 @@ def main():
     if quality_warnings: errors.append(f'{len(quality_warnings)} invalid or conflicting source quotes rejected')
     verified=[]
     for quote in clean:
-        official=espn_starts.get(quote['id'])
+        official=starts_by_game.get(quote['id'])
         if not official or abs((aware(official)-aware(quote['starts_at'])).total_seconds())>20*60: continue
         if aware(quote['fetched_at'])>=aware(official): continue
         verified.append(quote)
@@ -115,7 +156,7 @@ def main():
     if data_root:
         try:
             count=append_observations(data_root,verified,now.isoformat())
-            closed=finalize_closing_proxies(data_root,now.isoformat(),espn_starts)
+            closed=finalize_closing_proxies(data_root,now.isoformat(),starts_by_game)
             if record_run(data_root,started_at): errors.append('A scheduled update was missed or delayed; gaps in history are possible')
             print('History:',count,'new observations;',closed,'last-observed pregame proxies')
             archive_ok=True
@@ -125,15 +166,18 @@ def main():
     if disagreements: errors.append(f'{len(disagreements)} sportsbook/source disagreements quarantined')
     selected=[]
     for quote in reconciled:
-        official=espn_starts.get(quote['id'])
+        official=starts_by_game.get(quote['id'])
         item=dict(quote);item['starts_at']=min(aware(quote['starts_at']),aware(official)).isoformat();selected.append(item)
     markets=build_market(selected,now)
     # Capture status before the forecast timestamp, not after a pick is frozen.
-    nba_injury_key=os.environ.get('PROPLINE_API_KEY','').strip()
-    nba_injury_enabled=os.environ.get('PROPLINE_INJURY_ENABLED','').strip().lower()=='true'
+    nba_injury_key=propline_key
+    nba_injury_enabled=setting not in ('false','0','off','no') and (propline_enabled or injury_only_enabled)
     injury_payload=None;injury_observed_at=None
     if nba_injury_enabled and nba_injury_key and any(e.get('league')=='NBA' for e in markets.values()):
-        try:injury_payload,injury_observed_at=fetch_nba_injuries(nba_injury_key,True)
+        try:
+            if not reserve_call(data_root,'injuries_nba',datetime.now(timezone.utc).isoformat()):
+                raise ValueError('provider request budget unavailable')
+            injury_payload,injury_observed_at=fetch_nba_injuries(nba_injury_key,True)
         except Exception as e:errors.append('NBA injury context unavailable ('+type(e).__name__+')')
     now=datetime.now(timezone.utc)
     if now.astimezone(ET).date()!=today and not day_rolled:
@@ -142,8 +186,8 @@ def main():
     markets=build_market(selected,now)
     for event in markets.values():
         if event['league']=='NFL' and event['id'] in nfl_locations: event['neutral']=nfl_locations[event['id']]
-        if event['id'] in espn_starts:
-            event['starts_at']=min(event['starts_at'],espn_starts[event['id']])
+        if event['id'] in starts_by_game:
+            event['starts_at']=min(event['starts_at'],starts_by_game[event['id']])
     # If a league's training history is missing, do not produce predictions for it.
     blocked={('NBA' if x.startswith('NBA historical') else 'NFL') for x in errors if x.startswith(('NBA historical','NFL historical'))}
     permitted={k:v for k,v in markets.items() if archive_ok and not day_rolled and v['league'] not in blocked and (v['league']!='NFL' or 'neutral' in v)}
@@ -203,6 +247,7 @@ def main():
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
+    board['source']='AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; '+score_source+' scoreboard'
     attach_prediction_checks(board,ledger)
     try:
         watch_path=data_dir/'watchlist.json'
@@ -247,6 +292,7 @@ def main():
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
                             'nba_injury_context':'configured' if nba_injury_key and nba_injury_enabled else 'not_configured',
+                            'scoreboard_source':score_source,
                             'cross_check_independent':False}
     (ROOT/'dist'/'board.json').write_text(json.dumps(board,indent=2)+'\n')
     print('Board:',len(board['picks']),'active picks;',board['accuracy']['wins'],'wins;',board['accuracy']['losses'],'losses;',len(errors),'source warnings')

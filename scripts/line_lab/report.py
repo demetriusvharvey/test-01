@@ -9,7 +9,7 @@ def render_board(markets,ledger,now,errors,models=None,training_counts=None,adde
     today=now.astimezone(ET).date().isoformat()
     active=[]
     for pick in ledger:
-        if pick.get('pick_day')!=today or pick.get('outcome')!='pending': continue
+        if pick.get('pick_day')!=today or pick.get('outcome')!='pending' or pick.get('validated_selection') is not True: continue
         event=markets.get(pick['id'])
         if not event or datetime.fromisoformat(event['starts_at'])<=now: continue
         side='home' if pick['team_code']==event['home'] else 'away'
@@ -35,6 +35,7 @@ def render_board(markets,ledger,now,errors,models=None,training_counts=None,adde
     history=[]
     for pick in ledger:
         item={key:pick.get(key) for key in ('id','team','opponent','league','starts_at','pick_day','predicted_at','graded_at','outcome','initial_best_odds','initial_books','model','mode','estimated_ev')}
+        item['recommendation_eligible']=pick.get('validated_selection') is True
         item['model_probability']=pick.get('probability') if pick.get('model')=='pure-elo-v1' else None
         history.append(item)
     wins=sum(p.get('outcome')=='win' for p in ledger); losses=sum(p.get('outcome')=='loss' for p in ledger); voids=sum(p.get('outcome')=='void' for p in ledger); pending=sum(p.get('outcome')=='pending' for p in ledger)

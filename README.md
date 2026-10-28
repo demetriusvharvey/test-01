@@ -35,7 +35,8 @@ entry across devices, assess a validated edge, or place a wager.
 
 New recommendations are withheld while Elo remains uncalibrated and its
 apparent price advantage lacks matched-time market validation. Previously
-saved selections and their grading remain visible. Research candidates are
+saved selections and their grading remain visible under "Saved earlier" on
+the current day or in the date archive. Research candidates are
 still logged; releasing a new selection requires explicit forward-validation
 and qualified-market evidence.
 

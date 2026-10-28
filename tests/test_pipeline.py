@@ -52,6 +52,9 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(picks[0]['team_code'],'LAL')
         self.assertEqual(picks[0]['initial_best_odds'],-105)
         self.assertEqual(choose_candidates(markets,models,self.now,picks),[])
+        self.assertEqual(render_board(markets,picks,self.now,[])['picks'],[])
+        self.assertFalse(render_board(markets,picks,self.now,[])['history'][0]['recommendation_eligible'])
+        picks[0]['validated_selection']=True
         board=render_board(markets,picks,self.now,[])
         self.assertEqual(board['picks'][0]['best'],-105)
         self.assertEqual(len(board['picks'][0]['books']),6)

@@ -174,7 +174,9 @@
     const oldest=times.length?Math.min(...times):null;
     const stale=!validDate||now.valueOf()-generated.valueOf()>95*60*1000||generated.valueOf()-now.valueOf()>5*60*1000||(oldest!=null&&now.valueOf()-oldest>95*60*1000);
     const active=selectedDay===today()&&!stale?upcoming:[];
-    const history=(Array.isArray(board.history)?board.history:[]).filter(p=>p.pick_day===selectedDay);
+    const allHistory=(Array.isArray(board.history)?board.history:[]).filter(p=>p.pick_day===selectedDay);
+    const earlier=selectedDay===today()?allHistory.filter(p=>p.recommendation_eligible!==true):[];
+    const history=selectedDay===today()?allHistory.filter(p=>p.recommendation_eligible===true):allHistory;
     const activeById=new Map(active.filter(p=>p.id).map(p=>[p.id,p]));
     const picks=history.map(p=>activeById.has(p.id)?Object.assign({},p,activeById.get(p.id),{current:true}):Object.assign({},p,{current:false}));
     for(const p of active)if(!p.id||!history.some(h=>h.id===p.id))picks.push(Object.assign({},p,{current:true}));
@@ -191,6 +193,8 @@
     if(!picks.length){
       $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved picks for this day.</strong><p>The archive grows as new picks are recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No games currently meet the algorithm’s selection criteria.</strong><p>Unvalidated price advantages are kept out of recommendations.</p></div>';
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
+    $('saved-section').hidden=!earlier.length;
+    $('saved-list').innerHTML=earlier.map(p=>pickMarkup(Object.assign({},p,{current:false}))).join('');
     const slate=selectedDay===today()&&!stale?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now):[];
     $('slate-section').hidden=!slate.length;
     $('game-slate').innerHTML=slate.map(slateMarkup).join('');

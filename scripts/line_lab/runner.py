@@ -265,6 +265,7 @@ def main():
     eligible_leagues={league for league,model in models.items()
                       if model.get('validated_forward_edge') is True and model.get('qualified_market') is True}
     chosen=[p for p in research_candidates if p['league'] in eligible_leagues]
+    for pick in chosen:pick['validated_selection']=True
     if data_root and archive_ok:
         try:
             candidate_count=record_candidates(data_root,permitted,models,now.isoformat(),ledger,chosen)

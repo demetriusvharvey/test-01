@@ -1,0 +1,40 @@
+name: Inspect public research sources
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/source-probe.yml']
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check data schemas
+        run: |
+          python - <<'PY'
+          from urllib.request import Request, urlopen
+          import json
+          urls = [
+            ('nba2027', 'https://boxscorelab.com/downloads/2026-27-team-game-results.csv'),
+            ('nba2026', 'https://boxscorelab.com/downloads/2025-26-team-game-results.csv'),
+            ('nfl', 'https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv'),
+            ('fd_nba', 'https://agentbets.ai/odds/fanduel/nba'),
+            ('dk_nba', 'https://agentbets.ai/odds/draftkings/nba'),
+            ('best_api', 'https://api.agentbets.ai/api/odds/best?event=lakers%20trail%20blazers'),
+            ('robots', 'https://agentbets.ai/robots.txt'),
+            ('espn', 'https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard')
+          ]
+          for label, url in urls:
+            try:
+              req = Request(url, headers={'User-Agent':'Mozilla/5.0 LineLab/1.0','Accept':'text/csv,application/json,text/html'})
+              with urlopen(req, timeout=15) as resp:
+                text = resp.read(12000).decode('utf-8','replace')
+                if label.startswith('nba') or label == 'nfl':
+                  print(label, 'OK', '\\n'.join(text.splitlines()[:2])[:1000])
+                elif label.endswith('nba') or label == 'robots':
+                  print(label, 'OK bytes read', len(text), 'HTML table', '<table' in text, text[:300])
+                else:
+                  print(label, 'OK', text[:1000])
+            except Exception as exc:
+              print(label, 'ERROR', type(exc).__name__, str(exc)[:180])
+          PY

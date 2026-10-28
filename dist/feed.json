@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-10-28T01:30:17.103324+00:00",
+  "nba_referees": {
+    "source": "https://official.nba.com/referee-assignments/",
+    "status": "ok",
+    "date_expected": "2026-10-27",
+    "games": [
+      {
+        "matchup": "Brooklyn @ Boston",
+        "crew_chief": "John Goble (#10)",
+        "referee": "Jonathan Sterling (#17)",
+        "umpire": "JD Ralls (#80)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Detroit @ New York",
+        "crew_chief": "Nick Buchert (#3)",
+        "referee": "Dedric Taylor (#21)",
+        "umpire": "Brett Nansel (#44)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Sacramento @ San Antonio",
+        "crew_chief": "James Capers (#19)",
+        "referee": "Natalie Sago (#9)",
+        "umpire": "Suyash Mehta (#47)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Portland @ L.A. Lakers",
+        "crew_chief": "Scott Foster (#48)",
+        "referee": "Che Flores (#91)",
+        "umpire": "Nate Cearley (#84)",
+        "alternate": ""
+      }
+    ]
+  },
+  "fanduel_moneylines": {
+    "source": "The Odds API",
+    "events": [],
+    "status": "missing_api_key"
+  }
+}

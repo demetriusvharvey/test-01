@@ -26,7 +26,7 @@ The optional second odds adapter reads `ODDS_API_KEY` from GitHub Actions secret
 
 Sources, attribution, rights and risks are in [DATA_SOURCES.md](DATA_SOURCES.md); the audit is in [AUDIT.md](AUDIT.md), the plan is in [PLAN.md](PLAN.md), and the Phase 1 report is in [reports/phase1.md](reports/phase1.md). NBA upstream data rights need review before adding direct NBA statistical backfills. No historical NBA close or publication timestamp is fabricated.
 
-Predictions in `data/predictions.json` are frozen before the event. Only a final score grades a pick; ties are void and pending/void picks do not enter win rate. Starting prices are retained for picked games and labeled historical. Accuracy is not a profit metric; availability and actual sportsbook prices may differ.
+Predictions in `data/predictions.json` are frozen before the event. A pick is graded only when the scoreboard explicitly reports final status and any available supplemental score agrees; missing or conflicting confirmations remain pending. Ties are void and pending/void picks do not enter win rate. Starting prices are retained for picked games and labeled historical. Accuracy is not a profit metric; availability and actual sportsbook prices may differ.
 
 The pipeline uses Python 3.12 and the standard library; there are no pip dependencies. A one-command local check is `python -m unittest discover -s tests`. Static preview: `python -m http.server 8000 --directory dist`. The browser JavaScript can be checked with `node --check dist/app.js`. GitHub CI runs the checks on pushes and pull requests.
 

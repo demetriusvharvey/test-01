@@ -86,7 +86,7 @@ def main():
     except Exception as e:
         print('NBA referee source unavailable:',type(e).__name__)
     refs_path.write_text(json.dumps(refs,indent=2)+'\n')
-    finals=[{'id':g['id'],'home':g['home'],'away':g['away'],'home_score':g['home_score'],'away_score':g['away_score'],'source':'BoxScore Lab' if g['league']=='NBA' else 'nflverse'} for g in games if g['date']<=today]
+    supplemental_finals=[{'id':g['id'],'home':g['home'],'away':g['away'],'home_score':g['home_score'],'away_score':g['away_score'],'source':'BoxScore Lab' if g['league']=='NBA' else 'nflverse'} for g in games if g['date']<=today]
     espn_starts={}; espn_finals=[]
     for league,sport in [('NBA','basketball/nba'),('NFL','football/nfl')]:
         for days_ago in range(0,4):
@@ -94,13 +94,15 @@ def main():
             try:
                 payload=json.loads(get(f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}',10))
                 result=parse_espn_results(payload,league)
-                finals.extend(result); espn_finals.extend(result); espn_starts.update(parse_espn_starts(payload,league))
+                espn_finals.extend(result); espn_starts.update(parse_espn_starts(payload,league))
             except Exception as e: errors.append(f'{league} scores {day} unavailable ({type(e).__name__})')
     now=datetime.now(timezone.utc)
     day_rolled=now.astimezone(ET).date()!=today
     if day_rolled: errors.append('ET date changed during update; new picks suppressed')
+    finals,confirmed_finals,final_conflicts=qualify_final_results(supplemental_finals,espn_finals,now)
+    if final_conflicts:errors.append(f'{len(final_conflicts)} conflicting final score(s) held for review')
     grade_ledger(ledger,finals,now)
-    added_finals=apply_same_day_finals(models,espn_finals,today,nfl_locations,now)
+    added_finals=apply_same_day_finals(models,confirmed_finals,today,nfl_locations,now)
     clean,quality_warnings=validate_and_deduplicate(raw,now.isoformat())
     if quality_warnings: errors.append(f'{len(quality_warnings)} invalid or conflicting source quotes rejected')
     verified=[]

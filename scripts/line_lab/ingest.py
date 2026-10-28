@@ -118,6 +118,41 @@ def parse_espn_results(payload,league):
         except (KeyError,IndexError,TypeError,ValueError): continue
     return finals
 
+
+def qualify_final_results(supplemental,explicit_finals,now):
+    """Require explicit final status; quarantine contradictory source scores.
+
+    Score-bearing historical tables may be updated while a game is in progress.
+    They cannot establish that a game has ended. Matching supplemental scores
+    are retained as source confirmations, never as independent proof of finality.
+    """
+    grouped={};other={};conflicts=set()
+    def identity(row):
+        home,away=row['home'],row['away'];scores=(row['home_score'],row['away_score'])
+        if not home or not away or home==away or any(not isinstance(v,int) or isinstance(v,bool) or v<0 for v in scores):
+            raise ValueError('invalid game score')
+        return (home,away,*scores)
+    for row in supplemental:
+        try:other.setdefault(row['id'],[]).append((identity(row),row))
+        except (KeyError,TypeError,ValueError):continue
+    for row in explicit_finals:
+        try:
+            start=row['starts_at']
+            if not isinstance(start,datetime) or start.tzinfo is None or start.utcoffset() is None or start>now:continue
+            grouped.setdefault(row['id'],[]).append((identity(row),row))
+        except (KeyError,TypeError,ValueError):continue
+    verified=[];corroborating=[]
+    for game,values in grouped.items():
+        identities={value for value,_ in values}
+        if len(identities)!=1 or any(value not in identities for value,_ in other.get(game,[])):
+            conflicts.add(game);continue
+        verified.append(values[0][1])
+        seen=set()
+        for _,row in other.get(game,[]):
+            source=row.get('source')
+            if source not in seen:corroborating.append(row);seen.add(source)
+    return verified+corroborating,verified,sorted(conflicts)
+
 def parse_espn_starts(payload,league):
     starts={}
     for e in payload.get('events',[]):

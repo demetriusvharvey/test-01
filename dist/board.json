@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T13:10:51.794023+00:00",
+  "generated_at": "2026-10-28T13:13:23.192608+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -73,7 +73,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T13:10:51.794023+00:00",
+        "observed_at": "2026-10-28T13:13:23.192608+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -83,7 +83,7 @@
         "crew_chief": "James Williams (#60)",
         "referee": "Marat Kogut (#32)",
         "umpire": "Brandon Adair (#67)",
-        "observed_at": "2026-10-28T13:10:50.482415+00:00",
+        "observed_at": "2026-10-28T13:13:21.549312+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -185,7 +185,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T13:10:51.794023+00:00",
+        "observed_at": "2026-10-28T13:13:23.192608+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -195,7 +195,7 @@
         "crew_chief": "Curtis Blair (#74)",
         "referee": "Andy Nagy (#18)",
         "umpire": "Ashley Moyer-Gleich (#13)",
-        "observed_at": "2026-10-28T13:10:50.482415+00:00",
+        "observed_at": "2026-10-28T13:13:21.549312+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -292,7 +292,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T13:10:51.794023+00:00",
+        "observed_at": "2026-10-28T13:13:23.192608+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -302,7 +302,7 @@
         "crew_chief": "Ben Taylor (#46)",
         "referee": "JB DeRosa (#14)",
         "umpire": "Brandon Schwab (#49)",
-        "observed_at": "2026-10-28T13:10:50.482415+00:00",
+        "observed_at": "2026-10-28T13:13:21.549312+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -644,7 +644,7 @@
     }
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T13:10:51.794023+00:00",
+    "pipeline_generated_at": "2026-10-28T13:13:23.192608+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T13:00:00+00:00",
     "oldest_quote_at": "2026-10-28T13:00:00+00:00",

@@ -270,6 +270,15 @@ def main():
     # If a league's training history is missing, do not produce predictions for it.
     blocked={('NBA' if x.startswith('NBA historical') else 'NFL') for x in errors if x.startswith(('NBA historical','NFL historical'))}
     permitted={k:v for k,v in markets.items() if v['league'] not in blocked and (v['league']!='NFL' or 'neutral' in v)}
+    print('Training games:', len([x for x in games if x['league']=='NBA']), 'NBA;', len([x for x in games if x['league']=='NFL']), 'NFL. Fresh matchups:', len(markets))
+    for event in permitted.values():
+        start=datetime.fromisoformat(event['starts_at'])
+        if start.astimezone(ET).date()!=today or len(event['books'])<3: continue
+        estimate=project_home(models[event['league']],event['home'],event['away'],start,event.get('neutral',False))
+        if estimate is None: continue
+        fair=median([implied(b['home'])/(implied(b['home'])+implied(b['away'])) for b in event['books'].values()])
+        homep=.75*fair+.25*estimate
+        print('TODAY', event['league'],event['away'],'at',event['home'],'model home',round(100*homep,1),'best home',max(v['home'] for v in event['books'].values()),'best away',max(v['away'] for v in event['books'].values()))
     ledger.extend(choose_candidates(permitted,models,now,ledger))
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     board=render_board(markets,ledger,now,errors)

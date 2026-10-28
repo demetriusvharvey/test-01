@@ -20,4 +20,6 @@ Sources, attribution, rights and risks are in [DATA_SOURCES.md](DATA_SOURCES.md)
 
 Predictions in `data/predictions.json` are frozen before the event. Only a final score grades a pick; ties are void and pending/void picks do not enter win rate. Starting prices are retained for picked games and labeled historical. Accuracy is not a profit metric; availability and actual sportsbook prices may differ.
 
-Test: `python -m unittest discover -s tests`. Static preview: `python -m http.server 8000 --directory dist`.
+The pipeline uses Python 3.12 and the standard library; there are no pip dependencies. A one-command local check is `python -m unittest discover -s tests`. Static preview: `python -m http.server 8000 --directory dist`. The browser JavaScript can be checked with `node --check dist/app.js`. GitHub CI runs the checks on pushes and pull requests.
+
+The pipeline snapshots a versioned feature definition and source hashes with each new prediction, and logs selected and skipped paper candidates. The weekly research workflow attempts preregistered tests and an odds-independent challenger; insufficient data and errors are recorded, not treated as successes. Its fitted artifacts and drift-monitoring outputs stay in shadow mode and do not automatically change predictions. See [reports/phase9_model_stack.md](reports/phase9_model_stack.md), [reports/phase11_validation.md](reports/phase11_validation.md), and [reports/phase14_engineering.md](reports/phase14_engineering.md).

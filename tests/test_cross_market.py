@@ -1,6 +1,7 @@
 import copy
 import json
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -26,7 +27,7 @@ class CrossMarketTests(unittest.TestCase):
         self.assertEqual({r['market'] for r in rows},{'spreads','totals'})
         self.assertEqual(archive_market_snapshots(self.root,rows),2)
         self.assertEqual(archive_market_snapshots(self.root,rows),0)
-        with sqlite3.connect(self.root/'observations/cross_market/2026-10-28.sqlite') as db:
+        with closing(sqlite3.connect(self.root/'observations/cross_market/2026-10-28.sqlite')) as db:
             with self.assertRaises(sqlite3.IntegrityError):db.execute('DELETE FROM market_quotes')
     def test_invalid_market_is_isolated(self):
         bad=copy.deepcopy(self.payload);bad[0]['bookmakers'][0]['markets'][0]['outcomes'][0]['name']='unknown'

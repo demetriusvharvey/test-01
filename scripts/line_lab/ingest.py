@@ -1,14 +1,24 @@
 """Ingest components for the picks pipeline."""
-import csv, io, json, re
+import csv, io, json, re, time
 from datetime import date, datetime, timedelta, timezone
 from html.parser import HTMLParser
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError, URLError
 from .constants import *
 
 
 def get(url, timeout=25):
     request=Request(url,headers={'User-Agent':'LineLab/1.0 (+sports research)','Accept':'application/json,text/csv,text/html'})
-    with urlopen(request,timeout=timeout) as r: return r.read().decode('utf-8','replace')
+    # Only retry this public-data adapter. The metered Odds API uses a separate
+    # client and is never retried here, preserving its request budget.
+    for attempt in range(3):
+        try:
+            with urlopen(request,timeout=timeout) as r:return r.read().decode('utf-8','replace')
+        except HTTPError as exc:
+            if attempt==2 or not (exc.code==429 or 500<=exc.code<600):raise
+        except (URLError,TimeoutError):
+            if attempt==2:raise
+        time.sleep(.2*(2**attempt))
 
 class Tables(HTMLParser):
     def __init__(self):
@@ -104,7 +114,7 @@ def parse_espn_results(payload,league):
             season=e.get('season',{})
             finals.append({'id':game_id(league,day,ac,hc),'league':league,'date':day,'starts_at':start,
                            'season_year':season.get('year'),'season_type':season.get('type'),
-                           'home':hc,'away':ac,'home_score':int(h['score']),'away_score':int(a['score'])})
+                           'home':hc,'away':ac,'home_score':int(h['score']),'away_score':int(a['score']),'source':'ESPN final'})
         except (KeyError,IndexError,TypeError,ValueError): continue
     return finals
 

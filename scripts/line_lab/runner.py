@@ -177,5 +177,7 @@ def main():
                             'cross_check_independent':False}
     (ROOT/'dist'/'board.json').write_text(json.dumps(board,indent=2)+'\n')
     print('Board:',len(board['picks']),'active picks;',board['accuracy']['wins'],'wins;',board['accuracy']['losses'],'losses;',len(errors),'source warnings')
+    print(json.dumps({'event':'pipeline_complete','generated_at':now.isoformat(),'active_board_picks':len(board['picks']),
+                      'quote_count':len(verified),'source_warnings':len(board['errors']),'archive_ok':archive_ok},sort_keys=True))
     for e in errors: print('SOURCE:',e)
     if not raw: print('No odds sources reachable; board intentionally has no active picks.')

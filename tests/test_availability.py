@@ -1,4 +1,5 @@
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -22,7 +23,7 @@ class AvailabilityTests(unittest.TestCase):
         self.assertEqual(rows['00-001']['report_status'],'questionable')
         self.assertEqual(rows['00-001']['source_modified_raw'],'2026-10-28 10:00')
         self.assertEqual(nfl_statuses_as_of(self.root,2026,8,'MIN',(self.now+timedelta(hours=31)).isoformat(),self.start.isoformat()),{})
-        with sqlite3.connect(self.root/'observations/nfl_availability/2026-10-28.sqlite') as db:
+        with closing(sqlite3.connect(self.root/'observations/nfl_availability/2026-10-28.sqlite')) as db:
             with self.assertRaises(sqlite3.IntegrityError):db.execute('DELETE FROM injury_observations')
     def test_conflicting_simultaneous_status_is_unknown(self):
         data=self.csv+'2026,8,MIN,00-001,QB,Test QB,Out,Did Not Participate,2026-10-28 10:01\n'

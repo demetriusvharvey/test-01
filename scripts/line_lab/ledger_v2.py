@@ -15,6 +15,7 @@ from pathlib import Path
 from statistics import median
 
 from .history import aware
+from .feature_registry import FEATURE_REGISTRY_VERSION
 
 
 MUTABLE_FIELDS = frozenset({
@@ -40,7 +41,7 @@ def feature_snapshot(event, model):
     """Capture exactly the values currently consumed by project_home."""
     home, away = event['home'], event['away']
     return {
-        'schema': 'pure-elo-input-v1', 'model': 'pure-elo-v1',
+        'schema': FEATURE_REGISTRY_VERSION, 'model': 'pure-elo-v1',
         'home': home, 'away': away, 'starts_at': event['starts_at'],
         'home_rating': model['ratings'][home], 'away_rating': model['ratings'][away],
         'home_advantage': model['home_advantage'], 'neutral': event.get('neutral', False),

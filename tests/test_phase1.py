@@ -3,6 +3,7 @@ import gzip
 import io
 import json
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from datetime import date, datetime, timedelta, timezone
@@ -52,7 +53,7 @@ class StorageAndSourceTests(unittest.TestCase):
         event=self.events[0]
         self.assertEqual(append_observations(self.root,[event,event],NOW.isoformat()),1)
         path=self.root/'observations/odds/2026-10-28.sqlite'
-        with sqlite3.connect(path) as db:
+        with closing(sqlite3.connect(path)) as db:
             with self.assertRaises(sqlite3.IntegrityError): db.execute('DELETE FROM snapshots')
             self.assertEqual(db.execute('SELECT count(*) FROM snapshots').fetchone()[0],1)
         later='2026-10-28T03:30:00+00:00'
@@ -60,7 +61,7 @@ class StorageAndSourceTests(unittest.TestCase):
         verified={event['id']:'2026-10-28T03:00:00+00:00'}
         self.assertEqual(finalize_closing_proxies(self.root,later,verified),1)
         self.assertEqual(finalize_closing_proxies(self.root,later,verified),0)
-        with sqlite3.connect(self.root/'observations/closes/2026-10-28.sqlite') as db:
+        with closing(sqlite3.connect(self.root/'observations/closes/2026-10-28.sqlite')) as db:
             label,gap=db.execute('SELECT label,observed_gap_seconds FROM closes').fetchone()
         self.assertEqual(label,'last_observed_pregame_not_certified_close');self.assertEqual(gap,5400)
     def test_optional_api_is_quota_limited(self):
@@ -81,7 +82,7 @@ class StorageAndSourceTests(unittest.TestCase):
         result=archive_asset(self.root,spec,payload,NOW.isoformat())
         self.assertEqual(result['columns'],6);self.assertEqual(result['rows'],1)
         self.assertFalse(archive_asset(self.root,spec,payload,NOW.isoformat())['new'])
-        with sqlite3.connect(self.root/'observations/backfill/nfl_schedules/all.sqlite') as db:
+        with closing(sqlite3.connect(self.root/'observations/backfill/nfl_schedules/all.sqlite')) as db:
             status,columns,content=db.execute('SELECT knowledge_status,columns_json,content_gzip FROM assets').fetchone()
         self.assertEqual(status,'retrospective_only');self.assertEqual(json.loads(columns)[1],'referee')
         self.assertEqual(gzip.decompress(content),payload)
@@ -123,7 +124,7 @@ class StorageAndSourceTests(unittest.TestCase):
         board=json.loads((self.root/'dist/board.json').read_text())
         self.assertEqual(board['source_status']['the_odds_api'],'missing_api_key')
         self.assertEqual(board['source_status']['odds_history'],'available')
-        with sqlite3.connect(self.root/'store/observations/odds/2026-10-28.sqlite') as db:
+        with closing(sqlite3.connect(self.root/'store/observations/odds/2026-10-28.sqlite')) as db:
             self.assertEqual(db.execute('SELECT count(*) FROM snapshots').fetchone()[0],6)
         self.assertFalse(any('probability' in p for p in board['picks']))
 

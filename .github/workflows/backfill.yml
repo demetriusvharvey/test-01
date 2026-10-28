@@ -6,7 +6,6 @@ on:
     paths:
       - 'scripts/backfill.py'
       - 'scripts/line_lab/backfill.py'
-      - '.github/workflows/backfill.yml'
 permissions:
   contents: write
 concurrency:
@@ -22,6 +21,9 @@ jobs:
         with:
           ref: data/observations
           path: .data-store
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
+        with:
+          python-version: '3.12'
       - name: Run tests
         run: python -m unittest discover -s tests
       - name: Fetch and validate retrospective files

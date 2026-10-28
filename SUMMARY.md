@@ -1,21 +1,36 @@
 # Work summary
 
-## Completed
+## What is built
 
-- Step 0: audited the current system, cataloged data rights and limitations, established a phased plan, and preregistered future hypotheses. No backtest was claimed as validation.
-- Phase 1: modularized the existing pipeline, added a separate append-only SQLite data branch, checked source timestamps/duplicates/mismatches, and preserved historical picks. The live update ran successfully and captured 71 timestamped odds observations. The backfill job successfully stored 30 source shards: the full nflverse schedule file, 2021–2026 NFL play-by-play/injuries/depth charts/snap counts, and five NBA team-game seasons. Current seasons are partial and all backfilled assets are marked retrospective.
-- Model-first amendment: new paper selections use the team model without market probabilities as inputs. The model and a retail reference are logged prospectively; qualified sharp-market arms remain absent. A conservative guard prevents staking while evidence and point-in-time news checks are unavailable. Timestamped NFL QB efficiency summaries are collected as shadow-only research. The UI separates the old model's picks from new paper selections and provides an inconclusive study scoreboard. Following deployment, the first update recorded 12 prospective NBA forecasts; the NFL shadow job saved 63 quarterback/team summaries. Both jobs completed successfully and 29 tests passed.
+- Step 0 and Phase 1: audit, source and hypothesis registries, modular Python pipeline, point-in-time quote checks, and an append-only SQLite data branch. Historical NFL and NBA source snapshots are attributed and labeled retrospective, not pregame knowledge. The optional Odds API adapter remains disabled when the free key is absent.
+- Phase 2: immutable v2 paper ledger with distinct observed price, book, feature snapshot, future grading fields and clearly labeled retail close proxies. Actual wager fields remain empty unless the user supplies them.
+- Phases 3–4: shadow anchor and three de-vig methods, qualified-source and fee guards, optional quota-capped spread/total collection, and empirical cross-market research tools. No independent sharp source or licensed historical NBA close is configured; retail is never called sharp.
+- Phase 5: timestamped NFL injury/practice capture and shadow scenario helpers. An initial automated run archived 366 reported rows; NBA status and lineup access/rights are unresolved. The research inputs do not change the live model.
+- Phase 6: shadow margin Elo, season carryover and shrunk home-advantage tools, plus point-in-time schedule/rest/travel calculations. They do not automatically promote to production.
+- Phase 7: descriptive, shrunken NFL referee report using 1,328 retrospective games. Source/assignment timestamps and odds do not support causal or prospective claims. NBA officials are archived when available, without invented effects.
+- Phase 8: preregistered schedule-pattern batch, day-block tests, multiple-testing correction and append-only trial logs. The initial forward run had 96 forecast snapshots and no matched settled outcomes; all ten tested definitions were `not_testable`.
+- Phase 9: prior-only, market-independent elastic-net challenger, append-only registry and weekly research workflow. The first run logged insufficient eligible data for both leagues. The challenger is separate from the production team model.
+- Phase 10: append-only logs of selected and skipped candidate sides; trust, closing-line timing and paper-risk helpers remain research-only. A missing candidate audit suppresses new picks.
+- Phases 11–12: prospective validation calculations, strict evidence gates and counts; feature drift/freshness monitoring and missed-update warnings. No wagering is automated.
+- Phase 13: the site retains the picks, sportsbook quotes, accuracy, history and variables while labeling the model experimental, showing progress toward validation and keeping unavailable context explicit.
+- Phase 14: source-isolated bounded retries, versioned feature snapshots, structured run summaries, Python 3.12 configuration and CI. Unit and fixture tests accompany each implementation stage.
 
-## Honest comparison
+## Lakers review and honest numbers
 
-At the initial model-first deployment checkpoint, there are no qualified matched-time sharp-market observations, certified sharp closing lines, or settled prospective pure-model picks. Therefore sharp-market log loss, sharp CLV, ROI confidence intervals and a model-ahead verdict are **not available**. No positive expected value or profit has been demonstrated. See [reports/model_vs_market.md](reports/model_vs_market.md).
+On October 27, 2026 Portland beat the Lakers 136–129. The frozen legacy pick was Lakers moneyline: a FanDuel quote of -126 was recorded separately from a best quote of -125 at other books. No actual bet is recorded. One loss does not identify a faulty feature or justify changing a model weight. The review and source details are in [reports/lakers_2026-10-27.md](reports/lakers_2026-10-27.md).
 
-The model is still a simple, uncalibrated Elo baseline. The full 10+ seasons of NBA history, player-level lineup/injury effects, NFL QB/EPA/weather models, ensemble, independent sharp source, fitted challenger, disagreement calibration and validation/staking gate requested by the amendment are not complete. Existing retrospective source rows cannot safely stand in for point-in-time information. Odds are refreshed approximately hourly, not minute-by-minute. No purchases or subscriptions were made.
+At the initial prospective research checkpoint, no independently verified sharp-closing sample or settled pure-model paper picks were available. Consequently, sharp CLV, its confidence interval, an unbiased sharp-market comparison, and a defensible ROI interval are **not available**. The all-model historical win counter includes older legacy picks and is not proof of profit. No gains, improved accuracy, or profitable edge are claimed.
+
+## What is not finished
+
+The full master prompt is **not complete**. Certified sharp prices and closes, pregame NBA injury/lineup rights, complete point-in-time player and referee history, advanced boosted/Bayesian/lineup models, validated trust and timing models, a rigorous execution-aware walk-forward backtest, and the required future replication/holdout results are missing. Several research helpers and screens are implemented, but cannot substitute for licensed historical data or results that have not happened. Per-league qualification requires 300 settled prospective picks and additional preregistered evidence; none is guaranteed. Every selection remains paper-only and the site places no bets.
+
+The underlying odds pages and scheduled update are roughly hourly, and scheduled jobs can be delayed; the browser's once-a-minute check does not create a minute-by-minute source. No purchase, subscription, paid feed, or additional account was created.
 
 ## Next five priorities
 
-1. Configure an existing free The Odds API key as the GitHub Actions `ODDS_API_KEY` secret for fallback and cross-checks; the key is currently absent. This is not an independent sharp source and its free quota is limited.
-2. Establish genuinely licensed, independently sourced sharp pregame/closing prices and 10+ seasons of NBA history with clearly documented rights; do not assume an hourly retail proxy is a sharp close.
-3. Capture timestamped injuries, lineups, quarterback status and weather from permitted sources and establish reliable first-observed times before adding them as features.
-4. Accumulate prospective matched-time paper forecasts and outcomes; run the preregistered chronological tests, multiple-testing correction and untouched confirmation before approving any model change or stake.
-5. Develop and shadow-test calibration, QB/EPA and lineup-based challengers with uncertainty and leakage checks; promote only with the documented evidence.
+1. Establish a permitted, independently sourced sharp pregame and certified closing-price feed with reliable timestamps and retention rights.
+2. Obtain rights-compatible NBA injury, lineup and player data, along with verified NFL starting-QB and inactive statuses, without backdating knowledge.
+3. Accumulate prospective paper forecasts, all skipped candidates, actual confirmed outcomes and sufficiently frequent price observations.
+4. Evaluate the preregistered challengers and availability/schedule factors using walk-forward splits, multiple-testing correction, two independent season replications and a later untouched holdout.
+5. Validate calibration, execution assumptions and sharp CLV, improve feed latency only with an appropriate authorized source, and promote changes only if the evidence supports them.

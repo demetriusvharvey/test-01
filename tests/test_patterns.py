@@ -1,4 +1,5 @@
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
@@ -44,7 +45,7 @@ class PatternTests(unittest.TestCase):
         cutoff=(self.start+timedelta(days=5)).isoformat();rows=[self.row(0)];results=analyze(rows,cutoff)
         self.assertEqual(append_run(self.root,rows,results,cutoff),10)
         self.assertEqual(append_run(self.root,rows,results,cutoff),0)
-        with sqlite3.connect(self.root/'observations/pattern_tests/2026-01-06.sqlite') as db:
+        with closing(sqlite3.connect(self.root/'observations/pattern_tests/2026-01-06.sqlite')) as db:
             with self.assertRaises(sqlite3.IntegrityError):db.execute('DELETE FROM pattern_runs')
 
 

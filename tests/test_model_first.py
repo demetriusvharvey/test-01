@@ -1,5 +1,6 @@
 import math
 import sqlite3
+from contextlib import closing
 import tempfile
 import unittest
 from datetime import date, datetime, timedelta, timezone
@@ -52,7 +53,7 @@ class ModelFirstTests(unittest.TestCase):
         self.assertAlmostEqual(report['paper_roi'],100/105,places=4)
         self.assertIsNone(report['sharp_clv']);self.assertIsNone(report['paper_roi_interval'])
         self.assertEqual(report['verdict'],'inconclusive');self.assertFalse(report['staking_allowed'])
-        with sqlite3.connect(self.root/'observations/forecasts/2026-10-28.sqlite') as db:
+        with closing(sqlite3.connect(self.root/'observations/forecasts/2026-10-28.sqlite')) as db:
             with self.assertRaises(sqlite3.IntegrityError):db.execute('UPDATE forecasts SET pure_probability=.99')
     def test_nonfinal_and_mismatched_teams_do_not_count(self):
         record_forecasts(self.root,self.markets,self.models,self.now.isoformat())

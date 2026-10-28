@@ -15,6 +15,7 @@ from .model import project_home
 from .guard import assess_disagreement
 from .statistics import paired_block_test, bh_adjust
 from .constants import ET
+from .feature_registry import FEATURE_REGISTRY_VERSION
 
 FORECAST_SCHEMA='''
 CREATE TABLE IF NOT EXISTS forecasts (
@@ -63,7 +64,7 @@ def record_forecasts(root,markets,models,now,shadow_context=None):
             if any(t>captured for t in times): continue
             prices=[implied(b['home'])/(implied(b['home'])+implied(b['away'])) for b in event['books'].values()]
             retail=median(prices)
-            inputs={'home_rating':model['ratings'][event['home']],'away_rating':model['ratings'][event['away']],
+            inputs={'schema':FEATURE_REGISTRY_VERSION,'home_rating':model['ratings'][event['home']],'away_rating':model['ratings'][event['away']],
                     'model_version':'pure-elo-v1','k':model.get('k'),'last_season':model.get('last_season'),
                     'source_text_sha256':model.get('source_hashes',{}),
                     'home_advantage':model['home_advantage'],'rest_weight':model['rest_weight'],

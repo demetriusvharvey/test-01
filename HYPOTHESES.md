@@ -136,3 +136,19 @@ its sample, multiple-testing, time-order, rights, replication and untouched
 holdout gates. Do not train on a source until its relevant usage rights are
 reviewed, and do not promote position features without evidence they improve
 the matched-time benchmark.
+
+## H019 — score bootstrap challenger (registered before evaluation)
+
+For NBA and NFL separately, estimate each team's scoring and prevention from
+earlier final scores, shrink small team samples toward the earlier league
+mean, then simulate paired score variation from earlier same-league games.
+Hypothesis: the score bootstrap improves Brier score and log loss over the
+existing Elo baseline on later games. Use a fixed seeded 5,000-draw
+retrospective evaluation, comparing only games with both forecasts and
+respecting game-date order. Also show the naive 50% home baseline. The
+retrospective seasons used here have already been inspected and are **not**
+an untouched holdout. Source revisions lack historical publication timestamps.
+No betting ROI, player impact, possessions or drives may be inferred from
+this test. The live 10,000-draw snapshot remains disabled for pick selection
+until a later untouched evaluation, matched-time market comparison and the
+same source-rights and prospective promotion gates as H016 pass.

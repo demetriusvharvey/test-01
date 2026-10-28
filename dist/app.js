@@ -144,8 +144,26 @@
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}
     return `<article class="pick">${title}<div class="single-odds">Best odds recorded at time of pick${Number.isFinite(p.initial_best_odds)?' <strong>'+odds(p.initial_best_odds)+'</strong>':' unavailable'}</div></article>`;
   }
+  function slateMarkup(g){
+    const books=Object.entries(g.books||{});
+    const each=side=>{
+      const quotes=books.filter(([,b])=>Number.isFinite(b[side])).sort((a,b)=>b[1][side]-a[1][side]);
+      if(!quotes.length)return 'Price unavailable';
+      const [name,b]=quotes[0];return `${odds(b[side])} · ${escape(name)} · observed ${displayTime(b.as_of)}`;
+    };
+    const simulation=g.simulation;
+    const simulated=simulation?`<p>Score research: ${Number(simulation.draws).toLocaleString()} seeded score draws; median ${escape(g.home)} ${Number(simulation.median_home_score)}–${escape(g.away)} ${Number(simulation.median_away_score)}. This score model does not include injuries or change picks.</p>`:'';
+    return `<article class="pick"><div class="pick-head"><div class="team-info"><h3>${escape(g.away)} at ${escape(g.home)}</h3><p>${escape(g.league)} · ${displayTime(g.starts_at)}</p></div></div><div class="slate-prices"><p>${escape(g.away)}: ${each('away')}</p><p>${escape(g.home)}: ${each('home')}</p></div><details class="pick-context"><summary>Game details</summary>${availabilityMarkup(g)}${simulated}</details></article>`;
+  }
   function render(){
     setDailyDetails();renderDates();renderFactors();if(!board)return;
+    const gameSelect=$('manual-game'),prior=gameSelect.value;
+    gameSelect.replaceChildren(new Option('Choose an upcoming game',''));
+    for(const game of Array.isArray(board.games)?board.games:[]){
+      if(new Date(game.starts_at)<=new Date())continue;
+      for(const side of ['home','away'])gameSelect.add(new Option(`${game.league} · ${game.away} at ${game.home} · ${game[side]}`,`${game.id}|${side}`));
+    }
+    if([...gameSelect.options].some(o=>o.value===prior))gameSelect.value=prior;
     const accuracy=board.accuracy||{wins:0,losses:0};
     $('accuracy').textContent=accuracy.percent==null?'—':Number(accuracy.percent).toFixed(1)+'%';
     $('record').textContent=(accuracy.wins||0)+'W – '+(accuracy.losses||0)+'L · '+((accuracy.wins||0)+(accuracy.losses||0))+' settled'+(accuracy.pending?' · '+accuracy.pending+' pending':'');
@@ -174,6 +192,9 @@
       const incomplete=Array.isArray(board.errors)&&board.errors.length>0;
       $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved picks for this day.</strong><p>The archive grows as new picks are recorded.</p></div>':stale||incomplete?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No active picks right now.</strong><p>New picks appear when a game qualifies.</p></div>';
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
+    const slate=selectedDay===today()&&!stale?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now):[];
+    $('slate-section').hidden=!slate.length;
+    $('game-slate').innerHTML=slate.map(slateMarkup).join('');
     const watched=selectedDay===today()&&!stale?(Array.isArray(board.watchlist)?board.watchlist:[]).filter(p=>{
       const stamps=(p.books||[]).filter(b=>Number.isFinite(b.odds)).map(b=>new Date(b.as_of).valueOf());
       return new Date(p.starts_at)>now&&!picks.some(x=>x.id===p.id)&&stamps.length>0&&stamps.every(t=>Number.isFinite(t)&&t<=now.valueOf()+5*60*1000&&now.valueOf()-t<=95*60*1000);
@@ -183,6 +204,25 @@
   }
   async function refresh(){try{const r=await fetch('board.json?view='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('unavailable');board=await r.json();render();}catch(_){$('freshness').textContent='Board unavailable';$('picks').innerHTML='<div class="empty"><strong>Unable to load picks.</strong><p>Please try again shortly.</p></div>';}}
   const storageKey='pick-variable-ideas-v1';
+  $('manual-odds-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    const selected=$('manual-game').value,price=Number($('manual-price').value),stake=Number($('manual-stake').value);
+    const split=selected.lastIndexOf('|'),id=selected.slice(0,split),side=selected.slice(split+1);
+    const game=(Array.isArray(board?.games)?board.games:[]).find(g=>g.id===id&&new Date(g.starts_at)>new Date());
+    const label=game?.[side];
+    if(!game||!['home','away'].includes(side)||!label||!Number.isSafeInteger(price)||Math.abs(price)<100||!Number.isFinite(stake)||stake<=0||stake>1000000){
+      $('manual-result').textContent='Select an upcoming game and enter valid American odds (at most -100 or at least +100) and a positive stake.';return;
+    }
+    const decimal=price<0?1+100/-price:1+price/100,breakEven=1/decimal;
+    const observed=new Date().toISOString();
+    try{
+      const key='fanduel-manual-observations-v1';let saved=JSON.parse(localStorage.getItem(key)||'[]');
+      if(!Array.isArray(saved))saved=[];
+      saved.push({game_id:id,team:label,league:game.league,book:'FanDuel',source:'user entry',american_odds:price,stake,observed_at:observed});
+      localStorage.setItem(key,JSON.stringify(saved.slice(-50)));
+      $('manual-result').textContent=`Your FanDuel observation for ${label}: ${odds(price)}, saved ${displayTime(observed)}. Break-even: ${(breakEven*100).toFixed(2)}%. At $${stake.toFixed(2)}, winning profit $${(stake*(decimal-1)).toFixed(2)}; total payout $${(stake*decimal).toFixed(2)}. No validated edge is available to assess this price.`;
+    }catch(_){$('manual-result').textContent='Browser storage unavailable; price was not saved.';}
+  });
   function getIdeas(){try{const items=JSON.parse(localStorage.getItem(storageKey)||'[]');return Array.isArray(items)?items.slice(0,100):[];}catch(_){return [];}}
   function saveIdeas(items){try{localStorage.setItem(storageKey,JSON.stringify(items));return true;}catch(_){$('idea-message').textContent='Could not save on this device. Check your browser storage settings.';return false;}}
   function renderIdeas(){const ideas=getIdeas();$('ideas').innerHTML=ideas.map(item=>`<li><div><strong>${escape(item.name)}</strong><small>${escape(item.league)}${item.note?' · '+escape(item.note):''}</small></div><button type="button" class="remove-idea" data-idea="${escape(item.id)}" aria-label="Remove ${escape(item.name)}">Remove</button></li>`).join('');}

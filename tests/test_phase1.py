@@ -154,7 +154,8 @@ class StorageAndSourceTests(unittest.TestCase):
         with patch.object(runner,'ROOT',self.root),patch.object(runner,'datetime',FixedDateTime),patch.object(runner,'get',side_effect=fake_get),patch.object(runner,'fetch_nba_injuries',return_value=(payload,NOW.isoformat())),patch.dict('os.environ',env,clear=True):
             runner.main()
         board=json.loads((self.root/'dist/board.json').read_text())
-        self.assertEqual(board['picks'][0]['nba_availability_context']['teams']['home']['counts']['out'],1)
+        self.assertEqual(board['picks'],[])  # No validated edge, no new recommendation.
+        self.assertEqual(board['games'][0]['nba_availability_context']['teams']['home']['counts']['out'],1)
         self.assertNotIn('Do Not Publish',json.dumps(board));self.assertNotIn('secret-test-key',json.dumps(board))
         path=self.root/'store/observations/forecasts/2026-10-28.sqlite'
         with closing(sqlite3.connect(path)) as db:
@@ -195,9 +196,9 @@ class StorageAndSourceTests(unittest.TestCase):
         board=json.loads((self.root/'dist/board.json').read_text())
         self.assertEqual(board['source_status']['scoreboard_source'],'PropLine')
         self.assertIn('PropLine scoreboard',board['source'])
-        self.assertEqual(len(board['picks']),1)
-        self.assertEqual(board['picks'][0]['nba_availability_context']['teams']['home']['counts']['out'],1)
-        self.assertEqual(board['picks'][0]['nba_availability_context']['teams']['home']['positions']['C']['out'],1)
+        self.assertEqual(board['picks'],[])
+        self.assertEqual(board['games'][0]['nba_availability_context']['teams']['home']['counts']['out'],1)
+        self.assertEqual(board['games'][0]['nba_availability_context']['teams']['home']['positions']['C']['out'],1)
         self.assertNotIn('test-key',json.dumps(board))
         path=self.root/'store/observations/forecasts/2026-10-28.sqlite'
         with closing(sqlite3.connect(path)) as db:

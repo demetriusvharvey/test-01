@@ -25,6 +25,7 @@ from .schedule_context import attach_rest_context
 from .referees import attach_current_officials
 from .availability import attach_nfl_reports, nfl_report_context
 from .availability_features import availability_features, position_availability_snapshot
+from .simulator import as_of_histories
 from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
 from .watchlist import render_watchlist
@@ -200,7 +201,7 @@ def main():
     # If a league's training history is missing, do not produce predictions for it.
     blocked={('NBA' if x.startswith('NBA historical') else 'NFL') for x in errors if x.startswith(('NBA historical','NFL historical'))}
     permitted={k:v for k,v in markets.items() if archive_ok and not day_rolled and v['league'] not in blocked and (v['league']!='NFL' or 'neutral' in v)}
-    status_by_game={};nba_context={};provider_context={};positions_by_game={}
+    status_by_game={};nba_context={};provider_context={};positions_by_game={};simulations_by_game={}
     if injury_payload is not None:
         try:
             temp={'picks':[{'id':key} for key in permitted]}
@@ -222,6 +223,15 @@ def main():
             position_snapshot=position_availability_snapshot(event,provider_context.get(key),now.isoformat())
             if position_snapshot:positions_by_game[key]=position_snapshot
         except Exception as exc:errors.append(event['league']+' injury research unavailable ('+type(exc).__name__+')')
+    # The score simulator is an independently testable challenger. It observes
+    # only completed games before the current ET date and never changes picks.
+    try:
+        score_histories=as_of_histories(games,today)
+        for key,event in permitted.items():
+            seed=int(hashlib.sha256(key.encode()).hexdigest()[:8],16)
+            result=score_histories[event['league']].simulate(event['home'],event['away'],event.get('neutral',False),10000,seed)
+            if result:simulations_by_game[key]=result
+    except Exception as exc:errors.append('Score simulation research unavailable ('+type(exc).__name__+')')
     try:
         if data_root and archive_ok:
             result_count=record_outcomes(data_root,finals,now.isoformat())
@@ -230,8 +240,8 @@ def main():
                 try:qb_shadow=build_nfl_shadow_context(data_root,nfl_csv,nfl_observed_at,now.isoformat())
                 except Exception as exc:print('NFL shadow context unavailable:',type(exc).__name__)
             shadow={key:{'quarterback':qb_shadow.get(key),'availability':status_by_game.get(key),
-                         'position_availability':positions_by_game.get(key)}
-                    for key in permitted if key in qb_shadow or key in status_by_game or key in positions_by_game}
+                         'position_availability':positions_by_game.get(key),'simulation':simulations_by_game.get(key)}
+                    for key in permitted if key in qb_shadow or key in status_by_game or key in positions_by_game or key in simulations_by_game}
             forecast_count=record_forecasts(data_root,permitted,models,now.isoformat(),shadow)
             print('Paper study:',forecast_count,'forecasts;',result_count,'confirmed outcomes')
             challenger_count=record_challenger_forecasts(data_root,permitted,models,now.isoformat(),status_by_game)
@@ -247,11 +257,18 @@ def main():
         estimate=project_home(models[event['league']],event['home'],event['away'],start,event.get('neutral',False))
         if estimate is None: continue
         print('TODAY', event['league'],event['away'],'at',event['home'],'pure model home',round(100*estimate,1),'best home',max(v['home'] for v in event['books'].values()),'best away',max(v['away'] for v in event['books'].values()))
-    chosen=choose_candidates(permitted,models,now,ledger)
+    # Legacy Elo can generate research candidates, but its one-point price
+    # threshold was never calibrated against matched-time market forecasts.
+    # No newly recommended side is published until a separately evaluated
+    # champion carries explicit forward validation and source qualification.
+    research_candidates=choose_candidates(permitted,models,now,ledger)
+    eligible_leagues={league for league,model in models.items()
+                      if model.get('validated_forward_edge') is True and model.get('qualified_market') is True}
+    chosen=[p for p in research_candidates if p['league'] in eligible_leagues]
     if data_root and archive_ok:
         try:
             candidate_count=record_candidates(data_root,permitted,models,now.isoformat(),ledger,chosen)
-            print('Candidate audit:',candidate_count,'selected and skipped paper sides')
+            print('Candidate audit:',candidate_count,'selected and skipped research sides; released:',len(chosen))
         except Exception as e:
             errors.append('Candidate audit unavailable ('+type(e).__name__+')')
             chosen=[]
@@ -265,7 +282,22 @@ def main():
         ledger=copy.deepcopy(frozen_ledger)
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
-    board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
+    # Keep unpriced scheduled games visible for research and manual price entry.
+    # Schedule IDs come only from the validated scoreboard/event parser.
+    reverse={league:{code:name.title() for name,code in teams.items()}
+             for league,teams in (('NBA',NBA_TEAMS),('NFL',NFL_TEAMS))}
+    scheduled=[]
+    for identifier,start in starts_by_game.items():
+        try:
+            league,day,away,home=identifier.split(':')
+            sport=league.upper();when=aware(start)
+            if (sport not in reverse or when<=now or when>now+timedelta(days=8)
+                    or when.astimezone(ET).date().isoformat()!=day
+                    or home not in reverse[sport] or away not in reverse[sport] or home==away):continue
+            scheduled.append({'id':identifier,'league':sport,'home':reverse[sport][home],
+                              'away':reverse[sport][away],'starts_at':when.isoformat()})
+        except (TypeError,ValueError,AttributeError):continue
+    board=render_board(markets,ledger,now,errors,models,training_counts,added_finals,scheduled)
     board['source']='AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; '+score_source+' scoreboard'
     attach_prediction_checks(board,ledger)
     try:
@@ -280,6 +312,11 @@ def main():
     if nfl_provider_payload is not None:
         try:attach_nfl_summaries(board,markets,nfl_provider_payload,nfl_provider_observed_at)
         except Exception as e:board['errors'].append('NFL injury context unavailable ('+type(e).__name__+')')
+    for game in board['games']:
+        context=provider_context.get(game['id'])
+        if context:game['nba_availability_context' if game['league']=='NBA' else 'nfl_provider_availability_context']=context
+        if game['id'] in simulations_by_game:
+            game['simulation']={**simulations_by_game[game['id']],'used_in_prediction':False}
     attach_rest_context(board,markets,models,now.isoformat())
     attach_current_officials(board,markets,ref_report,ref_observed_at,now.isoformat())
     try:

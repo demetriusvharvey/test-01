@@ -2,7 +2,7 @@
 
 An NBA/NFL single-game moneyline board with sportsbook prices, a pick record, a historical archive and documented research factors. Predictions are informational; the site never places bets. The model is **not validated as profitable**.
 
-The current engine predicts from team Elo and completed game results independently of odds. It takes the model's preferred side of each game, applies existing data and price checks, and orders the qualifying winners by model win probability. These raw estimates are not calibrated and can be wrong; the ordering is not evidence of a betting edge. Previous selections remain frozen. No verified sharp source, sharp CLV, completed head-to-head validation or actual user returns are available. See [reports/model_vs_market.md](reports/model_vs_market.md).
+The current research engine predicts from team Elo and completed game results independently of odds. It examines the model's preferred side of each priced game and compares the price, but **does not release new recommendations** because those estimates are not calibrated or validated against a matched-time market benchmark. Previous selections remain frozen and visible. No verified sharp source, sharp CLV, completed head-to-head validation or actual user returns are available. See [reports/model_vs_market.md](reports/model_vs_market.md).
 
 Prior rest and scoring-margin experiments remain disabled until the preregistered protocol in [HYPOTHESES.md](HYPOTHESES.md) is satisfied. Referees, injuries, lineups, quarterbacks and travel are not direct model inputs. Visitor ideas are stored only in that browser and are not automatically used by the model.
 
@@ -17,6 +17,27 @@ Current source reports are also grouped by all reported NBA/NFL positions,
 including NFL offense, defense and special teams, and stored as aggregate
 pregame research snapshots. Missing positions remain unknown. The position
 snapshots do not affect live predictions and have not been validated.
+
+A seeded score-bootstrap simulator produces 10,000 paired home/away score
+draws for each priced game with sufficient earlier team scores. It is a
+**score-level challenger only**: it does not simulate possessions, drives,
+turnovers, player rotations or weather and is not an injury-impact engine.
+Its results are archived with timestamped research forecasts and shown as
+score context in the upcoming-game slate; they never change picks. Run
+`python -m scripts.research_simulator --data-root .data-store --output reports/simulation_validation.md`
+to compare it chronologically with Elo using archived source assets.
+
+The game slate includes verified schedule events for the next eight days,
+including unpriced games. The manual FanDuel calculator timestamps a game,
+team, entered American odds and stake in that browser's local storage, then
+calculates break-even and payout. It does not verify the price, share the
+entry across devices, assess a validated edge, or place a wager.
+
+New recommendations are withheld while Elo remains uncalibrated and its
+apparent price advantage lacks matched-time market validation. Previously
+saved selections and their grading remain visible. Research candidates are
+still logged; releasing a new selection requires explicit forward-validation
+and qualified-market evidence.
 
 That same optional key enables the provider's NBA/NFL schedules, scores and injury
 context without any additional account. A daily request cap protects the free

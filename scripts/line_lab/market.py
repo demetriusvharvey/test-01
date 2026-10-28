@@ -11,6 +11,32 @@ def implied(odds): return -odds/(-odds+100) if odds<0 else 100/(odds+100)
 def decimal_odds(odds):
     return 1+100/(-odds) if odds<0 else 1+odds/100
 
+
+def moneyline_calculation(american,stake,probability=None,other_side=None):
+    """Calculate a quote without treating a model estimate as a proven edge."""
+    if isinstance(american,bool) or not isinstance(american,int) or abs(american)<100 or american==0:
+        raise ValueError('American odds must be <= -100 or >= +100')
+    if isinstance(stake,bool) or not isinstance(stake,(int,float)) or not 0<stake<=1000000:
+        raise ValueError('invalid stake')
+    from math import isfinite
+    if not isfinite(stake):raise ValueError('invalid stake')
+    multiplier=decimal_odds(american)
+    result={'decimal_odds':multiplier,'break_even':implied(american),
+            'winning_profit':round(stake*(multiplier-1),2),'losing_profit':-stake,
+            'total_payout':round(stake*multiplier,2)}
+    if other_side is not None:
+        if isinstance(other_side,bool) or not isinstance(other_side,int) or abs(other_side)<100:
+            raise ValueError('invalid opposing quote')
+        total=implied(american)+implied(other_side)
+        result.update({'overround':total-1,'proportional_no_vig':implied(american)/total})
+    if probability is not None:
+        if isinstance(probability,bool) or not isinstance(probability,(int,float)) or not isfinite(probability) or not 0<=probability<=1:
+            raise ValueError('invalid model probability')
+        result.update({'estimated_ev':round(probability*multiplier-1,6),
+                       'estimated_profit':round(stake*(probability*multiplier-1),2),
+                       'probability_edge':probability-implied(american)})
+    return result
+
 def build_market(events,now):
     merged={}
     for x in events:

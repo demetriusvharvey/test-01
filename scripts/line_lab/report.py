@@ -5,7 +5,7 @@ from .constants import *
 from .market import decimal_odds, implied
 
 
-def render_board(markets,ledger,now,errors,models=None,training_counts=None,added_finals=None):
+def render_board(markets,ledger,now,errors,models=None,training_counts=None,added_finals=None,scheduled=None):
     today=now.astimezone(ET).date().isoformat()
     active=[]
     for pick in ledger:
@@ -48,4 +48,12 @@ def render_board(markets,ledger,now,errors,models=None,training_counts=None,adde
                          'selection_count':model.get('selection_count'),'holdout_count':model.get('holdout_count'),
                          'candidate_name':model.get('candidate_name'),'candidate_passed':model.get('candidate_passed',False),
                          'candidate_testing':model.get('candidate_testing','disabled')}
-    return {'generated_at':now.isoformat(),'model':'Experimental pure team Elo — paper only','source':'AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores','accuracy':{'wins':wins,'losses':losses,'voids':voids,'pending':pending,'percent':round(100*wins/(wins+losses),1) if wins+losses else None},'picks':active,'history':history,'model_details':details,'errors':errors}
+    upcoming=[{'id':e['id'],'league':e['league'],'home':e['home_name'],'away':e['away_name'],
+               'starts_at':e['starts_at'],'books':e['books']}
+              for e in markets.values() if datetime.fromisoformat(e['starts_at'])>now]
+    listed={e['id'] for e in upcoming}
+    for e in scheduled or []:
+        if e['id'] not in listed and datetime.fromisoformat(e['starts_at'])>now:
+            upcoming.append({**e,'books':{}});listed.add(e['id'])
+    upcoming.sort(key=lambda e:(e['starts_at'],e['id']))
+    return {'generated_at':now.isoformat(),'model':'Pure team Elo — not validated as profitable','source':'AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores','accuracy':{'wins':wins,'losses':losses,'voids':voids,'pending':pending,'percent':round(100*wins/(wins+losses),1) if wins+losses else None},'picks':active,'history':history,'games':upcoming,'model_details':details,'errors':errors}

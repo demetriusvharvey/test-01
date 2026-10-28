@@ -96,3 +96,20 @@ market-matched untouched test remain unresolved. The independent NBA scoring
 unit and NFL drive challenger was implemented, tested and found inferior to
 Elo on the exploratory matched samples. Neither the top-three rank nor a
 positive sportsbook moneyline establishes a validated edge or reliable win.
+
+## Top-three audit and injury timing — October 28, 2026
+
+The weekly research workflow completed a chronological day-start replay of
+the fixed top-three Elo selection rule on 2024–2026 archived results. It
+selected 1,388 games on 494 dates, with 1,038 correct (74.78%), Brier 0.1777
+and log loss 0.5360. The day-block bootstrap accuracy interval was
+72.51%–76.94%; NBA was 75.58% on 1,208 and NFL was 69.44% on 180. These
+archives were acquired after the games and the rule has no injury input or
+matched-time market benchmark. The replay is separate from the forward site
+record; see `reports/winner_accuracy_replay.md` for source hashes and bins.
+
+Active cards now flag an injury report observed after their frozen forecast.
+This makes the timing gap visible; it does not imply the injury status changed
+or that the model quantified player impacts. No forecast history is rewritten.
+Local suite: 147 passing; browser script syntax check passed. The status
+of the new GitHub CI and deployment is verified after the corresponding commit.

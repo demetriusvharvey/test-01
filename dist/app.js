@@ -138,8 +138,9 @@
     const status=Object.hasOwn(statuses,p.outcome)?p.outcome:'pending';
     const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:p.watching?'<span class="result-badge">WATCHING</span>':p.close_forecast?'<span class="result-badge">CLOSE CALL</span>':!historical&&p.rank?`<span class="result-badge">RANK #${Number(p.rank)}</span>`:'';
     const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}</div></div>`;
+    const injuryNotice=p.injury_report_after_forecast?'<p class="forecast-alert">Injury report updated after this winner was picked. This forecast did not account for that report; review the current status before relying on it.</p>':'';
     const context=`<details class="pick-context"><summary>Game details</summary>${availabilityMarkup(p)}${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
-    if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}${context}</article>`;
+    if(!historical)return `<article class="pick">${title}${injuryNotice}${booksMarkup(p.books||[])}${context}</article>`;
     const recorded=Array.isArray(p.initial_books)?p.initial_books.filter(b=>Number.isFinite(b.odds)):[];
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}
     return `<article class="pick">${title}<div class="single-odds">Best odds recorded at time of pick${Number.isFinite(p.initial_best_odds)?' <strong>'+odds(p.initial_best_odds)+'</strong>':' unavailable'}</div></article>`;

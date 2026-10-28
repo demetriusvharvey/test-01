@@ -78,6 +78,13 @@ def render_winners(board, ledger, now, models):
             for _,name in BOOKS], 'prediction_integrity':status,'close_forecast':row['probability']<.55}
         for field in ('nba_availability_context','nfl_provider_availability_context','availability_context','schedule_context','referee_assignment','line_history'):
             if field in game:item[field]=game[field]
+        injury=game.get('nba_availability_context') or game.get('nfl_provider_availability_context')
+        try:
+            # The published forecast is immutable. Make later injury-report
+            # observations explicit instead of suggesting they were inputs.
+            item['injury_report_after_forecast']=bool(injury and datetime.fromisoformat(injury['observed_at']) > datetime.fromisoformat(row['predicted_at']))
+        except (KeyError,TypeError,ValueError):
+            item['injury_report_after_forecast']=False
         active.append(item)
     active.sort(key=lambda x:(-next(r['probability'] for r in ledger if r['id']==x['id']),x['id']))
     for rank,item in enumerate(active,1):item['rank']=rank

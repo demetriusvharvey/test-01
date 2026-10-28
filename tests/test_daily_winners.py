@@ -48,6 +48,17 @@ class WinnerForecastTests(unittest.TestCase):
         changed[0]['team']='wrong'
         with self.assertRaises(ValueError):validate_transition(first,changed)
 
+    def test_later_injury_observation_is_flagged_without_rewriting_forecast(self):
+        forecast=make_daily_winners([self.scheduled[0]],{'NBA':self.model},self.now,[])
+        self.scheduled[0]['nba_availability_context']={
+            'observed_at':(self.now+timedelta(minutes=30)).isoformat(),
+            'teams':{'home':{'counts':{'out':1}},'away':{'counts':{'out':0}}}}
+        board={'games':[self.scheduled[0]],'history':[],'errors':[]}
+        render_winners(board,forecast,self.now+timedelta(hours=1),{'NBA':self.model})
+        self.assertTrue(board['picks'][0]['injury_report_after_forecast'])
+        self.assertEqual(forecast[0]['predicted_at'],self.now.isoformat())
+        self.assertEqual(forecast[0]['probability'],make_daily_winners([self.scheduled[0]],{'NBA':self.model},self.now,[])[0]['probability'])
+
     def test_only_confirmed_final_grades_saved_winner(self):
         picks=make_daily_winners(self.scheduled,{'NBA':self.model},self.now,[])
         self.assertEqual(grade_ledger(picks,[],self.now),0)

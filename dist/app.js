@@ -62,7 +62,7 @@
   $('pick-date').addEventListener('change',e=>chooseDay(e.target.value));
   function renderDates(){
     const nowDay=today(),yesterday=shiftDay(nowDay,-1),isToday=selectedDay===nowDay;
-    $('picks-title').textContent=isToday?'Today’s picks':selectedDay===yesterday?'Yesterday’s picks':displayDay(selectedDay);
+    $('picks-title').textContent=isToday?'Today’s predicted winners':selectedDay===yesterday?'Yesterday’s predicted winners':displayDay(selectedDay);
     $('today-button').classList.toggle('is-active',isToday);
     $('yesterday-button').classList.toggle('is-active',selectedDay===yesterday);
     $('pick-date').value=selectedDay;
@@ -136,7 +136,7 @@
     const historical=!p.current;
     const statuses={win:'WON',loss:'LOST',void:'VOID',pending:'PENDING'};
     const status=Object.hasOwn(statuses,p.outcome)?p.outcome:'pending';
-    const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:p.watching?'<span class="result-badge">WATCHING</span>':!historical&&p.model&&p.model!=='pure-elo-v1'?'<span class="result-badge">EARLIER MODEL</span>':'';
+    const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:p.watching?'<span class="result-badge">WATCHING</span>':p.close_forecast?'<span class="result-badge">CLOSE CALL</span>':!historical&&p.rank?`<span class="result-badge">RANK #${Number(p.rank)}</span>`:'';
     const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}</div></div>`;
     const context=`<details class="pick-context"><summary>Game details</summary>${availabilityMarkup(p)}${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
     if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}${context}</article>`;
@@ -153,7 +153,7 @@
     };
     const simulation=g.simulation;
     const simulated=simulation?`<p>Score research: ${Number(simulation.draws).toLocaleString()} seeded score draws; median ${escape(g.home)} ${Number(simulation.median_home_score)}–${escape(g.away)} ${Number(simulation.median_away_score)}. This score model does not include injuries or change picks.</p>`:'';
-    return `<article class="pick"><div class="pick-head"><div class="team-info"><h3>${escape(g.away)} at ${escape(g.home)}</h3><p>${escape(g.league)} · ${displayTime(g.starts_at)}</p></div></div><div class="slate-prices"><p>${escape(g.away)}: ${each('away')}</p><p>${escape(g.home)}: ${each('home')}</p></div><details class="pick-context"><summary>Game details</summary>${availabilityMarkup(g)}${simulated}</details></article>`;
+    return `<article class="pick"><div class="pick-head"><div class="team-info"><h3>${escape(g.away)} at ${escape(g.home)}</h3><p>${escape(g.league)} · ${displayTime(g.starts_at)}</p><p>Model winner: <strong>${escape(g.predicted_winner||'Unavailable')}</strong>${g.prediction_uncertain?' · close forecast':''}</p></div></div><div class="slate-prices"><p>${escape(g.away)}: ${each('away')}</p><p>${escape(g.home)}: ${each('home')}</p></div><details class="pick-context"><summary>Game details</summary>${availabilityMarkup(g)}${simulated}</details></article>`;
   }
   function render(){
     setDailyDetails();renderDates();renderFactors();if(!board)return;
@@ -172,11 +172,11 @@
     const upcoming=all.filter(p=>new Date(p.starts_at)>now);
     const times=upcoming.flatMap(p=>(p.books||[]).filter(b=>b.as_of).map(b=>new Date(b.as_of).valueOf())).filter(Number.isFinite);
     const oldest=times.length?Math.min(...times):null;
-    const stale=!validDate||now.valueOf()-generated.valueOf()>95*60*1000||generated.valueOf()-now.valueOf()>5*60*1000||(oldest!=null&&now.valueOf()-oldest>95*60*1000);
+    const stale=!validDate||now.valueOf()-generated.valueOf()>95*60*1000||generated.valueOf()-now.valueOf()>5*60*1000;
     const active=selectedDay===today()&&!stale?upcoming:[];
     const allHistory=(Array.isArray(board.history)?board.history:[]).filter(p=>p.pick_day===selectedDay);
-    const earlier=selectedDay===today()?allHistory.filter(p=>p.recommendation_eligible!==true):[];
-    const history=selectedDay===today()?allHistory.filter(p=>p.recommendation_eligible===true):allHistory;
+    const earlier=[];
+    const history=allHistory;
     const activeById=new Map(active.filter(p=>p.id).map(p=>[p.id,p]));
     const picks=history.map(p=>activeById.has(p.id)?Object.assign({},p,activeById.get(p.id),{current:true}):Object.assign({},p,{current:false}));
     for(const p of active)if(!p.id||!history.some(h=>h.id===p.id))picks.push(Object.assign({},p,{current:true}));
@@ -189,9 +189,9 @@
     });
     $('count').textContent=picks.length===1?'1 pick':picks.length+' picks';
     const freshness=$('freshness');freshness.classList.toggle('stale',selectedDay===today()&&stale);
-    freshness.textContent=selectedDay!==today()?'Saved picks and results · '+displayDay(selectedDay):stale?'Update delayed · saved picks shown':oldest?'Odds updated '+displayTime(new Date(oldest)):validDate?'Last checked '+displayTime(generated):'Waiting for data';
+    freshness.textContent=selectedDay!==today()?'Saved picks and results · '+displayDay(selectedDay):stale?'Update delayed · saved picks shown':oldest?'Odds observed '+displayTime(new Date(oldest)):validDate?'Last checked '+displayTime(generated):'Waiting for data';
     if(!picks.length){
-      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved picks for this day.</strong><p>The archive grows as new picks are recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No games currently meet the algorithm’s selection criteria.</strong><p>Unvalidated price advantages are kept out of recommendations.</p></div>';
+      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved winners for this day.</strong><p>The forecast history grows as each day is recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No unstarted games with usable model data right now.</strong><p>Predicted winners appear when the next slate and ratings are available.</p></div>';
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
     $('saved-section').hidden=!earlier.length;
     $('saved-list').innerHTML=earlier.map(p=>pickMarkup(Object.assign({},p,{current:false}))).join('');

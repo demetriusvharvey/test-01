@@ -65,3 +65,22 @@ The pipeline snapshots a versioned feature definition and source hashes with eac
 The current acceptance-by-acceptance implementation status, archived season
 counts, negative score-simulator result, and remaining data blockers are in
 [reports/implementation_status.md](reports/implementation_status.md).
+
+### Daily predicted winners
+
+The dashboard now publishes up to three **top-ranked Elo winners** on each
+ET game date, independently of sportsbook prices or expected value. The
+hourly GitHub Actions workflow evaluates the scheduled NBA and NFL slate,
+saves each selected forecast once in `data/winner_predictions.json`, and
+grades it only from confirmed final scores. The predictions and original
+feature snapshots remain immutable. The expandable slate displays the model's
+predicted side for every scheduled game with sufficient rating history;
+prices are optional and never decide the predicted winner. The accuracy
+counter for this new series starts fresh and excludes older price-screened
+research selections. No games or missing historical model inputs can mean
+no winner forecast. A top rank is relative to that day's available games,
+not a calibrated probability of success or evidence of profitable betting.
+Current Elo does not model game-day injuries, lineups or all-position player
+impact; those are presented as observed context when available. The independent
+possession/drive challenger remains disabled after losing to Elo on its
+exploratory test.

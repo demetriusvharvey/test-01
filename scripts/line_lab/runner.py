@@ -29,6 +29,7 @@ from .simulator import as_of_histories
 from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
 from .watchlist import render_watchlist
+from .winners import make_daily_winners, render_winners
 from .nba_injury_feed import fetch_nba_injuries, fetch_nfl_injuries, attach_nba_summaries, attach_nfl_summaries, injury_quality_counts
 from .propline_scores import fetch_scores, fetch_events, parse_scores, parse_event_starts, restrict_public_results, use_provider, reserve_call
 
@@ -369,6 +370,20 @@ def main():
         board['monitoring']=build_monitoring(data_root,now.isoformat(),markets,board['errors']) if data_root else {}
     except Exception as e:
         board['monitoring']={};board['errors'].append('Monitoring unavailable ('+type(e).__name__+')')
+    # Winner predictions are a separate, immutable record. They are selected
+    # from the schedule and team model, never from an odds/EV gate.
+    winner_path=data_dir/'winner_predictions.json'
+    try:
+        winner_ledger=json.loads(winner_path.read_text()) if winner_path.exists() else []
+        previous_winners=copy.deepcopy(winner_ledger)
+        grade_ledger(winner_ledger,confirmed_finals,now)
+        winner_ledger.extend(make_daily_winners(board['games'],models,now,winner_ledger))
+        validate_transition(previous_winners,winner_ledger)
+        winner_path.write_text(json.dumps(winner_ledger,indent=2)+'\n')
+        render_winners(board,winner_ledger,now,models)
+    except (OSError,ValueError,KeyError,TypeError) as exc:
+        board['errors'].append('Winner forecast record unavailable ('+type(exc).__name__+')')
+        board['picks']=[]
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
                             'nba_injury_context':'configured' if nba_injury_key and nba_injury_enabled else 'not_configured',

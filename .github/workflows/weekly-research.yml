@@ -10,6 +10,7 @@ on:
       - scripts/research_trust.py
       - scripts/research_patterns.py
       - scripts/research_simulator.py
+      - scripts/inspect_simulator_sources.py
   schedule:
     - cron: '42 10 * * 2'
 permissions:
@@ -42,6 +43,7 @@ jobs:
           python scripts/backtest_shadow.py --data-root "$PICKS_DATA_ROOT" --output reports/paper_backtest.md
           python scripts/research_trust.py --data-root "$PICKS_DATA_ROOT" --output reports/trust_timing.md
           python -m scripts.research_simulator --data-root "$PICKS_DATA_ROOT" --output reports/simulation_validation.md
+          python -m scripts.inspect_simulator_sources --data-root "$PICKS_DATA_ROOT" --output reports/simulator_source_schema.md
       - name: Append research logs
         run: |
           git -C .data-store config user.name 'github-actions[bot]'
@@ -56,7 +58,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add PATTERN_REPORT.md reports/model_registry.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md reports/simulation_validation.md
+          git add PATTERN_REPORT.md reports/model_registry.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md reports/simulation_validation.md reports/simulator_source_schema.md
           if ! git diff --cached --quiet; then
             git commit -m 'Update weekly research summaries'
             git pull --rebase origin main

@@ -1,0 +1,53 @@
+name: Weekly paper-model research
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/research_models.py
+      - .github/workflows/weekly-research.yml
+  schedule:
+    - cron: '42 10 * * 2'
+permissions:
+  contents: write
+concurrency:
+  group: line-lab-data
+  cancel-in-progress: false
+jobs:
+  research:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          ref: data/observations
+          path: .data-store
+      - name: Verify research gates
+        run: python -m unittest discover -s tests
+      - name: Run preregistered research
+        env:
+          PICKS_DATA_ROOT: ${{ github.workspace }}/.data-store
+        run: |
+          python scripts/research_patterns.py --data-root "$PICKS_DATA_ROOT" --output PATTERN_REPORT.md
+          python scripts/research_models.py --data-root "$PICKS_DATA_ROOT" --output reports/model_registry.md
+      - name: Append research logs
+        run: |
+          git -C .data-store config user.name 'github-actions[bot]'
+          git -C .data-store config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C .data-store add observations/pattern_tests observations/model_registry.sqlite
+          if ! git -C .data-store diff --cached --quiet; then
+            git -C .data-store commit -m 'Record weekly shadow research'
+            git -C .data-store pull --rebase origin data/observations
+            git -C .data-store push origin HEAD:data/observations
+          fi
+      - name: Publish research summaries
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add PATTERN_REPORT.md reports/model_registry.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'Update weekly research summaries'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

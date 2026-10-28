@@ -16,6 +16,7 @@ from .heartbeat import record_run
 from .experiment import record_forecasts, record_outcomes, build_scoreboard
 from .nfl_shadow import build_nfl_shadow_context
 from .ledger_v2 import attach_retail_closing_proxies, paper_breakdowns, validate_transition
+from .model_stack import record_challenger_forecasts
 
 
 def main():
@@ -127,6 +128,8 @@ def main():
                 except Exception as exc:print('NFL shadow context unavailable:',type(exc).__name__)
             forecast_count=record_forecasts(data_root,permitted,models,now.isoformat(),shadow)
             print('Paper study:',forecast_count,'forecasts;',result_count,'confirmed outcomes')
+            challenger_count=record_challenger_forecasts(data_root,permitted,models,now.isoformat())
+            print('Shadow challenger:',challenger_count,'forecasts; no automatic promotion')
     except Exception as e:
         errors.append('Paper study storage unavailable ('+type(e).__name__+')')
         permitted={}

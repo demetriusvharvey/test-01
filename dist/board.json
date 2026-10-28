@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T01:51:01.868069+00:00",
+  "generated_at": "2026-10-28T03:48:46.951843+00:00",
   "model": "Experimental Elo + market baseline",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -9,14 +9,20 @@
     "pending": 1,
     "percent": null
   },
-  "picks": [
+  "picks": [],
+  "history": [
     {
+      "id": "nba:2026-10-27:POR:LAL",
       "team": "Los Angeles Lakers",
       "opponent": "Portland Trail Blazers",
       "league": "NBA",
       "starts_at": "2026-10-28T03:00:00+00:00",
-      "probability": 0.56907,
-      "books": [
+      "pick_day": "2026-10-27",
+      "predicted_at": "2026-10-28T01:48:51.647553+00:00",
+      "graded_at": null,
+      "outcome": "pending",
+      "initial_best_odds": -125,
+      "initial_books": [
         {
           "name": "FanDuel",
           "odds": -126,
@@ -47,10 +53,38 @@
           "odds": -132,
           "as_of": "2026-10-28T01:00:00+00:00"
         }
-      ],
-      "best": -125,
-      "predicted_at": "2026-10-28T01:48:51.647553+00:00"
+      ]
     }
   ],
+  "model_details": {
+    "NBA": {
+      "available": true,
+      "training_games": 4962,
+      "same_day_finals": 3,
+      "home_advantage": 40,
+      "rest_weight": 8,
+      "form_weight": 3,
+      "selection_season": "2024-25",
+      "holdout_season": "2025-26",
+      "selection_count": 1225,
+      "holdout_count": 1225,
+      "candidate_name": "rest + recent scoring margin",
+      "candidate_passed": true
+    },
+    "NFL": {
+      "available": true,
+      "training_games": 4470,
+      "same_day_finals": 0,
+      "home_advantage": 42,
+      "rest_weight": 4,
+      "form_weight": 3,
+      "selection_season": "2024",
+      "holdout_season": "2025",
+      "selection_count": 285,
+      "holdout_count": 284,
+      "candidate_name": "rest + recent scoring margin",
+      "candidate_passed": true
+    }
+  },
   "errors": []
 }

@@ -12,6 +12,38 @@
     "initial_best_odds": -125,
     "edge": 0.013517945317359392,
     "outcome": "pending",
-    "model": "elo-market-v1"
+    "model": "elo-market-v1",
+    "initial_books": [
+      {
+        "name": "FanDuel",
+        "odds": -126,
+        "as_of": "2026-10-28T01:00:00+00:00"
+      },
+      {
+        "name": "DraftKings",
+        "odds": -125,
+        "as_of": "2026-10-28T01:00:00+00:00"
+      },
+      {
+        "name": "BetMGM",
+        "odds": -125,
+        "as_of": "2026-10-28T01:00:00+00:00"
+      },
+      {
+        "name": "Caesars",
+        "odds": -125,
+        "as_of": "2026-10-28T01:00:00+00:00"
+      },
+      {
+        "name": "Fanatics",
+        "odds": -125,
+        "as_of": "2026-10-28T01:00:00+00:00"
+      },
+      {
+        "name": "BetRivers",
+        "odds": -132,
+        "as_of": "2026-10-28T01:00:00+00:00"
+      }
+    ]
   }
 ]

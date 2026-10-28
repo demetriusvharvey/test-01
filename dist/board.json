@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T13:04:23.908635+00:00",
+  "generated_at": "2026-10-28T13:05:13.776182+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -73,12 +73,13 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T13:04:23.908635+00:00",
+        "observed_at": "2026-10-28T13:05:13.776182+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
         "used_in_prediction": false
       },
+      "referee_assignment": null,
       "line_history": {
         "book": "BetRivers",
         "provider": "agentbets",
@@ -176,12 +177,13 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T13:04:23.908635+00:00",
+        "observed_at": "2026-10-28T13:05:13.776182+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
         "used_in_prediction": false
       },
+      "referee_assignment": null,
       "line_history": {
         "book": "FanDuel",
         "provider": "agentbets",
@@ -274,12 +276,13 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T13:04:23.908635+00:00",
+        "observed_at": "2026-10-28T13:05:13.776182+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
         "used_in_prediction": false
       },
+      "referee_assignment": null,
       "line_history": {
         "book": "Caesars",
         "provider": "agentbets",
@@ -617,7 +620,7 @@
     }
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T13:04:23.908635+00:00",
+    "pipeline_generated_at": "2026-10-28T13:05:13.776182+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T13:00:00+00:00",
     "oldest_quote_at": "2026-10-28T13:00:00+00:00",

@@ -50,7 +50,8 @@ def main():
     api_key=os.environ.get('ODDS_API_KEY','').strip()
     if data_root:
         try:
-            api_rows,api_warnings=collect_odds_api(data_root,api_key,datetime.now(timezone.utc).isoformat())
+            featured=os.environ.get('ODDS_API_FEATURED_MARKETS','').strip().lower()=='true'
+            api_rows,api_warnings=collect_odds_api(data_root,api_key,datetime.now(timezone.utc).isoformat(),featured=featured)
             raw.extend(api_rows)
             for warning in api_warnings: print('ODDS SOURCE:',warning)
         except Exception as e:

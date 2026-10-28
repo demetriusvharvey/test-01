@@ -8,6 +8,7 @@ from urllib.parse import urlencode
 from urllib.request import Request, urlopen
 from .constants import BOOKS, ET, game_id, team_code
 from .history import aware
+from .cross_market import parse_featured_markets, archive_market_snapshots
 
 SPORTS={'NBA':'basketball_nba','NFL':'americanfootball_nfl'}
 BOOK_NAMES=dict(BOOKS)
@@ -50,17 +51,17 @@ def _db(root):
     path=Path(root)/'observations'/'api_quota.sqlite';path.parent.mkdir(parents=True,exist_ok=True)
     db=sqlite3.connect(path);db.executescript(QUOTA_SCHEMA);return db
 
-def should_call(root,league,now,interval=timedelta(hours=6),monthly_limit=240,reserve=60):
+def should_call(root,league,now,interval=timedelta(hours=6),monthly_limit=240,reserve=60,next_cost=1):
     now=aware(now);month=now.strftime('%Y-%m-01T00:00:00+00:00')
     with closing(_db(root)) as db:
         last=db.execute('SELECT attempted_at FROM calls WHERE league=? ORDER BY attempted_at DESC,id DESC LIMIT 1',(league,)).fetchone()
-        count=db.execute('SELECT COUNT(*) FROM calls WHERE attempted_at>=?',(month,)).fetchone()[0]
+        count=db.execute('SELECT COALESCE(SUM(COALESCE(cost,1)),0) FROM calls WHERE attempted_at>=?',(month,)).fetchone()[0]
         remaining=db.execute('SELECT remaining FROM calls WHERE remaining IS NOT NULL ORDER BY attempted_at DESC,id DESC LIMIT 1').fetchone()
     if last and now-aware(last[0])<interval: return False
-    if count>=monthly_limit: return False
+    if count+next_cost>monthly_limit: return False
     # A previous month's remaining count may be zero; permit a new month to
     # discover whether the provider reset it, but still observe the hard cap.
-    if remaining and remaining[0]<reserve:
+    if remaining and remaining[0]-next_cost<reserve:
         with closing(_db(root)) as db:
             in_month=db.execute('SELECT COUNT(*) FROM calls WHERE attempted_at>=? AND remaining IS NOT NULL',(month,)).fetchone()[0]
         if in_month: return False
@@ -75,12 +76,15 @@ def _int_header(headers,key):
     try: return int(headers.get(key))
     except (TypeError,ValueError): return None
 
-def collect_odds_api(root,key,now):
+def collect_odds_api(root,key,now,featured=False):
     if not key: return [],['The Odds API is disabled: missing API key']
     output=[]; warnings=[]
     for league,sport in SPORTS.items():
-        if not should_call(root,league,now): continue
-        params=urlencode({'apiKey':key,'regions':'us','markets':'h2h','oddsFormat':'american'})
+        cost=3 if featured else 1
+        interval=timedelta(hours=12 if featured else 6)
+        budget=360 if featured else 240
+        if not should_call(root,league,now,interval=interval,monthly_limit=budget,next_cost=cost): continue
+        params=urlencode({'apiKey':key,'regions':'us','markets':'h2h,spreads,totals' if featured else 'h2h','oddsFormat':'american'})
         url=f'https://api.the-odds-api.com/v4/sports/{sport}/odds/?{params}'
         try:
             request=Request(url,headers={'User-Agent':'MoneylineResearch/1.0','Accept':'application/json'})
@@ -88,11 +92,18 @@ def collect_odds_api(root,key,now):
                 payload=json.loads(response.read().decode('utf-8'))
                 headers=response.headers
                 fetched=datetime.now(timezone.utc).isoformat()
-                record_call(root,league,fetched,'ok',_int_header(headers,'x-requests-remaining'),_int_header(headers,'x-requests-used'),_int_header(headers,'x-requests-last'))
+                reported_cost=_int_header(headers,'x-requests-last')
+                record_call(root,league,fetched,'ok',_int_header(headers,'x-requests-remaining'),_int_header(headers,'x-requests-used'),cost if reported_cost is None else reported_cost)
                 output.extend(parse_odds_api(payload,league,fetched))
+                if featured:
+                    try:
+                        rows=parse_featured_markets(payload,league,fetched,BOOK_NAMES)
+                        archive_market_snapshots(root,rows)
+                    except Exception as exc:
+                        warnings.append(f'{league} spread/total archive unavailable ({type(exc).__name__})')
         except Exception as exc:
             # Exception text can contain a URL with the key: never print it.
             fetched=datetime.now(timezone.utc).isoformat()
-            record_call(root,league,fetched,'error')
+            record_call(root,league,fetched,'error',cost=cost)
             warnings.append(f'The Odds API {league} unavailable ({type(exc).__name__})')
     return output,warnings

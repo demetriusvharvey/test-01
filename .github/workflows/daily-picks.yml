@@ -30,6 +30,7 @@ jobs:
         env:
           PICKS_DATA_ROOT: ${{ github.workspace }}/.data-store
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+          ODDS_API_FEATURED_MARKETS: ${{ vars.ODDS_API_FEATURED_MARKETS }}
         run: python scripts/pipeline.py
       - name: Commit append-only observations
         run: |

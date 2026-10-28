@@ -73,3 +73,45 @@ Registered before implementation or evaluation. Apply the same first-eligible-pr
 8. **H013h:** an NFL game begins at or after 8 p.m. ET with a non-even market favorite; test whether that favorite falls short of its retail probability (negative).
 
 Previous-game margins, team games played and all book prices must be preserved in the forecast's pregame snapshot. Missing, tied, contradictory or unverified values remain unknown. These exploratory definitions do not prove a causal mechanism, and the market may already reflect the schedule or news.
+
+## H016 — player availability as a shadow model input
+
+Registered before collecting or testing this feature. For each future NBA/NFL
+game with observed, time-qualified injury status for both teams, compare a
+ridge-regularized logistic adjustment to the simultaneously frozen pure-team
+forecast with the unchanged forecast. Inputs are the home-minus-away counts of
+players listed out, doubtful, and questionable/game-time-decision. They are
+coarse signals, not player-importance estimates; more missing players are
+hypothesized to favor the opponent. An absent report, empty team report,
+future timestamp, malformed response, conflicting status or unreviewed source
+is unknown and must not be imputed as a healthy roster. Keep source, observation
+time, game time and a versioned feature snapshot, with no raw NBA feed dataset
+published to the public repository. Do not train NBA data until its rights are
+explicitly established.
+
+Use only one earliest eligible pregame observation per game and results
+actually observed before training. Require at least 500 previous training
+games, a later prior-season validation of at least 100 games, and three
+seasons before producing a candidate. Tune only a fixed regularization grid
+on that prior validation season and refit only with data known before the
+forecast. Evaluate future forecasts on the same timestamps against the frozen
+team baseline using paired log loss and Brier, with NBA and NFL in one
+multiple-testing family and game-day blocking. Do not promote before two
+independent season replications, an untouched later holdout, and the other
+registered market-validation conditions. No effect size, play probability,
+player impact, or claim of better predictions is assumed in advance.
+
+## H017 — user-requested confidence ordering
+
+The user requested ranking the model's most likely winners rather than sorting
+by estimated return. On every run, consider all eligible same-day games, take
+only the side with the higher independent model win probability, retain the
+existing timestamp, book-count and price-qualification checks, and rank the
+remaining sides by that win probability. Ties have a deterministic game-id
+order. Existing frozen selections remain unchanged. This is a user-directed
+presentation and selection preference, not evidence of an advantage or a
+calibrated confidence measure. A future matched-time replay should compare
+the first three qualified sides under this ordering with the previous EV
+ordering using accuracy, log loss, Brier and execution-aware return; log all
+outcomes and report counts. Do not force a selection when nothing qualifies,
+and do not label a price edge proven from an unvalidated forecast.

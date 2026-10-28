@@ -78,7 +78,8 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--data-root',required=True);parser.add_argument('--output',default='reports/model_registry.md');args=parser.parse_args()
     now=datetime.now(timezone.utc).isoformat();rows,forecasts,outcomes=load_training_rows(args.data_root,now)
     availability_rows=load_availability_rows(args.data_root,now)
-    lines=['# Weekly model challenger registry','',f'Run {now}: {forecasts} forecast snapshots, {outcomes} outcome records, {len(rows)} matched rows before eligibility.', '',
+    lines=['# Weekly model challenger registry','',f'Run {now}: {forecasts} forecast snapshots, {outcomes} outcome records, {len(rows)} matched rows before eligibility.',
+           f'Availability: {len(availability_rows)} matched snapshots before time and source eligibility checks.', '',
            '| League | Model | Status | Eligible training games | Validation season | Promoted |','| --- | --- | --- | ---: | --- | --- |']
     for league in ('NBA','NFL'):
         for family,fit,training in (('pure-elasticnet-v1',fit_elastic_net_shadow,rows),('pure-stumpboost-v1',fit_boosted_shadow,rows),('availability-logistic-v1',fit_availability_shadow,availability_rows)):

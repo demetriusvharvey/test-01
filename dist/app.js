@@ -82,6 +82,12 @@
   }
   function renderStudy(){
     const study=(board&&board.study)||{};
+    const progress=(board&&board.validation_progress)||{};
+    $('validation-progress').innerHTML=['NBA','NFL'].map(league=>{
+      const item=progress[league];if(!item)return '';
+      const settled=Math.max(0,Number(item.settled_paper_picks)||0),required=Math.max(1,Number(item.required_picks)||300);
+      return `<span><strong>${league}</strong> ${settled} / ${required} settled paper picks</span>`;
+    }).filter(Boolean).join('')||'Validation progress appears after the next update.';
     if(!study.NBA&&!study.NFL){$('study').innerHTML='<p class="muted">Study data will appear after the next update.</p>';return;}
     const number=x=>Number.isFinite(x)?Number(x).toFixed(3):'—';
     const percent=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'—';
@@ -102,7 +108,10 @@
     const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:pure?'<span class="result-badge">PAPER</span>':'<span class="result-badge">LEGACY MODEL</span>';
     const estimate=pure&&Number.isFinite(p.model_probability)?`<small class="pick-ev">Model ${(p.model_probability*100).toFixed(1)}%</small>${Number.isFinite(p.estimated_ev)?'<small class="pick-ev">EV '+(p.estimated_ev>=0?'+':'')+(100*p.estimated_ev).toFixed(1)+'%</small>':''}<small class="pick-ev">Uncalibrated</small>`:'';
     const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}${estimate}</div></div>`;
-    if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}</article>`;
+    const pct=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'unavailable';
+    const points=x=>Number.isFinite(x)?(x>=0?'+':'')+(100*x).toFixed(1)+' points':'unavailable';
+    const context=`<details class="pick-context"><summary>Research context</summary><p>Latest retail no-vig reference: ${pct(p.retail_reference_probability)} · Price difference: ${points(p.retail_price_edge)} · Frozen model difference: ${points(p.model_edge_vs_retail)}</p><p>Retail reference is not a verified sharp line; differences are not proven edges. Injuries, projected lineups, referee assignment, trust and timing: unconfirmed or not available for this pick.</p></details>`;
+    if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}${context}</article>`;
     const recorded=Array.isArray(p.initial_books)?p.initial_books.filter(b=>Number.isFinite(b.odds)):[];
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}
     return `<article class="pick">${title}<div class="single-odds">Best odds recorded at time of pick${Number.isFinite(p.initial_best_odds)?' <strong>'+odds(p.initial_best_odds)+'</strong>':' unavailable'}</div></article>`;

@@ -43,6 +43,8 @@
       <img src="money-stacks.webp" class="money-image" alt="Stacks of cash">
     </aside>
 
+    <aside class="research-notice"><strong>Paper picks · experimental model</strong><span>Not validated as profitable. Betting can lose money; set an affordable limit and don’t chase losses.</span></aside>
+
     <nav class="tabs" role="tablist" aria-label="Site sections">
       <button type="button" id="tab-picks" role="tab" aria-selected="true" aria-controls="panel-picks" class="tab is-active">Picks</button>
       <button type="button" id="tab-variables" role="tab" aria-selected="false" aria-controls="panel-variables" class="tab" tabindex="-1">Variables</button>
@@ -55,6 +57,7 @@
       <section class="study-panel" aria-label="Paper model study">
         <div class="study-head"><div><p class="section-kicker">PAPER STUDY</p><h2>Model vs. market</h2></div><span class="pill testing">INCONCLUSIVE</span></div>
         <p class="study-note">Experimental forecasts · no verified sharp close yet</p>
+        <div id="validation-progress" class="validation-progress">Validation progress appears after the next update.</div>
         <div id="study" class="study-grid"><p class="muted">Waiting for study data.</p></div>
       </section>
     </section>
@@ -64,7 +67,7 @@
       <div class="variable-grid">
         <article class="variable-card"><div class="card-heading"><div><p class="section-kicker">NBA + NFL</p><h3>Core inputs</h3></div><span class="pill in-use">IN USE</span></div><ul class="factor-list"><li><strong>Team strength</strong><span>Elo ratings update from final scores and opponent strength.</span></li><li><strong>Home advantage</strong><span>Accounts for the home team; NFL neutral-site games are treated separately.</span></li><li><strong>Model-first forecast</strong><span>The team forecast uses game results, not sportsbook odds. It is experimental and not yet calibrated.</span></li><li><strong>Available odds</strong><span>At least three books, the best available price, time until tipoff or kickoff, and an estimated edge determine which paper picks qualify.</span></li></ul></article>
         <article class="variable-card"><div class="card-heading"><div><p class="section-kicker">NBA + NFL</p><h3>Factors under research</h3></div><span class="pill testing">PAUSED</span></div><div id="dynamic-factors"><p class="muted">Waiting for the latest model details.</p></div><p class="explanation">Rest and recent scoring margin are paused while we prepare stronger tests. A new factor needs preregistration, multiple-season replication, an untouched holdout, and a comparison with the market before it can enter the model. No result guarantees profit.</p></article>
-        <article class="variable-card wide-card"><div class="card-heading"><div><p class="section-kicker">ON THE RADAR</p><h3>Tracked, but not model inputs</h3></div><span class="pill neutral">NOT IN USE</span></div><div class="not-used"><div><strong>Referee assignments</strong><p>NBA crews are archived when available, but their effects have not been validated for the model. NFL referees are not collected.</p></div><div><strong>Injuries, lineups &amp; quarterbacks</strong><p>Not directly incorporated. Sportsbook prices may already reflect some of this news.</p></div><div><strong>Travel &amp; time zones</strong><p>Not currently measured. Rest days are evaluated separately.</p></div></div></article>
+        <article class="variable-card wide-card"><div class="card-heading"><div><p class="section-kicker">ON THE RADAR</p><h3>Tracked, but not model inputs</h3></div><span class="pill neutral">NOT IN USE</span></div><div class="not-used"><div><strong>Referee assignments</strong><p>NBA crews are archived when available; NFL history is researched. Assignments can change and their effects are unvalidated.</p></div><div><strong>Injuries, lineups &amp; quarterbacks</strong><p>NFL reports are archived for research; availability and projected lineups are not directly incorporated. Sportsbook prices may already reflect news.</p></div><div><strong>Travel &amp; time zones</strong><p>Schedule features are under research and do not change picks.</p></div></div></article>
         <article class="variable-card wide-card ideas-card"><div class="card-heading"><div><p class="section-kicker">YOUR NOTES</p><h3>Variable ideas</h3><p>Keep track of factors you want to investigate.</p></div></div><form id="idea-form"><div class="idea-fields"><label>Variable<input id="idea-name" maxlength="70" required placeholder="e.g. back-to-back games"></label><label>League<select id="idea-league"><option>NBA + NFL</option><option>NBA</option><option>NFL</option></select></label></div><label>Note <span class="optional">(optional)</span><input id="idea-note" maxlength="160" placeholder="What should we look for?"></label><button class="add-button" type="submit">Add idea <span aria-hidden="true">+</span></button></form><ul id="ideas" class="ideas-list"></ul><p id="idea-message" class="idea-disclaimer" aria-live="polite">Ideas are saved on this device. They aren’t used in predictions until data and testing support them.</p></article>
       </div>
     </section>

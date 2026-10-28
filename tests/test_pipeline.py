@@ -48,6 +48,8 @@ class PipelineTests(unittest.TestCase):
         board=render_board(markets,picks,self.now,[])
         self.assertEqual(board['picks'][0]['best'],-105)
         self.assertEqual(len(board['picks'][0]['books']),6)
+        self.assertAlmostEqual(board['picks'][0]['retail_reference_probability'],.5)
+        self.assertAlmostEqual(board['picks'][0]['retail_price_edge'],.5-105/205)
         self.assertIsNone(board['accuracy']['percent'])
         self.assertEqual(board['history'][0]['initial_books'][2]['odds'],-105)
         self.assertNotIn('probability',board['picks'][0])

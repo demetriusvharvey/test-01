@@ -1,7 +1,8 @@
 """Report components for the picks pipeline."""
 from datetime import datetime
+from statistics import median
 from .constants import *
-from .market import decimal_odds
+from .market import decimal_odds, implied
 
 
 def render_board(markets,ledger,now,errors,models=None,training_counts=None,added_finals=None):
@@ -16,10 +17,21 @@ def render_board(markets,ledger,now,errors,models=None,training_counts=None,adde
         available=[b['odds'] for b in books if b['odds'] is not None]
         if not available: continue
         best=max(available)
+        fair=[]
+        for quote in event['books'].values():
+            try:
+                h,a=implied(quote['home']),implied(quote['away'])
+                fair.append((h if side=='home' else a)/(h+a))
+            except (KeyError,TypeError,ValueError,ZeroDivisionError):continue
+        reference=median(fair) if fair else None
+        model_p=pick.get('probability') if pick.get('model')=='pure-elo-v1' else None
         active.append({'id':pick['id'],'team':pick['team'],'opponent':pick['opponent'],'league':pick['league'],'starts_at':pick['starts_at'],'books':books,'best':best,'predicted_at':pick['predicted_at'],
                        'model':pick.get('model'),'mode':pick.get('mode','legacy'),
-                       'model_probability':pick.get('probability') if pick.get('model')=='pure-elo-v1' else None,
-                       'estimated_ev':round(pick['probability']*decimal_odds(best)-1,5) if pick.get('model')=='pure-elo-v1' and isinstance(pick.get('probability'),(int,float)) else None})
+                       'model_probability':model_p,
+                       'estimated_ev':round(model_p*decimal_odds(best)-1,5) if isinstance(model_p,(int,float)) else None,
+                       'retail_reference_probability':reference,
+                       'retail_price_edge':reference-implied(best) if reference is not None else None,
+                       'model_edge_vs_retail':model_p-reference if reference is not None and isinstance(model_p,(int,float)) else None})
     history=[]
     for pick in ledger:
         item={key:pick.get(key) for key in ('id','team','opponent','league','starts_at','pick_day','predicted_at','graded_at','outcome','initial_best_odds','initial_books','model','mode','estimated_ev')}

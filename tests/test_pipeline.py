@@ -1,7 +1,7 @@
 import unittest
 from datetime import date, datetime, timedelta, timezone
 from scripts.pipeline import (parse_book_html, parse_nba_csv, parse_nfl_locations, build_ratings,
-                              grade_ledger, build_market, choose_candidates, game_id)
+                              grade_ledger, build_market, choose_candidates, game_id, render_board)
 
 class PipelineTests(unittest.TestCase):
     def setUp(self): self.now=datetime(2026,10,28,1,30,tzinfo=timezone.utc)
@@ -31,6 +31,23 @@ class PipelineTests(unittest.TestCase):
     def test_stale_odds_are_not_used(self):
         item={'id':'a','league':'NBA','home':'LAL','away':'POR','home_name':'Los Angeles Lakers','away_name':'Portland Trail Blazers','starts_at':(self.now+timedelta(hours=2)).isoformat(),'book':'FanDuel','home_odds':-126,'away_odds':108,'as_of':(self.now-timedelta(hours=3)).isoformat()}
         self.assertEqual(build_market([item],self.now),{})
+    def test_selection_is_frozen_once_and_shows_best_book(self):
+        from scripts.pipeline import BOOKS
+        start=self.now+timedelta(hours=2)
+        event={'id':'nba:2026-10-27:POR:LAL','league':'NBA','home':'LAL','away':'POR','home_name':'Los Angeles Lakers','away_name':'Portland Trail Blazers','starts_at':start.isoformat(),'books':{}}
+        for i,(_,name) in enumerate(BOOKS[:4]):
+            event['books'][name]={'home':-105 if i==2 else -110,'away':-110,'as_of':self.now.isoformat()}
+        model={'ratings':{'LAL':1800,'POR':1300},'last':{'LAL':date(2026,10,25),'POR':date(2026,10,23)},'home_advantage':55,'rest_weight':8}
+        markets={event['id']:event}; models={'NBA':model}
+        picks=choose_candidates(markets,models,self.now,[])
+        self.assertEqual(len(picks),1)
+        self.assertEqual(picks[0]['team_code'],'LAL')
+        self.assertEqual(picks[0]['initial_best_odds'],-105)
+        self.assertEqual(choose_candidates(markets,models,self.now,picks),[])
+        board=render_board(markets,picks,self.now,[])
+        self.assertEqual(board['picks'][0]['best'],-105)
+        self.assertEqual(len(board['picks'][0]['books']),6)
+        self.assertIsNone(board['accuracy']['percent'])
     def test_nfl_neutral_is_read_from_schedule(self):
         csv='gameday,home_team,away_team,location\n2026-11-01,LA,NYG,Neutral\n'
         self.assertTrue(parse_nfl_locations(csv)['nfl:2026-11-01:NYG:LA'])

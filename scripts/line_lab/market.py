@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from statistics import median
 from .constants import *
 from .model import project_home
+from .ledger_v2 import initial_details
 
 
 def implied(odds): return -odds/(-odds+100) if odds<0 else 100/(odds+100)
@@ -36,7 +37,8 @@ def choose_candidates(markets,models,now,ledger):
             if edge>=.01:
                 initial_books=[{'name':name,'odds':event['books'][name][side] if name in event['books'] else None,'as_of':event['books'][name]['as_of'] if name in event['books'] else None} for _,name in BOOKS]
                 ev=p*decimal_odds(best)-1
-                results.append({'id':event['id'],'league':event['league'],'team_code':event[side], 'team':event[side+'_name'],'opponent':event[('away' if side=='home' else 'home')+'_name'],'starts_at':event['starts_at'],'probability':round(p,5),'predicted_at':now.isoformat(),'pick_day':today,'initial_best_odds':best,'initial_books':initial_books,'edge':edge,'estimated_ev':round(ev,5),'outcome':'pending','model':'pure-elo-v1','mode':'paper','staking_allowed':False,'guard_reason':'sharp validation and point-in-time availability checks missing'})
+                details=initial_details(event,models[event['league']],side,p,initial_books,now.isoformat())
+                results.append({'id':event['id'],'league':event['league'],'team_code':event[side], 'team':event[side+'_name'],'opponent':event[('away' if side=='home' else 'home')+'_name'],'starts_at':event['starts_at'],'probability':round(p,5),'predicted_at':now.isoformat(),'pick_day':today,'initial_best_odds':best,'initial_books':initial_books,'edge':edge,'estimated_ev':round(ev,5),'outcome':'pending','model':'pure-elo-v1','mode':'paper','staking_allowed':False,'guard_reason':'sharp validation and point-in-time availability checks missing',**details})
     results.sort(key=lambda x:x['estimated_ev'],reverse=True)
     chosen=[]; used=set()
     for x in results:

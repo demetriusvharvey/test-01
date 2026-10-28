@@ -1,5 +1,5 @@
 """Runner components for the picks pipeline."""
-import hashlib, json, os
+import copy, hashlib, json, os
 from datetime import datetime, timedelta, timezone
 from statistics import median
 from scripts.refresh_feed import NBA_REFS, parse_referees
@@ -15,6 +15,7 @@ from .quality import validate_and_deduplicate, reconcile_quotes
 from .heartbeat import record_run
 from .experiment import record_forecasts, record_outcomes, build_scoreboard
 from .nfl_shadow import build_nfl_shadow_context
+from .ledger_v2 import attach_retail_closing_proxies, paper_breakdowns, validate_transition
 
 
 def main():
@@ -59,8 +60,7 @@ def main():
     data_dir=ROOT/'data'; data_dir.mkdir(exist_ok=True)
     ledger_path=data_dir/'predictions.json'
     ledger=json.loads(ledger_path.read_text()) if ledger_path.exists() else []
-    legacy_path=data_dir/'legacy_pick_quotes.json'
-    if legacy_path.exists(): backfill_initial_books(ledger,json.loads(legacy_path.read_text()))
+    frozen_ledger=copy.deepcopy(ledger)
     refs_path=data_dir/'referee_history.json'
     refs=json.loads(refs_path.read_text()) if refs_path.exists() else []
     try:
@@ -138,12 +138,20 @@ def main():
         if estimate is None: continue
         print('TODAY', event['league'],event['away'],'at',event['home'],'pure model home',round(100*estimate,1),'best home',max(v['home'] for v in event['books'].values()),'best away',max(v['away'] for v in event['books'].values()))
     ledger.extend(choose_candidates(permitted,models,now,ledger))
+    try:
+        if data_root: attach_retail_closing_proxies(data_root,ledger)
+        validate_transition(frozen_ledger,ledger)
+    except Exception as e:
+        # Never publish a rewritten historical pick if integrity fails.
+        errors.append('Ledger integrity check failed ('+type(e).__name__+')')
+        ledger=copy.deepcopy(frozen_ledger)
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
     try: board['study']=build_scoreboard(data_root,ledger,now.isoformat()) if data_root else {}
     except Exception as e:
         board['study']={};board['errors'].append('Paper study report unavailable ('+type(e).__name__+')')
+    board['paper_breakdowns']=paper_breakdowns(ledger)
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
                             'cross_check_independent':False}

@@ -1,5 +1,6 @@
 """Ledger components for the picks pipeline."""
 from scripts.refresh_feed import NBA_REFS
+from .ledger_v2 import _decimal
 
 
 def append_referee_assignments(history, report, now):
@@ -25,9 +26,19 @@ def grade_ledger(ledger,finals,now):
         g=byid.get(p['id'])
         if not g: continue
         hs,as_=g['home_score'],g['away_score']
+        if p.get('team_code') not in (g.get('home'),g.get('away')) or g.get('home')==g.get('away'): continue
+        if any(not isinstance(score,int) or isinstance(score,bool) for score in (hs,as_)): continue
+        if p.get('starts_at'):
+            try:
+                from .history import aware
+                if aware(p['starts_at'])>now: continue
+            except (ValueError,TypeError): continue
         if hs==as_: result='void'
         else: result='win' if p['team_code']==(g['home'] if hs>as_ else g['away']) else 'loss'
         p['outcome']=result; p['graded_at']=now.isoformat(); p['final_score']={'home':hs,'away':as_}; changed+=1
+        if p.get('ledger_version')==2 and p.get('mode')=='paper':
+            try:p['paper_units_pnl']=round((_decimal(p['observed_price'])-1 if result=='win' else -1 if result=='loss' else 0)*p['paper_stake_units'],6)
+            except (KeyError,ValueError,TypeError):p['paper_units_pnl']=None
     return changed
 
 def backfill_initial_books(ledger, snapshots):

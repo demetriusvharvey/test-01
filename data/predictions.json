@@ -1,1 +1,17 @@
-[]
+[
+  {
+    "id": "nba:2026-10-27:POR:LAL",
+    "league": "NBA",
+    "team_code": "LAL",
+    "team": "Los Angeles Lakers",
+    "opponent": "Portland Trail Blazers",
+    "starts_at": "2026-10-28T03:00:00+00:00",
+    "probability": 0.56907,
+    "predicted_at": "2026-10-28T01:48:51.647553+00:00",
+    "pick_day": "2026-10-27",
+    "initial_best_odds": -125,
+    "edge": 0.013517945317359392,
+    "outcome": "pending",
+    "model": "elo-market-v1"
+  }
+]

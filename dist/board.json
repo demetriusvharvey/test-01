@@ -1,14 +1,56 @@
 {
-  "generated_at": "2026-10-28T01:47:04.929935+00:00",
+  "generated_at": "2026-10-28T01:48:51.647553+00:00",
   "model": "Experimental Elo + market baseline",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
     "wins": 0,
     "losses": 0,
     "voids": 0,
-    "pending": 0,
+    "pending": 1,
     "percent": null
   },
-  "picks": [],
+  "picks": [
+    {
+      "team": "Los Angeles Lakers",
+      "opponent": "Portland Trail Blazers",
+      "league": "NBA",
+      "starts_at": "2026-10-28T03:00:00+00:00",
+      "probability": 0.56907,
+      "books": [
+        {
+          "name": "FanDuel",
+          "odds": -126,
+          "as_of": "2026-10-28T01:00:00+00:00"
+        },
+        {
+          "name": "DraftKings",
+          "odds": -125,
+          "as_of": "2026-10-28T01:00:00+00:00"
+        },
+        {
+          "name": "BetMGM",
+          "odds": -125,
+          "as_of": "2026-10-28T01:00:00+00:00"
+        },
+        {
+          "name": "Caesars",
+          "odds": -125,
+          "as_of": "2026-10-28T01:00:00+00:00"
+        },
+        {
+          "name": "Fanatics",
+          "odds": -125,
+          "as_of": "2026-10-28T01:00:00+00:00"
+        },
+        {
+          "name": "BetRivers",
+          "odds": -132,
+          "as_of": "2026-10-28T01:00:00+00:00"
+        }
+      ],
+      "best": -125,
+      "predicted_at": "2026-10-28T01:48:51.647553+00:00"
+    }
+  ],
   "errors": []
 }

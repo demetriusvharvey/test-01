@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T18:48:41.187397+00:00",
+  "generated_at": "2026-10-28T18:54:06.511119+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; PropLine scoreboard",
   "accuracy": {
@@ -67,6 +67,20 @@
               "questionable": 0,
               "doubtful": 0,
               "other": 1
+            },
+            "positions": {
+              "G": {
+                "out": 5,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 1
+              },
+              "C": {
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              }
             }
           },
           "home": {
@@ -76,11 +90,31 @@
               "questionable": 0,
               "doubtful": 0,
               "other": 2
+            },
+            "positions": {
+              "F": {
+                "out": 4,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 1
+              },
+              "C": {
+                "out": 1,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "G": {
+                "out": 0,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 1
+              }
             }
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-28T18:48:40.792140+00:00",
+        "observed_at": "2026-10-28T18:54:06.437549+00:00",
         "incomplete": true,
         "used_in_prediction": false
       },
@@ -100,7 +134,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:48:41.187397+00:00",
+        "observed_at": "2026-10-28T18:54:06.511119+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -110,7 +144,7 @@
         "crew_chief": "James Williams (#60)",
         "referee": "Marat Kogut (#32)",
         "umpire": "Brandon Adair (#67)",
-        "observed_at": "2026-10-28T18:48:38.139496+00:00",
+        "observed_at": "2026-10-28T18:54:05.861745+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -216,7 +250,8 @@
               "questionable": 0,
               "doubtful": 0,
               "other": 0
-            }
+            },
+            "positions": {}
           },
           "home": {
             "team": "Minnesota Timberwolves",
@@ -225,11 +260,19 @@
               "questionable": 0,
               "doubtful": 0,
               "other": 0
+            },
+            "positions": {
+              "G": {
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              }
             }
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-28T18:48:40.792140+00:00",
+        "observed_at": "2026-10-28T18:54:06.437549+00:00",
         "incomplete": true,
         "used_in_prediction": false
       },
@@ -249,7 +292,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:48:41.187397+00:00",
+        "observed_at": "2026-10-28T18:54:06.511119+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -259,7 +302,7 @@
         "crew_chief": "Curtis Blair (#74)",
         "referee": "Andy Nagy (#18)",
         "umpire": "Ashley Moyer-Gleich (#13)",
-        "observed_at": "2026-10-28T18:48:38.139496+00:00",
+        "observed_at": "2026-10-28T18:54:05.861745+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -365,6 +408,14 @@
               "questionable": 0,
               "doubtful": 0,
               "other": 0
+            },
+            "positions": {
+              "F": {
+                "out": 1,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              }
             }
           },
           "home": {
@@ -374,11 +425,31 @@
               "questionable": 0,
               "doubtful": 0,
               "other": 1
+            },
+            "positions": {
+              "G": {
+                "out": 0,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 1
+              },
+              "C": {
+                "out": 1,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "F": {
+                "out": 1,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              }
             }
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-28T18:48:40.792140+00:00",
+        "observed_at": "2026-10-28T18:54:06.437549+00:00",
         "incomplete": true,
         "used_in_prediction": false
       },
@@ -398,7 +469,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:48:41.187397+00:00",
+        "observed_at": "2026-10-28T18:54:06.511119+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -408,7 +479,7 @@
         "crew_chief": "Ben Taylor (#46)",
         "referee": "JB DeRosa (#14)",
         "umpire": "Brandon Schwab (#49)",
-        "observed_at": "2026-10-28T18:48:38.139496+00:00",
+        "observed_at": "2026-10-28T18:54:05.861745+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -736,6 +807,20 @@
               "questionable": 0,
               "doubtful": 0,
               "other": 0
+            },
+            "positions": {
+              "C": {
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "F": {
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              }
             }
           },
           "home": {
@@ -745,11 +830,31 @@
               "questionable": 0,
               "doubtful": 0,
               "other": 3
+            },
+            "positions": {
+              "G": {
+                "out": 4,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 2
+              },
+              "C": {
+                "out": 1,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "F": {
+                "out": 0,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 1
+              }
             }
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-28T18:48:40.792140+00:00",
+        "observed_at": "2026-10-28T18:54:06.437549+00:00",
         "incomplete": true,
         "used_in_prediction": false
       },
@@ -769,7 +874,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T18:48:41.187397+00:00",
+        "observed_at": "2026-10-28T18:54:06.511119+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -779,7 +884,7 @@
         "crew_chief": "Courtney Kirkland (#61)",
         "referee": "Aaron Smith (#51)",
         "umpire": "Phenizee Ransom (#70)",
-        "observed_at": "2026-10-28T18:48:38.139496+00:00",
+        "observed_at": "2026-10-28T18:54:05.861745+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -1451,7 +1556,7 @@
     "status": "descriptive_research_only"
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T18:48:41.187397+00:00",
+    "pipeline_generated_at": "2026-10-28T18:54:06.511119+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T18:00:00+00:00",
     "oldest_quote_at": "2026-10-28T18:00:00+00:00",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T01:48:51.647553+00:00",
+  "generated_at": "2026-10-28T01:51:01.868069+00:00",
   "model": "Experimental Elo + market baseline",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {

@@ -197,3 +197,24 @@ untouched holdout nor a same-time market comparison. The next defensible
 change needs point-in-time player availability and a validation/holdout split;
 re-running more simulated outcomes from the same assumptions cannot repair
 this failure.
+
+## H021 — day-start top-three winner ranking audit
+
+Registered before running the new archive evaluation. Population: archived NBA
+and NFL games on ET dates, excluding ties; fixed Elo NBA K=20/HFA=55 and NFL
+K=24/HFA=42, using only results strictly before each game date. On a day with
+multiple eligible games, choose the three sides with the largest Elo winner
+estimate, breaking ties by game ID. Test dates begin January 1, 2024 after
+initial training seasons. Report accuracy, Brier and log loss of the selected
+sides, all eligible model favorites and a 50% uninformative baseline. Report
+league split, calendar-year split and 0.50–0.59, 0.60–0.69, 0.70–0.79 and
+0.80–1.00 reliability bins with sample sizes. Include a seeded 2,000-draw
+calendar-day-block bootstrap interval for top-three accuracy when at least
+30 selected games and ten days exist. Do not fit thresholds or calibration on
+these same observed test dates. Source files were first archived after these
+games; the evaluation is an exploratory retrospective day-start proxy, not a
+record of published pregame forecasts, verified pregame injuries or a fresh
+untouched season. It cannot prove the model's current accuracy or betting
+value. Archive research only for NBA because upstream usage rights remain
+unresolved. The actual forward winner accuracy continues to use only the
+immutable `data/winner_predictions.json` ledger.

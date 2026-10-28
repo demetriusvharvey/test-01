@@ -184,8 +184,8 @@
     for(const p of active)if(!p.id||!history.some(h=>h.id===p.id))picks.push(Object.assign({},p,{current:true}));
     picks.sort((a,b)=>{
       if(selectedDay===today()&&a.current&&b.current){
-        const ap=Number.isFinite(a.model_probability)?a.model_probability:-1,bp=Number.isFinite(b.model_probability)?b.model_probability:-1;
-        if(ap!==bp)return bp-ap;
+        const ar=Number.isFinite(a.rank)?a.rank:Infinity,br=Number.isFinite(b.rank)?b.rank:Infinity;
+        if(ar!==br)return ar-br;
       }
       return new Date(a.starts_at)-new Date(b.starts_at);
     });
@@ -197,7 +197,8 @@
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
     $('saved-section').hidden=!earlier.length;
     $('saved-list').innerHTML=earlier.map(p=>pickMarkup(Object.assign({},p,{current:false}))).join('');
-    const allSlate=selectedDay===today()&&!stale?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now):[];
+    const shownIds=new Set(picks.filter(p=>p.current).map(p=>p.id));
+    const allSlate=selectedDay===today()&&!stale?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now&&!shownIds.has(g.id)):[];
     const filter=$('slate-filter').value;
     const slate=allSlate.filter(g=>filter==='today'?dayString(new Date(g.starts_at))===today():g.league===filter.toUpperCase());
     $('slate-section').hidden=!allSlate.length;

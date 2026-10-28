@@ -1,1 +1,14 @@
-{"generated_at":"2026-10-28T01:00:00+00:00","model":"Experimental Elo + market baseline","accuracy":{"wins":0,"losses":0,"voids":0,"pending":0,"percent":null},"picks":[],"errors":[]}
+{
+  "generated_at": "2026-10-28T01:44:28.833296+00:00",
+  "model": "Experimental Elo + market baseline",
+  "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
+  "accuracy": {
+    "wins": 0,
+    "losses": 0,
+    "voids": 0,
+    "pending": 0,
+    "percent": null
+  },
+  "picks": [],
+  "errors": []
+}

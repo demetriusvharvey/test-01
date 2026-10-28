@@ -189,8 +189,7 @@
     const freshness=$('freshness');freshness.classList.toggle('stale',selectedDay===today()&&stale);
     freshness.textContent=selectedDay!==today()?'Saved picks and results · '+displayDay(selectedDay):stale?'Update delayed · saved picks shown':oldest?'Odds updated '+displayTime(new Date(oldest)):validDate?'Last checked '+displayTime(generated):'Waiting for data';
     if(!picks.length){
-      const incomplete=Array.isArray(board.errors)&&board.errors.length>0;
-      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved picks for this day.</strong><p>The archive grows as new picks are recorded.</p></div>':stale||incomplete?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No active picks right now.</strong><p>New picks appear when a game qualifies.</p></div>';
+      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved picks for this day.</strong><p>The archive grows as new picks are recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No games currently meet the algorithm’s selection criteria.</strong><p>Unvalidated price advantages are kept out of recommendations.</p></div>';
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
     const slate=selectedDay===today()&&!stale?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now):[];
     $('slate-section').hidden=!slate.length;

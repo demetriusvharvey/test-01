@@ -183,12 +183,17 @@ class StorageAndSourceTests(unittest.TestCase):
             raise AssertionError('unexpected direct source: '+url)
         scoreboard=[{'id':'123','sport_key':'basketball_nba','home_team':'Los Angeles Lakers',
                      'away_team':'Portland Trail Blazers','commence_time':'2026-10-28T03:00:00Z',
+                     'status':'upcoming','home_score':None,'away_score':None},
+                    {'id':'124','sport_key':'basketball_nba','home_team':'New York Knicks',
+                     'away_team':'Boston Celtics','commence_time':'2026-10-28T04:00:00Z',
                      'status':'upcoming','home_score':None,'away_score':None}]
         def fake_scores(key,league):return [],NOW.isoformat()
         def fake_events(key,league):return (scoreboard if league=='NBA' else []),NOW.isoformat()
-        injuries={'sport':'basketball_nba','count':2,'players':[
+        injuries={'sport':'basketball_nba','count':4,'players':[
             {'team_abbr':'LAL','player_id':'espn:1','position':'C','status_code':'out','status_since':NOW.isoformat()},
-            {'team_abbr':'POR','player_id':'espn:2','position':'G','status_code':'questionable','status_since':NOW.isoformat()}]}
+            {'team_abbr':'POR','player_id':'espn:2','position':'G','status_code':'questionable','status_since':NOW.isoformat()},
+            {'team_abbr':'NY','player_id':'espn:3','position':'F','status_code':'out','status_since':NOW.isoformat()},
+            {'team_abbr':'BOS','player_id':'espn:4','position':'G','status_code':'questionable','status_since':NOW.isoformat()}]}
         (self.root/'dist').mkdir();(self.root/'data').mkdir()
         env={'PICKS_DATA_ROOT':str(self.root/'store'),'PROPLINE_API_KEY':'test-key'}
         with patch.object(runner,'ROOT',self.root),patch.object(runner,'datetime',FixedDateTime),patch.object(runner,'get',side_effect=fake_get),patch.object(runner,'fetch_scores',side_effect=fake_scores),patch.object(runner,'fetch_events',side_effect=fake_events),patch.object(runner,'fetch_nba_injuries',return_value=(injuries,NOW.isoformat())),patch.dict('os.environ',env,clear=True):
@@ -199,6 +204,9 @@ class StorageAndSourceTests(unittest.TestCase):
         self.assertEqual(board['picks'],[])
         self.assertEqual(board['games'][0]['nba_availability_context']['teams']['home']['counts']['out'],1)
         self.assertEqual(board['games'][0]['nba_availability_context']['teams']['home']['positions']['C']['out'],1)
+        unpriced=next(g for g in board['games'] if g['home']=='New York Knicks')
+        self.assertFalse(unpriced['books'])
+        self.assertEqual(unpriced['nba_availability_context']['teams']['home']['positions']['F']['out'],1)
         self.assertNotIn('test-key',json.dumps(board))
         path=self.root/'store/observations/forecasts/2026-10-28.sqlite'
         with closing(sqlite3.connect(path)) as db:

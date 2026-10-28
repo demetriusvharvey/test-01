@@ -17,6 +17,18 @@
 - Phase 14: source-isolated bounded retries, versioned feature snapshots, structured run summaries, Python 3.12 configuration and CI. Unit and fixture tests accompany each implementation stage.
 - Additional implementation: a deterministic 10,000-draw score-bootstrap challenger for both leagues records score distributions from earlier games and does not influence selection. A weekly archived-data walk-forward comparison with Elo and a home baseline is configured. The board exposes verified scheduled games even when unpriced, shows available injury-position context, and offers a browser-local manual FanDuel quote/payout calculator. New recommendations are suppressed until independent forward validation and qualified market evidence exist; the historical record is unchanged.
 
+## Score simulator result (October 28, 2026 ET)
+
+The weekly research workflow evaluated 5,000 seeded score draws per matchup
+from archived final-score files, testing only later dates. On 1,277 NBA games,
+the score challenger had Brier **0.2369** versus Elo **0.2093** on the same
+games; accuracy was **59.2%** versus Elo **67.3%**. On 675 NFL games, it had
+Brier **0.2380** versus Elo **0.2231**; accuracy **59.4%** versus Elo **64.7%**.
+Both challengers lost to Elo, so neither is promoted or used for picks. These
+retrospective data are not a fresh holdout; no matched-time sportsbook price,
+verified betting ROI or position-specific player estimate exists. See
+[reports/simulation_validation.md](reports/simulation_validation.md).
+
 ## Lakers review and honest numbers
 
 On October 27, 2026 Portland beat the Lakers 136–129. The frozen legacy pick was Lakers moneyline: a FanDuel quote of -126 was recorded separately from a best quote of -125 at other books. No actual bet is recorded. One loss does not identify a faulty feature or justify changing a model weight. The review and source details are in [reports/lakers_2026-10-27.md](reports/lakers_2026-10-27.md).

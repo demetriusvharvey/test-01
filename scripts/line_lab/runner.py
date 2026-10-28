@@ -174,7 +174,7 @@ def main():
     nba_injury_key=propline_key
     nba_injury_enabled=setting not in ('false','0','off','no') and (propline_enabled or injury_only_enabled)
     injury_payload=None;injury_observed_at=None
-    if nba_injury_enabled and nba_injury_key and any(e.get('league')=='NBA' for e in markets.values()):
+    if nba_injury_enabled and nba_injury_key and (any(e.get('league')=='NBA' for e in markets.values()) or any(k.startswith('nba:') for k in starts_by_game)):
         try:
             if not reserve_call(data_root,'injuries_nba',datetime.now(timezone.utc).isoformat()):
                 raise ValueError('provider request budget unavailable')
@@ -182,7 +182,7 @@ def main():
             print('NBA injury report quality:',json.dumps(injury_quality_counts(injury_payload,injury_observed_at,'NBA'),sort_keys=True))
         except Exception as e:errors.append('NBA injury context unavailable ('+type(e).__name__+')')
     nfl_provider_payload=None;nfl_provider_observed_at=None
-    if propline_enabled and propline_key and any(e.get('league')=='NFL' for e in markets.values()):
+    if propline_enabled and propline_key and (any(e.get('league')=='NFL' for e in markets.values()) or any(k.startswith('nfl:') for k in starts_by_game)):
         try:
             if not reserve_call(data_root,'injuries_nfl',datetime.now(timezone.utc).isoformat()):
                 raise ValueError('provider request budget unavailable')
@@ -312,9 +312,26 @@ def main():
     if nfl_provider_payload is not None:
         try:attach_nfl_summaries(board,markets,nfl_provider_payload,nfl_provider_observed_at)
         except Exception as e:board['errors'].append('NFL injury context unavailable ('+type(e).__name__+')')
+    # Display captured status context for the full upcoming schedule, even
+    # when a game's price is missing or it is too close to start to qualify.
+    # This never makes the game eligible for a prediction or selection.
+    all_events=dict(markets)
     for game in board['games']:
-        context=provider_context.get(game['id'])
-        if context:game['nba_availability_context' if game['league']=='NBA' else 'nfl_provider_availability_context']=context
+        if game['id'] in all_events:continue
+        _,_,away,home=game['id'].split(':')
+        all_events[game['id']]={'id':game['id'],'league':game['league'],'away':away,'home':home,
+                                 'away_name':game['away'],'home_name':game['home'],'starts_at':game['starts_at']}
+    context_board={'picks':[{'id':game['id']} for game in board['games']]}
+    if injury_payload is not None:
+        try:attach_nba_summaries(context_board,all_events,injury_payload,injury_observed_at)
+        except Exception as e:board['errors'].append('Scheduled NBA injury context unavailable ('+type(e).__name__+')')
+    if nfl_provider_payload is not None:
+        try:attach_nfl_summaries(context_board,all_events,nfl_provider_payload,nfl_provider_observed_at)
+        except Exception as e:board['errors'].append('Scheduled NFL injury context unavailable ('+type(e).__name__+')')
+    all_context={row['id']:row for row in context_board['picks']}
+    for game in board['games']:
+        for key in ('nba_availability_context','nfl_provider_availability_context'):
+            if key in all_context.get(game['id'],{}):game[key]=all_context[game['id']][key]
         if game['id'] in simulations_by_game:
             game['simulation']={**simulations_by_game[game['id']],'used_in_prediction':False}
     attach_rest_context(board,markets,models,now.isoformat())

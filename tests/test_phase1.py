@@ -128,4 +128,41 @@ class StorageAndSourceTests(unittest.TestCase):
             self.assertEqual(db.execute('SELECT count(*) FROM snapshots').fetchone()[0],6)
         self.assertFalse(any('probability' in p for p in board['picks']))
 
+    def test_configured_status_is_observed_before_the_frozen_forecast(self):
+        from scripts.line_lab import runner
+        class FixedDateTime(datetime):
+            @classmethod
+            def now(cls,tz=None):return NOW.astimezone(tz or timezone.utc)
+        nba='game_date,home,team,opponent,points,opponent_points,season\n2026-10-26,true,LAL,POR,110,100,2026-27\n'
+        nfl='season,game_type,gameday,home_team,away_team,home_score,away_score,location\n2025,REG,2025-09-07,NE,BUF,14,21,Home\n'
+        book=(FIXTURES/'agentbets_nba.html').read_text()
+        refs='<p>October 27, 2026</p><table><tr><th>Game</th><th>Crew Chief</th><th>Referee</th><th>Umpire</th></tr><tr><td>Portland @ Lakers</td><td>A</td><td>B</td><td>C</td></tr></table>'
+        scoreboard={'events':[{'date':'2026-10-28T03:00:00Z','competitions':[{'competitors':[{'homeAway':'home','team':{'displayName':'Los Angeles Lakers'}},{'homeAway':'away','team':{'displayName':'Portland Trail Blazers'}}]}]}]}
+        def fake_get(url,timeout=25):
+            if 'boxscorelab.com' in url:return nba
+            if 'nflverse/nfldata' in url:return nfl
+            if 'agentbets.ai/odds/' in url:return book if url.endswith('/nba') else book.replace('Portland Trail Blazers @ Los Angeles Lakers','Unknown @ Unknown')
+            if 'official.nba.com' in url:return refs
+            if 'basketball/nba' in url:return json.dumps(scoreboard)
+            if 'football/nfl' in url:return json.dumps({'events':[]})
+            raise AssertionError(url)
+        payload={'sport':'basketball_nba','count':2,'players':[
+            {'team_abbr':'LAL','player_id':'espn:1','player_name':'Do Not Publish One','status_code':'out','status_since':NOW.isoformat()},
+            {'team_abbr':'POR','player_id':'espn:2','player_name':'Do Not Publish Two','status_code':'questionable','status_since':NOW.isoformat()}]}
+        (self.root/'dist').mkdir();(self.root/'data').mkdir()
+        env={'PICKS_DATA_ROOT':str(self.root/'store'),'PROPLINE_API_KEY':'secret-test-key','PROPLINE_INJURY_ENABLED':'true'}
+        with patch.object(runner,'ROOT',self.root),patch.object(runner,'datetime',FixedDateTime),patch.object(runner,'get',side_effect=fake_get),patch.object(runner,'fetch_nba_injuries',return_value=(payload,NOW.isoformat())),patch.dict('os.environ',env,clear=True):
+            runner.main()
+        board=json.loads((self.root/'dist/board.json').read_text())
+        self.assertEqual(board['picks'][0]['nba_availability_context']['teams']['home']['counts']['out'],1)
+        self.assertNotIn('Do Not Publish',json.dumps(board));self.assertNotIn('secret-test-key',json.dumps(board))
+        path=self.root/'store/observations/forecasts/2026-10-28.sqlite'
+        with closing(sqlite3.connect(path)) as db:
+            captured,snapshot=db.execute('SELECT captured_at,feature_snapshot FROM forecasts').fetchone()
+        status=json.loads(snapshot)['shadow_context']['availability']
+        self.assertEqual(status['observed_at'],captured)
+        self.assertEqual(status['features']['out_difference'],1)
+        self.assertFalse(status['used_in_prediction'])
+        self.assertNotIn('Do Not Publish',snapshot);self.assertNotIn('secret-test-key',snapshot)
+
 if __name__=='__main__': unittest.main()

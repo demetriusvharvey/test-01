@@ -22,7 +22,7 @@ class ChallengerEvaluationTests(unittest.TestCase):
                       candidates if candidates is not None else [self.candidate],
                       trials if trials is not None else self.trials,
                       outcomes if outcomes is not None else self.outcomes,self.now)
-        return next(r for r in rows if r['league']=='NFL')
+        return next(r for r in rows if r['league']=='NFL' and r['model_version']=='pure-elasticnet-v1')
     def test_matched_pregame_predictions_compare_and_remain_inconclusive(self):
         r=self.nfl();self.assertEqual(r['games'],1);self.assertLess(r['logloss_difference'],0)
         self.assertLess(r['brier_difference'],0);self.assertIsNone(r['adjusted_p'])
@@ -40,7 +40,7 @@ class ChallengerEvaluationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
             append_results(root,results,self.now);append_results(root,results,self.now)
             with closing(sqlite3.connect(Path(root)/'observations/challenger_tests.sqlite')) as db:
-                self.assertEqual(db.execute('SELECT count(*) FROM challenger_tests').fetchone()[0],4)
+                self.assertEqual(db.execute('SELECT count(*) FROM challenger_tests').fetchone()[0],6)
                 with self.assertRaises(sqlite3.IntegrityError):db.execute('DELETE FROM challenger_tests')
 
 

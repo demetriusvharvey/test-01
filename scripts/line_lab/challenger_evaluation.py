@@ -61,7 +61,7 @@ def evaluate(baselines,candidates,trials,outcomes,now):
         if not version or league not in ('NBA','NFL') or not row.get('game_id'):continue
         versions.add((league,version));first.setdefault((league,version,row['game_id']),row)
     # Both league hypotheses exist even when no candidate has qualified yet.
-    versions.update((league,version) for league in ('NBA','NFL') for version in ('pure-elasticnet-v1','pure-stumpboost-v1'))
+    versions.update((league,version) for league in ('NBA','NFL') for version in ('pure-elasticnet-v1','pure-stumpboost-v1','availability-logistic-v1'))
     matched=defaultdict(list);excluded=defaultdict(int)
     for (league,version,game_id),row in first.items():
         key=(league,version);trial=trials.get(row.get('model_id'),{});model=trial.get('artifact',{})
@@ -78,6 +78,20 @@ def evaluate(baselines,candidates,trials,outcomes,now):
             features=json.loads(base['feature_snapshot'])
             if league!='NFL' or out.get('source')!='nflverse' or not features.get('source_text_sha256',{}).get('games.csv'):
                 raise ValueError('source rights/timing not established')
+            if version=='availability-logistic-v1':
+                from .availability_model import FEATURES
+                observed=(features.get('shadow_context') or {}).get('availability') or {}
+                candidate_features=json.loads(row['feature_json'])
+                if observed.get('schema')!='availability-counts-v1' or observed.get('used_in_prediction') is not False:
+                    raise ValueError('availability snapshot missing')
+                if observed.get('source')!='nflverse injury and practice reports' or aware(observed['observed_at'])>captured:
+                    raise ValueError('availability source or timestamp invalid')
+                if candidate_features.get('availability_source')!=observed['source'] or candidate_features.get('availability_observed_at')!=observed['observed_at']:
+                    raise ValueError('availability provenance mismatch')
+                if any(candidate_features.get(name)!=observed['features'].get(name) for name in FEATURES):
+                    raise ValueError('availability feature mismatch')
+                if not math.isclose(float(candidate_features['baseline_probability']),float(base['pure_probability']),rel_tol=1e-12,abs_tol=1e-12):
+                    raise ValueError('baseline mismatch')
             p=float(row['probability']);reference=float(base['pure_probability'])
             if not 0<p<1 or not 0<reference<1 or not math.isfinite(p+reference):raise ValueError('invalid probability')
             y=int(out['home_score']>out['away_score'])
@@ -98,7 +112,10 @@ def evaluate(baselines,candidates,trials,outcomes,now):
                        'brier_difference':sum((r['candidate']-r['outcome'])**2-(r['baseline']-r['outcome'])**2 for r in rows)/n if n else None,
                        'status':'descriptive_only' if test else 'insufficient_data',
                        'promoted':False,'input_hash':hashlib.sha256(json.dumps(rows,sort_keys=True,separators=(',',':')).encode()).hexdigest()})
-    for item,q in zip(result,bh_adjust([r['raw_p'] for r in result])):item['adjusted_p']=q
+    # H016's two league tests form a family distinct from H011's model family.
+    for family in ('H011','H016'):
+        group=[item for item in result if ('H016' if item['model_version']=='availability-logistic-v1' else 'H011')==family]
+        for item,q in zip(group,bh_adjust([r['raw_p'] for r in group])):item['adjusted_p']=q
     return result
 
 

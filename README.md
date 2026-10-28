@@ -1,10 +1,18 @@
 # Daily moneyline picks
 
-An experimental NBA/NFL single-game moneyline board with sportsbook prices, a prospective pick record, a historical archive and documented research factors. Predictions are informational; the site never places bets. The model is **not validated as profitable**, and all new model-first selections are paper-only.
+An NBA/NFL single-game moneyline board with sportsbook prices, a pick record, a historical archive and documented research factors. Predictions are informational; the site never places bets. The model is **not validated as profitable**.
 
-The new paper engine predicts from team Elo and completed game results independently of odds. Prices are used to estimate EV and compare available books; they are not inputs to the team forecast. These raw estimates are not calibrated and can be wrong. Previous blended-model picks remain frozen and are marked as legacy. The paper scoreboard tracks a retail reference descriptively; no verified sharp source, sharp CLV, completed head-to-head validation or actual user returns are available. See [reports/model_vs_market.md](reports/model_vs_market.md).
+The current engine predicts from team Elo and completed game results independently of odds. It takes the model's preferred side of each game, applies existing data and price checks, and orders the qualifying winners by model win probability. These raw estimates are not calibrated and can be wrong; the ordering is not evidence of a betting edge. Previous selections remain frozen. No verified sharp source, sharp CLV, completed head-to-head validation or actual user returns are available. See [reports/model_vs_market.md](reports/model_vs_market.md).
 
 Prior rest and scoring-margin experiments remain disabled until the preregistered protocol in [HYPOTHESES.md](HYPOTHESES.md) is satisfied. Referees, injuries, lineups, quarterbacks and travel are not direct model inputs. Visitor ideas are stored only in that browser and are not automatically used by the model.
+
+An availability challenger records timestamped status-count differences before
+forecasts, trains only on eligible earlier outcomes, and is evaluated against
+the simultaneously frozen team baseline. It does not change live picks and
+does not estimate individual player impact. NBA collection requires the free
+provider setup in [docs/NBA_AVAILABILITY.md](docs/NBA_AVAILABILITY.md); NBA
+model training additionally remains blocked while upstream rights are reviewed.
+Empty, conflicting, stale or future reports never mean a healthy team.
 
 The preregistered validation bar requires at least 300 settled prospective paper picks in the relevant segment, positive sharp closing-line value with a confidence interval excluding zero, and calibration no worse than a matched-time market benchmark. The stricter model-first protocol also requires adjusted head-to-head evidence, a nonnegative lower paper-ROI interval, two independent season replications and a later untouched holdout. An hourly retail quote is not a verified sharp close. Until these requirements are met, the model is not validated as profitable; no system action places a bet.
 

@@ -21,4 +21,20 @@ The NFL shadow job also captures recent [nflverse injury and practice reports](h
 
 The optional [PropLine NBA injury endpoint](https://prop-line.com/docs) is disabled until the user obtains a key, accepts [its terms](https://prop-line.com/terms), and enables the integration. As checked October 28, 2026, the free tier lists 1,000 daily requests and the provider describes its injury source as ESPN with ten-minute refreshes. The board's roughly hourly update remains the limiting cadence. A response is reduced to aggregate status counts for displayed teams, with observed time and an incomplete-data warning; the raw player-level response is never committed. It is not a prediction input, a confirmed starting lineup, or a guarantee of full report coverage. Upstream rights still require review for any broader model or dataset use. Setup: [docs/NBA_AVAILABILITY.md](docs/NBA_AVAILABILITY.md).
 
+The H016 availability challenger additionally captures aggregate status
+differences before the forecast, with its source and first-observed time. It
+requires nonempty reports for both teams, rejects conflicting or future values
+and keeps an unavailable report distinct from a zero-injury roster. In the
+current registry, NBA data remain ineligible for training until upstream rights
+are reviewed; NFL training requires observed nflverse reports and a matching
+nflverse-confirmed outcome. This limited input does not establish that a player
+will play, quantify player importance, or authorize a live adjustment.
+
+Direct ESPN scoreboard automation needs rights review. [Disney's terms of
+use](https://disneytermsofuse.com/english/) contain restrictions on automated
+access to Disney products; ESPN is a Disney brand. The existing public-scoreboard
+endpoint has not been established as an authorized exception, so its current
+use is a source-rights risk rather than a verified license. A rights-cleared
+schedule and final-status replacement is still required for full compliance.
+
 The prospective paper-replay process uses `data/research_permissions.json` as a separate, initially empty allowlist. An entry must document the league, exact quote provider, model-feature source (`nflverse+espn` or `boxscorelab+espn`), permitted outcome sources, a rights-evidence link, a positive rights-verification decision and a review time no later than the prediction. Captured source hashes must also be present. No source is approved merely because it is public or appears in a file. The gate records source uncertainty; it is not a substitute for legal review or a way to manufacture historical availability timestamps.

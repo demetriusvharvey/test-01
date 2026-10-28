@@ -21,25 +21,33 @@ def fetch(url):
         if len(payload)>35_000_000:raise ValueError('source exceeds 35 MB cap')
         return payload,datetime.now(timezone.utc).isoformat()
 
-if __name__=='__main__':
-    target=os.environ.get('PICKS_DATA_ROOT')
-    if not target:raise SystemExit('PICKS_DATA_ROOT is required')
-    day=datetime.now(ZoneInfo('America/New_York'))
+def refresh(target,day,fetcher=fetch):
+    """Injury collection remains independent of a quarterback-data outage."""
     season=day.year if day.month>=8 else day.year-1
+    result={'quarterbacks':False,'injuries':False}
     try:
-        pbp,pbp_time=fetch(f'https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.csv.gz')
-        schedule,schedule_time=fetch('https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv')
+        pbp,pbp_time=fetcher(f'https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_{season}.csv.gz')
+        schedule,schedule_time=fetcher('https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv')
         now=datetime.now(timezone.utc).isoformat()
         stats=qb_summaries(gzip.decompress(pbp).decode('utf-8-sig'),schedule.decode('utf-8-sig'),pbp_time,schedule_time,now)
         added=save_qb_snapshot(target,season,stats,pbp_time,schedule_time,hashlib.sha256(pbp).hexdigest(),hashlib.sha256(schedule).hexdigest())
+        result['quarterbacks']=True
         print('NFL QB shadow snapshot:',len(stats),'team/quarterback summaries;',added,'new snapshots. No model inputs promoted.')
     except Exception as exc:
         # URLs may be operationally sensitive in other adapters; log only type.
         print('NFL shadow refresh unavailable:',type(exc).__name__,file=sys.stderr)
-        raise SystemExit(1)
     try:
-        injury,injury_time=fetch(f'https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_{season}.csv.gz')
+        injury,injury_time=fetcher(f'https://github.com/nflverse/nflverse-data/releases/download/injuries/injuries_{season}.csv.gz')
         added=capture_nfl_injuries(target,gzip.decompress(injury).decode('utf-8-sig'),season,injury_time,hashlib.sha256(injury).hexdigest())
+        result['injuries']=True
         print('NFL injury reports:',added,'first-observed rows archived; not used in predictions.')
     except Exception as exc:
         print('NFL injury source unavailable:',type(exc).__name__,file=sys.stderr)
+    return result
+
+
+if __name__=='__main__':
+    target=os.environ.get('PICKS_DATA_ROOT')
+    if not target:raise SystemExit('PICKS_DATA_ROOT is required')
+    result=refresh(target,datetime.now(ZoneInfo('America/New_York')))
+    if not any(result.values()):raise SystemExit(1)

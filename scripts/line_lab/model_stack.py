@@ -143,7 +143,7 @@ def latest_candidates(root,league,as_of):
         try:
             model=json.loads(payload)
             version=model.get('model_version')
-            if version not in ('pure-elasticnet-v1','pure-stumpboost-v1') or version in seen:continue
+            if version not in ('pure-elasticnet-v1','pure-stumpboost-v1','availability-logistic-v1') or version in seen:continue
             if aware(completed)<=now and aware(model['trained_before'])<now and model.get('promoted') is False:
                 result.append((key,model));seen.add(version)
         except (KeyError,TypeError,ValueError):continue
@@ -162,6 +162,9 @@ def predict_candidate(model,features,prediction_at,feature_observed_at):
     if model.get('model_version')=='pure-stumpboost-v1':
         from .boosted_shadow import predict_boosted_shadow
         return predict_boosted_shadow(model,features,prediction_at,feature_observed_at)
+    if model.get('model_version')=='availability-logistic-v1':
+        from .availability_model import predict_availability_shadow
+        return predict_availability_shadow(model,features.get('baseline_probability'),features,prediction_at,feature_observed_at)
     return None
 
 
@@ -173,7 +176,7 @@ def model_features(model,event):
             'games_played_difference':counts[home]-counts[away]}
 
 
-def record_challenger_forecasts(root,markets,models,now):
+def record_challenger_forecasts(root,markets,models,now,availability_contexts=None):
     """Log candidate forecasts before games; do not influence pick selection."""
     observed=aware(now);path=Path(root)/'observations'/'challenger_forecasts'/(observed.date().isoformat()+'.sqlite');added=0
     candidates={league:latest_candidates(root,league,now) for league in ('NBA','NFL')}
@@ -184,11 +187,21 @@ def record_challenger_forecasts(root,markets,models,now):
         for event in markets.values():
             group=candidates.get(event['league'])
             if not group or aware(event['starts_at'])<=observed:continue
-            inputs=model_features(models[event['league']],event)
-            if not inputs:continue
-            content=json.dumps(inputs,sort_keys=True,separators=(',',':'))
             for key,model in group:
-                p=predict_candidate(model,inputs,now,now)
+                if model.get('model_version')=='availability-logistic-v1':
+                    context=(availability_contexts or {}).get(event['id'])
+                    if not context:continue
+                    from .model import project_home
+                    base=project_home(models[event['league']],event['home'],event['away'],aware(event['starts_at']),event.get('neutral',False))
+                    if base is None:continue
+                    inputs={**context['features'],'baseline_probability':base,'availability_observed_at':context['observed_at'],'availability_source':context['source']}
+                    feature_observed_at=context['observed_at']
+                else:
+                    inputs=model_features(models[event['league']],event)
+                    if not inputs:continue
+                    feature_observed_at=now
+                content=json.dumps(inputs,sort_keys=True,separators=(',',':'))
+                p=predict_candidate(model,inputs,now,feature_observed_at)
                 if p is None:continue
                 identity=hashlib.sha256((event['id']+'|'+key+'|'+observed.isoformat()+'|'+content).encode()).hexdigest()
                 added+=db.execute('INSERT OR IGNORE INTO challenger_forecasts VALUES (?,?,?,?,?,?,?,?,?)',

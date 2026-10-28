@@ -14,6 +14,7 @@ from scripts.line_lab.experiment import read_forecasts,corroborated_nfl_outcomes
 from scripts.line_lab.history import aware
 from scripts.line_lab.model_stack import append_trial,fit_elastic_net_shadow
 from scripts.line_lab.boosted_shadow import fit_boosted_shadow
+from scripts.line_lab.availability_model import fit_availability_shadow
 
 
 def load_training_rows(root,as_of=None):
@@ -46,23 +47,52 @@ def load_training_rows(root,as_of=None):
     return rows,len(forecasts),len(outcomes)
 
 
+def load_availability_rows(root,as_of):
+    """Join frozen status features only to subsequently observed final scores."""
+    forecasts=read_forecasts(root);path=Path(root)/'observations'/'forecast_outcomes.sqlite';outcomes={}
+    if path.exists():
+        with closing(sqlite3.connect(path)) as db:
+            db.row_factory=sqlite3.Row;outcomes={r['game_id']:dict(r) for r in db.execute('SELECT * FROM outcomes')}
+    confirmed=corroborated_nfl_outcomes(root,as_of);rows=[]
+    for forecast in forecasts:
+        out=confirmed.get(forecast['game_id']) if forecast['league']=='NFL' else outcomes.get(forecast['game_id'])
+        if not out or out['home_score']==out['away_score'] or (out['home'],out['away'])!=(forecast['home'],forecast['away']):continue
+        try:
+            snapshot=json.loads(forecast['feature_snapshot']);status=(snapshot.get('shadow_context') or {}).get('availability')
+            if not isinstance(status,dict) or status.get('schema')!='availability-counts-v1' or status.get('used_in_prediction') is not False:continue
+            start=aware(forecast['starts_at']);day=start.astimezone(ET).date();year=day.year if day.month>=8 else day.year-1
+            rights=(forecast['league']=='NFL' and out.get('source')=='nflverse' and
+                    status.get('source')=='nflverse injury and practice reports' and
+                    bool(snapshot.get('source_text_sha256',{}).get('games.csv')))
+            # NBA player-status upstream permissions are not yet established.
+            rows.append({'game_id':forecast['game_id'],'league':forecast['league'],'season':str(year),
+                         'feature_observed_at':status['observed_at'],'forecast_at':forecast['captured_at'],
+                         'starts_at':forecast['starts_at'],'final_observed_at':out['observed_at'],
+                         'home_win':int(out['home_score']>out['away_score']),'rights_verified':rights,
+                         'baseline_probability':forecast['pure_probability'],'features':status['features']})
+        except (KeyError,TypeError,ValueError):continue
+    return rows
+
+
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--data-root',required=True);parser.add_argument('--output',default='reports/model_registry.md');args=parser.parse_args()
     now=datetime.now(timezone.utc).isoformat();rows,forecasts,outcomes=load_training_rows(args.data_root,now)
+    availability_rows=load_availability_rows(args.data_root,now)
     lines=['# Weekly model challenger registry','',f'Run {now}: {forecasts} forecast snapshots, {outcomes} outcome records, {len(rows)} matched rows before eligibility.', '',
            '| League | Model | Status | Eligible training games | Validation season | Promoted |','| --- | --- | --- | ---: | --- | --- |']
     for league in ('NBA','NFL'):
-        for family,fit in (('pure-elasticnet-v1',fit_elastic_net_shadow),('pure-stumpboost-v1',fit_boosted_shadow)):
+        for family,fit,training in (('pure-elasticnet-v1',fit_elastic_net_shadow,rows),('pure-stumpboost-v1',fit_boosted_shadow,rows),('availability-logistic-v1',fit_availability_shadow,availability_rows)):
             try:
-                candidate=fit(rows,league,now)
-                trial=append_trial(args.data_root,league,rows,now,candidate,family=family)
+                candidate=fit(training,league,now)
+                trial=append_trial(args.data_root,league,training,now,candidate,family=family)
                 lines.append(f"| {league} | {family} | {'shadow candidate' if candidate else 'insufficient data'} | {candidate['training_games'] if candidate else 0} | {candidate['validation_season'] if candidate else '—'} | no |")
                 print('Challenger',league,family,'candidate' if candidate else 'insufficient data','trial',trial)
             except Exception as exc:
-                trial=append_trial(args.data_root,league,rows,now,error=type(exc).__name__,family=family)
+                trial=append_trial(args.data_root,league,training,now,error=type(exc).__name__,family=family)
                 lines.append(f'| {league} | {family} | failed: {type(exc).__name__} | — | — | no |')
                 print('Challenger',league,family,'failed',type(exc).__name__,'trial',trial)
     lines += ['', 'Both pure challengers use rating difference, home advantage and games-played difference, without odds, an anchor, spreads or totals. The fixed-grid monotonic boosted-stump model is a standard-library research implementation, not XGBoost, LightGBM, CatBoost or Optuna. Inner validation uses a later prior season; the artifact is refit only on data settled before this run, then may produce separately logged future shadow forecasts. It is never automatically promoted by training alone.',
+              '', f'The availability challenger has {len(availability_rows)} matched snapshots before time and rights screening. It learns only from recorded team-status counts on top of a frozen team forecast; it has no individual player value, is not a complete lineup model, and does not change picks.',
               '', 'The default training gate requires at least 500 earlier training games, 100 validation games and three seasons with eligible point-in-time data. Eligibility and missingness can make the useful sample much smaller than raw snapshot counts. NBA inputs are blocked pending rights review. No model-vs-sharp or profit result is assumed.', '']
     Path(args.output).parent.mkdir(parents=True,exist_ok=True);Path(args.output).write_text('\n'.join(lines),encoding='utf-8')
 

@@ -19,7 +19,7 @@ def main():
     def fmt(v):return '—' if v is None else f'{v:.4f}'
     for r in results:
         lines.append(f"| {r['league']} | {r['model_version']} | {r['games']} | {r['excluded']} | {fmt(r['logloss_difference'])} | {fmt(r['brier_difference'])} | {fmt(r['adjusted_p'])} | {r['status']} |")
-    lines.extend(['','Negative differences favor the challenger. The registered game-day-block test needs at least 30 games on 10 days. Exclusions include pending games, unmatched timestamps, missing or unqualified sources and ties. NBA inputs remain blocked pending rights review.',
+    lines.extend(['','Negative differences favor the challenger. The registered game-day-block test needs at least 30 games on 10 days. Exclusions include pending games, unmatched timestamps, missing or unqualified sources and ties. NBA inputs remain blocked pending rights review. H016 availability tests are adjusted across leagues separately from the H011 challenger family.',
                   '', 'This is prospective research against the frozen team baseline, not a sharp-market or profitability comparison. A favorable result is not promotion: replication, an untouched later holdout and the registered sharp-market and paper-ROI conditions are still required. No wagers are placed.',''])
     Path(args.output).parent.mkdir(parents=True,exist_ok=True);Path(args.output).write_text('\n'.join(lines),encoding='utf-8')
     print('Forward challenger evaluation:',len(candidates),'forecast snapshots;',sum(x['games'] for x in results),'matched settled games')

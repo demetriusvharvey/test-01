@@ -143,13 +143,16 @@ def nfl_report_context(root,event,schedule_text,schedule_observed_at,now,max_pla
                     match.append((season,week))
             except (KeyError,TypeError,ValueError):continue
         if len(match)!=1:return None
-        season,week=match[0];teams={};all_times=[]
+        season,week=match[0];teams={};all_times=[];incomplete=False
         for side in ('away','home'):
             records=nfl_statuses_as_of(root,season,week,event[side],now,event['starts_at'])
             entries=[]
             for value in records.values():
                 report=value.get('report_status');practice=(value.get('practice_status') or '').strip()
-                if value.get('status_conflict') or not (report or practice):continue
+                if value.get('status_conflict'):
+                    incomplete=True
+                    continue
+                if not (report or practice):continue
                 item={'name':value.get('name') or value.get('player_id'),'position':value.get('position') or '',
                       'report_status':report,'practice_status':practice or None,'observed_at':value['observed_at']}
                 entries.append(item);all_times.append(aware(value['observed_at']))
@@ -157,7 +160,7 @@ def nfl_report_context(root,event,schedule_text,schedule_observed_at,now,max_pla
             teams[side]={'team':event[side+'_name'],'entries':entries[:max_players],'total_entries':len(entries)}
         return {'teams':teams,'week':week,'source':'nflverse injury and practice reports',
                 'latest_observed_at':max(all_times).isoformat() if all_times else None,
-                'starter_status':'unconfirmed','inactive_list':'unconfirmed','used_in_prediction':False,
+                'starter_status':'unconfirmed','inactive_list':'unconfirmed','used_in_prediction':False,'incomplete':incomplete,
                 'note':'Captured reports may be incomplete; an absent name does not mean healthy.'}
     except (KeyError,TypeError,ValueError,OverflowError):return None
 

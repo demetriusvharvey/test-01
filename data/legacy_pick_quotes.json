@@ -1,0 +1,15 @@
+[
+  {
+    "id": "nba:2026-10-27:POR:LAL",
+    "predicted_at": "2026-10-28T01:48:51.647553+00:00",
+    "source": "https://github.com/demetriusvharvey/test-01/blob/61f949eab5f5c7db371bf69cf9091fc7b0d7df34/dist/board.json",
+    "initial_books": [
+      {"name": "FanDuel", "odds": -126, "as_of": "2026-10-28T01:00:00+00:00"},
+      {"name": "DraftKings", "odds": -125, "as_of": "2026-10-28T01:00:00+00:00"},
+      {"name": "BetMGM", "odds": -125, "as_of": "2026-10-28T01:00:00+00:00"},
+      {"name": "Caesars", "odds": -125, "as_of": "2026-10-28T01:00:00+00:00"},
+      {"name": "Fanatics", "odds": -125, "as_of": "2026-10-28T01:00:00+00:00"},
+      {"name": "BetRivers", "odds": -132, "as_of": "2026-10-28T01:00:00+00:00"}
+    ]
+  }
+]

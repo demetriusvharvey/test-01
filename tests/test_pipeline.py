@@ -1,7 +1,8 @@
 import unittest
 from datetime import date, datetime, timedelta, timezone
 from scripts.pipeline import (parse_book_html, parse_nba_csv, parse_nfl_locations, build_ratings,
-                              grade_ledger, build_market, choose_candidates, game_id, render_board, append_referee_assignments)
+                              grade_ledger, build_market, choose_candidates, game_id, render_board, append_referee_assignments,
+                              feature_passes, parse_espn_results, apply_same_day_finals, backfill_initial_books)
 
 class PipelineTests(unittest.TestCase):
     def setUp(self): self.now=datetime(2026,10,28,1,30,tzinfo=timezone.utc)
@@ -48,6 +49,42 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(board['picks'][0]['best'],-105)
         self.assertEqual(len(board['picks'][0]['books']),6)
         self.assertIsNone(board['accuracy']['percent'])
+        self.assertEqual(board['history'][0]['initial_books'][2]['odds'],-105)
+        self.assertNotIn('probability',board['picks'][0])
+        self.assertNotIn('probability',board['history'][0])
+        self.assertNotIn('edge',board['history'][0])
+        event['books']['BetMGM']['home']=-125
+        updated=render_board(markets,picks,self.now,[])
+        self.assertEqual(updated['history'][0]['initial_books'][2]['odds'],-105)
+        self.assertNotEqual(updated['picks'][0]['books'][2]['odds'],-105)
+    def test_features_require_improvement_on_both_historical_periods(self):
+        def metric(score,count=250): return {'validation_brier':score,'validation_count':count}
+        baseline=metric(.240); improved=metric(.238); worse=metric(.241)
+        self.assertTrue(feature_passes(baseline,improved,baseline,improved,200))
+        self.assertFalse(feature_passes(baseline,improved,baseline,worse,200))
+        self.assertFalse(feature_passes(baseline,worse,baseline,improved,200))
+        self.assertFalse(feature_passes(baseline,improved,baseline,metric(.238,199),200))
+    def test_legacy_quotes_require_exact_pick_time_and_best_price(self):
+        pick={'id':'a','predicted_at':'at-pick','initial_best_odds':-125}
+        snapshots=[{'id':'a','predicted_at':'wrong-time','initial_books':[{'name':'Book','odds':-125}]}]
+        self.assertEqual(backfill_initial_books([pick],snapshots),0)
+        snapshots[0]['predicted_at']='at-pick';snapshots[0]['initial_books'][0]['odds']=-126
+        self.assertEqual(backfill_initial_books([pick],snapshots),0)
+        snapshots[0]['initial_books'][0]['odds']=-125
+        self.assertEqual(backfill_initial_books([pick],snapshots),1)
+        self.assertEqual(backfill_initial_books([pick],snapshots),0)
+    def test_only_confirmed_same_day_finals_update_team_ratings_once(self):
+        payload={'events':[{'date':'2026-10-28T00:00:00Z','season':{'year':2027,'type':2},'competitions':[{'status':{'type':{'completed':True,'name':'STATUS_FINAL'}},'competitors':[{'homeAway':'home','team':{'displayName':'Los Angeles Lakers'},'score':'110'},{'homeAway':'away','team':{'displayName':'Portland Trail Blazers'},'score':'100'}]}]}]}
+        finals=parse_espn_results(payload,'NBA')
+        self.assertEqual(len(finals),1)
+        model=build_ratings([],date(2026,10,27),'NBA')
+        model['last_season']='2026-27'
+        added=apply_same_day_finals({'NBA':model},finals+finals,date(2026,10,27),{},self.now)
+        self.assertEqual(added['NBA'],1)
+        self.assertGreater(model['ratings']['LAL'],1500)
+        self.assertEqual(model['margins']['LAL'],[10])
+        payload['events'][0]['competitions'][0]['status']['type']={'completed':False,'name':'STATUS_IN_PROGRESS'}
+        self.assertEqual(parse_espn_results(payload,'NBA'),[])
     def test_referees_are_archived_without_duplicate_or_unverified_rows(self):
         history=[]
         report={'status':'ok','date_expected':'2026-10-27','games':[{'matchup':'Portland @ L.A. Lakers','crew_chief':'Scott Foster','referee':'Che Flores','umpire':'Nate Cearley'}]}

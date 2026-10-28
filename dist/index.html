@@ -3,39 +3,68 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="theme-color" content="#f8f9fb">
-  <meta name="description" content="NBA and NFL moneyline picks with sportsbook odds and model accuracy.">
+  <meta name="theme-color" content="#f7f6f3">
+  <meta name="description" content="NBA and NFL moneyline picks, sportsbook odds, results, and model variables.">
   <title>Daily picks</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="player-backdrop" aria-hidden="true">
+    <div class="player-row nba-players">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Kobe_Bryant_2014.jpg/330px-Kobe_Bryant_2014.jpg" alt="">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a7/LeBron_James_Lakers.jpg/500px-LeBron_James_Lakers.jpg" alt="">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/6/6c/Stephen_Curry_%2816454505719%29.jpg/330px-Stephen_Curry_%2816454505719%29.jpg" alt="">
+    </div>
+    <div class="player-row nfl-players">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Tom_Brady_WFT-Buccaneers_NOV2021_%28cropped%29.jpg/500px-Tom_Brady_WFT-Buccaneers_NOV2021_%28cropped%29.jpg" alt="">
+      <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/ba/Lamar_Jackson_2020.jpg/500px-Lamar_Jackson_2020.jpg" alt="">
+    </div>
+  </div>
   <main class="page">
     <header class="page-header">
-      <div>
-        <p class="eyebrow">NBA &amp; NFL · MONEYLINE</p>
-        <h1>Today’s picks</h1>
+      <div class="heading-block">
+        <div class="league-logos" aria-label="NBA and NFL">
+          <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nba.png" alt="NBA">
+          <span aria-hidden="true"></span>
+          <img src="https://a.espncdn.com/i/teamlogos/leagues/500/nfl.png" alt="NFL">
+        </div>
+        <h1>Daily picks<span>.</span></h1>
         <p id="date-full" class="date">Loading date…</p>
       </div>
       <section class="accuracy" aria-label="Model accuracy">
-        <div class="accuracy-heading">Model accuracy <span>Experimental</span></div>
+        <div class="accuracy-heading">Model accuracy <span>ALL TIME</span></div>
         <div class="accuracy-value" id="accuracy">—</div>
         <p class="accuracy-record" id="record">No settled picks yet</p>
       </section>
     </header>
 
-    <div class="list-header">
-      <p id="freshness" aria-live="polite">Loading the latest picks…</p>
-      <span id="count"></span>
-    </div>
-    <section id="picks" class="pick-list" aria-label="Today’s moneyline picks" aria-live="polite">
-      <div class="loading">Loading picks…</div>
+    <aside class="quote-card" aria-label="Daily motivation">
+      <div class="quote-copy"><p class="quote-label"><span aria-hidden="true">✦</span> A LITTLE DAILY MOTIVATION</p><p id="daily-quote" class="quote">Big goals. Smart moves. One day at a time.</p><p class="quote-note">Keep your eyes on the bigger picture.</p></div>
+      <img src="money-stacks.webp" class="money-image" alt="Stacks of cash">
+    </aside>
+
+    <nav class="tabs" role="tablist" aria-label="Site sections">
+      <button type="button" id="tab-picks" role="tab" aria-selected="true" aria-controls="panel-picks" class="tab is-active">Picks</button>
+      <button type="button" id="tab-variables" role="tab" aria-selected="false" aria-controls="panel-variables" class="tab" tabindex="-1">Variables</button>
+    </nav>
+
+    <section id="panel-picks" role="tabpanel" aria-labelledby="tab-picks">
+      <div class="section-top"><div><p class="section-kicker">THE BOARD</p><h2 id="picks-title">Today’s picks</h2></div><div class="date-controls" aria-label="Choose a pick date"><button type="button" id="today-button" class="date-button is-active">Today</button><button type="button" id="yesterday-button" class="date-button">Yesterday</button><label class="date-picker"><span class="sr-only">Choose another date</span><input type="date" id="pick-date" aria-label="Choose another date"></label></div></div>
+      <div class="list-header"><p id="freshness" aria-live="polite">Loading the latest picks…</p><span id="count"></span></div>
+      <section id="picks" class="pick-list" aria-label="Moneyline picks" aria-live="polite"><div class="loading">Loading picks…</div></section>
     </section>
 
-    <footer class="sources">
-      <p>Odds update hourly. Verify the price with the sportsbook.</p>
-      <p>Odds: <a href="https://agentbets.ai/odds/" target="_blank" rel="noopener noreferrer">AgentBets</a> · NBA data: <a href="https://boxscorelab.com/downloads/" target="_blank" rel="noopener noreferrer">BoxScore Lab</a> · NFL data: <a href="https://nflreadr.nflverse.com/" target="_blank" rel="noopener noreferrer">nflverse</a></p>
-      <p>Accuracy is win rate, not profit.</p>
-    </footer>
+    <section id="panel-variables" role="tabpanel" aria-labelledby="tab-variables" hidden>
+      <div class="variables-header"><div><p class="section-kicker">INSIDE THE MODEL</p><h2>What goes into a pick</h2><p>The factors, the testing, and a place to keep your ideas.</p></div></div>
+      <div class="variable-grid">
+        <article class="variable-card"><div class="card-heading"><div><p class="section-kicker">NBA + NFL</p><h3>Core inputs</h3></div><span class="pill in-use">IN USE</span></div><ul class="factor-list"><li><strong>Team strength</strong><span>Elo ratings update from final scores and opponent strength.</span></li><li><strong>Home advantage</strong><span>Accounts for the home team; NFL neutral-site games are treated separately.</span></li><li><strong>Sportsbook market</strong><span>The model blends three parts market consensus with one part team rating. The market is adjusted to remove the books’ built-in margin.</span></li><li><strong>Available odds</strong><span>At least three books, the best available price, time until tipoff or kickoff, and a minimum model edge determine which games qualify.</span></li></ul></article>
+        <article class="variable-card"><div class="card-heading"><div><p class="section-kicker">NBA + NFL</p><h3>Factors being evaluated</h3></div><span class="pill testing">AUTOMATIC</span></div><div id="dynamic-factors"><p class="muted">Waiting for the latest model details.</p></div><p class="explanation">The system tests supported factors on one historical season and checks the winner against a separate later season. A factor is used only if it clears both tests. Tests cover the team-rating component; historical sportsbook snapshots aren’t available. Passing doesn’t guarantee improvement in the full model or profit.</p></article>
+        <article class="variable-card wide-card"><div class="card-heading"><div><p class="section-kicker">ON THE RADAR</p><h3>Tracked, but not model inputs</h3></div><span class="pill neutral">NOT IN USE</span></div><div class="not-used"><div><strong>Referee assignments</strong><p>NBA crews are archived when available, but their effects have not been validated for the model. NFL referees are not collected.</p></div><div><strong>Injuries, lineups &amp; quarterbacks</strong><p>Not directly incorporated. Sportsbook prices may already reflect some of this news.</p></div><div><strong>Travel &amp; time zones</strong><p>Not currently measured. Rest days are evaluated separately.</p></div></div></article>
+        <article class="variable-card wide-card ideas-card"><div class="card-heading"><div><p class="section-kicker">YOUR NOTES</p><h3>Variable ideas</h3><p>Keep track of factors you want to investigate.</p></div></div><form id="idea-form"><div class="idea-fields"><label>Variable<input id="idea-name" maxlength="70" required placeholder="e.g. back-to-back games"></label><label>League<select id="idea-league"><option>NBA + NFL</option><option>NBA</option><option>NFL</option></select></label></div><label>Note <span class="optional">(optional)</span><input id="idea-note" maxlength="160" placeholder="What should we look for?"></label><button class="add-button" type="submit">Add idea <span aria-hidden="true">+</span></button></form><ul id="ideas" class="ideas-list"></ul><p id="idea-message" class="idea-disclaimer" aria-live="polite">Ideas are saved on this device. They aren’t used in predictions until data and testing support them.</p></article>
+      </div>
+    </section>
+
+    <footer class="sources"><p>Odds update about hourly. Verify the price with the sportsbook.</p><p>Odds: <a href="https://agentbets.ai/odds/" target="_blank" rel="noopener noreferrer">AgentBets</a> · NBA data: <a href="https://boxscorelab.com/downloads/" target="_blank" rel="noopener noreferrer">BoxScore Lab</a> · NFL data: <a href="https://nflreadr.nflverse.com/" target="_blank" rel="noopener noreferrer">nflverse</a></p><p>Accuracy is win rate, not profit.</p><details class="photo-credits"><summary>Photo credits</summary><p><a href="https://commons.wikimedia.org/wiki/File:Kobe_Bryant_2014.jpg">Kobe Bryant</a> and <a href="https://commons.wikimedia.org/wiki/File:Stephen_Curry_(16454505719).jpg">Stephen Curry</a> by Keith Allison; <a href="https://commons.wikimedia.org/wiki/File:LeBron_James_Lakers.jpg">LeBron James</a>, <a href="https://commons.wikimedia.org/wiki/File:Tom_Brady_WFT-Buccaneers_NOV2021_(cropped).jpg">Tom Brady</a>, and <a href="https://commons.wikimedia.org/wiki/File:Lamar_Jackson_2020.jpg">Lamar Jackson</a> by All-Pro Reels, via Wikimedia Commons. Photos are cropped and desaturated on the page. <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</p></details></footer>
   </main>
   <script src="app.js"></script>
 </body>

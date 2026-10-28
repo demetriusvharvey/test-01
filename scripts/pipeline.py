@@ -113,42 +113,75 @@ def parse_nfl_locations(text):
 
 def elo_probability(diff): return 1/(1+10**(-max(-1200,min(1200,diff))/400))
 
+def recent_margin(margins, team):
+    values = margins.get(team, [])
+    return sum(values) / len(values) if values else 0.0
+
+def record_margin(margins, home, away, difference):
+    for team, value in ((home, difference), (away, -difference)):
+        margins[team] = (margins.get(team, []) + [value])[-5:]
+
 def build_ratings(games, cutoff, league, params=None, validation_season=None):
     # Training ends before today's ET date. This avoids training on later same-day results.
-    ratings={}; last={}; last_season=None; validation_errors=[]
-    k,home_advantage,rest_weight=params or ((20,55,0) if league=='NBA' else (24,42,0))
+    ratings={}; last={}; margins={}; last_season=None; validation_errors=[]
+    values=params or ((20,55,0,0) if league=='NBA' else (24,42,0,0))
+    k,home_advantage,rest_weight=values[:3]
+    form_weight=values[3] if len(values)>3 else 0
     for g in sorted((x for x in games if x['league']==league and x['date']<cutoff),key=lambda x:(x['date'],x['id'])):
         if last_season is not None and g['season']!=last_season:
             ratings={team:1500+(value-1500)*0.75 for team,value in ratings.items()}
+            margins={}
         last_season=g['season']
         h,a=g['home'],g['away']; hr=ratings.get(h,1500); ar=ratings.get(a,1500)
         rh=min(7,max(0,(g['date']-last[h]).days-1)) if h in last else 3
         ra=min(7,max(0,(g['date']-last[a]).days-1)) if a in last else 3
-        p=elo_probability(hr-ar+(0 if g['neutral'] else home_advantage)+rest_weight*(rh-ra))
+        form=recent_margin(margins,h)-recent_margin(margins,a)
+        p=elo_probability(hr-ar+(0 if g['neutral'] else home_advantage)+rest_weight*(rh-ra)+form_weight*form)
         outcome=1 if g['home_score']>g['away_score'] else 0 if g['home_score']<g['away_score'] else 0.5
         if g['season']==validation_season and outcome!=0.5: validation_errors.append((p-outcome)**2)
         ratings[h]=hr+k*(outcome-p); ratings[a]=ar-k*(outcome-p)
+        record_margin(margins,h,a,g['home_score']-g['away_score'])
         last[h]=g['date']; last[a]=g['date']
-    return {'ratings':ratings,'last':last,'home_advantage':home_advantage,'rest_weight':rest_weight,'k':k,'validation_count':len(validation_errors),'validation_brier':sum(validation_errors)/len(validation_errors) if validation_errors else None}
+    return {'ratings':ratings,'last':last,'margins':margins,'last_season':last_season,'home_advantage':home_advantage,'rest_weight':rest_weight,'form_weight':form_weight,'k':k,'validation_count':len(validation_errors),'validation_brier':sum(validation_errors)/len(validation_errors) if validation_errors else None}
+
+def feature_passes(baseline_validation, candidate_validation, baseline_holdout, candidate_holdout, minimum):
+    metrics=[baseline_validation,candidate_validation,baseline_holdout,candidate_holdout]
+    if any(x['validation_count']<minimum or x['validation_brier'] is None for x in metrics): return False
+    return (baseline_validation['validation_brier']-candidate_validation['validation_brier']>=0.0005 and
+            baseline_holdout['validation_brier']-candidate_holdout['validation_brier']>=0.0005)
 
 def train_model(games,cutoff,league):
-    # Select among small, fixed alternatives on the latest completed season using
-    # chronological pre-game predictions. This is tuning, not an independent test
-    # or evidence of profit. Prefer the baseline for marginal changes.
+    # Pick one candidate using an earlier full season, then require that candidate
+    # to improve Brier score on a separate later season before promotion. The small
+    # predefined pool is a guardrail, not proof of future or betting profitability.
     count={}
     for g in games:
         if g['league']==league and g['date']<cutoff and g['home_score']!=g['away_score']:
             count[g['season']]=count.get(g['season'],0)+1
     minimum=1000 if league=='NBA' else 200
     completed=sorted(s for s,n in count.items() if n>=minimum)
-    if league=='NBA': candidates=[(20,55,0),(20,55,8),(20,40,0),(20,70,0),(15,55,0),(25,55,0)]
-    else: candidates=[(24,42,0),(24,42,4),(24,25,0),(24,55,0),(18,42,0),(30,42,0)]
-    if not completed: return build_ratings(games,cutoff,league,candidates[0])
-    val=completed[-1]
-    fitted=[build_ratings(games,cutoff,league,c,val) for c in candidates]
-    baseline=fitted[0]; best=min(fitted,key=lambda x:x['validation_brier'] if x['validation_brier'] is not None else float('inf'))
-    winner=best if best['validation_count']>=minimum and baseline['validation_brier']-best['validation_brier']>=0.0005 else baseline
-    winner['validation_season']=val
+    if league=='NBA': base_configs=[(20,55,0,0),(20,40,0,0),(20,70,0,0),(15,55,0,0),(25,55,0,0)]; rest=8
+    else: base_configs=[(24,42,0,0),(24,25,0,0),(24,55,0,0),(18,42,0,0),(30,42,0,0)]; rest=4
+    if len(completed)<2:
+        result=build_ratings(games,cutoff,league,base_configs[0])
+        result.update({'validation_season':None,'holdout_season':None,'candidate_passed':False,'candidate_name':None})
+        return result
+    val,holdout=completed[-2],completed[-1]
+    fitted=[build_ratings(games,cutoff,league,c,val) for c in base_configs]
+    best_index=min(range(len(fitted)),key=lambda i:fitted[i]['validation_brier'] if fitted[i]['validation_brier'] is not None else float('inf'))
+    baseline_val=fitted[best_index]; k,home,_,_=base_configs[best_index]
+    feature_configs=[(k,home,rest,0),(k,home,0,3),(k,home,rest,3)]
+    variants=[build_ratings(games,cutoff,league,c,val) for c in feature_configs]
+    best_feature=min(range(len(variants)),key=lambda i:variants[i]['validation_brier'] if variants[i]['validation_brier'] is not None else float('inf'))
+    candidate_val=variants[best_feature]
+    baseline_hold=build_ratings(games,cutoff,league,base_configs[best_index],holdout)
+    candidate_hold=build_ratings(games,cutoff,league,feature_configs[best_feature],holdout)
+    passed=feature_passes(baseline_val,candidate_val,baseline_hold,candidate_hold,minimum)
+    winner=candidate_hold if passed else baseline_hold
+    winner.update({'validation_season':val,'holdout_season':holdout,'holdout_count':baseline_hold['validation_count'],
+                   'candidate_passed':passed,'candidate_name':['rest','recent scoring margin','rest + recent scoring margin'][best_feature],
+                   'selection_count':baseline_val['validation_count'],
+                   'baseline_holdout_brier':baseline_hold['validation_brier'],'candidate_holdout_brier':candidate_hold['validation_brier']})
     return winner
 
 def project_home(model, home, away, when, neutral=False):
@@ -157,7 +190,8 @@ def project_home(model, home, away, when, neutral=False):
     day=when.astimezone(ET).date()
     rh=min(7,max(0,(day-last[home]).days-1)) if home in last else 3
     ra=min(7,max(0,(day-last[away]).days-1)) if away in last else 3
-    return elo_probability(ratings[home]-ratings[away]+(0 if neutral else model['home_advantage'])+model['rest_weight']*(rh-ra))
+    form=recent_margin(model.get('margins',{}),home)-recent_margin(model.get('margins',{}),away)
+    return elo_probability(ratings[home]-ratings[away]+(0 if neutral else model['home_advantage'])+model['rest_weight']*(rh-ra)+model.get('form_weight',0)*form)
 
 def implied(odds): return -odds/(-odds+100) if odds<0 else 100/(odds+100)
 
@@ -171,10 +205,43 @@ def parse_espn_results(payload,league):
             h,a=sides['home'],sides['away']; hc=team_code(h['team']['displayName'],league); ac=team_code(a['team']['displayName'],league)
             if not hc or not ac: continue
             # Provider UTC dates may cross midnight: prefer its local game date when available.
-            start=datetime.fromisoformat(e['date'].replace('Z','+00:00')).astimezone(ET).date()
-            finals.append({'id':game_id(league,start,ac,hc),'home':hc,'away':ac,'home_score':int(h['score']),'away_score':int(a['score'])})
+            start=datetime.fromisoformat(e['date'].replace('Z','+00:00'))
+            day=start.astimezone(ET).date()
+            season=e.get('season',{})
+            finals.append({'id':game_id(league,day,ac,hc),'league':league,'date':day,'starts_at':start,
+                           'season_year':season.get('year'),'season_type':season.get('type'),
+                           'home':hc,'away':ac,'home_score':int(h['score']),'away_score':int(a['score'])})
         except (KeyError,IndexError,TypeError,ValueError): continue
     return finals
+
+def apply_same_day_finals(models, finals, today, nfl_locations, now):
+    # Yesterday's historical results are already in the model. Add only ESPN
+    # regular/postseason games that have actually finished today, once each.
+    seen=set(); added={'NBA':0,'NFL':0}
+    for game in sorted(finals,key=lambda x:x.get('starts_at',now)):
+        if game.get('date')!=today or game.get('season_type') not in (2,3): continue
+        if game.get('starts_at',now)>now or game['id'] in seen: continue
+        league=game['league']; model=models.get(league)
+        if not model or (league=='NFL' and game['id'] not in nfl_locations): continue
+        # ESPN and historical providers can label NBA seasons by different years.
+        # The game date determines the regular/postseason's starting year.
+        start_year=today.year if today.month>=8 else today.year-1
+        season=f'{start_year}-{str(start_year+1)[-2:]}' if league=='NBA' else str(start_year)
+        if model.get('last_season') and season!=model['last_season']:
+            model['ratings']={team:1500+(value-1500)*0.75 for team,value in model['ratings'].items()}
+            model['margins']={}; model['last_season']=season
+        home,away=game['home'],game['away']
+        hr=model['ratings'].get(home,1500); ar=model['ratings'].get(away,1500)
+        rh=min(7,max(0,(today-model['last'][home]).days-1)) if home in model['last'] else 3
+        ra=min(7,max(0,(today-model['last'][away]).days-1)) if away in model['last'] else 3
+        neutral=nfl_locations.get(game['id'],False) if league=='NFL' else False
+        form=recent_margin(model['margins'],home)-recent_margin(model['margins'],away)
+        p=elo_probability(hr-ar+(0 if neutral else model['home_advantage'])+model['rest_weight']*(rh-ra)+model.get('form_weight',0)*form)
+        outcome=1 if game['home_score']>game['away_score'] else 0 if game['home_score']<game['away_score'] else 0.5
+        model['ratings'][home]=hr+model['k']*(outcome-p); model['ratings'][away]=ar-model['k']*(outcome-p)
+        record_margin(model['margins'],home,away,game['home_score']-game['away_score'])
+        model['last'][home]=today; model['last'][away]=today; seen.add(game['id']); added[league]+=1
+    return added
 
 def parse_espn_starts(payload,league):
     starts={}
@@ -215,6 +282,19 @@ def grade_ledger(ledger,finals,now):
         p['outcome']=result; p['graded_at']=now.isoformat(); p['final_score']={'home':hs,'away':as_}; changed+=1
     return changed
 
+def backfill_initial_books(ledger, snapshots):
+    # A legacy pick can only gain quotes from its exact original board snapshot.
+    bykey={(p.get('id'),p.get('predicted_at')):p for p in snapshots}
+    changed=0
+    for pick in ledger:
+        snapshot=bykey.get((pick.get('id'),pick.get('predicted_at')))
+        if pick.get('initial_books') or not snapshot: continue
+        books=snapshot.get('initial_books',[])
+        prices=[b.get('odds') for b in books if isinstance(b.get('odds'),int)]
+        if not prices or max(prices)!=pick.get('initial_best_odds'): continue
+        pick['initial_books']=books; changed+=1
+    return changed
+
 def build_market(events,now):
     merged={}
     for x in events:
@@ -239,7 +319,8 @@ def choose_candidates(markets,models,now,ledger):
             best=max(v[side] for v in event['books'].values())
             edge=p-implied(best)
             if edge>=.01:
-                results.append({'id':event['id'],'league':event['league'],'team_code':event[side], 'team':event[side+'_name'],'opponent':event[('away' if side=='home' else 'home')+'_name'],'starts_at':event['starts_at'],'probability':round(p,5),'predicted_at':now.isoformat(),'pick_day':today,'initial_best_odds':best,'edge':edge,'outcome':'pending','model':'elo-market-v1'})
+                initial_books=[{'name':name,'odds':event['books'][name][side] if name in event['books'] else None,'as_of':event['books'][name]['as_of'] if name in event['books'] else None} for _,name in BOOKS]
+                results.append({'id':event['id'],'league':event['league'],'team_code':event[side], 'team':event[side+'_name'],'opponent':event[('away' if side=='home' else 'home')+'_name'],'starts_at':event['starts_at'],'probability':round(p,5),'predicted_at':now.isoformat(),'pick_day':today,'initial_best_odds':best,'initial_books':initial_books,'edge':edge,'outcome':'pending','model':'elo-market-v2'})
     results.sort(key=lambda x:x['edge'],reverse=True)
     chosen=[]; used=set()
     for x in results:
@@ -248,7 +329,7 @@ def choose_candidates(markets,models,now,ledger):
         if len(chosen)>=max(0,3-already): break
     return chosen if already<3 else []
 
-def render_board(markets,ledger,now,errors):
+def render_board(markets,ledger,now,errors,models=None,training_counts=None,added_finals=None):
     today=now.astimezone(ET).date().isoformat()
     active=[]
     for pick in ledger:
@@ -260,9 +341,21 @@ def render_board(markets,ledger,now,errors):
         available=[b['odds'] for b in books if b['odds'] is not None]
         if not available: continue
         best=max(available)
-        active.append({'team':pick['team'],'opponent':pick['opponent'],'league':pick['league'],'starts_at':pick['starts_at'],'probability':pick['probability'],'books':books,'best':best,'predicted_at':pick['predicted_at']})
+        active.append({'id':pick['id'],'team':pick['team'],'opponent':pick['opponent'],'league':pick['league'],'starts_at':pick['starts_at'],'books':books,'best':best,'predicted_at':pick['predicted_at']})
+    history=[]
+    for pick in ledger:
+        history.append({key:pick.get(key) for key in ('id','team','opponent','league','starts_at','pick_day','predicted_at','graded_at','outcome','initial_best_odds','initial_books')})
     wins=sum(p.get('outcome')=='win' for p in ledger); losses=sum(p.get('outcome')=='loss' for p in ledger); voids=sum(p.get('outcome')=='void' for p in ledger); pending=sum(p.get('outcome')=='pending' for p in ledger)
-    return {'generated_at':now.isoformat(),'model':'Experimental Elo + market baseline','source':'AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores','accuracy':{'wins':wins,'losses':losses,'voids':voids,'pending':pending,'percent':round(100*wins/(wins+losses),1) if wins+losses else None},'picks':active,'errors':errors}
+    details={}
+    for league,model in (models or {}).items():
+        unavailable=any(x.startswith(league+' historical') for x in errors)
+        details[league]={'available':not unavailable,'training_games':(training_counts or {}).get(league,0),
+                         'same_day_finals':(added_finals or {}).get(league,0),'home_advantage':model['home_advantage'],
+                         'rest_weight':model['rest_weight'],'form_weight':model.get('form_weight',0),
+                         'selection_season':model.get('validation_season'),'holdout_season':model.get('holdout_season'),
+                         'selection_count':model.get('selection_count'),'holdout_count':model.get('holdout_count'),
+                         'candidate_name':model.get('candidate_name'),'candidate_passed':model.get('candidate_passed',False)}
+    return {'generated_at':now.isoformat(),'model':'Experimental Elo + market baseline','source':'AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores','accuracy':{'wins':wins,'losses':losses,'voids':voids,'pending':pending,'percent':round(100*wins/(wins+losses),1) if wins+losses else None},'picks':active,'history':history,'model_details':details,'errors':errors}
 
 def main():
     now=datetime.now(timezone.utc); today=now.astimezone(ET).date(); errors=[]; games=[]; nfl_locations={}
@@ -289,6 +382,8 @@ def main():
     data_dir=ROOT/'data'; data_dir.mkdir(exist_ok=True)
     ledger_path=data_dir/'predictions.json'
     ledger=json.loads(ledger_path.read_text()) if ledger_path.exists() else []
+    legacy_path=data_dir/'legacy_pick_quotes.json'
+    if legacy_path.exists(): backfill_initial_books(ledger,json.loads(legacy_path.read_text()))
     refs_path=data_dir/'referee_history.json'
     refs=json.loads(refs_path.read_text()) if refs_path.exists() else []
     try:
@@ -298,15 +393,17 @@ def main():
         print('NBA referee source unavailable:',type(e).__name__)
     refs_path.write_text(json.dumps(refs,indent=2)+'\n')
     finals=[{'id':g['id'],'home':g['home'],'away':g['away'],'home_score':g['home_score'],'away_score':g['away_score']} for g in games if g['date']<=today]
-    espn_starts={}
+    espn_starts={}; espn_finals=[]
     for league,sport in [('NBA','basketball/nba'),('NFL','football/nfl')]:
         for days_ago in range(0,4):
             day=(today-timedelta(days=days_ago)).strftime('%Y%m%d')
             try:
                 payload=json.loads(get(f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}',10))
-                finals.extend(parse_espn_results(payload,league)); espn_starts.update(parse_espn_starts(payload,league))
+                result=parse_espn_results(payload,league)
+                finals.extend(result); espn_finals.extend(result); espn_starts.update(parse_espn_starts(payload,league))
             except Exception as e: errors.append(f'{league} scores {day} unavailable ({type(e).__name__})')
     grade_ledger(ledger,finals,now)
+    added_finals=apply_same_day_finals(models,espn_finals,today,nfl_locations,now)
     markets=build_market(raw,now)
     for event in markets.values():
         if event['league']=='NFL' and event['id'] in nfl_locations: event['neutral']=nfl_locations[event['id']]
@@ -316,7 +413,7 @@ def main():
     blocked={('NBA' if x.startswith('NBA historical') else 'NFL') for x in errors if x.startswith(('NBA historical','NFL historical'))}
     permitted={k:v for k,v in markets.items() if v['league'] not in blocked and (v['league']!='NFL' or 'neutral' in v)}
     print('Training games:', len([x for x in games if x['league']=='NBA']), 'NBA;', len([x for x in games if x['league']=='NFL']), 'NFL. Fresh matchups:', len(markets))
-    for league,model in models.items(): print('MODEL',league,'validation',model.get('validation_season'),'games',model.get('validation_count'),'brier',model.get('validation_brier'),'params',model['k'],model['home_advantage'],model['rest_weight'])
+    for league,model in models.items(): print('MODEL',league,'selection',model.get('validation_season'),'holdout',model.get('holdout_season'),'games',model.get('validation_count'),'brier',model.get('validation_brier'),'params',model['k'],model['home_advantage'],model['rest_weight'],model.get('form_weight',0),'same-day finals',added_finals[league])
     for event in permitted.values():
         start=datetime.fromisoformat(event['starts_at'])
         if start.astimezone(ET).date()!=today or len(event['books'])<3: continue
@@ -327,7 +424,8 @@ def main():
         print('TODAY', event['league'],event['away'],'at',event['home'],'model home',round(100*homep,1),'best home',max(v['home'] for v in event['books'].values()),'best away',max(v['away'] for v in event['books'].values()))
     ledger.extend(choose_candidates(permitted,models,now,ledger))
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
-    board=render_board(markets,ledger,now,errors)
+    training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
+    board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
     (ROOT/'dist'/'board.json').write_text(json.dumps(board,indent=2)+'\n')
     print('Board:',len(board['picks']),'active picks;',board['accuracy']['wins'],'wins;',board['accuracy']['losses'],'losses;',len(errors),'source warnings')
     for e in errors: print('SOURCE:',e)

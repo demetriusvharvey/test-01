@@ -1,0 +1,13 @@
+[
+  {
+    "id": "api-event-example",
+    "sport_key": "basketball_nba",
+    "commence_time": "2026-10-28T03:00:00Z",
+    "home_team": "Los Angeles Lakers",
+    "away_team": "Portland Trail Blazers",
+    "bookmakers": [
+      {"key":"fanduel","title":"FanDuel","last_update":"2026-10-28T01:00:00Z","markets":[{"key":"h2h","last_update":"2026-10-28T01:00:00Z","outcomes":[{"name":"Los Angeles Lakers","price":-126},{"name":"Portland Trail Blazers","price":108}]}]},
+      {"key":"williamhill_us","title":"Caesars","last_update":"2026-10-28T01:00:00Z","markets":[{"key":"h2h","outcomes":[{"name":"Los Angeles Lakers","price":-125},{"name":"Portland Trail Blazers","price":105}]}]}
+    ]
+  }
+]

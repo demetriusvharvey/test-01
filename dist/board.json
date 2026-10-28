@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T13:03:29.405638+00:00",
+  "generated_at": "2026-10-28T13:04:23.908635+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -57,6 +57,28 @@
       "retail_reference_probability": 0.6636481241914618,
       "retail_price_edge": -0.013771230647247834,
       "model_edge_vs_retail": null,
+      "schedule_context": {
+        "teams": {
+          "home": {
+            "team": "Dallas Mavericks",
+            "last_game": "2026-10-26",
+            "rest_days": 1,
+            "back_to_back": false
+          },
+          "away": {
+            "team": "Oklahoma City Thunder",
+            "last_game": "2026-10-26",
+            "rest_days": 1,
+            "back_to_back": false
+          }
+        },
+        "source": "completed game data available to current pipeline",
+        "observed_at": "2026-10-28T13:04:23.908635+00:00",
+        "travel": "unknown",
+        "time_zone_change": "unknown",
+        "note": "previous-game dates may be incomplete; market may already reflect the schedule",
+        "used_in_prediction": false
+      },
       "line_history": {
         "book": "BetRivers",
         "provider": "agentbets",
@@ -138,6 +160,28 @@
       "retail_reference_probability": 0.5936975159154071,
       "retail_price_edge": -0.009477087259196049,
       "model_edge_vs_retail": null,
+      "schedule_context": {
+        "teams": {
+          "home": {
+            "team": "Minnesota Timberwolves",
+            "last_game": "2026-10-26",
+            "rest_days": 1,
+            "back_to_back": false
+          },
+          "away": {
+            "team": "Golden State Warriors",
+            "last_game": "2026-10-26",
+            "rest_days": 1,
+            "back_to_back": false
+          }
+        },
+        "source": "completed game data available to current pipeline",
+        "observed_at": "2026-10-28T13:04:23.908635+00:00",
+        "travel": "unknown",
+        "time_zone_change": "unknown",
+        "note": "previous-game dates may be incomplete; market may already reflect the schedule",
+        "used_in_prediction": false
+      },
       "line_history": {
         "book": "FanDuel",
         "provider": "agentbets",
@@ -214,6 +258,28 @@
       "retail_reference_probability": 0.5732638603334235,
       "retail_price_edge": -0.018572874360454072,
       "model_edge_vs_retail": null,
+      "schedule_context": {
+        "teams": {
+          "home": {
+            "team": "Atlanta Hawks",
+            "last_game": "2026-10-26",
+            "rest_days": 1,
+            "back_to_back": false
+          },
+          "away": {
+            "team": "Miami Heat",
+            "last_game": "2026-10-26",
+            "rest_days": 1,
+            "back_to_back": false
+          }
+        },
+        "source": "completed game data available to current pipeline",
+        "observed_at": "2026-10-28T13:04:23.908635+00:00",
+        "travel": "unknown",
+        "time_zone_change": "unknown",
+        "note": "previous-game dates may be incomplete; market may already reflect the schedule",
+        "used_in_prediction": false
+      },
       "line_history": {
         "book": "Caesars",
         "provider": "agentbets",
@@ -551,7 +617,7 @@
     }
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T13:03:29.405638+00:00",
+    "pipeline_generated_at": "2026-10-28T13:04:23.908635+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T13:00:00+00:00",
     "oldest_quote_at": "2026-10-28T13:00:00+00:00",

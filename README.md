@@ -6,6 +6,8 @@ The new paper engine predicts from team Elo and completed game results independe
 
 Prior rest and scoring-margin experiments remain disabled until the preregistered protocol in [HYPOTHESES.md](HYPOTHESES.md) is satisfied. Referees, injuries, lineups, quarterbacks and travel are not direct model inputs. Visitor ideas are stored only in that browser and are not automatically used by the model.
 
+The preregistered validation bar requires at least 300 settled prospective paper picks in the relevant segment, positive sharp closing-line value with a confidence interval excluding zero, and calibration no worse than a matched-time market benchmark. The stricter model-first protocol also requires adjusted head-to-head evidence, a nonnegative lower paper-ROI interval, two independent season replications and a later untouched holdout. An hourly retail quote is not a verified sharp close. Until these requirements are met, the model is not validated as profitable; no system action places a bet.
+
 ## Data and architecture
 
 The standard-library Python program is `scripts/pipeline.py`, a compatibility entry point to `scripts/line_lab/` components. GitHub Actions updates approximately hourly; the static Vercel page checks for a newer snapshot each minute, but the underlying AgentBets source itself updates about hourly. Runs may be delayed, and stale, incomplete, conflicting or unverified prices suppress affected picks.

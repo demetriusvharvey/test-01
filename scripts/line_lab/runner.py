@@ -18,6 +18,7 @@ from .nfl_shadow import build_nfl_shadow_context
 from .ledger_v2 import attach_retail_closing_proxies, paper_breakdowns, validate_transition
 from .model_stack import record_challenger_forecasts
 from .trust import record_candidates
+from .validation import progress_from_ledger
 
 
 def main():
@@ -165,6 +166,7 @@ def main():
     except Exception as e:
         board['study']={};board['errors'].append('Paper study report unavailable ('+type(e).__name__+')')
     board['paper_breakdowns']=paper_breakdowns(ledger)
+    board['validation_progress']=progress_from_ledger(ledger)
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
                             'cross_check_independent':False}

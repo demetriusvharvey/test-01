@@ -1,0 +1,7 @@
+# Phase 11: prospective validation and remaining evidence
+
+The validation helper calculates paired log-loss differences, Brier scores, flat-unit paper ROI and probability-scale sharp closing-line value only from qualified same-game, pregame, prospective records. It requires an independently sourced, rights-verified and certified sharp close; a retail last-observed proxy does not qualify. Timestamps after a forecast or at/after the game are excluded. Game-day-block intervals and the preregistered league-family BH correction remain unavailable below their sample thresholds.
+
+The registered bar requires at least 300 settled prospective picks in the relevant league/segment, a positive sharp-CLV interval, a nonnegative lower ROI interval, improved matched-time sharp log loss after correction, calibration no worse than the sharp comparator, two independent replications and a later untouched holdout. Even a hypothetical evidence pass does not place wagers or automatically promote a model. The site now receives honest counts for eligible paper picks and marks validation incomplete; no independent certified sharp close feed is configured, so the current verified sharp-close count is zero.
+
+There is no claim that the Lakers result established a flaw in a specific feature, and no invented historical backtest, spread-adjusted slippage, certified closing line, confidence interval or profit is reported. A rigorous, rights-compatible walk-forward backtest with realistic execution assumptions and enough genuinely prospective outcomes is still outstanding.

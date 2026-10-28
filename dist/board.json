@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T12:44:03.946441+00:00",
+  "generated_at": "2026-10-28T12:45:13.637981+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -433,6 +433,24 @@
     "edge_bucket": {},
     "book": {},
     "pick_phase": {}
+  },
+  "validation_progress": {
+    "NBA": {
+      "settled_paper_picks": 0,
+      "required_picks": 300,
+      "verified_sharp_closes": 0,
+      "validated_profitable": false,
+      "staking_allowed": false,
+      "reason": "no configured independent verified sharp-close feed or untouched validation"
+    },
+    "NFL": {
+      "settled_paper_picks": 0,
+      "required_picks": 300,
+      "verified_sharp_closes": 0,
+      "validated_profitable": false,
+      "staking_allowed": false,
+      "reason": "no configured independent verified sharp-close feed or untouched validation"
+    }
   },
   "source_status": {
     "the_odds_api": "missing_api_key",

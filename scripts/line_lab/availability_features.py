@@ -102,3 +102,54 @@ def availability_features(event,context,prediction_at):
                 'features':{name+'_difference':home[name]-away[name] for name in ('out','doubtful','questionable')},
                 'used_in_prediction':False,'limitations':'listed players only; team report and player impact may be incomplete'}
     except (KeyError,TypeError,ValueError,OverflowError):return None
+
+
+NFL_POSITION_GROUPS={
+    'QB':'QB','RB':'BACK','FB':'BACK','WR':'RECEIVER','TE':'RECEIVER',
+    'C':'LINE','G':'LINE','OG':'LINE','T':'LINE','OT':'LINE','OL':'LINE',
+    'DT':'FRONT','DE':'FRONT','DL':'FRONT','NT':'FRONT','EDGE':'FRONT',
+    'LB':'LINEBACKER','ILB':'LINEBACKER','OLB':'LINEBACKER',
+    'CB':'SECONDARY','DB':'SECONDARY','S':'SECONDARY','FS':'SECONDARY','SS':'SECONDARY',
+    'K':'SPECIAL','P':'SPECIAL','LS':'SPECIAL',
+}
+NFL_GROUPS=('QB','BACK','RECEIVER','LINE','FRONT','LINEBACKER','SECONDARY','SPECIAL','OTHER')
+NFL_STATUSES=('out','doubtful','questionable')
+
+
+def nfl_position_features(event,context,prediction_at):
+    """Frozen NFL injury counts by position group, without assumed player value.
+
+    An absent player or practice-only status is never counted as available.
+    Unrecognized positions remain OTHER. Both teams require untruncated, fresh
+    observed reports. The report's capture time is not its publication time.
+    """
+    try:
+        now,start=aware(prediction_at),aware(event['starts_at'])
+        observed=aware(context['latest_observed_at'])
+        if (event['league']!='NFL' or not observed<=now<start or now-observed>timedelta(hours=30)
+                or context.get('source')!='nflverse injury and practice reports'
+                or context.get('used_in_prediction') is not False or context.get('incomplete') is not False):return None
+        teams={}
+        for side in ('home','away'):
+            team=context['teams'][side];entries=team['entries']
+            if (team['team']!=event[side+'_name'] or not isinstance(entries,list)
+                    or not entries or team['total_entries']!=len(entries)):return None
+            counts={(group,status):0 for group in NFL_GROUPS for status in NFL_STATUSES}
+            seen=set();reported=0
+            for player in entries:
+                name=player['name'];stamp=aware(player['observed_at'])
+                if not isinstance(name,str) or not name or name in seen or stamp>now or now-stamp>timedelta(hours=30):return None
+                seen.add(name)
+                status=str(player.get('report_status') or '').strip().lower()
+                if status in NFL_STATUSES:
+                    code=str(player.get('position') or '').strip().upper()
+                    group=NFL_POSITION_GROUPS.get(code,'OTHER')
+                    counts[group,status]+=1;reported+=1
+            if not reported:return None
+            teams[side]=counts
+        features={f'{group.lower()}_{status}_difference':teams['home'][group,status]-teams['away'][group,status]
+                  for group in NFL_GROUPS for status in NFL_STATUSES}
+        return {'schema':'nfl-position-status-v1','source':context['source'],
+                'observed_at':observed.isoformat(),'features':features,'used_in_prediction':False,
+                'limitations':'listed, game-designated players only; role and replacement impact unverified'}
+    except (KeyError,TypeError,ValueError,OverflowError):return None

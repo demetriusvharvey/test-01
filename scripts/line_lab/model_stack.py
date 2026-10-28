@@ -143,7 +143,7 @@ def latest_candidates(root,league,as_of):
         try:
             model=json.loads(payload)
             version=model.get('model_version')
-            if version not in ('pure-elasticnet-v1','pure-stumpboost-v1','availability-logistic-v1') or version in seen:continue
+            if version not in ('pure-elasticnet-v1','pure-stumpboost-v1','availability-logistic-v1','nfl-position-status-logistic-v1') or version in seen:continue
             if aware(completed)<=now and aware(model['trained_before'])<now and model.get('promoted') is False:
                 result.append((key,model));seen.add(version)
         except (KeyError,TypeError,ValueError):continue
@@ -165,6 +165,9 @@ def predict_candidate(model,features,prediction_at,feature_observed_at):
     if model.get('model_version')=='availability-logistic-v1':
         from .availability_model import predict_availability_shadow
         return predict_availability_shadow(model,features.get('baseline_probability'),features,prediction_at,feature_observed_at)
+    if model.get('model_version')=='nfl-position-status-logistic-v1':
+        from .position_status_model import predict_position_shadow
+        return predict_position_shadow(model,features.get('baseline_probability'),features,prediction_at,feature_observed_at)
     return None
 
 
@@ -176,7 +179,7 @@ def model_features(model,event):
             'games_played_difference':counts[home]-counts[away]}
 
 
-def record_challenger_forecasts(root,markets,models,now,availability_contexts=None):
+def record_challenger_forecasts(root,markets,models,now,availability_contexts=None,position_contexts=None):
     """Log candidate forecasts before games; do not influence pick selection."""
     observed=aware(now);path=Path(root)/'observations'/'challenger_forecasts'/(observed.date().isoformat()+'.sqlite');added=0
     candidates={league:latest_candidates(root,league,now) for league in ('NBA','NFL')}
@@ -188,8 +191,9 @@ def record_challenger_forecasts(root,markets,models,now,availability_contexts=No
             group=candidates.get(event['league'])
             if not group or aware(event['starts_at'])<=observed:continue
             for key,model in group:
-                if model.get('model_version')=='availability-logistic-v1':
-                    context=(availability_contexts or {}).get(event['id'])
+                version=model.get('model_version')
+                if version in ('availability-logistic-v1','nfl-position-status-logistic-v1'):
+                    context=((position_contexts if version=='nfl-position-status-logistic-v1' else availability_contexts) or {}).get(event['id'])
                     if not context:continue
                     from .model import project_home
                     base=project_home(models[event['league']],event['home'],event['away'],aware(event['starts_at']),event.get('neutral',False))

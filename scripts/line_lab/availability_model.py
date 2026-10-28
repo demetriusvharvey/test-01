@@ -32,7 +32,7 @@ def _logit(p):return math.log(p/(1-p))
 
 
 def _fit(rows,l2,epochs=400,step=.03):
-    weights=[0.0]*len(FEATURES);intercept=0.0;n=len(rows)
+    weights=[0.0]*len(rows[0]['vector']);intercept=0.0;n=len(rows)
     for _ in range(epochs):
         grad=[0.0]*len(weights);bias=0.0
         for row in rows:

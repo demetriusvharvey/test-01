@@ -218,3 +218,23 @@ untouched season. It cannot prove the model's current accuracy or betting
 value. Archive research only for NBA because upstream usage rights remain
 unresolved. The actual forward winner accuracy continues to use only the
 immutable `data/winner_predictions.json` ledger.
+
+## H022 — NFL position-status research challenger
+
+Registered before running a real-data evaluation. A frozen pregame nflverse
+injury/practice snapshot for both teams supplies out, doubtful and questionable
+count differences in nine position groups (QB, back, receiver/TE, offensive
+line, front, linebacker, secondary, special teams, other). No practice-only
+status is converted into a game designation, and no unlisted player is assumed
+healthy. Add these counts as regularized logit adjustments to the frozen Elo
+home probability; choose the penalty on a later prior season, with at least
+500 earlier games, 100 validation games and three eligible seasons. This
+tests whether position-aware statuses improve future log loss and Brier beyond
+team-wide counts and Elo. Record candidate predictions before kickoff and
+compare on the same game and timestamp against frozen Elo by calendar-day
+block. Treat H016 and H022 as one multiple-test family with adjusted p-values.
+Never promote based on training/validation alone, a small prospective sample,
+or the most favorable position coefficient. This is not a player-impact model,
+cannot supply justified questionable-player probabilities, and does not
+influence picks until independent later results establish benefit. NBA
+upstream status rights remain unresolved and are excluded from this challenger.

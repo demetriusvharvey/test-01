@@ -24,7 +24,7 @@ from .line_movement import attach_histories
 from .schedule_context import attach_rest_context
 from .referees import attach_current_officials
 from .availability import attach_nfl_reports, nfl_report_context
-from .availability_features import availability_features, position_availability_snapshot
+from .availability_features import availability_features, position_availability_snapshot, nfl_position_features
 from .simulator import as_of_histories
 from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
@@ -202,7 +202,7 @@ def main():
     # If a league's training history is missing, do not produce predictions for it.
     blocked={('NBA' if x.startswith('NBA historical') else 'NFL') for x in errors if x.startswith(('NBA historical','NFL historical'))}
     permitted={k:v for k,v in markets.items() if archive_ok and not day_rolled and v['league'] not in blocked and (v['league']!='NFL' or 'neutral' in v)}
-    status_by_game={};nba_context={};provider_context={};positions_by_game={};simulations_by_game={}
+    status_by_game={};nba_context={};provider_context={};positions_by_game={};nfl_position_by_game={};simulations_by_game={}
     if injury_payload is not None:
         try:
             temp={'picks':[{'id':key} for key in permitted]}
@@ -221,6 +221,9 @@ def main():
             context=nba_context.get(key) if event['league']=='NBA' else nfl_report_context(data_root,event,nfl_csv,nfl_observed_at,now.isoformat(),max_players=1000) if data_root and nfl_csv and nfl_observed_at else None
             features=availability_features(event,context,now.isoformat())
             if features:status_by_game[key]=features
+            if event['league']=='NFL':
+                nfl_positions=nfl_position_features(event,context,now.isoformat())
+                if nfl_positions:nfl_position_by_game[key]=nfl_positions
             position_snapshot=position_availability_snapshot(event,provider_context.get(key),now.isoformat())
             if position_snapshot:positions_by_game[key]=position_snapshot
         except Exception as exc:errors.append(event['league']+' injury research unavailable ('+type(exc).__name__+')')
@@ -241,11 +244,13 @@ def main():
                 try:qb_shadow=build_nfl_shadow_context(data_root,nfl_csv,nfl_observed_at,now.isoformat())
                 except Exception as exc:print('NFL shadow context unavailable:',type(exc).__name__)
             shadow={key:{'quarterback':qb_shadow.get(key),'availability':status_by_game.get(key),
-                         'position_availability':positions_by_game.get(key),'simulation':simulations_by_game.get(key)}
-                    for key in permitted if key in qb_shadow or key in status_by_game or key in positions_by_game or key in simulations_by_game}
+                         'position_availability':positions_by_game.get(key),
+                         'nfl_position_status':nfl_position_by_game.get(key),
+                         'simulation':simulations_by_game.get(key)}
+                    for key in permitted if key in qb_shadow or key in status_by_game or key in positions_by_game or key in nfl_position_by_game or key in simulations_by_game}
             forecast_count=record_forecasts(data_root,permitted,models,now.isoformat(),shadow)
             print('Paper study:',forecast_count,'forecasts;',result_count,'confirmed outcomes')
-            challenger_count=record_challenger_forecasts(data_root,permitted,models,now.isoformat(),status_by_game)
+            challenger_count=record_challenger_forecasts(data_root,permitted,models,now.isoformat(),status_by_game,nfl_position_by_game)
             print('Shadow challenger:',challenger_count,'forecasts; no automatic promotion')
     except Exception as e:
         errors.append('Paper study storage unavailable ('+type(e).__name__+')')

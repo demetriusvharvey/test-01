@@ -113,3 +113,15 @@ This makes the timing gap visible; it does not imply the injury status changed
 or that the model quantified player impacts. No forecast history is rewritten.
 Local suite: 147 passing; browser script syntax check passed. The status
 of the new GitHub CI and deployment is verified after the corresponding commit.
+
+## Position-aware research path — October 28, 2026
+
+An NFL-only position-status challenger now records all nine position groups
+and three game designations from captured nflverse reports before kickoff. A
+chronological, regularized logistic adjustment can train when enough eligible
+frozen reports and confirmed later outcomes exist, then record same-time
+shadow forecasts against Elo for paired forward evaluation. Its tests are
+synthetic integrity checks, not evidence that injury adjustment improves
+prediction. It is not used by the public winner picks. See
+`reports/position_status_challenger.md`. The full player-impact, NBA injury,
+simulation, market validation and untouched-forward requirements remain open.

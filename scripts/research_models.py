@@ -15,6 +15,7 @@ from scripts.line_lab.history import aware
 from scripts.line_lab.model_stack import append_trial,fit_elastic_net_shadow
 from scripts.line_lab.boosted_shadow import fit_boosted_shadow
 from scripts.line_lab.availability_model import fit_availability_shadow
+from scripts.line_lab.position_status_model import fit_position_shadow
 
 
 def load_training_rows(root,as_of=None):
@@ -47,7 +48,7 @@ def load_training_rows(root,as_of=None):
     return rows,len(forecasts),len(outcomes)
 
 
-def load_availability_rows(root,as_of):
+def load_availability_rows(root,as_of,feature_key='availability',schema='availability-counts-v1'):
     """Join frozen status features only to subsequently observed final scores."""
     forecasts=read_forecasts(root);path=Path(root)/'observations'/'forecast_outcomes.sqlite';outcomes={}
     if path.exists():
@@ -58,8 +59,8 @@ def load_availability_rows(root,as_of):
         out=confirmed.get(forecast['game_id']) if forecast['league']=='NFL' else outcomes.get(forecast['game_id'])
         if not out or out['home_score']==out['away_score'] or (out['home'],out['away'])!=(forecast['home'],forecast['away']):continue
         try:
-            snapshot=json.loads(forecast['feature_snapshot']);status=(snapshot.get('shadow_context') or {}).get('availability')
-            if not isinstance(status,dict) or status.get('schema')!='availability-counts-v1' or status.get('used_in_prediction') is not False:continue
+            snapshot=json.loads(forecast['feature_snapshot']);status=(snapshot.get('shadow_context') or {}).get(feature_key)
+            if not isinstance(status,dict) or status.get('schema')!=schema or status.get('used_in_prediction') is not False:continue
             start=aware(forecast['starts_at']);day=start.astimezone(ET).date();year=day.year if day.month>=8 else day.year-1
             rights=(forecast['league']=='NFL' and out.get('source')=='nflverse' and
                     status.get('source')=='nflverse injury and practice reports' and
@@ -78,11 +79,12 @@ def main():
     parser=argparse.ArgumentParser();parser.add_argument('--data-root',required=True);parser.add_argument('--output',default='reports/model_registry.md');args=parser.parse_args()
     now=datetime.now(timezone.utc).isoformat();rows,forecasts,outcomes=load_training_rows(args.data_root,now)
     availability_rows=load_availability_rows(args.data_root,now)
+    position_rows=load_availability_rows(args.data_root,now,'nfl_position_status','nfl-position-status-v1')
     lines=['# Weekly model challenger registry','',f'Run {now}: {forecasts} forecast snapshots, {outcomes} outcome records, {len(rows)} matched rows before eligibility.',
-           f'Availability: {len(availability_rows)} matched snapshots before time and source eligibility checks.', '',
+           f'Availability: {len(availability_rows)} team-status and {len(position_rows)} NFL position-status matched snapshots before time and source eligibility checks.', '',
            '| League | Model | Status | Eligible training games | Validation season | Promoted |','| --- | --- | --- | ---: | --- | --- |']
     for league in ('NBA','NFL'):
-        for family,fit,training in (('pure-elasticnet-v1',fit_elastic_net_shadow,rows),('pure-stumpboost-v1',fit_boosted_shadow,rows),('availability-logistic-v1',fit_availability_shadow,availability_rows)):
+        for family,fit,training in (('pure-elasticnet-v1',fit_elastic_net_shadow,rows),('pure-stumpboost-v1',fit_boosted_shadow,rows),('availability-logistic-v1',fit_availability_shadow,availability_rows),('nfl-position-status-logistic-v1',fit_position_shadow,position_rows)):
             try:
                 candidate=fit(training,league,now)
                 trial=append_trial(args.data_root,league,training,now,candidate,family=family)
@@ -93,7 +95,7 @@ def main():
                 lines.append(f'| {league} | {family} | failed: {type(exc).__name__} | — | — | no |')
                 print('Challenger',league,family,'failed',type(exc).__name__,'trial',trial)
     lines += ['', 'Both pure challengers use rating difference, home advantage and games-played difference, without odds, an anchor, spreads or totals. The fixed-grid monotonic boosted-stump model is a standard-library research implementation, not XGBoost, LightGBM, CatBoost or Optuna. Inner validation uses a later prior season; the artifact is refit only on data settled before this run, then may produce separately logged future shadow forecasts. It is never automatically promoted by training alone.',
-              '', f'The availability challenger has {len(availability_rows)} matched snapshots before time and rights screening. It learns only from recorded team-status counts on top of a frozen team forecast; it has no individual player value, is not a complete lineup model, and does not change picks.',
+              '', f'The availability challengers have {len(availability_rows)} team-count and {len(position_rows)} NFL position-group snapshots before time and rights screening. They learn from frozen pregame listed statuses on top of Elo; neither has individual player value, is a complete lineup model, or changes picks.',
               '', 'The default training gate requires at least 500 earlier training games, 100 validation games and three seasons with eligible point-in-time data. Eligibility and missingness can make the useful sample much smaller than raw snapshot counts. NBA inputs are blocked pending rights review. No model-vs-sharp or profit result is assumed.', '']
     Path(args.output).parent.mkdir(parents=True,exist_ok=True);Path(args.output).write_text('\n'.join(lines),encoding='utf-8')
 

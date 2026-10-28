@@ -1,8 +1,42 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0d1816"><meta name="description" content="Daily NBA and NFL moneyline picks and sportsbook odds."><title>Line Lab — Daily Picks</title><link rel="stylesheet" href="style.css"></head><body>
-<header class="topbar"><div class="wrap top-inner"><a class="brand" href="/" aria-label="Line Lab"><span class="brand-mark">L<span>/</span></span><span>LINE<span class="brand-green">LAB</span><small>DAILY MONEYLINES</small></span></a><span class="top-note"><i></i> NBA + NFL</span></div></header>
-<main class="wrap"><div class="intro"><div><div class="eyebrow"><span></span> TODAY’S BOARD</div><h1>Daily picks<span>.</span></h1><p>Single-game moneylines. Find the best price.</p></div><div class="date-box"><span id="date">TODAY</span><strong id="date-full">—</strong></div></div>
-<section class="accuracy" aria-label="Model accuracy"><div class="accuracy-main"><span class="acc-icon">↗</span><div><span class="micro">MODEL ACCURACY</span><strong id="accuracy">—</strong><small id="record">No settled picks yet</small></div></div><div class="accuracy-note"><span class="tiny-dot"></span><div><strong>EXPERIMENTAL MODEL</strong><p>Accuracy counts saved picks after games finish. It does not measure profit.</p></div></div></section>
-<div class="board-head"><div><h2>Today’s picks <span id="count">—</span></h2><p id="freshness">Loading the latest board…</p></div><div class="league-chip">STRAIGHT ML ONLY</div></div>
-<section id="picks" class="pick-list" aria-live="polite"><div class="loading"><span></span><span></span><span></span></div></section>
-<p class="source-line">Odds via <a href="https://agentbets.ai/odds/" target="_blank" rel="noopener noreferrer">AgentBets</a> · Updated hourly at the source. Verify with the sportsbook.<br>NBA data: <a href="https://boxscorelab.com/downloads/" target="_blank" rel="noopener noreferrer">BoxScore Lab</a> · NFL data: <a href="https://nflreadr.nflverse.com/" target="_blank" rel="noopener noreferrer">nflverse</a>.</p>
-</main><footer class="wrap"><span>LINE<span>LAB</span></span><p>NBA + NFL · RESEARCH PICKS</p></footer><script src="app.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#f8f9fb">
+  <meta name="description" content="NBA and NFL moneyline picks with sportsbook odds and model accuracy.">
+  <title>Daily picks</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page-header">
+      <div>
+        <p class="eyebrow">NBA &amp; NFL · MONEYLINE</p>
+        <h1>Today’s picks</h1>
+        <p id="date-full" class="date">Loading date…</p>
+      </div>
+      <section class="accuracy" aria-label="Model accuracy">
+        <div class="accuracy-heading">Model accuracy <span>Experimental</span></div>
+        <div class="accuracy-value" id="accuracy">—</div>
+        <p class="accuracy-record" id="record">No settled picks yet</p>
+      </section>
+    </header>
+
+    <div class="list-header">
+      <p id="freshness" aria-live="polite">Loading the latest picks…</p>
+      <span id="count"></span>
+    </div>
+    <section id="picks" class="pick-list" aria-label="Today’s moneyline picks" aria-live="polite">
+      <div class="loading">Loading picks…</div>
+    </section>
+
+    <footer class="sources">
+      <p>Odds update hourly. Verify the price with the sportsbook.</p>
+      <p>Odds: <a href="https://agentbets.ai/odds/" target="_blank" rel="noopener noreferrer">AgentBets</a> · NBA data: <a href="https://boxscorelab.com/downloads/" target="_blank" rel="noopener noreferrer">BoxScore Lab</a> · NFL data: <a href="https://nflreadr.nflverse.com/" target="_blank" rel="noopener noreferrer">nflverse</a></p>
+      <p>Accuracy is win rate, not profit.</p>
+    </footer>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>

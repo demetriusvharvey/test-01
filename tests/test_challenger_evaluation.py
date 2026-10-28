@@ -40,7 +40,7 @@ class ChallengerEvaluationTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
             append_results(root,results,self.now);append_results(root,results,self.now)
             with closing(sqlite3.connect(Path(root)/'observations/challenger_tests.sqlite')) as db:
-                self.assertEqual(db.execute('SELECT count(*) FROM challenger_tests').fetchone()[0],2)
+                self.assertEqual(db.execute('SELECT count(*) FROM challenger_tests').fetchone()[0],4)
                 with self.assertRaises(sqlite3.IntegrityError):db.execute('DELETE FROM challenger_tests')
 
 

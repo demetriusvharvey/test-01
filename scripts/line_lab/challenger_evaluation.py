@@ -54,7 +54,7 @@ def evaluate(baselines,candidates,trials,outcomes,now):
         if not version or league not in ('NBA','NFL') or not row.get('game_id'):continue
         versions.add((league,version));first.setdefault((league,version,row['game_id']),row)
     # Both league hypotheses exist even when no candidate has qualified yet.
-    versions.update((league,'pure-elasticnet-v1') for league in ('NBA','NFL'))
+    versions.update((league,version) for league in ('NBA','NFL') for version in ('pure-elasticnet-v1','pure-stumpboost-v1'))
     matched=defaultdict(list);excluded=defaultdict(int)
     for (league,version,game_id),row in first.items():
         key=(league,version);trial=trials.get(row.get('model_id'),{});model=trial.get('artifact',{})

@@ -121,28 +121,47 @@ def predict_elastic_shadow(model,features,prediction_at,feature_observed_at):
     except (KeyError,TypeError,ValueError,ZeroDivisionError):return None
 
 
-def append_trial(root,league,rows,completed_at,artifact=None,error=None):
+def append_trial(root,league,rows,completed_at,artifact=None,error=None,family='pure-elasticnet-v1'):
     now=aware(completed_at);path=Path(root)/'observations'/'model_registry.sqlite';path.parent.mkdir(parents=True,exist_ok=True)
     digest=hashlib.sha256(json.dumps(rows,sort_keys=True,separators=(',',':'),default=str).encode()).hexdigest()
     status='failed' if error else 'candidate' if artifact else 'insufficient_data'
-    payload=artifact or {'reason':error or 'not enough verified, settled prior seasons','promoted':False}
-    key=hashlib.sha256((league+'|'+now.isoformat()+'|'+digest).encode()).hexdigest()
+    payload=artifact or {'model_version':family,'reason':error or 'not enough verified, settled prior seasons','promoted':False}
+    key=hashlib.sha256((league+'|'+family+'|'+now.isoformat()+'|'+digest).encode()).hexdigest()
     with closing(sqlite3.connect(path)) as db, db:
         db.executescript(REGISTRY)
         db.execute('INSERT OR IGNORE INTO trials VALUES (?,?,?,?,?,?)',(key,league,now.isoformat(),status,digest,json.dumps(payload,sort_keys=True)))
     return key
 
 
-def latest_candidate(root,league,as_of):
+def latest_candidates(root,league,as_of):
     path=Path(root)/'observations'/'model_registry.sqlite';now=aware(as_of)
-    if not path.exists():return None
+    if not path.exists():return []
     with closing(sqlite3.connect(path)) as db:
         rows=db.execute('SELECT trial_id,completed_at,artifact_json FROM trials WHERE league=? AND status=? ORDER BY completed_at DESC',(league,'candidate')).fetchall()
+    result=[];seen=set()
     for key,completed,payload in rows:
         try:
             model=json.loads(payload)
-            if aware(completed)<=now and aware(model['trained_before'])<now and model.get('promoted') is False:return key,model
+            version=model.get('model_version')
+            if version not in ('pure-elasticnet-v1','pure-stumpboost-v1') or version in seen:continue
+            if aware(completed)<=now and aware(model['trained_before'])<now and model.get('promoted') is False:
+                result.append((key,model));seen.add(version)
         except (KeyError,TypeError,ValueError):continue
+    return result
+
+
+def latest_candidate(root,league,as_of):
+    """Backward-compatible single-candidate view."""
+    candidates=latest_candidates(root,league,as_of)
+    return candidates[0] if candidates else None
+
+
+def predict_candidate(model,features,prediction_at,feature_observed_at):
+    if model.get('model_version')=='pure-elasticnet-v1':
+        return predict_elastic_shadow(model,features,prediction_at,feature_observed_at)
+    if model.get('model_version')=='pure-stumpboost-v1':
+        from .boosted_shadow import predict_boosted_shadow
+        return predict_boosted_shadow(model,features,prediction_at,feature_observed_at)
     return None
 
 
@@ -157,20 +176,21 @@ def model_features(model,event):
 def record_challenger_forecasts(root,markets,models,now):
     """Log candidate forecasts before games; do not influence pick selection."""
     observed=aware(now);path=Path(root)/'observations'/'challenger_forecasts'/(observed.date().isoformat()+'.sqlite');added=0
-    candidates={league:latest_candidate(root,league,now) for league in ('NBA','NFL')}
+    candidates={league:latest_candidates(root,league,now) for league in ('NBA','NFL')}
     if not any(candidates.values()):return 0
     path.parent.mkdir(parents=True,exist_ok=True)
     with closing(sqlite3.connect(path)) as db,db:
         db.executescript(FORECASTS)
         for event in markets.values():
-            candidate=candidates.get(event['league'])
-            if not candidate or aware(event['starts_at'])<=observed:continue
+            group=candidates.get(event['league'])
+            if not group or aware(event['starts_at'])<=observed:continue
             inputs=model_features(models[event['league']],event)
             if not inputs:continue
-            key,model=candidate;p=predict_elastic_shadow(model,inputs,now,now)
-            if p is None:continue
             content=json.dumps(inputs,sort_keys=True,separators=(',',':'))
-            identity=hashlib.sha256((event['id']+'|'+key+'|'+observed.isoformat()+'|'+content).encode()).hexdigest()
-            added+=db.execute('INSERT OR IGNORE INTO challenger_forecasts VALUES (?,?,?,?,?,?,?,?,?)',
-                (identity,event['id'],event['league'],key,observed.isoformat(),aware(event['starts_at']).isoformat(),p,content,'shadow_unvalidated')).rowcount
+            for key,model in group:
+                p=predict_candidate(model,inputs,now,now)
+                if p is None:continue
+                identity=hashlib.sha256((event['id']+'|'+key+'|'+observed.isoformat()+'|'+content).encode()).hexdigest()
+                added+=db.execute('INSERT OR IGNORE INTO challenger_forecasts VALUES (?,?,?,?,?,?,?,?,?)',
+                    (identity,event['id'],event['league'],key,observed.isoformat(),aware(event['starts_at']).isoformat(),p,content,'shadow_unvalidated')).rowcount
     return added

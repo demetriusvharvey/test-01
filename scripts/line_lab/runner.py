@@ -24,6 +24,7 @@ from .line_movement import attach_histories
 from .schedule_context import attach_rest_context
 from .referees import attach_current_officials
 from .availability import attach_nfl_reports
+from .research_dashboard import research_dashboard
 
 
 def main():
@@ -184,6 +185,9 @@ def main():
         board['study']={};board['errors'].append('Paper study report unavailable ('+type(e).__name__+')')
     board['paper_breakdowns']=paper_breakdowns(ledger)
     board['validation_progress']=progress_from_ledger(ledger)
+    try:board['research_dashboard']=research_dashboard(data_root,now.isoformat()) if data_root else {}
+    except Exception as e:
+        board['research_dashboard']={};board['errors'].append('Research dashboard unavailable ('+type(e).__name__+')')
     try:
         board['monitoring']=build_monitoring(data_root,now.isoformat(),markets,board['errors']) if data_root else {}
     except Exception as e:

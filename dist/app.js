@@ -96,6 +96,35 @@
       return `<article class="study-league"><div><strong>${league} · ${Number(item.forecast_games)||0} settled games</strong><span class="study-verdict">INCONCLUSIVE</span></div><p>Log loss: model ${number(item.pure_log_loss)} · retail ${number(item.retail_log_loss)}</p><p>Sharp CLV: ${percent(item.sharp_clv)} · Paper ROI: ${percent(item.paper_roi)} (${Number(item.paper_picks)||0} picks)</p><p class="study-muted">Paper ROI interval: ${escape(interval)}</p></article>`;
     }).join('');
   }
+  function researchChart(points,label){
+    const values=points.filter(Number.isFinite);if(values.length<2)return '';
+    const min=Math.min(...values),max=Math.max(...values),range=max-min||1;
+    const coordinates=values.map((value,i)=>`${(4+152*i/(values.length-1)).toFixed(1)},${(40-34*(value-min)/range).toFixed(1)}`).join(' ');
+    return `<svg class="research-chart" viewBox="0 0 160 45" role="img" aria-label="${escape(label)}"><polyline points="${coordinates}"/></svg>`;
+  }
+  function renderResearchDashboard(){
+    const dashboard=(board&&board.research_dashboard)||{},replay=dashboard.paper_replay||{},patterns=Array.isArray(dashboard.patterns)?dashboard.patterns:[];
+    const pct=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'—';
+    const metric=x=>Number.isFinite(x)?x.toFixed(3):'—';
+    const summaries=['NBA','NFL'].map(league=>{
+      const r=replay[league];if(!r)return `<p>${league}: no paper replay yet.</p>`;
+      const curve=Array.isArray(r.equity_curve)?r.equity_curve.map(x=>x.units):[];
+      const chart=researchChart(curve,`${league} settled paper equity in units`);
+      const bins=Array.isArray(r.calibration)?r.calibration.filter(b=>b.n>0&&Number.isFinite(b.mean_probability)&&Number.isFinite(b.win_rate)):[];
+      const enough=Number(r.settled)>=30&&bins.length>0;
+      const calibration=enough?`<svg class="calibration-chart" viewBox="0 0 120 120" role="img" aria-label="${league} model probability versus observed win rate"><line x1="5" y1="115" x2="115" y2="5"/><g>${bins.map(b=>`<circle cx="${(5+110*b.mean_probability).toFixed(1)}" cy="${(115-110*b.win_rate).toFixed(1)}" r="4"><title>${b.n} games</title></circle>`).join('')}</g></svg><p>Calibration: model probability horizontally, observed wins vertically; dots group recorded games.</p>`:'<p>Calibration chart: not enough settled paper games.</p>';
+      return `<div class="research-dashboard-block"><h4>${league} paper replay</h4><p>${Number(r.settled)||0} settled · ${Number(r.pending_or_unresolved)||0} pending or unresolved · ROI ${pct(r.paper_roi)} · Sharp CLV ${pct(r.sharp_clv)} (${Number(r.sharp_close_samples)||0} qualified closes) · Maximum drawdown ${metric(r.max_drawdown_units)} units.</p>${chart||'<p>Equity chart: not enough settled paper results.</p>'}${calibration}</div>`;
+    }).join('');
+    const rows=patterns.map(p=>`<tr><td>${escape(p.id)}</td><td>${escape(p.league)}</td><td>${escape(p.description)}</td><td>${Number(p.games)||0}</td><td>${Number.isFinite(p.effect)?(100*p.effect).toFixed(2)+' pp':'—'}</td><td>${metric(p.adjusted_p)}</td><td>${escape(p.holdout||'not tested')}</td><td>${escape(p.status||'unknown')}</td></tr>`).join('');
+    const patternTable=rows?`<div class="research-table-wrap"><table class="research-table"><thead><tr><th>Test</th><th>League</th><th>Definition</th><th>Games</th><th>Effect</th><th>Adjusted p</th><th>Holdout</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p>No logged pattern tests yet.</p>';
+    const breakdown=(board&&board.paper_breakdowns)||{},segments=[];
+    for(const key of ['league','edge_type','edge_bucket','book','pick_phase'])for(const [name,value] of Object.entries(breakdown[key]||{})){
+      if(!value||!Number.isFinite(value.settled)||value.settled<1)continue;
+      segments.push(`<tr><td>${escape(key.replace('_',' '))}</td><td>${escape(name)}</td><td>${value.settled}</td><td>${pct(value.paper_roi)}</td><td>${pct(value.retail_proxy_clv)} (${Number(value.retail_proxy_clv_samples)||0})</td></tr>`);
+    }
+    const segmentTable=segments.length?`<div class="research-table-wrap"><table class="research-table"><thead><tr><th>Group</th><th>Segment</th><th>Settled</th><th>Paper ROI</th><th>Retail proxy CLV (n)</th></tr></thead><tbody>${segments.join('')}</tbody></table></div><p>Retail last-observed proxies are not certified sharp closes.</p>`:'<p>No settled v2 paper segments yet.</p>';
+    $('research-dashboard').innerHTML=summaries+`<div class="research-dashboard-block"><h4>Pattern tests</h4>${patternTable}</div><div class="research-dashboard-block"><h4>Paper segments</h4>${segmentTable}</div>`;
+  }
   function booksMarkup(books){
     const available=books.map(b=>b.odds).filter(Number.isFinite),best=available.length?Math.max(...available):null;
     return `<div class="odds" aria-label="Sportsbook odds">${books.map(b=>`<div class="book ${b.odds!=null&&b.odds===best?'best':''}"><span class="book-name">${escape(b.name)}</span><div class="book-amount"><strong class="book-odds">${Number.isFinite(b.odds)?odds(b.odds):'—'}</strong>${b.odds!=null&&b.odds===best?'<span class="best-label">Best</span>':''}</div></div>`).join('')}</div>`;
@@ -147,7 +176,7 @@
     return `<article class="pick">${title}<div class="single-odds">Best odds recorded at time of pick${Number.isFinite(p.initial_best_odds)?' <strong>'+odds(p.initial_best_odds)+'</strong>':' unavailable'}</div></article>`;
   }
   function render(){
-    setDailyDetails();renderDates();renderFactors();renderStudy();if(!board)return;
+    setDailyDetails();renderDates();renderFactors();renderStudy();renderResearchDashboard();if(!board)return;
     const accuracy=board.accuracy||{wins:0,losses:0};
     $('accuracy').textContent=accuracy.percent==null?'—':Number(accuracy.percent).toFixed(1)+'%';
     $('record').textContent=(accuracy.wins||0)+'W – '+(accuracy.losses||0)+'L · '+((accuracy.wins||0)+(accuracy.losses||0))+' settled'+(accuracy.pending?' · '+accuracy.pending+' pending':'');

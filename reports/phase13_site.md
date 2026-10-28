@@ -4,4 +4,6 @@ The existing mobile-first single-page layout retains daily picks, sportsbook pri
 
 Observed model percentages and EV are explicitly labeled uncalibrated estimates under the model-first amendment, not assurances. The all-model accuracy counter includes the older legacy model and is not a profit counter. The underlying feed updates approximately hourly, not every minute; the browser merely checks for a new snapshot each minute.
 
-Real sharp anchors, validated confidence/trust scores, official current crews by matchup, injury scenarios, closing-line sparklines, equity curves, calibration charts and a complete research dashboard remain unavailable without verified data and adequate samples. These are not filled with placeholders that look like results.
+The variables tab now has an optional research dashboard displaying the latest recorded pattern tests, paper ROI by populated segment, qualified sharp-CLV sample counts, and paper-replay equity/calibration plots only when actual observations exist. It shows a missing-data message otherwise. Current NBA crew, NFL report entries, observed same-book price movement and schedule context are attached when the corresponding verified or timestamped sources are available.
+
+Real sharp anchors, validated confidence/trust scores, NBA injury scenarios, a certified closing-line sparkline and meaningful equity or calibration evidence remain unavailable without verified data and adequate samples. These are not filled with placeholders that look like results.

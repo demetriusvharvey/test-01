@@ -123,7 +123,7 @@
     const historical=!p.current;
     const statuses={win:'WON',loss:'LOST',void:'VOID',pending:'PENDING'};
     const status=Object.hasOwn(statuses,p.outcome)?p.outcome:'pending';
-    const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:p.watching?'<span class="result-badge">WATCHING</span>':'';
+    const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:p.watching?'<span class="result-badge">WATCHING</span>':!historical&&p.model&&p.model!=='pure-elo-v1'?'<span class="result-badge">EARLIER MODEL</span>':'';
     const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}</div></div>`;
     const context=`<details class="pick-context"><summary>Game details</summary>${availabilityMarkup(p)}${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
     if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}${context}</article>`;

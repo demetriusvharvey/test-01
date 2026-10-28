@@ -284,7 +284,7 @@ def main():
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     # Keep unpriced scheduled games visible for research and manual price entry.
     # Schedule IDs come only from the validated scoreboard/event parser.
-    reverse={league:{code:name.title() for name,code in teams.items()}
+    reverse={league:{code:name.title().replace('76Ers','76ers').replace('49Ers','49ers') for name,code in teams.items()}
              for league,teams in (('NBA',NBA_TEAMS),('NFL',NFL_TEAMS))}
     scheduled=[]
     for identifier,start in starts_by_game.items():
@@ -297,25 +297,28 @@ def main():
             scheduled.append({'id':identifier,'league':sport,'home':reverse[sport][home],
                               'away':reverse[sport][away],'starts_at':when.isoformat()})
         except (TypeError,ValueError,AttributeError):continue
-    board=render_board(markets,ledger,now,errors,models,training_counts,added_finals,scheduled)
+    # Prices within 20 minutes of start are still useful as labeled snapshots
+    # on the game slate, but the selection market keeps its stricter cutoff.
+    display_markets=build_market(selected,now,min_lead_minutes=0)
+    board=render_board(display_markets,ledger,now,errors,models,training_counts,added_finals,scheduled)
     board['source']='AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; '+score_source+' scoreboard'
     attach_prediction_checks(board,ledger)
     try:
         watch_path=data_dir/'watchlist.json'
         watched=json.loads(watch_path.read_text()) if watch_path.exists() else []
-        board['watchlist']=render_watchlist(markets,watched,now.isoformat()) if isinstance(watched,list) else []
+        board['watchlist']=render_watchlist(display_markets,watched,now.isoformat()) if isinstance(watched,list) else []
     except (OSError,ValueError,TypeError):
         board['watchlist']=[];board['errors'].append('Watchlist unavailable')
     if injury_payload is not None:
-        try:attach_nba_summaries(board,markets,injury_payload,injury_observed_at)
+        try:attach_nba_summaries(board,display_markets,injury_payload,injury_observed_at)
         except Exception as e:board['errors'].append('NBA injury context unavailable ('+type(e).__name__+')')
     if nfl_provider_payload is not None:
-        try:attach_nfl_summaries(board,markets,nfl_provider_payload,nfl_provider_observed_at)
+        try:attach_nfl_summaries(board,display_markets,nfl_provider_payload,nfl_provider_observed_at)
         except Exception as e:board['errors'].append('NFL injury context unavailable ('+type(e).__name__+')')
     # Display captured status context for the full upcoming schedule, even
     # when a game's price is missing or it is too close to start to qualify.
     # This never makes the game eligible for a prediction or selection.
-    all_events=dict(markets)
+    all_events=dict(display_markets)
     for game in board['games']:
         if game['id'] in all_events:continue
         _,_,away,home=game['id'].split(':')
@@ -334,23 +337,23 @@ def main():
             if key in all_context.get(game['id'],{}):game[key]=all_context[game['id']][key]
         if game['id'] in simulations_by_game:
             game['simulation']={**simulations_by_game[game['id']],'used_in_prediction':False}
-    attach_rest_context(board,markets,models,now.isoformat())
-    attach_current_officials(board,markets,ref_report,ref_observed_at,now.isoformat())
+    attach_rest_context(board,display_markets,models,now.isoformat())
+    attach_current_officials(board,display_markets,ref_report,ref_observed_at,now.isoformat())
     try:
-        if data_root:attach_nfl_reports(data_root,board,markets,nfl_csv,nfl_observed_at,now.isoformat())
+        if data_root:attach_nfl_reports(data_root,board,display_markets,nfl_csv,nfl_observed_at,now.isoformat())
     except Exception as e:
         board['errors'].append('Injury context unavailable ('+type(e).__name__+')')
     try:
-        if data_root:attach_histories(data_root,board,markets,ledger,now.isoformat())
+        if data_root:attach_histories(data_root,board,display_markets,ledger,now.isoformat())
     except Exception as e:
         board['errors'].append('Observed line history unavailable ('+type(e).__name__+')')
     watch_board={'picks':board['watchlist'],'errors':board['errors']}
-    attach_rest_context(watch_board,markets,models,now.isoformat())
-    attach_current_officials(watch_board,markets,ref_report,ref_observed_at,now.isoformat())
+    attach_rest_context(watch_board,display_markets,models,now.isoformat())
+    attach_current_officials(watch_board,display_markets,ref_report,ref_observed_at,now.isoformat())
     try:
         if data_root:
-            attach_nfl_reports(data_root,watch_board,markets,nfl_csv,nfl_observed_at,now.isoformat())
-            attach_histories(data_root,watch_board,markets,board['watchlist'],now.isoformat())
+            attach_nfl_reports(data_root,watch_board,display_markets,nfl_csv,nfl_observed_at,now.isoformat())
+            attach_histories(data_root,watch_board,display_markets,board['watchlist'],now.isoformat())
     except Exception as e:
         board['errors'].append('Watchlist context unavailable ('+type(e).__name__+')')
     try: board['study']=build_scoreboard(data_root,ledger,now.isoformat()) if data_root else {}

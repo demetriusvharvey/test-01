@@ -60,3 +60,7 @@ Predictions in `data/predictions.json` are frozen before the event. A pick is gr
 The pipeline uses Python 3.12 and the standard library; there are no pip dependencies. A one-command local check is `python -m unittest discover -s tests`. Static preview: `python -m http.server 8000 --directory dist`. The browser JavaScript can be checked with `node --check dist/app.js`. GitHub CI runs the checks on pushes and pull requests.
 
 The pipeline snapshots a versioned feature definition and source hashes with each new prediction, and logs selected and skipped paper candidates. The weekly research workflow attempts preregistered tests and an odds-independent challenger, then compares later challenger forecasts with frozen baseline forecasts from the same time; insufficient data and errors are recorded, not treated as successes. Its fitted artifacts and drift-monitoring outputs stay in shadow mode and do not automatically change predictions. See [reports/phase9_model_stack.md](reports/phase9_model_stack.md), [reports/challenger_forward.md](reports/challenger_forward.md), [reports/phase11_validation.md](reports/phase11_validation.md), and [reports/phase14_engineering.md](reports/phase14_engineering.md).
+
+The current acceptance-by-acceptance implementation status, archived season
+counts, negative score-simulator result, and remaining data blockers are in
+[reports/implementation_status.md](reports/implementation_status.md).

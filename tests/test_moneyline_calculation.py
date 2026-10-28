@@ -1,5 +1,6 @@
 import unittest
-from scripts.line_lab.market import moneyline_calculation
+from datetime import datetime,timedelta,timezone
+from scripts.line_lab.market import moneyline_calculation,build_market
 
 
 class MoneylineCalculationTests(unittest.TestCase):
@@ -18,6 +19,16 @@ class MoneylineCalculationTests(unittest.TestCase):
     def test_reject_invalid_values(self):
         for price,stake in ((-99,100),(0,100),(True,100),(150,0),(150,float('nan'))):
             with self.assertRaises(ValueError):moneyline_calculation(price,stake)
+
+    def test_near_start_quote_can_be_displayed_without_becoming_eligible(self):
+        now=datetime(2026,10,28,22,45,tzinfo=timezone.utc)
+        event={'id':'nba:2026-10-28:PHI:IND','league':'NBA','home':'IND','away':'PHI',
+               'home_name':'Indiana Pacers','away_name':'Philadelphia 76ers',
+               'starts_at':(now+timedelta(minutes=15)).isoformat(),
+               'as_of':(now-timedelta(minutes=5)).isoformat(),'book':'FanDuel',
+               'home_odds':130,'away_odds':-150}
+        self.assertEqual(build_market([event],now),{})
+        self.assertEqual(build_market([event],now,min_lead_minutes=0)[event['id']]['books']['FanDuel']['away'],-150)
 
 
 if __name__=='__main__':unittest.main()

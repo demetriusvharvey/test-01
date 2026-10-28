@@ -100,6 +100,14 @@
     const available=books.map(b=>b.odds).filter(Number.isFinite),best=available.length?Math.max(...available):null;
     return `<div class="odds" aria-label="Sportsbook odds">${books.map(b=>`<div class="book ${b.odds!=null&&b.odds===best?'best':''}"><span class="book-name">${escape(b.name)}</span><div class="book-amount"><strong class="book-odds">${Number.isFinite(b.odds)?odds(b.odds):'—'}</strong>${b.odds!=null&&b.odds===best?'<span class="best-label">Best</span>':''}</div></div>`).join('')}</div>`;
   }
+  function lineHistoryMarkup(history){
+    const points=history&&Array.isArray(history.points)?history.points.filter(p=>Number.isFinite(p.implied)&&Number.isFinite(p.odds)&&Number.isFinite(new Date(p.as_of).valueOf())):[];
+    if(points.length<2)return '<p>Observed price movement: not enough matching snapshots.</p>';
+    const values=points.map(p=>p.implied),low=Math.min(...values),high=Math.max(...values),range=high-low||1;
+    const coords=points.map((p,i)=>`${(3+124*i/(points.length-1)).toFixed(1)},${(31-26*(p.implied-low)/range).toFixed(1)}`).join(' ');
+    const first=points[0],last=points[points.length-1];
+    return `<div class="line-history"><svg viewBox="0 0 130 36" role="img" aria-label="Observed implied price over time"><polyline points="${coords}" fill="none" stroke="currentColor" stroke-width="2"/></svg><p>${escape(history.book)} observed ${odds(first.odds)} at ${displayTime(first.as_of)} → ${odds(last.odds)} at ${displayTime(last.as_of)}. Snapshot history is not a verified opening or closing line.</p></div>`;
+  }
   function pickMarkup(p){
     const historical=!p.current;
     const statuses={win:'WON',loss:'LOST',void:'VOID',pending:'PENDING'};
@@ -110,7 +118,7 @@
     const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}${estimate}</div></div>`;
     const pct=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'unavailable';
     const points=x=>Number.isFinite(x)?(x>=0?'+':'')+(100*x).toFixed(1)+' points':'unavailable';
-    const context=`<details class="pick-context"><summary>Research context</summary><p>Latest retail no-vig reference: ${pct(p.retail_reference_probability)} · Price difference: ${points(p.retail_price_edge)} · Frozen model difference: ${points(p.model_edge_vs_retail)}</p><p>Retail reference is not a verified sharp line; differences are not proven edges. Injuries, projected lineups, referee assignment, trust and timing: unconfirmed or not available for this pick.</p></details>`;
+    const context=`<details class="pick-context"><summary>Research context</summary><p>Latest retail no-vig reference: ${pct(p.retail_reference_probability)} · Price difference: ${points(p.retail_price_edge)} · Frozen model difference: ${points(p.model_edge_vs_retail)}</p><p>Retail reference is not a verified sharp line; differences are not proven edges. Injuries, projected lineups, referee assignment, trust and timing: unconfirmed or not available for this pick.</p>${lineHistoryMarkup(p.line_history)}</details>`;
     if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}${context}</article>`;
     const recorded=Array.isArray(p.initial_books)?p.initial_books.filter(b=>Number.isFinite(b.odds)):[];
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}

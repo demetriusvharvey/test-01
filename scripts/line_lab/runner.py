@@ -20,6 +20,7 @@ from .model_stack import record_challenger_forecasts
 from .trust import record_candidates
 from .validation import progress_from_ledger
 from .monitoring import build_monitoring
+from .line_movement import attach_histories
 
 
 def main():
@@ -163,6 +164,10 @@ def main():
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
+    try:
+        if data_root:attach_histories(data_root,board,markets,ledger,now.isoformat())
+    except Exception as e:
+        board['errors'].append('Observed line history unavailable ('+type(e).__name__+')')
     try: board['study']=build_scoreboard(data_root,ledger,now.isoformat()) if data_root else {}
     except Exception as e:
         board['study']={};board['errors'].append('Paper study report unavailable ('+type(e).__name__+')')

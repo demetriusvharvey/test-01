@@ -147,7 +147,13 @@
     const activeById=new Map(active.filter(p=>p.id).map(p=>[p.id,p]));
     const picks=history.map(p=>activeById.has(p.id)?Object.assign({},p,activeById.get(p.id),{current:true}):Object.assign({},p,{current:false}));
     for(const p of active)if(!p.id||!history.some(h=>h.id===p.id))picks.push(Object.assign({},p,{current:true}));
-    picks.sort((a,b)=>new Date(a.starts_at)-new Date(b.starts_at));
+    picks.sort((a,b)=>{
+      if(selectedDay===today()&&a.current&&b.current){
+        const ap=Number.isFinite(a.model_probability)?a.model_probability:-1,bp=Number.isFinite(b.model_probability)?b.model_probability:-1;
+        if(ap!==bp)return bp-ap;
+      }
+      return new Date(a.starts_at)-new Date(b.starts_at);
+    });
     $('count').textContent=picks.length===1?'1 pick':picks.length+' picks';
     const freshness=$('freshness');freshness.classList.toggle('stale',selectedDay===today()&&stale);
     freshness.textContent=selectedDay!==today()?'Saved picks and results · '+displayDay(selectedDay):stale?'Update delayed · saved picks shown':oldest?'Odds updated '+displayTime(new Date(oldest)):validDate?'Last checked '+displayTime(generated):'Waiting for data';

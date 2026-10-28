@@ -22,7 +22,7 @@ class TrustTests(unittest.TestCase):
             dbpath=Path(root)/'observations/candidates/2026-10-28.sqlite'
             with closing(sqlite3.connect(dbpath)) as db:
                 rows=db.execute('SELECT side,decision,trust_probability,timing FROM candidates ORDER BY side').fetchall()
-                self.assertEqual(rows,[('away','below_paper_threshold',None,'unknown'),('home','selected_paper',None,'unknown')])
+                self.assertEqual(rows,[('away','other_side_favored_by_model',None,'unknown'),('home','selected_paper',None,'unknown')])
                 with self.assertRaises(sqlite3.IntegrityError):
                     db.execute("UPDATE candidates SET decision='selected_paper'")
 

@@ -59,10 +59,12 @@ def record_candidates(root, markets, models, now, old_ledger, chosen):
                     decision = 'too_near_start'
                 elif len(books) < 3 or p is None or price is None:
                     decision = 'insufficient_inputs'
+                elif p <= .5:
+                    decision = 'other_side_favored_by_model'
                 elif p - implied(price) < .01:
                     decision = 'below_paper_threshold'
                 else:
-                    decision = 'not_selected_by_paper_ranking_or_cap'
+                    decision = 'not_selected_by_win_ranking_or_cap'
                 details = {'books': books, 'model_version': 'pure-elo-v1', 'team': event[side],
                            'research_only': True, 'real_wager_recorded': False,
                            'trust_reason': 'no qualified sharp-close training data',

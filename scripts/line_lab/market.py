@@ -30,17 +30,19 @@ def choose_candidates(markets,models,now,ledger):
         if start.astimezone(ET).date().isoformat()!=today or start<=now+timedelta(minutes=20) or event['id'] in existing or len(event['books'])<3: continue
         elo=project_home(models[event['league']],event['home'],event['away'],start,event.get('neutral',False))
         if elo is None: continue
-        # Team probability uses completed-game ratings only. Odds do not affect
-        # the forecast; they are used below solely to price a paper selection.
-        for side,p in [('home',elo),('away',1-elo)]:
-            best=max(v[side] for v in event['books'].values())
-            edge=p-implied(best)
-            if edge>=.01:
-                initial_books=[{'name':name,'odds':event['books'][name][side] if name in event['books'] else None,'as_of':event['books'][name]['as_of'] if name in event['books'] else None} for _,name in BOOKS]
-                ev=p*decimal_odds(best)-1
-                details=initial_details(event,models[event['league']],side,p,initial_books,now.isoformat())
-                results.append({'id':event['id'],'league':event['league'],'team_code':event[side], 'team':event[side+'_name'],'opponent':event[('away' if side=='home' else 'home')+'_name'],'starts_at':event['starts_at'],'probability':round(p,5),'predicted_at':now.isoformat(),'pick_day':today,'initial_best_odds':best,'initial_books':initial_books,'edge':edge,'estimated_ev':round(ev,5),'outcome':'pending','model':'pure-elo-v1','mode':'paper','staking_allowed':False,'guard_reason':'sharp validation and point-in-time availability checks missing',**details})
-    results.sort(key=lambda x:x['estimated_ev'],reverse=True)
+        # Rank the model's preferred side by estimated win likelihood, not by
+        # estimated return. Odds remain a separate eligibility/price guard.
+        # This forecast is uncalibrated and does not yet use player status.
+        if elo==.5:continue
+        side,p=('home',elo) if elo>.5 else ('away',1-elo)
+        best=max(v[side] for v in event['books'].values())
+        edge=p-implied(best)
+        if edge>=.01:
+            initial_books=[{'name':name,'odds':event['books'][name][side] if name in event['books'] else None,'as_of':event['books'][name]['as_of'] if name in event['books'] else None} for _,name in BOOKS]
+            ev=p*decimal_odds(best)-1
+            details=initial_details(event,models[event['league']],side,p,initial_books,now.isoformat())
+            results.append({'id':event['id'],'league':event['league'],'team_code':event[side], 'team':event[side+'_name'],'opponent':event[('away' if side=='home' else 'home')+'_name'],'starts_at':event['starts_at'],'probability':round(p,5),'predicted_at':now.isoformat(),'pick_day':today,'initial_best_odds':best,'initial_books':initial_books,'edge':edge,'estimated_ev':round(ev,5),'outcome':'pending','model':'pure-elo-v1','selection_rule':'model-win-ranking-v1','mode':'paper','staking_allowed':False,'guard_reason':'sharp validation and point-in-time availability checks missing',**details})
+    results.sort(key=lambda x:(-x['probability'],x['id']))
     chosen=[]; used=set()
     for x in results:
         if x['id'] in used: continue

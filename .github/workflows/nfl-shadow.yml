@@ -8,6 +8,7 @@ on:
     paths:
       - 'scripts/refresh_nfl_shadow.py'
       - 'scripts/line_lab/nfl_shadow.py'
+      - 'scripts/line_lab/availability.py'
       - '.github/workflows/nfl-shadow.yml'
 permissions:
   contents: write
@@ -36,6 +37,9 @@ jobs:
           git -C .data-store config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           if [ -d .data-store/observations/nfl_qb ]; then
             git -C .data-store add observations/nfl_qb
+          fi
+          if [ -d .data-store/observations/nfl_availability ]; then
+            git -C .data-store add observations/nfl_availability
           fi
           if ! git -C .data-store diff --cached --quiet; then
             git -C .data-store commit -m 'Append NFL quarterback shadow context'

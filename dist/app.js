@@ -76,7 +76,7 @@
     if(!details.NBA&&!details.NFL){$('dynamic-factors').innerHTML='<p class="muted">Model details will appear after the next data update.</p>';return;}
     $('dynamic-factors').innerHTML=['NBA','NFL'].map(league=>{
       const info=details[league],rest=factorStatus(info,'rest_weight'),form=factorStatus(info,'form_weight');
-      const test=info&&info.available&&info.candidate_testing==='disabled'?'Automated feature tests are paused while the required validation is prepared.':info&&info.available&&info.selection_season&&info.holdout_season?`Selection: ${escape(info.selection_season)} · holdout: ${escape(info.holdout_season)}${info.holdout_count?' · '+escape(info.holdout_count)+' holdout games':''}`:'Waiting for model details.';
+      const test=info&&info.available&&info.candidate_testing==='disabled'?'These factors stay out of picks while weekly research collects enough data to test them.':info&&info.available&&info.selection_season&&info.holdout_season?`Selection: ${escape(info.selection_season)} · holdout: ${escape(info.holdout_season)}${info.holdout_count?' · '+escape(info.holdout_count)+' holdout games':''}`:'Waiting for model details.';
       return `<div class="factor-status"><div><strong>${league} · Rest between games</strong><span class="status-tag ${rest[1]?'on':''}">${rest[0]}</span></div><p>Compares each team’s days since its last game.</p></div><div class="factor-status"><div><strong>${league} · Recent scoring margin</strong><span class="status-tag ${form[1]?'on':''}">${form[0]}</span></div><p>Looks at point differences over the last five games.</p></div><p class="explanation">${test}</p>`;
     }).join('');
   }

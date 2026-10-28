@@ -5,8 +5,8 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/refresh-feed.yml'
-      - 'scripts/**'
-      - 'tests/**'
+      - 'scripts/refresh_feed.py'
+      - 'tests/test_refresh_feed.py'
   schedule:
     - cron: '17 14,22 * * *'
 permissions:
@@ -35,5 +35,6 @@ jobs:
           git add dist/feed.json
           if ! git diff --cached --quiet; then
             git commit -m 'Refresh research feed'
-            git push
+            git pull --rebase origin main
+            git push origin HEAD:main
           fi

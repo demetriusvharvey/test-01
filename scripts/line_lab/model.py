@@ -8,14 +8,14 @@ def elo_probability(diff): return 1/(1+10**(-max(-1200,min(1200,diff))/400))
 
 def build_ratings(games, cutoff, league, params=None, validation_season=None):
     # Training ends before today's ET date. This avoids training on later same-day results.
-    ratings={}; last={}; margins={}; last_season=None; validation_errors=[]
+    ratings={}; last={}; margins={}; games_played={}; last_season=None; validation_errors=[]
     values=params or ((20,55,0,0) if league=='NBA' else (24,42,0,0))
     k,home_advantage,rest_weight=values[:3]
     form_weight=values[3] if len(values)>3 else 0
     for g in sorted((x for x in games if x['league']==league and x['date']<cutoff),key=lambda x:(x['date'],x['id'])):
         if last_season is not None and g['season']!=last_season:
             ratings={team:1500+(value-1500)*0.75 for team,value in ratings.items()}
-            margins={}
+            margins={};games_played={}
         last_season=g['season']
         h,a=g['home'],g['away']; hr=ratings.get(h,1500); ar=ratings.get(a,1500)
         rh=min(7,max(0,(g['date']-last[h]).days-1)) if h in last else 3
@@ -26,8 +26,9 @@ def build_ratings(games, cutoff, league, params=None, validation_season=None):
         if g['season']==validation_season and outcome!=0.5: validation_errors.append((p-outcome)**2)
         ratings[h]=hr+k*(outcome-p); ratings[a]=ar-k*(outcome-p)
         record_margin(margins,h,a,g['home_score']-g['away_score'])
+        games_played[h]=games_played.get(h,0)+1;games_played[a]=games_played.get(a,0)+1
         last[h]=g['date']; last[a]=g['date']
-    return {'ratings':ratings,'last':last,'margins':margins,'last_season':last_season,'home_advantage':home_advantage,'rest_weight':rest_weight,'form_weight':form_weight,'k':k,'validation_count':len(validation_errors),'validation_brier':sum(validation_errors)/len(validation_errors) if validation_errors else None}
+    return {'ratings':ratings,'last':last,'margins':margins,'games_played':games_played,'last_season':last_season,'home_advantage':home_advantage,'rest_weight':rest_weight,'form_weight':form_weight,'k':k,'validation_count':len(validation_errors),'validation_brier':sum(validation_errors)/len(validation_errors) if validation_errors else None}
 
 def feature_passes(baseline_validation, candidate_validation, baseline_holdout, candidate_holdout, minimum):
     metrics=[baseline_validation,candidate_validation,baseline_holdout,candidate_holdout]
@@ -87,7 +88,7 @@ def apply_same_day_finals(models, finals, today, nfl_locations, now):
         season=f'{start_year}-{str(start_year+1)[-2:]}' if league=='NBA' else str(start_year)
         if model.get('last_season') and season!=model['last_season']:
             model['ratings']={team:1500+(value-1500)*0.75 for team,value in model['ratings'].items()}
-            model['margins']={}; model['last_season']=season
+            model['margins']={}; model['games_played']={}; model['last_season']=season
         home,away=game['home'],game['away']
         hr=model['ratings'].get(home,1500); ar=model['ratings'].get(away,1500)
         rh=min(7,max(0,(today-model['last'][home]).days-1)) if home in model['last'] else 3
@@ -98,5 +99,6 @@ def apply_same_day_finals(models, finals, today, nfl_locations, now):
         outcome=1 if game['home_score']>game['away_score'] else 0 if game['home_score']<game['away_score'] else 0.5
         model['ratings'][home]=hr+model['k']*(outcome-p); model['ratings'][away]=ar-model['k']*(outcome-p)
         record_margin(model['margins'],home,away,game['home_score']-game['away_score'])
+        counts=model.setdefault('games_played',{});counts[home]=counts.get(home,0)+1;counts[away]=counts.get(away,0)+1
         model['last'][home]=today; model['last'][away]=today; seen.add(game['id']); added[league]+=1
     return added

@@ -23,3 +23,5 @@ No new hypothesis test, p-value, ROI or CLV estimate is claimed in this phase. T
 ## Verification
 
 Run `python -m unittest discover -s tests`. The Phase 1 tests cover source-shaped fixtures, book mapping, invalid timestamps, stale and incomplete quotes, duplicates, disagreement, quota rules, SQLite append-only/idempotency, pregame proxy labeling, source-asset preservation and the disabled experimental feature gate. Network-backed backfill and real scheduled execution require their GitHub Actions outcomes to be checked separately.
+
+On October 28, 2026 ET, the push-triggered live update completed successfully, including 21 tests and 71 new odds observations. The separately triggered backfill job succeeded with 30 source shards and no reported download failures; its data-branch commit is `4ffa7d9`. A scheduled recurring run was not yet observed at that checkpoint. The missing historical NBA rights, sharp anchor and API key limitations above remain.

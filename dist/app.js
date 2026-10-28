@@ -80,6 +80,16 @@
       return `<div class="factor-status"><div><strong>${league} · Rest between games</strong><span class="status-tag ${rest[1]?'on':''}">${rest[0]}</span></div><p>Compares each team’s days since its last game.</p></div><div class="factor-status"><div><strong>${league} · Recent scoring margin</strong><span class="status-tag ${form[1]?'on':''}">${form[0]}</span></div><p>Looks at point differences over the last five games.</p></div><p class="explanation">${test}</p>`;
     }).join('');
   }
+  function renderStudy(){
+    const study=(board&&board.study)||{};
+    if(!study.NBA&&!study.NFL){$('study').innerHTML='<p class="muted">Study data will appear after the next update.</p>';return;}
+    const number=x=>Number.isFinite(x)?Number(x).toFixed(3):'—';
+    const percent=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'—';
+    $('study').innerHTML=['NBA','NFL'].map(league=>{
+      const item=study[league]||{},interval=Array.isArray(item.paper_roi_interval)?item.paper_roi_interval.map(percent).join(' to '):'not enough data';
+      return `<article class="study-league"><div><strong>${league} · ${Number(item.forecast_games)||0} settled games</strong><span class="study-verdict">INCONCLUSIVE</span></div><p>Log loss: model ${number(item.pure_log_loss)} · retail ${number(item.retail_log_loss)}</p><p>Sharp CLV: ${percent(item.sharp_clv)} · Paper ROI: ${percent(item.paper_roi)} (${Number(item.paper_picks)||0} picks)</p><p class="study-muted">Paper ROI interval: ${escape(interval)}</p></article>`;
+    }).join('');
+  }
   function booksMarkup(books){
     const available=books.map(b=>b.odds).filter(Number.isFinite),best=available.length?Math.max(...available):null;
     return `<div class="odds" aria-label="Sportsbook odds">${books.map(b=>`<div class="book ${b.odds!=null&&b.odds===best?'best':''}"><span class="book-name">${escape(b.name)}</span><div class="book-amount"><strong class="book-odds">${Number.isFinite(b.odds)?odds(b.odds):'—'}</strong>${b.odds!=null&&b.odds===best?'<span class="best-label">Best</span>':''}</div></div>`).join('')}</div>`;
@@ -88,15 +98,17 @@
     const historical=!p.current;
     const statuses={win:'WON',loss:'LOST',void:'VOID',pending:'PENDING'};
     const status=Object.hasOwn(statuses,p.outcome)?p.outcome:'pending';
-    const badge=historical?`<span class="result-badge ${status}">${statuses[status]}</span>`:'<span class="result-badge">OPEN PICK</span>';
-    const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div>${badge}</div>`;
+    const pure=p.model==='pure-elo-v1';
+    const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:pure?'<span class="result-badge">PAPER</span>':'<span class="result-badge">LEGACY MODEL</span>';
+    const estimate=pure&&Number.isFinite(p.model_probability)?`<small class="pick-ev">Model ${(p.model_probability*100).toFixed(1)}%</small>${Number.isFinite(p.estimated_ev)?'<small class="pick-ev">EV '+(p.estimated_ev>=0?'+':'')+(100*p.estimated_ev).toFixed(1)+'%</small>':''}<small class="pick-ev">Uncalibrated</small>`:'';
+    const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}${estimate}</div></div>`;
     if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}</article>`;
     const recorded=Array.isArray(p.initial_books)?p.initial_books.filter(b=>Number.isFinite(b.odds)):[];
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}
     return `<article class="pick">${title}<div class="single-odds">Best odds recorded at time of pick${Number.isFinite(p.initial_best_odds)?' <strong>'+odds(p.initial_best_odds)+'</strong>':' unavailable'}</div></article>`;
   }
   function render(){
-    setDailyDetails();renderDates();renderFactors();if(!board)return;
+    setDailyDetails();renderDates();renderFactors();renderStudy();if(!board)return;
     const accuracy=board.accuracy||{wins:0,losses:0};
     $('accuracy').textContent=accuracy.percent==null?'—':Number(accuracy.percent).toFixed(1)+'%';
     $('record').textContent=(accuracy.wins||0)+'W – '+(accuracy.losses||0)+'L · '+((accuracy.wins||0)+(accuracy.losses||0))+' settled'+(accuracy.pending?' · '+accuracy.pending+' pending':'');

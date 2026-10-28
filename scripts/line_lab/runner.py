@@ -1,5 +1,5 @@
 """Runner components for the picks pipeline."""
-import json, os
+import hashlib, json, os
 from datetime import datetime, timedelta, timezone
 from statistics import median
 from scripts.refresh_feed import NBA_REFS, parse_referees
@@ -13,23 +13,30 @@ from .history import append_observations, finalize_closing_proxies, aware
 from .odds_api import collect_odds_api
 from .quality import validate_and_deduplicate, reconcile_quotes
 from .heartbeat import record_run
+from .experiment import record_forecasts, record_outcomes, build_scoreboard
+from .nfl_shadow import build_nfl_shadow_context
 
 
 def main():
-    now=datetime.now(timezone.utc); started_at=now.isoformat(); today=now.astimezone(ET).date(); errors=[]; games=[]; nfl_locations={}
+    now=datetime.now(timezone.utc); started_at=now.isoformat(); today=now.astimezone(ET).date(); errors=[]; games=[]; nfl_locations={};nfl_csv='';nfl_observed_at=None;source_hashes={'NBA':{},'NFL':{}}
     for season in NBA_SEASONS:
         try:
-            result=parse_nba_csv(get(f'https://boxscorelab.com/downloads/{season}-team-game-results.csv'))
+            text=get(f'https://boxscorelab.com/downloads/{season}-team-game-results.csv')
+            result=parse_nba_csv(text)
             if not result: raise ValueError('empty NBA season')
             games.extend(result)
+            source_hashes['NBA'][season]=hashlib.sha256(text.encode('utf-8')).hexdigest()
         except Exception as e: errors.append('NBA historical data unavailable: '+season+' ('+type(e).__name__+')')
     try:
         nfl_csv=get('https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv')
+        nfl_observed_at=datetime.now(timezone.utc).isoformat()
         nfl=parse_nfl_csv(nfl_csv); nfl_locations=parse_nfl_locations(nfl_csv)
         if not nfl: raise ValueError('empty NFL data')
         games.extend(nfl)
+        source_hashes['NFL']['games.csv']=hashlib.sha256(nfl_csv.encode('utf-8')).hexdigest()
     except Exception as e: errors.append('NFL historical data unavailable ('+type(e).__name__+')')
     models={league:train_model(games,today,league) for league in ('NBA','NFL')}
+    for league,model in models.items():model['source_hashes']=source_hashes[league]
     raw=[]; data_root=os.environ.get('PICKS_DATA_ROOT','').strip()
     for slug,name in BOOKS:
         for league in ('NBA','NFL'):
@@ -63,7 +70,7 @@ def main():
     except Exception as e:
         print('NBA referee source unavailable:',type(e).__name__)
     refs_path.write_text(json.dumps(refs,indent=2)+'\n')
-    finals=[{'id':g['id'],'home':g['home'],'away':g['away'],'home_score':g['home_score'],'away_score':g['away_score']} for g in games if g['date']<=today]
+    finals=[{'id':g['id'],'home':g['home'],'away':g['away'],'home_score':g['home_score'],'away_score':g['away_score'],'source':'BoxScore Lab' if g['league']=='NBA' else 'nflverse'} for g in games if g['date']<=today]
     espn_starts={}; espn_finals=[]
     for league,sport in [('NBA','basketball/nba'),('NFL','football/nfl')]:
         for days_ago in range(0,4):
@@ -110,6 +117,18 @@ def main():
     # If a league's training history is missing, do not produce predictions for it.
     blocked={('NBA' if x.startswith('NBA historical') else 'NFL') for x in errors if x.startswith(('NBA historical','NFL historical'))}
     permitted={k:v for k,v in markets.items() if archive_ok and not day_rolled and v['league'] not in blocked and (v['league']!='NFL' or 'neutral' in v)}
+    try:
+        if data_root and archive_ok:
+            result_count=record_outcomes(data_root,finals,now.isoformat())
+            shadow={}
+            if nfl_csv and nfl_observed_at:
+                try:shadow=build_nfl_shadow_context(data_root,nfl_csv,nfl_observed_at,now.isoformat())
+                except Exception as exc:print('NFL shadow context unavailable:',type(exc).__name__)
+            forecast_count=record_forecasts(data_root,permitted,models,now.isoformat(),shadow)
+            print('Paper study:',forecast_count,'forecasts;',result_count,'confirmed outcomes')
+    except Exception as e:
+        errors.append('Paper study storage unavailable ('+type(e).__name__+')')
+        permitted={}
     print('Training games:', len([x for x in games if x['league']=='NBA']), 'NBA;', len([x for x in games if x['league']=='NFL']), 'NFL. Fresh matchups:', len(markets))
     for league,model in models.items(): print('MODEL',league,'selection',model.get('validation_season'),'holdout',model.get('holdout_season'),'games',model.get('validation_count'),'brier',model.get('validation_brier'),'params',model['k'],model['home_advantage'],model['rest_weight'],model.get('form_weight',0),'same-day finals',added_finals[league])
     for event in permitted.values():
@@ -117,13 +136,14 @@ def main():
         if start.astimezone(ET).date()!=today or len(event['books'])<3: continue
         estimate=project_home(models[event['league']],event['home'],event['away'],start,event.get('neutral',False))
         if estimate is None: continue
-        fair=median([implied(b['home'])/(implied(b['home'])+implied(b['away'])) for b in event['books'].values()])
-        homep=.75*fair+.25*estimate
-        print('TODAY', event['league'],event['away'],'at',event['home'],'model home',round(100*homep,1),'best home',max(v['home'] for v in event['books'].values()),'best away',max(v['away'] for v in event['books'].values()))
+        print('TODAY', event['league'],event['away'],'at',event['home'],'pure model home',round(100*estimate,1),'best home',max(v['home'] for v in event['books'].values()),'best away',max(v['away'] for v in event['books'].values()))
     ledger.extend(choose_candidates(permitted,models,now,ledger))
     ledger_path.write_text(json.dumps(ledger,indent=2)+'\n')
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
+    try: board['study']=build_scoreboard(data_root,ledger,now.isoformat()) if data_root else {}
+    except Exception as e:
+        board['study']={};board['errors'].append('Paper study report unavailable ('+type(e).__name__+')')
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
                             'cross_check_independent':False}

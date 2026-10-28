@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T12:45:13.637981+00:00",
+  "generated_at": "2026-10-28T12:46:01.302781+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -451,6 +451,31 @@
       "staking_allowed": false,
       "reason": "no configured independent verified sharp-close feed or untouched validation"
     }
+  },
+  "monitoring": {
+    "pipeline_generated_at": "2026-10-28T12:46:01.302781+00:00",
+    "source_warning_count": 0,
+    "latest_quote_at": "2026-10-28T12:00:00+00:00",
+    "oldest_quote_at": "2026-10-28T12:00:00+00:00",
+    "source_freshness": "within_window",
+    "drift": {
+      "NBA": {
+        "reference_games": 0,
+        "current_games": 12,
+        "rating_psi": null,
+        "probability_psi": null,
+        "status": "insufficient_data"
+      },
+      "NFL": {
+        "reference_games": 0,
+        "current_games": 0,
+        "rating_psi": null,
+        "probability_psi": null,
+        "status": "insufficient_data"
+      }
+    },
+    "alerts": "display_only",
+    "limitations": "PSI is descriptive, not proof of calibration decay or profit"
   },
   "source_status": {
     "the_odds_api": "missing_api_key",

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T12:50:06.480774+00:00",
+  "generated_at": "2026-10-28T12:52:43.665683+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -462,7 +462,7 @@
     }
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T12:50:06.480774+00:00",
+    "pipeline_generated_at": "2026-10-28T12:52:43.665683+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T12:00:00+00:00",
     "oldest_quote_at": "2026-10-28T12:00:00+00:00",

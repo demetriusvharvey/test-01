@@ -14,6 +14,16 @@ from .history import aware
 URL = 'https://api.prop-line.com/v1/sports/basketball_nba/injuries'
 STATUSES = {'out', 'out_first_half', 'doubtful', 'questionable', 'probable',
             'game_time_decision', 'day_to_day', 'injured_list', 'suspended', 'other'}
+PROVIDER_TEAM_ALIASES = {
+    'NBA': {'GS':'GSW','NY':'NYK','NO':'NOP','SA':'SAS','UTAH':'UTA','WSH':'WAS'},
+    'NFL': {'WSH':'WAS'},
+}
+
+
+def provider_team_code(value,league):
+    """Map ESPN-style abbreviations without confusing teams across leagues."""
+    code=str(value or '').strip().upper()
+    return normalize_code(PROVIDER_TEAM_ALIASES.get(league,{}).get(code,code))
 
 
 def _bucket(status):
@@ -61,7 +71,7 @@ def summarize_by_team(payload, observed_at, league='NBA'):
         if not isinstance(row, dict):
             incomplete = True
             continue
-        code = normalize_code(str(row.get('team_abbr') or '').strip().upper())
+        code = provider_team_code(row.get('team_abbr'),league)
         player = row.get('player_id')
         status = row.get('status_code')
         stamps = [row.get('source_updated_at'), row.get('status_since')]
@@ -102,7 +112,7 @@ def summarize_positions_by_team(payload, observed_at, league):
     teams=set((NBA_TEAMS if league=='NBA' else NFL_TEAMS).values());candidates={}
     for row in rows:
         if not isinstance(row,dict):continue
-        code=normalize_code(str(row.get('team_abbr') or '').strip().upper())
+        code=provider_team_code(row.get('team_abbr'),league)
         player=row.get('player_id');status=row.get('status_code')
         try:
             times=[aware(value) for value in (row.get('source_updated_at'),row.get('status_since')) if value]
@@ -134,7 +144,7 @@ def injury_quality_counts(payload,observed_at,league):
             'unknown_status':0,'missing_timestamp':0,'invalid_or_future_timestamp':0,'missing_position':0}
     for row in rows:
         if not isinstance(row,dict):result['invalid_row']+=1;continue
-        if normalize_code(str(row.get('team_abbr') or '').strip().upper()) not in teams:result['unknown_team']+=1
+        if provider_team_code(row.get('team_abbr'),league) not in teams:result['unknown_team']+=1
         if not isinstance(row.get('player_id'),str) or not row['player_id'].strip():result['missing_player_id']+=1
         if row.get('status_code') not in STATUSES:result['unknown_status']+=1
         position=str(row.get('position') or '').strip().upper()

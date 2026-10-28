@@ -105,6 +105,21 @@ class NbaInjuryFeedTests(unittest.TestCase):
         self.assertEqual(quality['missing_position'],1);self.assertEqual(quality['rows'],len(positions))
         self.assertNotIn('espn:',json.dumps(quality))
 
+    def test_espn_team_codes_are_mapped_by_league_before_aggregating(self):
+        nba={'sport':'basketball_nba','count':6,'players':[
+            {'team_abbr':team,'player_id':f'espn:{i}','position':'G','status_code':'out','status_since':'2026-10-28T17:00:00Z'}
+            for i,team in enumerate(['GS','NY','NO','SA','UTAH','WSH'])]}
+        summaries,incomplete=summarize_by_team(nba,self.now,'NBA')
+        self.assertFalse(incomplete)
+        for team in ('GSW','NYK','NOP','SAS','UTA','WAS'):self.assertEqual(summaries[team]['out'],1)
+        self.assertEqual(injury_quality_counts(nba,self.now,'NBA')['unknown_team'],0)
+        nfl={'sport':'football_nfl','count':2,'players':[
+            {'team_abbr':'NO','player_id':'espn:1','position':'WR','status_code':'out','status_since':'2026-10-28T17:00:00Z'},
+            {'team_abbr':'WSH','player_id':'espn:2','position':'CB','status_code':'questionable','status_since':'2026-10-28T17:00:00Z'}]}
+        summaries,incomplete=summarize_by_team(nfl,self.now,'NFL')
+        self.assertFalse(incomplete);self.assertEqual(summaries['NO']['out'],1);self.assertEqual(summaries['WAS']['questionable'],1)
+        self.assertEqual(injury_quality_counts(nfl,self.now,'NFL')['unknown_team'],0)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -82,7 +82,7 @@
   }
   function booksMarkup(books){
     const available=books.map(b=>b.odds).filter(Number.isFinite),best=available.length?Math.max(...available):null;
-    return `<div class="odds" aria-label="Sportsbook odds">${books.map(b=>`<div class="book ${b.odds!=null&&b.odds===best?'best':''}"><span class="book-name">${escape(b.name)}</span><div class="book-amount"><strong class="book-odds">${Number.isFinite(b.odds)?odds(b.odds):'—'}</strong>${b.odds!=null&&b.odds===best?'<span class="best-label">Best</span>':''}</div></div>`).join('')}</div>`;
+    return `<div class="odds" aria-label="Sportsbook odds">${books.map(b=>{const isBest=b.odds!=null&&b.odds===best,price=Number.isFinite(b.odds)?odds(b.odds):'unavailable';return `<div role="group" aria-label="${escape(b.name)}: ${price}${isBest?' — best odds':''}" class="book ${isBest?'best':''}"><span class="book-name">${escape(b.name)}</span><div class="book-amount"><strong class="book-odds">${Number.isFinite(b.odds)?price:'—'}</strong>${isBest?'<span class="best-label">Best</span>':''}</div></div>`;}).join('')}</div>`;
   }
   function lineHistoryMarkup(history){
     const points=history&&Array.isArray(history.points)?history.points.filter(p=>Number.isFinite(p.implied)&&Number.isFinite(p.odds)&&Number.isFinite(new Date(p.as_of).valueOf())):[];
@@ -105,7 +105,12 @@
     return `<p>NBA crew, observed ${displayTime(ref.observed_at)}: ${escape(ref.crew_chief)} (chief), ${escape(ref.referee)}, ${escape(ref.umpire)}. Assignments can change; no referee effect is used. Source: ${label}.</p>`;
   }
   function availabilityMarkup(p){
-    if(p.league!=='NFL')return '<p>NBA injuries and projected lineups: unconfirmed or unavailable for this pick.</p>';
+    if(p.league!=='NFL'){
+      const link='<a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener noreferrer">latest NBA player report</a>',c=p.nba_availability_context;
+      if(!c||!c.teams)return `<p>NBA injuries and projected lineups are not included in this prediction. Check the ${link}; starters are unconfirmed.</p>`;
+      const entries=['away','home'].map(side=>c.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.counts.out)} out, ${Number(team.counts.questionable)} questionable or game-time decision, ${Number(team.counts.doubtful)} doubtful`).join(' · ');
+      return `<p>Player-status counts from PropLine (ESPN), checked ${displayTime(c.observed_at)}: ${entries}. Reports may be incomplete and a missing name does not mean healthy. Check the ${link}; this information has not changed the prediction.</p>`;
+    }
     const c=p.availability_context;
     if(!c||!c.teams)return '<p>NFL injury report, starting quarterback and inactive list: unavailable or unconfirmed.</p>';
     const entries=['away','home'].map(side=>c.teams[side]).filter(Boolean).map(team=>{

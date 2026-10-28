@@ -27,6 +27,7 @@ from .availability import attach_nfl_reports
 from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
 from .watchlist import render_watchlist
+from .nba_injury_feed import fetch_nba_injuries, attach_nba_summaries
 
 
 def main():
@@ -179,6 +180,14 @@ def main():
         board['watchlist']=render_watchlist(markets,watched,now.isoformat()) if isinstance(watched,list) else []
     except (OSError,ValueError,TypeError):
         board['watchlist']=[];board['errors'].append('Watchlist unavailable')
+    nba_injury_key=os.environ.get('PROPLINE_API_KEY','').strip()
+    nba_injury_enabled=os.environ.get('PROPLINE_INJURY_ENABLED','').strip().lower()=='true'
+    if nba_injury_enabled and nba_injury_key and any(p.get('league')=='NBA' for p in board['picks']+board['watchlist']):
+        try:
+            injury_payload,injury_observed_at=fetch_nba_injuries(nba_injury_key,True)
+            attach_nba_summaries(board,markets,injury_payload,injury_observed_at)
+        except Exception as e:
+            board['errors'].append('NBA injury context unavailable ('+type(e).__name__+')')
     attach_rest_context(board,markets,models,now.isoformat())
     attach_current_officials(board,markets,ref_report,ref_observed_at,now.isoformat())
     try:
@@ -212,6 +221,7 @@ def main():
         board['monitoring']={};board['errors'].append('Monitoring unavailable ('+type(e).__name__+')')
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
+                            'nba_injury_context':'configured' if nba_injury_key and nba_injury_enabled else 'not_configured',
                             'cross_check_independent':False}
     (ROOT/'dist'/'board.json').write_text(json.dumps(board,indent=2)+'\n')
     print('Board:',len(board['picks']),'active picks;',board['accuracy']['wins'],'wins;',board['accuracy']['losses'],'losses;',len(errors),'source warnings')

@@ -34,6 +34,8 @@ jobs:
           PICKS_DATA_ROOT: ${{ github.workspace }}/.data-store
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           ODDS_API_FEATURED_MARKETS: ${{ vars.ODDS_API_FEATURED_MARKETS }}
+          PROPLINE_API_KEY: ${{ secrets.PROPLINE_API_KEY }}
+          PROPLINE_INJURY_ENABLED: ${{ vars.PROPLINE_INJURY_ENABLED }}
         run: python scripts/pipeline.py
       - name: Commit append-only observations
         run: |

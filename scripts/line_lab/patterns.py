@@ -21,7 +21,20 @@ DEFINITIONS=[('H010a','NBA','home at least two fewer rest days','negative'),
              ('H010f','NFL','outdoor sustained wind at least 15 mph, underdog','positive'),
              ('H010g','NFL','one confirmed starting-quarterback change','negative'),
              ('H010h','NBA','home team after overtime','negative'),
-             ('H010h','NFL','home team after overtime','negative')]
+             ('H010h','NFL','home team after overtime','negative'),
+             ('H013a','NBA','one team after a loss of at least 20','positive'),
+             ('H013a','NFL','one team after a loss of at least 21','positive'),
+             ('H013b','NBA','one team after a win of at least 20','negative'),
+             ('H013b','NFL','one team after a win of at least 21','negative'),
+             ('H013c','NFL','exactly one team on a short week','negative'),
+             ('H013d','NFL','exactly one team after a bye','positive'),
+             ('H013e','NBA','early-season underdog','positive'),
+             ('H013e','NFL','early-season underdog','positive'),
+             ('H013f','NBA','underdog below 35% no-vig','negative'),
+             ('H013f','NFL','underdog below 35% no-vig','negative'),
+             ('H013g','NBA','home team with wide book disagreement','negative'),
+             ('H013g','NFL','home team with wide book disagreement','negative'),
+             ('H013h','NFL','prime-time favorite','negative')]
 SCHEMA='''
 CREATE TABLE IF NOT EXISTS pattern_runs (
  run_key TEXT PRIMARY KEY, completed_at TEXT NOT NULL, input_hash TEXT NOT NULL,
@@ -71,6 +84,31 @@ def _side(row,identifier):
             return 'home' if h else 'away'
         except (KeyError,TypeError,ValueError):return None
     if identifier=='H010h':return 'home' if f.get('home_last_game_overtime') is True else None
+    if identifier in ('H013a','H013b'):
+        h,a=f.get('home_last_margin'),f.get('away_last_margin')
+        if any(not isinstance(x,(int,float)) or isinstance(x,bool) or not math.isfinite(x) for x in (h,a)):return None
+        threshold=20 if row.get('league')=='NBA' else 21
+        home=h<=-threshold if identifier=='H013a' else h>=threshold
+        away=a<=-threshold if identifier=='H013a' else a>=threshold
+        if home==away:return None
+        return 'home' if home else 'away'
+    if identifier in ('H013c','H013d'):
+        h,a=f.get('home_rest'),f.get('away_rest')
+        if any(not isinstance(x,int) or isinstance(x,bool) or x<0 for x in (h,a)):return None
+        home=h<=5 if identifier=='H013c' else h>=13
+        away=a<=5 if identifier=='H013c' else a>=13
+        if home==away:return None
+        return 'home' if home else 'away'
+    if identifier=='H013e':
+        h,a=f.get('home_games'),f.get('away_games')
+        if any(not isinstance(x,int) or isinstance(x,bool) or not 0<=x<10 for x in (h,a)) or p==.5:return None
+        return 'home' if p<.5 else 'away'
+    if identifier=='H013f':return 'home' if p<.35 else 'away' if 1-p<.35 else None
+    if identifier=='H013g':
+        span=f.get('book_probability_range')
+        return 'home' if isinstance(span,(int,float)) and not isinstance(span,bool) and math.isfinite(span) and .08<=span<=1 else None
+    if identifier=='H013h':
+        return ('home' if p>.5 else 'away') if aware(row['starts_at']).astimezone(ET).hour>=20 and p!=.5 else None
     return None
 
 

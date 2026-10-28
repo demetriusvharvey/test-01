@@ -8,6 +8,7 @@ on:
       - scripts/evaluate_challengers.py
       - scripts/backtest_shadow.py
       - scripts/research_trust.py
+      - scripts/research_patterns.py
   schedule:
     - cron: '42 10 * * 2'
 permissions:

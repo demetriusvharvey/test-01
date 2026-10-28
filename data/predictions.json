@@ -45,5 +45,146 @@
         "as_of": "2026-10-28T01:00:00+00:00"
       }
     ]
+  },
+  {
+    "id": "nba:2026-10-28:OKC:DAL",
+    "league": "NBA",
+    "team_code": "OKC",
+    "team": "Oklahoma City Thunder",
+    "opponent": "Dallas Mavericks",
+    "starts_at": "2026-10-29T01:30:00+00:00",
+    "probability": 0.69705,
+    "predicted_at": "2026-10-28T04:03:40.108458+00:00",
+    "pick_day": "2026-10-28",
+    "initial_best_odds": -205,
+    "initial_books": [
+      {
+        "name": "FanDuel",
+        "odds": -210,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "DraftKings",
+        "odds": -205,
+        "as_of": "2026-10-28T03:00:00+00:00"
+      },
+      {
+        "name": "BetMGM",
+        "odds": -225,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "Caesars",
+        "odds": -225,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "Fanatics",
+        "odds": -220,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "BetRivers",
+        "odds": -230,
+        "as_of": "2026-10-28T03:00:00+00:00"
+      }
+    ],
+    "edge": 0.024922795427182565,
+    "outcome": "pending",
+    "model": "elo-market-v2"
+  },
+  {
+    "id": "nba:2026-10-28:GSW:MIN",
+    "league": "NBA",
+    "team_code": "MIN",
+    "team": "Minnesota Timberwolves",
+    "opponent": "Golden State Warriors",
+    "starts_at": "2026-10-29T00:00:00+00:00",
+    "probability": 0.61923,
+    "predicted_at": "2026-10-28T04:03:40.108458+00:00",
+    "pick_day": "2026-10-28",
+    "initial_best_odds": -152,
+    "initial_books": [
+      {
+        "name": "FanDuel",
+        "odds": -152,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "DraftKings",
+        "odds": -155,
+        "as_of": "2026-10-28T03:00:00+00:00"
+      },
+      {
+        "name": "BetMGM",
+        "odds": -155,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "Caesars",
+        "odds": -155,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "Fanatics",
+        "odds": -160,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "BetRivers",
+        "odds": -162,
+        "as_of": "2026-10-28T03:00:00+00:00"
+      }
+    ],
+    "edge": 0.01605802681034596,
+    "outcome": "pending",
+    "model": "elo-market-v2"
+  },
+  {
+    "id": "nba:2026-10-28:MIA:ATL",
+    "league": "NBA",
+    "team_code": "ATL",
+    "team": "Atlanta Hawks",
+    "opponent": "Miami Heat",
+    "starts_at": "2026-10-28T23:00:00+00:00",
+    "probability": 0.60669,
+    "predicted_at": "2026-10-28T04:03:40.108458+00:00",
+    "pick_day": "2026-10-28",
+    "initial_best_odds": -146,
+    "initial_books": [
+      {
+        "name": "FanDuel",
+        "odds": -146,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "DraftKings",
+        "odds": -162,
+        "as_of": "2026-10-28T03:00:00+00:00"
+      },
+      {
+        "name": "BetMGM",
+        "odds": -150,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "Caesars",
+        "odds": -155,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "Fanatics",
+        "odds": -155,
+        "as_of": "2026-10-28T04:00:00+00:00"
+      },
+      {
+        "name": "BetRivers",
+        "odds": -175,
+        "as_of": "2026-10-28T03:00:00+00:00"
+      }
+    ],
+    "edge": 0.013194315936606804,
+    "outcome": "pending",
+    "model": "elo-market-v2"
   }
 ]

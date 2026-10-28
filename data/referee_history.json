@@ -50,5 +50,57 @@
     ],
     "observed_at": "2026-10-28T01:51:01.868069+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-28:Brooklyn @ Boston",
+    "game_date": "2026-10-28",
+    "matchup": "Brooklyn @ Boston",
+    "crew": [
+      "John Goble (#10)",
+      "Jonathan Sterling (#17)",
+      "JD Ralls (#80)",
+      ""
+    ],
+    "observed_at": "2026-10-28T04:03:39.720340+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-28:Detroit @ New York",
+    "game_date": "2026-10-28",
+    "matchup": "Detroit @ New York",
+    "crew": [
+      "Nick Buchert (#3)",
+      "Dedric Taylor (#21)",
+      "Brett Nansel (#44)",
+      ""
+    ],
+    "observed_at": "2026-10-28T04:03:39.720340+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-28:Sacramento @ San Antonio",
+    "game_date": "2026-10-28",
+    "matchup": "Sacramento @ San Antonio",
+    "crew": [
+      "James Capers (#19)",
+      "Natalie Sago (#9)",
+      "Suyash Mehta (#47)",
+      ""
+    ],
+    "observed_at": "2026-10-28T04:03:39.720340+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-28:Portland @ L.A. Lakers",
+    "game_date": "2026-10-28",
+    "matchup": "Portland @ L.A. Lakers",
+    "crew": [
+      "Scott Foster (#48)",
+      "Che Flores (#91)",
+      "Nate Cearley (#84)",
+      ""
+    ],
+    "observed_at": "2026-10-28T04:03:39.720340+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

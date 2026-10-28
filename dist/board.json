@@ -1,15 +1,139 @@
 {
-  "generated_at": "2026-10-28T03:48:46.951843+00:00",
+  "generated_at": "2026-10-28T04:03:40.108458+00:00",
   "model": "Experimental Elo + market baseline",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
     "wins": 0,
     "losses": 0,
     "voids": 0,
-    "pending": 1,
+    "pending": 4,
     "percent": null
   },
-  "picks": [],
+  "picks": [
+    {
+      "id": "nba:2026-10-28:OKC:DAL",
+      "team": "Oklahoma City Thunder",
+      "opponent": "Dallas Mavericks",
+      "league": "NBA",
+      "starts_at": "2026-10-29T01:30:00+00:00",
+      "books": [
+        {
+          "name": "FanDuel",
+          "odds": -210,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "DraftKings",
+          "odds": -205,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        },
+        {
+          "name": "BetMGM",
+          "odds": -225,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Caesars",
+          "odds": -225,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Fanatics",
+          "odds": -220,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "BetRivers",
+          "odds": -230,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        }
+      ],
+      "best": -205,
+      "predicted_at": "2026-10-28T04:03:40.108458+00:00"
+    },
+    {
+      "id": "nba:2026-10-28:GSW:MIN",
+      "team": "Minnesota Timberwolves",
+      "opponent": "Golden State Warriors",
+      "league": "NBA",
+      "starts_at": "2026-10-29T00:00:00+00:00",
+      "books": [
+        {
+          "name": "FanDuel",
+          "odds": -152,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "DraftKings",
+          "odds": -155,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        },
+        {
+          "name": "BetMGM",
+          "odds": -155,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Caesars",
+          "odds": -155,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Fanatics",
+          "odds": -160,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "BetRivers",
+          "odds": -162,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        }
+      ],
+      "best": -152,
+      "predicted_at": "2026-10-28T04:03:40.108458+00:00"
+    },
+    {
+      "id": "nba:2026-10-28:MIA:ATL",
+      "team": "Atlanta Hawks",
+      "opponent": "Miami Heat",
+      "league": "NBA",
+      "starts_at": "2026-10-28T23:00:00+00:00",
+      "books": [
+        {
+          "name": "FanDuel",
+          "odds": -146,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "DraftKings",
+          "odds": -162,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        },
+        {
+          "name": "BetMGM",
+          "odds": -150,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Caesars",
+          "odds": -155,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Fanatics",
+          "odds": -155,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "BetRivers",
+          "odds": -175,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        }
+      ],
+      "best": -146,
+      "predicted_at": "2026-10-28T04:03:40.108458+00:00"
+    }
+  ],
   "history": [
     {
       "id": "nba:2026-10-27:POR:LAL",
@@ -54,37 +178,178 @@
           "as_of": "2026-10-28T01:00:00+00:00"
         }
       ]
+    },
+    {
+      "id": "nba:2026-10-28:OKC:DAL",
+      "team": "Oklahoma City Thunder",
+      "opponent": "Dallas Mavericks",
+      "league": "NBA",
+      "starts_at": "2026-10-29T01:30:00+00:00",
+      "pick_day": "2026-10-28",
+      "predicted_at": "2026-10-28T04:03:40.108458+00:00",
+      "graded_at": null,
+      "outcome": "pending",
+      "initial_best_odds": -205,
+      "initial_books": [
+        {
+          "name": "FanDuel",
+          "odds": -210,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "DraftKings",
+          "odds": -205,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        },
+        {
+          "name": "BetMGM",
+          "odds": -225,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Caesars",
+          "odds": -225,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Fanatics",
+          "odds": -220,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "BetRivers",
+          "odds": -230,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "id": "nba:2026-10-28:GSW:MIN",
+      "team": "Minnesota Timberwolves",
+      "opponent": "Golden State Warriors",
+      "league": "NBA",
+      "starts_at": "2026-10-29T00:00:00+00:00",
+      "pick_day": "2026-10-28",
+      "predicted_at": "2026-10-28T04:03:40.108458+00:00",
+      "graded_at": null,
+      "outcome": "pending",
+      "initial_best_odds": -152,
+      "initial_books": [
+        {
+          "name": "FanDuel",
+          "odds": -152,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "DraftKings",
+          "odds": -155,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        },
+        {
+          "name": "BetMGM",
+          "odds": -155,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Caesars",
+          "odds": -155,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Fanatics",
+          "odds": -160,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "BetRivers",
+          "odds": -162,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        }
+      ]
+    },
+    {
+      "id": "nba:2026-10-28:MIA:ATL",
+      "team": "Atlanta Hawks",
+      "opponent": "Miami Heat",
+      "league": "NBA",
+      "starts_at": "2026-10-28T23:00:00+00:00",
+      "pick_day": "2026-10-28",
+      "predicted_at": "2026-10-28T04:03:40.108458+00:00",
+      "graded_at": null,
+      "outcome": "pending",
+      "initial_best_odds": -146,
+      "initial_books": [
+        {
+          "name": "FanDuel",
+          "odds": -146,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "DraftKings",
+          "odds": -162,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        },
+        {
+          "name": "BetMGM",
+          "odds": -150,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Caesars",
+          "odds": -155,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "Fanatics",
+          "odds": -155,
+          "as_of": "2026-10-28T04:00:00+00:00"
+        },
+        {
+          "name": "BetRivers",
+          "odds": -175,
+          "as_of": "2026-10-28T03:00:00+00:00"
+        }
+      ]
     }
   ],
   "model_details": {
     "NBA": {
       "available": true,
       "training_games": 4962,
-      "same_day_finals": 3,
+      "same_day_finals": 0,
       "home_advantage": 40,
-      "rest_weight": 8,
-      "form_weight": 3,
+      "rest_weight": 0,
+      "form_weight": 0,
       "selection_season": "2024-25",
-      "holdout_season": "2025-26",
+      "holdout_season": null,
       "selection_count": 1225,
-      "holdout_count": 1225,
-      "candidate_name": "rest + recent scoring margin",
-      "candidate_passed": true
+      "holdout_count": null,
+      "candidate_name": null,
+      "candidate_passed": false,
+      "candidate_testing": "disabled"
     },
     "NFL": {
       "available": true,
       "training_games": 4470,
       "same_day_finals": 0,
       "home_advantage": 42,
-      "rest_weight": 4,
-      "form_weight": 3,
+      "rest_weight": 0,
+      "form_weight": 0,
       "selection_season": "2024",
-      "holdout_season": "2025",
+      "holdout_season": null,
       "selection_count": 285,
-      "holdout_count": 284,
-      "candidate_name": "rest + recent scoring margin",
-      "candidate_passed": true
+      "holdout_count": null,
+      "candidate_name": null,
+      "candidate_passed": false,
+      "candidate_testing": "disabled"
     }
   },
-  "errors": []
+  "errors": [
+    "2 invalid or conflicting source quotes rejected"
+  ],
+  "source_status": {
+    "the_odds_api": "missing_api_key",
+    "odds_history": "available",
+    "cross_check_independent": false
+  }
 }

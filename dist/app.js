@@ -13,15 +13,19 @@
     $('date-full').textContent=etDate.format(now);
     const all=Array.isArray(board.picks)?board.picks:[];
     // A static deployment may remain visible after game time; never show its pregame prices as current.
-    const picks=all.filter(p=>new Date(p.starts_at)>now);
-    $('count').textContent=String(picks.length).padStart(2,'0');
-    const times=picks.flatMap(p=>(p.books||[]).filter(b=>b.as_of).map(b=>new Date(b.as_of).valueOf())).filter(Number.isFinite);
+    const upcoming=all.filter(p=>new Date(p.starts_at)>now);
+    const times=upcoming.flatMap(p=>(p.books||[]).filter(b=>b.as_of).map(b=>new Date(b.as_of).valueOf())).filter(Number.isFinite);
     const oldest=times.length?Math.min(...times):null;
-    const stale=oldest!=null && now.valueOf()-oldest>95*60*1000;
+    const stale=!validDate || now.valueOf()-generated.valueOf()>95*60*1000 || generated.valueOf()-now.valueOf()>5*60*1000 || (oldest!=null && now.valueOf()-oldest>95*60*1000);
+    const picks=stale?[]:upcoming;
+    $('count').textContent=String(picks.length).padStart(2,'0');
     const freshness=$('freshness'); freshness.classList.toggle('stale',stale);
-    freshness.textContent=oldest ? (stale?'STALE ODDS · ':'Odds snapshot · ')+etTime.format(new Date(oldest))+' ET'+(stale?' · Check the sportsbook':'') : validDate?'Board checked '+etTime.format(generated)+' ET':'Waiting for data';
+    freshness.textContent=stale?'DATA DELAYED · Waiting for a fresh update':oldest?'Odds snapshot · '+etTime.format(new Date(oldest))+' ET':validDate?'Board checked '+etTime.format(generated)+' ET':'Waiting for data';
     const target=$('picks');
-    if(!picks.length){target.innerHTML='<div class="empty"><strong>No active picks right now.</strong><p>New picks appear when the model finds a qualifying game.</p></div>';return;}
+    if(!picks.length){
+      const incomplete=Array.isArray(board.errors)&&board.errors.length>0;
+      target.innerHTML=stale||incomplete?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No active picks right now.</strong><p>New picks appear when the model finds a qualifying game.</p></div>';return;
+    }
     target.innerHTML=picks.map(p=>{
       const best=Math.max(...p.books.map(b=>b.odds).filter(Number.isFinite));
       const books=p.books.map(b=>`<div class="book ${b.odds!=null&&b.odds===best?'best':''}"><span class="book-name">${escape(b.name)}</span>${b.odds!=null&&b.odds===best?'<span class="best-label">BEST</span>':''}<strong class="book-odds">${b.odds==null?'—':odds(b.odds)}</strong></div>`).join('');

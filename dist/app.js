@@ -80,51 +80,6 @@
       return `<div class="factor-status"><div><strong>${league} · Rest between games</strong><span class="status-tag ${rest[1]?'on':''}">${rest[0]}</span></div><p>Compares each team’s days since its last game.</p></div><div class="factor-status"><div><strong>${league} · Recent scoring margin</strong><span class="status-tag ${form[1]?'on':''}">${form[0]}</span></div><p>Looks at point differences over the last five games.</p></div><p class="explanation">${test}</p>`;
     }).join('');
   }
-  function renderStudy(){
-    const study=(board&&board.study)||{};
-    const progress=(board&&board.validation_progress)||{};
-    $('validation-progress').innerHTML=['NBA','NFL'].map(league=>{
-      const item=progress[league];if(!item)return '';
-      const settled=Math.max(0,Number(item.settled_paper_picks)||0),required=Math.max(1,Number(item.required_picks)||300);
-      return `<span><strong>${league}</strong> ${settled} / ${required} settled paper picks</span>`;
-    }).filter(Boolean).join('')||'Validation progress appears after the next update.';
-    if(!study.NBA&&!study.NFL){$('study').innerHTML='<p class="muted">Study data will appear after the next update.</p>';return;}
-    const number=x=>Number.isFinite(x)?Number(x).toFixed(3):'—';
-    const percent=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'—';
-    $('study').innerHTML=['NBA','NFL'].map(league=>{
-      const item=study[league]||{},interval=Array.isArray(item.paper_roi_interval)?item.paper_roi_interval.map(percent).join(' to '):'not enough data';
-      return `<article class="study-league"><div><strong>${league} · ${Number(item.forecast_games)||0} settled games</strong><span class="study-verdict">INCONCLUSIVE</span></div><p>Log loss: model ${number(item.pure_log_loss)} · retail ${number(item.retail_log_loss)}</p><p>Sharp CLV: ${percent(item.sharp_clv)} · Paper ROI: ${percent(item.paper_roi)} (${Number(item.paper_picks)||0} picks)</p><p class="study-muted">Paper ROI interval: ${escape(interval)}</p></article>`;
-    }).join('');
-  }
-  function researchChart(points,label){
-    const values=points.filter(Number.isFinite);if(values.length<2)return '';
-    const min=Math.min(...values),max=Math.max(...values),range=max-min||1;
-    const coordinates=values.map((value,i)=>`${(4+152*i/(values.length-1)).toFixed(1)},${(40-34*(value-min)/range).toFixed(1)}`).join(' ');
-    return `<svg class="research-chart" viewBox="0 0 160 45" role="img" aria-label="${escape(label)}"><polyline points="${coordinates}"/></svg>`;
-  }
-  function renderResearchDashboard(){
-    const dashboard=(board&&board.research_dashboard)||{},replay=dashboard.paper_replay||{},patterns=Array.isArray(dashboard.patterns)?dashboard.patterns:[];
-    const pct=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'—';
-    const metric=x=>Number.isFinite(x)?x.toFixed(3):'—';
-    const summaries=['NBA','NFL'].map(league=>{
-      const r=replay[league];if(!r)return `<p>${league}: no paper replay yet.</p>`;
-      const curve=Array.isArray(r.equity_curve)?r.equity_curve.map(x=>x.units):[];
-      const chart=researchChart(curve,`${league} settled paper equity in units`);
-      const bins=Array.isArray(r.calibration)?r.calibration.filter(b=>b.n>0&&Number.isFinite(b.mean_probability)&&Number.isFinite(b.win_rate)):[];
-      const enough=Number(r.settled)>=30&&bins.length>0;
-      const calibration=enough?`<svg class="calibration-chart" viewBox="0 0 120 120" role="img" aria-label="${league} model probability versus observed win rate"><line x1="5" y1="115" x2="115" y2="5"/><g>${bins.map(b=>`<circle cx="${(5+110*b.mean_probability).toFixed(1)}" cy="${(115-110*b.win_rate).toFixed(1)}" r="4"><title>${b.n} games</title></circle>`).join('')}</g></svg><p>Calibration: model probability horizontally, observed wins vertically; dots group recorded games.</p>`:'<p>Calibration chart: not enough settled paper games.</p>';
-      return `<div class="research-dashboard-block"><h4>${league} paper replay</h4><p>${Number(r.settled)||0} settled · ${Number(r.pending_or_unresolved)||0} pending or unresolved · ROI ${pct(r.paper_roi)} · Sharp CLV ${pct(r.sharp_clv)} (${Number(r.sharp_close_samples)||0} qualified closes) · Maximum drawdown ${metric(r.max_drawdown_units)} units.</p>${chart||'<p>Equity chart: not enough settled paper results.</p>'}${calibration}</div>`;
-    }).join('');
-    const rows=patterns.map(p=>`<tr><td>${escape(p.id)}</td><td>${escape(p.league)}</td><td>${escape(p.description)}</td><td>${Number(p.games)||0}</td><td>${Number.isFinite(p.effect)?(100*p.effect).toFixed(2)+' pp':'—'}</td><td>${metric(p.adjusted_p)}</td><td>${escape(p.holdout||'not tested')}</td><td>${escape(p.status||'unknown')}</td></tr>`).join('');
-    const patternTable=rows?`<div class="research-table-wrap"><table class="research-table"><thead><tr><th>Test</th><th>League</th><th>Definition</th><th>Games</th><th>Effect</th><th>Adjusted p</th><th>Holdout</th><th>Status</th></tr></thead><tbody>${rows}</tbody></table></div>`:'<p>No logged pattern tests yet.</p>';
-    const breakdown=(board&&board.paper_breakdowns)||{},segments=[];
-    for(const key of ['league','edge_type','edge_bucket','book','pick_phase'])for(const [name,value] of Object.entries(breakdown[key]||{})){
-      if(!value||!Number.isFinite(value.settled)||value.settled<1)continue;
-      segments.push(`<tr><td>${escape(key.replace('_',' '))}</td><td>${escape(name)}</td><td>${value.settled}</td><td>${pct(value.paper_roi)}</td><td>${pct(value.retail_proxy_clv)} (${Number(value.retail_proxy_clv_samples)||0})</td></tr>`);
-    }
-    const segmentTable=segments.length?`<div class="research-table-wrap"><table class="research-table"><thead><tr><th>Group</th><th>Segment</th><th>Settled</th><th>Paper ROI</th><th>Retail proxy CLV (n)</th></tr></thead><tbody>${segments.join('')}</tbody></table></div><p>Retail last-observed proxies are not certified sharp closes.</p>`:'<p>No settled v2 paper segments yet.</p>';
-    $('research-dashboard').innerHTML=summaries+`<div class="research-dashboard-block"><h4>Pattern tests</h4>${patternTable}</div><div class="research-dashboard-block"><h4>Paper segments</h4>${segmentTable}</div>`;
-  }
   function booksMarkup(books){
     const available=books.map(b=>b.odds).filter(Number.isFinite),best=available.length?Math.max(...available):null;
     return `<div class="odds" aria-label="Sportsbook odds">${books.map(b=>`<div class="book ${b.odds!=null&&b.odds===best?'best':''}"><span class="book-name">${escape(b.name)}</span><div class="book-amount"><strong class="book-odds">${Number.isFinite(b.odds)?odds(b.odds):'—'}</strong>${b.odds!=null&&b.odds===best?'<span class="best-label">Best</span>':''}</div></div>`).join('')}</div>`;
@@ -163,20 +118,16 @@
     const historical=!p.current;
     const statuses={win:'WON',loss:'LOST',void:'VOID',pending:'PENDING'};
     const status=Object.hasOwn(statuses,p.outcome)?p.outcome:'pending';
-    const pure=p.model==='pure-elo-v1';
-    const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:pure?'<span class="result-badge">PAPER</span>':'<span class="result-badge">LEGACY MODEL</span>';
-    const estimate=pure&&Number.isFinite(p.model_probability)?`<small class="pick-ev">Model ${(p.model_probability*100).toFixed(1)}%</small>${Number.isFinite(p.estimated_ev)?'<small class="pick-ev">EV '+(p.estimated_ev>=0?'+':'')+(100*p.estimated_ev).toFixed(1)+'%</small>':''}<small class="pick-ev">Uncalibrated</small>`:'';
-    const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}${estimate}</div></div>`;
-    const pct=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'unavailable';
-    const points=x=>Number.isFinite(x)?(x>=0?'+':'')+(100*x).toFixed(1)+' points':'unavailable';
-    const context=`<details class="pick-context"><summary>Research context</summary><p>Latest retail no-vig reference: ${pct(p.retail_reference_probability)} · Price difference: ${points(p.retail_price_edge)} · Frozen model difference: ${points(p.model_edge_vs_retail)}</p><p>Retail reference is not a verified sharp line; differences are not proven edges. Trust and timing are unconfirmed or unavailable.</p>${availabilityMarkup(p)}${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
+    const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:p.watching?'<span class="result-badge">WATCHING</span>':'';
+    const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}</div></div>`;
+    const context=`<details class="pick-context"><summary>Game details</summary>${availabilityMarkup(p)}${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
     if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}${context}</article>`;
     const recorded=Array.isArray(p.initial_books)?p.initial_books.filter(b=>Number.isFinite(b.odds)):[];
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}
     return `<article class="pick">${title}<div class="single-odds">Best odds recorded at time of pick${Number.isFinite(p.initial_best_odds)?' <strong>'+odds(p.initial_best_odds)+'</strong>':' unavailable'}</div></article>`;
   }
   function render(){
-    setDailyDetails();renderDates();renderFactors();renderStudy();renderResearchDashboard();if(!board)return;
+    setDailyDetails();renderDates();renderFactors();if(!board)return;
     const accuracy=board.accuracy||{wins:0,losses:0};
     $('accuracy').textContent=accuracy.percent==null?'—':Number(accuracy.percent).toFixed(1)+'%';
     $('record').textContent=(accuracy.wins||0)+'W – '+(accuracy.losses||0)+'L · '+((accuracy.wins||0)+(accuracy.losses||0))+' settled'+(accuracy.pending?' · '+accuracy.pending+' pending':'');
@@ -199,6 +150,12 @@
       const incomplete=Array.isArray(board.errors)&&board.errors.length>0;
       $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved picks for this day.</strong><p>The archive grows as new picks are recorded.</p></div>':stale||incomplete?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No active picks right now.</strong><p>New picks appear when a game qualifies.</p></div>';
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
+    const watched=selectedDay===today()&&!stale?(Array.isArray(board.watchlist)?board.watchlist:[]).filter(p=>{
+      const stamps=(p.books||[]).filter(b=>Number.isFinite(b.odds)).map(b=>new Date(b.as_of).valueOf());
+      return new Date(p.starts_at)>now&&!picks.some(x=>x.id===p.id)&&stamps.length>0&&stamps.every(t=>Number.isFinite(t)&&t<=now.valueOf()+5*60*1000&&now.valueOf()-t<=95*60*1000);
+    }):[];
+    $('watch-section').hidden=!watched.length;
+    $('watchlist').innerHTML=watched.map(p=>pickMarkup(Object.assign({},p,{current:true,watching:true}))).join('');
   }
   async function refresh(){try{const r=await fetch('board.json?view='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('unavailable');board=await r.json();render();}catch(_){$('freshness').textContent='Board unavailable';$('picks').innerHTML='<div class="empty"><strong>Unable to load picks.</strong><p>Please try again shortly.</p></div>';}}
   const storageKey='pick-variable-ideas-v1';

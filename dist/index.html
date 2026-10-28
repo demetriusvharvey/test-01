@@ -32,18 +32,18 @@
         <p id="date-full" class="date">Loading date…</p>
       </div>
       <section class="accuracy" aria-label="Model accuracy">
-        <div class="accuracy-heading">Model accuracy <span>ALL MODELS</span></div>
+        <div class="accuracy-heading">Pick accuracy <span>ALL SAVED PICKS</span></div>
         <div class="accuracy-value" id="accuracy">—</div>
         <p class="accuracy-record" id="record">No settled picks yet</p>
       </section>
     </header>
 
-    <aside class="quote-card" aria-label="Daily motivation">
-      <div class="quote-copy"><p class="quote-label"><span aria-hidden="true">✦</span> A LITTLE DAILY MOTIVATION</p><p id="daily-quote" class="quote">Big goals. Smart moves. One day at a time.</p><p class="quote-note">Keep your eyes on the bigger picture.</p></div>
+    <aside class="quote-card" aria-label="Daily quote">
+      <div class="quote-copy"><p id="daily-quote" class="quote">Big goals. Smart moves. One day at a time.</p></div>
       <img src="money-stacks.webp" class="money-image" alt="Stacks of cash">
     </aside>
 
-    <aside class="research-notice"><strong>Paper picks · experimental model</strong><span>Not validated as profitable. Betting can lose money; set an affordable limit and don’t chase losses.</span></aside>
+    <p class="availability-notice">NBA injury updates aren’t included in these predictions yet. Check player status before betting.</p>
 
     <nav class="tabs" role="tablist" aria-label="Site sections">
       <button type="button" id="tab-picks" role="tab" aria-selected="true" aria-controls="panel-picks" class="tab is-active">Picks</button>
@@ -54,26 +54,20 @@
       <div class="section-top"><div><p class="section-kicker">THE BOARD</p><h2 id="picks-title">Today’s picks</h2></div><div class="date-controls" aria-label="Choose a pick date"><button type="button" id="today-button" class="date-button is-active">Today</button><button type="button" id="yesterday-button" class="date-button">Yesterday</button><label class="date-picker"><span class="sr-only">Choose another date</span><input type="date" id="pick-date" aria-label="Choose another date"></label></div></div>
       <div class="list-header"><p id="freshness" aria-live="polite">Loading the latest picks…</p><span id="count"></span></div>
       <section id="picks" class="pick-list" aria-label="Moneyline picks" aria-live="polite"><div class="loading">Loading picks…</div></section>
-      <section class="study-panel" aria-label="Paper model study">
-        <div class="study-head"><div><p class="section-kicker">PAPER STUDY</p><h2>Model vs. market</h2></div><span class="pill testing">INCONCLUSIVE</span></div>
-        <p class="study-note">Experimental forecasts · no verified sharp close yet</p>
-        <div id="validation-progress" class="validation-progress">Validation progress appears after the next update.</div>
-        <div id="study" class="study-grid"><p class="muted">Waiting for study data.</p></div>
-      </section>
+      <section id="watch-section" class="watch-section" hidden><h2>Watching</h2><p>Games you asked to follow; not included in the pick record.</p><div id="watchlist" class="pick-list"></div></section>
     </section>
 
     <section id="panel-variables" role="tabpanel" aria-labelledby="tab-variables" hidden>
       <div class="variables-header"><div><p class="section-kicker">INSIDE THE MODEL</p><h2>What goes into a pick</h2><p>The factors, the testing, and a place to keep your ideas.</p></div></div>
       <div class="variable-grid">
-        <article class="variable-card"><div class="card-heading"><div><p class="section-kicker">NBA + NFL</p><h3>Core inputs</h3></div><span class="pill in-use">IN USE</span></div><ul class="factor-list"><li><strong>Team strength</strong><span>Elo ratings update from final scores and opponent strength.</span></li><li><strong>Home advantage</strong><span>Accounts for the home team; NFL neutral-site games are treated separately.</span></li><li><strong>Model-first forecast</strong><span>The team forecast uses game results, not sportsbook odds. It is experimental and not yet calibrated.</span></li><li><strong>Available odds</strong><span>At least three books, the best available price, time until tipoff or kickoff, and an estimated edge determine which paper picks qualify.</span></li></ul></article>
+        <article class="variable-card"><div class="card-heading"><div><p class="section-kicker">NBA + NFL</p><h3>Core inputs</h3></div><span class="pill in-use">IN USE</span></div><ul class="factor-list"><li><strong>Team strength</strong><span>Elo ratings update from final scores and opponent strength.</span></li><li><strong>Home advantage</strong><span>Accounts for the home team; NFL neutral-site games are treated separately.</span></li><li><strong>Team forecast</strong><span>The team forecast uses game results and opponent strength; the odds are compared afterward. It has not yet been calibrated.</span></li><li><strong>Available odds</strong><span>At least three books, the best available price and time until tipoff or kickoff help determine which picks qualify.</span></li></ul></article>
         <article class="variable-card"><div class="card-heading"><div><p class="section-kicker">NBA + NFL</p><h3>Factors under research</h3></div><span class="pill testing">PAUSED</span></div><div id="dynamic-factors"><p class="muted">Waiting for the latest model details.</p></div><p class="explanation">Rest and recent scoring margin are paused while we prepare stronger tests. A new factor needs preregistration, multiple-season replication, an untouched holdout, and a comparison with the market before it can enter the model. No result guarantees profit.</p></article>
         <article class="variable-card wide-card"><div class="card-heading"><div><p class="section-kicker">ON THE RADAR</p><h3>Tracked, but not model inputs</h3></div><span class="pill neutral">NOT IN USE</span></div><div class="not-used"><div><strong>Referee assignments</strong><p>NBA crews are archived when available; NFL history is researched. Assignments can change and their effects are unvalidated.</p></div><div><strong>Injuries, lineups &amp; quarterbacks</strong><p>NFL reports are archived for research; availability and projected lineups are not directly incorporated. Sportsbook prices may already reflect news.</p></div><div><strong>Travel &amp; time zones</strong><p>Schedule features are under research and do not change picks.</p></div></div></article>
         <article class="variable-card wide-card ideas-card"><div class="card-heading"><div><p class="section-kicker">YOUR NOTES</p><h3>Variable ideas</h3><p>Keep track of factors you want to investigate.</p></div></div><form id="idea-form"><div class="idea-fields"><label>Variable<input id="idea-name" maxlength="70" required placeholder="e.g. back-to-back games"></label><label>League<select id="idea-league"><option>NBA + NFL</option><option>NBA</option><option>NFL</option></select></label></div><label>Note <span class="optional">(optional)</span><input id="idea-note" maxlength="160" placeholder="What should we look for?"></label><button class="add-button" type="submit">Add idea <span aria-hidden="true">+</span></button></form><ul id="ideas" class="ideas-list"></ul><p id="idea-message" class="idea-disclaimer" aria-live="polite">Ideas are saved on this device. They aren’t used in predictions until data and testing support them.</p></article>
-        <article class="variable-card wide-card"><details class="research-details"><summary>Research results and paper tracking</summary><p class="explanation">Only recorded results are shown. No model or pattern is approved as profitable.</p><div id="research-dashboard"><p class="muted">Waiting for research data.</p></div></details></article>
       </div>
     </section>
 
-    <footer class="sources"><p>Odds update about hourly. Verify the price with the sportsbook.</p><p>Odds: <a href="https://agentbets.ai/odds/" target="_blank" rel="noopener noreferrer">AgentBets</a> · NBA data: <a href="https://boxscorelab.com/downloads/" target="_blank" rel="noopener noreferrer">BoxScore Lab</a> · NFL data: <a href="https://nflreadr.nflverse.com/" target="_blank" rel="noopener noreferrer">nflverse</a></p><p>Accuracy is win rate, not profit.</p><details class="photo-credits"><summary>Photo credits</summary><p><a href="https://commons.wikimedia.org/wiki/File:Kobe_Bryant_2014.jpg">Kobe Bryant</a> and <a href="https://commons.wikimedia.org/wiki/File:Stephen_Curry_(16454505719).jpg">Stephen Curry</a> by Keith Allison; <a href="https://commons.wikimedia.org/wiki/File:LeBron_James_Lakers.jpg">LeBron James</a>, <a href="https://commons.wikimedia.org/wiki/File:Tom_Brady_WFT-Buccaneers_NOV2021_(cropped).jpg">Tom Brady</a>, and <a href="https://commons.wikimedia.org/wiki/File:Lamar_Jackson_2020.jpg">Lamar Jackson</a> by All-Pro Reels, via Wikimedia Commons. Photos are cropped and desaturated on the page. <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</p></details></footer>
+    <footer class="sources"><p>Odds update about hourly. Verify the price with the sportsbook.</p><p>Odds: <a href="https://agentbets.ai/odds/" target="_blank" rel="noopener noreferrer">AgentBets</a> · NBA data: <a href="https://boxscorelab.com/downloads/" target="_blank" rel="noopener noreferrer">BoxScore Lab</a> · NFL data: <a href="https://nflreadr.nflverse.com/" target="_blank" rel="noopener noreferrer">nflverse</a></p><p>Accuracy is based on saved picks, not proof of profit. Results don’t guarantee future performance.</p><details class="photo-credits"><summary>Photo credits</summary><p><a href="https://commons.wikimedia.org/wiki/File:Kobe_Bryant_2014.jpg">Kobe Bryant</a> and <a href="https://commons.wikimedia.org/wiki/File:Stephen_Curry_(16454505719).jpg">Stephen Curry</a> by Keith Allison; <a href="https://commons.wikimedia.org/wiki/File:LeBron_James_Lakers.jpg">LeBron James</a>, <a href="https://commons.wikimedia.org/wiki/File:Tom_Brady_WFT-Buccaneers_NOV2021_(cropped).jpg">Tom Brady</a>, and <a href="https://commons.wikimedia.org/wiki/File:Lamar_Jackson_2020.jpg">Lamar Jackson</a> by All-Pro Reels, via Wikimedia Commons. Photos are cropped and desaturated on the page. <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</p></details></footer>
   </main>
   <script src="app.js"></script>
 </body>

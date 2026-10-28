@@ -26,6 +26,7 @@ from .referees import attach_current_officials
 from .availability import attach_nfl_reports
 from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
+from .watchlist import render_watchlist
 
 
 def main():
@@ -172,6 +173,12 @@ def main():
     training_counts={league:sum(1 for g in games if g['league']==league and g['date']<today) for league in ('NBA','NFL')}
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
     attach_prediction_checks(board,ledger)
+    try:
+        watch_path=data_dir/'watchlist.json'
+        watched=json.loads(watch_path.read_text()) if watch_path.exists() else []
+        board['watchlist']=render_watchlist(markets,watched,now.isoformat()) if isinstance(watched,list) else []
+    except (OSError,ValueError,TypeError):
+        board['watchlist']=[];board['errors'].append('Watchlist unavailable')
     attach_rest_context(board,markets,models,now.isoformat())
     attach_current_officials(board,markets,ref_report,ref_observed_at,now.isoformat())
     try:
@@ -182,6 +189,15 @@ def main():
         if data_root:attach_histories(data_root,board,markets,ledger,now.isoformat())
     except Exception as e:
         board['errors'].append('Observed line history unavailable ('+type(e).__name__+')')
+    watch_board={'picks':board['watchlist'],'errors':board['errors']}
+    attach_rest_context(watch_board,markets,models,now.isoformat())
+    attach_current_officials(watch_board,markets,ref_report,ref_observed_at,now.isoformat())
+    try:
+        if data_root:
+            attach_nfl_reports(data_root,watch_board,markets,nfl_csv,nfl_observed_at,now.isoformat())
+            attach_histories(data_root,watch_board,markets,board['watchlist'],now.isoformat())
+    except Exception as e:
+        board['errors'].append('Watchlist context unavailable ('+type(e).__name__+')')
     try: board['study']=build_scoreboard(data_root,ledger,now.isoformat()) if data_root else {}
     except Exception as e:
         board['study']={};board['errors'].append('Paper study report unavailable ('+type(e).__name__+')')

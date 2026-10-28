@@ -1,0 +1,161 @@
+[
+  {
+    "id": "nba:2026-10-28:SAS:UTA",
+    "league": "NBA",
+    "team_code": "SAS",
+    "team": "San Antonio Spurs",
+    "opponent": "Utah Jazz",
+    "starts_at": "2026-10-29T01:00:00+00:00",
+    "pick_day": "2026-10-28",
+    "predicted_at": "2026-10-28T23:23:44.894111+00:00",
+    "probability": 0.81903865,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "UTA",
+      "away": "SAS",
+      "starts_at": "2026-10-29T01:00:00+00:00",
+      "home_rating": 1331.0261773491293,
+      "away_rating": 1633.313600382225,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-26",
+      "away_last": "2026-10-27",
+      "home_margins": [
+        -20,
+        1,
+        -9,
+        -5
+      ],
+      "away_margins": [
+        -12,
+        -4,
+        16,
+        27
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "ff0d08b052e50736b85c4a4ee9e4650b597731bcee2ff6860732a3ce4216727c"
+      }
+    },
+    "feature_snapshot_hash": "cc4abf1ff1fecba433a0e7731bafb87f93e5d38b64f53c20fb72e9f3cbf1a396",
+    "model_only_probability": 0.8190386461471668,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  },
+  {
+    "id": "nba:2026-10-28:OKC:DAL",
+    "league": "NBA",
+    "team_code": "OKC",
+    "team": "Oklahoma City Thunder",
+    "opponent": "Dallas Mavericks",
+    "starts_at": "2026-10-29T01:30:00+00:00",
+    "pick_day": "2026-10-28",
+    "predicted_at": "2026-10-28T23:23:44.894111+00:00",
+    "probability": 0.8055641,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "DAL",
+      "away": "OKC",
+      "starts_at": "2026-10-29T01:30:00+00:00",
+      "home_rating": 1412.8796505294126,
+      "away_rating": 1699.8091083361444,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-26",
+      "away_last": "2026-10-26",
+      "home_margins": [
+        -18,
+        16,
+        -16,
+        4
+      ],
+      "away_margins": [
+        12,
+        12,
+        7,
+        11
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "ff0d08b052e50736b85c4a4ee9e4650b597731bcee2ff6860732a3ce4216727c"
+      }
+    },
+    "feature_snapshot_hash": "8748fef5ee7dc4d8355e527e69e0915f59f50fac8868b9249979e327271844d0",
+    "model_only_probability": 0.8055640984059844,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  },
+  {
+    "id": "nba:2026-10-28:GSW:MIN",
+    "league": "NBA",
+    "team_code": "MIN",
+    "team": "Minnesota Timberwolves",
+    "opponent": "Golden State Warriors",
+    "starts_at": "2026-10-29T00:00:00+00:00",
+    "pick_day": "2026-10-28",
+    "predicted_at": "2026-10-28T23:23:44.894111+00:00",
+    "probability": 0.7279526,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "MIN",
+      "away": "GSW",
+      "starts_at": "2026-10-29T00:00:00+00:00",
+      "home_rating": 1570.8545196894713,
+      "away_rating": 1439.8711137422385,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-26",
+      "away_last": "2026-10-26",
+      "home_margins": [
+        25,
+        22,
+        23,
+        -2
+      ],
+      "away_margins": [
+        -22,
+        -3,
+        -9,
+        20
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "ff0d08b052e50736b85c4a4ee9e4650b597731bcee2ff6860732a3ce4216727c"
+      }
+    },
+    "feature_snapshot_hash": "b44fdc3ebca256e4520a5e5c5cd7ee57dcb0c25072dcca8c53cde1a7a6984b84",
+    "model_only_probability": 0.7279525967999763,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  }
+]

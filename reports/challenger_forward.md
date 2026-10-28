@@ -1,6 +1,6 @@
 # Forward challenger comparison
 
-Run 2026-10-28T13:20:33.753608+00:00. The challenger and baseline must share the same recorded pregame timestamp.
+Run 2026-10-28T13:21:48.721275+00:00. The challenger and baseline must share the same recorded pregame timestamp.
 
 | League | Challenger | Matched settled games | Excluded first forecasts | Log loss difference | Brier difference | Adjusted p | Status |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | --- |

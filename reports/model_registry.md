@@ -1,6 +1,6 @@
 # Weekly model challenger registry
 
-Run 2026-10-28T13:20:33.690667+00:00: 312 forecast snapshots, 0 outcome records, 0 matched rows before eligibility.
+Run 2026-10-28T13:21:48.644312+00:00: 312 forecast snapshots, 0 outcome records, 0 matched rows before eligibility.
 
 | League | Model | Status | Eligible training games | Validation season | Promoted |
 | --- | --- | --- | ---: | --- | --- |

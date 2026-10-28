@@ -1,7 +1,7 @@
 # Pattern research report
 
-As of 2026-10-28T13:20:33.630259+00:00: 312 archived forecast snapshots, 0 separately observed outcomes, 0 matched rows before rights/time eligibility.
-All results are shadow-only. No pattern is promoted; insufficient data is not a failure or a success. H010 is one Benjamini–Hochberg family across the definitions and leagues below. Only valid tests enter the correction.
+As of 2026-10-28T13:21:48.577443+00:00: 312 archived forecast snapshots, 0 separately observed outcomes, 0 matched rows before rights/time eligibility.
+All results are shadow-only. No pattern is promoted; insufficient data is not a failure or a success. H010 and H013 form one Benjamini–Hochberg family across the definitions and leagues below. Only valid tests enter the correction.
 
 | Hypothesis | League | Definition | Games / days | Mean win-minus-market | 95% day-block interval | Raw p | Adjusted p | Holdout | Status |
 | --- | --- | --- | ---: | ---: | ---: | ---: | ---: | --- | --- |
@@ -15,6 +15,19 @@ All results are shadow-only. No pattern is promoted; insufficient data is not a 
 | H010g | NFL | one confirmed starting-quarterback change | 0 / 0 | — | — | — | — | not_tested | not_testable |
 | H010h | NBA | home team after overtime | 0 / 0 | — | — | — | — | not_tested | not_testable |
 | H010h | NFL | home team after overtime | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013a | NBA | one team after a loss of at least 20 | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013a | NFL | one team after a loss of at least 21 | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013b | NBA | one team after a win of at least 20 | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013b | NFL | one team after a win of at least 21 | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013c | NFL | exactly one team on a short week | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013d | NFL | exactly one team after a bye | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013e | NBA | early-season underdog | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013e | NFL | early-season underdog | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013f | NBA | underdog below 35% no-vig | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013f | NFL | underdog below 35% no-vig | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013g | NBA | home team with wide book disagreement | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013g | NFL | home team with wide book disagreement | 0 / 0 | — | — | — | — | not_tested | not_testable |
+| H013h | NFL | prime-time favorite | 0 / 0 | — | — | — | — | not_tested | not_testable |
 
 A result requires at least 30 games over 10 distinct game days even for an exploratory day-block test. Publication-time gaps, missing features, unsettled games and sources without verified rights are excluded. Day-block sign randomization assumes exchangeable signs across days; serial dependence and assumptions need review. For promotion, require two separate season replications, a genuinely untouched later holdout and the broader model-first validation gate.
 

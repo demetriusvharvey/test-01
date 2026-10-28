@@ -8,7 +8,7 @@
   function render(board){
     const accuracy=board.accuracy||{wins:0,losses:0};
     $('accuracy').textContent=accuracy.percent==null?'—':Number(accuracy.percent).toFixed(1)+'%';
-    $('record').textContent=accuracy.wins+'W – '+accuracy.losses+'L · '+(accuracy.wins+accuracy.losses)+' settled';
+    $('record').textContent=accuracy.wins+'W – '+accuracy.losses+'L · '+(accuracy.wins+accuracy.losses)+' settled'+(accuracy.pending?' · '+accuracy.pending+' pending':'');
     const now=new Date(), generated=new Date(board.generated_at); const validDate=Number.isFinite(generated.valueOf());
     $('date-full').textContent=etDate.format(now);
     const all=Array.isArray(board.picks)?board.picks:[];

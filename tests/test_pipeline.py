@@ -1,7 +1,7 @@
 import unittest
 from datetime import date, datetime, timedelta, timezone
 from scripts.pipeline import (parse_book_html, parse_nba_csv, parse_nfl_locations, build_ratings,
-                              grade_ledger, build_market, choose_candidates, game_id, render_board)
+                              grade_ledger, build_market, choose_candidates, game_id, render_board, append_referee_assignments)
 
 class PipelineTests(unittest.TestCase):
     def setUp(self): self.now=datetime(2026,10,28,1,30,tzinfo=timezone.utc)
@@ -48,6 +48,14 @@ class PipelineTests(unittest.TestCase):
         self.assertEqual(board['picks'][0]['best'],-105)
         self.assertEqual(len(board['picks'][0]['books']),6)
         self.assertIsNone(board['accuracy']['percent'])
+    def test_referees_are_archived_without_duplicate_or_unverified_rows(self):
+        history=[]
+        report={'status':'ok','date_expected':'2026-10-27','games':[{'matchup':'Portland @ L.A. Lakers','crew_chief':'Scott Foster','referee':'Che Flores','umpire':'Nate Cearley'}]}
+        self.assertEqual(append_referee_assignments(history,report,self.now),1)
+        self.assertEqual(append_referee_assignments(history,report,self.now),0)
+        report['status']='stale_or_date_unverified'
+        self.assertEqual(append_referee_assignments(history,report,self.now),0)
+        self.assertEqual(len(history),1)
     def test_nfl_neutral_is_read_from_schedule(self):
         csv='gameday,home_team,away_team,location\n2026-11-01,LA,NYG,Neutral\n'
         self.assertTrue(parse_nfl_locations(csv)['nfl:2026-11-01:NYG:LA'])

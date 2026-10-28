@@ -11,6 +11,8 @@ from urllib.request import Request, urlopen
 from zoneinfo import ZoneInfo
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from scripts.refresh_feed import parse_referees, NBA_REFS
 ET = ZoneInfo('America/New_York')
 BOOKS = [('fanduel','FanDuel'),('draftkings','DraftKings'),('betmgm','BetMGM'),('caesars','Caesars'),('fanatics','Fanatics'),('betrivers','BetRivers')]
 NBA_SEASONS = ['2022-23','2023-24','2024-25','2025-26','2026-27']
@@ -185,6 +187,22 @@ def parse_espn_starts(payload,league):
         except (KeyError,IndexError,TypeError,ValueError): continue
     return starts
 
+def append_referee_assignments(history, report, now):
+    # Archive each reported crew and later changes; do not infer a causal effect.
+    if report.get('status')!='ok': return 0
+    changed=0
+    for g in report.get('games',[]):
+        matchup=g.get('matchup','')
+        if not matchup: continue
+        crew=[g.get('crew_chief',''),g.get('referee',''),g.get('umpire',''),g.get('alternate','')]
+        if not all(crew[:3]): continue
+        key=report['date_expected']+':'+matchup
+        previous=next((x for x in reversed(history) if x.get('key')==key),None)
+        if previous and previous.get('crew')==crew: continue
+        history.append({'key':key,'game_date':report['date_expected'],'matchup':matchup,'crew':crew,'observed_at':now.isoformat(),'source':NBA_REFS})
+        changed+=1
+    return changed
+
 def grade_ledger(ledger,finals,now):
     byid={x['id']:x for x in finals}; changed=0
     for p in ledger:
@@ -271,6 +289,14 @@ def main():
     data_dir=ROOT/'data'; data_dir.mkdir(exist_ok=True)
     ledger_path=data_dir/'predictions.json'
     ledger=json.loads(ledger_path.read_text()) if ledger_path.exists() else []
+    refs_path=data_dir/'referee_history.json'
+    refs=json.loads(refs_path.read_text()) if refs_path.exists() else []
+    try:
+        ref_report=parse_referees(get(NBA_REFS),today)
+        print('NBA referees:',ref_report['status'],'new/changed:',append_referee_assignments(refs,ref_report,now))
+    except Exception as e:
+        print('NBA referee source unavailable:',type(e).__name__)
+    refs_path.write_text(json.dumps(refs,indent=2)+'\n')
     finals=[{'id':g['id'],'home':g['home'],'away':g['away'],'home_score':g['home_score'],'away_score':g['away_score']} for g in games if g['date']<=today]
     espn_starts={}
     for league,sport in [('NBA','basketball/nba'),('NFL','football/nfl')]:

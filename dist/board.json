@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-28T17:42:03.167877+00:00",
+  "generated_at": "2026-10-28T17:49:20.248838+00:00",
   "model": "Experimental pure team Elo \u2014 paper only",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; ESPN final scores",
   "accuracy": {
@@ -74,7 +74,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T17:42:03.167877+00:00",
+        "observed_at": "2026-10-28T17:49:20.248838+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -84,7 +84,7 @@
         "crew_chief": "James Williams (#60)",
         "referee": "Marat Kogut (#32)",
         "umpire": "Brandon Adair (#67)",
-        "observed_at": "2026-10-28T17:42:01.771720+00:00",
+        "observed_at": "2026-10-28T17:49:19.731149+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -192,7 +192,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T17:42:03.167877+00:00",
+        "observed_at": "2026-10-28T17:49:20.248838+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -202,7 +202,7 @@
         "crew_chief": "Curtis Blair (#74)",
         "referee": "Andy Nagy (#18)",
         "umpire": "Ashley Moyer-Gleich (#13)",
-        "observed_at": "2026-10-28T17:42:01.771720+00:00",
+        "observed_at": "2026-10-28T17:49:19.731149+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -310,7 +310,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T17:42:03.167877+00:00",
+        "observed_at": "2026-10-28T17:49:20.248838+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -320,7 +320,7 @@
         "crew_chief": "Ben Taylor (#46)",
         "referee": "JB DeRosa (#14)",
         "umpire": "Brandon Schwab (#49)",
-        "observed_at": "2026-10-28T17:42:01.771720+00:00",
+        "observed_at": "2026-10-28T17:49:19.731149+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -591,9 +591,7 @@
       "candidate_testing": "disabled"
     }
   },
-  "errors": [
-    "A scheduled update was missed or delayed; gaps in history are possible"
-  ],
+  "errors": [],
   "watchlist": [
     {
       "id": "nba:2026-10-28:PHI:IND",
@@ -652,7 +650,7 @@
           }
         },
         "source": "completed game data available to current pipeline",
-        "observed_at": "2026-10-28T17:42:03.167877+00:00",
+        "observed_at": "2026-10-28T17:49:20.248838+00:00",
         "travel": "unknown",
         "time_zone_change": "unknown",
         "note": "previous-game dates may be incomplete; market may already reflect the schedule",
@@ -662,7 +660,7 @@
         "crew_chief": "Courtney Kirkland (#61)",
         "referee": "Aaron Smith (#51)",
         "umpire": "Phenizee Ransom (#70)",
-        "observed_at": "2026-10-28T17:42:01.771720+00:00",
+        "observed_at": "2026-10-28T17:49:19.731149+00:00",
         "source": "https://official.nba.com/referee-assignments/",
         "assignment_can_change": true,
         "used_in_prediction": false
@@ -1334,8 +1332,8 @@
     "status": "descriptive_research_only"
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-28T17:42:03.167877+00:00",
-    "source_warning_count": 1,
+    "pipeline_generated_at": "2026-10-28T17:49:20.248838+00:00",
+    "source_warning_count": 0,
     "latest_quote_at": "2026-10-28T17:00:00+00:00",
     "oldest_quote_at": "2026-10-28T17:00:00+00:00",
     "source_freshness": "within_window",
@@ -1361,6 +1359,7 @@
   "source_status": {
     "the_odds_api": "missing_api_key",
     "odds_history": "available",
+    "nba_injury_context": "not_configured",
     "cross_check_independent": false
   }
 }

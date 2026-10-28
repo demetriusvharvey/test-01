@@ -16,7 +16,7 @@ class AvailabilityModelTests(unittest.TestCase):
         self.event={'id':'nfl:test','league':'NFL','home':'A','away':'B',
                     'home_name':'Home','away_name':'Away','starts_at':(self.now+timedelta(hours=3)).isoformat()}
         self.nfl={'source':'nflverse injury and practice reports','used_in_prediction':False,
-                  'incomplete':False,'latest_observed_at':self.now.isoformat(),'teams':{
+                  'incomplete':False,'latest_observed_at':self.now.isoformat(),'schedule_observed_at':self.now.isoformat(),'teams':{
                       'home':{'team':'Home','total_entries':1,'entries':[{'report_status':'Out','observed_at':self.now.isoformat()}]},
                       'away':{'team':'Away','total_entries':1,'entries':[{'report_status':'Questionable','observed_at':self.now.isoformat()}]}}}
         self.cutoff=datetime(2026,1,1,tzinfo=timezone.utc);self.rows=[]
@@ -33,6 +33,12 @@ class AvailabilityModelTests(unittest.TestCase):
         features=availability_features(self.event,self.nfl,self.now.isoformat())
         self.assertEqual(features['features'],{'out_difference':1,'doubtful_difference':0,'questionable_difference':-1})
         self.assertFalse(features['used_in_prediction'])
+        self.nfl['schedule_observed_at']=(self.now+timedelta(seconds=1)).isoformat()
+        self.assertIsNone(availability_features(self.event,self.nfl,self.now.isoformat()))
+        self.nfl['schedule_observed_at']=self.now.isoformat()
+        self.nfl['latest_observed_at']=(self.now-timedelta(hours=31)).isoformat()
+        self.assertIsNone(availability_features(self.event,self.nfl,self.now.isoformat()))
+        self.nfl['latest_observed_at']=self.now.isoformat()
         self.nfl['teams']['away']['entries']=[];self.nfl['teams']['away']['total_entries']=0
         self.assertIsNone(availability_features(self.event,self.nfl,self.now.isoformat()))
         self.nfl['teams']['away']['entries']=[{'report_status':'Out','observed_at':(self.now+timedelta(seconds=1)).isoformat()}]

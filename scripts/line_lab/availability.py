@@ -160,6 +160,7 @@ def nfl_report_context(root,event,schedule_text,schedule_observed_at,now,max_pla
             teams[side]={'team':event[side+'_name'],'entries':entries[:max_players],'total_entries':len(entries)}
         return {'teams':teams,'week':week,'source':'nflverse injury and practice reports',
                 'latest_observed_at':max(all_times).isoformat() if all_times else None,
+                'schedule_observed_at':schedule_time.isoformat(),
                 'starter_status':'unconfirmed','inactive_list':'unconfirmed','used_in_prediction':False,'incomplete':incomplete,
                 'note':'Captured reports may be incomplete; an absent name does not mean healthy.'}
     except (KeyError,TypeError,ValueError,OverflowError):return None

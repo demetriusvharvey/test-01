@@ -50,9 +50,10 @@ def availability_features(event,context,prediction_at):
             home,away=(_counts_nba(context,side) for side in ('home','away'))
             source='PropLine, ESPN-sourced'
         elif league=='NFL':
-            observed=aware(context['latest_observed_at'])
+            report_observed=aware(context['latest_observed_at']);schedule_observed=aware(context['schedule_observed_at'])
+            observed=max(report_observed,schedule_observed)
             if context.get('source')!='nflverse injury and practice reports' or context.get('incomplete') is not False:return None
-            if observed>now or now-observed>timedelta(hours=30):return None
+            if observed>now or now-report_observed>timedelta(hours=30):return None
             home,away=(_counts_nfl(context,side,now) for side in ('home','away'))
             source='nflverse injury and practice reports'
         else:return None

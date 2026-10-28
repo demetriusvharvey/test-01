@@ -11,7 +11,7 @@
     "pick_day": "2026-10-27",
     "initial_best_odds": -125,
     "edge": 0.013517945317359392,
-    "outcome": "pending",
+    "outcome": "loss",
     "model": "elo-market-v1",
     "initial_books": [
       {
@@ -44,7 +44,12 @@
         "odds": -132,
         "as_of": "2026-10-28T01:00:00+00:00"
       }
-    ]
+    ],
+    "graded_at": "2026-10-28T08:23:13.353615+00:00",
+    "final_score": {
+      "home": 129,
+      "away": 136
+    }
   },
   {
     "id": "nba:2026-10-28:OKC:DAL",

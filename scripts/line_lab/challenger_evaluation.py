@@ -8,7 +8,7 @@ from contextlib import closing
 from pathlib import Path
 
 from .constants import ET
-from .experiment import _block_interval, _logloss, read_forecasts
+from .experiment import _block_interval, _logloss, read_forecasts, corroborated_nfl_outcomes
 from .history import aware
 from .model_stack import FORBIDDEN
 from .statistics import bh_adjust, paired_block_test
@@ -24,7 +24,7 @@ CREATE TRIGGER IF NOT EXISTS challenger_tests_no_delete BEFORE DELETE ON challen
 '''
 
 
-def read_inputs(root):
+def read_inputs(root,as_of=None):
     root=Path(root);baselines=read_forecasts(root);candidates=[];trials={};outcomes={}
     for path in sorted((root/'observations/challenger_forecasts').glob('*.sqlite')):
         with closing(sqlite3.connect(path)) as db:
@@ -41,6 +41,13 @@ def read_inputs(root):
     if path.exists():
         with closing(sqlite3.connect(path)) as db:
             db.row_factory=sqlite3.Row;outcomes={r['game_id']:dict(r) for r in db.execute('SELECT * FROM outcomes')}
+    if as_of is not None:
+        # NBA remains ineligible; NFL research needs a later nflverse source
+        # corroboration without rewriting its first reported final.
+        confirmed=corroborated_nfl_outcomes(root,as_of)
+        nba_ids={row['game_id'] for row in baselines if row.get('league')=='NBA'}
+        outcomes={key:value for key,value in outcomes.items() if key in nba_ids}
+        outcomes.update(confirmed)
     return baselines,candidates,trials,outcomes
 
 

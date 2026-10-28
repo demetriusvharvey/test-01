@@ -10,20 +10,21 @@ from pathlib import Path
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT))
 from scripts.line_lab.constants import ET
-from scripts.line_lab.experiment import read_forecasts
+from scripts.line_lab.experiment import read_forecasts,corroborated_nfl_outcomes
 from scripts.line_lab.history import aware
 from scripts.line_lab.model_stack import append_trial,fit_elastic_net_shadow
 from scripts.line_lab.boosted_shadow import fit_boosted_shadow
 
 
-def load_training_rows(root):
+def load_training_rows(root,as_of=None):
     forecasts=read_forecasts(root);path=Path(root)/'observations'/'forecast_outcomes.sqlite';outcomes={}
     if path.exists():
         with closing(sqlite3.connect(path)) as db:
             db.row_factory=sqlite3.Row;outcomes={r['game_id']:dict(r) for r in db.execute('SELECT * FROM outcomes')}
+    confirmed=corroborated_nfl_outcomes(root,as_of or datetime.now(timezone.utc).isoformat())
     rows=[]
     for forecast in forecasts:
-        out=outcomes.get(forecast['game_id'])
+        out=confirmed.get(forecast['game_id']) if forecast['league']=='NFL' else outcomes.get(forecast['game_id'])
         if not out or out['home_score']==out['away_score'] or (out['home'],out['away'])!=(forecast['home'],forecast['away']):continue
         try:
             f=json.loads(forecast['feature_snapshot']);start=aware(forecast['starts_at']);day=start.astimezone(ET).date()
@@ -47,7 +48,7 @@ def load_training_rows(root):
 
 def main():
     parser=argparse.ArgumentParser();parser.add_argument('--data-root',required=True);parser.add_argument('--output',default='reports/model_registry.md');args=parser.parse_args()
-    now=datetime.now(timezone.utc).isoformat();rows,forecasts,outcomes=load_training_rows(args.data_root)
+    now=datetime.now(timezone.utc).isoformat();rows,forecasts,outcomes=load_training_rows(args.data_root,now)
     lines=['# Weekly model challenger registry','',f'Run {now}: {forecasts} forecast snapshots, {outcomes} outcome records, {len(rows)} matched rows before eligibility.', '',
            '| League | Model | Status | Eligible training games | Validation season | Promoted |','| --- | --- | --- | ---: | --- | --- |']
     for league in ('NBA','NFL'):

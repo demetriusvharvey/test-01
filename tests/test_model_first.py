@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta, timezone
 from pathlib import Path
 from scripts.line_lab.constants import BOOKS
 from scripts.line_lab.market import choose_candidates, decimal_odds
-from scripts.line_lab.experiment import record_forecasts, record_outcomes, build_scoreboard, read_forecasts
+from scripts.line_lab.experiment import record_forecasts, record_outcomes, build_scoreboard, read_forecasts, corroborated_nfl_outcomes
 from scripts.line_lab.guard import assess_disagreement, disagreement_curve
 from scripts.line_lab.calibration import eligible_past_rows, fit_platt_shadow, fit_sharp_blend_shadow, predict_shadow, bootstrap_shadow_interval
 from scripts.line_lab.statistics import bh_adjust, paired_block_test
@@ -23,6 +23,24 @@ class ModelFirstTests(unittest.TestCase):
             self.event['books'][name]={'home':-105 if i==2 else -110,'away':-110,'as_of':self.now.isoformat()}
         self.model={'ratings':{'LAL':1800,'POR':1300},'last':{'LAL':date(2026,10,25),'POR':date(2026,10,23)},'margins':{},'home_advantage':55,'rest_weight':0,'form_weight':0}
         self.markets={self.event['id']:self.event};self.models={'NBA':self.model}
+
+    def test_later_nflverse_final_corroborates_without_rewriting_or_backdating(self):
+        for _,name in BOOKS[:3]:
+            self.event['books'][name]={'home':-110,'away':-110,'as_of':self.now.isoformat()}
+        model={'ratings':{'LAL':1500,'POR':1500},'last':{},'margins':{},'home_advantage':55,'rest_weight':0}
+        record_forecasts(self.root,{self.event['id']:self.event},{'NBA':model},self.now.isoformat())
+        early=self.now+timedelta(hours=5);later=self.now+timedelta(hours=10)
+        final={'id':self.event['id'],'home':'LAL','away':'POR','home_score':110,'away_score':100,'source':'ESPN final'}
+        self.assertEqual(record_outcomes(self.root,[final],early.isoformat()),1)
+        self.assertEqual(corroborated_nfl_outcomes(self.root,(later-timedelta(seconds=1)).isoformat()),{})
+        self.assertEqual(record_outcomes(self.root,[{**final,'source':'nflverse'}],later.isoformat()),0)
+        confirmed=corroborated_nfl_outcomes(self.root,later.isoformat())[self.event['id']]
+        self.assertEqual(confirmed['source'],'nflverse');self.assertEqual(confirmed['observed_at'],later.isoformat())
+        with closing(sqlite3.connect(self.root/'observations/forecast_outcomes.sqlite')) as db:
+            self.assertEqual(db.execute('SELECT source FROM outcomes').fetchone()[0],'ESPN final')
+        conflict={**final,'source':'nflverse','home_score':111}
+        record_outcomes(self.root,[conflict],(later+timedelta(hours=1)).isoformat())
+        self.assertEqual(corroborated_nfl_outcomes(self.root,(later+timedelta(hours=2)).isoformat()),{})
     def tearDown(self):self.tmp.cleanup()
     def test_probability_is_independent_of_bookmakers_and_all_picks_are_paper(self):
         before=choose_candidates(self.markets,self.models,self.now,[])

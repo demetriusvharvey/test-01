@@ -38,6 +38,14 @@ CREATE TABLE IF NOT EXISTS outcomes (
 CREATE TRIGGER IF NOT EXISTS outcomes_no_update BEFORE UPDATE ON outcomes BEGIN SELECT RAISE(ABORT,'outcomes are append-only'); END;
 CREATE TRIGGER IF NOT EXISTS outcomes_no_delete BEFORE DELETE ON outcomes BEGIN SELECT RAISE(ABORT,'outcomes are append-only'); END;
 '''
+CONFIRMATION_SCHEMA='''
+CREATE TABLE IF NOT EXISTS confirmations (
+ confirmation_key TEXT PRIMARY KEY, game_id TEXT NOT NULL, home TEXT NOT NULL, away TEXT NOT NULL,
+ home_score INTEGER NOT NULL, away_score INTEGER NOT NULL, observed_at TEXT NOT NULL, source TEXT NOT NULL
+);
+CREATE TRIGGER IF NOT EXISTS confirmations_no_update BEFORE UPDATE ON confirmations BEGIN SELECT RAISE(ABORT,'confirmations are append-only'); END;
+CREATE TRIGGER IF NOT EXISTS confirmations_no_delete BEFORE DELETE ON confirmations BEGIN SELECT RAISE(ABORT,'confirmations are append-only'); END;
+'''
 TEST_SCHEMA='''
 CREATE TABLE IF NOT EXISTS test_runs (
  run_key TEXT PRIMARY KEY, hypothesis TEXT NOT NULL, league TEXT NOT NULL,
@@ -103,11 +111,58 @@ def record_outcomes(root,finals,now):
             row=recorded.get(final['id'])
             if not row or (final['home'],final['away'])!=(row['home'],row['away']) or aware(row['starts_at'])>observed: continue
             h,a=final['home_score'],final['away_score']
-            if not isinstance(h,int) or not isinstance(a,int): continue
+            if any(not isinstance(score,int) or isinstance(score,bool) or score<0 for score in (h,a)):continue
             cursor=db.execute('INSERT OR IGNORE INTO outcomes VALUES (?,?,?,?,?,?,?)',
                 (final['id'],final['home'],final['away'],h,a,observed.isoformat(),final.get('source','confirmed final')))
             added+=cursor.rowcount
+    # Preserve the first observation from each source separately. A later
+    # nflverse confirmation may corroborate an earlier ESPN final without
+    # rewriting the original outcome or backdating its observation time.
+    confirmation_path=Path(root)/'observations'/'outcome_confirmations.sqlite'
+    with closing(_db(confirmation_path,CONFIRMATION_SCHEMA)) as db,db:
+        for final in finals:
+            row=recorded.get(final.get('id'))
+            if not row or (final.get('home'),final.get('away'))!=(row['home'],row['away']) or aware(row['starts_at'])>observed:continue
+            scores=(final.get('home_score'),final.get('away_score'))
+            if any(not isinstance(score,int) or isinstance(score,bool) or score<0 for score in scores):continue
+            source=final.get('source') or 'confirmed final'
+            values=[final['id'],final['home'],final['away'],scores[0],scores[1],source]
+            key=hashlib.sha256(json.dumps(values,separators=(',',':')).encode()).hexdigest()
+            db.execute('INSERT OR IGNORE INTO confirmations VALUES (?,?,?,?,?,?,?,?)',
+                       (key,final['id'],final['home'],final['away'],scores[0],scores[1],observed.isoformat(),source))
     return added
+
+
+def corroborated_nfl_outcomes(root,as_of):
+    """Return matching NFL-source confirmations known by as_of; quarantine conflicts."""
+    current=aware(as_of);primary_path=Path(root)/'observations'/'forecast_outcomes.sqlite'
+    confirmation_path=Path(root)/'observations'/'outcome_confirmations.sqlite'
+    if not primary_path.exists():return {}
+    with closing(sqlite3.connect(primary_path)) as db:
+        db.row_factory=sqlite3.Row;primary=[dict(r) for r in db.execute('SELECT * FROM outcomes')]
+    confirmations=defaultdict(list)
+    if confirmation_path.exists():
+        with closing(sqlite3.connect(confirmation_path)) as db:
+            db.row_factory=sqlite3.Row
+            for row in db.execute('SELECT * FROM confirmations'):
+                try:
+                    value=dict(row)
+                    if aware(value['observed_at'])<=current:confirmations[value['game_id']].append(value)
+                except (KeyError,TypeError,ValueError):continue
+    result={}
+    for row in primary:
+        try:
+            if aware(row['observed_at'])>current:continue
+            relevant=[x for x in confirmations[row['game_id']] if (x['home'],x['away'])==(row['home'],row['away'])]
+            if any((x['home_score'],x['away_score'])!=(row['home_score'],row['away_score']) for x in relevant):continue
+            sources=[x for x in relevant if x['source']=='nflverse']
+            if row['source']=='nflverse':sources.append(row)
+            if not sources:continue
+            confirmed=min(sources,key=lambda x:aware(x['observed_at']))
+            available=max(aware(row['observed_at']),aware(confirmed['observed_at']))
+            result[row['game_id']]={**row,'source':'nflverse','observed_at':available.isoformat()}
+        except (KeyError,TypeError,ValueError):continue
+    return result
 
 def _logloss(p,y):
     p=max(1e-6,min(1-1e-6,p));return -(y*math.log(p)+(1-y)*math.log(1-p))

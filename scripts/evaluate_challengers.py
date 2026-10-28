@@ -11,7 +11,7 @@ from scripts.line_lab.challenger_evaluation import read_inputs,evaluate,append_r
 
 def main():
     p=argparse.ArgumentParser();p.add_argument('--data-root',required=True);p.add_argument('--output',default='reports/challenger_forward.md');args=p.parse_args()
-    now=datetime.now(timezone.utc).isoformat();baselines,candidates,trials,outcomes=read_inputs(args.data_root)
+    now=datetime.now(timezone.utc).isoformat();baselines,candidates,trials,outcomes=read_inputs(args.data_root,now)
     results=evaluate(baselines,candidates,trials,outcomes,now);append_results(args.data_root,results,now)
     lines=['# Forward challenger comparison','',f'Run {now}. The challenger and baseline must share the same recorded pregame timestamp.','',
            '| League | Challenger | Matched settled games | Excluded first forecasts | Log loss difference | Brier difference | Adjusted p | Status |',

@@ -1,0 +1,33 @@
+name: Refresh research feed
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 14,22 * * *'
+permissions:
+  contents: write
+concurrency:
+  group: research-feed
+  cancel-in-progress: false
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Run feed checks
+        run: python -m unittest discover -s tests
+      - name: Fetch source snapshots
+        env:
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python scripts/refresh_feed.py
+      - name: Commit feed if changed
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add dist/feed.json
+          if ! git diff --cached --quiet; then
+            git commit -m 'Refresh research feed'
+            git push
+          fi

@@ -1,0 +1,7 @@
+# Phase 10: candidate audit, trust and paper risk
+
+The hourly pipeline now appends both sides of each permitted pregame matchup to an immutable candidate audit, including selected and skipped sides, book snapshots, decisions, model estimate and hypothetical EV. An audit-storage failure suppresses new picks. Older picks and actual-bet records are not rewritten. The existing three-per-day paper cap remains; replacing it with an evidence-based exposure limit requires a validated model and has not been established.
+
+Trust probability and timing are deliberately unknown. No genuine, independently qualified sharp closing-line sample exists to train or calibrate a trust or timing model. The audit records the information needed for a future time-ordered study; it does not invent a confidence score, a bet-now signal or an automated bet.
+
+Research-only helpers cover flat-unit exposure, correlated group limits, a drawdown stop, quarter-Kelly examples gated on a separately confirmed calibration assumption, and reproducible hypothetical paths with explicit independence assumptions. They do not size actual wagers, simulate real returns, or convert an unvalidated probability into a recommended stake. No paid data or real-money orders are enabled.

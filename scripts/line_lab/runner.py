@@ -17,6 +17,7 @@ from .experiment import record_forecasts, record_outcomes, build_scoreboard
 from .nfl_shadow import build_nfl_shadow_context
 from .ledger_v2 import attach_retail_closing_proxies, paper_breakdowns, validate_transition
 from .model_stack import record_challenger_forecasts
+from .trust import record_candidates
 
 
 def main():
@@ -141,7 +142,15 @@ def main():
         estimate=project_home(models[event['league']],event['home'],event['away'],start,event.get('neutral',False))
         if estimate is None: continue
         print('TODAY', event['league'],event['away'],'at',event['home'],'pure model home',round(100*estimate,1),'best home',max(v['home'] for v in event['books'].values()),'best away',max(v['away'] for v in event['books'].values()))
-    ledger.extend(choose_candidates(permitted,models,now,ledger))
+    chosen=choose_candidates(permitted,models,now,ledger)
+    if data_root and archive_ok:
+        try:
+            candidate_count=record_candidates(data_root,permitted,models,now.isoformat(),ledger,chosen)
+            print('Candidate audit:',candidate_count,'selected and skipped paper sides')
+        except Exception as e:
+            errors.append('Candidate audit unavailable ('+type(e).__name__+')')
+            chosen=[]
+    ledger.extend(chosen)
     try:
         if data_root: attach_retail_closing_proxies(data_root,ledger)
         validate_transition(frozen_ledger,ledger)

@@ -23,6 +23,7 @@ from .monitoring import build_monitoring
 from .line_movement import attach_histories
 from .schedule_context import attach_rest_context
 from .referees import attach_current_officials
+from .availability import attach_nfl_reports
 
 
 def main():
@@ -170,6 +171,10 @@ def main():
     board=render_board(markets,ledger,now,errors,models,training_counts,added_finals)
     attach_rest_context(board,markets,models,now.isoformat())
     attach_current_officials(board,markets,ref_report,ref_observed_at,now.isoformat())
+    try:
+        if data_root:attach_nfl_reports(data_root,board,markets,nfl_csv,nfl_observed_at,now.isoformat())
+    except Exception as e:
+        board['errors'].append('Injury context unavailable ('+type(e).__name__+')')
     try:
         if data_root:attach_histories(data_root,board,markets,ledger,now.isoformat())
     except Exception as e:

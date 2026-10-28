@@ -9,6 +9,7 @@ from contextlib import closing
 from datetime import timedelta
 from pathlib import Path
 from .history import aware
+from .constants import game_id, normalize_code
 
 SCHEMA='''
 CREATE TABLE IF NOT EXISTS injury_observations (
@@ -125,3 +126,45 @@ def news_freshness(latest_news_at,latest_quote_at,prediction_at):
         if news>prediction or quote>prediction:return 'unknown'
         return 'news_newer_than_quote' if news>quote else 'quote_after_news'
     except (ValueError,TypeError):return 'unknown'
+
+
+def nfl_report_context(root,event,schedule_text,schedule_observed_at,now,max_players=8):
+    """Display observed report entries, without inferring health or starters."""
+    try:
+        current,start,schedule_time=aware(now),aware(event['starts_at']),aware(schedule_observed_at)
+        if event.get('league')!='NFL' or not schedule_time<=current<start:return None
+        match=[]
+        for row in csv.DictReader(io.StringIO(schedule_text)):
+            try:
+                home,away=normalize_code(row['home_team']),normalize_code(row['away_team'])
+                identifier=game_id('NFL',row['gameday'],away,home)
+                season,week=int(row['season']),int(row['week'])
+                if identifier==event['id'] and (home,away)==(event['home'],event['away']) and 1<=week<=25:
+                    match.append((season,week))
+            except (KeyError,TypeError,ValueError):continue
+        if len(match)!=1:return None
+        season,week=match[0];teams={};all_times=[]
+        for side in ('away','home'):
+            records=nfl_statuses_as_of(root,season,week,event[side],now,event['starts_at'])
+            entries=[]
+            for value in records.values():
+                report=value.get('report_status');practice=(value.get('practice_status') or '').strip()
+                if value.get('status_conflict') or not (report or practice):continue
+                item={'name':value.get('name') or value.get('player_id'),'position':value.get('position') or '',
+                      'report_status':report,'practice_status':practice or None,'observed_at':value['observed_at']}
+                entries.append(item);all_times.append(aware(value['observed_at']))
+            entries.sort(key=lambda x:(x['position']!='QB',x['position'],x['name']))
+            teams[side]={'team':event[side+'_name'],'entries':entries[:max_players],'total_entries':len(entries)}
+        return {'teams':teams,'week':week,'source':'nflverse injury and practice reports',
+                'latest_observed_at':max(all_times).isoformat() if all_times else None,
+                'starter_status':'unconfirmed','inactive_list':'unconfirmed','used_in_prediction':False,
+                'note':'Captured reports may be incomplete; an absent name does not mean healthy.'}
+    except (KeyError,TypeError,ValueError,OverflowError):return None
+
+
+def attach_nfl_reports(root,board,markets,schedule_text,schedule_observed_at,now):
+    if not schedule_text or not schedule_observed_at:return
+    for pick in board.get('picks',[]):
+        event=markets.get(pick.get('id'))
+        if event and event.get('league')=='NFL':
+            pick['availability_context']=nfl_report_context(root,event,schedule_text,schedule_observed_at,now)

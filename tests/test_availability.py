@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
-from scripts.line_lab.availability import capture_nfl_injuries, estimate_play_rate, news_freshness, nfl_statuses_as_of, scenario_mixture
+from scripts.line_lab.availability import capture_nfl_injuries, estimate_play_rate, news_freshness, nfl_statuses_as_of, scenario_mixture, nfl_report_context
 
 
 class AvailabilityTests(unittest.TestCase):
@@ -15,6 +15,17 @@ class AvailabilityTests(unittest.TestCase):
                   '2026,8,MIN,00-001,QB,Test QB,Questionable,Limited,2026-10-28 10:00\n'
                   '2026,8,MIN,00-002,WR,Test WR,Out,Did Not Participate,2026-10-28 10:00\n')
     def tearDown(self):self.tmp.cleanup()
+    def test_injury_context_is_week_matched_and_never_assumes_health_or_starters(self):
+        self.assertEqual(capture_nfl_injuries(self.root,self.csv,2026,self.now.isoformat(),'sha'),2)
+        event={'id':'nfl:2026-11-01:DET:MIN','league':'NFL','home':'MIN','away':'DET',
+               'home_name':'Minnesota','away_name':'Detroit','starts_at':self.start.isoformat()}
+        schedule='season,week,gameday,home_team,away_team\n2026,8,2026-11-01,MIN,DET\n'
+        result=nfl_report_context(self.root,event,schedule,self.now.isoformat(),self.now.isoformat())
+        self.assertEqual(len(result['teams']['home']['entries']),2)
+        self.assertEqual(result['teams']['home']['entries'][0]['position'],'QB')
+        self.assertEqual(result['teams']['away']['entries'],[])
+        self.assertEqual(result['starter_status'],'unconfirmed');self.assertFalse(result['used_in_prediction'])
+        self.assertIsNone(nfl_report_context(self.root,event,schedule,(self.now+timedelta(hours=1)).isoformat(),self.now.isoformat()))
     def test_nfl_injuries_use_observation_time_and_age(self):
         self.assertEqual(capture_nfl_injuries(self.root,self.csv,2026,self.now.isoformat(),'sha'),2)
         self.assertEqual(capture_nfl_injuries(self.root,self.csv,2026,self.now.isoformat(),'sha'),0)

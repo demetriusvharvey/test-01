@@ -120,6 +120,16 @@
     if(!ref||!ref.crew_chief||!ref.referee||!ref.umpire)return `<p>NBA officiating crew: unconfirmed. Check ${label} closer to tipoff.</p>`;
     return `<p>NBA crew, observed ${displayTime(ref.observed_at)}: ${escape(ref.crew_chief)} (chief), ${escape(ref.referee)}, ${escape(ref.umpire)}. Assignments can change; no referee effect is used. Source: ${label}.</p>`;
   }
+  function availabilityMarkup(p){
+    if(p.league!=='NFL')return '<p>NBA injuries and projected lineups: unconfirmed or unavailable for this pick.</p>';
+    const c=p.availability_context;
+    if(!c||!c.teams)return '<p>NFL injury report, starting quarterback and inactive list: unavailable or unconfirmed.</p>';
+    const entries=['away','home'].map(side=>c.teams[side]).filter(Boolean).map(team=>{
+      const players=(team.entries||[]).map(x=>`${escape(x.name)}${x.position?' ('+escape(x.position)+')':''}: ${escape(x.report_status||x.practice_status||'unknown')}`);
+      return `<p>${escape(team.team)} report: ${players.length?players.join(' · '):'no captured entries; health unknown'}${team.total_entries>players.length?' · '+(team.total_entries-players.length)+' more entries':''}.</p>`;
+    }).join('');
+    return `<p>NFL report captured ${c.latest_observed_at?displayTime(c.latest_observed_at):'at an unavailable time'} from <a href="https://nflreadr.nflverse.com/reference/load_injuries.html" target="_blank" rel="noopener noreferrer">nflverse</a>. Starting QBs and inactive lists are unconfirmed; these reports may be incomplete.</p>${entries}`;
+  }
   function pickMarkup(p){
     const historical=!p.current;
     const statuses={win:'WON',loss:'LOST',void:'VOID',pending:'PENDING'};
@@ -130,7 +140,7 @@
     const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}${estimate}</div></div>`;
     const pct=x=>Number.isFinite(x)?(100*x).toFixed(1)+'%':'unavailable';
     const points=x=>Number.isFinite(x)?(x>=0?'+':'')+(100*x).toFixed(1)+' points':'unavailable';
-    const context=`<details class="pick-context"><summary>Research context</summary><p>Latest retail no-vig reference: ${pct(p.retail_reference_probability)} · Price difference: ${points(p.retail_price_edge)} · Frozen model difference: ${points(p.model_edge_vs_retail)}</p><p>Retail reference is not a verified sharp line; differences are not proven edges. Injuries, projected lineups, trust and timing are unconfirmed or unavailable.</p>${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
+    const context=`<details class="pick-context"><summary>Research context</summary><p>Latest retail no-vig reference: ${pct(p.retail_reference_probability)} · Price difference: ${points(p.retail_price_edge)} · Frozen model difference: ${points(p.model_edge_vs_retail)}</p><p>Retail reference is not a verified sharp line; differences are not proven edges. Trust and timing are unconfirmed or unavailable.</p>${availabilityMarkup(p)}${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
     if(!historical)return `<article class="pick">${title}${booksMarkup(p.books||[])}${context}</article>`;
     const recorded=Array.isArray(p.initial_books)?p.initial_books.filter(b=>Number.isFinite(b.odds)):[];
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}

@@ -187,3 +187,13 @@ analysis. Evaluation uses the already inspected 2026–27 NBA and 2025 NFL
 seasons; it is exploratory and not an untouched test or a market comparison.
 Missing pregame player availability and unresolved NBA upstream gambling-use
 rights keep both research-only. No live pick or UI probability is changed.
+
+The first archived evaluation completed in GitHub Actions. On matched games,
+NBA scoring-process-v1 Brier was **0.2468 versus Elo 0.2116** (52 games;
+2026–27 to date). NFL was **0.2473 versus Elo 0.2338** (326 games across
+2025 and 2026 to date). Log loss also favored Elo in both. The challenger
+failed this gate and remains excluded from picks. This sample is neither an
+untouched holdout nor a same-time market comparison. The next defensible
+change needs point-in-time player availability and a validation/holdout split;
+re-running more simulated outcomes from the same assumptions cannot repair
+this failure.

@@ -45,3 +45,14 @@ use is a source-rights risk rather than a verified license. A rights-cleared
 schedule and final-status replacement is still required for full compliance.
 
 The prospective paper-replay process uses `data/research_permissions.json` as a separate, initially empty allowlist. An entry must document the league, exact quote provider, model-feature source (`nflverse+espn` or `boxscorelab+espn`), permitted outcome sources, a rights-evidence link, a positive rights-verification decision and a review time no later than the prediction. Captured source hashes must also be present. No source is approved merely because it is public or appears in a file. The gate records source uncertainty; it is not a substitute for legal review or a way to manufacture historical availability timestamps.
+
+### Independent scoring-process research input
+
+`research_possession_simulator.py` reads archived BoxScore Lab team box scores
+and nflverse play-by-play shards from `data/observations` in GitHub Actions.
+It does not download RotoBot content. `reports/scoring_process_validation.md`
+records exact archived asset hashes, observation counts and a matched-game Elo
+comparison when the weekly research workflow succeeds. NBA source upstream
+wagering rights remain unresolved, so archive usage is confined to research;
+neither league's simulation influences published selections. The report may
+be absent or stale when Actions or an input source is unavailable.

@@ -169,3 +169,21 @@ which is a reason to demand stronger empirical evidence, not to increase
 the simulation count. RotoBot's terms preclude automated ingestion or using
 its outputs to benchmark a competing model under the current $0/public-site
 requirements; see DATA_SOURCES.md.
+
+### H020 implementation checkpoint — scoring-process-v1
+
+The first independently implemented challenger uses BoxScore Lab box scores to
+**estimate** NBA possession counts with FGA − offensive rebounds + turnovers
++ 0.44 × FTA and to derive abstract 0/1/2/3-point scoring units. These units
+are not observed play-by-play possessions: free throws can share a possession
+with a field-goal attempt. The NFL component groups nflverse `fixed_drive`
+play rows and measures offensive points from each drive's first preplay to
+last postplay offensive score. Defensive scores, returns and unusual plays
+remain unmodeled. The simulator shrinks earlier offense and opponent defense
+rates toward the league, samples earlier paired game unit counts, and draws
+points from an exponentially tilted historical scoring-unit distribution.
+Seeds and 5,000 draws are fixed. Same-day finals are withheld in walk-forward
+analysis. Evaluation uses the already inspected 2026–27 NBA and 2025 NFL
+seasons; it is exploratory and not an untouched test or a market comparison.
+Missing pregame player availability and unresolved NBA upstream gambling-use
+rights keep both research-only. No live pick or UI probability is changed.

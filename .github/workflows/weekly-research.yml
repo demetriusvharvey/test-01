@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
     paths:
+      - .github/workflows/weekly-research.yml
+      - scripts/line_lab/nba_scenarios.py
       - scripts/research_models.py
       - scripts/research_player_impact.py
       - scripts/research_nba_statistical.py

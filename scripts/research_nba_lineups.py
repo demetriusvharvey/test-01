@@ -83,12 +83,11 @@ def known(rows,names):
 
 
 def training_cohort(rows):
+    # Retain low-sample players as nuisance controls during fitting. Publishing
+    # and evaluation still require 120 actual training minutes per player.
     rows=[r for r in rows if r['seconds']>=10]
-    while rows:
-        names,minutes=vocabulary(rows);kept=known(rows,names)
-        if len(kept)==len(rows):return kept,names,minutes
-        rows=kept
-    return [],[],{}
+    _,minutes=vocabulary(rows)
+    return rows,sorted(minutes),minutes
 
 
 def matrix(rows,names,kind):
@@ -124,8 +123,9 @@ def run(root,output):
         earlier=sorted(s for s in seasons if s<season);calibration=earlier[-1]
         train=[r for r in stints if r['season']<calibration]
         train,names,minutes=training_cohort(train)
-        validation=known([r for r in stints if r['season']==calibration],names)
-        test=known([r for r in stints if r['season']==season],names)
+        supported=[p for p in names if minutes[p]>=120]
+        validation=known([r for r in stints if r['season']==calibration],supported)
+        test=known([r for r in stints if r['season']==season],supported)
         if len(train)<1000 or len(validation)<500 or not test:
             results.append({'season':season,'status':'insufficient_matched_stints','train':len(train),'validation':len(validation),'test':len(test)});continue
         team_names=sorted({t for r in train for t in (r['home'],r['away'])})
@@ -144,14 +144,14 @@ def run(root,output):
         byday=defaultdict(list)
         for r,y,p,t in zip(test,target(test),scores['player'],scores['team']):byday[r['date']].append(r['seconds']/60*((y-p)**2-(y-t)**2))
         comparison=paired_block_test(byday)
-        artifact={'model_version':'nba-stint-ridge-v1','features':names,'weights':models['player'].coef_.tolist(),
-                  'intercept':float(models['player'].intercept_),'alpha':selected['player'],'player_training_minutes':{p:minutes[p] for p in names},
+        artifact={'model_version':'nba-stint-ridge-v1','features':supported,'weights':[float(v) for p,v in zip(names,models['player'].coef_) if p in set(supported)],
+                  'intercept':float(models['player'].intercept_),'alpha':selected['player'],'player_training_minutes':{p:minutes[p] for p in supported},
                   'training_seasons':earlier[:-1],'calibration_season':calibration,'evaluated_season':season,'promoted':False,
                   'units':'net points per 48 minutes; observational first-quarter association'}
         (version/f'{season}.json').write_text(json.dumps(artifact,sort_keys=True))
         results.append({'season':season,'status':'evaluated','training_stints':len(train),'validation_stints':len(validation),
                         'test_stints':len(test),'test_games':len({r['game_id'] for r in test}),'test_minutes':sum(weights(test)),
-                        'players':len(names),'alpha':selected,'player_mse':mse(test,scores['player']),'team_mse':mse(test,scores['team']),
+                        'players':len(supported),'nuisance_players':len(names)-len(supported),'alpha':selected,'player_mse':mse(test,scores['player']),'team_mse':mse(test,scores['team']),
                         'league_mse':mse(test,[mean]*len(test)),'paired_day_test':comparison,'raw_p':comparison['p_value'] if comparison else None})
     valid=[r for r in results if r['status']=='evaluated']
     for r,q in zip(valid,bh_adjust([r['raw_p'] for r in valid])):r['adjusted_p']=q
@@ -162,8 +162,9 @@ def run(root,output):
     past,names,minutes=training_cohort(past)
     if valid and len(past)>=1000:
         alpha=valid[-1]['alpha']['player'];model=fit(past,names,alpha,'player')
-        artifact={'model_version':'nba-stint-ridge-v1','features':names,'weights':model.coef_.tolist(),
-                  'intercept':float(model.intercept_),'alpha':alpha,'player_training_minutes':{p:minutes[p] for p in names},
+        supported=[p for p in names if minutes[p]>=120]
+        artifact={'model_version':'nba-stint-ridge-v1','features':supported,'weights':[float(v) for p,v in zip(names,model.coef_) if p in set(supported)],
+                  'intercept':float(model.intercept_),'alpha':alpha,'player_training_minutes':{p:minutes[p] for p in supported},'nuisance_players':len(names)-len(supported),
                   'trained_before_date':cutoff,'exported_at':now.isoformat(),'input_hash':digest,'promoted':False,
                   'units':'net points per 48 minutes; observational first-quarter association',
                   'limitations':'refitted candidate, first-quarter sample, unvalidated full-game injury/replacement causality'}
@@ -181,7 +182,7 @@ def run(root,output):
         if r['status']!='evaluated':lines.append(f"| {r['season']} | {r['status']} | — | {r['test']} | — | — | — | — |");continue
         p='unavailable' if r['adjusted_p'] is None else f"{r['adjusted_p']:.5f}"
         lines.append(f"| {r['season']} | evaluated | {r['test_games']} | {r['test_stints']} | {r['player_mse']:.3f} | {r['team_mse']:.3f} | {r['league_mse']:.3f} | {p} |")
-    lines+=['','MSE is minute-weighted squared error in net points per 48 minutes; lower is better. These are stint-rate errors, not game-winner accuracy. Ridge penalties are selected on a distinct prior season. Only players with at least 120 earlier stint minutes are estimated; rows with unknown effects are excluded, including test rows. This selective coverage must not be described as all-game validation.',
+    lines+=['','MSE is minute-weighted squared error in net points per 48 minutes; lower is better. These are stint-rate errors, not game-winner accuracy. Ridge penalties are selected on a distinct prior season. Low-sample players are nuisance controls in training; only effects backed by 120 actual training minutes are published or admitted to validation/test rows. Unknown-player test rows are excluded. This selective coverage must not be described as all-game validation.',
             '', 'Ratings control observed teammates/opponents but remain observational, first-quarter associations. They are not possession RAPM, complete defensive ratings or causal injury effects. Full-game replacement and probability conversion require separate evaluation. All rejected-game reasons, source hashes, thresholds and fold artifacts are retained. No wagering-source approval or profit is established.',
             '',f'Artifact: observations/nba_lineups/{digest}/evaluation.json.','']
     Path(output).write_text('\n'.join(lines));print(json.dumps({'stints':len(stints),'source_failures':failures,'evaluated_folds':len(valid)}))

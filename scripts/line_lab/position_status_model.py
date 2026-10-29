@@ -5,6 +5,7 @@ This is a shadow comparison to Elo, not a player-value or lineup model.
 import hashlib
 import json
 import math
+from datetime import timedelta
 
 from .availability_features import NFL_GROUPS, NFL_STATUSES
 from .availability_model import _fit, _predict, _score, GRID
@@ -23,6 +24,7 @@ def eligible_rows(rows,cutoff):
                 ('feature_observed_at','forecast_at','starts_at','final_observed_at'))
             if (row.get('league')!='NFL' or row.get('rights_verified') is not True
                     or not observed<=forecast<start<=final<current
+                    or forecast-observed>timedelta(hours=30)
                     or row['home_win'] not in (0,1) or not row.get('game_id') or not row.get('season')):continue
             base=float(row['baseline_probability'])
             vector=[float(row['features'][name])/5 for name in FEATURES]
@@ -63,7 +65,7 @@ def predict_position_shadow(model,base_probability,features,prediction_at,featur
         if (not model or model.get('model_version')!=VERSION or model.get('promoted') is not False
                 or model.get('features')!=list(FEATURES) or len(model['weights'])!=len(FEATURES)
                 or aware(model['trained_before'])>=aware(prediction_at)
-                or aware(feature_observed_at)>aware(prediction_at)):return None
+                or not timedelta(0)<=aware(prediction_at)-aware(feature_observed_at)<=timedelta(hours=30)):return None
         base=float(base_probability);vector=[float(features[name])/5 for name in FEATURES]
         if not 0<base<1 or any(not math.isfinite(x) or abs(x)>16 for x in vector):return None
         return _predict(model,base,vector)

@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T20:56:30.502670+00:00",
+  "generated_at": "2026-10-29T21:01:25.551166+00:00",
   "model": "Pure team Elo winner ranking \u2014 probabilities not calibrated",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; PropLine scoreboard",
   "accuracy": {
@@ -764,7 +764,7 @@
     "status": "descriptive_research_only"
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-29T20:56:30.502670+00:00",
+    "pipeline_generated_at": "2026-10-29T21:01:25.551166+00:00",
     "source_warning_count": 2,
     "latest_quote_at": null,
     "oldest_quote_at": null,

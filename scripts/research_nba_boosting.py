@@ -14,9 +14,10 @@ from scripts.line_lab.nba_statistical import examples,FEATURES
 from scripts.line_lab.nba_efficiency import parse_team_stats,enrich_examples,METRICS
 from scripts.line_lab.simulator import score_metrics
 import numpy as np
+import joblib
 
 
-def evaluate(rows,season):
+def evaluate(rows,season,artifact_dir=None):
     earlier=sorted({r['season'] for r in rows if r['season']<season})
     if len(earlier)<2:return None
     train=[r for r in rows if r['season']<earlier[-1]]
@@ -25,7 +26,11 @@ def evaluate(rows,season):
     if len(train)<500 or len(calibration)<200 or not test:return None
     x=lambda data:[r['vector'] for r in data];y=lambda data:[r['home_win'] for r in data]
     metrics=lambda p:score_metrics([{'probability':float(v),'outcome':r['home_win']} for v,r in zip(p,test)])
-    result={'test_season':season,'training_games':len(train),'calibration_games':len(calibration),
+    result={'model_version':'nba-efficiency-sklearn-v1','test_season':season,
+            'training_seasons':earlier[:-1],'calibration_season':earlier[-1],
+            'training_games':len(train),'calibration_games':len(calibration),
+            'missing_inputs':['player impacts','injuries','projected lineups','travel'],
+            'promoted':False,'uncertainty':'predictive intervals not established',
             'elo':metrics([r['elo'] for r in test])}
     models={'logistic':make_pipeline(StandardScaler(),LogisticRegression(C=1,max_iter=1000,random_state=42)),
             'boosting':HistGradientBoostingClassifier(max_iter=100,max_depth=3,min_samples_leaf=40,l2_regularization=1,early_stopping=False,random_state=42)}
@@ -36,6 +41,12 @@ def evaluate(rows,season):
         calibrator.fit(logit(model.predict_proba(x(calibration))[:,1]),y(calibration))
         p=model.predict_proba(x(test))[:,1]
         result[name]={'raw':metrics(p),'calibrated':metrics(calibrator.predict_proba(logit(p))[:,1])}
+        if artifact_dir:
+            folder=Path(artifact_dir)/season;folder.mkdir(parents=True,exist_ok=True)
+            joblib.dump({'model':model,'calibrator':calibrator,
+                         'features':list(FEATURES)+list(METRICS),
+                         'training_seasons':earlier[:-1],'calibration_season':earlier[-1],
+                         'promoted':False},folder/(name+'.joblib'),compress=3)
     return result
 
 
@@ -47,9 +58,9 @@ def main():
             row=db.execute('SELECT content_gzip FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
         if row:stats.update(parse_team_stats(gzip.decompress(row[0]).decode('utf-8-sig')))
     rows=enrich_examples(examples(games),games,stats)
-    results=[r for season in sorted({r['season'] for r in rows})[2:] if (r:=evaluate(rows,season))]
     digest=hashlib.sha256(json.dumps(rows,sort_keys=True,separators=(',',':')).encode()).hexdigest()
     folder=Path(args.data_root)/'observations/nba_statistical'/digest;folder.mkdir(parents=True,exist_ok=True)
+    results=[r for season in sorted({r['season'] for r in rows})[2:] if (r:=evaluate(rows,season,folder))]
     (folder/'boosting_evaluation.json').write_text(json.dumps({'features':list(FEATURES)+list(METRICS),'sources':sources,'results':results},indent=2))
     lines=['# NBA efficiency model comparison','',
            'Fixed-config sklearn logistic and histogram gradient boosting, trained before a distinct calibration season and evaluated in later seasons. No random game splits or test-driven promotion. Archive already inspected; not an untouched holdout. Player/injury inputs unavailable; no market baseline or wagering-source qualification. Research only.','',

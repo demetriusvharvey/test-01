@@ -51,12 +51,12 @@ def candidate(row,version,now):
     return result
 
 
-def record_ranked(root,predictions,scheduled,now):
+def record_ranked(root,predictions,scheduled,now,schedule_available=True):
     current=aware(now);day=current.astimezone(ET).date().isoformat();eligible={}
     for game in scheduled:
         if game['league']=='NBA' and aware(game['starts_at']).astimezone(ET).date().isoformat()==day and aware(game['starts_at'])>current+timedelta(minutes=5):
             eligible[game['id']]=game
-    if not eligible:return {'status':'no_eligible_games','added':0,'unavailable':{}}
+    if schedule_available and not eligible:return {'status':'no_eligible_games','added':0,'unavailable':{}}
     rows={}
     for row in predictions:
         if row['game_id'] not in eligible:continue
@@ -74,9 +74,13 @@ def record_ranked(root,predictions,scheduled,now):
         CREATE TRIGGER IF NOT EXISTS nra_no_delete BEFORE DELETE ON attempts BEGIN SELECT RAISE(ABORT,'immutable'); END;''')
         def audit(version,status,supported):
             payload=json.dumps({'day':day,'model_version':version,'observed_at':now,'status':status,
-                                'eligible_games':len(eligible),'supported_games':supported},sort_keys=True)
+                                'eligible_games':len(eligible) if schedule_available else None,'supported_games':supported},sort_keys=True)
             db.execute('INSERT OR IGNORE INTO attempts VALUES (?,?)',(hashlib.sha256(payload.encode()).hexdigest(),payload))
         for version in MODELS:
+            if not schedule_available:
+                unavailable[version]='schedule_source_unavailable'
+                audit(version,'source_unavailable',None)
+                continue
             key=f'{day}:{version}:{POLICY}'
             if db.execute('SELECT 1 FROM decisions WHERE key=?',(key,)).fetchone():
                 audit(version,'existing_frozen_decision',None);continue

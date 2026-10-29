@@ -342,7 +342,7 @@ def main():
                 forward=evaluate_saved(data_root,confirmed_finals,ml_now)
                 print('NBA ML forward evaluation:',json.dumps(forward,sort_keys=True))
                 from .nba_ranked_forward import record_ranked,evaluate_ranked
-                print('NBA daily policy archive:',json.dumps(record_ranked(data_root,ml['predictions'],scheduled,ml_now),sort_keys=True))
+                print('NBA daily policy archive:',json.dumps(record_ranked(data_root,ml['predictions'],scheduled,ml_now,schedule_available=not any(e.startswith('NBA score source unavailable') for e in errors)),sort_keys=True))
                 print('NBA daily policy evaluation:',json.dumps(evaluate_ranked(data_root,ml_now),sort_keys=True))
                 print('NBA availability scenario statuses:',json.dumps([
                     {'game_id':p['game_id'],'status':p.get('availability_scenarios',{}).get('status','model_unavailable'),

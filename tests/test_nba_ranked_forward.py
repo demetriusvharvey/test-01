@@ -106,3 +106,16 @@ class RankedForwardTests(unittest.TestCase):
             self.assertEqual(m['review_status'],'insufficient_forward_sample')
             self.assertEqual(m['fully_settled_day_comparison']['complete_days'],0)
             self.assertIsNone(m['fully_settled_day_comparison']['accuracy_difference'])
+
+    def test_schedule_outage_is_audited_even_when_no_games_are_returned(self):
+        rows,slate,now=self.fixture()
+        with tempfile.TemporaryDirectory() as root:
+            result=record_ranked(root,[],[],now,schedule_available=False)
+            self.assertEqual(result['added'],0)
+            self.assertEqual(result['unavailable']['nba-efficiency-logistic-v1'],'schedule_source_unavailable')
+            report=evaluate_ranked(root,now)
+            self.assertEqual(report['data_coverage']['nba-efficiency-logistic-v1']['audited_days_without_decision'],1)
+            self.assertEqual(report['data_coverage']['nba-efficiency-logistic-v1']['unavailable_attempts'],1)
+            self.assertEqual(report['models'],{})
+            self.assertEqual(record_ranked(root,rows,slate,now)['added'],2)
+            self.assertEqual(evaluate_ranked(root,now)['data_coverage']['nba-efficiency-logistic-v1']['audited_days_without_decision'],0)

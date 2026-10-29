@@ -59,3 +59,11 @@ observations/nba_ranked_forecasts/<ET day>.sqlite plus evaluation.json on the
 data branch. Root modules are nba_winner_selection.py and nba_ranked_forward.py;
 research runs through the existing zero-cost lineup workflow. Daily capture
 and grading run through the existing pipeline. No UI rebuild or paid API.
+
+Operational safeguards: development pushes and research have separate request
+limits within the free provider budget, with reserved daily operational capacity.
+Documented numeric quota headers and Retry-After cooldowns are respected. Total
+schedule failures preserve only a recent, explicitly stale display snapshot;
+new forecasts are not created from it. The forward audit also records schedule
+outages when zero games were returned, distinguishing them from verified empty
+slates. Repository tests cover these paths as well as immutable daily grading.

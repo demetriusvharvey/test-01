@@ -17,7 +17,9 @@ def check_predictions(predictions,now):
         checks.append((game+':missingness_and_uncertainty',bool(p.get('missing_inputs') and p.get('uncertainty'))))
         context=p.get('availability_scenarios') or {}
         scenarios=context.get('scenarios') or []
-        checks.append((game+':live_roster_injury_join',context.get('status')=='conditional_research_only' and len(scenarios)==2))
+        checks.append((game+':live_roster_injury_join',context.get('status')=='conditional_research_only' and context.get('exhaustive_listed_uncertainty') is True
+                       and len(scenarios)==2**context.get('uncertain_players',-1)
+                       and 1<=len(scenarios)<=64))
         checks.append((game+':scenario_reproducibility',bool(context.get('model_hash')) and all(s.get('features') for s in scenarios)))
         checks.append((game+':scenario_probabilities',bool(scenarios) and all(
             0<s['home_probability']<1 and math.isclose(s['home_probability']+s['away_probability'],1,abs_tol=1e-12)

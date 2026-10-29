@@ -66,7 +66,7 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
         predictions.append({'game_id':row['game_id'],'predicted_at':now,'starts_at':event['starts_at'],
             'model_version':model['model_version'],'model_input_hash':model['input_hash'],
             'model_exported_at':model['exported_at'],'input_data_observed_at':max(source_times) if source_times else None,
-            'home_probability':p,'away_probability':1-p,'home':event['home'],'away':event['away'],
+            'home_probability':p,'away_probability':1-p,'baseline_elo_probability':row['elo'],'home':event['home'],'away':event['away'],
             'features':dict(zip(model['features'],row['vector'])),'used_in_public_picks':False,
             'missing_inputs':['injury-adjusted lineup','replacement impact','travel'],
             'uncertainty':'retrospective calibration; predictive intervals and forward accuracy unestablished'})

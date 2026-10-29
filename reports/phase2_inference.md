@@ -1,17 +1,32 @@
 # NBA Phase 2 inference checkpoint — October 29, 2026
 
-Actual trained model artifacts now produce timestamped calibrated probabilities
-for real upcoming NBA games, separately from the public Elo winner ledger.
-The research workflow verified artifact loading, feature construction and
-immutable forecast persistence on the actual slate. Each record includes
-model/version and input hashes, model export time, input observation time,
-missing-input flags and uncertainty. Predictions cover only the next eight
-days. Final same-game scores and minutes never enter their own features.
+The team-efficiency logistic and rotation logistic artifacts now produce actual
+immutable pregame forecasts. Each includes version/input hashes, export and
+observation times, missing inputs and uncertainty. The live roster/injury join
+was verified on all three games in the October 29 acceptance run.
 
-The statistical-model training-to-inference component is operational.
-165 tests pass. This is not a declaration that the complete player-aware
-Phase 2 specification is finished: the live injury/roster join has not been
-verified and incorporated into calibrated forecasts; replacement/defensive
-player effects remain unvalidated. No public winner is silently switched.
-The inference uses the team-efficiency logistic model, not a player-aware
-model or the exploratory rotation model.
+The injury model now enumerates independent availability combinations for each
+listed uncertain player (up to six players / 64 scenarios). Confirmed out
+players are excluded in every scenario. Both teams can have opposite or mixed
+availability. Above the compute bound, or with stale/unmatched data, it returns
+an explicit unavailable status instead of an incomplete range. An unchanged
+winner across the scenarios is recorded; a winner reversal remains unresolved.
+The resulting range is conditional sensitivity, not a confidence interval.
+Unlisted players are assumed available only inside these labeled scenarios.
+
+The hourly pipeline now grades the earliest eligible saved team-model forecast
+against its paired pregame Elo probability. Only explicitly confirmed finals
+from the existing result qualification pipeline are accepted. Repeat runs do
+not add games, tied scores are flagged, schedule/identity mismatches are
+excluded and conflicting confirmed finals fail rather than silently rewriting
+a result. Archived older forecasts without a saved baseline are excluded.
+Results persist in observations/nba_ml_predictions/forward_evaluation.json and
+an immutable confirmed_outcomes.sqlite on the data branch.
+
+172 tests pass locally, including mixed injury scenarios, winner reversal,
+compute limits, first-forecast selection, paired metrics and idempotent grading.
+Public picks still use Elo. The new models have not earned promotion: recent
+retrospective performance did not consistently beat Elo, forward sample size
+is not yet established, and verified defensive/replacement effects are absent.
+No new player-impact coefficients or unsupported participation weights were
+invented. Full Phase 2 remains incomplete on those substantive requirements.

@@ -26,10 +26,13 @@ if __name__=='__main__':
     output=Path(args.data_root)/'observations/nba_rotation/inference_acceptance.json'
     output.parent.mkdir(parents=True,exist_ok=True);output.write_text(json.dumps(acceptance,indent=2))
     lines=['# NBA trained-model inference verification','',f'Run: {now}. Status: {result["status"]}.',
-           'Actual scheduled games and trained efficiency logistic artifact. Research outputs only; not the public pick list. No injury adjustment or validated future accuracy is claimed.','',
-           '| Game | Home probability | Away probability | Availability scenario status |','|---|---:|---:|---|']
+           'Actual scheduled games and trained efficiency logistic artifact. The baseline columns are team-only probabilities; availability ranges come from the separately trained rotation model. Conditional ranges are sensitivity checks, not confidence intervals or weighted predictions. These outputs do not replace public picks.','',
+           '| Game | Baseline home probability | Baseline away probability | Availability status | Scenarios | Conditional home range | Consistent winner |','|---|---:|---:|---|---:|---|---|']
     for row in result['predictions']:
-        lines.append(f"| {row['away']} at {row['home']} | {row['home_probability']:.4f} | {row['away_probability']:.4f} | {row.get('availability_scenarios',{}).get('status','rotation_model_unavailable')} |")
+        context=row.get('availability_scenarios') or {}
+        bounds=context.get('home_scenario_range')
+        interval=f'{bounds[0]:.4f}–{bounds[1]:.4f}' if bounds else 'unavailable'
+        lines.append(f"| {row['away']} at {row['home']} | {row['home_probability']:.4f} | {row['away_probability']:.4f} | {context.get('status','rotation_model_unavailable')} | {context.get('scenario_count',0)} | {interval} | {context.get('consistent_winner') or 'unresolved'} |")
         diagnostic=row.get('availability_scenarios',{}).get('join_diagnostics')
         if diagnostic:lines.append('\nAggregate join diagnostics: '+json.dumps(diagnostic,sort_keys=True)+'\n')
     lines+=['','Each saved forecast carries model/input hashes, model and input observation times, missing inputs and uncertainty. Source freshness is limited to the archived assets. No unseen player/lineup data is manufactured.','']

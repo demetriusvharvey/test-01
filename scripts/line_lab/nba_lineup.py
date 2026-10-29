@@ -6,7 +6,7 @@ from collections import defaultdict
 from datetime import timedelta
 from .history import aware
 from .nba_injury_feed import provider_team_code,STATUSES
-from .constants import NBA_TEAMS
+from .constants import NBA_TEAMS,ET
 
 
 def parse_current_rosters(text,observed_at,source):
@@ -86,7 +86,7 @@ def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=(),cond
             elif status not in ('available','probable','active'):return None
         histories=defaultdict(list)
         for row in players:
-            if row['player_id'] not in ids or row['team']!=team or row['date']>=now.date():continue
+            if row['player_id'] not in ids or row['team']!=team or row['date']>=now.astimezone(ET).date():continue
             histories[row['player_id']].append(row)
         estimates=[]
         for p in ids:

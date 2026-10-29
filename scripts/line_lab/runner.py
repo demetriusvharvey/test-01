@@ -332,6 +332,9 @@ def main():
             if 'NBA' not in blocked:
                 ml=record_nba_predictions(data_root,games,scheduled,now.isoformat(),injury_payload,injury_observed_at)
                 print('NBA ML inference:',ml['status'],'forecasts:',len(ml['predictions']))
+                from .nba_forward import evaluate_saved
+                forward=evaluate_saved(data_root,confirmed_finals,now.isoformat())
+                print('NBA ML forward evaluation:',json.dumps(forward,sort_keys=True))
                 print('NBA availability scenario statuses:',json.dumps([
                     {'game_id':p['game_id'],'status':p.get('availability_scenarios',{}).get('status','model_unavailable')}
                     for p in ml['predictions']],sort_keys=True))

@@ -3,6 +3,8 @@ from .history import aware
 from .nba_lineup import project_rotation,map_injury_statuses
 import hashlib
 import json
+from itertools import product
+from .constants import ET
 
 
 def conditional_forecasts(model,base_vector,event,players,rosters,payload,observed_at,now,predict):
@@ -21,12 +23,28 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
         return {'status':'unmatched_injury_identity','scenarios':[],
                 'join_diagnostics':{side:{k:report[k] for k in ('diagnostics','unmatched','invalid','matched_players','roster_players')}
                                     for side,(roster,report) in mapped.items()}}
-    cutoff=aware(now).date();scenarios=[]
-    for label,exclude_uncertain in (('listed_uncertain_players_available',False),('listed_uncertain_players_unavailable',True)):
+    cutoff=aware(now).astimezone(ET).date();scenarios=[]
+    # Enumerate each listed uncertain player independently, including opposing
+    # availability states. Never assign unsupported participation probabilities.
+    uncertain=[(side,p) for side,(_,report) in mapped.items()
+               for p,status in sorted(report['players'].items())
+               if status in ('questionable','doubtful','game_time_decision','day_to_day')]
+    if len(uncertain)>6:
+        return {'status':'scenario_limit_exceeded','scenarios':[],
+                'uncertain_players':len(uncertain),'required_scenarios':2**len(uncertain),
+                'limitation':'exhaustive availability scenarios exceed the 64-scenario compute bound'}
+    cache={}
+    for states in product((False,True),repeat=len(uncertain)):
+        excluded={side:tuple(p for (s,p),out in zip(uncertain,states) if s==side and out)
+                  for side in ('home','away')}
+        label='availability_'+(''.join('0' if out else '1' for out in states) or 'no_uncertain_players')
         summaries={}
         for side in ('home','away'):
             roster,report=mapped[side]
-            absent=[p for p,s in report['players'].items() if s in ('questionable','doubtful','game_time_decision','day_to_day')] if exclude_uncertain else []
+            absent=excluded[side]
+            cache_key=(side,absent)
+            if cache_key in cache:
+                summaries[side]=cache[cache_key];continue
             rotation=project_rotation(players,roster,report,now,event['starts_at'],absent,conditional=True)
             if rotation is None:return {'status':'insufficient_rotation_history','scenarios':[]}
             scoring=0.;experienced=0.;minutes=[]
@@ -38,12 +56,20 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
                 if len(rows)>=5:experienced+=p['minutes']/240
                 minutes.append(p['minutes'])
             summaries[side]=(scoring,sum(sorted(minutes,reverse=True)[:5])/240,experienced)
+            cache[cache_key]=summaries[side]
         h,a=summaries['home'],summaries['away']
         vector=base_vector+[(h[0]-a[0])/20,h[1]-a[1],h[2]-a[2]]
         probability=predict(model,vector)
         scenarios.append({'scenario':label,'home_probability':probability,'away_probability':1-probability,
-                          'features':dict(zip(model['features'],vector))})
-    return {'status':'conditional_research_only','scenarios':scenarios,
+                          'features':dict(zip(model['features'],vector)),
+                          'uncertain_available':{side:sum(s==side and not out for (s,p),out in zip(uncertain,states))
+                                                 for side in ('home','away')}})
+    low=min(s['home_probability'] for s in scenarios);high=max(s['home_probability'] for s in scenarios)
+    return {'status':'conditional_research_only','scenario_count':len(scenarios),
+            'uncertain_players':len(uncertain),'exhaustive_listed_uncertainty':True,
+            'home_scenario_range':[low,high],
+            'consistent_winner':event['home'] if low>.5 else event['away'] if high<.5 else None,
+            'range_meaning':'conditional sensitivity range, not a confidence interval or calibrated mixture','scenarios':scenarios,
             'model_version':model['model_version'],'injury_observed_at':observed_at,
             'model_hash':hashlib.sha256(json.dumps(model,sort_keys=True).encode()).hexdigest(),
             'assumption':'unlisted players available within each scenario; not confirmed',

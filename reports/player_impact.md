@@ -21,3 +21,12 @@ nonzero player exposures rather than assigning zero value.
 155 tests pass. Synthetic tests verify future-data rejection, roster
 alignment, rejection of postgame participation, chronological validation
 and unknown-player handling. They are not a predictive-performance result.
+
+## NBA multi-stat addition
+
+The newer NBA path fits coefficients for lagged projected box statistics and
+connects them to current injury scenarios. This is distinct from the
+player-ID exposure learner above: it does not manufacture an eligible
+player-exposure dataset or claim that player-ID coefficients were learned.
+See reports/nba_player_method.md and the generated
+reports/nba_player_box_validation.md for definitions and actual comparisons.

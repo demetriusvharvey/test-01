@@ -15,7 +15,8 @@ def _valid(row,now):
     try:
         predicted,start=aware(row['predicted_at']),aware(row['starts_at'])
         if not aware(row['model_exported_at'])<=predicted<start or predicted>now:return False
-        if not row.get('model_input_hash') or not row.get('features'):return False
+        if not row.get('model_input_hash') or not row.get('features') or not row.get('model_version'):return False
+        if not row['game_id'].startswith('nba:') or row['home']==row['away']:return False
         if aware(row['input_data_observed_at'])>predicted:return False
         for key in ('home_probability','baseline_elo_probability'):
             p=row[key]
@@ -58,6 +59,44 @@ def evaluate_saved(root,confirmed_finals,now):
                 else:db.execute('INSERT INTO outcomes VALUES (?,?)',(g['id'],json.dumps(value,sort_keys=True)))
             except (KeyError,TypeError):continue
         outcomes={game:json.loads(payload) for game,payload in db.execute('SELECT game_id,payload FROM outcomes')}
+    # Conditional models have no justified scenario weights, so grade only
+    # their frozen, scenario-consistent winner; never invent a Brier probability.
+    conditional={};first_conditional={}
+    for file in sorted(folder.glob('????-??-??.sqlite')):
+        with sqlite3.connect(file) as db:records=db.execute('SELECT payload FROM predictions').fetchall()
+        for (payload,) in records:
+            row=json.loads(payload)
+            if not _valid(row,current):continue
+            for field in ('availability_scenarios','player_box_scenarios'):
+                context=row.get(field) or {};scenarios=context.get('scenarios') or []
+                try:
+                    if context.get('status')!='conditional_research_only' or not context.get('exhaustive_listed_uncertainty'):continue
+                    if not context.get('model_hash') or aware(context['injury_observed_at'])>aware(row['predicted_at']):continue
+                    if not 1<=len(scenarios)<=64 or len(scenarios)!=2**context['uncertain_players']:continue
+                    values=[r['home_probability'] for r in scenarios]
+                    if any(not math.isfinite(v) or not 0<v<1 for v in values):continue
+                    if any(not math.isclose(s['home_probability']+s['away_probability'],1,abs_tol=1e-12) for s in scenarios):continue
+                    winner=row['home'] if min(values)>.5 else row['away'] if max(values)<.5 else None
+                    if context.get('consistent_winner')!=winner:continue
+                    key=(row['game_id'],context['model_version'])
+                    old=first_conditional.get(key)
+                    if old is None or aware(row['predicted_at'])<aware(old[0]['predicted_at']):
+                        first_conditional[key]=(row,winner)
+                except (KeyError,ValueError,TypeError,OverflowError):continue
+    for (game,version),(row,winner) in sorted(first_conditional.items()):
+        group=conditional.setdefault(version,{'wins':0,'losses':0,'pending':0,'abstained':0,'void':0,'excluded':0})
+        final=outcomes.get(game)
+        if not final:group['pending']+=1;continue
+        if (row['home'],row['away'],aware(row['starts_at']))!=(final['home'],final['away'],aware(final['starts_at'])):
+            group['excluded']+=1;continue
+        if final['home_score']==final['away_score']:group['void']+=1;continue
+        if winner is None:group['abstained']+=1;continue
+        actual=final['home'] if final['home_score']>final['away_score'] else final['away']
+        group['wins' if winner==actual else 'losses']+=1
+    for group in conditional.values():
+        settled=group['wins']+group['losses']
+        group['settled_predictions']=settled
+        group['accuracy']=group['wins']/settled if settled else None
     grouped={}
     for (game,version),row in sorted(first.items()):
         group=grouped.setdefault(version,{'model':[],'elo':[],'pending':0,'void':0,'excluded':0,'scenario_agreement':0,'scenario_disagreement':0})
@@ -72,10 +111,10 @@ def evaluate_saved(root,confirmed_finals,now):
         context=row.get('availability_scenarios') or {}
         if context.get('exhaustive_listed_uncertainty'):
             group['scenario_agreement' if context.get('consistent_winner') else 'scenario_disagreement']+=1
-    result={'evaluated_at':now,'invalid_forecasts':excluded,'models':{},'promoted':False,
+    result={'evaluated_at':now,'invalid_forecasts':excluded,'models':{},'conditional_winner_records':conditional,'promoted':False,
             'policy':'earliest eligible immutable forecast per game/version; identical paired Elo sample; confirmed finals only',
             'limitations':['pipeline versions may contain retrained artifacts; not a fixed-artifact trial',
-                          'conditional scenarios are not an unconditional calibrated prediction',
+                          'conditional scenarios are not an unconditional calibrated prediction; only scenario-consistent winner accuracy is graded',
                           'no causal player-effect validation, market comparison or profitability claim']}
     for version,g in grouped.items():
         model,elo=score_metrics(g.pop('model')),score_metrics(g.pop('elo'))

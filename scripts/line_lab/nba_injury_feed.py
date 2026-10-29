@@ -181,10 +181,10 @@ def attach_nba_summaries(board, markets, payload, observed_at):
                 code = event[side]
                 if code not in summaries:
                     raise ValueError('unknown team')
-                sides[side] = {'team': event[side + '_name'], 'counts': summaries[code], 'positions': positions[code]}
+                sides[side] = {'team': event[side + '_name'], 'counts': summaries[code], 'positions': positions[code], 'report_present': bool(sum(summaries[code].values()))}
             pick['nba_availability_context'] = {
                 'teams': sides, 'source': 'PropLine, ESPN-sourced',
-                'observed_at': observed.isoformat(), 'incomplete': incomplete,
+                'observed_at': observed.isoformat(), 'incomplete': incomplete or not all(v['report_present'] for v in sides.values()),
                 'used_in_prediction': False,
             }
         except (KeyError, TypeError, ValueError):
@@ -205,10 +205,10 @@ def attach_nfl_summaries(board, markets, payload, observed_at):
             for side in ('away','home'):
                 code=event[side]
                 if code not in summaries:raise ValueError('unknown team')
-                sides[side]={'team':event[side+'_name'],'counts':summaries[code],'positions':positions[code]}
+                sides[side]={'team':event[side+'_name'],'counts':summaries[code],'positions':positions[code],'report_present':bool(sum(summaries[code].values()))}
             pick['nfl_provider_availability_context']={
                 'teams':sides,'source':'PropLine, ESPN-sourced',
-                'observed_at':observed.isoformat(),'incomplete':incomplete,
+                'observed_at':observed.isoformat(),'incomplete':incomplete or not all(v['report_present'] for v in sides.values()),
                 'used_in_prediction':False,
             }
         except (KeyError,TypeError,ValueError):continue

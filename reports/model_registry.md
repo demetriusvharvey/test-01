@@ -1,6 +1,6 @@
 # Weekly model challenger registry
 
-Run 2026-10-29T13:20:52.943564+00:00: 1195 forecast snapshots, 12 outcome records, 573 matched rows before eligibility.
+Run 2026-10-29T13:24:37.099617+00:00: 1297 forecast snapshots, 12 outcome records, 573 matched rows before eligibility.
 Availability: 81 team-status and 0 NFL position-status matched snapshots before time and source eligibility checks.
 
 | League | Model | Status | Eligible training games | Validation season | Promoted |

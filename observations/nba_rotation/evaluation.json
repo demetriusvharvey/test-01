@@ -1,0 +1,659 @@
+{
+  "sources": [
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2023.csv",
+      "sha256": "1b797107d4a0b2fbc98862bd283b9e807a05aa11c671b89a471b25591a589493",
+      "observed_at": "2026-10-29T14:10:45.265164+00:00",
+      "parsed_player_rows": 27637,
+      "columns": [
+        "game_id",
+        "season",
+        "season_type",
+        "game_date",
+        "game_date_time",
+        "athlete_id",
+        "athlete_display_name",
+        "team_id",
+        "team_name",
+        "team_location",
+        "team_short_display_name",
+        "minutes",
+        "field_goals_made",
+        "field_goals_attempted",
+        "three_point_field_goals_made",
+        "three_point_field_goals_attempted",
+        "free_throws_made",
+        "free_throws_attempted",
+        "offensive_rebounds",
+        "defensive_rebounds",
+        "rebounds",
+        "assists",
+        "steals",
+        "blocks",
+        "turnovers",
+        "fouls",
+        "plus_minus",
+        "points",
+        "starter",
+        "ejected",
+        "did_not_play",
+        "reason",
+        "active",
+        "athlete_jersey",
+        "athlete_short_name",
+        "athlete_headshot_href",
+        "athlete_position_name",
+        "athlete_position_abbreviation",
+        "team_display_name",
+        "team_uid",
+        "team_slug",
+        "team_logo",
+        "team_abbreviation",
+        "team_color",
+        "team_alternate_color",
+        "home_away",
+        "team_winner",
+        "team_score",
+        "opponent_team_id",
+        "opponent_team_name",
+        "opponent_team_location",
+        "opponent_team_display_name",
+        "opponent_team_abbreviation",
+        "opponent_team_logo",
+        "opponent_team_color",
+        "opponent_team_alternate_color",
+        "opponent_team_score"
+      ]
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2024.csv",
+      "sha256": "c52a708ac80542baa0711f166154e0a647543036854e29aa903bd2fc27b49ae2",
+      "observed_at": "2026-10-29T14:10:46.133144+00:00",
+      "parsed_player_rows": 28098,
+      "columns": [
+        "game_id",
+        "season",
+        "season_type",
+        "game_date",
+        "game_date_time",
+        "athlete_id",
+        "athlete_display_name",
+        "team_id",
+        "team_name",
+        "team_location",
+        "team_short_display_name",
+        "minutes",
+        "field_goals_made",
+        "field_goals_attempted",
+        "three_point_field_goals_made",
+        "three_point_field_goals_attempted",
+        "free_throws_made",
+        "free_throws_attempted",
+        "offensive_rebounds",
+        "defensive_rebounds",
+        "rebounds",
+        "assists",
+        "steals",
+        "blocks",
+        "turnovers",
+        "fouls",
+        "plus_minus",
+        "points",
+        "starter",
+        "ejected",
+        "did_not_play",
+        "reason",
+        "active",
+        "athlete_jersey",
+        "athlete_short_name",
+        "athlete_headshot_href",
+        "athlete_position_name",
+        "athlete_position_abbreviation",
+        "team_display_name",
+        "team_uid",
+        "team_slug",
+        "team_logo",
+        "team_abbreviation",
+        "team_color",
+        "team_alternate_color",
+        "home_away",
+        "team_winner",
+        "team_score",
+        "opponent_team_id",
+        "opponent_team_name",
+        "opponent_team_location",
+        "opponent_team_display_name",
+        "opponent_team_abbreviation",
+        "opponent_team_logo",
+        "opponent_team_color",
+        "opponent_team_alternate_color",
+        "opponent_team_score"
+      ]
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2025.csv",
+      "sha256": "8e34c5b1b7629dda89483356b5ec40f76a0b534aa273a5ddd8d9ef23f3e0e4f7",
+      "observed_at": "2026-10-29T14:10:46.989532+00:00",
+      "parsed_player_rows": 28154,
+      "columns": [
+        "game_id",
+        "season",
+        "season_type",
+        "game_date",
+        "game_date_time",
+        "athlete_id",
+        "athlete_display_name",
+        "team_id",
+        "team_name",
+        "team_location",
+        "team_short_display_name",
+        "minutes",
+        "field_goals_made",
+        "field_goals_attempted",
+        "three_point_field_goals_made",
+        "three_point_field_goals_attempted",
+        "free_throws_made",
+        "free_throws_attempted",
+        "offensive_rebounds",
+        "defensive_rebounds",
+        "rebounds",
+        "assists",
+        "steals",
+        "blocks",
+        "turnovers",
+        "fouls",
+        "plus_minus",
+        "points",
+        "starter",
+        "ejected",
+        "did_not_play",
+        "reason",
+        "active",
+        "athlete_jersey",
+        "athlete_short_name",
+        "athlete_headshot_href",
+        "athlete_position_name",
+        "athlete_position_abbreviation",
+        "team_display_name",
+        "team_uid",
+        "team_slug",
+        "team_logo",
+        "team_abbreviation",
+        "team_color",
+        "team_alternate_color",
+        "home_away",
+        "team_winner",
+        "team_score",
+        "opponent_team_id",
+        "opponent_team_name",
+        "opponent_team_location",
+        "opponent_team_display_name",
+        "opponent_team_abbreviation",
+        "opponent_team_logo",
+        "opponent_team_color",
+        "opponent_team_alternate_color",
+        "opponent_team_score"
+      ]
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2026.csv",
+      "sha256": "7a4868da67ae7f6ebfba23389e04220be2e3f69d2e56a3942c02aa56f1becc89",
+      "observed_at": "2026-10-29T14:10:47.847710+00:00",
+      "parsed_player_rows": 28588,
+      "columns": [
+        "game_id",
+        "season",
+        "season_type",
+        "game_date",
+        "game_date_time",
+        "athlete_id",
+        "athlete_display_name",
+        "team_id",
+        "team_name",
+        "team_location",
+        "team_short_display_name",
+        "minutes",
+        "field_goals_made",
+        "field_goals_attempted",
+        "three_point_field_goals_made",
+        "three_point_field_goals_attempted",
+        "free_throws_made",
+        "free_throws_attempted",
+        "offensive_rebounds",
+        "defensive_rebounds",
+        "rebounds",
+        "assists",
+        "steals",
+        "blocks",
+        "turnovers",
+        "fouls",
+        "plus_minus",
+        "points",
+        "starter",
+        "ejected",
+        "did_not_play",
+        "reason",
+        "active",
+        "athlete_jersey",
+        "athlete_short_name",
+        "athlete_headshot_href",
+        "athlete_position_name",
+        "athlete_position_abbreviation",
+        "team_display_name",
+        "team_uid",
+        "team_slug",
+        "team_logo",
+        "team_abbreviation",
+        "team_color",
+        "team_alternate_color",
+        "home_away",
+        "team_winner",
+        "team_score",
+        "opponent_team_id",
+        "opponent_team_name",
+        "opponent_team_location",
+        "opponent_team_display_name",
+        "opponent_team_abbreviation",
+        "opponent_team_logo",
+        "opponent_team_color",
+        "opponent_team_alternate_color",
+        "opponent_team_score"
+      ]
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2027.csv",
+      "sha256": "93806629508d8b7cdaea54e6c2cea43bfd29a33700646b88a1ad35dd7b1112dd",
+      "observed_at": "2026-10-29T14:10:48.504523+00:00",
+      "parsed_player_rows": 1526,
+      "columns": [
+        "game_id",
+        "season",
+        "season_type",
+        "game_date",
+        "game_date_time",
+        "athlete_id",
+        "athlete_display_name",
+        "team_id",
+        "team_name",
+        "team_location",
+        "team_short_display_name",
+        "minutes",
+        "field_goals_made",
+        "field_goals_attempted",
+        "three_point_field_goals_made",
+        "three_point_field_goals_attempted",
+        "free_throws_made",
+        "free_throws_attempted",
+        "offensive_rebounds",
+        "defensive_rebounds",
+        "rebounds",
+        "assists",
+        "steals",
+        "blocks",
+        "turnovers",
+        "fouls",
+        "plus_minus",
+        "points",
+        "starter",
+        "ejected",
+        "did_not_play",
+        "reason",
+        "active",
+        "athlete_jersey",
+        "athlete_short_name",
+        "athlete_headshot_href",
+        "athlete_position_name",
+        "athlete_position_abbreviation",
+        "team_display_name",
+        "team_uid",
+        "team_slug",
+        "team_logo",
+        "team_abbreviation",
+        "team_color",
+        "team_alternate_color",
+        "home_away",
+        "team_winner",
+        "team_score",
+        "opponent_team_id",
+        "opponent_team_name",
+        "opponent_team_location",
+        "opponent_team_display_name",
+        "opponent_team_abbreviation",
+        "opponent_team_logo",
+        "opponent_team_color",
+        "opponent_team_alternate_color",
+        "opponent_team_score"
+      ]
+    }
+  ],
+  "failures": [],
+  "results": [
+    {
+      "season": "2024-25",
+      "without_rotation": {
+        "model_version": "nba-efficiency-sklearn-v1",
+        "test_season": "2024-25",
+        "training_seasons": [
+          "2022-23"
+        ],
+        "calibration_season": "2023-24",
+        "training_games": 1073,
+        "calibration_games": 1215,
+        "missing_inputs": [
+          "player impacts",
+          "injuries",
+          "projected lineups",
+          "travel"
+        ],
+        "promoted": false,
+        "uncertainty": "predictive intervals not established",
+        "elo": {
+          "games": 1209,
+          "accuracy": 0.6608767576509512,
+          "brier": 0.21388564657504058,
+          "log_loss": 0.6154939397825933
+        },
+        "logistic": {
+          "raw": {
+            "games": 1209,
+            "accuracy": 0.6708023159636063,
+            "brier": 0.210642246347299,
+            "log_loss": 0.6083177715536932
+          },
+          "calibrated": {
+            "games": 1209,
+            "accuracy": 0.674937965260546,
+            "brier": 0.21020037857718527,
+            "log_loss": 0.6072723708540357
+          }
+        },
+        "boosting": {
+          "raw": {
+            "games": 1209,
+            "accuracy": 0.6385442514474773,
+            "brier": 0.22627993121243767,
+            "log_loss": 0.6477303543113494
+          },
+          "calibrated": {
+            "games": 1209,
+            "accuracy": 0.6426799007444168,
+            "brier": 0.2238732265035464,
+            "log_loss": 0.6397843134129201
+          }
+        }
+      },
+      "with_rotation": {
+        "model_version": "nba-efficiency-sklearn-v1",
+        "test_season": "2024-25",
+        "training_seasons": [
+          "2022-23"
+        ],
+        "calibration_season": "2023-24",
+        "training_games": 1073,
+        "calibration_games": 1215,
+        "missing_inputs": [
+          "player impacts",
+          "injuries",
+          "projected lineups",
+          "travel"
+        ],
+        "promoted": false,
+        "uncertainty": "predictive intervals not established",
+        "elo": {
+          "games": 1209,
+          "accuracy": 0.6608767576509512,
+          "brier": 0.21388564657504058,
+          "log_loss": 0.6154939397825933
+        },
+        "logistic": {
+          "raw": {
+            "games": 1209,
+            "accuracy": 0.6699751861042184,
+            "brier": 0.21068313465223873,
+            "log_loss": 0.6082147270266576
+          },
+          "calibrated": {
+            "games": 1209,
+            "accuracy": 0.6708023159636063,
+            "brier": 0.21020560484087075,
+            "log_loss": 0.6071624370738351
+          }
+        },
+        "boosting": {
+          "raw": {
+            "games": 1209,
+            "accuracy": 0.6484698097601324,
+            "brier": 0.2245131252575375,
+            "log_loss": 0.6435828185739662
+          },
+          "calibrated": {
+            "games": 1209,
+            "accuracy": 0.6492969396195203,
+            "brier": 0.22278862125652854,
+            "log_loss": 0.6378175351406471
+          }
+        }
+      }
+    },
+    {
+      "season": "2025-26",
+      "without_rotation": {
+        "model_version": "nba-efficiency-sklearn-v1",
+        "test_season": "2025-26",
+        "training_seasons": [
+          "2022-23",
+          "2023-24"
+        ],
+        "calibration_season": "2024-25",
+        "training_games": 2288,
+        "calibration_games": 1209,
+        "missing_inputs": [
+          "player impacts",
+          "injuries",
+          "projected lineups",
+          "travel"
+        ],
+        "promoted": false,
+        "uncertainty": "predictive intervals not established",
+        "elo": {
+          "games": 1209,
+          "accuracy": 0.6782464846980976,
+          "brier": 0.20848351600203008,
+          "log_loss": 0.6050505032636384
+        },
+        "logistic": {
+          "raw": {
+            "games": 1209,
+            "accuracy": 0.6889991728701406,
+            "brier": 0.20617773624914126,
+            "log_loss": 0.6000479188886099
+          },
+          "calibrated": {
+            "games": 1209,
+            "accuracy": 0.6873449131513648,
+            "brier": 0.206384870574223,
+            "log_loss": 0.6002921369634476
+          }
+        },
+        "boosting": {
+          "raw": {
+            "games": 1209,
+            "accuracy": 0.6683209263854425,
+            "brier": 0.2140970012627923,
+            "log_loss": 0.6201155730340444
+          },
+          "calibrated": {
+            "games": 1209,
+            "accuracy": 0.6666666666666666,
+            "brier": 0.21393680544851024,
+            "log_loss": 0.6180063200739235
+          }
+        }
+      },
+      "with_rotation": {
+        "model_version": "nba-efficiency-sklearn-v1",
+        "test_season": "2025-26",
+        "training_seasons": [
+          "2022-23",
+          "2023-24"
+        ],
+        "calibration_season": "2024-25",
+        "training_games": 2288,
+        "calibration_games": 1209,
+        "missing_inputs": [
+          "player impacts",
+          "injuries",
+          "projected lineups",
+          "travel"
+        ],
+        "promoted": false,
+        "uncertainty": "predictive intervals not established",
+        "elo": {
+          "games": 1209,
+          "accuracy": 0.6782464846980976,
+          "brier": 0.20848351600203008,
+          "log_loss": 0.6050505032636384
+        },
+        "logistic": {
+          "raw": {
+            "games": 1209,
+            "accuracy": 0.6923076923076923,
+            "brier": 0.20471704886423714,
+            "log_loss": 0.596052939951703
+          },
+          "calibrated": {
+            "games": 1209,
+            "accuracy": 0.6947890818858561,
+            "brier": 0.2049559994993915,
+            "log_loss": 0.5964680997474178
+          }
+        },
+        "boosting": {
+          "raw": {
+            "games": 1209,
+            "accuracy": 0.6699751861042184,
+            "brier": 0.2122143154071397,
+            "log_loss": 0.6161594941560413
+          },
+          "calibrated": {
+            "games": 1209,
+            "accuracy": 0.6724565756823822,
+            "brier": 0.21223398772120072,
+            "log_loss": 0.6142032519550101
+          }
+        }
+      }
+    },
+    {
+      "season": "2026-27",
+      "without_rotation": {
+        "model_version": "nba-efficiency-sklearn-v1",
+        "test_season": "2026-27",
+        "training_seasons": [
+          "2022-23",
+          "2023-24",
+          "2024-25"
+        ],
+        "calibration_season": "2025-26",
+        "training_games": 3497,
+        "calibration_games": 1209,
+        "missing_inputs": [
+          "player impacts",
+          "injuries",
+          "projected lineups",
+          "travel"
+        ],
+        "promoted": false,
+        "uncertainty": "predictive intervals not established",
+        "elo": {
+          "games": 36,
+          "accuracy": 0.5833333333333334,
+          "brier": 0.2134802928908926,
+          "log_loss": 0.6124022327085847
+        },
+        "logistic": {
+          "raw": {
+            "games": 36,
+            "accuracy": 0.6388888888888888,
+            "brier": 0.21715078602319246,
+            "log_loss": 0.6183035654675784
+          },
+          "calibrated": {
+            "games": 36,
+            "accuracy": 0.6388888888888888,
+            "brier": 0.2173085939953968,
+            "log_loss": 0.6184174917472143
+          }
+        },
+        "boosting": {
+          "raw": {
+            "games": 36,
+            "accuracy": 0.6388888888888888,
+            "brier": 0.22815332581633674,
+            "log_loss": 0.645263230680343
+          },
+          "calibrated": {
+            "games": 36,
+            "accuracy": 0.6388888888888888,
+            "brier": 0.22680663273909296,
+            "log_loss": 0.6430373826089179
+          }
+        }
+      },
+      "with_rotation": {
+        "model_version": "nba-efficiency-sklearn-v1",
+        "test_season": "2026-27",
+        "training_seasons": [
+          "2022-23",
+          "2023-24",
+          "2024-25"
+        ],
+        "calibration_season": "2025-26",
+        "training_games": 3497,
+        "calibration_games": 1209,
+        "missing_inputs": [
+          "player impacts",
+          "injuries",
+          "projected lineups",
+          "travel"
+        ],
+        "promoted": false,
+        "uncertainty": "predictive intervals not established",
+        "elo": {
+          "games": 36,
+          "accuracy": 0.5833333333333334,
+          "brier": 0.2134802928908926,
+          "log_loss": 0.6124022327085847
+        },
+        "logistic": {
+          "raw": {
+            "games": 36,
+            "accuracy": 0.5833333333333334,
+            "brier": 0.22023892515208676,
+            "log_loss": 0.6234552915393574
+          },
+          "calibrated": {
+            "games": 36,
+            "accuracy": 0.5833333333333334,
+            "brier": 0.2205805019364192,
+            "log_loss": 0.6240417262468213
+          }
+        },
+        "boosting": {
+          "raw": {
+            "games": 36,
+            "accuracy": 0.6111111111111112,
+            "brier": 0.23708683699554248,
+            "log_loss": 0.6652063401617994
+          },
+          "calibrated": {
+            "games": 36,
+            "accuracy": 0.6111111111111112,
+            "brier": 0.23321225100487014,
+            "log_loss": 0.6563859644148462
+          }
+        }
+      }
+    }
+  ]
+}

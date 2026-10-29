@@ -1,0 +1,52 @@
+name: NBA lineup research
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - scripts/inspect_nba_lineups.py
+      - scripts/research_nba_lineups.py
+      - scripts/line_lab/nba_stints.py
+      - .github/workflows/nba-lineups.yml
+permissions:
+  contents: write
+concurrency:
+  group: line-lab-data
+  cancel-in-progress: false
+jobs:
+  lineups:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: data/observations
+          path: .data-store
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - name: Test engine
+        run: python -m unittest discover -s tests
+      - name: Inspect lineup source
+        run: python -m scripts.inspect_nba_lineups --data-root .data-store --output reports/nba_lineup_source.md
+      - name: Persist source observations
+        run: |
+          git -C .data-store config user.name 'github-actions[bot]'
+          git -C .data-store config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git -C .data-store add observations
+          if ! git -C .data-store diff --cached --quiet; then
+            git -C .data-store commit -m 'Archive NBA lineup research source'
+            git -C .data-store pull --rebase origin data/observations
+            git -C .data-store push origin HEAD:data/observations
+          fi
+      - name: Publish source report
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add reports/nba_lineup_source.md
+          if ! git diff --cached --quiet; then
+            git commit -m 'Report NBA lineup source inspection'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

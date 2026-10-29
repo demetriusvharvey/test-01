@@ -3,6 +3,7 @@ import hashlib
 import json
 import math
 import sqlite3
+from datetime import timedelta
 from collections import defaultdict
 from contextlib import closing
 from pathlib import Path
@@ -99,7 +100,7 @@ def evaluate(baselines,candidates,trials,outcomes,now):
                 candidate_features=json.loads(row['feature_json'])
                 if observed.get('schema')!=schema or observed.get('used_in_prediction') is not False:
                     raise ValueError('availability snapshot missing')
-                if observed.get('source')!='nflverse injury and practice reports' or aware(observed['observed_at'])>captured:
+                if (observed.get('source')!='nflverse injury and practice reports' or not timedelta(0)<=captured-aware(observed['observed_at'])<=timedelta(hours=30)):
                     raise ValueError('availability source or timestamp invalid')
                 if candidate_features.get('availability_source')!=observed['source'] or candidate_features.get('availability_observed_at')!=observed['observed_at']:
                     raise ValueError('availability provenance mismatch')

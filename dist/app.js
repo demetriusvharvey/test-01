@@ -125,15 +125,20 @@
     if(age>20)return `<p>STALE INJURY CHECK — last retrieved ${age} minutes ago. Late scratches and starting lineups may have changed. Recheck before betting.</p>`;
     return '<p>Recent injury snapshot, but lineup and late scratches remain unconfirmed. Recheck before betting.</p>';
   }
+  function injuryChangeNote(p){
+    const c=p.injury_change;
+    if(!c||c.status!=='changed')return '';
+    return '<p>Injury status counts changed since the previous observed report. Recheck the official player list before betting; these counts do not identify starters or confirm availability.</p>';
+  }
   function availabilityMarkup(p){
     if(p.league!=='NFL'){
       const link='<a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener noreferrer">latest NBA player report</a>',c=p.nba_availability_context;
       if(!c||!c.teams)return `<p>NBA injuries and projected lineups are not included in this prediction. Check the ${link}; starters are unconfirmed.</p>`;
       const entries=['away','home'].map(side=>c.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.counts.out)} out, ${Number(team.counts.questionable)} questionable or game-time decision, ${Number(team.counts.doubtful)} doubtful`).join(' · ');
-      return `<p>Player-status counts from PropLine (ESPN), checked ${displayTime(c.observed_at)}: ${entries}. Reports may be incomplete and a missing name does not mean healthy. Check the ${link}; this information has not changed the prediction.</p>${injuryFreshnessNote(c)}${positionMarkup(c)}`;
+      return `<p>Player-status counts from PropLine (ESPN), checked ${displayTime(c.observed_at)}: ${entries}. Reports may be incomplete and a missing name does not mean healthy. Check the ${link}; this information has not changed the prediction.</p>${injuryFreshnessNote(c)}${injuryChangeNote(p)}${positionMarkup(c)}`;
     }
     const current=p.nfl_provider_availability_context;
-    const currentSummary=current&&current.teams?`<p>Player-status counts from PropLine (ESPN), checked ${displayTime(current.observed_at)}: ${['away','home'].map(side=>current.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.counts.out)} out, ${Number(team.counts.questionable)} questionable or game-time decision, ${Number(team.counts.doubtful)} doubtful`).join(' · ')}. Reports may be incomplete; no listing does not mean healthy.</p>${injuryFreshnessNote(current)}${positionMarkup(current)}`:'';
+    const currentSummary=current&&current.teams?`<p>Player-status counts from PropLine (ESPN), checked ${displayTime(current.observed_at)}: ${['away','home'].map(side=>current.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.counts.out)} out, ${Number(team.counts.questionable)} questionable or game-time decision, ${Number(team.counts.doubtful)} doubtful`).join(' · ')}. Reports may be incomplete; no listing does not mean healthy.</p>${injuryFreshnessNote(current)}${injuryChangeNote(p)}${positionMarkup(current)}`:'';
     const c=p.availability_context;
     if(!c||!c.teams)return `${currentSummary}<p>NFL starting quarterback and inactive list: unconfirmed. Injury information has not changed this prediction.</p>`;
     const entries=['away','home'].map(side=>c.teams[side]).filter(Boolean).map(team=>{

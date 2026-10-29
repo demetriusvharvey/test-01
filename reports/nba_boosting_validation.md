@@ -6,8 +6,8 @@ Fixed-config sklearn logistic and histogram gradient boosting, trained before a 
 |---|---:|---:|---:|---:|---:|---:|
 | 2024-25 | 1225 | 0.2104 | 0.2237 | 0.2139 | 0.6727 | 0.6424 |
 | 2025-26 | 1225 | 0.2077 | 0.2126 | 0.2092 | 0.6824 | 0.6645 |
-| 2026-27 | 52 | 0.2186 | 0.2226 | 0.2110 | 0.6154 | 0.6346 |
+| 2026-27 | 68 | 0.2187 | 0.2156 | 0.2122 | 0.6176 | 0.6471 |
 
-Input hash: f3546dd1ba1a08212f32e1c896c4c8c1f0de0851da060f8a42c0086bf4331d3f. Detailed results: data branch observations/nba_statistical/f3546dd1ba1a08212f32e1c896c4c8c1f0de0851da060f8a42c0086bf4331d3f/boosting_evaluation.json.
+Input hash: 5d8604cba23a0abee360be6747cb4bbe198e1c5c2bcd25b76e46b4ff1da2d949. Detailed results: data branch observations/nba_statistical/5d8604cba23a0abee360be6747cb4bbe198e1c5c2bcd25b76e46b4ff1da2d949/boosting_evaluation.json.
 
 Features include earlier Elo, scoring, rest and home court plus earlier offensive/defensive efficiency, effective FG%, estimated possessions, turnover/rebounding proxies, FT rate and 3P%. Rebounding is a per-possession proxy, not rebound-chance percentage. No player-adjusted rating is implied.

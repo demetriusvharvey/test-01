@@ -16,7 +16,7 @@ Column names describe retrospective assets only. No live injury, lineup or odds 
 - Season: 2025-26; rows: 2460; archived: 2026-10-28T04:04:06.133243+00:00; source: https://boxscorelab.com/downloads/2025-26-team-game-results.csv
 - Columns: season, team, game_date, matchup, opponent, home, result, points, opponent_points, point_diff, field_goals_made, field_goal_attempts, field_goal_pct, three_point_makes, three_point_attempts, three_point_pct, free_throws_made, free_throw_attempts, offensive_rebounds, defensive_rebounds, rebounds, assists, steals, blocks, turnovers, effective_fg_pct, off_rating_est, def_rating_est
 
-- Season: 2026-27; rows: 104; archived: 2026-10-28T04:04:06.242851+00:00; source: https://boxscorelab.com/downloads/2026-27-team-game-results.csv
+- Season: 2026-27; rows: 136; archived: 2026-10-29T18:57:43.768736+00:00; source: https://boxscorelab.com/downloads/2026-27-team-game-results.csv
 - Columns: season, team, game_date, matchup, opponent, home, result, points, opponent_points, point_diff, field_goals_made, field_goal_attempts, field_goal_pct, three_point_makes, three_point_attempts, three_point_pct, free_throws_made, free_throw_attempts, offensive_rebounds, defensive_rebounds, rebounds, assists, steals, blocks, turnovers, effective_fg_pct, off_rating_est, def_rating_est
 
 ## nfl_pbp

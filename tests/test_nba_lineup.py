@@ -12,6 +12,10 @@ class LineupTests(unittest.TestCase):
         self.assertFalse(mapped['complete']);self.assertFalse(mapped['missing_listing_means_healthy'])
         payload['players'][0]['player_id']='different:123'
         self.assertFalse(map_injury_statuses(payload,roster,'2026-10-29T12:00:00+00:00')['identity_mapping_valid'])
+        payload['players'][0]['espn_athlete_id']='123'
+        self.assertEqual(map_injury_statuses(payload,roster,'2026-10-29T12:00:00+00:00')['players'],{'123':'out'})
+        payload['players'][0]['player_id']='espn:456'
+        self.assertFalse(map_injury_statuses(payload,roster,'2026-10-29T12:00:00+00:00')['identity_mapping_valid'])
     def test_out_player_removed_minutes_conserved_and_questionable_unweighted(self):
         ids=[str(i) for i in range(10)]
         players=[{'player_id':p,'team':'A','date':date(2026,10,27),'minutes':30.,'points':10.} for p in ids]

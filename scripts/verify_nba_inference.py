@@ -26,5 +26,7 @@ if __name__=='__main__':
            '| Game | Home probability | Away probability | Availability scenario status |','|---|---:|---:|---|']
     for row in result['predictions']:
         lines.append(f"| {row['away']} at {row['home']} | {row['home_probability']:.4f} | {row['away_probability']:.4f} | {row.get('availability_scenarios',{}).get('status','rotation_model_unavailable')} |")
+        diagnostic=row.get('availability_scenarios',{}).get('join_diagnostics')
+        if diagnostic:lines.append('\nAggregate join diagnostics: '+json.dumps(diagnostic,sort_keys=True)+'\n')
     lines+=['','Each saved forecast carries model/input hashes, model and input observation times, missing inputs and uncertainty. Source freshness is limited to the archived assets. No unseen player/lineup data is manufactured.','']
     Path(args.output).write_text('\n'.join(lines))

@@ -15,8 +15,12 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
         roster=rosters.get(event[side])
         if not roster:return {'status':'roster_unavailable','scenarios':[]}
         report=map_injury_statuses(payload,roster,observed_at)
-        if not report or not report['identity_mapping_valid']:return {'status':'unmatched_injury_identity','scenarios':[]}
+        if not report:return {'status':'invalid_injury_report','scenarios':[]}
         mapped[side]=(roster,report)
+    if any(not report['identity_mapping_valid'] for roster,report in mapped.values()):
+        return {'status':'unmatched_injury_identity','scenarios':[],
+                'join_diagnostics':{side:{k:report[k] for k in ('diagnostics','unmatched','invalid','matched_players','roster_players')}
+                                    for side,(roster,report) in mapped.items()}}
     cutoff=aware(now).date();scenarios=[]
     for label,exclude_uncertain in (('listed_uncertain_players_available',False),('listed_uncertain_players_unavailable',True)):
         summaries={}

@@ -27,12 +27,23 @@ def parse_current_rosters(text,observed_at,source):
 def map_injury_statuses(payload,roster,observed_at):
     """Explicit espn: ID mapping; missing listings remain unknown."""
     now=aware(observed_at);ids=set(roster['player_ids']);statuses={};unmatched=0;invalid=0
+    diagnostics={'unknown_namespace':0,'missing_from_roster':0,'explicit_id_conflict':0}
     if payload.get('sport')!='basketball_nba' or payload.get('count')!=len(payload.get('players',[])):return None
     for row in payload['players']:
         try:
             if provider_team_code(row.get('team_abbr'),'NBA')!=roster['team']:continue
-            raw=str(row['player_id']);p=raw[5:] if raw.startswith('espn:') else ''
-            if p not in ids:unmatched+=1;continue
+            raw=str(row.get('player_id') or '')
+            explicit=str(row.get('espn_athlete_id') or '').strip()
+            prefixed=raw[5:] if raw.startswith('espn:') and raw[5:].isdigit() else ''
+            if explicit and not explicit.isdigit():
+                diagnostics['explicit_id_conflict']+=1;invalid+=1;continue
+            if explicit and prefixed and explicit!=prefixed:
+                diagnostics['explicit_id_conflict']+=1;invalid+=1;continue
+            p=explicit or prefixed
+            if not p:
+                diagnostics['unknown_namespace']+=1;unmatched+=1;continue
+            if p not in ids:
+                diagnostics['missing_from_roster']+=1;unmatched+=1;continue
             status=row['status_code']
             stamps=[aware(v) for v in (row.get('source_updated_at'),row.get('status_since')) if v]
             if status not in STATUSES or not stamps or any(v>now for v in stamps):invalid+=1;continue
@@ -40,6 +51,7 @@ def map_injury_statuses(payload,roster,observed_at):
             statuses[p]=status
         except (KeyError,TypeError,ValueError):invalid+=1
     return {'observed_at':observed_at,'players':statuses,'unmatched':unmatched,'invalid':invalid,
+            'diagnostics':diagnostics,'matched_players':len(statuses),'roster_players':len(ids),
             'complete':False,'identity_mapping_valid':not (unmatched or invalid),
             'missing_listing_means_healthy':False,
             'note':'matching succeeded only for explicit source IDs; full availability coverage unverified'}

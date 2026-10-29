@@ -1,6 +1,6 @@
 # NBA trained-model inference verification
 
-Run: 2026-10-29T14:45:49.060254+00:00. Status: research_forecasts_recorded.
+Run: 2026-10-29T14:57:37.641647+00:00. Status: research_forecasts_recorded.
 Actual scheduled games and trained efficiency logistic artifact. Research outputs only; not the public pick list. No injury adjustment or validated future accuracy is claimed.
 
 | Game | Home probability | Away probability | Availability scenario status |
@@ -62,3 +62,31 @@ Actual scheduled games and trained efficiency logistic artifact. Research output
 | ORL at PHX | 0.5954 | 0.4046 | conditional_research_only |
 
 Each saved forecast carries model/input hashes, model and input observation times, missing inputs and uncertainty. Source freshness is limited to the archived assets. No unseen player/lineup data is manufactured.
+
+## Implementation acceptance
+
+Status: passed; today’s games checked: 3.
+This verifies model inference and conditional injury integration. It does not establish causal injury impacts, confirmed lineups, predictive interval coverage, wagering permissions, profitability or production promotion.
+
+- PASS: today_has_forecasts
+- PASS: nba:2026-10-29:CLE:ATL:probabilities
+- PASS: nba:2026-10-29:CLE:ATL:pregame
+- PASS: nba:2026-10-29:CLE:ATL:provenance
+- PASS: nba:2026-10-29:CLE:ATL:missingness_and_uncertainty
+- PASS: nba:2026-10-29:CLE:ATL:live_roster_injury_join
+- PASS: nba:2026-10-29:CLE:ATL:scenario_reproducibility
+- PASS: nba:2026-10-29:CLE:ATL:scenario_probabilities
+- PASS: nba:2026-10-29:MEM:POR:probabilities
+- PASS: nba:2026-10-29:MEM:POR:pregame
+- PASS: nba:2026-10-29:MEM:POR:provenance
+- PASS: nba:2026-10-29:MEM:POR:missingness_and_uncertainty
+- PASS: nba:2026-10-29:MEM:POR:live_roster_injury_join
+- PASS: nba:2026-10-29:MEM:POR:scenario_reproducibility
+- PASS: nba:2026-10-29:MEM:POR:scenario_probabilities
+- PASS: nba:2026-10-29:SAC:NOP:probabilities
+- PASS: nba:2026-10-29:SAC:NOP:pregame
+- PASS: nba:2026-10-29:SAC:NOP:provenance
+- PASS: nba:2026-10-29:SAC:NOP:missingness_and_uncertainty
+- PASS: nba:2026-10-29:SAC:NOP:live_roster_injury_join
+- PASS: nba:2026-10-29:SAC:NOP:scenario_reproducibility
+- PASS: nba:2026-10-29:SAC:NOP:scenario_probabilities

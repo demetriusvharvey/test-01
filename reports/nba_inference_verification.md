@@ -1,6 +1,6 @@
 # NBA trained-model inference verification
 
-Run: 2026-10-29T20:10:17.256357+00:00. Status: research_forecasts_recorded.
+Run: 2026-10-29T20:16:09.043862+00:00. Status: research_forecasts_recorded.
 Actual scheduled games and trained efficiency logistic artifact. The baseline columns are team-only probabilities; availability ranges come from the separately trained rotation model. Conditional ranges are sensitivity checks, not confidence intervals or weighted predictions. These outputs do not replace public picks.
 
 | Game | Baseline home probability | Baseline away probability | Availability status | Scenarios | Conditional home range | Consistent winner |

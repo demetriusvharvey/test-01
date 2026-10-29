@@ -1,6 +1,6 @@
 # NBA chronological statistical ensemble
 
-Run: 2026-10-29T20:10:16.787601+00:00. H024 was registered after inspecting H023.
+Run: 2026-10-29T20:16:08.632044+00:00. H024 was registered after inspecting H023.
 Weights are learned from earlier held-out component predictions only. All test comparisons use identical games. The previously inspected archive is exploratory, not independent confirmation.
 
 | Season | Games | Ensemble Brier | Elo Brier | Ensemble log loss | Elo log loss | Earlier-selected component | Raw p | Joint BH p |

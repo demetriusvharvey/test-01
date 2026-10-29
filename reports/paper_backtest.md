@@ -1,6 +1,6 @@
 # Prospective paper replay
 
-Run 2026-10-29T20:11:19.226736+00:00. This is a chronological replay of frozen model-first paper picks, not actual wagers.
+Run 2026-10-29T20:17:40.341399+00:00. This is a chronological replay of frozen model-first paper picks, not actual wagers.
 The preregistered scenario uses 100 units, at most 1 unit per pick, 3 units per local game day and a 2% haircut to the quoted net winning payout. Limits, slippage and fills are hypothetical.
 
 | League | Archived selections | Rights-qualified | Settled / pending | Model / same-book Brier | Paired log loss difference | Paper ROI (95% interval) | Certified sharp CLV (n) | Maximum drawdown |

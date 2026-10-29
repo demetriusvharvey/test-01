@@ -69,7 +69,7 @@ jobs:
         run: |
           git -C .data-store config user.name 'github-actions[bot]'
           git -C .data-store config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git -C .data-store add observations/pattern_tests observations/model_registry.sqlite observations/challenger_tests.sqlite observations/paper_replay.sqlite observations/trust_trials.sqlite observations/nba_statistical observations/nba_rotation observations/backfill/nba_player_boxscores
+          git -C .data-store add observations/pattern_tests observations/model_registry.sqlite observations/challenger_tests.sqlite observations/paper_replay.sqlite observations/trust_trials.sqlite observations/nba_statistical observations/nba_rotation observations/backfill/nba_player_boxscores observations/backfill/nba_roster_snapshots
           if ! git -C .data-store diff --cached --quiet; then
             git -C .data-store commit -m 'Record weekly shadow research'
             git -C .data-store pull --rebase origin data/observations

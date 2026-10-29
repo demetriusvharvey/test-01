@@ -15,6 +15,9 @@ from scripts.research_nba_boosting import evaluate
 def main():
     ap=argparse.ArgumentParser();ap.add_argument('--data-root',required=True);ap.add_argument('--output',required=True)
     args=ap.parse_args();base=Path(args.data_root)/'observations/backfill';specs=[]
+    specs.append({'dataset':'nba_roster_snapshots','season':'2027',
+                  'url':'https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_rosters/rosters_2027.csv',
+                  'license':'CC-BY-4.0; upstream use review required','attribution':'SportsDataverse hoopR NBA, ESPN source; current capture only'})
     for year in range(2023,2028):
         if year<2027 and (base/'nba_player_boxscores'/f'{year}.sqlite').exists():continue
         specs.append({'dataset':'nba_player_boxscores','season':str(year),
@@ -42,9 +45,19 @@ def main():
         if baseline and candidate:results.append({'season':season,'without_rotation':baseline,'with_rotation':candidate})
     artifact=Path(args.data_root)/'observations/nba_rotation';artifact.mkdir(parents=True,exist_ok=True)
     (artifact/'evaluation.json').write_text(json.dumps({'sources':provenance,'failures':failures,'results':results},indent=2))
+    roster_path=base/'nba_roster_snapshots/2027.sqlite';roster_info=None
+    if roster_path.exists():
+        with sqlite3.connect(roster_path) as db:
+            record=db.execute('SELECT source_url,sha256,retrieved_at,columns_json,row_count FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
+        if record:
+            roster_info={'url':record[0],'sha256':record[1],'observed_at':record[2],
+                         'columns':json.loads(record[3]),'rows':record[4],
+                         'identity_crosswalk_verified':False}
+            (artifact/'current_roster_source.json').write_text(json.dumps(roster_info,indent=2))
     lines=['# NBA player rotation research','',
            'Free SportsDataverse player box imports. Projections use only earlier appearances; membership is inferred, not a verified pregame roster. Historical injuries, trades before first appearance and confirmed lineups remain unknown. No public pick is changed.','',
-           f'Parsed player rows: {len(players)}. Rotation-covered games: {len(rotation)}. Matched modeling examples: {len(matched)}. Source failures: {len(failures)}.','',
+           f'Parsed player rows: {len(players)}. Rotation-covered games: {len(rotation)}. Matched modeling examples: {len(matched)}. Source failures: {len(failures)}.',
+           f"Current roster snapshot: {roster_info['rows'] if roster_info else 0} source rows; player-ID crosswalk not yet verified.",'',
            '| Season | Games | Baseline logistic Brier | Rotation logistic Brier | Rotation accuracy |',
            '|---|---:|---:|---:|---:|']
     for r in results:

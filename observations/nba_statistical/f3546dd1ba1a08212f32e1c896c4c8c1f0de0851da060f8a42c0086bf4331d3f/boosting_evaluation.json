@@ -1,0 +1,175 @@
+{
+  "features": [
+    "elo_difference",
+    "scoring_difference",
+    "allowed_difference",
+    "win_rate_difference",
+    "rest_difference",
+    "home_court",
+    "off_rating_est",
+    "def_rating_est",
+    "effective_fg_pct",
+    "pace_proxy",
+    "turnover_rate",
+    "rebound_rate",
+    "free_throw_rate",
+    "three_point_pct"
+  ],
+  "sources": [
+    {
+      "url": "https://boxscorelab.com/downloads/2022-23-team-game-results.csv",
+      "sha256": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+      "retrieved_at": "2026-10-28T04:04:05.730265+00:00",
+      "parsed_games": 1230
+    },
+    {
+      "url": "https://boxscorelab.com/downloads/2023-24-team-game-results.csv",
+      "sha256": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+      "retrieved_at": "2026-10-28T04:04:05.850963+00:00",
+      "parsed_games": 1230
+    },
+    {
+      "url": "https://boxscorelab.com/downloads/2024-25-team-game-results.csv",
+      "sha256": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+      "retrieved_at": "2026-10-28T04:04:06.000392+00:00",
+      "parsed_games": 1225
+    },
+    {
+      "url": "https://boxscorelab.com/downloads/2025-26-team-game-results.csv",
+      "sha256": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+      "retrieved_at": "2026-10-28T04:04:06.133243+00:00",
+      "parsed_games": 1225
+    },
+    {
+      "url": "https://boxscorelab.com/downloads/2026-27-team-game-results.csv",
+      "sha256": "4a3b5337bb72d910289d77cb731317399a992105d84241424972b68015846c6b",
+      "retrieved_at": "2026-10-28T04:04:06.242851+00:00",
+      "parsed_games": 52
+    },
+    {
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv",
+      "sha256": "5357a754c00d97c448ba366226b024afb96afbae980a88f0c1a188c456b8033d",
+      "retrieved_at": "2026-10-28T04:03:50.008929+00:00",
+      "parsed_games": 4470
+    }
+  ],
+  "results": [
+    {
+      "test_season": "2024-25",
+      "training_games": 1073,
+      "calibration_games": 1230,
+      "elo": {
+        "games": 1225,
+        "accuracy": 0.6595918367346939,
+        "brier": 0.21386880947359882,
+        "log_loss": 0.6154385240967701
+      },
+      "logistic": {
+        "raw": {
+          "games": 1225,
+          "accuracy": 0.6693877551020408,
+          "brier": 0.21096007303875408,
+          "log_loss": 0.6090002945933812
+        },
+        "calibrated": {
+          "games": 1225,
+          "accuracy": 0.6726530612244898,
+          "brier": 0.21038774799852206,
+          "log_loss": 0.6076530986923636
+        }
+      },
+      "boosting": {
+        "raw": {
+          "games": 1225,
+          "accuracy": 0.6383673469387755,
+          "brier": 0.2261038758822835,
+          "log_loss": 0.6472451432861462
+        },
+        "calibrated": {
+          "games": 1225,
+          "accuracy": 0.6424489795918368,
+          "brier": 0.22372892597977434,
+          "log_loss": 0.63943192193418
+        }
+      }
+    },
+    {
+      "test_season": "2025-26",
+      "training_games": 2303,
+      "calibration_games": 1225,
+      "elo": {
+        "games": 1225,
+        "accuracy": 0.6775510204081633,
+        "brier": 0.20923149737528227,
+        "log_loss": 0.6068910155920766
+      },
+      "logistic": {
+        "raw": {
+          "games": 1225,
+          "accuracy": 0.6857142857142857,
+          "brier": 0.2074614180899366,
+          "log_loss": 0.6031012897415949
+        },
+        "calibrated": {
+          "games": 1225,
+          "accuracy": 0.6824489795918367,
+          "brier": 0.20771885940064028,
+          "log_loss": 0.6033714106657035
+        }
+      },
+      "boosting": {
+        "raw": {
+          "games": 1225,
+          "accuracy": 0.6644897959183673,
+          "brier": 0.2124990974203399,
+          "log_loss": 0.6166738794881337
+        },
+        "calibrated": {
+          "games": 1225,
+          "accuracy": 0.6644897959183673,
+          "brier": 0.2125985738862501,
+          "log_loss": 0.6151346397160391
+        }
+      }
+    },
+    {
+      "test_season": "2026-27",
+      "training_games": 3528,
+      "calibration_games": 1225,
+      "elo": {
+        "games": 52,
+        "accuracy": 0.5769230769230769,
+        "brier": 0.2109914620521547,
+        "log_loss": 0.607190732727432
+      },
+      "logistic": {
+        "raw": {
+          "games": 52,
+          "accuracy": 0.6153846153846154,
+          "brier": 0.21830531218151078,
+          "log_loss": 0.6203424731033157
+        },
+        "calibrated": {
+          "games": 52,
+          "accuracy": 0.6153846153846154,
+          "brier": 0.218621028789214,
+          "log_loss": 0.6211470984254266
+        }
+      },
+      "boosting": {
+        "raw": {
+          "games": 52,
+          "accuracy": 0.6346153846153846,
+          "brier": 0.22372651309969704,
+          "log_loss": 0.6330439037631233
+        },
+        "calibrated": {
+          "games": 52,
+          "accuracy": 0.6346153846153846,
+          "brier": 0.22258378448802632,
+          "log_loss": 0.632722228061355
+        }
+      }
+    }
+  ]
+}

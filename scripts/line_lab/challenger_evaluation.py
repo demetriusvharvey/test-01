@@ -48,6 +48,15 @@ def read_inputs(root,as_of=None):
         nba_ids={row['game_id'] for row in baselines if row.get('league')=='NBA'}
         outcomes={key:value for key,value in outcomes.items() if key in nba_ids}
         outcomes.update(confirmed)
+    if as_of is not None:
+        from .slate_archive import read_slate_inputs
+        independent,independent_outcomes=read_slate_inputs(root,as_of)
+        baselines.extend(independent)
+        for key,value in independent_outcomes.items():
+            prior=outcomes.get(key)
+            if prior and (prior['home'],prior['away'],prior['home_score'],prior['away_score'])!=(value['home'],value['away'],value['home_score'],value['away_score']):
+                outcomes.pop(key,None)
+            else:outcomes[key]=value
     return baselines,candidates,trials,outcomes
 
 

@@ -321,6 +321,13 @@ def main():
                 if features:slate_injuries[game['id']]=features
             print('Independent slate archive:',json.dumps(archive_slate(
                 data_root,scheduled,models,finals,now.isoformat(),blocked,slate_injuries),sort_keys=True))
+            slate_events={}
+            for game in scheduled:
+                if game['league'] in blocked or (game['league']=='NFL' and 'neutral' not in game):continue
+                _,_,away,home=game['id'].split(':')
+                slate_events[game['id']]={**game,'home':home,'away':away}
+            print('Independent slate challengers:',record_challenger_forecasts(
+                data_root,slate_events,models,now.isoformat(),position_contexts=slate_injuries))
         except Exception as exc:errors.append('Independent slate archive unavailable ('+type(exc).__name__+')')
     # Prices within 20 minutes of start are still useful as labeled snapshots
     # on the game slate, but the selection market keeps its stricter cutoff.

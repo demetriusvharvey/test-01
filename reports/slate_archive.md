@@ -15,6 +15,14 @@ games to the public selected-winner record. Missing history and unconfirmed
 NFL venues are rejected; missing injury features remain null. Injury effects
 are still not included in the current public Elo probability.
 
+The archive also feeds pure statistical-model training and paired challenger
+evaluation. Future challenger predictions are recorded for eligible scheduled
+games without odds. Saved game counts support the existing logistic/boosting
+features. An integrity fixture verifies an unpriced NFL game from frozen
+inputs through a later confirmed final and matched-time challenger Brier
+comparison. Conflicting observed outcomes are excluded. This does not
+establish a successful model or authorize its promotion.
+
 152 local tests passed, including unpriced-game persistence, duplicate
 idempotence, immutable storage, confirmed-outcome joins and blocked history.
 The complete master specification remains open for player-level replacement

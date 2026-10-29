@@ -54,6 +54,8 @@ def archive_slate(root,games,models,finals,now,blocked=(),injury_features=None):
                           'source_hashes':model['source_hashes'],
                           'injury_features':(injury_features or {}).get(game['id']),
                           'injuries_used_in_probability':False}
+                snapshot['inputs']['home_games']=model.get('games_played',{}).get(home)
+                snapshot['inputs']['away_games']=model.get('games_played',{}).get(away)
                 content=json.dumps(snapshot,sort_keys=True,separators=(',',':'))
                 key=hashlib.sha256((game['id']+'|'+current.isoformat()+'|'+content).encode()).hexdigest()
                 added+=db.execute('INSERT OR IGNORE INTO slate_forecasts VALUES (?,?,?,?,?,?,?,?,?)',
@@ -69,3 +71,27 @@ def archive_slate(root,games,models,finals,now,blocked=(),injury_features=None):
                     (final['id'],current.isoformat(),final['home'],final['away'],*scores,final['source'])).rowcount
             except (KeyError,TypeError,ValueError):continue
     return {'forecasts_added':added,'outcomes_added':graded}
+
+
+def read_slate_inputs(root,as_of):
+    """Adapt independent frozen inputs to the paired challenger evaluator."""
+    path=Path(root)/'observations'/'slate_archive.sqlite'
+    if not path.exists():return [],{}
+    cutoff=aware(as_of);forecasts=[];outcomes={}
+    with closing(sqlite3.connect(path)) as db:
+        db.row_factory=sqlite3.Row
+        for row in db.execute('SELECT * FROM slate_forecasts'):
+            try:
+                r=dict(row)
+                if aware(r['captured_at'])>cutoff:continue
+                snapshot=json.loads(r['snapshot']);features=snapshot['inputs']
+                features={**features,'shadow_context':{'nfl_position_status':snapshot.get('injury_features')}}
+                forecasts.append({**r,'pure_probability':r['probability'],
+                                  'feature_snapshot':json.dumps(features,sort_keys=True)})
+            except (KeyError,TypeError,ValueError):continue
+        for row in db.execute('SELECT * FROM slate_outcomes'):
+            try:
+                r=dict(row)
+                if aware(r['observed_at'])<=cutoff and r['source']=='nflverse':outcomes[r['game_id']]=r
+            except (KeyError,TypeError,ValueError):continue
+    return forecasts,outcomes

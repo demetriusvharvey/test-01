@@ -24,6 +24,14 @@ def load_training_rows(root,as_of=None):
         with closing(sqlite3.connect(path)) as db:
             db.row_factory=sqlite3.Row;outcomes={r['game_id']:dict(r) for r in db.execute('SELECT * FROM outcomes')}
     confirmed=corroborated_nfl_outcomes(root,as_of or datetime.now(timezone.utc).isoformat())
+    from scripts.line_lab.slate_archive import read_slate_inputs
+    independent,independent_outcomes=read_slate_inputs(root,as_of or datetime.now(timezone.utc).isoformat())
+    forecasts.extend(independent)
+    for key,value in independent_outcomes.items():
+        prior=confirmed.get(key)
+        if prior and (prior['home_score'],prior['away_score'])!=(value['home_score'],value['away_score']):
+            confirmed.pop(key,None)
+        else:confirmed[key]=value
     rows=[]
     for forecast in forecasts:
         out=confirmed.get(forecast['game_id']) if forecast['league']=='NFL' else outcomes.get(forecast['game_id'])

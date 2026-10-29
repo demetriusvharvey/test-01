@@ -55,9 +55,22 @@
   ],
   "results": [
     {
+      "model_version": "nba-efficiency-sklearn-v1",
       "test_season": "2024-25",
+      "training_seasons": [
+        "2022-23"
+      ],
+      "calibration_season": "2023-24",
       "training_games": 1073,
       "calibration_games": 1230,
+      "missing_inputs": [
+        "player impacts",
+        "injuries",
+        "projected lineups",
+        "travel"
+      ],
+      "promoted": false,
+      "uncertainty": "predictive intervals not established",
       "elo": {
         "games": 1225,
         "accuracy": 0.6595918367346939,
@@ -94,9 +107,23 @@
       }
     },
     {
+      "model_version": "nba-efficiency-sklearn-v1",
       "test_season": "2025-26",
+      "training_seasons": [
+        "2022-23",
+        "2023-24"
+      ],
+      "calibration_season": "2024-25",
       "training_games": 2303,
       "calibration_games": 1225,
+      "missing_inputs": [
+        "player impacts",
+        "injuries",
+        "projected lineups",
+        "travel"
+      ],
+      "promoted": false,
+      "uncertainty": "predictive intervals not established",
       "elo": {
         "games": 1225,
         "accuracy": 0.6775510204081633,
@@ -133,9 +160,24 @@
       }
     },
     {
+      "model_version": "nba-efficiency-sklearn-v1",
       "test_season": "2026-27",
+      "training_seasons": [
+        "2022-23",
+        "2023-24",
+        "2024-25"
+      ],
+      "calibration_season": "2025-26",
       "training_games": 3528,
       "calibration_games": 1225,
+      "missing_inputs": [
+        "player impacts",
+        "injuries",
+        "projected lineups",
+        "travel"
+      ],
+      "promoted": false,
+      "uncertainty": "predictive intervals not established",
       "elo": {
         "games": 52,
         "accuracy": 0.5769230769230769,

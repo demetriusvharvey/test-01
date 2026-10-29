@@ -1,5 +1,5 @@
 {
-  "evaluated_at": "2026-10-29T19:05:55.461184+00:00",
+  "evaluated_at": "2026-10-29T19:10:57.185117+00:00",
   "invalid_forecasts": 500,
   "models": {
     "nba-efficiency-logistic-v1": {
@@ -25,11 +25,33 @@
       "status": "awaiting_confirmed_finals"
     }
   },
+  "conditional_winner_records": {
+    "nba-player-box-logistic-v1": {
+      "wins": 0,
+      "losses": 0,
+      "pending": 55,
+      "abstained": 0,
+      "void": 0,
+      "excluded": 0,
+      "settled_predictions": 0,
+      "accuracy": null
+    },
+    "nba-rotation-logistic-v1": {
+      "wins": 0,
+      "losses": 0,
+      "pending": 55,
+      "abstained": 0,
+      "void": 0,
+      "excluded": 0,
+      "settled_predictions": 0,
+      "accuracy": null
+    }
+  },
   "promoted": false,
   "policy": "earliest eligible immutable forecast per game/version; identical paired Elo sample; confirmed finals only",
   "limitations": [
     "pipeline versions may contain retrained artifacts; not a fixed-artifact trial",
-    "conditional scenarios are not an unconditional calibrated prediction",
+    "conditional scenarios are not an unconditional calibrated prediction; only scenario-consistent winner accuracy is graded",
     "no causal player-effect validation, market comparison or profitability claim"
   ]
 }

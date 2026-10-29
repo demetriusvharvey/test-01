@@ -330,10 +330,15 @@ def main():
             print('Independent slate challengers:',record_challenger_forecasts(
                 data_root,slate_events,models,now.isoformat(),position_contexts=slate_injuries))
             if 'NBA' not in blocked:
-                ml=record_nba_predictions(data_root,games,scheduled,now.isoformat(),injury_payload,injury_observed_at)
+                ml_now=now.isoformat()
+                if (Path(data_root)/'observations/nba_statistical/current_candidate.json').exists():
+                    from .nba_refresh import refresh_current_sources
+                    print('NBA current inputs:',json.dumps(refresh_current_sources(data_root,now.isoformat()),sort_keys=True))
+                    ml_now=datetime.now(timezone.utc).isoformat()
+                ml=record_nba_predictions(data_root,games,scheduled,ml_now,injury_payload,injury_observed_at)
                 print('NBA ML inference:',ml['status'],'forecasts:',len(ml['predictions']))
                 from .nba_forward import evaluate_saved
-                forward=evaluate_saved(data_root,confirmed_finals,now.isoformat())
+                forward=evaluate_saved(data_root,confirmed_finals,ml_now)
                 print('NBA ML forward evaluation:',json.dumps(forward,sort_keys=True))
                 print('NBA availability scenario statuses:',json.dumps([
                     {'game_id':p['game_id'],'status':p.get('availability_scenarios',{}).get('status','model_unavailable')}

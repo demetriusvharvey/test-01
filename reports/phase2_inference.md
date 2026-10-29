@@ -23,8 +23,15 @@ a result. Archived older forecasts without a saved baseline are excluded.
 Results persist in observations/nba_ml_predictions/forward_evaluation.json and
 an immutable confirmed_outcomes.sqlite on the data branch.
 
-172 tests pass locally, including mixed injury scenarios, winner reversal,
+175 tests pass locally, including mixed injury scenarios, winner reversal,
 compute limits, first-forecast selection, paired metrics and idempotent grading.
+Current-season team statistics, player boxes and rosters now refresh inside
+the daily pipeline with a 12-hour success cache, a 3-hour failure backoff,
+bounded requests and schema checks. No completed season is redownloaded.
+Successful reobservations of unchanged roster content have separate immutable
+receipts; the original content archive is never rewritten. A failed refresh
+cannot make a stale roster look fresh.
+
 Public picks still use Elo. The new models have not earned promotion: recent
 retrospective performance did not consistently beat Elo, forward sample size
 is not yet established, and verified defensive/replacement effects are absent.

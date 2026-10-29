@@ -55,11 +55,15 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
             with sqlite3.connect(file) as db:
                 r=db.execute('SELECT content_gzip,retrieved_at FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
             if r and aware(r[1])<=current:players.extend(parse_players(gzip.decompress(r[0]).decode('utf-8-sig')))
-        file=Path(root)/'observations/backfill/nba_roster_snapshots/2027.sqlite'
+        roster_year=cutoff.year+int(cutoff.month>=8)
+        file=Path(root)/f'observations/backfill/nba_roster_snapshots/{roster_year}.sqlite'
         if file.exists():
             with sqlite3.connect(file) as db:
-                r=db.execute('SELECT content_gzip,retrieved_at,source_url FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
-            if r and aware(r[1])<=current:rosters=parse_current_rosters(gzip.decompress(r[0]).decode('utf-8-sig'),r[1],r[2])
+                r=db.execute('SELECT content_gzip,retrieved_at,source_url,sha256 FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
+            if r and aware(r[1])<=current:
+                from .nba_refresh import roster_observed_at
+                observed=roster_observed_at(root,r[2],r[3],r[1])
+                if aware(observed)<=current:rosters=parse_current_rosters(gzip.decompress(r[0]).decode('utf-8-sig'),observed,r[2])
     for row in rows:
         if row['game_id'] not in events:continue
         p=probability(model,row['vector']);event=events[row['game_id']]

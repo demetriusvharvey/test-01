@@ -13,7 +13,10 @@ from scripts.line_lab.nba_acceptance import check_predictions
 
 if __name__=='__main__':
     ap=argparse.ArgumentParser();ap.add_argument('--data-root',required=True);ap.add_argument('--output',required=True)
-    args=ap.parse_args();games,_=load_games(args.data_root)
+    args=ap.parse_args()
+    from scripts.line_lab.nba_refresh import refresh_current_sources
+    print('NBA current source refresh:',json.dumps(refresh_current_sources(args.data_root,datetime.now(timezone.utc).isoformat()),sort_keys=True))
+    games,_=load_games(args.data_root)
     board=json.loads(Path('dist/board.json').read_text());now=datetime.now(timezone.utc).isoformat()
     payload=None;observed=None
     key=os.environ.get('PROPLINE_API_KEY','').strip()

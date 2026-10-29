@@ -45,7 +45,7 @@ def map_injury_statuses(payload,roster,observed_at):
             'note':'matching succeeded only for explicit source IDs; full availability coverage unverified'}
 
 
-def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=()):
+def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=(),conditional=False):
     """Use explicit IDs from a captured roster and explicitly mapped statuses.
 
     The caller must resolve source IDs before calling. Questionable players
@@ -62,7 +62,8 @@ def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=()):
         excluded=set(unavailable)
         if not excluded<=set(ids):return None
         report_time=aware(statuses['observed_at'])
-        if not report_time<=now or now-report_time>timedelta(minutes=95) or statuses.get('complete') is not True:return None
+        if not report_time<=now or now-report_time>timedelta(minutes=95):return None
+        if statuses.get('complete') is not True and not (conditional and statuses.get('identity_mapping_valid') is True):return None
         reports=statuses['players']
         if any(p not in ids for p in reports):return None
         unresolved=[]
@@ -101,5 +102,6 @@ def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=()):
                 'injury_observed_at':report_time.isoformat(),'players':estimates,
                 'unavailable_players':sorted(excluded),'unresolved_players':sorted(unresolved),
                 'availability_scenario':'unresolved' if unresolved else 'specified',
+                'conditional_assumption':conditional,
                 'used_in_prediction':False,'limitations':'minutes redistribution proxy; no verified replacement impact or availability probabilities'}
     except (KeyError,TypeError,ValueError,OverflowError,ZeroDivisionError):return None

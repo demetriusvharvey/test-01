@@ -23,7 +23,7 @@ def probability(model,vector):
     return 1/(1+math.exp(-max(-35,min(35,calibrated))))
 
 
-def record_nba_predictions(root,games,scheduled,now):
+def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_observed_at=None):
     path=Path(root)/'observations/nba_statistical/current_candidate.json'
     if not path.exists():return {'status':'model_unavailable','predictions':[]}
     model=json.loads(path.read_text());current=aware(now);cutoff=current.astimezone(ET).date()
@@ -45,6 +45,21 @@ def record_nba_predictions(root,games,scheduled,now):
             stats.update(parse_team_stats(gzip.decompress(row[0]).decode('utf-8-sig')));source_times.append(row[1])
     combined=past+list(events.values())
     rows=enrich_examples(examples(combined),combined,stats);predictions=[]
+    rotation_model_path=Path(root)/'observations/nba_rotation/current_candidate.json'
+    rotation_model=json.loads(rotation_model_path.read_text()) if rotation_model_path.exists() else None
+    players=[];rosters={}
+    if rotation_model and injury_payload:
+        from .nba_rotation import parse_players
+        from .nba_lineup import parse_current_rosters
+        for file in sorted((Path(root)/'observations/backfill/nba_player_boxscores').glob('*.sqlite')):
+            with sqlite3.connect(file) as db:
+                r=db.execute('SELECT content_gzip,retrieved_at FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
+            if r and aware(r[1])<=current:players.extend(parse_players(gzip.decompress(r[0]).decode('utf-8-sig')))
+        file=Path(root)/'observations/backfill/nba_roster_snapshots/2027.sqlite'
+        if file.exists():
+            with sqlite3.connect(file) as db:
+                r=db.execute('SELECT content_gzip,retrieved_at,source_url FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
+            if r and aware(r[1])<=current:rosters=parse_current_rosters(gzip.decompress(r[0]).decode('utf-8-sig'),r[1],r[2])
     for row in rows:
         if row['game_id'] not in events:continue
         p=probability(model,row['vector']);event=events[row['game_id']]
@@ -55,6 +70,10 @@ def record_nba_predictions(root,games,scheduled,now):
             'features':dict(zip(model['features'],row['vector'])),'used_in_public_picks':False,
             'missing_inputs':['injury-adjusted lineup','replacement impact','travel'],
             'uncertainty':'retrospective calibration; predictive intervals and forward accuracy unestablished'})
+        if rotation_model:
+            from .nba_scenarios import conditional_forecasts
+            predictions[-1]['availability_scenarios']=conditional_forecasts(
+                rotation_model,row['vector'],event,players,rosters,injury_payload,injury_observed_at,now,probability)
     folder=Path(root)/'observations/nba_ml_predictions';folder.mkdir(parents=True,exist_ok=True)
     with sqlite3.connect(folder/(current.date().isoformat()+'.sqlite')) as db:
         db.executescript("""CREATE TABLE IF NOT EXISTS predictions (key TEXT PRIMARY KEY,payload TEXT NOT NULL);

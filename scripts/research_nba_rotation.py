@@ -7,7 +7,8 @@ from pathlib import Path
 from scripts.line_lab.backfill import fetch_and_archive
 from scripts.line_lab.nba_rotation import parse_players,rotation_features
 from scripts.line_lab.nba_efficiency import parse_team_stats,enrich_examples
-from scripts.line_lab.nba_statistical import examples
+from scripts.line_lab.nba_efficiency import METRICS
+from scripts.line_lab.nba_statistical import examples,FEATURES
 from scripts.research_simulator import load_games
 from scripts.research_nba_boosting import evaluate
 from scripts.line_lab.nba_lineup import parse_current_rosters
@@ -40,11 +41,16 @@ def main():
     rows=enrich_examples(examples(games),games,stats)
     matched=[r for r in rows if r['game_id'] in rotation]
     extended=[{**r,'vector':r['vector']+rotation[r['game_id']]['vector']} for r in matched]
+    artifact=Path(args.data_root)/'observations/nba_rotation';artifact.mkdir(parents=True,exist_ok=True)
+    names=list(FEATURES)+list(METRICS)+['rotation_scoring_difference','top_five_share_difference','experienced_share_difference']
     results=[]
     for season in sorted({r['season'] for r in matched})[2:]:
-        baseline=evaluate(matched,season);candidate=evaluate(extended,season)
+        baseline=evaluate(matched,season);candidate=evaluate(extended,season,artifact,names)
         if baseline and candidate:results.append({'season':season,'without_rotation':baseline,'with_rotation':candidate})
-    artifact=Path(args.data_root)/'observations/nba_rotation';artifact.mkdir(parents=True,exist_ok=True)
+    if results:
+        latest=sorted(r['season'] for r in results)[-1]
+        model=json.loads((artifact/latest/'logistic.json').read_text())
+        (artifact/'current_candidate.json').write_text(json.dumps(model,sort_keys=True))
     (artifact/'evaluation.json').write_text(json.dumps({'sources':provenance,'failures':failures,'results':results},indent=2))
     roster_path=base/'nba_roster_snapshots/2027.sqlite';roster_info=None
     if roster_path.exists():

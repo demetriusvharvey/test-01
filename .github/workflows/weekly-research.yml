@@ -52,6 +52,8 @@ jobs:
       - name: Run preregistered research
         env:
           PICKS_DATA_ROOT: ${{ github.workspace }}/.data-store
+          PROPLINE_API_KEY: ${{ secrets.PROPLINE_API_KEY }}
+          PROPLINE_ENABLED: ${{ vars.PROPLINE_ENABLED }}
         run: |
           python scripts/research_patterns.py --data-root "$PICKS_DATA_ROOT" --output PATTERN_REPORT.md
           python scripts/research_models.py --data-root "$PICKS_DATA_ROOT" --output reports/model_registry.md

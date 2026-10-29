@@ -330,8 +330,11 @@ def main():
             print('Independent slate challengers:',record_challenger_forecasts(
                 data_root,slate_events,models,now.isoformat(),position_contexts=slate_injuries))
             if 'NBA' not in blocked:
-                ml=record_nba_predictions(data_root,games,scheduled,now.isoformat())
+                ml=record_nba_predictions(data_root,games,scheduled,now.isoformat(),injury_payload,injury_observed_at)
                 print('NBA ML inference:',ml['status'],'forecasts:',len(ml['predictions']))
+                print('NBA availability scenario statuses:',json.dumps([
+                    {'game_id':p['game_id'],'status':p.get('availability_scenarios',{}).get('status','model_unavailable')}
+                    for p in ml['predictions']],sort_keys=True))
         except Exception as exc:errors.append('Independent slate archive unavailable ('+type(exc).__name__+')')
     # Prices within 20 minutes of start are still useful as labeled snapshots
     # on the game slate, but the selection market keeps its stricter cutoff.

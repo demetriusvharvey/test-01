@@ -414,5 +414,44 @@
     ],
     "observed_at": "2026-10-29T07:00:38.790539+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-29:Cleveland @ Atlanta",
+    "game_date": "2026-10-29",
+    "matchup": "Cleveland @ Atlanta",
+    "crew": [
+      "Justin Van Duyne (#64)",
+      "Jacyn Goble (#68)",
+      "Matt Kallio (#53)",
+      ""
+    ],
+    "observed_at": "2026-10-29T13:06:45.338647+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-29:Sacramento @ New Orleans",
+    "game_date": "2026-10-29",
+    "matchup": "Sacramento @ New Orleans",
+    "crew": [
+      "Josh Tiven (#58)",
+      "Gediminas Petraitis (#50)",
+      "Chelisa Painter (#79)",
+      ""
+    ],
+    "observed_at": "2026-10-29T13:06:45.338647+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-29:Memphis @ Portland",
+    "game_date": "2026-10-29",
+    "matchup": "Memphis @ Portland",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Kevin Cutler (#34)",
+      "Catherine Chang (#83)",
+      ""
+    ],
+    "observed_at": "2026-10-29T13:06:45.338647+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

@@ -6,6 +6,8 @@ on:
     paths:
       - scripts/research_models.py
       - scripts/research_player_impact.py
+      - scripts/research_nba_statistical.py
+      - scripts/line_lab/nba_statistical.py
       - scripts/line_lab/player_impact.py
       - scripts/evaluate_challengers.py
       - scripts/backtest_shadow.py
@@ -46,6 +48,7 @@ jobs:
         run: |
           python scripts/research_patterns.py --data-root "$PICKS_DATA_ROOT" --output PATTERN_REPORT.md
           python scripts/research_models.py --data-root "$PICKS_DATA_ROOT" --output reports/model_registry.md
+          python -m scripts.research_nba_statistical --data-root "$PICKS_DATA_ROOT" --output reports/nba_statistical_validation.md
           python -m scripts.research_player_impact --data-root "$PICKS_DATA_ROOT" --output reports/player_training_status.md
           python scripts/evaluate_challengers.py --data-root "$PICKS_DATA_ROOT" --output reports/challenger_forward.md
           python scripts/backtest_shadow.py --data-root "$PICKS_DATA_ROOT" --output reports/paper_backtest.md
@@ -58,7 +61,7 @@ jobs:
         run: |
           git -C .data-store config user.name 'github-actions[bot]'
           git -C .data-store config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git -C .data-store add observations/pattern_tests observations/model_registry.sqlite observations/challenger_tests.sqlite observations/paper_replay.sqlite observations/trust_trials.sqlite
+          git -C .data-store add observations/pattern_tests observations/model_registry.sqlite observations/challenger_tests.sqlite observations/paper_replay.sqlite observations/trust_trials.sqlite observations/nba_statistical
           if ! git -C .data-store diff --cached --quiet; then
             git -C .data-store commit -m 'Record weekly shadow research'
             git -C .data-store pull --rebase origin data/observations
@@ -68,7 +71,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add PATTERN_REPORT.md reports/model_registry.md reports/player_training_status.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md reports/simulation_validation.md reports/simulator_source_schema.md reports/scoring_process_validation.md reports/winner_accuracy_replay.md
+          git add reports/nba_statistical_validation.md PATTERN_REPORT.md reports/model_registry.md reports/player_training_status.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md reports/simulation_validation.md reports/simulator_source_schema.md reports/scoring_process_validation.md reports/winner_accuracy_replay.md
           if ! git diff --cached --quiet; then
             git commit -m 'Update weekly research summaries'
             git pull --rebase origin main

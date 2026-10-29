@@ -68,16 +68,25 @@ def record_ranked(root,predictions,scheduled,now):
     with sqlite3.connect(folder/(day+'.sqlite')) as db:
         db.executescript('''CREATE TABLE IF NOT EXISTS decisions(key TEXT PRIMARY KEY,payload TEXT NOT NULL);
         CREATE TRIGGER IF NOT EXISTS nrd_no_update BEFORE UPDATE ON decisions BEGIN SELECT RAISE(ABORT,'immutable'); END;
-        CREATE TRIGGER IF NOT EXISTS nrd_no_delete BEFORE DELETE ON decisions BEGIN SELECT RAISE(ABORT,'immutable'); END;''')
+        CREATE TRIGGER IF NOT EXISTS nrd_no_delete BEFORE DELETE ON decisions BEGIN SELECT RAISE(ABORT,'immutable'); END;
+        CREATE TABLE IF NOT EXISTS attempts(key TEXT PRIMARY KEY,payload TEXT NOT NULL);
+        CREATE TRIGGER IF NOT EXISTS nra_no_update BEFORE UPDATE ON attempts BEGIN SELECT RAISE(ABORT,'immutable'); END;
+        CREATE TRIGGER IF NOT EXISTS nra_no_delete BEFORE DELETE ON attempts BEGIN SELECT RAISE(ABORT,'immutable'); END;''')
+        def audit(version,status,supported):
+            payload=json.dumps({'day':day,'model_version':version,'observed_at':now,'status':status,
+                                'eligible_games':len(eligible),'supported_games':supported},sort_keys=True)
+            db.execute('INSERT OR IGNORE INTO attempts VALUES (?,?)',(hashlib.sha256(payload.encode()).hexdigest(),payload))
         for version in MODELS:
             key=f'{day}:{version}:{POLICY}'
-            if db.execute('SELECT 1 FROM decisions WHERE key=?',(key,)).fetchone():continue
+            if db.execute('SELECT 1 FROM decisions WHERE key=?',(key,)).fetchone():
+                audit(version,'existing_frozen_decision',None);continue
             candidates=[]
             for game in sorted(eligible):
                 value=candidate(rows[game],version,current) if game in rows else None
-                if value is None:break
-                candidates.append(value)
-            if len(candidates)!=len(eligible):unavailable[version]='incomplete_model_or_schedule_coverage';continue
+                if value is not None:candidates.append(value)
+            if len(candidates)!=len(eligible):
+                unavailable[version]='incomplete_model_or_schedule_coverage'
+                audit(version,'source_unavailable',len(candidates));continue
             baseline=rank_winners([{'game_id':g,'home':rows[g]['home'],'away':rows[g]['away'],
                                    'home_probability':rows[g]['baseline_elo_probability']} for g in sorted(eligible)])
             baseline=[{**p,'starts_at':rows[p['game_id']]['starts_at'],'home':rows[p['game_id']]['home'],'away':rows[p['game_id']]['away']} for p in baseline]
@@ -86,6 +95,7 @@ def record_ranked(root,predictions,scheduled,now):
                     'picks':picks,'matched_elo_picks':baseline,'scenario_abstentions':sum(p['abstain'] for p in candidates),
                     'used_in_public_picks':False,'limitation':'scenario minimum is not a confidence bound; no availability weights or betting edge'}
             db.execute('INSERT INTO decisions VALUES (?,?)',(key,json.dumps(record,sort_keys=True)));added+=1
+            audit(version,'frozen',len(candidates))
     return {'status':'recorded' if added else 'unchanged_or_unavailable','added':added,'unavailable':unavailable}
 
 
@@ -94,9 +104,12 @@ def evaluate_ranked(root,now):
     source=Path(root)/'observations/nba_ml_predictions/confirmed_outcomes.sqlite';outcomes={}
     if source.exists():
         with sqlite3.connect(source) as db:outcomes={g:json.loads(p) for g,p in db.execute('SELECT game_id,payload FROM outcomes')}
-    records=[]
+    records=[];attempts=[]
     for path in sorted(folder.glob('????-??-??.sqlite')):
-        with sqlite3.connect(path) as db:records.extend(json.loads(r[0]) for r in db.execute('SELECT payload FROM decisions ORDER BY key'))
+        with sqlite3.connect(path) as db:
+            records.extend(json.loads(r[0]) for r in db.execute('SELECT payload FROM decisions ORDER BY key'))
+            if db.execute("SELECT 1 FROM sqlite_master WHERE type='table' AND name='attempts'").fetchone():
+                attempts.extend(json.loads(r[0]) for r in db.execute('SELECT payload FROM attempts ORDER BY key'))
     models={}
     def grade(picks):
         counts={'wins':0,'losses':0,'pending':0,'voids':0,'excluded':0}
@@ -117,7 +130,14 @@ def evaluate_ranked(root,now):
         group['decisions']+=1;group['scenario_abstentions']+=record['scenario_abstentions']
         group['picks'].extend(record['picks']);group['elo'].extend(record['matched_elo_picks'])
     for group in models.values():group['winner_record']=grade(group.pop('picks'));group['matched_elo_record']=grade(group.pop('elo'))
-    report={'evaluated_at':now,'policy_version':POLICY,'models':models,'public_record_changed':False,
+    coverage={}
+    for version in MODELS:
+        observed=[a for a in attempts if a['model_version']==version and aware(a['observed_at'])<=current]
+        days={a['day'] for a in observed};decided={r['day'] for r in records if r['model_version']==version and aware(r['frozen_at'])<=current}
+        coverage[version]={'audited_attempts':len(observed),'audited_days':len(days),'decision_days':len(decided),
+                           'audited_days_without_decision':len(days-decided),
+                           'unavailable_attempts':sum(a['status']=='source_unavailable' for a in observed)}
+    report={'evaluated_at':now,'data_coverage':coverage,'policy_version':POLICY,'models':models,'public_record_changed':False,
             'limitation':'first usable daily model snapshot; matched Elo at the same time; no wager or ROI record'}
     (folder/'evaluation.json').write_text(json.dumps(report,indent=2)+'\n')
     return report

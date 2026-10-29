@@ -28,11 +28,15 @@ class RankedForwardTests(unittest.TestCase):
         rows,slate,now=self.fixture()
         with tempfile.TemporaryDirectory() as root:
             self.assertEqual(record_ranked(root,rows[:-1],slate,now)['added'],0)
+            missing=evaluate_ranked(root,now)['data_coverage']['nba-efficiency-logistic-v1']
+            self.assertEqual(missing['audited_days_without_decision'],1)
+            self.assertEqual(missing['unavailable_attempts'],1)
             self.assertEqual(record_ranked(root,rows,slate,now)['added'],2)
             self.assertEqual(record_ranked(root,rows,slate,now)['added'],0)
             r=evaluate_ranked(root,now)
             self.assertEqual(r['models']['nba-rotation-logistic-v1']['winner_record']['pending'],3)
             self.assertEqual(r['models']['nba-rotation-logistic-v1']['scenario_abstentions'],1)
+            self.assertEqual(r['data_coverage']['nba-rotation-logistic-v1']['audited_days_without_decision'],0)
             self.assertIsNone(r['models']['nba-rotation-logistic-v1']['winner_record']['accuracy'])
             path=Path(root)/'observations/nba_ranked_forecasts/2026-10-29.sqlite'
             with sqlite3.connect(path) as db:

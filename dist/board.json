@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T21:49:35.114054+00:00",
+  "generated_at": "2026-10-29T21:51:42.515506+00:00",
   "model": "Pure team Elo winner ranking \u2014 probabilities not calibrated",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; PropLine scoreboard",
   "accuracy": {
@@ -96,14 +96,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": true,
         "pregame_readiness": {
           "status": "incomplete",
           "reason": "one or more team reports missing or invalid",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 248,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 246,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -266,14 +266,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 143,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 141,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -388,14 +388,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 128,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 126,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -498,42 +498,42 @@
           "home": -116,
           "away": -102,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.852985+00:00",
+          "fetched_at": "2026-10-29T21:51:40.384188+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -112,
           "away": -108,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -125,
           "away": 105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.558330+00:00",
+          "fetched_at": "2026-10-29T21:51:41.404733+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -112,
           "away": -108,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -583,14 +583,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 128,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 126,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -633,8 +633,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -661,42 +661,42 @@
           "home": -245,
           "away": 200,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.852985+00:00",
+          "fetched_at": "2026-10-29T21:51:40.384188+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -238,
           "away": 195,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -235,
           "away": 195,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -235,
           "away": 192,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.558330+00:00",
+          "fetched_at": "2026-10-29T21:51:41.404733+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -245,
           "away": 200,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -250,
           "away": 200,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -758,14 +758,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 128,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 126,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -808,8 +808,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -836,42 +836,42 @@
           "home": -198,
           "away": 166,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -180,
           "away": 150,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -200,
           "away": 165,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -197,
           "away": 165,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -981,14 +981,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 143,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 141,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -1031,8 +1031,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -1059,42 +1059,42 @@
           "home": -300,
           "away": 240,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.852985+00:00",
+          "fetched_at": "2026-10-29T21:51:40.384188+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -290,
           "away": 235,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -300,
           "away": 240,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -285,
           "away": 228,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.558330+00:00",
+          "fetched_at": "2026-10-29T21:51:41.404733+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -300,
           "away": 240,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -305,
           "away": 240,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -1137,14 +1137,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": true,
         "pregame_readiness": {
           "status": "incomplete",
           "reason": "one or more team reports missing or invalid",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 248,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 246,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -1188,7 +1188,7 @@
       "injury_change": {
         "status": "comparison_unavailable",
         "reason": "missing or incomplete injury report",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00"
+        "observed_at": "2026-10-29T21:51:42.461566+00:00"
       }
     },
     {
@@ -1202,28 +1202,28 @@
           "home": -105,
           "away": -115,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -105,
           "away": -115,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -105,
           "away": -115,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -103,
           "away": -118,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -1235,14 +1235,14 @@
               "out": 4,
               "questionable": 0,
               "doubtful": 0,
-              "other": 0
+              "other": 1
             },
             "positions": {
               "G": {
                 "out": 3,
                 "doubtful": 0,
                 "questionable": 0,
-                "other": 0
+                "other": 1
               },
               "F": {
                 "out": 1,
@@ -1279,14 +1279,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1518,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1516,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -1329,8 +1329,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -1357,28 +1357,28 @@
           "home": -850,
           "away": 575,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -900,
           "away": 600,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -850,
           "away": 575,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -835,
           "away": 550,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -1428,14 +1428,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1548,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1546,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -1478,8 +1478,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -1506,35 +1506,35 @@
           "home": 210,
           "away": -255,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.852985+00:00",
+          "fetched_at": "2026-10-29T21:51:40.384188+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 210,
           "away": -258,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 200,
           "away": -250,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 210,
           "away": -260,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 210,
           "away": -275,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -1590,14 +1590,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1548,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1546,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -1640,8 +1640,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -1668,35 +1668,35 @@
           "home": -112,
           "away": -104,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.852985+00:00",
+          "fetched_at": "2026-10-29T21:51:40.384188+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -109,
           "away": -112,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -1723,7 +1723,7 @@
           "home": {
             "team": "Philadelphia 76ers",
             "counts": {
-              "out": 3,
+              "out": 4,
               "questionable": 0,
               "doubtful": 0,
               "other": 1
@@ -1736,7 +1736,13 @@
                 "other": 0
               },
               "F": {
-                "out": 1,
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "G": {
+                "out": 0,
                 "doubtful": 0,
                 "questionable": 0,
                 "other": 1
@@ -1746,14 +1752,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1548,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1546,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -1795,12 +1801,12 @@
       "predicted_winner": "Philadelphia 76ers",
       "prediction_uncertain": true,
       "injury_change": {
-        "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "changed",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
-            "out": 0,
+            "out": 1,
             "doubtful": 0,
             "questionable": 0
           },
@@ -1824,35 +1830,35 @@
           "home": -205,
           "away": 172,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.852985+00:00",
+          "fetched_at": "2026-10-29T21:51:40.384188+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -192,
           "away": 160,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -200,
           "away": 165,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -220,
           "away": 175,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -1908,14 +1914,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1548,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1546,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -1958,8 +1964,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -1986,28 +1992,28 @@
           "home": 160,
           "away": -192,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 155,
           "away": -190,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 155,
           "away": -190,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 155,
           "away": -190,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -2063,14 +2069,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1578,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1576,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -2112,9 +2118,9 @@
       "predicted_winner": "Houston Rockets",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "unchanged",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -2122,7 +2128,7 @@
             "questionable": 0
           },
           "away": {
-            "out": 1,
+            "out": 0,
             "doubtful": 0,
             "questionable": 0
           }
@@ -2141,28 +2147,28 @@
           "home": -205,
           "away": 170,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -210,
           "away": 170,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -200,
           "away": 165,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -190,
           "away": 155,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -2212,14 +2218,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1578,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1576,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -2261,9 +2267,9 @@
       "predicted_winner": "Miami Heat",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "unchanged",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -2271,7 +2277,7 @@
             "questionable": 0
           },
           "away": {
-            "out": 1,
+            "out": 0,
             "doubtful": 0,
             "questionable": 0
           }
@@ -2290,28 +2296,28 @@
           "home": -245,
           "away": 200,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -250,
           "away": 200,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -245,
           "away": 200,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -240,
           "away": 190,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -2367,14 +2373,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1578,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1576,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -2417,8 +2423,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -2445,28 +2451,28 @@
           "home": 142,
           "away": -170,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 145,
           "away": -175,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 140,
           "away": -170,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 143,
           "away": -175,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -2522,14 +2528,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1698,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1696,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -2572,8 +2578,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -2600,35 +2606,35 @@
           "home": 104,
           "away": -122,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.852985+00:00",
+          "fetched_at": "2026-10-29T21:51:40.384188+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 105,
           "away": -125,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 105,
           "away": -125,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.277871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.137557+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 105,
           "away": -125,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.802545+00:00",
+          "fetched_at": "2026-10-29T21:51:41.677297+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 106,
           "away": -129,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -2690,14 +2696,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 1698,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 1696,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -2740,8 +2746,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -2822,14 +2828,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 2708,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 2706,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -2840,8 +2846,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -2869,7 +2875,7 @@
           "away": {
             "team": "Philadelphia 76ers",
             "counts": {
-              "out": 3,
+              "out": 4,
               "questionable": 0,
               "doubtful": 0,
               "other": 1
@@ -2882,7 +2888,13 @@
                 "other": 0
               },
               "F": {
-                "out": 1,
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "G": {
+                "out": 0,
                 "doubtful": 0,
                 "questionable": 0,
                 "other": 1
@@ -2896,14 +2908,14 @@
               "out": 4,
               "questionable": 0,
               "doubtful": 0,
-              "other": 0
+              "other": 1
             },
             "positions": {
               "G": {
                 "out": 3,
                 "doubtful": 0,
                 "questionable": 0,
-                "other": 0
+                "other": 1
               },
               "F": {
                 "out": 1,
@@ -2916,14 +2928,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 2888,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 2886,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -2933,9 +2945,9 @@
       "predicted_winner": "Charlotte Hornets",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "changed",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -2943,7 +2955,7 @@
             "questionable": 0
           },
           "away": {
-            "out": 0,
+            "out": 1,
             "doubtful": 0,
             "questionable": 0
           }
@@ -3010,14 +3022,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 2948,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 2946,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -3028,8 +3040,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -3085,14 +3097,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": true,
         "pregame_readiness": {
           "status": "incomplete",
           "reason": "one or more team reports missing or invalid",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 3008,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 3006,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -3104,7 +3116,7 @@
       "injury_change": {
         "status": "comparison_unavailable",
         "reason": "missing or incomplete injury report",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00"
+        "observed_at": "2026-10-29T21:51:42.461566+00:00"
       }
     },
     {
@@ -3154,14 +3166,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 3008,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 3006,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -3172,8 +3184,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -3241,14 +3253,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": true,
         "pregame_readiness": {
           "status": "incomplete",
           "reason": "one or more team reports missing or invalid",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 3008,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 3006,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -3260,7 +3272,7 @@
       "injury_change": {
         "status": "comparison_unavailable",
         "reason": "missing or incomplete injury report",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00"
+        "observed_at": "2026-10-29T21:51:42.461566+00:00"
       }
     },
     {
@@ -3322,14 +3334,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 3038,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 3036,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -3339,12 +3351,12 @@
       "predicted_winner": "Oklahoma City Thunder",
       "prediction_uncertain": true,
       "injury_change": {
-        "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "unchanged",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
-            "out": 1,
+            "out": 0,
             "doubtful": 0,
             "questionable": 0
           },
@@ -3368,42 +3380,42 @@
           "home": -335,
           "away": 270,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -310,
           "away": 250,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -300,
           "away": 260,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -320,
           "away": 250,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -320,
           "away": 250,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -360,
           "away": 265,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -3531,14 +3543,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4088,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4086,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -3581,8 +3593,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -3609,42 +3621,42 @@
           "home": -134,
           "away": 114,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -142,
           "away": 120,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -140,
           "away": 115,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -138,
           "away": 118,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -140,
           "away": 115,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -150,
           "away": 123,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -3742,14 +3754,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4088,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4086,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -3792,8 +3804,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -3820,42 +3832,42 @@
           "home": -168,
           "away": 142,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -170,
           "away": 142,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -165,
           "away": 138,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -173,
           "away": 145,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -175,
           "away": 140,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -3965,14 +3977,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4088,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4086,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -4015,8 +4027,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -4043,42 +4055,42 @@
           "home": -188,
           "away": 158,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -185,
           "away": 154,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -200,
           "away": 165,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -190,
           "away": 159,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -4176,14 +4188,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4088,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4086,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -4226,8 +4238,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -4254,42 +4266,42 @@
           "home": -510,
           "away": 390,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -485,
           "away": 370,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -525,
           "away": 400,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -480,
           "away": 360,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -500,
           "away": 370,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -500,
           "away": 375,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -4387,14 +4399,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4088,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4086,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -4437,8 +4449,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -4465,42 +4477,42 @@
           "home": -126,
           "away": 108,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -122,
           "away": 102,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -125,
           "away": 105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -121,
           "away": 103,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -125,
           "away": 105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -118,
           "away": -104,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -4604,14 +4616,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4088,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4086,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -4654,8 +4666,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -4682,42 +4694,42 @@
           "home": -172,
           "away": 144,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -170,
           "away": 142,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -179,
           "away": 151,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -180,
           "away": 150,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -175,
           "away": 140,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -4726,8 +4738,8 @@
           "away": {
             "team": "Minnesota Vikings",
             "counts": {
-              "out": 0,
-              "questionable": 2,
+              "out": 1,
+              "questionable": 3,
               "doubtful": 0,
               "other": 0
             },
@@ -4738,8 +4750,14 @@
                 "questionable": 1,
                 "other": 0
               },
-              "TE": {
+              "OT": {
                 "out": 0,
+                "doubtful": 0,
+                "questionable": 1,
+                "other": 0
+              },
+              "G": {
+                "out": 1,
                 "doubtful": 0,
                 "questionable": 1,
                 "other": 0
@@ -4791,14 +4809,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4088,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4086,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -4841,8 +4859,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -4850,9 +4868,9 @@
             "questionable": 0
           },
           "away": {
-            "out": -1,
+            "out": 1,
             "doubtful": 0,
-            "questionable": -1
+            "questionable": 1
           }
         },
         "limitations": "aggregate listing changes do not establish who will play"
@@ -4869,42 +4887,42 @@
           "home": -700,
           "away": 500,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -625,
           "away": 455,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -625,
           "away": 475,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -625,
           "away": 450,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -650,
           "away": 460,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -670,
           "away": 460,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -4984,14 +5002,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4088,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4086,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -5034,8 +5052,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -5104,14 +5122,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 4238,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 4236,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -5122,8 +5140,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -5150,42 +5168,42 @@
           "home": -300,
           "away": 245,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -278,
           "away": 225,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -295,
           "away": 240,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -295,
           "away": 235,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -300,
           "away": 240,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -315,
           "away": 245,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -5289,14 +5307,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4273,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4271,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -5339,8 +5357,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -5367,42 +5385,42 @@
           "home": 100,
           "away": -118,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -102,
           "away": -118,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 100,
           "away": -120,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 103,
           "away": -122,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 100,
           "away": -120,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 102,
           "away": -124,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -5506,14 +5524,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4293,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4291,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -5556,8 +5574,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -5584,42 +5602,42 @@
           "home": 250,
           "away": -310,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 260,
           "away": -325,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 260,
           "away": -325,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 265,
           "away": -335,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 260,
           "away": -330,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 275,
           "away": -375,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -5723,14 +5741,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4293,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4291,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -5773,8 +5791,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -5849,14 +5867,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 4328,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 4326,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -5866,12 +5884,12 @@
       "predicted_winner": "Indiana Pacers",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "unchanged",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
-            "out": 1,
+            "out": 0,
             "doubtful": 0,
             "questionable": 0
           },
@@ -5895,42 +5913,42 @@
           "home": -270,
           "away": 220,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -238,
           "away": 195,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -275,
           "away": 220,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -250,
           "away": 205,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -275,
           "away": 220,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -250,
           "away": 200,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -6022,14 +6040,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 4528,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 4526,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6072,8 +6090,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -6160,14 +6178,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 4538,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 4536,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6178,8 +6196,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -6254,14 +6272,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 4568,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 4566,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6272,8 +6290,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -6342,14 +6360,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5888,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5886,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6360,8 +6378,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -6436,14 +6454,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5918,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5916,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6453,12 +6471,12 @@
       "predicted_winner": "Atlanta Hawks",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "unchanged",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
-            "out": 1,
+            "out": 0,
             "doubtful": 0,
             "questionable": 0
           },
@@ -6524,14 +6542,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5918,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5916,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6542,8 +6560,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -6595,7 +6613,7 @@
           "home": {
             "team": "Philadelphia 76ers",
             "counts": {
-              "out": 3,
+              "out": 4,
               "questionable": 0,
               "doubtful": 0,
               "other": 1
@@ -6608,7 +6626,13 @@
                 "other": 0
               },
               "F": {
-                "out": 1,
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "G": {
+                "out": 0,
                 "doubtful": 0,
                 "questionable": 0,
                 "other": 1
@@ -6618,14 +6642,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5918,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5916,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6635,12 +6659,12 @@
       "predicted_winner": "Philadelphia 76ers",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "changed",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
-            "out": 0,
+            "out": 1,
             "doubtful": 0,
             "questionable": 0
           },
@@ -6692,14 +6716,14 @@
               "out": 4,
               "questionable": 0,
               "doubtful": 0,
-              "other": 0
+              "other": 1
             },
             "positions": {
               "G": {
                 "out": 3,
                 "doubtful": 0,
                 "questionable": 0,
-                "other": 0
+                "other": 1
               },
               "F": {
                 "out": 1,
@@ -6712,14 +6736,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5918,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5916,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6730,8 +6754,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -6806,14 +6830,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5918,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5916,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6824,8 +6848,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -6881,14 +6905,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": true,
         "pregame_readiness": {
           "status": "incomplete",
           "reason": "one or more team reports missing or invalid",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5948,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5946,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6900,7 +6924,7 @@
       "injury_change": {
         "status": "comparison_unavailable",
         "reason": "missing or incomplete injury report",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00"
+        "observed_at": "2026-10-29T21:51:42.461566+00:00"
       }
     },
     {
@@ -6949,14 +6973,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": true,
         "pregame_readiness": {
           "status": "incomplete",
           "reason": "one or more team reports missing or invalid",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5948,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5946,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -6968,7 +6992,7 @@
       "injury_change": {
         "status": "comparison_unavailable",
         "reason": "missing or incomplete injury report",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00"
+        "observed_at": "2026-10-29T21:51:42.461566+00:00"
       }
     },
     {
@@ -7036,14 +7060,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5948,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5946,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7054,8 +7078,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -7082,42 +7106,42 @@
           "home": -168,
           "away": 142,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -170,
           "away": 142,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.357263+00:00",
+          "fetched_at": "2026-10-29T21:51:41.243079+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -170,
           "away": 144,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.870003+00:00",
+          "fetched_at": "2026-10-29T21:51:41.758813+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -175,
           "away": 143,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -7209,14 +7233,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 5963,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 5961,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7259,8 +7283,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -7329,14 +7353,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5978,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5976,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7346,12 +7370,12 @@
       "predicted_winner": "Houston Rockets",
       "prediction_uncertain": true,
       "injury_change": {
-        "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "unchanged",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
-            "out": 1,
+            "out": 0,
             "doubtful": 0,
             "questionable": 0
           },
@@ -7423,14 +7447,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 5978,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 5976,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7441,8 +7465,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -7517,14 +7541,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 6008,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 6006,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7535,8 +7559,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -7605,14 +7629,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 6068,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 6066,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7623,8 +7647,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -7705,14 +7729,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 6068,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 6066,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7723,8 +7747,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -7805,14 +7829,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 6068,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 6066,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7823,8 +7847,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -7899,14 +7923,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8768,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8766,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -7917,8 +7941,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -7946,7 +7970,7 @@
           "away": {
             "team": "Philadelphia 76ers",
             "counts": {
-              "out": 3,
+              "out": 4,
               "questionable": 0,
               "doubtful": 0,
               "other": 1
@@ -7959,7 +7983,13 @@
                 "other": 0
               },
               "F": {
-                "out": 1,
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "G": {
+                "out": 0,
                 "doubtful": 0,
                 "questionable": 0,
                 "other": 1
@@ -7993,14 +8023,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8768,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8766,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8010,9 +8040,9 @@
       "predicted_winner": "Detroit Pistons",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "changed",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -8020,7 +8050,7 @@
             "questionable": 0
           },
           "away": {
-            "out": 0,
+            "out": 1,
             "doubtful": 0,
             "questionable": 0
           }
@@ -8043,14 +8073,14 @@
               "out": 4,
               "questionable": 0,
               "doubtful": 0,
-              "other": 0
+              "other": 1
             },
             "positions": {
               "G": {
                 "out": 3,
                 "doubtful": 0,
                 "questionable": 0,
-                "other": 0
+                "other": 1
               },
               "F": {
                 "out": 1,
@@ -8087,14 +8117,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8798,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8796,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8105,8 +8135,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -8175,14 +8205,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8798,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8796,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8193,8 +8223,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -8250,14 +8280,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": true,
         "pregame_readiness": {
           "status": "incomplete",
           "reason": "one or more team reports missing or invalid",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8798,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8796,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8269,7 +8299,7 @@
       "injury_change": {
         "status": "comparison_unavailable",
         "reason": "missing or incomplete injury report",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00"
+        "observed_at": "2026-10-29T21:51:42.461566+00:00"
       }
     },
     {
@@ -8325,14 +8355,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8828,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8826,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8343,8 +8373,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -8406,14 +8436,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": true,
         "pregame_readiness": {
           "status": "incomplete",
           "reason": "one or more team reports missing or invalid",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8828,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8826,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8425,7 +8455,7 @@
       "injury_change": {
         "status": "comparison_unavailable",
         "reason": "missing or incomplete injury report",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00"
+        "observed_at": "2026-10-29T21:51:42.461566+00:00"
       }
     },
     {
@@ -8493,14 +8523,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8828,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8826,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8511,8 +8541,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -8581,14 +8611,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8858,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8856,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8598,12 +8628,12 @@
       "predicted_winner": "Houston Rockets",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "unchanged",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
-            "out": 1,
+            "out": 0,
             "doubtful": 0,
             "questionable": 0
           },
@@ -8675,14 +8705,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8888,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8886,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8693,8 +8723,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -8769,14 +8799,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8888,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8886,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8787,8 +8817,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -8857,14 +8887,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8918,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8916,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8875,8 +8905,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -8957,14 +8987,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8948,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8946,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -8975,8 +9005,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -9051,14 +9081,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 8978,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 8976,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -9069,8 +9099,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -9097,28 +9127,28 @@
           "home": -154,
           "away": 130,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -155,
           "away": 130,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -154,
           "away": 130,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -159,
           "away": 130,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -9228,14 +9258,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 10283,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 10281,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -9278,8 +9308,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -9354,14 +9384,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 10328,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 10326,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -9372,8 +9402,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -9448,14 +9478,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 10388,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 10386,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -9466,8 +9496,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -9494,28 +9524,28 @@
           "home": 142,
           "away": -168,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 142,
           "away": -170,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 144,
           "away": -170,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 140,
           "away": -175,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -9601,14 +9631,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 13958,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 13956,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -9651,8 +9681,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -9679,28 +9709,28 @@
           "home": -148,
           "away": 126,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -135,
           "away": 114,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -141,
           "away": 119,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -150,
           "away": 123,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -9804,14 +9834,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14168,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14166,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -9854,8 +9884,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -9882,28 +9912,28 @@
           "home": 180,
           "away": -215,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 190,
           "away": -230,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 181,
           "away": -218,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 170,
           "away": -215,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -9995,14 +10025,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14168,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14166,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -10045,8 +10075,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -10073,28 +10103,28 @@
           "home": 118,
           "away": -138,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 114,
           "away": -135,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 114,
           "away": -134,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 114,
           "away": -137,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -10192,14 +10222,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14168,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14166,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -10242,8 +10272,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -10270,28 +10300,28 @@
           "home": 350,
           "away": -450,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 320,
           "away": -410,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 305,
           "away": -390,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 350,
           "away": -480,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -10389,14 +10419,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14168,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14166,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -10439,8 +10469,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -10467,28 +10497,28 @@
           "home": 180,
           "away": -215,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 195,
           "away": -238,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 185,
           "away": -225,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 190,
           "away": -240,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -10592,14 +10622,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14168,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14166,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -10642,8 +10672,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -10670,28 +10700,28 @@
           "home": -102,
           "away": -116,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 102,
           "away": -122,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 101,
           "away": -118,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -105,
           "away": -117,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -10789,14 +10819,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14168,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14166,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -10839,8 +10869,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -10867,28 +10897,28 @@
           "home": -520,
           "away": 400,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -500,
           "away": 380,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -560,
           "away": 400,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -560,
           "away": 405,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -10992,14 +11022,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14168,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14166,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -11042,8 +11072,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -11070,28 +11100,28 @@
           "home": 152,
           "away": -180,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 154,
           "away": -185,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 155,
           "away": -190,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 140,
           "away": -177,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -11177,14 +11207,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14353,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14351,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -11227,8 +11257,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -11255,28 +11285,28 @@
           "home": -560,
           "away": 420,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -535,
           "away": 400,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -560,
           "away": 400,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -590,
           "away": 425,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -11380,14 +11410,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14353,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14351,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -11430,8 +11460,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -11458,28 +11488,28 @@
           "home": -800,
           "away": 560,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -650,
           "away": 470,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -750,
           "away": 500,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -910,
           "away": 600,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -11601,14 +11631,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14373,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14371,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -11651,8 +11681,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -11679,28 +11709,28 @@
           "home": -154,
           "away": 130,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -170,
           "away": 142,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -152,
           "away": 125,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -11816,14 +11846,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14373,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14371,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -11866,8 +11896,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -11894,28 +11924,28 @@
           "home": -310,
           "away": 250,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -265,
           "away": 215,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -280,
           "away": 225,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -305,
           "away": 240,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -12007,14 +12037,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 14608,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 14606,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -12057,8 +12087,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -12085,28 +12115,28 @@
           "home": 118,
           "away": -138,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:32.930768+00:00",
+          "fetched_at": "2026-10-29T21:51:40.463683+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 120,
           "away": -142,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.157476+00:00",
+          "fetched_at": "2026-10-29T21:51:41.028104+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 118,
           "away": -139,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.707459+00:00",
+          "fetched_at": "2026-10-29T21:51:41.588377+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 117,
           "away": -141,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.210871+00:00",
+          "fetched_at": "2026-10-29T21:51:41.896455+00:00",
           "provider": "agentbets"
         }
       },
@@ -12169,8 +12199,8 @@
           "home": {
             "team": "Minnesota Vikings",
             "counts": {
-              "out": 0,
-              "questionable": 2,
+              "out": 1,
+              "questionable": 3,
               "doubtful": 0,
               "other": 0
             },
@@ -12181,8 +12211,14 @@
                 "questionable": 1,
                 "other": 0
               },
-              "TE": {
+              "OT": {
                 "out": 0,
+                "doubtful": 0,
+                "questionable": 1,
+                "other": 0
+              },
+              "G": {
+                "out": 1,
                 "doubtful": 0,
                 "questionable": 1,
                 "other": 0
@@ -12192,14 +12228,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.113025+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.262001+00:00",
-          "minutes_until_start": 16043,
+          "checked_at": "2026-10-29T21:51:42.514524+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.176250+00:00",
+          "minutes_until_start": 16041,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -12242,13 +12278,13 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "changed",
-        "observed_at": "2026-10-29T21:49:35.113025+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.204339+00:00",
+        "observed_at": "2026-10-29T21:51:42.514524+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.113025+00:00",
         "count_differences": {
           "home": {
-            "out": -1,
+            "out": 1,
             "doubtful": 0,
-            "questionable": -1
+            "questionable": 1
           },
           "away": {
             "out": 0,
@@ -12270,21 +12306,21 @@
           "home": -105,
           "away": -115,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.558330+00:00",
+          "fetched_at": "2026-10-29T21:51:41.404733+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -12328,14 +12364,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 81798,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 81796,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -12378,8 +12414,8 @@
       "prediction_uncertain": true,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -12406,21 +12442,21 @@
           "home": -218,
           "away": 180,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -190,
           "away": 158,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.558330+00:00",
+          "fetched_at": "2026-10-29T21:51:41.404733+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -190,
           "away": 155,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -12464,14 +12500,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 81948,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 81946,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -12514,8 +12550,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -12542,21 +12578,21 @@
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.558330+00:00",
+          "fetched_at": "2026-10-29T21:51:41.404733+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -12565,7 +12601,7 @@
           "away": {
             "team": "Philadelphia 76ers",
             "counts": {
-              "out": 3,
+              "out": 4,
               "questionable": 0,
               "doubtful": 0,
               "other": 1
@@ -12578,7 +12614,13 @@
                 "other": 0
               },
               "F": {
-                "out": 1,
+                "out": 2,
+                "doubtful": 0,
+                "questionable": 0,
+                "other": 0
+              },
+              "G": {
+                "out": 0,
                 "doubtful": 0,
                 "questionable": 0,
                 "other": 1
@@ -12612,14 +12654,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 82098,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 82096,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -12661,9 +12703,9 @@
       "predicted_winner": "Los Angeles Lakers",
       "prediction_uncertain": false,
       "injury_change": {
-        "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "status": "changed",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -12671,7 +12713,7 @@
             "questionable": 0
           },
           "away": {
-            "out": 0,
+            "out": 1,
             "doubtful": 0,
             "questionable": 0
           }
@@ -12690,14 +12732,14 @@
           "home": 142,
           "away": -170,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 140,
           "away": -165,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.558330+00:00",
+          "fetched_at": "2026-10-29T21:51:41.404733+00:00",
           "provider": "agentbets"
         }
       },
@@ -12747,14 +12789,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 82278,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 82276,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -12797,8 +12839,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -12825,14 +12867,14 @@
           "home": 114,
           "away": -135,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:33.040230+00:00",
+          "fetched_at": "2026-10-29T21:51:40.899439+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 105,
           "away": -127,
           "as_of": "2026-10-29T21:00:00+00:00",
-          "fetched_at": "2026-10-29T21:49:34.009888+00:00",
+          "fetched_at": "2026-10-29T21:51:41.826537+00:00",
           "provider": "agentbets"
         }
       },
@@ -12894,14 +12936,14 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
         "incomplete": false,
         "pregame_readiness": {
           "status": "early_snapshot",
           "reason": "injuries may change before game time",
-          "checked_at": "2026-10-29T21:49:35.068161+00:00",
-          "evaluated_at": "2026-10-29T21:51:11.258742+00:00",
-          "minutes_until_start": 82428,
+          "checked_at": "2026-10-29T21:51:42.461566+00:00",
+          "evaluated_at": "2026-10-29T21:53:06.172323+00:00",
+          "minutes_until_start": 82426,
           "age_minutes": 1,
           "confirmed_starters": false,
           "real_time": false
@@ -12944,8 +12986,8 @@
       "prediction_uncertain": false,
       "injury_change": {
         "status": "unchanged",
-        "observed_at": "2026-10-29T21:49:35.068161+00:00",
-        "previous_observed_at": "2026-10-29T21:47:28.080313+00:00",
+        "observed_at": "2026-10-29T21:51:42.461566+00:00",
+        "previous_observed_at": "2026-10-29T21:49:35.068161+00:00",
         "count_differences": {
           "home": {
             "out": 0,
@@ -13632,7 +13674,7 @@
     "status": "descriptive_research_only"
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-29T21:49:35.114054+00:00",
+    "pipeline_generated_at": "2026-10-29T21:51:42.515506+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-29T21:00:00+00:00",
     "oldest_quote_at": "2026-10-29T21:00:00+00:00",
@@ -13864,7 +13906,7 @@
   },
   "refresh_status": {
     "status": "ok",
-    "attempted_at": "2026-10-29T21:49:35.114054+00:00",
-    "last_successful_at": "2026-10-29T21:49:35.114054+00:00"
+    "attempted_at": "2026-10-29T21:51:42.515506+00:00",
+    "last_successful_at": "2026-10-29T21:51:42.515506+00:00"
   }
 }

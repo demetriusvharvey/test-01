@@ -30,7 +30,16 @@ def provider_team_code(value,league):
 
 
 def _bucket(status):
-    return status if status in ('out', 'doubtful') else 'questionable' if status in ('questionable', 'game_time_decision') else 'other'
+    # A suspension or injured-list designation must never appear as a
+    # healthy/available "other" entry. A first-half-only absence is not
+    # equivalent to a full-game scratch and stays explicitly uncertain.
+    if status in ('out', 'suspended', 'injured_list'):
+        return 'out'
+    if status in ('doubtful',):
+        return 'doubtful'
+    if status in ('questionable', 'game_time_decision'):
+        return 'questionable'
+    return 'other'
 
 
 def _fetch_injuries(key, enabled, url, opener):

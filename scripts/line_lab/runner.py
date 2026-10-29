@@ -1,5 +1,6 @@
 """Runner components for the picks pipeline."""
 import copy, hashlib, json, os
+from collections import Counter
 from datetime import datetime, timedelta, timezone
 from statistics import median
 from scripts.refresh_feed import NBA_REFS, parse_referees
@@ -345,8 +346,11 @@ def main():
                      'multi_stat_status':p.get('player_box_scenarios',{}).get('status','model_unavailable'),
                      'ensemble_status':p.get('ensemble_scenarios',{}).get('status','model_unavailable'),
                      'lineup_value_status':p.get('stint_strength_context',{}).get('status','model_unavailable'),
-                     'lineup_prediction_status':p.get('stint_prediction_scenarios',{}).get('status','model_unavailable')}
+                     'lineup_prediction_status':p.get('stint_prediction_scenarios',{}).get('status','model_unavailable'),
+                     'partial_lineup_status':p.get('partial_stint_scenarios',{}).get('status','model_unavailable')}
                     for p in ml['predictions']],sort_keys=True))
+                print('NBA component coverage:',json.dumps({field:dict(Counter(p.get(field,{}).get('status','model_unavailable') for p in ml['predictions']))
+                    for field in ('availability_scenarios','player_box_scenarios','ensemble_scenarios','stint_strength_context','stint_prediction_scenarios','partial_stint_scenarios')},sort_keys=True))
         except Exception as exc:errors.append('Independent slate archive unavailable ('+type(exc).__name__+')')
     # Prices within 20 minutes of start are still useful as labeled snapshots
     # on the game slate, but the selection market keeps its stricter cutoff.

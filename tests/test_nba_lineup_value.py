@@ -46,3 +46,17 @@ class LineupValueTests(unittest.TestCase):
         self.assertEqual(result['status'],'lineup_associations_available')
         self.assertFalse(result['counterfactual_available'])
         self.assertIsNone(result['scenarios'][0]['change_from_all_available_counterfactual'])
+
+
+    def test_partial_component_is_not_an_imputed_total(self):
+        from scripts.line_lab.nba_lineup_value import partial_rotation_value
+        model,event,players,rosters,payload,now=self.fixture()
+        rotation={'players':[{'player_id':str(i),'minutes':24.} for i in range(1,11)]}
+        del model['player_training_minutes']['2']
+        value=partial_rotation_value(model,rotation)
+        self.assertAlmostEqual(value['supported_fraction'],.9)
+        self.assertAlmostEqual(value['unknown_minutes'],24.)
+        self.assertIsNone(value['total_lineup_value'])
+        empty=partial_rotation_value({'features':[],'weights':[],'player_training_minutes':{}},rotation)
+        self.assertEqual(empty['supported_fraction'],0.)
+        self.assertIsNone(empty['total_lineup_value'])

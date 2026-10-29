@@ -75,3 +75,19 @@ def lineup_associations(model,event,players,rosters,payload,observed_at,now):
                 'used_in_public_picks':False,
                 'limitations':'observational association, inferred minutes, incomplete defense; counterfactual delta is not a causal injury effect or win probability'}
     except (KeyError,ValueError,TypeError,OverflowError):return {'status':'lineup_model_unavailable','scenarios':[]}
+
+
+def partial_rotation_value(model,rotation):
+    """Return a measured supported subset and coverage, never total lineup value."""
+    names=model['features'];values=model['weights']
+    if len(names)!=len(values) or len(set(names))!=len(names):raise ValueError('rating dimensions')
+    effects=dict(zip(names,values));samples=model['player_training_minutes'];component=0.;known=0.
+    for player in rotation['players']:
+        minutes=player['minutes'];p=player['player_id'];value=effects.get(p)
+        if type(minutes) not in (int,float) or not math.isfinite(minutes) or not 0<minutes<=48:raise ValueError('invalid minutes')
+        if type(value) in (int,float) and math.isfinite(value) and samples.get(p,0)>=120:
+            component+=minutes/48*value;known+=minutes
+    total=sum(p['minutes'] for p in rotation['players'])
+    if not math.isclose(total,240,abs_tol=1e-6):raise ValueError('incomplete rotation')
+    return {'known_component':component,'supported_fraction':min(1.,max(0.,known/240)),'unknown_minutes':max(0.,240-known),
+            'total_lineup_value':None if known<240-1e-6 else component}

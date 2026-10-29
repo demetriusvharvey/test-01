@@ -60,7 +60,7 @@ def current_summary(players,rotation,as_of):
     return summarize(rotation['players'],history,team)
 
 
-def historical_features(games,players,ratings_by_season=None):
+def historical_features(games,players,ratings_by_season=None,partial_coverage=False):
     """Prior appearances infer membership; historical pregame availability is unknown."""
     daily=defaultdict(list);slates=defaultdict(list)
     for row in players:daily[row['date']].append(row)
@@ -83,13 +83,19 @@ def historical_features(games,players,ratings_by_season=None):
                 summary=summarize(rotation,history,team)
                 if summary and ratings_by_season is not None:
                     from .nba_lineup_value import rotation_value
-                    value=rotation_value(rating,{'players':rotation}) if rating else None
-                    if value is None:continue
-                    summary['stint_value']=value
+                    if partial_coverage:
+                        if not rating:continue
+                        from .nba_lineup_value import partial_rotation_value
+                        measured=partial_rotation_value(rating,{'players':rotation})
+                        summary['stint_value']=measured['known_component'];summary['stint_coverage']=measured['supported_fraction']
+                    else:
+                        value=rotation_value(rating,{'players':rotation}) if rating else None
+                        if value is None:continue
+                        summary['stint_value']=value
                 if summary:summaries[team]=summary
         for game in slates[day]:
             h,a=summaries.get(game['home']),summaries.get(game['away'])
-            if h and a:output[game['id']]={'vector':difference(h,a)+([(h['stint_value']-a['stint_value'])/20] if ratings_by_season is not None else []),
+            if h and a:output[game['id']]={'vector':difference(h,a)+(([(h['stint_value']-a['stint_value'])/20,h['stint_coverage'],a['stint_coverage']] if partial_coverage else [(h['stint_value']-a['stint_value'])/20]) if ratings_by_season is not None else []),
                                           'availability':'historical pregame injuries and lineups unknown'}
         # Freeze every feature on a date before observing ANY game on that date.
         for row in daily[day]:

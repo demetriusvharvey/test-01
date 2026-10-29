@@ -90,3 +90,33 @@ class PlayerFeatureTests(unittest.TestCase):
         self.assertTrue(r['season_rating_hash'])
         rating['training_seasons']=['2026-27']
         self.assertEqual(conditional_forecasts(model,[0.]*14,event,players,rosters,payload,now,now,lambda m,x:.6,rating)['status'],'season_frozen_rating_unavailable')
+
+
+    def test_partial_coverage_preserves_examples_without_fake_player_values(self):
+        games,players=self.fixture()
+        for g in games:g['season']='2026-27'
+        rating={'features':['0'],'weights':[5.],'player_training_minutes':{'0':200.},
+                'trained_before_season':'2026-27','training_seasons':['2025-26']}
+        self.assertEqual(historical_features(games,players,{'2026-27':rating}),{})
+        partial=historical_features(games,players,{'2026-27':rating},partial_coverage=True)
+        self.assertEqual(len(partial['3']['vector']),16)
+        self.assertAlmostEqual(partial['3']['vector'][-2],.1)
+        self.assertEqual(partial['3']['vector'][-1],0.)
+
+    def test_partial_scenarios_report_coverage_instead_of_claiming_full_effects(self):
+        games,players=self.fixture();now='2026-10-23T12:00:00+00:00'
+        event={'home':'PHI','away':'IND','season':'2026-27','starts_at':'2026-10-24T00:00:00+00:00'}
+        rosters={team:{'team':team,'player_ids':[str(p+offset) for p in range(10)],'verified':True,'source':'fixture','observed_at':now}
+                 for team,offset in (('PHI',0),('IND',10))}
+        rating={'features':['0'],'weights':[5.],'player_training_minutes':{'0':200.},'trained_before_season':'2026-27',
+                'training_seasons':['2025-26'],'exported_at':'2026-10-22T12:00:00+00:00'}
+        model={'model_version':'nba-partial-stint-logistic-v1','exported_at':'2026-10-22T12:00:00+00:00',
+               'features':[str(i) for i in range(14)]+list(FEATURES)+['known_stint_component_difference','home_stint_coverage','away_stint_coverage']}
+        payload={'sport':'basketball_nba','count':1,'players':[{'team_abbr':'PHI','player_id':'espn:0','status_code':'questionable','status_since':now}]}
+        result=conditional_forecasts(model,[0.]*14,event,players,rosters,payload,now,now,lambda m,x:.6,rating)
+        self.assertEqual(result['status'],'conditional_research_only')
+        self.assertTrue(result['partial_lineup_component'])
+        self.assertFalse(result['unknown_individual_effects_filled'])
+        self.assertEqual(len(result['scenarios'][0]['features']),30)
+        self.assertAlmostEqual(result['scenarios'][0]['features']['home_stint_coverage'],.1)
+        self.assertEqual(result['scenarios'][1]['features']['home_stint_coverage'],0.)

@@ -67,7 +67,7 @@ def evaluate_saved(root,confirmed_finals,now):
         for (payload,) in records:
             row=json.loads(payload)
             if not _valid(row,current):continue
-            for field in ('availability_scenarios','player_box_scenarios','ensemble_scenarios','stint_prediction_scenarios'):
+            for field in ('availability_scenarios','player_box_scenarios','ensemble_scenarios','stint_prediction_scenarios','partial_stint_scenarios'):
                 context=row.get(field) or {};scenarios=context.get('scenarios') or []
                 try:
                     if context.get('status')!='conditional_research_only' or not context.get('exhaustive_listed_uncertainty'):continue

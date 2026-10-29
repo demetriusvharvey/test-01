@@ -10,7 +10,7 @@ from .constants import ET
 def conditional_forecasts(model,base_vector,event,players,rosters,payload,observed_at,now,predict,stint_model=None):
     """Return explicit scenarios, not a fabricated P(plays) mixture or interval."""
     if not payload or not observed_at:return {'status':'injury_feed_unavailable','scenarios':[]}
-    if model.get('model_version') not in ('nba-rotation-logistic-v1','nba-player-box-logistic-v1','nba-stint-feature-logistic-v1') or aware(model['exported_at'])>aware(now):
+    if model.get('model_version') not in ('nba-rotation-logistic-v1','nba-player-box-logistic-v1','nba-stint-feature-logistic-v1','nba-partial-stint-logistic-v1') or aware(model['exported_at'])>aware(now):
         return {'status':'rotation_model_unavailable','scenarios':[]}
     mapped={}
     for side in ('home','away'):
@@ -24,8 +24,9 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
                 'join_diagnostics':{side:{k:report[k] for k in ('diagnostics','unmatched','invalid','matched_players','roster_players')}
                                     for side,(roster,report) in mapped.items()}}
     cutoff=aware(now).astimezone(ET).date();scenarios=[]
-    multi_stat=model['model_version'] in ('nba-player-box-logistic-v1','nba-stint-feature-logistic-v1')
-    use_stint=model['model_version']=='nba-stint-feature-logistic-v1'
+    multi_stat=model['model_version'] in ('nba-player-box-logistic-v1','nba-stint-feature-logistic-v1','nba-partial-stint-logistic-v1')
+    use_stint=model['model_version'] in ('nba-stint-feature-logistic-v1','nba-partial-stint-logistic-v1')
+    partial_stint=model['model_version']=='nba-partial-stint-logistic-v1'
     if use_stint and (not stint_model or stint_model.get('trained_before_season')!=event['season']
                       or not stint_model.get('training_seasons') or any(s>=event['season'] for s in stint_model['training_seasons'])
                       or aware(stint_model['exported_at'])>aware(now)):
@@ -59,9 +60,14 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
                 if summary is None:return {'status':'player_metrics_unavailable','scenarios':[]}
                 if use_stint:
                     from .nba_lineup_value import rotation_value
-                    value=rotation_value(stint_model,rotation)
-                    if value is None:return {'status':'unknown_player_effect','scenarios':[]}
-                    summary['stint_value']=value
+                    if partial_stint:
+                        from .nba_lineup_value import partial_rotation_value
+                        measured=partial_rotation_value(stint_model,rotation)
+                        summary['stint_value']=measured['known_component'];summary['stint_coverage']=measured['supported_fraction']
+                    else:
+                        value=rotation_value(stint_model,rotation)
+                        if value is None:return {'status':'unknown_player_effect','scenarios':[]}
+                        summary['stint_value']=value
                 summaries[side]=summary;cache[cache_key]=summary;continue
             scoring=0.;experienced=0.;minutes=[]
             for p in rotation['players']:
@@ -76,7 +82,7 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
         h,a=summaries['home'],summaries['away']
         if multi_stat:
             from .nba_player_features import difference
-            vector=base_vector+difference(h,a)+([(h['stint_value']-a['stint_value'])/20] if use_stint else [])
+            vector=base_vector+difference(h,a)+(([(h['stint_value']-a['stint_value'])/20,h['stint_coverage'],a['stint_coverage']] if partial_stint else [(h['stint_value']-a['stint_value'])/20]) if use_stint else [])
         else:vector=base_vector+[(h[0]-a[0])/20,h[1]-a[1],h[2]-a[2]]
         probability=predict(model,vector)
         scenarios.append({'scenario':label,'home_probability':probability,'away_probability':1-probability,
@@ -88,6 +94,7 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
             'uncertain_players':len(uncertain),'exhaustive_listed_uncertainty':True,
             'home_scenario_range':[low,high],
             'consistent_winner':event['home'] if low>.5 else event['away'] if high<.5 else None,
+            'partial_lineup_component':partial_stint,'unknown_individual_effects_filled':False,
             'range_meaning':'conditional sensitivity range, not a confidence interval or calibrated mixture','scenarios':scenarios,
             'model_version':model['model_version'],'injury_observed_at':observed_at,
             'season_rating_hash':hashlib.sha256(json.dumps(stint_model,sort_keys=True).encode()).hexdigest() if use_stint else None,

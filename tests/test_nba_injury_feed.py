@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import Mock
 
 from scripts.line_lab.nba_injury_feed import (
-    attach_nba_summaries, attach_nfl_summaries, fetch_nba_injuries, fetch_nfl_injuries, summarize_by_team, summarize_positions_by_team, injury_quality_counts,
+    attach_nba_summaries, attach_nfl_summaries, pregame_injury_readiness, fetch_nba_injuries, fetch_nfl_injuries, summarize_by_team, summarize_positions_by_team, injury_quality_counts,
 )
 
 
@@ -128,6 +128,22 @@ class NbaInjuryFeedTests(unittest.TestCase):
         self.assertTrue(context['incomplete'])
         self.assertFalse(context['teams']['home']['report_present'])
         self.assertFalse(context['used_in_prediction'])
+
+    def test_pregame_readiness_never_claims_realtime_or_confirmed_lineup(self):
+        event=dict(self.event,starts_at='2026-10-28T23:00:00Z')
+        recent=pregame_injury_readiness(event,'2026-10-28T21:58:00Z',
+                                         '2026-10-28T22:05:00Z',True)
+        self.assertEqual(recent['status'],'recent_unconfirmed')
+        self.assertFalse(recent['confirmed_starters'])
+        self.assertFalse(recent['real_time'])
+        stale=pregame_injury_readiness(event,'2026-10-28T21:30:00Z',
+                                        '2026-10-28T22:05:00Z',True)
+        self.assertEqual(stale['status'],'stale')
+        missing=pregame_injury_readiness(event,'2026-10-28T22:00:00Z',
+                                          '2026-10-28T22:05:00Z',False)
+        self.assertEqual(missing['status'],'incomplete')
+        self.assertEqual(pregame_injury_readiness(event,'2026-10-28T23:01:00Z',
+                      '2026-10-28T23:02:00Z',True)['status'],'unavailable')
 
     def test_espn_team_codes_are_mapped_by_league_before_aggregating(self):
         nba={'sport':'basketball_nba','count':6,'players':[

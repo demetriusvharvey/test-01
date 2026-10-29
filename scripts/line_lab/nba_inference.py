@@ -5,7 +5,7 @@ import json
 import math
 import sqlite3
 from pathlib import Path
-from datetime import date
+from datetime import date,timedelta
 from .constants import ET
 from .history import aware
 from .nba_statistical import examples
@@ -32,7 +32,7 @@ def record_nba_predictions(root,games,scheduled,now):
     past=[g for g in games if g['league']=='NBA' and g['date']<cutoff]
     events={}
     for game in scheduled:
-        if game['league']!='NBA' or aware(game['starts_at'])<=current:continue
+        if game['league']!='NBA' or not current<aware(game['starts_at'])<=current+timedelta(days=8):continue
         _,_,away,home=game['id'].split(':')
         events[game['id']]={**game,'home':home,'away':away,'date':aware(game['starts_at']).astimezone(ET).date(),
                             'season':str(cutoff.year if cutoff.month>=8 else cutoff.year-1)+'-'+str((cutoff.year+1) if cutoff.month>=8 else cutoff.year)[-2:],

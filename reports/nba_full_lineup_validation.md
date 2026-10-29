@@ -1,6 +1,6 @@
 # NBA uniquely reconstructed regulation-game lineup associations
 
-Run 2026-10-29T19:52:45.254443+00:00. H026. Source failures: 0.
+Run 2026-10-29T20:02:44.981859+00:00. H026. Source failures: 0.
 Source IDs, unique period constraints and explicit substitutions reconstruct stints. Ambiguous games are rejected. Scope: uniquely reconstructed regulation-game. Full-game mode also validates each player against box minutes and excludes overtime. This is postgame training data, not historical pregame availability. No public pick changes.
 
 | Source season | Games seen | Accepted | Rejected | Stints |

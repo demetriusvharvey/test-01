@@ -7,6 +7,8 @@ on:
       - scripts/inspect_nba_lineups.py
       - scripts/research_nba_lineups.py
       - scripts/research_nba_stint_features.py
+      - scripts/research_nba_winner_selection.py
+      - scripts/line_lab/nba_winner_selection.py
       - scripts/line_lab/nba_stints.py
       - scripts/line_lab/nba_full_stints.py
       - requirements-lineups.txt
@@ -53,13 +55,15 @@ jobs:
         env:
           OMP_NUM_THREADS: 2
         run: python -m scripts.research_nba_stint_features --data-root .data-store --partial-coverage --output reports/nba_partial_stint_validation.md
+      - name: Compare daily winner selections
+        run: python -m scripts.research_nba_winner_selection --data-root .data-store --output reports/nba_winner_selection_validation.md
       - name: Persist source observations
         run: |
           git -C .data-store config user.name 'github-actions[bot]'
           git -C .data-store config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           # These paths are owned only by lineup research. Daily/weekly jobs
           # modify different files, so their commits can be safely rebased.
-          for path in observations/backfill/nba_play_by_play observations/backfill/nba_pbp_parquet observations/backfill/nba_player_boxscores/2022.sqlite observations/nba_lineups observations/nba_full_lineups observations/nba_stint_features observations/nba_partial_stint_features; do
+          for path in observations/backfill/nba_play_by_play observations/backfill/nba_pbp_parquet observations/backfill/nba_player_boxscores/2022.sqlite observations/nba_lineups observations/nba_full_lineups observations/nba_stint_features observations/nba_partial_stint_features observations/nba_winner_selection; do
             if [ -e ".data-store/$path" ]; then
               git -C .data-store add "$path"
             fi
@@ -77,7 +81,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reports/nba_partial_stint_validation.md reports/nba_stint_feature_validation.md reports/nba_lineup_source.md reports/nba_lineup_validation.md reports/nba_full_lineup_validation.md
+          git add reports/nba_winner_selection_validation.md reports/nba_partial_stint_validation.md reports/nba_stint_feature_validation.md reports/nba_lineup_source.md reports/nba_lineup_validation.md reports/nba_full_lineup_validation.md
           if ! git diff --cached --quiet; then
             git commit -m 'Report NBA lineup source inspection'
             for attempt in 1 2 3; do

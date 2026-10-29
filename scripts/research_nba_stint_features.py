@@ -50,17 +50,24 @@ def run(root,output,partial=False):
     base_names=list(TEAM_FEATURES)+list(METRICS)+list(FEATURES)
     names=base_names+(['known_stint_component_difference','home_stint_coverage','away_stint_coverage'] if partial else ['lineup_stint_strength_difference'])
     digest=hashlib.sha256(json.dumps(extended,sort_keys=True).encode()).hexdigest();version=folder/digest;version.mkdir(exist_ok=True)
-    results=[]
+    results=[];winner_records=[]
     for season in sorted({g['season'] for g in games if g['league']=='NBA'})[2:]:
         a=evaluate(control,season,version/'control',base_names,model_version='nba-player-box-logistic-v1')
         b=evaluate(extended,season,version/'candidate',names,model_version='nba-partial-stint-logistic-v1' if partial else 'nba-stint-feature-logistic-v1')
         if not a or not b:
             results.append({'season':season,'status':'insufficient_matched_training_calibration_or_test'});continue
+        team=evaluate(rows,season,version/'team') if partial else None
+        team_model=json.loads((version/'team'/season/'logistic.json').read_text()) if team else None
         prior=json.loads((version/'control'/season/'logistic.json').read_text());model=json.loads((version/'candidate'/season/'logistic.json').read_text())
         comparison=defaultdict(list);lookup={r['game_id']:r for r in control}
         loss=lambda p,y:-(y*math.log(p)+(1-y)*math.log1p(-p))
         for row in extended:
             if row['season']==season:
+                if team_model:
+                    winner_records.append({'game_id':row['game_id'],'date':row['date'],'season':row['season'],'home_win':row['home_win'],
+                        'probabilities':{'elo':row['elo'],'team14':probability(team_model,row['vector'][:14]),
+                                         'player27':probability(prior,lookup[row['game_id']]['vector']),
+                                         'lineup30':probability(model,row['vector'])}})
                 comparison[row['date']].append(loss(probability(model,row['vector']),row['home_win'])-
                                                loss(probability(prior,lookup[row['game_id']]['vector']),row['home_win']))
         test=paired_block_test(comparison)
@@ -77,6 +84,9 @@ def run(root,output,partial=False):
     if valid:
         latest=valid[-1]['season'];model=json.loads((version/'candidate'/latest/'logistic.json').read_text());model['input_hash']=digest
         (folder/'current_candidate.json').write_text(json.dumps(model,sort_keys=True))
+    if partial:
+        (version/'winner_components.json').write_text(json.dumps(winner_records,sort_keys=True))
+        (folder/'winner_components.json').write_text(json.dumps({'input_hash':digest,'rows':winner_records},sort_keys=True))
     report={'hypothesis':study,'partial_coverage':partial,'evaluated_at':datetime.now(timezone.utc).isoformat(),'matched_games':len(rows),
             'season_counts':{s:sum(r['season']==s for r in rows) for s in sorted({r['season'] for r in rows})},
             'rating_seasons':list(ratings),'sources':sources,'coverage':coverage,'failures':failures,'results':results,'promoted':False}

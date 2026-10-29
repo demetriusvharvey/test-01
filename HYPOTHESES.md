@@ -330,3 +330,24 @@ effects backed by 120 actual training minutes; validation/test rows must contain
 only those supported players. Unknown test players remain excluded. No penalty
 grid, metric, evaluation boundary or sample threshold is relaxed. Record the
 number of unpublished nuisance columns separately from supported player values.
+
+## H026 — uniquely reconstructed later-quarter lineup validation
+
+Registered after H025's weak/limited first-quarter results, before fitting the
+expanded model. Later-period initial lineups may be deduced only when explicit
+on-court actions/substitutions uniquely establish exactly five initial players
+per team. Replaying every substitution must preserve membership and clocks.
+Require quarter 1 to agree with recorded starters, exactly 48 regulation game
+minutes and each player's reconstructed full-game minutes to agree with the
+source's rounded box minutes within 1.1 minutes. Reject ambiguous periods,
+unknown identities, clock corrections and overtime games; do not guess a fifth
+starter. Report all exclusions, accepted games and coverage. These are
+postgame reconstruction constraints, not verified pregame lineups.
+
+Apply H025's fixed ridge/alpha/minute thresholds and separate-season
+training/calibration/test to full-game stints. Metric/direction: lower later
+minute-weighted net-rate MSE than team ridge; retain league baseline and
+negative results. Correct H025/H026 season tests jointly. Ratings remain
+observational associations, not possession RAPM, causal injury effects,
+complete defense or game-winner probabilities. More data does not justify a
+production switch by itself. Record the full-game model separately.

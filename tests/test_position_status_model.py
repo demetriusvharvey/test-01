@@ -57,6 +57,25 @@ class PositionStatusTests(unittest.TestCase):
         self.rows[0]['rights_verified']=False
         self.assertIsNone(fit_position_shadow(self.rows,'NFL',self.cutoff.isoformat(),16,8,3))
 
+    def test_stale_reports_never_enter_training_or_predictions(self):
+        fresh=fit_position_shadow(self.rows,'NFL',self.cutoff.isoformat(),16,8,3)
+        self.assertIsNotNone(fresh)
+        stale_rows=[dict(row) for row in self.rows]
+        stale_rows[0]['feature_observed_at']=(datetime.fromisoformat(
+            stale_rows[0]['forecast_at'])-timedelta(hours=31)).isoformat()
+        self.assertIsNone(fit_position_shadow(
+            stale_rows,'NFL',self.cutoff.isoformat(),16,8,3))
+        future=(self.cutoff+timedelta(hours=1)).isoformat()
+        self.assertIsNone(predict_position_shadow(
+            fresh,.5,self.rows[0]['features'],future,
+            (self.cutoff-timedelta(hours=31)).isoformat()))
+        self.assertIsNotNone(predict_position_shadow(
+            fresh,.5,self.rows[0]['features'],future,
+            (self.cutoff-timedelta(hours=1)).isoformat()))
+        self.assertIsNone(predict_position_shadow(
+            fresh,.5,self.rows[0]['features'],future,
+            (self.cutoff+timedelta(hours=2)).isoformat()))
+
     def test_frozen_report_is_matched_before_shadow_evaluation(self):
         fit=fit_position_shadow(self.rows,'NFL',self.cutoff.isoformat(),16,8,3)
         snapshot=nfl_position_features(self.event,self.context,self.now.isoformat())

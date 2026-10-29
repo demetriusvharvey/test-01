@@ -1,0 +1,391 @@
+{
+  "input_hash": "47bac2e75d6b59c0008ad3c1b1e33d87fd2b55e2d8b37567b181fe3d7cf74b40",
+  "results": [
+    {
+      "artifact": {
+        "calibrated_through_season": "2023-24",
+        "calibration": {
+          "method": "platt_shadow",
+          "weights": [
+            -0.08151383721693352,
+            0.948098933800537
+          ]
+        },
+        "features": [
+          "elo_difference",
+          "scoring_difference",
+          "allowed_difference",
+          "win_rate_difference",
+          "rest_difference",
+          "home_court"
+        ],
+        "model": {
+          "intercept": 0.16216193607571414,
+          "l2": 0.1,
+          "weights": [
+            0.12024826864413428,
+            0.060310119401615146,
+            -0.10431911347602375,
+            0.10175304192062726,
+            0.02007030232858491,
+            0.10946508399014734
+          ]
+        },
+        "model_version": "nba-logistic-score-v1",
+        "promoted": false,
+        "trained_through_season": "2022-23"
+      },
+      "calibrated_logistic": {
+        "accuracy": 0.5779591836734694,
+        "brier": 0.23918394349163147,
+        "games": 1225,
+        "log_loss": 0.6713444750695634
+      },
+      "calibration_games": 1230,
+      "calibration_season": "2023-24",
+      "elo": {
+        "accuracy": 0.6595918367346939,
+        "brier": 0.21386880947359882,
+        "games": 1225,
+        "log_loss": 0.6154385240967701
+      },
+      "home_baseline": {
+        "accuracy": 0.5444897959183673,
+        "brier": 0.4555102040816327,
+        "games": 1225,
+        "log_loss": 6.293106578240325
+      },
+      "logistic": {
+        "accuracy": 0.5485714285714286,
+        "brier": 0.23933584453744505,
+        "games": 1225,
+        "log_loss": 0.6714793777986082
+      },
+      "reliability": [
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0,
+            0.2
+          ]
+        },
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "games": 1210,
+          "home_win_rate": 0.5396694214876033,
+          "mean_probability": 0.5428158175213753,
+          "range": [
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "games": 15,
+          "home_win_rate": 0.9333333333333333,
+          "mean_probability": 0.6052301046538392,
+          "range": [
+            0.6,
+            0.8
+          ]
+        },
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0.8,
+            1
+          ]
+        }
+      ],
+      "test_season": "2024-25",
+      "training_games": 1073,
+      "uninformative": {
+        "accuracy": 0.5444897959183673,
+        "brier": 0.25,
+        "games": 1225,
+        "log_loss": 0.6931471805599453
+      }
+    },
+    {
+      "artifact": {
+        "calibrated_through_season": "2024-25",
+        "calibration": {
+          "method": "platt_shadow",
+          "weights": [
+            -0.032493133481108716,
+            1.0372598932699706
+          ]
+        },
+        "features": [
+          "elo_difference",
+          "scoring_difference",
+          "allowed_difference",
+          "win_rate_difference",
+          "rest_difference",
+          "home_court"
+        ],
+        "model": {
+          "intercept": 0.12511703189025036,
+          "l2": 0.1,
+          "weights": [
+            0.19803290437821056,
+            0.10334332301085265,
+            -0.13377372328706502,
+            0.1387268814183651,
+            0.017987871853406334,
+            0.08451073282482753
+          ]
+        },
+        "model_version": "nba-logistic-score-v1",
+        "promoted": false,
+        "trained_through_season": "2023-24"
+      },
+      "calibrated_logistic": {
+        "accuracy": 0.6236734693877551,
+        "brier": 0.2323719150293759,
+        "games": 1225,
+        "log_loss": 0.657482685245627
+      },
+      "calibration_games": 1225,
+      "calibration_season": "2024-25",
+      "elo": {
+        "accuracy": 0.6775510204081633,
+        "brier": 0.20923149737528227,
+        "games": 1225,
+        "log_loss": 0.6068910155920766
+      },
+      "home_baseline": {
+        "accuracy": 0.5542857142857143,
+        "brier": 0.44571428571428573,
+        "games": 1225,
+        "log_loss": 6.15777097440721
+      },
+      "logistic": {
+        "accuracy": 0.6171428571428571,
+        "brier": 0.23280046575839797,
+        "games": 1225,
+        "log_loss": 0.6583039576807734
+      },
+      "reliability": [
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0,
+            0.2
+          ]
+        },
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "games": 1094,
+          "home_win_rate": 0.5191956124314442,
+          "mean_probability": 0.5373645849747954,
+          "range": [
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "games": 131,
+          "home_win_rate": 0.8473282442748091,
+          "mean_probability": 0.6186822032549776,
+          "range": [
+            0.6,
+            0.8
+          ]
+        },
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0.8,
+            1
+          ]
+        }
+      ],
+      "test_season": "2025-26",
+      "training_games": 2303,
+      "uninformative": {
+        "accuracy": 0.5542857142857143,
+        "brier": 0.25,
+        "games": 1225,
+        "log_loss": 0.6931471805599453
+      }
+    },
+    {
+      "artifact": {
+        "calibrated_through_season": "2025-26",
+        "calibration": {
+          "method": "platt_shadow",
+          "weights": [
+            0.014127642357646866,
+            1.0781224781780085
+          ]
+        },
+        "features": [
+          "elo_difference",
+          "scoring_difference",
+          "allowed_difference",
+          "win_rate_difference",
+          "rest_difference",
+          "home_court"
+        ],
+        "model": {
+          "intercept": 0.11493538155953398,
+          "l2": 0.1,
+          "weights": [
+            0.21964118383058615,
+            0.13332188250827215,
+            -0.13815498605018844,
+            0.1500316163904785,
+            0.01829189702688244,
+            0.07765592260486111
+          ]
+        },
+        "model_version": "nba-logistic-score-v1",
+        "promoted": false,
+        "trained_through_season": "2024-25"
+      },
+      "calibrated_logistic": {
+        "accuracy": 0.6176470588235294,
+        "brier": 0.23535111437933368,
+        "games": 68,
+        "log_loss": 0.6631751872525795
+      },
+      "calibration_games": 1225,
+      "calibration_season": "2025-26",
+      "elo": {
+        "accuracy": 0.6029411764705882,
+        "brier": 0.21222016311131475,
+        "games": 68,
+        "log_loss": 0.609331848596558
+      },
+      "home_baseline": {
+        "accuracy": 0.4852941176470588,
+        "brier": 0.5147058823529411,
+        "games": 68,
+        "log_loss": 7.110925037187736
+      },
+      "logistic": {
+        "accuracy": 0.6176470588235294,
+        "brier": 0.2354892683921331,
+        "games": 68,
+        "log_loss": 0.6635943259635336
+      },
+      "reliability": [
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0,
+            0.2
+          ]
+        },
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0.2,
+            0.4
+          ]
+        },
+        {
+          "games": 51,
+          "home_win_rate": 0.37254901960784315,
+          "mean_probability": 0.5383153329961432,
+          "range": [
+            0.4,
+            0.6
+          ]
+        },
+        {
+          "games": 17,
+          "home_win_rate": 0.8235294117647058,
+          "mean_probability": 0.624340344723753,
+          "range": [
+            0.6,
+            0.8
+          ]
+        },
+        {
+          "games": 0,
+          "home_win_rate": null,
+          "mean_probability": null,
+          "range": [
+            0.8,
+            1
+          ]
+        }
+      ],
+      "test_season": "2026-27",
+      "training_games": 3528,
+      "uninformative": {
+        "accuracy": 0.4852941176470588,
+        "brier": 0.25,
+        "games": 68,
+        "log_loss": 0.6931471805599453
+      }
+    }
+  ],
+  "sources": [
+    {
+      "parsed_games": 1230,
+      "retrieved_at": "2026-10-28T04:04:05.730265+00:00",
+      "sha256": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+      "url": "https://boxscorelab.com/downloads/2022-23-team-game-results.csv"
+    },
+    {
+      "parsed_games": 1230,
+      "retrieved_at": "2026-10-28T04:04:05.850963+00:00",
+      "sha256": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+      "url": "https://boxscorelab.com/downloads/2023-24-team-game-results.csv"
+    },
+    {
+      "parsed_games": 1225,
+      "retrieved_at": "2026-10-28T04:04:06.000392+00:00",
+      "sha256": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+      "url": "https://boxscorelab.com/downloads/2024-25-team-game-results.csv"
+    },
+    {
+      "parsed_games": 1225,
+      "retrieved_at": "2026-10-28T04:04:06.133243+00:00",
+      "sha256": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+      "url": "https://boxscorelab.com/downloads/2025-26-team-game-results.csv"
+    },
+    {
+      "parsed_games": 68,
+      "retrieved_at": "2026-10-29T18:57:43.768736+00:00",
+      "sha256": "e786108261eb1044225c34f4e3beb0f7115399ce83f01e9017e3cf4ec22dcb6e",
+      "url": "https://boxscorelab.com/downloads/2026-27-team-game-results.csv"
+    },
+    {
+      "parsed_games": 4470,
+      "retrieved_at": "2026-10-28T04:03:50.008929+00:00",
+      "sha256": "5357a754c00d97c448ba366226b024afb96afbae980a88f0c1a188c456b8033d",
+      "url": "https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv"
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 # NBA trained-model inference verification
 
-Run: 2026-10-29T19:07:16.839942+00:00. Status: research_forecasts_recorded.
+Run: 2026-10-29T19:17:48.449792+00:00. Status: research_forecasts_recorded.
 Actual scheduled games and trained efficiency logistic artifact. The baseline columns are team-only probabilities; availability ranges come from the separately trained rotation model. Conditional ranges are sensitivity checks, not confidence intervals or weighted predictions. These outputs do not replace public picks.
 
 | Game | Baseline home probability | Baseline away probability | Availability status | Scenarios | Conditional home range | Consistent winner |
@@ -122,6 +122,9 @@ Each saved forecast carries model/input hashes, model and input observation time
 | UTA at NOP | conditional_research_only | 4 | 0.7252–0.7503 | NOP |
 | MIA at GSW | conditional_research_only | 4 | 0.4268–0.4356 | MIA |
 | ORL at PHX | conditional_research_only | 2 | 0.4381–0.4433 | ORL |
+## Ensemble scenario status
+
+{"conditional_research_only": 55}
 ## Implementation acceptance
 
 Status: passed; today’s games checked: 3.

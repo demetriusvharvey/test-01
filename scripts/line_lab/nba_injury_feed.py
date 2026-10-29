@@ -169,7 +169,7 @@ def injury_quality_counts(payload,observed_at,league):
 def pregame_injury_readiness(event, observed_at, evaluated_at, coverage_complete):
     """Conservative snapshot-quality label, never a confirmation of starters."""
     from datetime import timedelta
-    captured, checked, starts = aware(observed_at), aware(evaluated_at), aware(event['starts_at'])
+    captured, checked, starts = aware(observed_at if isinstance(observed_at,str) else observed_at.isoformat()), aware(evaluated_at if isinstance(evaluated_at,str) else evaluated_at.isoformat()), aware(event['starts_at'])
     if captured > checked or checked >= starts:
         return {'status':'unavailable','reason':'not a valid pregame snapshot'}
     age = checked-captured

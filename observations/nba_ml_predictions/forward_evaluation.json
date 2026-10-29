@@ -1,5 +1,5 @@
 {
-  "evaluated_at": "2026-10-29T19:16:22.431826+00:00",
+  "evaluated_at": "2026-10-29T19:20:04.471147+00:00",
   "invalid_forecasts": 500,
   "models": {
     "nba-efficiency-logistic-v1": {
@@ -26,6 +26,16 @@
     }
   },
   "conditional_winner_records": {
+    "nba-convex-ensemble-v1": {
+      "wins": 0,
+      "losses": 0,
+      "pending": 55,
+      "abstained": 0,
+      "void": 0,
+      "excluded": 0,
+      "settled_predictions": 0,
+      "accuracy": null
+    },
     "nba-player-box-logistic-v1": {
       "wins": 0,
       "losses": 0,

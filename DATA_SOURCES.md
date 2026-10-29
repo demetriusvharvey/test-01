@@ -70,3 +70,20 @@ Historical rosters remain inferred from prior appearances, not verified injury
 snapshots. Source attribution/usage qualifications above remain in force.
 Outputs are separately versioned research artifacts, not a qualified wagering
 feed or proof of defensive player value.
+
+### NBA play-by-play lineup research
+
+The SportsDataverse `espn_nba_pbp` release supplies public CSV/Parquet exports:
+https://github.com/sportsdataverse/sportsdataverse-data/releases/tag/espn_nba_pbp
+Season files 2022–2027 are archived for six NBA seasons, including warm-up.
+The optional research environment pins PyArrow 19.0.1 alongside the existing
+sklearn dependency; the app runtime does not require either dependency.
+Downloads are capped at 35 MB with bounded retries; completed seasons are
+cached, and current-season Parquet refreshes are bounded to 12-hour intervals.
+Source roster/starter IDs are joined exactly, not by fuzzy player names.
+Only uniquely reconstructed, score/time-consistent segments are accepted;
+full-game mode additionally requires per-player box-minute agreement and
+excludes overtime. ESPN exports contain ambiguous action/clock sequences;
+low reconstruction coverage is disclosed rather than treated as full coverage.
+Publisher attribution and upstream-use qualifications remain unchanged.
+This research import grants no claimed NBA wagering-data permission.

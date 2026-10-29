@@ -88,6 +88,11 @@ def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=(),cond
         for row in players:
             if row['player_id'] not in ids or row['team']!=team or row['date']>=now.astimezone(ET).date():continue
             histories[row['player_id']].append(row)
+        # A listed player assumed available cannot silently disappear because
+        # their role/history is missing. Unlisted fringe roster players remain
+        # explicitly unmodeled rather than being declared healthy or zero-value.
+        if any(p not in excluded and not histories.get(p) for p in reports):return None
+        unmodeled=sum(p not in excluded and not histories.get(p) for p in ids)
         estimates=[]
         for p in ids:
             if p in excluded:continue
@@ -102,6 +107,7 @@ def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=(),cond
         return {'team':team,'observed_at':now.isoformat(),'roster_observed_at':observed.isoformat(),
                 'injury_observed_at':report_time.isoformat(),'players':estimates,
                 'unavailable_players':sorted(excluded),'unresolved_players':sorted(unresolved),
+                'unmodeled_roster_count':unmodeled,
                 'availability_scenario':'unresolved' if unresolved else 'specified',
                 'conditional_assumption':conditional,
                 'used_in_prediction':False,'limitations':'minutes redistribution proxy; no verified replacement impact or availability probabilities'}

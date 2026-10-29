@@ -28,3 +28,13 @@ class LineupTests(unittest.TestCase):
         self.assertNotIn('0',[p['player_id'] for p in result['players']])
         status['players']['bad-id']='out'
         self.assertIsNone(project_rotation(players,roster,status,'2026-10-29T12:30:00+00:00','2026-10-30T00:00:00+00:00'))
+
+
+    def test_listed_uncertain_player_without_role_history_is_not_silently_ignored(self):
+        ids=[str(i) for i in range(10)]
+        roster={'player_ids':ids,'team':'A','verified':True,'source':'fixture','observed_at':'2026-10-29T12:00:00+00:00'}
+        players=[{'player_id':p,'team':'A','date':date(2026,10,27),'minutes':30.,'points':10.} for p in ids[1:]]
+        status={'complete':True,'observed_at':'2026-10-29T12:00:00+00:00','players':{'0':'questionable'}}
+        self.assertIsNone(project_rotation(players,roster,status,'2026-10-29T12:30:00+00:00','2026-10-30T00:00:00+00:00'))
+        status['players']['0']='out'
+        self.assertIsNotNone(project_rotation(players,roster,status,'2026-10-29T12:30:00+00:00','2026-10-30T00:00:00+00:00'))

@@ -16,7 +16,7 @@ on:
 permissions:
   contents: write
 concurrency:
-  group: line-lab-data
+  group: line-lab-lineups
   cancel-in-progress: false
 jobs:
   lineups:
@@ -53,11 +53,21 @@ jobs:
         run: |
           git -C .data-store config user.name 'github-actions[bot]'
           git -C .data-store config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git -C .data-store add observations
+          # These paths are owned only by lineup research. Daily/weekly jobs
+          # modify different files, so their commits can be safely rebased.
+          for path in observations/backfill/nba_play_by_play observations/backfill/nba_pbp_parquet observations/backfill/nba_player_boxscores/2022.sqlite observations/nba_lineups observations/nba_full_lineups observations/nba_stint_features; do
+            if [ -e ".data-store/$path" ]; then
+              git -C .data-store add "$path"
+            fi
+          done
           if ! git -C .data-store diff --cached --quiet; then
             git -C .data-store commit -m 'Archive NBA lineup research source'
-            git -C .data-store pull --rebase origin data/observations
-            git -C .data-store push origin HEAD:data/observations
+            for attempt in 1 2 3; do
+              git -C .data-store pull --rebase origin data/observations
+              if git -C .data-store push origin HEAD:data/observations; then break; fi
+              if [ "$attempt" = 3 ]; then exit 1; fi
+              sleep "$attempt"
+            done
           fi
       - name: Publish source report
         run: |
@@ -66,6 +76,10 @@ jobs:
           git add reports/nba_stint_feature_validation.md reports/nba_lineup_source.md reports/nba_lineup_validation.md reports/nba_full_lineup_validation.md
           if ! git diff --cached --quiet; then
             git commit -m 'Report NBA lineup source inspection'
-            git pull --rebase origin main
-            git push origin HEAD:main
+            for attempt in 1 2 3; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then break; fi
+              if [ "$attempt" = 3 ]; then exit 1; fi
+              sleep "$attempt"
+            done
           fi

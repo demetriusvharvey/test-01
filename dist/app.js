@@ -160,13 +160,6 @@
   $('slate-more').addEventListener('click',()=>{slateLimit+=6;render();});
   function render(){
     setDailyDetails();renderDates();renderFactors();if(!board)return;
-    const gameSelect=$('manual-game'),prior=gameSelect.value;
-    gameSelect.replaceChildren(new Option('Choose an upcoming game',''));
-    for(const game of Array.isArray(board.games)?board.games:[]){
-      if(new Date(game.starts_at)<=new Date())continue;
-      for(const side of ['home','away'])gameSelect.add(new Option(`${game.league} · ${game.away} at ${game.home} · ${game[side]}`,`${game.id}|${side}`));
-    }
-    if([...gameSelect.options].some(o=>o.value===prior))gameSelect.value=prior;
     const accuracy=board.accuracy||{wins:0,losses:0};
     $('accuracy').textContent=accuracy.percent==null?'—':Number(accuracy.percent).toFixed(1)+'%';
     $('record').textContent=(accuracy.wins||0)+'W – '+(accuracy.losses||0)+'L · '+((accuracy.wins||0)+(accuracy.losses||0))+' settled'+(accuracy.pending?' · '+accuracy.pending+' pending':'');
@@ -215,25 +208,6 @@
   }
   async function refresh(){try{const r=await fetch('board.json?view='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('unavailable');board=await r.json();render();}catch(_){$('freshness').textContent='Board unavailable';$('picks').innerHTML='<div class="empty"><strong>Unable to load picks.</strong><p>Please try again shortly.</p></div>';}}
   const storageKey='pick-variable-ideas-v1';
-  $('manual-odds-form').addEventListener('submit',e=>{
-    e.preventDefault();
-    const selected=$('manual-game').value,price=Number($('manual-price').value),stake=Number($('manual-stake').value);
-    const split=selected.lastIndexOf('|'),id=selected.slice(0,split),side=selected.slice(split+1);
-    const game=(Array.isArray(board?.games)?board.games:[]).find(g=>g.id===id&&new Date(g.starts_at)>new Date());
-    const label=game?.[side];
-    if(!game||!['home','away'].includes(side)||!label||!Number.isSafeInteger(price)||Math.abs(price)<100||!Number.isFinite(stake)||stake<=0||stake>1000000){
-      $('manual-result').textContent='Select an upcoming game and enter valid American odds (at most -100 or at least +100) and a positive stake.';return;
-    }
-    const decimal=price<0?1+100/-price:1+price/100,breakEven=1/decimal;
-    const observed=new Date().toISOString();
-    try{
-      const key='fanduel-manual-observations-v1';let saved=JSON.parse(localStorage.getItem(key)||'[]');
-      if(!Array.isArray(saved))saved=[];
-      saved.push({game_id:id,team:label,league:game.league,book:'FanDuel',source:'user entry',american_odds:price,stake,observed_at:observed});
-      localStorage.setItem(key,JSON.stringify(saved.slice(-50)));
-      $('manual-result').textContent=`Your FanDuel observation for ${label}: ${odds(price)}, saved ${displayTime(observed)}. Break-even: ${(breakEven*100).toFixed(2)}%. At $${stake.toFixed(2)}, winning profit $${(stake*(decimal-1)).toFixed(2)}; total payout $${(stake*decimal).toFixed(2)}. No validated edge is available to assess this price.`;
-    }catch(_){$('manual-result').textContent='Browser storage unavailable; price was not saved.';}
-  });
   function getIdeas(){try{const items=JSON.parse(localStorage.getItem(storageKey)||'[]');return Array.isArray(items)?items.slice(0,100):[];}catch(_){return [];}}
   function saveIdeas(items){try{localStorage.setItem(storageKey,JSON.stringify(items));return true;}catch(_){$('idea-message').textContent='Could not save on this device. Check your browser storage settings.';return false;}}
   function renderIdeas(){const ideas=getIdeas();$('ideas').innerHTML=ideas.map(item=>`<li><div><strong>${escape(item.name)}</strong><small>${escape(item.league)}${item.note?' · '+escape(item.note):''}</small></div><button type="button" class="remove-idea" data-idea="${escape(item.id)}" aria-label="Remove ${escape(item.name)}">Remove</button></li>`).join('');}

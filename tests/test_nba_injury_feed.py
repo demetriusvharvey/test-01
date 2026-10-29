@@ -105,6 +105,30 @@ class NbaInjuryFeedTests(unittest.TestCase):
         self.assertEqual(quality['missing_position'],1);self.assertEqual(quality['rows'],len(positions))
         self.assertNotIn('espn:',json.dumps(quality))
 
+    def test_missing_team_report_never_claims_full_coverage(self):
+        nba={'sport':'basketball_nba','count':1,'players':[{
+            'team_abbr':'PHI','player_id':'espn:1','position':'F','status_code':'out',
+            'status_since':'2026-10-28T17:00:00Z'}]}
+        board={'picks':[{'id':'nba:test'}]}
+        attach_nba_summaries(board,{'nba:test':self.event},nba,self.now)
+        context=board['picks'][0]['nba_availability_context']
+        self.assertTrue(context['incomplete'])
+        self.assertTrue(context['teams']['away']['report_present'])
+        self.assertFalse(context['teams']['home']['report_present'])
+        self.assertEqual(context['teams']['home']['counts']['out'],0)
+        nfl={'sport':'football_nfl','count':1,'players':[{
+            'team_abbr':'KC','player_id':'espn:2','position':'QB','status_code':'out',
+            'status_since':'2026-10-28T17:00:00Z'}]}
+        event={'id':'nfl:test','league':'NFL','away':'KC','home':'BUF',
+               'away_name':'Kansas City Chiefs','home_name':'Buffalo Bills',
+               'starts_at':'2026-10-28T23:00:00Z'}
+        board={'picks':[{'id':'nfl:test'}]}
+        attach_nfl_summaries(board,{'nfl:test':event},nfl,self.now)
+        context=board['picks'][0]['nfl_provider_availability_context']
+        self.assertTrue(context['incomplete'])
+        self.assertFalse(context['teams']['home']['report_present'])
+        self.assertFalse(context['used_in_prediction'])
+
     def test_espn_team_codes_are_mapped_by_league_before_aggregating(self):
         nba={'sport':'basketball_nba','count':6,'players':[
             {'team_abbr':team,'player_id':f'espn:{i}','position':'G','status_code':'out','status_since':'2026-10-28T17:00:00Z'}

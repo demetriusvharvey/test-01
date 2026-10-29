@@ -1,5 +1,5 @@
 {
-  "evaluated_at": "2026-10-29T20:56:30.616918+00:00",
+  "evaluated_at": "2026-10-29T21:01:25.659109+00:00",
   "data_coverage": {
     "nba-efficiency-logistic-v1": {
       "audited_attempts": 0,
@@ -57,7 +57,17 @@
         "voids": 0,
         "excluded": 0,
         "accuracy": null
-      }
+      },
+      "fully_settled_day_comparison": {
+        "complete_days": 0,
+        "model_wins": 0,
+        "model_settled": 0,
+        "elo_wins": 0,
+        "elo_settled": 0,
+        "accuracy_difference": null
+      },
+      "review_status": "awaiting_outcomes",
+      "minimum_settled_review_sample": 300
     },
     "nba-efficiency-logistic-v1": {
       "decisions": 1,
@@ -77,7 +87,17 @@
         "voids": 0,
         "excluded": 0,
         "accuracy": null
-      }
+      },
+      "fully_settled_day_comparison": {
+        "complete_days": 0,
+        "model_wins": 0,
+        "model_settled": 0,
+        "elo_wins": 0,
+        "elo_settled": 0,
+        "accuracy_difference": null
+      },
+      "review_status": "awaiting_outcomes",
+      "minimum_settled_review_sample": 300
     },
     "nba-partial-stint-logistic-v1": {
       "decisions": 1,
@@ -97,7 +117,17 @@
         "voids": 0,
         "excluded": 0,
         "accuracy": null
-      }
+      },
+      "fully_settled_day_comparison": {
+        "complete_days": 0,
+        "model_wins": 0,
+        "model_settled": 0,
+        "elo_wins": 0,
+        "elo_settled": 0,
+        "accuracy_difference": null
+      },
+      "review_status": "awaiting_outcomes",
+      "minimum_settled_review_sample": 300
     },
     "nba-player-box-logistic-v1": {
       "decisions": 1,
@@ -117,7 +147,17 @@
         "voids": 0,
         "excluded": 0,
         "accuracy": null
-      }
+      },
+      "fully_settled_day_comparison": {
+        "complete_days": 0,
+        "model_wins": 0,
+        "model_settled": 0,
+        "elo_wins": 0,
+        "elo_settled": 0,
+        "accuracy_difference": null
+      },
+      "review_status": "awaiting_outcomes",
+      "minimum_settled_review_sample": 300
     },
     "nba-rotation-logistic-v1": {
       "decisions": 1,
@@ -137,7 +177,17 @@
         "voids": 0,
         "excluded": 0,
         "accuracy": null
-      }
+      },
+      "fully_settled_day_comparison": {
+        "complete_days": 0,
+        "model_wins": 0,
+        "model_settled": 0,
+        "elo_wins": 0,
+        "elo_settled": 0,
+        "accuracy_difference": null
+      },
+      "review_status": "awaiting_outcomes",
+      "minimum_settled_review_sample": 300
     }
   },
   "public_record_changed": false,

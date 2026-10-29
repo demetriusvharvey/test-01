@@ -165,10 +165,34 @@ def injury_quality_counts(payload,observed_at,league):
     return result
 
 
+
+def pregame_injury_readiness(event, observed_at, evaluated_at, coverage_complete):
+    """Conservative snapshot-quality label, never a confirmation of starters."""
+    from datetime import timedelta
+    captured, checked, starts = aware(observed_at), aware(evaluated_at), aware(event['starts_at'])
+    if captured > checked or checked >= starts:
+        return {'status':'unavailable','reason':'not a valid pregame snapshot'}
+    age = checked-captured
+    remaining = starts-checked
+    if not coverage_complete:
+        status,reason='incomplete','one or more team reports missing or invalid'
+    elif age>timedelta(minutes=20):
+        status,reason='stale','injury snapshot more than 20 minutes old'
+    elif remaining<=timedelta(minutes=90):
+        status,reason='recent_unconfirmed','recent injury check; starters and late scratches unverified'
+    else:
+        status,reason='early_snapshot','injuries may change before game time'
+    return {'status':status,'reason':reason,'checked_at':captured.isoformat(),
+            'evaluated_at':checked.isoformat(),'minutes_until_start':int(remaining.total_seconds()//60),
+            'age_minutes':int(age.total_seconds()//60),
+            'confirmed_starters':False,'real_time':False}
+
+
 def attach_nba_summaries(board, markets, payload, observed_at):
     summaries, incomplete = summarize_by_team(payload, observed_at)
     positions = summarize_positions_by_team(payload, observed_at, 'NBA')
     observed = aware(observed_at)
+    checked=datetime.now(timezone.utc)
     for pick in list(board.get('picks', [])) + list(board.get('watchlist', [])):
         event = markets.get(pick.get('id'))
         if not event or event.get('league') != 'NBA':
@@ -182,9 +206,11 @@ def attach_nba_summaries(board, markets, payload, observed_at):
                 if code not in summaries:
                     raise ValueError('unknown team')
                 sides[side] = {'team': event[side + '_name'], 'counts': summaries[code], 'positions': positions[code], 'report_present': bool(sum(summaries[code].values()))}
+            complete=not incomplete and all(v['report_present'] for v in sides.values())
             pick['nba_availability_context'] = {
                 'teams': sides, 'source': 'PropLine, ESPN-sourced',
-                'observed_at': observed.isoformat(), 'incomplete': incomplete or not all(v['report_present'] for v in sides.values()),
+                'observed_at': observed.isoformat(), 'incomplete': not complete,
+                'pregame_readiness': pregame_injury_readiness(event,observed, max(checked,observed),complete),
                 'used_in_prediction': False,
             }
         except (KeyError, TypeError, ValueError):
@@ -196,6 +222,7 @@ def attach_nfl_summaries(board, markets, payload, observed_at):
     summaries, incomplete = summarize_by_team(payload, observed_at, league='NFL')
     positions = summarize_positions_by_team(payload, observed_at, 'NFL')
     observed = aware(observed_at)
+    checked=datetime.now(timezone.utc)
     for pick in list(board.get('picks', [])) + list(board.get('watchlist', [])):
         event = markets.get(pick.get('id'))
         if not event or event.get('league') != 'NFL':continue
@@ -206,9 +233,11 @@ def attach_nfl_summaries(board, markets, payload, observed_at):
                 code=event[side]
                 if code not in summaries:raise ValueError('unknown team')
                 sides[side]={'team':event[side+'_name'],'counts':summaries[code],'positions':positions[code],'report_present':bool(sum(summaries[code].values()))}
+            complete=not incomplete and all(v['report_present'] for v in sides.values())
             pick['nfl_provider_availability_context']={
                 'teams':sides,'source':'PropLine, ESPN-sourced',
-                'observed_at':observed.isoformat(),'incomplete':incomplete or not all(v['report_present'] for v in sides.values()),
+                'observed_at':observed.isoformat(),'incomplete':not complete,
+                'pregame_readiness':pregame_injury_readiness(event,observed,max(checked,observed),complete),
                 'used_in_prediction':False,
             }
         except (KeyError,TypeError,ValueError):continue

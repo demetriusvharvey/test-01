@@ -1,7 +1,7 @@
 :root{color-scheme:light;--page:#f8f8f6;--surface:#fff;--text:#1d292d;--muted:#747e80;--border:#e6e9e7;--accent:#315f57;--accent-soft:#eff6f2;--sand:#f2eee5}
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{position:relative;isolation:isolate;margin:0;background:var(--page);color:var(--text);font:14px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body{position:relative;isolation:isolate;margin:0;background:var(--page);color:var(--text);font:14px/1.55 "Inter","Avenir Next",system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}
 .player-backdrop{position:absolute;z-index:-1;inset:0;overflow:hidden;pointer-events:none}.player-row{position:absolute;left:0;right:0;display:grid;height:480px;opacity:.12;filter:grayscale(1);mask-image:linear-gradient(transparent,#000 18%,#000 72%,transparent)}.player-row img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 25%}.nba-players{top:0;grid-template-columns:repeat(3,1fr)}.nfl-players{bottom:0;grid-template-columns:repeat(2,1fr)}
 button,input,select{font:inherit}button{cursor:pointer}a{color:inherit;text-underline-offset:3px}
 .page{max-width:1040px;margin:auto;padding:52px 32px 48px}

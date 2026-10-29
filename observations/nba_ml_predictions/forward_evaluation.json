@@ -1,0 +1,35 @@
+{
+  "evaluated_at": "2026-10-29T18:56:53.830600+00:00",
+  "invalid_forecasts": 500,
+  "models": {
+    "nba-efficiency-logistic-v1": {
+      "pending": 55,
+      "void": 0,
+      "excluded": 0,
+      "scenario_agreement": 0,
+      "scenario_disagreement": 0,
+      "model": {
+        "games": 0,
+        "accuracy": null,
+        "brier": null,
+        "log_loss": null
+      },
+      "elo": {
+        "games": 0,
+        "accuracy": null,
+        "brier": null,
+        "log_loss": null
+      },
+      "brier_difference": null,
+      "log_loss_difference": null,
+      "status": "awaiting_confirmed_finals"
+    }
+  },
+  "promoted": false,
+  "policy": "earliest eligible immutable forecast per game/version; identical paired Elo sample; confirmed finals only",
+  "limitations": [
+    "pipeline versions may contain retrained artifacts; not a fixed-artifact trial",
+    "conditional scenarios are not an unconditional calibrated prediction",
+    "no causal player-effect validation, market comparison or profitability claim"
+  ]
+}

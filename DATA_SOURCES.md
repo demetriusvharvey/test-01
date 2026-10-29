@@ -56,3 +56,17 @@ comparison when the weekly research workflow succeeds. NBA source upstream
 wagering rights remain unresolved, so archive usage is confined to research;
 neither league's simulation influences published selections. The report may
 be absent or stale when Actions or an input source is unavailable.
+
+
+### NBA multi-stat rotation features (H023)
+
+The existing archived SportsDataverse ESPN player boxes contain assists,
+turnovers, offensive/defensive rebounds, steals, blocks, field-goal attempts,
+three-point attempts, free-throw attempts and fouls. These are parsed as
+optional validated nonnegative numbers; absent/invalid entries remain unknown.
+No new service or subscription is enabled. Earlier same-team player rates and
+projected regulation minutes supply shared historical/live feature definitions.
+Historical rosters remain inferred from prior appearances, not verified injury
+snapshots. Source attribution/usage qualifications above remain in force.
+Outputs are separately versioned research artifacts, not a qualified wagering
+feed or proof of defensive player value.

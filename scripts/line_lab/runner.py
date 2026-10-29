@@ -341,7 +341,8 @@ def main():
                 forward=evaluate_saved(data_root,confirmed_finals,ml_now)
                 print('NBA ML forward evaluation:',json.dumps(forward,sort_keys=True))
                 print('NBA availability scenario statuses:',json.dumps([
-                    {'game_id':p['game_id'],'status':p.get('availability_scenarios',{}).get('status','model_unavailable')}
+                    {'game_id':p['game_id'],'status':p.get('availability_scenarios',{}).get('status','model_unavailable'),
+                     'multi_stat_status':p.get('player_box_scenarios',{}).get('status','model_unavailable')}
                     for p in ml['predictions']],sort_keys=True))
         except Exception as exc:errors.append('Independent slate archive unavailable ('+type(exc).__name__+')')
     # Prices within 20 minutes of start are still useful as labeled snapshots

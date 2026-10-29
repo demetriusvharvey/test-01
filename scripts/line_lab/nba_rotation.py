@@ -5,6 +5,7 @@ import math
 from collections import defaultdict,deque
 from datetime import date
 from .constants import NBA_TEAMS,normalize_code,team_code
+from .nba_player_features import BOX_STATS,allocate_minutes
 
 
 def parse_players(text):
@@ -22,7 +23,13 @@ def parse_players(text):
             key=(day,team,player)
             if key in seen:continue
             seen.add(key)
-            rows.append({'date':day,'team':team,'player_id':player,'minutes':minutes,'points':points})
+            parsed={'date':day,'team':team,'player_id':player,'minutes':minutes,'points':points}
+            for metric in BOX_STATS:
+                try:
+                    value=float(row[metric])
+                    parsed[metric]=value if math.isfinite(value) and value>=0 else None
+                except (KeyError,TypeError,ValueError):parsed[metric]=None
+            rows.append(parsed)
         except (KeyError,TypeError,ValueError):continue
     return rows
 
@@ -41,16 +48,17 @@ def rotation_features(games,players):
             eligible=[p for p in history if last_team[p]==team and 0<(day-last[p]).days<=21]
             values=[]
             for player in eligible:
-                records=history[player]
+                records=[r for r in history[player] if r['team']==team]
                 minutes=sum(r['minutes'] for r in records)/len(records)
                 ppm=sum(r['points'] for r in records)/sum(r['minutes'] for r in records)
                 values.append((player,minutes,ppm,len(records)))
             values.sort(key=lambda v:(-v[1],v[0]));values=values[:12]
             if len(values)<8:continue
-            total=sum(v[1] for v in values)
-            team_projections[team]={'projected_points':sum(240*v[1]/total*v[2] for v in values),
-                                    'top_five_share':sum(v[1] for v in values[:5])/total,
-                                    'experienced_share':sum(v[1] for v in values if v[3]>=5)/total,
+            allocated=allocate_minutes([{'player_id':v[0],'weight':v[1],'ppm':v[2],'games':v[3]} for v in values])
+            if allocated is None:continue
+            team_projections[team]={'projected_points':sum(v['minutes']*v['ppm'] for v in allocated),
+                                    'top_five_share':sum(sorted((v['minutes'] for v in allocated),reverse=True)[:5])/240,
+                                    'experienced_share':sum(v['minutes'] for v in allocated if v['games']>=5)/240,
                                     'players':len(values)}
         for game in games_byday[day]:
             h,a=team_projections.get(game['home']),team_projections.get(game['away'])

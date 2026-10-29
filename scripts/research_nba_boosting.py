@@ -18,7 +18,7 @@ import joblib
 from datetime import datetime,timezone
 
 
-def evaluate(rows,season,artifact_dir=None,feature_names=None):
+def evaluate(rows,season,artifact_dir=None,feature_names=None,model_version=None):
     names=feature_names or list(FEATURES)+list(METRICS)
     earlier=sorted({r['season'] for r in rows if r['season']<season})
     if len(earlier)<2:return None
@@ -28,7 +28,7 @@ def evaluate(rows,season,artifact_dir=None,feature_names=None):
     if len(train)<500 or len(calibration)<200 or not test:return None
     x=lambda data:[r['vector'] for r in data];y=lambda data:[r['home_win'] for r in data]
     metrics=lambda p:score_metrics([{'probability':float(v),'outcome':r['home_win']} for v,r in zip(p,test)])
-    result={'model_version':'nba-efficiency-sklearn-v1','test_season':season,
+    result={'model_version':model_version or 'nba-efficiency-sklearn-v1','test_season':season,
             'training_seasons':earlier[:-1],'calibration_season':earlier[-1],
             'training_games':len(train),'calibration_games':len(calibration),
             'missing_inputs':['player impacts','injuries','projected lineups','travel'],
@@ -51,7 +51,7 @@ def evaluate(rows,season,artifact_dir=None,feature_names=None):
                          'promoted':False},folder/(name+'.joblib'),compress=3)
             if name=='logistic':
                 scaler=model.named_steps['standardscaler'];linear=model.named_steps['logisticregression']
-                export={'model_version':'nba-rotation-logistic-v1' if feature_names else 'nba-efficiency-logistic-v1','features':names,
+                export={'model_version':model_version or ('nba-rotation-logistic-v1' if feature_names else 'nba-efficiency-logistic-v1'),'features':names,
                         'mean':scaler.mean_.tolist(),'scale':scaler.scale_.tolist(),
                         'weights':linear.coef_[0].tolist(),'intercept':float(linear.intercept_[0]),
                         'calibration_weight':float(calibrator.coef_[0][0]),

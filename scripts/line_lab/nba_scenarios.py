@@ -10,7 +10,7 @@ from .constants import ET
 def conditional_forecasts(model,base_vector,event,players,rosters,payload,observed_at,now,predict):
     """Return explicit scenarios, not a fabricated P(plays) mixture or interval."""
     if not payload or not observed_at:return {'status':'injury_feed_unavailable','scenarios':[]}
-    if model.get('model_version')!='nba-rotation-logistic-v1' or aware(model['exported_at'])>aware(now):
+    if model.get('model_version') not in ('nba-rotation-logistic-v1','nba-player-box-logistic-v1') or aware(model['exported_at'])>aware(now):
         return {'status':'rotation_model_unavailable','scenarios':[]}
     mapped={}
     for side in ('home','away'):
@@ -24,6 +24,7 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
                 'join_diagnostics':{side:{k:report[k] for k in ('diagnostics','unmatched','invalid','matched_players','roster_players')}
                                     for side,(roster,report) in mapped.items()}}
     cutoff=aware(now).astimezone(ET).date();scenarios=[]
+    multi_stat=model['model_version']=='nba-player-box-logistic-v1'
     # Enumerate each listed uncertain player independently, including opposing
     # availability states. Never assign unsupported participation probabilities.
     uncertain=[(side,p) for side,(_,report) in mapped.items()
@@ -47,6 +48,11 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
                 summaries[side]=cache[cache_key];continue
             rotation=project_rotation(players,roster,report,now,event['starts_at'],absent,conditional=True)
             if rotation is None:return {'status':'insufficient_rotation_history','scenarios':[]}
+            if multi_stat:
+                from .nba_player_features import current_summary
+                summary=current_summary(players,rotation,now)
+                if summary is None:return {'status':'player_metrics_unavailable','scenarios':[]}
+                summaries[side]=summary;cache[cache_key]=summary;continue
             scoring=0.;experienced=0.;minutes=[]
             for p in rotation['players']:
                 rows=sorted((r for r in players if r['player_id']==p['player_id'] and r['team']==roster['team'] and r['date']<cutoff),key=lambda r:r['date'])[-10:]
@@ -58,7 +64,10 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
             summaries[side]=(scoring,sum(sorted(minutes,reverse=True)[:5])/240,experienced)
             cache[cache_key]=summaries[side]
         h,a=summaries['home'],summaries['away']
-        vector=base_vector+[(h[0]-a[0])/20,h[1]-a[1],h[2]-a[2]]
+        if multi_stat:
+            from .nba_player_features import difference
+            vector=base_vector+difference(h,a)
+        else:vector=base_vector+[(h[0]-a[0])/20,h[1]-a[1],h[2]-a[2]]
         probability=predict(model,vector)
         scenarios.append({'scenario':label,'home_probability':probability,'away_probability':1-probability,
                           'features':dict(zip(model['features'],vector)),
@@ -73,4 +82,4 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
             'model_version':model['model_version'],'injury_observed_at':observed_at,
             'model_hash':hashlib.sha256(json.dumps(model,sort_keys=True).encode()).hexdigest(),
             'assumption':'unlisted players available within each scenario; not confirmed',
-            'limitations':'no scenario weights, causal injury effects, defensive player values or validated replacement impacts'}
+            'limitations':'no scenario weights, causal injury effects, complete defensive values or validated replacement impacts; box-score events are proxies'}

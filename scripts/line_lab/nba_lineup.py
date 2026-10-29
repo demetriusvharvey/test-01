@@ -96,20 +96,9 @@ def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=(),cond
             minutes=sum(r['minutes'] for r in records)/len(records)
             if not math.isfinite(minutes) or minutes<=0:continue
             estimates.append({'player_id':p,'weight':minutes,'minutes':0.,'prior_games':len(records)})
-        if len(estimates)<8:return None
-        # Redistribute to observed rotation players, capped at regulation 48.
-        remaining=240.;active=list(estimates)
-        while active and remaining>1e-8:
-            total=sum(p['weight'] for p in active);capped=[]
-            for p in active:
-                allocation=remaining*p['weight']/total
-                if allocation>=48:
-                    p['minutes']=48.;capped.append(p)
-            if not capped:
-                for p in active:p['minutes']=remaining*p['weight']/total
-                remaining=0.;break
-            remaining-=48*len(capped);active=[p for p in active if p not in capped]
-        if remaining>1e-8:return None
+        from .nba_player_features import allocate_minutes
+        estimates=allocate_minutes(estimates)
+        if estimates is None:return None
         return {'team':team,'observed_at':now.isoformat(),'roster_observed_at':observed.isoformat(),
                 'injury_observed_at':report_time.isoformat(),'players':estimates,
                 'unavailable_players':sorted(excluded),'unresolved_players':sorted(unresolved),

@@ -39,6 +39,14 @@ if __name__=='__main__':
         diagnostic=row.get('availability_scenarios',{}).get('join_diagnostics')
         if diagnostic:lines.append('\nAggregate join diagnostics: '+json.dumps(diagnostic,sort_keys=True)+'\n')
     lines+=['','Each saved forecast carries model/input hashes, model and input observation times, missing inputs and uncertainty. Source freshness is limited to the archived assets. No unseen player/lineup data is manufactured.','']
+    lines+=['## Multi-stat availability scenarios','',
+            '| Game | Status | Scenarios | Home sensitivity range | Consistent winner |',
+            '|---|---|---:|---|---|']
+    for row in result['predictions']:
+        context=row.get('player_box_scenarios') or {}
+        bounds=context.get('home_scenario_range')
+        interval=f'{bounds[0]:.4f}–{bounds[1]:.4f}' if bounds else 'unavailable'
+        lines.append(f"| {row['away']} at {row['home']} | {context.get('status','model_unavailable')} | {context.get('scenario_count',0)} | {interval} | {context.get('consistent_winner') or 'unresolved'} |")
     lines+=['## Implementation acceptance','',f"Status: {acceptance['status']}; today’s games checked: {acceptance['games_checked']}.",
             'This verifies model inference and conditional injury integration. It does not establish causal injury impacts, confirmed lineups, predictive interval coverage, wagering permissions, profitability or production promotion.','']
     lines.extend(f"- {'PASS' if c['passed'] else 'MISSING'}: {c['check']}" for c in acceptance['checks'])

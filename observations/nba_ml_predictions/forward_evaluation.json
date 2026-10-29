@@ -1,5 +1,5 @@
 {
-  "evaluated_at": "2026-10-29T19:59:38.416821+00:00",
+  "evaluated_at": "2026-10-29T20:12:52.851892+00:00",
   "invalid_forecasts": 500,
   "models": {
     "nba-efficiency-logistic-v1": {
@@ -27,6 +27,16 @@
   },
   "conditional_winner_records": {
     "nba-convex-ensemble-v1": {
+      "wins": 0,
+      "losses": 0,
+      "pending": 55,
+      "abstained": 0,
+      "void": 0,
+      "excluded": 0,
+      "settled_predictions": 0,
+      "accuracy": null
+    },
+    "nba-partial-stint-logistic-v1": {
       "wins": 0,
       "losses": 0,
       "pending": 55,

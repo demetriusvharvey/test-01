@@ -95,8 +95,13 @@
       }
     ],
     "edge": 0.024922795427182565,
-    "outcome": "pending",
-    "model": "elo-market-v2"
+    "outcome": "loss",
+    "model": "elo-market-v2",
+    "graded_at": "2026-10-29T07:00:39.619316+00:00",
+    "final_score": {
+      "home": 120,
+      "away": 96
+    }
   },
   {
     "id": "nba:2026-10-28:GSW:MIN",
@@ -142,8 +147,13 @@
       }
     ],
     "edge": 0.01605802681034596,
-    "outcome": "pending",
-    "model": "elo-market-v2"
+    "outcome": "loss",
+    "model": "elo-market-v2",
+    "graded_at": "2026-10-29T07:00:39.619316+00:00",
+    "final_score": {
+      "home": 114,
+      "away": 119
+    }
   },
   {
     "id": "nba:2026-10-28:MIA:ATL",
@@ -189,7 +199,12 @@
       }
     ],
     "edge": 0.013194315936606804,
-    "outcome": "pending",
-    "model": "elo-market-v2"
+    "outcome": "loss",
+    "model": "elo-market-v2",
+    "graded_at": "2026-10-29T07:00:39.619316+00:00",
+    "final_score": {
+      "home": 117,
+      "away": 129
+    }
   }
 ]

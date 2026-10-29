@@ -9,7 +9,7 @@
     "pick_day": "2026-10-28",
     "predicted_at": "2026-10-28T23:23:44.894111+00:00",
     "probability": 0.81903865,
-    "outcome": "pending",
+    "outcome": "win",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -50,7 +50,12 @@
     },
     "feature_snapshot_hash": "cc4abf1ff1fecba433a0e7731bafb87f93e5d38b64f53c20fb72e9f3cbf1a396",
     "model_only_probability": 0.8190386461471668,
-    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-29T07:00:40.344336+00:00",
+    "final_score": {
+      "home": 111,
+      "away": 117
+    }
   },
   {
     "id": "nba:2026-10-28:OKC:DAL",
@@ -62,7 +67,7 @@
     "pick_day": "2026-10-28",
     "predicted_at": "2026-10-28T23:23:44.894111+00:00",
     "probability": 0.8055641,
-    "outcome": "pending",
+    "outcome": "loss",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -103,7 +108,12 @@
     },
     "feature_snapshot_hash": "8748fef5ee7dc4d8355e527e69e0915f59f50fac8868b9249979e327271844d0",
     "model_only_probability": 0.8055640984059844,
-    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-29T07:00:40.344336+00:00",
+    "final_score": {
+      "home": 120,
+      "away": 96
+    }
   },
   {
     "id": "nba:2026-10-28:GSW:MIN",
@@ -115,7 +125,7 @@
     "pick_day": "2026-10-28",
     "predicted_at": "2026-10-28T23:23:44.894111+00:00",
     "probability": 0.7279526,
-    "outcome": "pending",
+    "outcome": "loss",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -156,6 +166,166 @@
     },
     "feature_snapshot_hash": "b44fdc3ebca256e4520a5e5c5cd7ee57dcb0c25072dcca8c53cde1a7a6984b84",
     "model_only_probability": 0.7279525967999763,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-29T07:00:40.344336+00:00",
+    "final_score": {
+      "home": 114,
+      "away": 119
+    }
+  },
+  {
+    "id": "nba:2026-10-29:MEM:POR",
+    "league": "NBA",
+    "team_code": "POR",
+    "team": "Portland Trail Blazers",
+    "opponent": "Memphis Grizzlies",
+    "starts_at": "2026-10-30T02:00:00+00:00",
+    "pick_day": "2026-10-29",
+    "predicted_at": "2026-10-29T07:00:40.344336+00:00",
+    "probability": 0.74329723,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "POR",
+      "away": "MEM",
+      "starts_at": "2026-10-30T02:00:00+00:00",
+      "home_rating": 1546.6777879032468,
+      "away_rating": 1401.9850044363347,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-27",
+      "away_last": "2026-10-26",
+      "home_margins": [
+        41,
+        8,
+        7
+      ],
+      "away_margins": [
+        20,
+        3,
+        11,
+        5
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "ff0d08b052e50736b85c4a4ee9e4650b597731bcee2ff6860732a3ce4216727c"
+      }
+    },
+    "feature_snapshot_hash": "66168c7f13e6ae164ddaf14351d826bf5ee0e44a1f82cf7c03f8d92b02f6c3f9",
+    "model_only_probability": 0.7432972297160214,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  },
+  {
+    "id": "nfl:2026-10-29:CAR:GB",
+    "league": "NFL",
+    "team_code": "GB",
+    "team": "Green Bay Packers",
+    "opponent": "Carolina Panthers",
+    "starts_at": "2026-10-30T00:15:00+00:00",
+    "pick_day": "2026-10-29",
+    "predicted_at": "2026-10-29T07:00:40.344336+00:00",
+    "probability": 0.66582202,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "GB",
+      "away": "CAR",
+      "starts_at": "2026-10-30T00:15:00+00:00",
+      "home_rating": 1528.755322404217,
+      "away_rating": 1451.0031952635013,
+      "home_advantage": 42,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-25",
+      "away_last": "2026-10-25",
+      "home_margins": [
+        -21,
+        3,
+        24,
+        10,
+        -3
+      ],
+      "away_margins": [
+        31,
+        -3,
+        6,
+        11,
+        -30
+      ],
+      "source_text_sha256": {
+        "games.csv": "83ea98b158ffecdfc63475a387aeb6198e1c1a050cb0366f1519df8b707b66e5"
+      }
+    },
+    "feature_snapshot_hash": "84d96d66e9beb8ab33effe8a6db2832c40c976e258f552c2fca1310e82f39835",
+    "model_only_probability": 0.6658220166031706,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  },
+  {
+    "id": "nba:2026-10-29:SAC:NOP",
+    "league": "NBA",
+    "team_code": "NOP",
+    "team": "New Orleans Pelicans",
+    "opponent": "Sacramento Kings",
+    "starts_at": "2026-10-30T00:00:00+00:00",
+    "pick_day": "2026-10-29",
+    "predicted_at": "2026-10-29T07:00:40.344336+00:00",
+    "probability": 0.58762877,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "NOP",
+      "away": "SAC",
+      "starts_at": "2026-10-30T00:00:00+00:00",
+      "home_rating": 1387.54403189571,
+      "away_rating": 1366.018153612067,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-24",
+      "away_last": "2026-10-27",
+      "home_margins": [
+        -3,
+        -1,
+        -6
+      ],
+      "away_margins": [
+        -25,
+        -8,
+        -11,
+        -27
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "ff0d08b052e50736b85c4a4ee9e4650b597731bcee2ff6860732a3ce4216727c"
+      }
+    },
+    "feature_snapshot_hash": "f3a0c5dd254bc60cdb3d7a013c630a8295dc01893163180f73223805580090c2",
+    "model_only_probability": 0.5876287718866917,
     "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
   }
 ]

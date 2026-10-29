@@ -7,6 +7,8 @@ on:
       - scripts/research_models.py
       - scripts/research_player_impact.py
       - scripts/research_nba_statistical.py
+      - scripts/research_nba_boosting.py
+      - scripts/line_lab/nba_efficiency.py
       - scripts/line_lab/nba_statistical.py
       - scripts/line_lab/player_impact.py
       - scripts/evaluate_challengers.py
@@ -40,6 +42,8 @@ jobs:
       - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: '3.12'
+      - name: Install free research dependencies
+        run: pip install -r requirements-research.txt
       - name: Verify research gates
         run: python -m unittest discover -s tests
       - name: Run preregistered research
@@ -48,6 +52,7 @@ jobs:
         run: |
           python scripts/research_patterns.py --data-root "$PICKS_DATA_ROOT" --output PATTERN_REPORT.md
           python scripts/research_models.py --data-root "$PICKS_DATA_ROOT" --output reports/model_registry.md
+          OMP_NUM_THREADS=2 python -m scripts.research_nba_boosting --data-root "$PICKS_DATA_ROOT" --output reports/nba_boosting_validation.md
           python -m scripts.research_nba_statistical --data-root "$PICKS_DATA_ROOT" --output reports/nba_statistical_validation.md
           python -m scripts.research_player_impact --data-root "$PICKS_DATA_ROOT" --output reports/player_training_status.md
           python scripts/evaluate_challengers.py --data-root "$PICKS_DATA_ROOT" --output reports/challenger_forward.md
@@ -71,7 +76,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reports/nba_statistical_validation.md PATTERN_REPORT.md reports/model_registry.md reports/player_training_status.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md reports/simulation_validation.md reports/simulator_source_schema.md reports/scoring_process_validation.md reports/winner_accuracy_replay.md
+          git add reports/nba_boosting_validation.md reports/nba_statistical_validation.md PATTERN_REPORT.md reports/model_registry.md reports/player_training_status.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md reports/simulation_validation.md reports/simulator_source_schema.md reports/scoring_process_validation.md reports/winner_accuracy_replay.md
           if ! git diff --cached --quiet; then
             git commit -m 'Update weekly research summaries'
             git pull --rebase origin main

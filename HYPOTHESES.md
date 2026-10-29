@@ -351,3 +351,25 @@ negative results. Correct H025/H026 season tests jointly. Ratings remain
 observational associations, not possession RAPM, causal injury effects,
 complete defense or game-winner probabilities. More data does not justify a
 production switch by itself. Record the full-game model separately.
+
+## H027 — season-frozen lineup-value feature in the NBA outcome model
+
+Registered after H025, before this new outcome-model test. For each game season,
+fit a fixed-alpha=1000 player ridge rating using only earlier seasons' accepted
+full-game stints. Include all observed training players as nuisance controls;
+publish/consume only effects supported by 120 earlier training minutes. Never
+use the game's actual lineup/participation as a pregame feature. Project from
+prior player appearances and infer historical membership as in H023, marking
+historical pregame availability unknown. Add only the projected home-minus-away
+lineup association /20 to H023's 27 features. An unknown projected player effect
+withholds the new feature, rather than becoming zero.
+
+Add the free 2021-22 player/PBP season as warm-up where available. Keep the
+existing 500-training/200-calibration game requirements and fixed logistic/GBM
+configuration. Compare 27 versus 28 features and Elo on identical later games;
+direction is lower calibrated log loss/Brier. Fit/calibrate strictly in older
+seasons. Correct related H023/H024/H027 game-outcome tests jointly; do not treat
+this follow-up on inspected archives as independent confirmation. Preserve
+insufficient-data and negative results. Current injury scenarios must use the
+same season-frozen rating definitions, not a differently refitted rating.
+No public promotion or wagering-edge claim follows from this test.

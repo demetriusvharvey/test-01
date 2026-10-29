@@ -1,6 +1,6 @@
 {
   "hypothesis": "H025",
-  "evaluated_at": "2026-10-29T19:41:20.112443+00:00",
+  "evaluated_at": "2026-10-29T19:52:19.724766+00:00",
   "input_hash": "230eda6b12b5334847cb9dfd02c78631acb82a37ea4a4e9e2032611930840c2e",
   "sources": [
     {
@@ -193,7 +193,7 @@
       "paired_day_test": {
         "games": 222,
         "game_days": 92,
-        "mean_difference": -42.72103034967089,
+        "mean_difference": -42.72103034967098,
         "p_value": 0.7464253574642535,
         "iterations": 10000,
         "seed": 20261028

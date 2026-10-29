@@ -4,12 +4,15 @@ This is descriptive context only, not a validated model input. The provider's
 terms require the user to obtain a key and agree to them before enabling calls.
 """
 import json
+import os
 import re
 from datetime import datetime, timezone
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 
 from .constants import NBA_TEAMS, NFL_TEAMS, normalize_code
 from .history import aware
+from .propline_quota import record_headers
 
 URL = 'https://api.prop-line.com/v1/sports/basketball_nba/injuries'
 STATUSES = {'out', 'out_first_half', 'doubtful', 'questionable', 'probable',
@@ -35,8 +38,13 @@ def _fetch_injuries(key, enabled, url, opener):
     if not key or str(enabled).strip().lower() != 'true':
         return None
     request = Request(url, headers={'X-API-Key': key, 'Accept': 'application/json'})
-    with opener(request, timeout=15) as response:
-        body = response.read(5_000_001)
+    try:
+        with opener(request, timeout=15) as response:
+            body = response.read(5_000_001)
+            record_headers(os.environ.get('PICKS_DATA_ROOT',''),getattr(response,'headers',{}),datetime.now(timezone.utc).isoformat())
+    except HTTPError as exc:
+        record_headers(os.environ.get('PICKS_DATA_ROOT',''),exc.headers,datetime.now(timezone.utc).isoformat())
+        raise
     if len(body) > 5_000_000:
         raise ValueError('injury response too large')
     return json.loads(body), datetime.now(timezone.utc).isoformat()

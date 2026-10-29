@@ -34,6 +34,7 @@ jobs:
         run: python -m unittest discover -s tests
       - name: Update ratings, prices and results
         env:
+          PROPLINE_REQUEST_PURPOSE: ${{ github.event_name == 'push' && 'development' || 'operational' }}
           PICKS_DATA_ROOT: ${{ github.workspace }}/.data-store
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
           ODDS_API_FEATURED_MARKETS: ${{ vars.ODDS_API_FEATURED_MARKETS }}

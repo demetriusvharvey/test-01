@@ -21,7 +21,7 @@ if __name__=='__main__':
     payload=None;observed=None
     key=os.environ.get('PROPLINE_API_KEY','').strip()
     if use_provider(key,os.environ.get('PROPLINE_ENABLED',''),False):
-        if reserve_call(args.data_root,'injuries_nba',now):
+        if reserve_call(args.data_root,'injuries_nba',now,purpose='research'):
             payload,observed=fetch_nba_injuries(key,True)
     now=datetime.now(timezone.utc).isoformat()
     result=record_nba_predictions(args.data_root,games,board.get('games',[]),now,payload,observed)

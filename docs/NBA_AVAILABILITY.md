@@ -38,8 +38,12 @@ for displayed games and does not write the raw league feed to either Git branch.
 Validated prediction effects require rights-compatible historical availability,
 lineups/minutes and outcome data, as well as forward and time-ordered tests.
 
-The integration reserves at most 200 calls per UTC day across schedule, score,
-and injury requests, well below the advertised 1,000-request free limit. A
+The integration reserves at most 500 calls per UTC day across schedule, score,
+and injury requests, below the free 1,000-request limit verified October 29, 2026.
+Push-triggered development runs have a 200-call sublimit; research has 30.
+The final 150 requests are reserved for scheduled/manual operational runs.
+Numeric provider quota headers and Retry-After cooldowns also stop requests;
+credentials and response headers unrelated to quota are never archived. A
 regular hourly run makes at most six calls; errors also consume the local budget.
 The reservations are persisted by the workflow after an update, so a run that
 fails before the archive is committed may lose its local reservation counts.
@@ -47,3 +51,8 @@ An exhausted or unavailable budget stops calls instead of upgrading a plan.
 An explicitly postponed or cancelled score status overrides an upcoming event.
 Provider score rows are held in memory; only individual results for recorded
 selections can be published, while supplemental results use their own sources.
+
+A total schedule outage preserves a successful slate for at most 95 minutes,
+with its original timestamp and explicit stale/error flags. Started picks are
+removed. This display fallback creates no new forecasts and never converts a
+verified empty schedule into cached games.

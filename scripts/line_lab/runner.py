@@ -446,6 +446,11 @@ def main():
                             'nfl_provider_injury_context':'configured' if propline_key and propline_enabled else 'not_configured',
                             'scoreboard_source':score_source,
                             'cross_check_independent':False}
+    from .board_freshness import protect_last_success
+    previous_board_path=ROOT/'dist'/'board.json'
+    try:previous_board=json.loads(previous_board_path.read_text()) if previous_board_path.exists() else None
+    except (OSError,ValueError):previous_board=None
+    board=protect_last_success(board,previous_board,now.isoformat())
     (ROOT/'dist'/'board.json').write_text(json.dumps(board,indent=2)+'\n')
     print('Board:',len(board['picks']),'active picks;',board['accuracy']['wins'],'wins;',board['accuracy']['losses'],'losses;',len(errors),'source warnings')
     print(json.dumps({'event':'pipeline_complete','generated_at':now.isoformat(),'active_board_picks':len(board['picks']),

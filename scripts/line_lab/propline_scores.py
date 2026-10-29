@@ -5,14 +5,17 @@ memory; they are not published as a raw data set. A status of ``expired`` is
 not a final score, and unknown or conflicting games are rejected.
 """
 import json
+import os
 import sqlite3
 import uuid
 from contextlib import closing
 from datetime import datetime, timezone
 from pathlib import Path
 from urllib.request import Request, urlopen
+from urllib.error import HTTPError
 from .constants import ET, game_id, team_code
 from .history import aware
+from .propline_quota import DAILY_LIMIT,allowed,record_headers
 
 SPORTS={'NBA':'basketball_nba','NFL':'football_nfl'}
 VALID={'upcoming','in_progress','final','postponed','cancelled','canceled','expired'}
@@ -28,18 +31,20 @@ def use_provider(key,setting,injury_only=False):
     return choice in ('true','1','yes') or (bool(str(key or '').strip()) and choice in ('','auto') and not injury_only)
 
 
-def reserve_call(root,endpoint,observed_at,daily_limit=200):
+def reserve_call(root,endpoint,observed_at,daily_limit=DAILY_LIMIT,purpose=None):
     """Reserve a conservative daily request budget before calling the provider."""
-    if not root or endpoint not in ('scores_nba','scores_nfl','events_nba','events_nfl','injuries_nba','injuries_nfl') or not isinstance(daily_limit,int) or isinstance(daily_limit,bool) or daily_limit<1:
+    purpose=purpose or os.environ.get('PROPLINE_REQUEST_PURPOSE','operational')
+    if purpose not in ('operational','development','research'):return False
+    if not root or endpoint not in ('scores_nba','scores_nfl','events_nba','events_nfl','injuries_nba','injuries_nfl') or not isinstance(daily_limit,int) or isinstance(daily_limit,bool) or not 1<=daily_limit<=DAILY_LIMIT:
         return False
     now=aware(observed_at);path=Path(root)/'observations'/'propline_quota'/(now.date().isoformat()+'.sqlite')
     path.parent.mkdir(parents=True,exist_ok=True)
     with closing(sqlite3.connect(path)) as db:
         db.executescript(QUOTA);db.execute('BEGIN IMMEDIATE')
-        count=db.execute('SELECT count(*) FROM calls').fetchone()[0]
-        if count>=daily_limit:
+        if not allowed(db,daily_limit,purpose,observed_at):
             db.rollback();return False
-        db.execute('INSERT INTO calls VALUES (?,?,?)',(uuid.uuid4().hex,endpoint,now.isoformat()))
+        label=endpoint if purpose=='operational' else purpose+':'+endpoint
+        db.execute('INSERT INTO calls VALUES (?,?,?)',(uuid.uuid4().hex,label,now.isoformat()))
         db.commit();return True
 
 
@@ -47,8 +52,13 @@ def _fetch(key,league,endpoint,opener):
     if not key or league not in SPORTS:raise ValueError('missing key or unsupported league')
     request=Request(f'https://api.prop-line.com/v1/sports/{SPORTS[league]}/{endpoint}',
                     headers={'X-API-Key':key,'Accept':'application/json'})
-    with opener(request,timeout=15) as response:
-        body=response.read(5_000_001)
+    try:
+        with opener(request,timeout=15) as response:
+            body=response.read(5_000_001)
+            record_headers(os.environ.get('PICKS_DATA_ROOT',''),getattr(response,'headers',{}),datetime.now(timezone.utc).isoformat())
+    except HTTPError as exc:
+        record_headers(os.environ.get('PICKS_DATA_ROOT',''),exc.headers,datetime.now(timezone.utc).isoformat())
+        raise
     if len(body)>5_000_000:raise ValueError('score response too large')
     return json.loads(body),datetime.now(timezone.utc).isoformat()
 

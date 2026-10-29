@@ -394,3 +394,36 @@ H023/H024/H027/H028 outcome tests jointly. Retain null/negative results and
 report coverage; a partial component is not a verified full defensive or
 replacement value. Current scenarios must retain missing-effect/coverage
 flags. No public-model promotion follows from this exploratory follow-up.
+
+
+## H029 — NBA daily winner selection, paired ranking and forward records
+
+Registered after H028's negative calibration comparison, before this ranking
+test. Compare Elo, the matched fourteen-feature team logistic, twenty-seven
+feature player logistic and thirty-feature coverage-aware logistic. Use their
+chronological held-out probabilities; never refit on the ranking test seasons.
+On each ET archive date select up to three highest model winner probabilities,
+with game-ID tie breaks and no sportsbook input. A 50/50 game has no selected
+winner. Score only dates with probabilities for every NBA game in the archived
+results slate, and report excluded dates and coverage. Archive completeness is
+not asserted to be an independently verified historical schedule.
+
+Primary target: selected-winner accuracy versus Elo on the same dates. Report
+selected sample sizes, Brier/log loss, calibration bins, seeded 2,000-draw day
+block bootstrap accuracy intervals and paired day-block tests, with BH correction
+including related H023/H024/H027/H028 outcome tests. No cherry-picked season or
+best-looking threshold earns promotion. Fixed 0.50/0.60/0.70/0.80 probability
+coverage tables are descriptive only, not fitted selection rules. Previously
+inspected archives remain exploratory, not independent forward confirmation,
+verified injury backtests or evidence of profitability.
+
+Forward: freeze a separate first usable daily top-three decision per model,
+using only unstarted NBA games at least five minutes away. Require complete
+model coverage of that eligible slate; missing/stale inputs are not a zero-pick
+forecast and may be retried. A conditional model selects a team only if every
+listed availability scenario agrees; rank by the minimum of that team's scenario
+probabilities. This is scenario sensitivity, not a confidence bound or weighted
+participation estimate. Save a matched Elo selection at the identical snapshot,
+source prediction hashes, input times, model/policy versions and abstentions.
+Grade only already-qualified confirmed finals. Preserve pending/void outcomes,
+immutability and independent records; never overwrite the site's Elo ledger.

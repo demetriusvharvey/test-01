@@ -238,3 +238,33 @@ or the most favorable position coefficient. This is not a player-impact model,
 cannot supply justified questionable-player probabilities, and does not
 influence picks until independent later results establish benefit. NBA
 upstream status rights remain unresolved and are excluded from this challenger.
+
+## H023 — NBA lagged multi-stat rotation challenger
+
+Registered before running this new feature comparison. Add earlier-appearance
+projected assists, turnovers, offensive and defensive rebounds, steals, blocks,
+field-goal attempts, three-point attempts, free-throw attempts and fouls to the
+existing fourteen team and three rotation features. Use the last ten earlier
+same-team appearances, infer historical membership only from earlier playing
+records within 21 days, cap rotations at twelve players and regulation minutes
+at 48 per player / 240 per team. No same-date player outcomes may enter features.
+Missing metrics are unavailable, never zero. Historical membership is inferred;
+this is not a reconstruction of historical injury reports or confirmed lineups.
+
+Fixed C=1 standardized logistic, separate prior-season Platt calibration and
+100-iteration histogram boosting use the existing training protocol. Compare
+team-only, scoring-rotation and multi-stat models on exactly the same games in
+each later season. Direction: lower calibrated log loss and Brier than the
+scoring-rotation baseline. Run paired calendar-day sign-randomization tests of
+log-loss differences with seed 20261028 and apply BH correction across every
+reported season; report null/negative results as well. Archive already inspected,
+so this is exploratory research, not untouched confirmation or promotion.
+
+Current injury scenarios may substitute verified current roster membership and
+listed absences into the same projected-stat feature definitions. Enumerate
+uncertain players independently without invented scenario probabilities. Steals,
+blocks and rebounds are box-score indicators, not RAPM or complete defensive
+value; minutes redistribution is a proxy, not validated replacement impact.
+Unknown historical availability, source-use qualifications, market performance
+and independent forward validation remain explicit limitations. No sportsbook
+prices enter the learner and no public pick switches based on these tests.

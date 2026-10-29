@@ -1,6 +1,71 @@
 {
   "sources": [
     {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2022.csv",
+      "sha256": "1a639a8c47250a35cb823a17510d6a1a900bbab9bcaec19b7b79abe2f7f803e6",
+      "observed_at": "2026-10-29T20:02:46.298491+00:00",
+      "parsed_player_rows": 27942,
+      "columns": [
+        "game_id",
+        "season",
+        "season_type",
+        "game_date",
+        "game_date_time",
+        "athlete_id",
+        "athlete_display_name",
+        "team_id",
+        "team_name",
+        "team_location",
+        "team_short_display_name",
+        "minutes",
+        "field_goals_made",
+        "field_goals_attempted",
+        "three_point_field_goals_made",
+        "three_point_field_goals_attempted",
+        "free_throws_made",
+        "free_throws_attempted",
+        "offensive_rebounds",
+        "defensive_rebounds",
+        "rebounds",
+        "assists",
+        "steals",
+        "blocks",
+        "turnovers",
+        "fouls",
+        "plus_minus",
+        "points",
+        "starter",
+        "ejected",
+        "did_not_play",
+        "reason",
+        "active",
+        "athlete_jersey",
+        "athlete_short_name",
+        "athlete_headshot_href",
+        "athlete_position_name",
+        "athlete_position_abbreviation",
+        "team_display_name",
+        "team_uid",
+        "team_slug",
+        "team_logo",
+        "team_abbreviation",
+        "team_color",
+        "team_alternate_color",
+        "home_away",
+        "team_winner",
+        "team_score",
+        "opponent_team_id",
+        "opponent_team_name",
+        "opponent_team_location",
+        "opponent_team_display_name",
+        "opponent_team_abbreviation",
+        "opponent_team_logo",
+        "opponent_team_color",
+        "opponent_team_alternate_color",
+        "opponent_team_score"
+      ]
+    },
+    {
       "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2023.csv",
       "sha256": "1b797107d4a0b2fbc98862bd283b9e807a05aa11c671b89a471b25591a589493",
       "observed_at": "2026-10-29T14:10:45.265164+00:00",
@@ -408,29 +473,29 @@
         "logistic": {
           "raw": {
             "games": 1209,
-            "accuracy": 0.6650124069478908,
-            "brier": 0.21012025649877392,
-            "log_loss": 0.6065205682135808
+            "accuracy": 0.6658395368072787,
+            "brier": 0.21001550683129025,
+            "log_loss": 0.6063021114032283
           },
           "calibrated": {
             "games": 1209,
             "accuracy": 0.6782464846980976,
-            "brier": 0.20956686008986994,
-            "log_loss": 0.6052011394640122
+            "brier": 0.20950917188933976,
+            "log_loss": 0.6050980001844606
           }
         },
         "boosting": {
           "raw": {
             "games": 1209,
-            "accuracy": 0.6542597187758478,
-            "brier": 0.2239618443979801,
-            "log_loss": 0.6413529368287062
+            "accuracy": 0.6476426799007444,
+            "brier": 0.22662470665994713,
+            "log_loss": 0.6495088887613073
           },
           "calibrated": {
             "games": 1209,
             "accuracy": 0.6492969396195203,
-            "brier": 0.22200590121729852,
-            "log_loss": 0.6354204062380774
+            "brier": 0.22420078796123283,
+            "log_loss": 0.6410188106251618
           }
         }
       }
@@ -517,29 +582,29 @@
         "logistic": {
           "raw": {
             "games": 1209,
-            "accuracy": 0.6823821339950372,
-            "brier": 0.20453889045423923,
-            "log_loss": 0.59573345633277
+            "accuracy": 0.6832092638544252,
+            "brier": 0.20449619226674778,
+            "log_loss": 0.595641700418464
           },
           "calibrated": {
             "games": 1209,
-            "accuracy": 0.6873449131513648,
-            "brier": 0.20477839413075793,
-            "log_loss": 0.5961003394574804
+            "accuracy": 0.6840363937138131,
+            "brier": 0.2047542066199947,
+            "log_loss": 0.5960649076257655
           }
         },
         "boosting": {
           "raw": {
             "games": 1209,
-            "accuracy": 0.6683209263854425,
-            "brier": 0.21369634278507865,
-            "log_loss": 0.6190331033539737
+            "accuracy": 0.6674937965260546,
+            "brier": 0.21338424988340415,
+            "log_loss": 0.6186285498719509
           },
           "calibrated": {
             "games": 1209,
             "accuracy": 0.6674937965260546,
-            "brier": 0.2133811930418296,
-            "log_loss": 0.6165886752031878
+            "brier": 0.2130027435602308,
+            "log_loss": 0.6157592136724743
           }
         }
       }
@@ -628,29 +693,29 @@
         "logistic": {
           "raw": {
             "games": 52,
-            "accuracy": 0.5961538461538461,
-            "brier": 0.22617458245662622,
-            "log_loss": 0.6366476783394668
+            "accuracy": 0.6153846153846154,
+            "brier": 0.22550488909826166,
+            "log_loss": 0.6351640258597774
           },
           "calibrated": {
             "games": 52,
-            "accuracy": 0.5961538461538461,
-            "brier": 0.2266867160987453,
-            "log_loss": 0.6378372540583862
+            "accuracy": 0.6153846153846154,
+            "brier": 0.22605103059985557,
+            "log_loss": 0.6364213744720477
           }
         },
         "boosting": {
           "raw": {
             "games": 52,
             "accuracy": 0.6538461538461539,
-            "brier": 0.2305341873283741,
-            "log_loss": 0.6579312455534012
+            "brier": 0.23039235234567276,
+            "log_loss": 0.6577417960050571
           },
           "calibrated": {
             "games": 52,
             "accuracy": 0.6538461538461539,
-            "brier": 0.22731488864906524,
-            "log_loss": 0.647411155872307
+            "brier": 0.2275194655480854,
+            "log_loss": 0.6480395250613924
           }
         }
       }

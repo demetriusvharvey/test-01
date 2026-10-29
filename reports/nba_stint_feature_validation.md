@@ -1,8 +1,8 @@
 # NBA season-frozen lineup values in outcome prediction
 
-Run: 2026-10-29T20:03:30.437559+00:00. H027.
+Run: 2026-10-29T20:11:07.522199+00:00. H027.
 Matched game features: 6. Counts: {"2023-24": 5, "2025-26": 1}.
-Player ratings use strictly earlier seasons; actual same-game participation never becomes a pregame feature. Low-support/unseen projected players withhold this model. No sample thresholds are lowered to force training.
+Player ratings use strictly earlier seasons; actual same-game participation never becomes a pregame feature. No sample thresholds are lowered to force training. Low-support/unseen projected players withhold this model.
 
 | Season | Status | Games | 27-feature Brier | 28-feature Brier | Elo Brier | Joint BH p |
 |---|---|---:|---:|---:|---:|---:|

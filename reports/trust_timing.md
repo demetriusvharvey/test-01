@@ -1,6 +1,6 @@
 # Shadow trust and timing research
 
-Run 2026-10-29T14:58:18.166501+00:00: 0 labeled source rows before eligibility checks.
+Run 2026-10-29T18:54:58.457976+00:00: 0 labeled source rows before eligibility checks.
 
 | League | Status | Training games | Inner validation | Promoted |
 | --- | --- | ---: | --- | --- |

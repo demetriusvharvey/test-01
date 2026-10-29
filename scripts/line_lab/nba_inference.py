@@ -52,8 +52,10 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
     player_model=json.loads(player_model_path.read_text()) if player_model_path.exists() else None
     ensemble_path=Path(root)/'observations/nba_ensemble/current_candidate.json'
     ensemble_model=json.loads(ensemble_path.read_text()) if ensemble_path.exists() else None
+    stint_model_path=Path(root)/'observations/nba_lineups/current_candidate.json'
+    stint_model=json.loads(stint_model_path.read_text()) if stint_model_path.exists() else None
     players=[];rosters={}
-    if (rotation_model or player_model) and injury_payload:
+    if (rotation_model or player_model or stint_model) and injury_payload:
         from .nba_rotation import parse_players
         from .nba_lineup import parse_current_rosters
         for file in sorted((Path(root)/'observations/backfill/nba_player_boxscores').glob('*.sqlite')):
@@ -91,6 +93,10 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
             from .nba_ensemble import conditional_ensemble
             predictions[-1]['ensemble_scenarios']=conditional_ensemble(ensemble_model,p,row['elo'],
                 predictions[-1].get('availability_scenarios'),predictions[-1].get('player_box_scenarios'),event,now)
+        if stint_model:
+            from .nba_lineup_value import lineup_associations
+            predictions[-1]['stint_strength_context']=lineup_associations(
+                stint_model,event,players,rosters,injury_payload,injury_observed_at,now)
     folder=Path(root)/'observations/nba_ml_predictions';folder.mkdir(parents=True,exist_ok=True)
     with sqlite3.connect(folder/(current.date().isoformat()+'.sqlite')) as db:
         db.executescript("""CREATE TABLE IF NOT EXISTS predictions (key TEXT PRIMARY KEY,payload TEXT NOT NULL);

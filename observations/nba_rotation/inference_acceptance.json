@@ -1,0 +1,95 @@
+{
+  "status": "passed",
+  "games_checked": 3,
+  "checks": [
+    {
+      "check": "today_has_forecasts",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:CLE:ATL:probabilities",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:CLE:ATL:pregame",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:CLE:ATL:provenance",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:CLE:ATL:missingness_and_uncertainty",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:CLE:ATL:live_roster_injury_join",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:CLE:ATL:scenario_reproducibility",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:CLE:ATL:scenario_probabilities",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:MEM:POR:probabilities",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:MEM:POR:pregame",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:MEM:POR:provenance",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:MEM:POR:missingness_and_uncertainty",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:MEM:POR:live_roster_injury_join",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:MEM:POR:scenario_reproducibility",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:MEM:POR:scenario_probabilities",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:SAC:NOP:probabilities",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:SAC:NOP:pregame",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:SAC:NOP:provenance",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:SAC:NOP:missingness_and_uncertainty",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:SAC:NOP:live_roster_injury_join",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:SAC:NOP:scenario_reproducibility",
+      "passed": true
+    },
+    {
+      "check": "nba:2026-10-29:SAC:NOP:scenario_probabilities",
+      "passed": true
+    }
+  ],
+  "scope": "model inference and conditional roster/injury integration; not model promotion or causal injury validation"
+}

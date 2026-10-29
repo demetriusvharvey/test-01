@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-10-29T19:34:57.650836+00:00",
+  "generated_at": "2026-10-29T19:38:49.750220+00:00",
   "model": "Pure team Elo winner ranking \u2014 probabilities not calibrated",
   "source": "AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; PropLine scoreboard",
   "accuracy": {
@@ -94,7 +94,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -246,7 +246,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -356,7 +356,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -456,42 +456,42 @@
           "home": -118,
           "away": 100,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.199562+00:00",
+          "fetched_at": "2026-10-29T19:37:40.288642+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -120,
           "away": 100,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.017166+00:00",
+          "fetched_at": "2026-10-29T19:37:59.141675+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -112,
           "away": -109,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -539,7 +539,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -589,42 +589,42 @@
           "home": -245,
           "away": 200,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.199562+00:00",
+          "fetched_at": "2026-10-29T19:37:40.288642+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -238,
           "away": 195,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -235,
           "away": 190,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -235,
           "away": 192,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.017166+00:00",
+          "fetched_at": "2026-10-29T19:37:59.141675+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -245,
           "away": 200,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -230,
           "away": 185,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -684,7 +684,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -734,42 +734,42 @@
           "home": -198,
           "away": 166,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -185,
           "away": 154,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -200,
           "away": 165,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -197,
           "away": 165,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -871,7 +871,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -921,42 +921,42 @@
           "home": -300,
           "away": 245,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.199562+00:00",
+          "fetched_at": "2026-10-29T19:37:40.288642+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -270,
           "away": 220,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -285,
           "away": 230,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -285,
           "away": 228,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.017166+00:00",
+          "fetched_at": "2026-10-29T19:37:59.141675+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -300,
           "away": 240,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -295,
           "away": 235,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -997,7 +997,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -1047,28 +1047,28 @@
           "home": -105,
           "away": -115,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -105,
           "away": -115,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -105,
           "away": -115,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -103,
           "away": -118,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -1122,7 +1122,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -1172,28 +1172,28 @@
           "home": -700,
           "away": 500,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -1000,
           "away": 650,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -850,
           "away": 575,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -835,
           "away": 550,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -1241,7 +1241,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -1291,28 +1291,28 @@
           "home": 280,
           "away": -355,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 275,
           "away": -350,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 275,
           "away": -350,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 270,
           "away": -345,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -1366,7 +1366,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -1416,35 +1416,35 @@
           "home": -112,
           "away": -104,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.199562+00:00",
+          "fetched_at": "2026-10-29T19:37:40.288642+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -109,
           "away": -112,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -1492,7 +1492,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -1542,35 +1542,35 @@
           "home": -205,
           "away": 172,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.199562+00:00",
+          "fetched_at": "2026-10-29T19:37:40.288642+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -192,
           "away": 160,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -210,
           "away": 170,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -220,
           "away": 175,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -1624,7 +1624,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -1674,28 +1674,28 @@
           "home": 160,
           "away": -192,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 155,
           "away": -190,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 155,
           "away": -190,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 155,
           "away": -190,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -1749,7 +1749,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -1799,28 +1799,28 @@
           "home": -185,
           "away": 154,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -190,
           "away": 154,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -185,
           "away": 150,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -190,
           "away": 155,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -1868,7 +1868,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -1918,28 +1918,28 @@
           "home": -230,
           "away": 190,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -250,
           "away": 200,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -235,
           "away": 190,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -240,
           "away": 190,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -1993,7 +1993,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2043,28 +2043,28 @@
           "home": 142,
           "away": -170,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 140,
           "away": -170,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 140,
           "away": -170,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 143,
           "away": -175,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -2118,7 +2118,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2168,35 +2168,35 @@
           "home": 104,
           "away": -122,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.199562+00:00",
+          "fetched_at": "2026-10-29T19:37:40.288642+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 105,
           "away": -125,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 105,
           "away": -125,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.401992+00:00",
+          "fetched_at": "2026-10-29T19:37:47.617610+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 105,
           "away": -125,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.567227+00:00",
+          "fetched_at": "2026-10-29T19:38:03.553856+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 106,
           "away": -129,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -2256,7 +2256,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2358,7 +2358,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2422,7 +2422,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2486,7 +2486,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2531,7 +2531,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2583,7 +2583,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2640,7 +2640,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2704,7 +2704,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2722,42 +2722,42 @@
           "home": -335,
           "away": 270,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -325,
           "away": 260,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -325,
           "away": 270,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -320,
           "away": 250,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -330,
           "away": 260,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -360,
           "away": 270,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -2877,7 +2877,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -2927,42 +2927,42 @@
           "home": -134,
           "away": 114,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -142,
           "away": 120,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -140,
           "away": 115,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -138,
           "away": 118,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -140,
           "away": 115,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -148,
           "away": 118,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -3058,7 +3058,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -3108,42 +3108,42 @@
           "home": -168,
           "away": 142,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -170,
           "away": 142,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -165,
           "away": 138,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -173,
           "away": 145,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -175,
           "away": 140,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -3269,7 +3269,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -3319,42 +3319,42 @@
           "home": -188,
           "away": 158,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -192,
           "away": 160,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -200,
           "away": 165,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -190,
           "away": 159,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -195,
           "away": 160,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -3456,7 +3456,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -3506,42 +3506,42 @@
           "home": -510,
           "away": 390,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -500,
           "away": 380,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -525,
           "away": 400,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -480,
           "away": 360,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -500,
           "away": 370,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -500,
           "away": 375,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -3643,7 +3643,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -3693,42 +3693,42 @@
           "home": -126,
           "away": 108,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -122,
           "away": 102,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -125,
           "away": 105,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -121,
           "away": 103,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -125,
           "away": 105,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -117,
           "away": -105,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -3830,7 +3830,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -3880,42 +3880,42 @@
           "home": -172,
           "away": 144,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -170,
           "away": 142,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -179,
           "away": 151,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -180,
           "away": 150,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -175,
           "away": 140,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -4005,7 +4005,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -4055,42 +4055,42 @@
           "home": -670,
           "away": 490,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -625,
           "away": 455,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -625,
           "away": 475,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -625,
           "away": 450,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -650,
           "away": 460,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -670,
           "away": 460,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -4174,7 +4174,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -4264,7 +4264,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -4282,42 +4282,42 @@
           "home": -300,
           "away": 245,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -278,
           "away": 225,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -295,
           "away": 240,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -295,
           "away": 235,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -300,
           "away": 240,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -315,
           "away": 245,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -4419,7 +4419,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -4469,42 +4469,42 @@
           "home": 100,
           "away": -118,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -102,
           "away": -118,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 100,
           "away": -120,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 103,
           "away": -122,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 100,
           "away": -120,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 102,
           "away": -124,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -4600,7 +4600,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -4650,42 +4650,42 @@
           "home": 265,
           "away": -330,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 260,
           "away": -325,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": 270,
           "away": -325,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 265,
           "away": -335,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": 260,
           "away": -330,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 270,
           "away": -360,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -4787,7 +4787,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -4883,7 +4883,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -4901,42 +4901,42 @@
           "home": -270,
           "away": 220,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -238,
           "away": 195,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -275,
           "away": 220,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -250,
           "away": 205,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -275,
           "away": 220,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -250,
           "away": 200,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -5026,7 +5026,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5134,7 +5134,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5198,7 +5198,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5256,7 +5256,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5320,7 +5320,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5378,7 +5378,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5442,7 +5442,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5506,7 +5506,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5570,7 +5570,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5615,7 +5615,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5666,7 +5666,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5736,7 +5736,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5754,42 +5754,42 @@
           "home": -168,
           "away": 142,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -170,
           "away": 142,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "BetMGM": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.628727+00:00",
+          "fetched_at": "2026-10-29T19:37:56.739338+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -170,
           "away": 144,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "Fanatics": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.825488+00:00",
+          "fetched_at": "2026-10-29T19:38:12.589286+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -175,
           "away": 143,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -5879,7 +5879,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -5969,7 +5969,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6033,7 +6033,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6097,7 +6097,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6155,7 +6155,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6225,7 +6225,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6295,7 +6295,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6359,7 +6359,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6423,7 +6423,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6487,7 +6487,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6545,7 +6545,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6590,7 +6590,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6648,7 +6648,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6699,7 +6699,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6769,7 +6769,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6827,7 +6827,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6891,7 +6891,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -6955,7 +6955,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7013,7 +7013,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7083,7 +7083,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7147,7 +7147,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7165,28 +7165,28 @@
           "home": -154,
           "away": 130,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -162,
           "away": 136,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -154,
           "away": 130,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -159,
           "away": 130,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -7300,7 +7300,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7396,7 +7396,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7460,7 +7460,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7478,28 +7478,28 @@
           "home": 142,
           "away": -168,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 142,
           "away": -170,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 144,
           "away": -170,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 140,
           "away": -175,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -7589,7 +7589,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7639,28 +7639,28 @@
           "home": -148,
           "away": 126,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -135,
           "away": 114,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -141,
           "away": 119,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -150,
           "away": 123,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -7762,7 +7762,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7812,28 +7812,28 @@
           "home": 180,
           "away": -215,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 180,
           "away": -218,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 181,
           "away": -218,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 170,
           "away": -215,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -7929,7 +7929,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -7979,28 +7979,28 @@
           "home": 118,
           "away": -138,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 114,
           "away": -135,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 114,
           "away": -134,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 114,
           "away": -137,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -8090,7 +8090,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -8140,28 +8140,28 @@
           "home": 350,
           "away": -450,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 300,
           "away": -380,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 305,
           "away": -390,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 350,
           "away": -480,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -8269,7 +8269,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -8319,28 +8319,28 @@
           "home": 180,
           "away": -215,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 190,
           "away": -230,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 185,
           "away": -225,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 190,
           "away": -240,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -8442,7 +8442,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -8492,28 +8492,28 @@
           "home": -102,
           "away": -116,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 102,
           "away": -122,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 101,
           "away": -118,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -105,
           "away": -117,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -8609,7 +8609,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -8659,28 +8659,28 @@
           "home": -520,
           "away": 400,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -520,
           "away": 390,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -560,
           "away": 400,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -560,
           "away": 405,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -8776,7 +8776,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -8826,28 +8826,28 @@
           "home": 152,
           "away": -180,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 154,
           "away": -185,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 155,
           "away": -190,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 140,
           "away": -177,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -8931,7 +8931,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -8981,28 +8981,28 @@
           "home": -560,
           "away": 420,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -520,
           "away": 390,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -560,
           "away": 400,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -590,
           "away": 425,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -9104,7 +9104,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -9154,28 +9154,28 @@
           "home": -800,
           "away": 560,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -650,
           "away": 470,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -750,
           "away": 500,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -910,
           "away": 600,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -9295,7 +9295,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -9345,28 +9345,28 @@
           "home": -154,
           "away": 130,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -175,
           "away": 145,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -170,
           "away": 142,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -152,
           "away": 125,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -9480,7 +9480,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -9530,28 +9530,28 @@
           "home": -310,
           "away": 250,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": -270,
           "away": 220,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -280,
           "away": 225,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -305,
           "away": 240,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -9641,7 +9641,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -9691,28 +9691,28 @@
           "home": 118,
           "away": -138,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.499178+00:00",
+          "fetched_at": "2026-10-29T19:37:44.300409+00:00",
           "provider": "agentbets"
         },
         "DraftKings": {
           "home": 120,
           "away": -142,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:51.155104+00:00",
+          "fetched_at": "2026-10-29T19:37:45.406656+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 118,
           "away": -139,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.361414+00:00",
+          "fetched_at": "2026-10-29T19:37:59.837645+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 117,
           "away": -141,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.596579+00:00",
+          "fetched_at": "2026-10-29T19:38:42.070271+00:00",
           "provider": "agentbets"
         }
       },
@@ -9808,7 +9808,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.650047+00:00",
+        "observed_at": "2026-10-29T19:38:49.749313+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -9858,21 +9858,21 @@
           "home": -105,
           "away": -115,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.017166+00:00",
+          "fetched_at": "2026-10-29T19:37:59.141675+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -9914,7 +9914,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -9964,21 +9964,21 @@
           "home": -218,
           "away": 180,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -190,
           "away": 158,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.017166+00:00",
+          "fetched_at": "2026-10-29T19:37:59.141675+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -190,
           "away": 155,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -10020,7 +10020,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -10070,21 +10070,21 @@
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": -110,
           "away": -110,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.017166+00:00",
+          "fetched_at": "2026-10-29T19:37:59.141675+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": -115,
           "away": -105,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -10138,7 +10138,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -10188,14 +10188,14 @@
           "home": 142,
           "away": -170,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "Caesars": {
           "home": 140,
           "away": -165,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:52.017166+00:00",
+          "fetched_at": "2026-10-29T19:37:59.141675+00:00",
           "provider": "agentbets"
         }
       },
@@ -10243,7 +10243,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -10293,14 +10293,14 @@
           "home": 114,
           "away": -135,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:50.864452+00:00",
+          "fetched_at": "2026-10-29T19:37:44.843265+00:00",
           "provider": "agentbets"
         },
         "BetRivers": {
           "home": 105,
           "away": -127,
           "as_of": "2026-10-29T19:00:00+00:00",
-          "fetched_at": "2026-10-29T19:34:53.031252+00:00",
+          "fetched_at": "2026-10-29T19:38:12.902617+00:00",
           "provider": "agentbets"
         }
       },
@@ -10360,7 +10360,7 @@
           }
         },
         "source": "PropLine, ESPN-sourced",
-        "observed_at": "2026-10-29T19:34:57.390880+00:00",
+        "observed_at": "2026-10-29T19:38:49.409559+00:00",
         "incomplete": false,
         "used_in_prediction": false
       },
@@ -11070,7 +11070,7 @@
     "status": "descriptive_research_only"
   },
   "monitoring": {
-    "pipeline_generated_at": "2026-10-29T19:34:57.650836+00:00",
+    "pipeline_generated_at": "2026-10-29T19:38:49.750220+00:00",
     "source_warning_count": 0,
     "latest_quote_at": "2026-10-29T19:00:00+00:00",
     "oldest_quote_at": "2026-10-29T19:00:00+00:00",

@@ -76,6 +76,23 @@ class PositionStatusTests(unittest.TestCase):
             fresh,.5,self.rows[0]['features'],future,
             (self.cutoff+timedelta(hours=2)).isoformat()))
 
+    def test_conflicting_duplicate_games_are_rejected_independent_of_order(self):
+        from scripts.line_lab.position_status_model import eligible_rows
+        original=self.rows[0]
+        same=dict(original)
+        self.assertEqual(len(eligible_rows(self.rows+[same],self.cutoff.isoformat())),24)
+        conflict=dict(original,home_win=1-original['home_win'])
+        a=eligible_rows(self.rows+[conflict],self.cutoff.isoformat())
+        b=eligible_rows([conflict]+self.rows,self.cutoff.isoformat())
+        self.assertEqual(len(a),23)
+        self.assertEqual([r['game_id'] for r in a],[r['game_id'] for r in b])
+        changed=dict(original,features={**original['features'],'qb_out_difference':1})
+        self.assertEqual(len(eligible_rows(self.rows+[changed],self.cutoff.isoformat())),23)
+        later=dict(original,forecast_at=(
+            datetime.fromisoformat(original['forecast_at'])+timedelta(minutes=10)).isoformat(),
+            features=changed['features'])
+        self.assertEqual(len(eligible_rows(self.rows+[later],self.cutoff.isoformat())),24)
+
     def test_frozen_report_is_matched_before_shadow_evaluation(self):
         fit=fit_position_shadow(self.rows,'NFL',self.cutoff.isoformat(),16,8,3)
         snapshot=nfl_position_features(self.event,self.context,self.now.isoformat())

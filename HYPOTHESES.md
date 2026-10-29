@@ -373,3 +373,24 @@ this follow-up on inspected archives as independent confirmation. Preserve
 insufficient-data and negative results. Current injury scenarios must use the
 same season-frozen rating definitions, not a differently refitted rating.
 No public promotion or wagering-edge claim follows from this test.
+
+## H028 — measured partial lineup component plus explicit coverage
+
+Registered after H027 yielded only six complete-case examples and no fitted
+outcome model. Preserve that failed/insufficient study. Without lowering the
+120-minute effect threshold, 500-game training floor or 200-game calibration
+floor, test three supplemental inputs: the difference in the measured
+minute-weighted contribution from supported players, home supported-minute
+fraction, and away supported-minute fraction. These are NOT total lineup
+values. Unobserved player coefficients remain unavailable; no individual
+unknown effect is set to zero. The sum over the known subset is a measured
+partial component, paired with explicit unknown exposure indicators.
+
+Keep all 27 prior box/team features and fixed chronological fitting protocol.
+Use prior-season-frozen ratings exactly as H027; no same-game participation
+becomes a predictor. Compare 27 versus 30 features and Elo on identical later
+outcomes. Direction: lower calibrated log loss/Brier. Correct related
+H023/H024/H027/H028 outcome tests jointly. Retain null/negative results and
+report coverage; a partial component is not a verified full defensive or
+replacement value. Current scenarios must retain missing-effect/coverage
+flags. No public-model promotion follows from this exploratory follow-up.

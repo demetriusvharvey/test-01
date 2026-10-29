@@ -1,6 +1,6 @@
 # NBA verified first-quarter lineup associations
 
-Run 2026-10-29T20:10:14.257312+00:00. H025. Source failures: 0.
+Run 2026-10-29T20:52:38.983285+00:00. H025. Source failures: 0.
 Source IDs, unique period constraints and explicit substitutions reconstruct stints. Ambiguous games are rejected. Scope: verified first-quarter. Full-game mode also validates each player against box minutes and excludes overtime. This is postgame training data, not historical pregame availability. No public pick changes.
 
 | Source season | Games seen | Accepted | Rejected | Stints |

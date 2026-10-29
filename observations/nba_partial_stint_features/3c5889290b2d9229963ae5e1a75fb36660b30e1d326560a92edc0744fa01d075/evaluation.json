@@ -1,7 +1,7 @@
 {
   "hypothesis": "H028",
   "partial_coverage": true,
-  "evaluated_at": "2026-10-29T20:11:41.355787+00:00",
+  "evaluated_at": "2026-10-29T20:54:33.859292+00:00",
   "matched_games": 4758,
   "season_counts": {
     "2022-23": 1073,
@@ -300,7 +300,7 @@
         "seed": 20261028
       },
       "raw_p": 0.901009899010099,
-      "adjusted_p_related_outcome_tests": 0.9010098990100989
+      "adjusted_p_related_outcome_tests": 0.9451054894510549
     },
     {
       "season": "2025-26",

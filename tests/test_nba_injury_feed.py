@@ -142,6 +142,16 @@ class NbaInjuryFeedTests(unittest.TestCase):
         self.assertFalse(context['teams']['home']['report_present'])
         self.assertFalse(context['used_in_prediction'])
 
+    def test_missing_team_report_is_not_an_eligible_position_snapshot(self):
+        from scripts.line_lab.availability_features import position_availability_snapshot
+        payload={'sport':'basketball_nba','count':1,'players':[{
+            'team_abbr':'PHI','player_id':'espn:1','position':'F','status_code':'out',
+            'status_since':'2026-10-28T17:00:00Z'}]}
+        board={'picks':[{'id':'nba:test'}]}
+        attach_nba_summaries(board,{'nba:test':self.event},payload,self.now)
+        context=board['picks'][0]['nba_availability_context']
+        self.assertIsNone(position_availability_snapshot(self.event,context,self.now))
+
     def test_pregame_readiness_never_claims_realtime_or_confirmed_lineup(self):
         event=dict(self.event,starts_at='2026-10-28T23:00:00Z')
         recent=pregame_injury_readiness(event,'2026-10-28T21:58:00Z',

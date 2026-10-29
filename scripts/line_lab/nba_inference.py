@@ -15,7 +15,8 @@ from .nba_efficiency import parse_team_stats,enrich_examples
 def probability(model,vector):
     n=len(vector)
     if any(len(model[k])!=n for k in ('features','mean','scale','weights')):raise ValueError('feature dimensions')
-    if any(not math.isfinite(float(x)) for x in vector) or any(float(x)<=0 for x in model['scale']):raise ValueError('invalid input')
+    numbers=list(vector)+list(model['mean'])+list(model['scale'])+list(model['weights'])+[model[k] for k in ('intercept','calibration_intercept','calibration_weight')]
+    if not n or any(type(x) not in (int,float) or not math.isfinite(x) for x in numbers) or any(x<=0 for x in model['scale']):raise ValueError('invalid input or artifact')
     z=float(model['intercept'])+sum(w*(x-m)/s for w,x,m,s in zip(model['weights'],vector,model['mean'],model['scale']))
     # Match sklearn clipping before the calibration logit.
     p=1/(1+math.exp(-max(-35,min(35,z))));p=max(1e-6,min(1-1e-6,p))

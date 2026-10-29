@@ -17,3 +17,10 @@ class NBAInferenceTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as root:
             result=record_nba_predictions(root,[],[],'2026-10-29T12:00:00+00:00')
             self.assertEqual(result,{'status':'model_unavailable','predictions':[]})
+
+
+    def test_nonfinite_artifact_cannot_become_a_confident_prediction(self):
+        model={'features':['x'],'mean':[0.],'scale':[1.],'weights':[.4],
+               'intercept':.1,'calibration_intercept':-.1,'calibration_weight':.9}
+        for key,value in (('weights',[math.nan]),('mean',[math.inf]),('scale',[0.]),('calibration_weight',math.nan)):
+            with self.subTest(key=key),self.assertRaises(ValueError):probability({**model,key:value},[1.])

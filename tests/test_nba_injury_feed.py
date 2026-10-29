@@ -105,6 +105,19 @@ class NbaInjuryFeedTests(unittest.TestCase):
         self.assertEqual(quality['missing_position'],1);self.assertEqual(quality['rows'],len(positions))
         self.assertNotIn('espn:',json.dumps(quality))
 
+    def test_suspension_and_injured_list_are_not_marked_available(self):
+        payload={'sport':'basketball_nba','count':4,'players':[
+            {'team_abbr':'PHI','player_id':f'espn:{i}','position':'F',
+             'status_code':status,'status_since':'2026-10-28T17:00:00Z'}
+            for i,status in enumerate(('suspended','injured_list','out_first_half','probable'))]}
+        totals,incomplete=summarize_by_team(payload,self.now)
+        self.assertFalse(incomplete)
+        self.assertEqual(totals['PHI']['out'],2)
+        self.assertEqual(totals['PHI']['other'],2)
+        positions=summarize_positions_by_team(payload,self.now,'NBA')
+        self.assertEqual(positions['PHI']['F']['out'],2)
+        self.assertEqual(positions['PHI']['F']['other'],2)
+
     def test_missing_team_report_never_claims_full_coverage(self):
         nba={'sport':'basketball_nba','count':1,'players':[{
             'team_abbr':'PHI','player_id':'espn:1','position':'F','status_code':'out',

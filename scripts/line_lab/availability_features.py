@@ -15,7 +15,8 @@ def position_availability_snapshot(event,context,prediction_at):
         statuses=('out','doubtful','questionable','other');teams={};unknown=0
         for side in ('away','home'):
             value=context['teams'][side]
-            if value.get('team')!=event[side+'_name'] or not isinstance(value.get('positions'),dict):return None
+            if (value.get('team')!=event[side+'_name'] or value.get('report_present') is False
+                    or not isinstance(value.get('positions'),dict)):return None
             positions={}
             for position,counts in value['positions'].items():
                 if not isinstance(position,str) or not re.fullmatch(r'[A-Z]{1,7}(?:[-/][A-Z]{1,5})?',position):return None

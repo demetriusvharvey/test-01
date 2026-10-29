@@ -1,6 +1,6 @@
 # NBA first-quarter lineup associations
 
-Run 2026-10-29T19:37:01.079455+00:00. H025. Source failures: 0.
+Run 2026-10-29T19:41:20.112443+00:00. H025. Source failures: 0.
 Actual starters and explicit substitution IDs reconstruct first-quarter stints only. Whole games with ambiguous reconstruction are rejected. This is postgame training data, not historical pregame availability. No public pick changes.
 
 | Source season | Games seen | Accepted | Rejected | Stints |
@@ -13,11 +13,11 @@ Actual starters and explicit substitution IDs reconstruct first-quarter stints o
 
 | Test season | Status | Matched games | Stints | Player MSE | Team MSE | League MSE | BH p |
 |---|---|---:|---:|---:|---:|---:|---:|
-| 2024-25 | insufficient_matched_stints | — | 0 | — | — | — | — |
-| 2025-26 | insufficient_matched_stints | — | 0 | — | — | — | — |
-| 2026-27 | insufficient_matched_stints | — | 0 | — | — | — | — |
+| 2024-25 | evaluated | 95 | 141 | 4866.624 | 4913.502 | 4825.575 | 0.74643 |
+| 2025-26 | evaluated | 122 | 222 | 6071.154 | 6087.744 | 6086.975 | 0.74643 |
+| 2026-27 | evaluated | 14 | 29 | 5840.600 | 5841.836 | 5816.795 | unavailable |
 
-MSE is minute-weighted squared error in net points per 48 minutes; lower is better. These are stint-rate errors, not game-winner accuracy. Ridge penalties are selected on a distinct prior season. Only players with at least 120 earlier stint minutes are estimated; rows with unknown effects are excluded, including test rows. This selective coverage must not be described as all-game validation.
+MSE is minute-weighted squared error in net points per 48 minutes; lower is better. These are stint-rate errors, not game-winner accuracy. Ridge penalties are selected on a distinct prior season. Low-sample players are nuisance controls in training; only effects backed by 120 actual training minutes are published or admitted to validation/test rows. Unknown-player test rows are excluded. This selective coverage must not be described as all-game validation.
 
 Ratings control observed teammates/opponents but remain observational, first-quarter associations. They are not possession RAPM, complete defensive ratings or causal injury effects. Full-game replacement and probability conversion require separate evaluation. All rejected-game reasons, source hashes, thresholds and fold artifacts are retained. No wagering-source approval or profit is established.
 

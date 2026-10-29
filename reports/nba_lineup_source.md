@@ -7,7 +7,7 @@ This is source inspection, not a confirmed lineup reconstruction, trained player
 ```json
 {
   "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2027.csv",
-  "checked_at": "2026-10-29T19:36:29.151712+00:00",
+  "checked_at": "2026-10-29T19:40:49.387249+00:00",
   "failures": [],
   "status": "inspected",
   "columns": [

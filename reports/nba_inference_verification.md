@@ -1,15 +1,15 @@
 # NBA trained-model inference verification
 
-Run: 2026-10-29T19:17:48.449792+00:00. Status: research_forecasts_recorded.
+Run: 2026-10-29T20:01:23.291961+00:00. Status: research_forecasts_recorded.
 Actual scheduled games and trained efficiency logistic artifact. The baseline columns are team-only probabilities; availability ranges come from the separately trained rotation model. Conditional ranges are sensitivity checks, not confidence intervals or weighted predictions. These outputs do not replace public picks.
 
 | Game | Baseline home probability | Baseline away probability | Availability status | Scenarios | Conditional home range | Consistent winner |
 |---|---:|---:|---|---:|---|---|
 | CLE at ATL | 0.5777 | 0.4223 | conditional_research_only | 4 | 0.5728–0.6122 | ATL |
-| MEM at POR | 0.8341 | 0.1659 | conditional_research_only | 1 | 0.8589–0.8589 | POR |
+| MEM at POR | 0.8341 | 0.1659 | conditional_research_only | 2 | 0.8589–0.8614 | POR |
 | SAC at NOP | 0.6536 | 0.3464 | conditional_research_only | 2 | 0.7242–0.7305 | NOP |
 | CHA at WAS | 0.2379 | 0.7621 | conditional_research_only | 2 | 0.1870–0.1903 | CHA |
-| CHI at BOS | 0.8751 | 0.1249 | conditional_research_only | 2 | 0.8616–0.8628 | BOS |
+| CHI at BOS | 0.8751 | 0.1249 | conditional_research_only | 4 | 0.8561–0.8665 | BOS |
 | DEN at PHX | 0.5348 | 0.4652 | conditional_research_only | 2 | 0.5558–0.5678 | PHX |
 | DET at BKN | 0.1622 | 0.8378 | conditional_research_only | 2 | 0.0907–0.1024 | DET |
 | HOU at DAL | 0.2755 | 0.7245 | conditional_research_only | 8 | 0.2454–0.2663 | HOU |
@@ -23,7 +23,7 @@ Actual scheduled games and trained efficiency logistic artifact. The baseline co
 | MIN at SAS | 0.6765 | 0.3235 | conditional_research_only | 1 | 0.6799–0.6799 | SAS |
 | OKC at HOU | 0.4777 | 0.5223 | conditional_research_only | 4 | 0.4842–0.5015 | unresolved |
 | PHI at CHA | 0.6156 | 0.3844 | conditional_research_only | 2 | 0.6792–0.6796 | CHA |
-| POR at UTA | 0.1997 | 0.8003 | conditional_research_only | 2 | 0.1518–0.1540 | POR |
+| POR at UTA | 0.1997 | 0.8003 | conditional_research_only | 4 | 0.1492–0.1540 | POR |
 | SAC at MEM | 0.6044 | 0.3956 | conditional_research_only | 1 | 0.6131–0.6131 | MEM |
 | BKN at IND | 0.6947 | 0.3053 | conditional_research_only | 2 | 0.7789–0.7816 | IND |
 | BOS at ORL | 0.3181 | 0.6819 | conditional_research_only | 1 | 0.4178–0.4178 | BOS |
@@ -32,21 +32,21 @@ Actual scheduled games and trained efficiency logistic artifact. The baseline co
 | ATL at IND | 0.3233 | 0.6767 | conditional_research_only | 2 | 0.3527–0.3563 | ATL |
 | BKN at NYK | 0.8459 | 0.1541 | conditional_research_only | 1 | 0.9099–0.9099 | NYK |
 | BOS at HOU | 0.5284 | 0.4716 | conditional_research_only | 2 | 0.5801–0.5926 | HOU |
-| CHI at PHI | 0.7599 | 0.2401 | conditional_research_only | 4 | 0.7309–0.7332 | PHI |
+| CHI at PHI | 0.7599 | 0.2401 | conditional_research_only | 8 | 0.7220–0.7394 | PHI |
 | DET at CHA | 0.4401 | 0.5599 | conditional_research_only | 2 | 0.4062–0.4389 | DET |
 | MIA at LAL | 0.7299 | 0.2701 | conditional_research_only | 8 | 0.6352–0.7034 | LAL |
 | MIL at MIN | 0.8301 | 0.1699 | conditional_research_only | 1 | 0.8611–0.8611 | MIN |
 | NOP at MEM | 0.5097 | 0.4903 | conditional_research_only | 2 | 0.4279–0.4357 | NOP |
 | OKC at CLE | 0.3940 | 0.6060 | conditional_research_only | 8 | 0.3247–0.3656 | OKC |
 | PHX at GSW | 0.3719 | 0.6281 | conditional_research_only | 4 | 0.4006–0.4126 | PHX |
-| POR at DEN | 0.5242 | 0.4758 | conditional_research_only | 1 | 0.4836–0.4836 | POR |
+| POR at DEN | 0.5242 | 0.4758 | conditional_research_only | 2 | 0.4785–0.4836 | POR |
 | SAC at DAL | 0.6674 | 0.3326 | conditional_research_only | 4 | 0.7337–0.7450 | DAL |
 | TOR at LAC | 0.4684 | 0.5316 | conditional_research_only | 2 | 0.3547–0.3931 | TOR |
 | UTA at SAS | 0.9022 | 0.0978 | conditional_research_only | 2 | 0.9475–0.9483 | SAS |
 | WAS at ORL | 0.7729 | 0.2271 | conditional_research_only | 2 | 0.8437–0.8466 | ORL |
 | ATL at WAS | 0.2102 | 0.7898 | conditional_research_only | 2 | 0.1960–0.1995 | ATL |
 | CHA at BKN | 0.2402 | 0.7598 | conditional_research_only | 1 | 0.1573–0.1573 | CHA |
-| CHI at NYK | 0.8061 | 0.1939 | conditional_research_only | 2 | 0.8383–0.8397 | NYK |
+| CHI at NYK | 0.8061 | 0.1939 | conditional_research_only | 4 | 0.8321–0.8439 | NYK |
 | CLE at OKC | 0.7171 | 0.2829 | conditional_research_only | 8 | 0.7396–0.7729 | OKC |
 | DAL at SAS | 0.8425 | 0.1575 | conditional_research_only | 4 | 0.8689–0.8754 | SAS |
 | IND at MEM | 0.4723 | 0.5277 | conditional_research_only | 2 | 0.3828–0.3866 | IND |
@@ -55,7 +55,7 @@ Actual scheduled games and trained efficiency logistic artifact. The baseline co
 | MIL at BOS | 0.8808 | 0.1192 | conditional_research_only | 1 | 0.8665–0.8665 | BOS |
 | MIN at HOU | 0.6289 | 0.3711 | conditional_research_only | 2 | 0.5912–0.6035 | HOU |
 | PHI at DET | 0.7234 | 0.2766 | conditional_research_only | 4 | 0.7760–0.7987 | DET |
-| POR at PHX | 0.4622 | 0.5378 | conditional_research_only | 2 | 0.4410–0.4531 | POR |
+| POR at PHX | 0.4622 | 0.5378 | conditional_research_only | 4 | 0.4360–0.4531 | POR |
 | TOR at DEN | 0.5340 | 0.4660 | conditional_research_only | 1 | 0.4488–0.4488 | TOR |
 | UTA at NOP | 0.6757 | 0.3243 | conditional_research_only | 4 | 0.7578–0.7668 | NOP |
 | MIA at GSW | 0.4898 | 0.5102 | conditional_research_only | 4 | 0.4478–0.4510 | MIA |
@@ -68,10 +68,10 @@ Each saved forecast carries model/input hashes, model and input observation time
 | Game | Status | Scenarios | Home sensitivity range | Consistent winner |
 |---|---|---:|---|---|
 | CLE at ATL | conditional_research_only | 4 | 0.6298–0.6670 | ATL |
-| MEM at POR | conditional_research_only | 1 | 0.8566–0.8566 | POR |
+| MEM at POR | conditional_research_only | 2 | 0.8472–0.8566 | POR |
 | SAC at NOP | conditional_research_only | 2 | 0.7638–0.7740 | NOP |
 | CHA at WAS | conditional_research_only | 2 | 0.1895–0.1923 | CHA |
-| CHI at BOS | conditional_research_only | 2 | 0.8836–0.8948 | BOS |
+| CHI at BOS | conditional_research_only | 4 | 0.8836–0.9022 | BOS |
 | DEN at PHX | conditional_research_only | 2 | 0.6000–0.6051 | PHX |
 | DET at BKN | conditional_research_only | 2 | 0.1006–0.1165 | DET |
 | HOU at DAL | conditional_research_only | 8 | 0.2657–0.3073 | HOU |
@@ -85,7 +85,7 @@ Each saved forecast carries model/input hashes, model and input observation time
 | MIN at SAS | conditional_research_only | 1 | 0.6671–0.6671 | SAS |
 | OKC at HOU | conditional_research_only | 4 | 0.5574–0.5937 | HOU |
 | PHI at CHA | conditional_research_only | 2 | 0.6549–0.6555 | CHA |
-| POR at UTA | conditional_research_only | 2 | 0.1533–0.1629 | POR |
+| POR at UTA | conditional_research_only | 4 | 0.1533–0.1734 | POR |
 | SAC at MEM | conditional_research_only | 1 | 0.6900–0.6900 | MEM |
 | BKN at IND | conditional_research_only | 2 | 0.7583–0.7630 | IND |
 | BOS at ORL | conditional_research_only | 1 | 0.4317–0.4317 | BOS |
@@ -94,21 +94,21 @@ Each saved forecast carries model/input hashes, model and input observation time
 | ATL at IND | conditional_research_only | 2 | 0.3837–0.3898 | ATL |
 | BKN at NYK | conditional_research_only | 1 | 0.9059–0.9059 | NYK |
 | BOS at HOU | conditional_research_only | 2 | 0.5349–0.5689 | HOU |
-| CHI at PHI | conditional_research_only | 4 | 0.7404–0.7621 | PHI |
+| CHI at PHI | conditional_research_only | 8 | 0.7404–0.7765 | PHI |
 | DET at CHA | conditional_research_only | 2 | 0.3796–0.4191 | DET |
 | MIA at LAL | conditional_research_only | 8 | 0.6110–0.6966 | LAL |
 | MIL at MIN | conditional_research_only | 1 | 0.8610–0.8610 | MIN |
 | NOP at MEM | conditional_research_only | 2 | 0.4547–0.4690 | NOP |
 | OKC at CLE | conditional_research_only | 8 | 0.3160–0.3548 | OKC |
 | PHX at GSW | conditional_research_only | 4 | 0.3854–0.3987 | PHX |
-| POR at DEN | conditional_research_only | 1 | 0.4070–0.4070 | POR |
+| POR at DEN | conditional_research_only | 2 | 0.4070–0.4252 | POR |
 | SAC at DAL | conditional_research_only | 4 | 0.7954–0.8060 | DAL |
 | TOR at LAC | conditional_research_only | 2 | 0.3414–0.3967 | TOR |
 | UTA at SAS | conditional_research_only | 2 | 0.9362–0.9404 | SAS |
 | WAS at ORL | conditional_research_only | 2 | 0.8802–0.8821 | ORL |
 | ATL at WAS | conditional_research_only | 2 | 0.2024–0.2053 | ATL |
 | CHA at BKN | conditional_research_only | 1 | 0.1900–0.1900 | CHA |
-| CHI at NYK | conditional_research_only | 2 | 0.8530–0.8667 | NYK |
+| CHI at NYK | conditional_research_only | 4 | 0.8530–0.8758 | NYK |
 | CLE at OKC | conditional_research_only | 8 | 0.7496–0.7809 | OKC |
 | DAL at SAS | conditional_research_only | 4 | 0.8474–0.8558 | SAS |
 | IND at MEM | conditional_research_only | 2 | 0.4183–0.4246 | IND |
@@ -117,7 +117,7 @@ Each saved forecast carries model/input hashes, model and input observation time
 | MIL at BOS | conditional_research_only | 1 | 0.8783–0.8783 | BOS |
 | MIN at HOU | conditional_research_only | 2 | 0.5726–0.6058 | HOU |
 | PHI at DET | conditional_research_only | 4 | 0.7714–0.7996 | DET |
-| POR at PHX | conditional_research_only | 2 | 0.4090–0.4141 | POR |
+| POR at PHX | conditional_research_only | 4 | 0.4090–0.4324 | POR |
 | TOR at DEN | conditional_research_only | 1 | 0.4250–0.4250 | TOR |
 | UTA at NOP | conditional_research_only | 4 | 0.7252–0.7503 | NOP |
 | MIA at GSW | conditional_research_only | 4 | 0.4268–0.4356 | MIA |

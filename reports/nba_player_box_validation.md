@@ -1,6 +1,6 @@
 # NBA multi-stat player rotation comparison
 
-Run: 2026-10-29T19:17:44.384877+00:00. Hypothesis H023.
+Run: 2026-10-29T20:01:20.029037+00:00. Hypothesis H023.
 Parsed played-player rows: 114003. Identical matched modeling games: 4758.
 Separate older training, prior-season calibration and later-season testing. Archive previously inspected; exploratory only. All metrics use identical games. No public pick is changed.
 

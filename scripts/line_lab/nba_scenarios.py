@@ -1,6 +1,8 @@
 """Conditional roster/injury scenarios using trained rotation features."""
 from .history import aware
 from .nba_lineup import project_rotation,map_injury_statuses
+import hashlib
+import json
 
 
 def conditional_forecasts(model,base_vector,event,players,rosters,payload,observed_at,now,predict):
@@ -35,8 +37,10 @@ def conditional_forecasts(model,base_vector,event,players,rosters,payload,observ
         h,a=summaries['home'],summaries['away']
         vector=base_vector+[(h[0]-a[0])/20,h[1]-a[1],h[2]-a[2]]
         probability=predict(model,vector)
-        scenarios.append({'scenario':label,'home_probability':probability,'away_probability':1-probability})
+        scenarios.append({'scenario':label,'home_probability':probability,'away_probability':1-probability,
+                          'features':dict(zip(model['features'],vector))})
     return {'status':'conditional_research_only','scenarios':scenarios,
             'model_version':model['model_version'],'injury_observed_at':observed_at,
+            'model_hash':hashlib.sha256(json.dumps(model,sort_keys=True).encode()).hexdigest(),
             'assumption':'unlisted players available within each scenario; not confirmed',
             'limitations':'no scenario weights, causal injury effects, defensive player values or validated replacement impacts'}

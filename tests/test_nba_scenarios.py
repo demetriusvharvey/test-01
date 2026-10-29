@@ -16,7 +16,7 @@ class ScenarioTests(unittest.TestCase):
                     players.append({'date':date(2026,10,20)+timedelta(days=day),'team':team,
                                     'player_id':p,'minutes':24.,'points':40. if team=='PHI' and i==0 else 10.})
         event={'home':'PHI','away':'IND','starts_at':'2026-10-30T00:00:00+00:00'}
-        model={'model_version':'nba-rotation-logistic-v1','exported_at':'2026-10-28T00:00:00+00:00'}
+        model={'model_version':'nba-rotation-logistic-v1','exported_at':'2026-10-28T00:00:00+00:00','features':[str(i) for i in range(17)]}
         payload={'sport':'basketball_nba','count':1,'players':[{'team_abbr':'PHI','player_id':'espn:0','status_code':'questionable','status_since':stamp}]}
         predict=lambda model,x:1/(1+math.exp(-x[-3]))
         result=conditional_forecasts(model,[0.]*14,event,players,rosters,payload,stamp,now,predict)

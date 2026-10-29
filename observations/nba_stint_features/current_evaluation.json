@@ -1,6 +1,7 @@
 {
   "hypothesis": "H027",
-  "evaluated_at": "2026-10-29T20:03:30.437559+00:00",
+  "partial_coverage": false,
+  "evaluated_at": "2026-10-29T20:11:07.522199+00:00",
   "matched_games": 6,
   "season_counts": {
     "2023-24": 5,
@@ -18,7 +19,7 @@
       "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2022.parquet",
       "sha256": "0fe5435bdd30187b8d8c5eb27bdf187821274a231f04608f15a46b5b59035f82",
       "observed_at": "2026-10-29T20:02:47.753833+00:00",
-      "cached": false,
+      "cached": true,
       "starter_source": {
         "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2022.csv",
         "sha256": "1a639a8c47250a35cb823a17510d6a1a900bbab9bcaec19b7b79abe2f7f803e6",

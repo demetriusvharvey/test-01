@@ -23,6 +23,12 @@ inputs through a later confirmed final and matched-time challenger Brier
 comparison. Conflicting observed outcomes are excluded. This does not
 establish a successful model or authorize its promotion.
 
+Later source confirmations now have their own append-only history. A result
+first reported by another provider can become eligible when nflverse actually
+corroborates it; the confirmation is never backdated. Conflicting scores are
+quarantined in both model training and forward evaluation. 153 local tests
+pass, including a first report, later confirmation and subsequent conflict.
+
 152 local tests passed, including unpriced-game persistence, duplicate
 idempotence, immutable storage, confirmed-outcome joins and blocked history.
 The complete master specification remains open for player-level replacement

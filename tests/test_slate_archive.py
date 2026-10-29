@@ -3,7 +3,7 @@ import sqlite3
 import tempfile
 import unittest
 from pathlib import Path
-from scripts.line_lab.slate_archive import archive_slate
+from scripts.line_lab.slate_archive import archive_slate,read_slate_inputs
 from scripts.research_models import load_availability_rows
 from scripts.line_lab.position_status_model import FEATURES
 from scripts.line_lab.model_stack import append_trial,record_challenger_forecasts
@@ -11,6 +11,23 @@ from scripts.line_lab.challenger_evaluation import read_inputs,evaluate
 
 
 class SlateArchiveTests(unittest.TestCase):
+    def test_later_confirmation_is_not_backdated_and_conflicts_are_quarantined(self):
+        game={'id':'nfl:2026-10-29:A:B','league':'NFL','starts_at':'2026-10-30T00:00:00+00:00','neutral':False}
+        model={'ratings':{'A':1500,'B':1600},'last':{},'home_advantage':42,
+               'rest_weight':0,'source_hashes':{'games.csv':'hash'}}
+        with tempfile.TemporaryDirectory() as root:
+            archive_slate(root,[game],{'NFL':model},[],'2026-10-29T12:00:00+00:00')
+            final={'id':game['id'],'home':'B','away':'A','home_score':24,'away_score':17,'source':'PropLine scores'}
+            archive_slate(root,[],{},[final],'2026-10-30T04:00:00+00:00')
+            self.assertEqual(read_slate_inputs(root,'2026-10-30T05:00:00+00:00')[1],{})
+            final['source']='nflverse'
+            archive_slate(root,[],{},[final],'2026-10-30T06:00:00+00:00')
+            self.assertEqual(read_slate_inputs(root,'2026-10-30T05:00:00+00:00')[1],{})
+            self.assertEqual(read_slate_inputs(root,'2026-10-30T07:00:00+00:00')[1][game['id']]['observed_at'],'2026-10-30T06:00:00+00:00')
+            final['home_score']=21
+            archive_slate(root,[],{},[final],'2026-10-30T08:00:00+00:00')
+            self.assertEqual(read_slate_inputs(root,'2026-10-30T09:00:00+00:00')[1],{})
+
     def test_unpriced_game_is_saved_immutably_and_feeds_future_training(self):
         game={'id':'nfl:2026-10-29:A:B','league':'NFL','home':'Home','away':'Away',
               'starts_at':'2026-10-30T00:00:00+00:00','neutral':False}

@@ -24,6 +24,13 @@ CREATE TRIGGER IF NOT EXISTS sf_no_update BEFORE UPDATE ON slate_forecasts BEGIN
 CREATE TRIGGER IF NOT EXISTS sf_no_delete BEFORE DELETE ON slate_forecasts BEGIN SELECT RAISE(ABORT,'immutable forecast'); END;
 CREATE TRIGGER IF NOT EXISTS so_no_update BEFORE UPDATE ON slate_outcomes BEGIN SELECT RAISE(ABORT,'immutable outcome'); END;
 CREATE TRIGGER IF NOT EXISTS so_no_delete BEFORE DELETE ON slate_outcomes BEGIN SELECT RAISE(ABORT,'immutable outcome'); END;
+CREATE TABLE IF NOT EXISTS slate_confirmations (
+ confirmation_key TEXT PRIMARY KEY, game_id TEXT NOT NULL, observed_at TEXT NOT NULL,
+ home TEXT NOT NULL, away TEXT NOT NULL, home_score INTEGER NOT NULL,
+ away_score INTEGER NOT NULL, source TEXT NOT NULL
+);
+CREATE TRIGGER IF NOT EXISTS sc_no_update BEFORE UPDATE ON slate_confirmations BEGIN SELECT RAISE(ABORT,'immutable confirmation'); END;
+CREATE TRIGGER IF NOT EXISTS sc_no_delete BEFORE DELETE ON slate_confirmations BEGIN SELECT RAISE(ABORT,'immutable confirmation'); END;
 """
 
 
@@ -69,6 +76,10 @@ def archive_slate(root,games,models,finals,now,blocked=(),injury_features=None):
                 if any(not isinstance(s,int) or isinstance(s,bool) or s<0 for s in scores):continue
                 graded+=db.execute('INSERT OR IGNORE INTO slate_outcomes VALUES (?,?,?,?,?,?,?)',
                     (final['id'],current.isoformat(),final['home'],final['away'],*scores,final['source'])).rowcount
+                identity=[final['id'],final['home'],final['away'],*scores,final['source']]
+                confirmation=hashlib.sha256(json.dumps(identity,separators=(',',':')).encode()).hexdigest()
+                db.execute('INSERT OR IGNORE INTO slate_confirmations VALUES (?,?,?,?,?,?,?,?)',
+                    (confirmation,final['id'],current.isoformat(),final['home'],final['away'],*scores,final['source']))
             except (KeyError,TypeError,ValueError):continue
     return {'forecasts_added':added,'outcomes_added':graded}
 
@@ -89,9 +100,21 @@ def read_slate_inputs(root,as_of):
                 forecasts.append({**r,'pure_probability':r['probability'],
                                   'feature_snapshot':json.dumps(features,sort_keys=True)})
             except (KeyError,TypeError,ValueError):continue
-        for row in db.execute('SELECT * FROM slate_outcomes'):
+        observations={}
+        # Read old archives without requiring a schema mutation during research.
+        tables={r[0] for r in db.execute("SELECT name FROM sqlite_master WHERE type='table'")}
+        rows=list(db.execute('SELECT * FROM slate_outcomes'))
+        if 'slate_confirmations' in tables:rows+=list(db.execute('SELECT * FROM slate_confirmations'))
+        for row in rows:
             try:
                 r=dict(row)
-                if aware(r['observed_at'])<=cutoff and r['source']=='nflverse':outcomes[r['game_id']]=r
+                if aware(r['observed_at'])<=cutoff:observations.setdefault(r['game_id'],[]).append(r)
             except (KeyError,TypeError,ValueError):continue
+        for key,values in observations.items():
+            signatures={(v['home'],v['away'],v['home_score'],v['away_score']) for v in values}
+            certified=[v for v in values if v['source']=='nflverse']
+            if len(signatures)==1 and certified:
+                # The source becomes eligible only when corroboration was
+                # actually observed; never backdate a later confirmation.
+                outcomes[key]=min(certified,key=lambda v:aware(v['observed_at']))
     return forecasts,outcomes

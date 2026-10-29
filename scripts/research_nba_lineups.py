@@ -49,13 +49,18 @@ def archive_parquet(root,year):
     return payload,{'url':url,'sha256':digest,'observed_at':observed,'cached':False}
 
 
-def load_stints(root,full=False):
+def load_stints(root,full=False,include_warmup=False):
     import pyarrow as pa
     import pyarrow.parquet as pq
     all_stints=[];sources=[];coverage=[];failures=[]
-    for year in range(2023,2028):
+    for year in range(2022 if include_warmup else 2023,2028):
         try:
             box=Path(root)/f'observations/backfill/nba_player_boxscores/{year}.sqlite'
+            if not box.exists() and include_warmup:
+                from scripts.line_lab.backfill import fetch_and_archive
+                fetch_and_archive(root,[{'dataset':'nba_player_boxscores','season':str(year),
+                    'url':f'https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_{year}.csv',
+                    'license':'CC-BY-4.0; upstream use review required','attribution':'SportsDataverse, ESPN source; research only'}])
             if not box.exists():raise ValueError('player starter archive unavailable')
             with sqlite3.connect(box) as db:
                 row=db.execute('SELECT content_gzip,source_url,sha256,retrieved_at FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()

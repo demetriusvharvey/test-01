@@ -57,3 +57,36 @@ class PlayerFeatureTests(unittest.TestCase):
         self.assertGreater(a['features']['projected_blocks_difference'],b['features']['projected_blocks_difference'])
         players[0]['blocks']=None
         self.assertEqual(conditional_forecasts(model,[0.]*14,event,players,roster,payload,now,now,lambda m,x:.6)['status'],'player_metrics_unavailable')
+
+
+    def test_season_frozen_player_values_never_consume_same_season_ratings(self):
+        games,players=self.fixture()
+        for g in games:g['season']='2026-27'
+        ids=sorted({p['player_id'] for p in players})
+        rating={'features':ids,'weights':[5. if p=='0' else 0. for p in ids],
+                'player_training_minutes':dict.fromkeys(ids,200.),
+                'trained_before_season':'2026-27','training_seasons':['2025-26']}
+        rows=historical_features(games,players,{'2026-27':rating})
+        self.assertEqual(len(rows['3']['vector']),14)
+        self.assertGreater(rows['3']['vector'][-1],0)
+        rating['training_seasons']=['2026-27']
+        self.assertEqual(historical_features(games,players,{'2026-27':rating}),{})
+
+    def test_stint_feature_scenarios_match_the_historical_definition(self):
+        games,players=self.fixture();now='2026-10-23T12:00:00+00:00'
+        event={'home':'PHI','away':'IND','season':'2026-27','starts_at':'2026-10-24T00:00:00+00:00'}
+        rosters={team:{'team':team,'player_ids':[str(p+offset) for p in range(10)],'verified':True,'source':'fixture','observed_at':now}
+                 for team,offset in (('PHI',0),('IND',10))}
+        ids=sorted({r['player_id'] for r in players})
+        rating={'features':ids,'weights':[5. if p=='0' else 0. for p in ids],
+                'player_training_minutes':dict.fromkeys(ids,200.),'trained_before_season':'2026-27',
+                'training_seasons':['2025-26'],'exported_at':'2026-10-22T12:00:00+00:00'}
+        model={'model_version':'nba-stint-feature-logistic-v1','exported_at':'2026-10-22T12:00:00+00:00',
+               'features':[str(i) for i in range(14)]+list(FEATURES)+['lineup_stint_strength_difference']}
+        payload={'sport':'basketball_nba','count':1,'players':[{'team_abbr':'PHI','player_id':'espn:0','status_code':'questionable','status_since':now}]}
+        r=conditional_forecasts(model,[0.]*14,event,players,rosters,payload,now,now,lambda m,x:.6,rating)
+        self.assertEqual(r['status'],'conditional_research_only')
+        self.assertGreater(r['scenarios'][0]['features']['lineup_stint_strength_difference'],r['scenarios'][1]['features']['lineup_stint_strength_difference'])
+        self.assertTrue(r['season_rating_hash'])
+        rating['training_seasons']=['2026-27']
+        self.assertEqual(conditional_forecasts(model,[0.]*14,event,players,rosters,payload,now,now,lambda m,x:.6,rating)['status'],'season_frozen_rating_unavailable')

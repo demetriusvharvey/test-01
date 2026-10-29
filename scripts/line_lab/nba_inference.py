@@ -56,8 +56,15 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
     full_stint_path=Path(root)/'observations/nba_full_lineups/current_candidate.json'
     if full_stint_path.exists():stint_model_path=full_stint_path
     stint_model=json.loads(stint_model_path.read_text()) if stint_model_path.exists() else None
+    stint_prediction_path=Path(root)/'observations/nba_stint_features/current_candidate.json'
+    stint_prediction_model=json.loads(stint_prediction_path.read_text()) if stint_prediction_path.exists() else None
+    season_rating=None
+    if events:
+        season=next(iter(events.values()))['season']
+        rating_path=Path(root)/f'observations/nba_stint_features/season_ratings/{season}.json'
+        if rating_path.exists():season_rating=json.loads(rating_path.read_text())
     players=[];rosters={}
-    if (rotation_model or player_model or stint_model) and injury_payload:
+    if (rotation_model or player_model or stint_model or stint_prediction_model) and injury_payload:
         from .nba_rotation import parse_players
         from .nba_lineup import parse_current_rosters
         for file in sorted((Path(root)/'observations/backfill/nba_player_boxscores').glob('*.sqlite')):
@@ -99,6 +106,10 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
             from .nba_lineup_value import lineup_associations
             predictions[-1]['stint_strength_context']=lineup_associations(
                 stint_model,event,players,rosters,injury_payload,injury_observed_at,now)
+        if stint_prediction_model:
+            from .nba_scenarios import conditional_forecasts
+            predictions[-1]['stint_prediction_scenarios']=conditional_forecasts(
+                stint_prediction_model,row['vector'],event,players,rosters,injury_payload,injury_observed_at,now,probability,season_rating)
     folder=Path(root)/'observations/nba_ml_predictions';folder.mkdir(parents=True,exist_ok=True)
     with sqlite3.connect(folder/(current.date().isoformat()+'.sqlite')) as db:
         db.executescript("""CREATE TABLE IF NOT EXISTS predictions (key TEXT PRIMARY KEY,payload TEXT NOT NULL);

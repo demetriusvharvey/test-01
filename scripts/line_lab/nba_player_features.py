@@ -60,7 +60,7 @@ def current_summary(players,rotation,as_of):
     return summarize(rotation['players'],history,team)
 
 
-def historical_features(games,players):
+def historical_features(games,players,ratings_by_season=None):
     """Prior appearances infer membership; historical pregame availability is unknown."""
     daily=defaultdict(list);slates=defaultdict(list)
     for row in players:daily[row['date']].append(row)
@@ -69,6 +69,9 @@ def historical_features(games,players):
     history=defaultdict(lambda:deque(maxlen=10));last={};membership={};output={}
     for day in sorted(set(daily)|set(slates)):
         summaries={}
+        rating=(ratings_by_season.get(slates[day][0]['season']) if slates[day] else None) if ratings_by_season is not None else None
+        if rating and (rating.get('trained_before_season')!=slates[day][0]['season'] or not rating.get('training_seasons')
+                       or any(s>=slates[day][0]['season'] for s in rating['training_seasons'])):rating=None
         for team in {t for g in slates[day] for t in (g['home'],g['away'])}:
             estimates=[]
             for player,assigned in membership.items():
@@ -78,10 +81,15 @@ def historical_features(games,players):
             rotation=allocate_minutes(estimates)
             if rotation:
                 summary=summarize(rotation,history,team)
+                if summary and ratings_by_season is not None:
+                    from .nba_lineup_value import rotation_value
+                    value=rotation_value(rating,{'players':rotation}) if rating else None
+                    if value is None:continue
+                    summary['stint_value']=value
                 if summary:summaries[team]=summary
         for game in slates[day]:
             h,a=summaries.get(game['home']),summaries.get(game['away'])
-            if h and a:output[game['id']]={'vector':difference(h,a),
+            if h and a:output[game['id']]={'vector':difference(h,a)+([(h['stint_value']-a['stint_value'])/20] if ratings_by_season is not None else []),
                                           'availability':'historical pregame injuries and lineups unknown'}
         # Freeze every feature on a date before observing ANY game on that date.
         for row in daily[day]:

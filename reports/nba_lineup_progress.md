@@ -61,7 +61,12 @@ The public picks continue using Elo. No historical gambling ROI is computed.
 
 ## Verification and phase status
 
-199 tests pass locally. The suite covers lineup membership, score/time
+199 tests passed locally and in GitHub CI. The final daily run also passed on
+October 29 at 4:20 p.m. EDT, saving 55 NBA forecasts. All 55 current games
+successfully produced the coverage-aware model's conditional injury scenarios;
+its forward record is 0 wins, 0 losses and 55 pending, with no invented accuracy.
+The strict complete-coverage model remains unavailable, and unknown total
+player effects are withheld. The suite covers lineup membership, score/time
 conservation, rejection of ambiguous/overtime games, per-player minute checks,
 unknown-value handling, season leakage, partial coverage, conditional scenarios
 and nonfinite model rejection. CI and the daily workflow verify repository

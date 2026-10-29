@@ -1,0 +1,66 @@
+"""Timestamped NBA ML inference, separate from production winner selection."""
+import gzip
+import hashlib
+import json
+import math
+import sqlite3
+from pathlib import Path
+from datetime import date
+from .constants import ET
+from .history import aware
+from .nba_statistical import examples
+from .nba_efficiency import parse_team_stats,enrich_examples
+
+
+def probability(model,vector):
+    n=len(vector)
+    if any(len(model[k])!=n for k in ('features','mean','scale','weights')):raise ValueError('feature dimensions')
+    if any(not math.isfinite(float(x)) for x in vector) or any(float(x)<=0 for x in model['scale']):raise ValueError('invalid input')
+    z=float(model['intercept'])+sum(w*(x-m)/s for w,x,m,s in zip(model['weights'],vector,model['mean'],model['scale']))
+    # Match sklearn clipping before the calibration logit.
+    p=1/(1+math.exp(-max(-35,min(35,z))));p=max(1e-6,min(1-1e-6,p))
+    calibrated=model['calibration_intercept']+model['calibration_weight']*math.log(p/(1-p))
+    return 1/(1+math.exp(-max(-35,min(35,calibrated))))
+
+
+def record_nba_predictions(root,games,scheduled,now):
+    path=Path(root)/'observations/nba_statistical/current_candidate.json'
+    if not path.exists():return {'status':'model_unavailable','predictions':[]}
+    model=json.loads(path.read_text());current=aware(now);cutoff=current.astimezone(ET).date()
+    if model.get('model_version')!='nba-efficiency-logistic-v1' or model.get('promoted') is not False or aware(model['exported_at'])>current:
+        raise ValueError('unusable research artifact')
+    past=[g for g in games if g['league']=='NBA' and g['date']<cutoff]
+    events={}
+    for game in scheduled:
+        if game['league']!='NBA' or aware(game['starts_at'])<=current:continue
+        _,_,away,home=game['id'].split(':')
+        events[game['id']]={**game,'home':home,'away':away,'date':aware(game['starts_at']).astimezone(ET).date(),
+                            'season':str(cutoff.year if cutoff.month>=8 else cutoff.year-1)+'-'+str((cutoff.year+1) if cutoff.month>=8 else cutoff.year)[-2:],
+                            'upcoming':True,'neutral':game.get('neutral',False)}
+    stats={};source_times=[]
+    for file in sorted((Path(root)/'observations/backfill/nba_team_game_boxscores').glob('*.sqlite')):
+        with sqlite3.connect(file) as db:
+            row=db.execute('SELECT content_gzip,retrieved_at FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
+        if row and aware(row[1])<=current:
+            stats.update(parse_team_stats(gzip.decompress(row[0]).decode('utf-8-sig')));source_times.append(row[1])
+    combined=past+list(events.values())
+    rows=enrich_examples(examples(combined),combined,stats);predictions=[]
+    for row in rows:
+        if row['game_id'] not in events:continue
+        p=probability(model,row['vector']);event=events[row['game_id']]
+        predictions.append({'game_id':row['game_id'],'predicted_at':now,'starts_at':event['starts_at'],
+            'model_version':model['model_version'],'model_input_hash':model['input_hash'],
+            'model_exported_at':model['exported_at'],'input_data_observed_at':max(source_times) if source_times else None,
+            'home_probability':p,'away_probability':1-p,'home':event['home'],'away':event['away'],
+            'features':dict(zip(model['features'],row['vector'])),'used_in_public_picks':False,
+            'missing_inputs':['injury-adjusted lineup','replacement impact','travel'],
+            'uncertainty':'retrospective calibration; predictive intervals and forward accuracy unestablished'})
+    folder=Path(root)/'observations/nba_ml_predictions';folder.mkdir(parents=True,exist_ok=True)
+    with sqlite3.connect(folder/(current.date().isoformat()+'.sqlite')) as db:
+        db.executescript("""CREATE TABLE IF NOT EXISTS predictions (key TEXT PRIMARY KEY,payload TEXT NOT NULL);
+        CREATE TRIGGER IF NOT EXISTS np_no_update BEFORE UPDATE ON predictions BEGIN SELECT RAISE(ABORT,'immutable'); END;
+        CREATE TRIGGER IF NOT EXISTS np_no_delete BEFORE DELETE ON predictions BEGIN SELECT RAISE(ABORT,'immutable'); END;""")
+        for row in predictions:
+            content=json.dumps(row,sort_keys=True);key=hashlib.sha256(content.encode()).hexdigest()
+            db.execute('INSERT OR IGNORE INTO predictions VALUES (?,?)',(key,content))
+    return {'status':'research_forecasts_recorded','predictions':predictions}

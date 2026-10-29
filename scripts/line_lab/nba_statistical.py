@@ -21,7 +21,7 @@ def examples(games):
             h,a=g['home'],g['away'];hr,ar=ratings.get(h,1500),ratings.get(a,1500)
             home_court=0 if g.get('neutral') else 55
             p=elo_probability(hr-ar+home_court)
-            if len(recent[h])>=10 and len(recent[a])>=10 and g['home_score']!=g['away_score']:
+            if len(recent[h])>=10 and len(recent[a])>=10 and (g.get('upcoming') or g['home_score']!=g['away_score']):
                 def avg(team,index):return sum(r[index] for r in recent[team])/len(recent[team])
                 rest=lambda t:min(7,max(0,(day-last[t]).days-1)) if t in last else 3
                 vector=[(hr-ar)/400,(avg(h,0)-avg(a,0))/20,
@@ -29,9 +29,10 @@ def examples(games):
                         (rest(h)-rest(a))/7,home_court/55]
                 output.append({'game_id':g['id'],'date':day.isoformat(),'season':g['season'],
                                'vector':vector,'baseline_probability':.5,'elo':p,
-                               'home_win':int(g['home_score']>g['away_score'])})
+                               **({} if g.get('upcoming') else {'home_win':int(g['home_score']>g['away_score'])})})
         # All day-start features are frozen before observing any same-day result.
         for g in sorted(slate,key=lambda g:g['id']):
+            if g.get('upcoming'):continue
             h,a=g['home'],g['away'];hr,ar=ratings.get(h,1500),ratings.get(a,1500)
             y=1 if g['home_score']>g['away_score'] else 0 if g['home_score']<g['away_score'] else .5
             p=elo_probability(hr-ar+(0 if g.get('neutral') else 55))

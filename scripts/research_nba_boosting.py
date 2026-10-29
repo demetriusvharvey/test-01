@@ -15,6 +15,7 @@ from scripts.line_lab.nba_efficiency import parse_team_stats,enrich_examples,MET
 from scripts.line_lab.simulator import score_metrics
 import numpy as np
 import joblib
+from datetime import datetime,timezone
 
 
 def evaluate(rows,season,artifact_dir=None):
@@ -47,6 +48,17 @@ def evaluate(rows,season,artifact_dir=None):
                          'features':list(FEATURES)+list(METRICS),
                          'training_seasons':earlier[:-1],'calibration_season':earlier[-1],
                          'promoted':False},folder/(name+'.joblib'),compress=3)
+            if name=='logistic':
+                scaler=model.named_steps['standardscaler'];linear=model.named_steps['logisticregression']
+                export={'model_version':'nba-efficiency-logistic-v1','features':list(FEATURES)+list(METRICS),
+                        'mean':scaler.mean_.tolist(),'scale':scaler.scale_.tolist(),
+                        'weights':linear.coef_[0].tolist(),'intercept':float(linear.intercept_[0]),
+                        'calibration_weight':float(calibrator.coef_[0][0]),
+                        'calibration_intercept':float(calibrator.intercept_[0]),
+                        'training_seasons':earlier[:-1],'calibration_season':earlier[-1],
+                        'evaluated_season':season,'exported_at':datetime.now(timezone.utc).isoformat(),
+                        'promoted':False}
+                (folder/'logistic.json').write_text(json.dumps(export,sort_keys=True))
     return result
 
 
@@ -62,6 +74,11 @@ def main():
     folder=Path(args.data_root)/'observations/nba_statistical'/digest;folder.mkdir(parents=True,exist_ok=True)
     results=[r for season in sorted({r['season'] for r in rows})[2:] if (r:=evaluate(rows,season,folder))]
     (folder/'boosting_evaluation.json').write_text(json.dumps({'features':list(FEATURES)+list(METRICS),'sources':sources,'results':results},indent=2))
+    if results:
+        latest=sorted(r['test_season'] for r in results)[-1]
+        candidate=json.loads((folder/latest/'logistic.json').read_text())
+        candidate['input_hash']=digest
+        (Path(args.data_root)/'observations/nba_statistical/current_candidate.json').write_text(json.dumps(candidate,sort_keys=True))
     lines=['# NBA efficiency model comparison','',
            'Fixed-config sklearn logistic and histogram gradient boosting, trained before a distinct calibration season and evaluated in later seasons. No random game splits or test-driven promotion. Archive already inspected; not an untouched holdout. Player/injury inputs unavailable; no market baseline or wagering-source qualification. Research only.','',
            '| Season | Test games | Logistic Brier | Boosting Brier | Elo Brier | Logistic accuracy | Boosting accuracy |',

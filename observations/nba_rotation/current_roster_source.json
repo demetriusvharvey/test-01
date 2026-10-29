@@ -41,5 +41,8 @@
     "status_type"
   ],
   "rows": 519,
-  "identity_crosswalk_verified": false
+  "teams_parsed": 30,
+  "current_ids_with_box_history": 498,
+  "current_ids_without_box_history": 21,
+  "injury_identity_crosswalk_verified": false
 }

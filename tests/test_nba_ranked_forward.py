@@ -38,6 +38,8 @@ class RankedForwardTests(unittest.TestCase):
             self.assertEqual(r['models']['nba-rotation-logistic-v1']['scenario_abstentions'],1)
             self.assertEqual(r['data_coverage']['nba-rotation-logistic-v1']['audited_days_without_decision'],0)
             self.assertIsNone(r['models']['nba-rotation-logistic-v1']['winner_record']['accuracy'])
+            self.assertEqual(r['models']['nba-rotation-logistic-v1']['fully_settled_day_comparison']['complete_days'],0)
+            self.assertIsNone(r['models']['nba-rotation-logistic-v1']['fully_settled_day_comparison']['accuracy_difference'])
             path=Path(root)/'observations/nba_ranked_forecasts/2026-10-29.sqlite'
             with sqlite3.connect(path) as db:
                 before=db.execute('SELECT payload FROM decisions ORDER BY key').fetchall()
@@ -72,6 +74,8 @@ class RankedForwardTests(unittest.TestCase):
             self.assertEqual(model['winner_record']['voids'],1)
             self.assertEqual(model['winner_record']['losses'],0)
             self.assertEqual(model['winner_record'],model['matched_elo_record'])
+            self.assertEqual(model['fully_settled_day_comparison']['complete_days'],1)
+            self.assertEqual(model['fully_settled_day_comparison']['accuracy_difference'],0.)
 
 
     def test_mismatched_identity_and_stale_injury_report_are_not_a_forecast(self):
@@ -85,3 +89,20 @@ class RankedForwardTests(unittest.TestCase):
             self.assertEqual(record_ranked(root,rows,slate,now)['added'],1)
             report=evaluate_ranked(root,now)
             self.assertNotIn('nba-rotation-logistic-v1',report['models'])
+
+    def test_one_early_final_does_not_establish_a_paired_day_advantage(self):
+        rows,slate,now=self.fixture()
+        with tempfile.TemporaryDirectory() as root:
+            record_ranked(root,rows,slate,now)
+            folder=Path(root)/'observations/nba_ml_predictions';folder.mkdir(parents=True)
+            final_now='2026-10-30T04:00:00+00:00';row=rows[3]
+            final={'game_id':row['game_id'],'home':row['home'],'away':row['away'],'starts_at':row['starts_at'],
+                   'home_score':110,'away_score':90,'confirmed_at':final_now,'source':'confirmed fixture'}
+            with sqlite3.connect(folder/'confirmed_outcomes.sqlite') as db:
+                db.execute('CREATE TABLE outcomes(game_id TEXT PRIMARY KEY,payload TEXT)')
+                db.execute('INSERT INTO outcomes VALUES (?,?)',(row['game_id'],json.dumps(final)))
+            m=evaluate_ranked(root,final_now)['models']['nba-efficiency-logistic-v1']
+            self.assertEqual(m['winner_record']['wins'],1)
+            self.assertEqual(m['review_status'],'insufficient_forward_sample')
+            self.assertEqual(m['fully_settled_day_comparison']['complete_days'],0)
+            self.assertIsNone(m['fully_settled_day_comparison']['accuracy_difference'])

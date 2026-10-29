@@ -124,12 +124,25 @@ def evaluate_ranked(root,now):
             counts['wins' if pick['team']==winner else 'losses']+=1
         settled=counts['wins']+counts['losses'];counts['accuracy']=counts['wins']/settled if settled else None
         return counts
+    paired={}
     for record in records:
         if aware(record['frozen_at'])>current:continue
         group=models.setdefault(record['model_version'],{'decisions':0,'scenario_abstentions':0,'picks':[],'elo':[]})
         group['decisions']+=1;group['scenario_abstentions']+=record['scenario_abstentions']
         group['picks'].extend(record['picks']);group['elo'].extend(record['matched_elo_picks'])
-    for group in models.values():group['winner_record']=grade(group.pop('picks'));group['matched_elo_record']=grade(group.pop('elo'))
+        a,b=grade(record['picks']),grade(record['matched_elo_picks'])
+        pair=paired.setdefault(record['model_version'],{'complete_days':0,'model_wins':0,'model_settled':0,'elo_wins':0,'elo_settled':0})
+        if not (a['pending'] or b['pending'] or a['excluded'] or b['excluded']) and a['accuracy'] is not None and b['accuracy'] is not None:
+            pair['complete_days']+=1;pair['model_wins']+=a['wins'];pair['model_settled']+=a['wins']+a['losses']
+            pair['elo_wins']+=b['wins'];pair['elo_settled']+=b['wins']+b['losses']
+    for version,group in models.items():
+        group['winner_record']=grade(group.pop('picks'));group['matched_elo_record']=grade(group.pop('elo'))
+        pair=paired[version]
+        pair['accuracy_difference']=(pair['model_wins']/pair['model_settled']-pair['elo_wins']/pair['elo_settled']) if pair['complete_days'] else None
+        group['fully_settled_day_comparison']=pair
+        count=group['winner_record']['wins']+group['winner_record']['losses']
+        group['review_status']='awaiting_outcomes' if not count else 'insufficient_forward_sample' if count<300 else 'review_only_not_validated'
+        group['minimum_settled_review_sample']=300
     coverage={}
     for version in MODELS:
         observed=[a for a in attempts if a['model_version']==version and aware(a['observed_at'])<=current]

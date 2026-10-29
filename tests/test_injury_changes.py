@@ -36,6 +36,16 @@ class InjuryChangeTests(unittest.TestCase):
         self.assertEqual(annotate_injury_changes(after,self.before),0)
         self.assertEqual(after['games'][0]['injury_change']['status'],'comparison_unavailable')
 
+    def test_stale_comparison_and_bad_counts_fail_closed(self):
+        old={'games':[game('2026-10-26T20:00:00Z')]}
+        fresh={'games':[game('2026-10-28T20:00:00Z',3)]}
+        self.assertEqual(annotate_injury_changes(fresh,old),0)
+        self.assertEqual(fresh['games'][0]['injury_change']['status'],'comparison_unavailable')
+        corrupt={'games':[game('2026-10-28T20:15:00Z',2)]}
+        corrupt['games'][0]['nba_availability_context']['teams']['home']['counts']['out']=-1
+        self.assertEqual(annotate_injury_changes(corrupt,self.before),0)
+        self.assertEqual(corrupt['games'][0]['injury_change']['status'],'comparison_unavailable')
+
     def test_invalid_team_and_provider_never_report_change(self):
         after={'games':[game('2026-10-28T20:15:00Z',0)]}
         after['games'][0]['nba_availability_context']['teams']['home']['team']='Wrong'

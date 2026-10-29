@@ -290,3 +290,34 @@ matching component scenarios; otherwise withhold a scenario requiring a
 missing component. Do not assign participation weights or claim that weighting
 correlated components creates independent evidence. An ensemble selecting only
 Elo/team inputs must not be described as injury-adjusted.
+
+## H025 — NBA verified first-quarter stint player associations
+
+Registered after source-schema inspection, before model fitting. Reconstruct
+first-quarter stints only from exactly five box-score starters per team and
+explicit entering/leaving player IDs. Require complete source End Game status,
+regular-season identity agreement, nonincreasing clocks, monotone scores,
+valid substitution membership and a first-quarter end marker. Exclude ambiguous
+games; do not infer later-period opening lineups. Report all exclusions and
+coverage. Same-game lineups/scores are postgame training inputs/targets only,
+never fabricated pregame availability features.
+
+Fit signed home/away player ridge effects on net points per 48 minutes, weighted
+by stint duration, controlling simultaneous teammates/opponents. This is an
+observational time-based adjusted plus-minus association, not possession RAPM
+or a causal injury effect. Require 120 earlier stint minutes per player and
+exclude unknown-player evaluation rows rather than assign zero. Compare on
+identical rows with league-intercept and team ridge baselines. Train older
+seasons, choose alpha from [100,1000,10000] on a separate previous season and
+report later-season minute-weighted MSE and unique game/player/stint counts.
+Direction: lower held-out MSE than team ridge. No game-winner, calibration or
+profit claim follows from a stint-rate improvement. Use whole-day paired tests
+and BH correction over reported seasons where supported. Archive research
+only; historical pregame participation and NBA source qualifications remain
+unresolved. Public picks do not change.
+
+An exported research artifact may report projected lineup-strength differences
+under supported current roster scenarios, including how redistributing minutes
+to known replacements changes the estimate. Unknown-player values stay unknown.
+Do not convert a strength delta into a winning probability without a separately
+trained and evaluated outcome model.

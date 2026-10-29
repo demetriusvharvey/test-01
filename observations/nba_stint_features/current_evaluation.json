@@ -1,0 +1,197 @@
+{
+  "hypothesis": "H027",
+  "evaluated_at": "2026-10-29T20:03:30.437559+00:00",
+  "matched_games": 6,
+  "season_counts": {
+    "2023-24": 5,
+    "2025-26": 1
+  },
+  "rating_seasons": [
+    "2022-23",
+    "2023-24",
+    "2024-25",
+    "2025-26",
+    "2026-27"
+  ],
+  "sources": [
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2022.parquet",
+      "sha256": "0fe5435bdd30187b8d8c5eb27bdf187821274a231f04608f15a46b5b59035f82",
+      "observed_at": "2026-10-29T20:02:47.753833+00:00",
+      "cached": false,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2022.csv",
+        "sha256": "1a639a8c47250a35cb823a17510d6a1a900bbab9bcaec19b7b79abe2f7f803e6",
+        "observed_at": "2026-10-29T20:02:46.298491+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2023.parquet",
+      "sha256": "f3fac3a58cf1be8813f1f4332edb7fc8d83936df703892a700095d62f71da886",
+      "observed_at": "2026-10-29T19:36:30.936342+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2023.csv",
+        "sha256": "1b797107d4a0b2fbc98862bd283b9e807a05aa11c671b89a471b25591a589493",
+        "observed_at": "2026-10-29T14:10:45.265164+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2024.parquet",
+      "sha256": "bda57bcb4f8aae57428979ac4a0f766f67c52c770d85b0e7fcf7237a333704b0",
+      "observed_at": "2026-10-29T19:36:38.586500+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2024.csv",
+        "sha256": "c52a708ac80542baa0711f166154e0a647543036854e29aa903bd2fc27b49ae2",
+        "observed_at": "2026-10-29T14:10:46.133144+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2025.parquet",
+      "sha256": "71d7d02671268f793f13a13d1a8a271cba1241cd9ba28c3a363a3f16ad56acc7",
+      "observed_at": "2026-10-29T19:36:45.857157+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2025.csv",
+        "sha256": "8e34c5b1b7629dda89483356b5ec40f76a0b534aa273a5ddd8d9ef23f3e0e4f7",
+        "observed_at": "2026-10-29T14:10:46.989532+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2026.parquet",
+      "sha256": "f7051c5c0c5b605419fcc0e0c13dd90df7803f96dab290554c1ef737433a98b2",
+      "observed_at": "2026-10-29T19:36:53.443573+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2026.csv",
+        "sha256": "7a4868da67ae7f6ebfba23389e04220be2e3f69d2e56a3942c02aa56f1becc89",
+        "observed_at": "2026-10-29T14:10:47.847710+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2027.parquet",
+      "sha256": "98d3932ea47501b45a627ff8f1a3144b01b3980ce660d70b8940fdeddfebbecf",
+      "observed_at": "2026-10-29T19:37:00.453048+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2027.csv",
+        "sha256": "93806629508d8b7cdaea54e6c2cea43bfd29a33700646b88a1ad35dd7b1112dd",
+        "observed_at": "2026-10-29T14:10:48.504523+00:00"
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "season_file": 2022,
+      "games_seen": 1324,
+      "accepted_games": 126,
+      "rejected_games": 1198,
+      "rejections": {
+        "period_replay_failure": 640,
+        "ambiguous_substitution": 118,
+        "action_off_court": 378,
+        "overtime_or_incomplete": 59,
+        "nonunique_period_starters": 2,
+        "malformed_or_incomplete": 1
+      },
+      "stints": 3771,
+      "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
+    },
+    {
+      "season_file": 2023,
+      "games_seen": 1321,
+      "accepted_games": 136,
+      "rejected_games": 1185,
+      "rejections": {
+        "period_replay_failure": 579,
+        "action_off_court": 402,
+        "overtime_or_incomplete": 84,
+        "ambiguous_substitution": 112,
+        "malformed_or_incomplete": 5,
+        "player_minute_disagreement": 1,
+        "nonunique_period_starters": 2
+      },
+      "stints": 3842,
+      "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
+    },
+    {
+      "season_file": 2024,
+      "games_seen": 1320,
+      "accepted_games": 107,
+      "rejected_games": 1213,
+      "rejections": {
+        "period_replay_failure": 621,
+        "action_off_court": 423,
+        "overtime_or_incomplete": 62,
+        "ambiguous_substitution": 104,
+        "malformed_or_incomplete": 2,
+        "player_minute_disagreement": 1
+      },
+      "stints": 3017,
+      "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
+    },
+    {
+      "season_file": 2025,
+      "games_seen": 1324,
+      "accepted_games": 91,
+      "rejected_games": 1233,
+      "rejections": {
+        "period_replay_failure": 593,
+        "ambiguous_substitution": 133,
+        "overtime_or_incomplete": 66,
+        "action_off_court": 435,
+        "nonunique_period_starters": 2,
+        "malformed_or_incomplete": 4
+      },
+      "stints": 2654,
+      "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
+    },
+    {
+      "season_file": 2026,
+      "games_seen": 1325,
+      "accepted_games": 85,
+      "rejected_games": 1240,
+      "rejections": {
+        "action_off_court": 463,
+        "period_replay_failure": 569,
+        "overtime_or_incomplete": 60,
+        "ambiguous_substitution": 140,
+        "malformed_or_incomplete": 5,
+        "nonunique_period_starters": 3
+      },
+      "stints": 2670,
+      "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
+    },
+    {
+      "season_file": 2027,
+      "games_seen": 68,
+      "accepted_games": 1,
+      "rejected_games": 67,
+      "rejections": {
+        "ambiguous_substitution": 11,
+        "period_replay_failure": 24,
+        "action_off_court": 28,
+        "overtime_or_incomplete": 4
+      },
+      "stints": 33,
+      "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
+    }
+  ],
+  "failures": [],
+  "results": [
+    {
+      "season": "2024-25",
+      "status": "insufficient_matched_training_calibration_or_test"
+    },
+    {
+      "season": "2025-26",
+      "status": "insufficient_matched_training_calibration_or_test"
+    },
+    {
+      "season": "2026-27",
+      "status": "insufficient_matched_training_calibration_or_test"
+    }
+  ],
+  "promoted": false
+}

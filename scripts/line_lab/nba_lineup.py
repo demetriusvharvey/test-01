@@ -1,8 +1,48 @@
 """Current roster-aware rotation scenarios; no invented availability weights."""
 import math
+import csv
+import io
 from collections import defaultdict
 from datetime import timedelta
 from .history import aware
+from .nba_injury_feed import provider_team_code,STATUSES
+from .constants import NBA_TEAMS
+
+
+def parse_current_rosters(text,observed_at,source):
+    """Capture explicit ESPN IDs and source teams; never fuzzy-match names."""
+    aware(observed_at);teams=defaultdict(set);membership={};conflicts=set()
+    reader=csv.DictReader(io.StringIO(text))
+    if not {'athlete_id','team_abbreviation'}<=set(reader.fieldnames or []):raise ValueError('roster schema')
+    for row in reader:
+        p=str(row['athlete_id']).strip();team=provider_team_code(row['team_abbreviation'],'NBA')
+        if not p.isdigit() or team not in NBA_TEAMS.values():continue
+        if p in membership and membership[p]!=team:conflicts.add(p)
+        membership[p]=team;teams[team].add(p)
+    return {team:{'team':team,'player_ids':sorted(ids),'observed_at':observed_at,
+                  'source':source,'verified':not bool(ids&conflicts)}
+            for team,ids in teams.items()}
+
+
+def map_injury_statuses(payload,roster,observed_at):
+    """Explicit espn: ID mapping; missing listings remain unknown."""
+    now=aware(observed_at);ids=set(roster['player_ids']);statuses={};unmatched=0;invalid=0
+    if payload.get('sport')!='basketball_nba' or payload.get('count')!=len(payload.get('players',[])):return None
+    for row in payload['players']:
+        try:
+            if provider_team_code(row.get('team_abbr'),'NBA')!=roster['team']:continue
+            raw=str(row['player_id']);p=raw[5:] if raw.startswith('espn:') else ''
+            if p not in ids:unmatched+=1;continue
+            status=row['status_code']
+            stamps=[aware(v) for v in (row.get('source_updated_at'),row.get('status_since')) if v]
+            if status not in STATUSES or not stamps or any(v>now for v in stamps):invalid+=1;continue
+            if p in statuses and statuses[p]!=status:invalid+=1;continue
+            statuses[p]=status
+        except (KeyError,TypeError,ValueError):invalid+=1
+    return {'observed_at':observed_at,'players':statuses,'unmatched':unmatched,'invalid':invalid,
+            'complete':False,'identity_mapping_valid':not (unmatched or invalid),
+            'missing_listing_means_healthy':False,
+            'note':'matching succeeded only for explicit source IDs; full availability coverage unverified'}
 
 
 def project_rotation(players,roster,statuses,as_of,starts_at,unavailable=()):

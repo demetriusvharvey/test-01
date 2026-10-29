@@ -10,6 +10,7 @@ from scripts.line_lab.nba_efficiency import parse_team_stats,enrich_examples
 from scripts.line_lab.nba_statistical import examples
 from scripts.research_simulator import load_games
 from scripts.research_nba_boosting import evaluate
+from scripts.line_lab.nba_lineup import parse_current_rosters
 
 
 def main():
@@ -49,15 +50,21 @@ def main():
     if roster_path.exists():
         with sqlite3.connect(roster_path) as db:
             record=db.execute('SELECT source_url,sha256,retrieved_at,columns_json,row_count FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
+            content=db.execute('SELECT content_gzip FROM assets ORDER BY retrieved_at DESC LIMIT 1').fetchone()
         if record:
+            rosters=parse_current_rosters(gzip.decompress(content[0]).decode('utf-8-sig'),record[2],record[0])
+            known={p['player_id'] for p in players}
+            roster_ids={p for roster in rosters.values() for p in roster['player_ids']}
             roster_info={'url':record[0],'sha256':record[1],'observed_at':record[2],
                          'columns':json.loads(record[3]),'rows':record[4],
-                         'identity_crosswalk_verified':False}
+                         'teams_parsed':len(rosters),'current_ids_with_box_history':len(roster_ids&known),
+                         'current_ids_without_box_history':len(roster_ids-known),
+                         'injury_identity_crosswalk_verified':False}
             (artifact/'current_roster_source.json').write_text(json.dumps(roster_info,indent=2))
     lines=['# NBA player rotation research','',
            'Free SportsDataverse player box imports. Projections use only earlier appearances; membership is inferred, not a verified pregame roster. Historical injuries, trades before first appearance and confirmed lineups remain unknown. No public pick is changed.','',
            f'Parsed player rows: {len(players)}. Rotation-covered games: {len(rotation)}. Matched modeling examples: {len(matched)}. Source failures: {len(failures)}.',
-           f"Current roster snapshot: {roster_info['rows'] if roster_info else 0} source rows; player-ID crosswalk not yet verified.",'',
+           f"Current roster snapshot: {roster_info['rows'] if roster_info else 0} source rows; {roster_info['teams_parsed'] if roster_info else 0} teams; {roster_info['current_ids_with_box_history'] if roster_info else 0} current IDs matched to historical box scores. Injury crosswalk unverified.",'',
            '| Season | Games | Baseline logistic Brier | Rotation logistic Brier | Rotation accuracy |',
            '|---|---:|---:|---:|---:|']
     for r in results:

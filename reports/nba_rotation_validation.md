@@ -3,7 +3,7 @@
 Free SportsDataverse player box imports. Projections use only earlier appearances; membership is inferred, not a verified pregame roster. Historical injuries, trades before first appearance and confirmed lineups remain unknown. No public pick is changed.
 
 Parsed player rows: 114003. Rotation-covered games: 4883. Matched modeling examples: 4742. Source failures: 0.
-Current roster snapshot: 519 source rows; player-ID crosswalk not yet verified.
+Current roster snapshot: 519 source rows; 30 teams; 498 current IDs matched to historical box scores. Injury crosswalk unverified.
 
 | Season | Games | Baseline logistic Brier | Rotation logistic Brier | Rotation accuracy |
 |---|---:|---:|---:|---:|

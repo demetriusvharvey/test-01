@@ -7,6 +7,7 @@ on:
       - scripts/inspect_nba_lineups.py
       - scripts/research_nba_lineups.py
       - scripts/line_lab/nba_stints.py
+      - scripts/line_lab/nba_full_stints.py
       - requirements-lineups.txt
       - .github/workflows/nba-lineups.yml
   schedule:
@@ -39,6 +40,10 @@ jobs:
         env:
           OMP_NUM_THREADS: 2
         run: python -m scripts.research_nba_lineups --data-root .data-store --output reports/nba_lineup_validation.md
+      - name: Evaluate uniquely reconstructed full-game associations
+        env:
+          OMP_NUM_THREADS: 2
+        run: python -m scripts.research_nba_lineups --data-root .data-store --full-game --output reports/nba_full_lineup_validation.md
       - name: Persist source observations
         run: |
           git -C .data-store config user.name 'github-actions[bot]'
@@ -53,7 +58,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reports/nba_lineup_source.md reports/nba_lineup_validation.md
+          git add reports/nba_lineup_source.md reports/nba_lineup_validation.md reports/nba_full_lineup_validation.md
           if ! git diff --cached --quiet; then
             git commit -m 'Report NBA lineup source inspection'
             git pull --rebase origin main

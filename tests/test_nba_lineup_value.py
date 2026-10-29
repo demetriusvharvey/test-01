@@ -36,3 +36,13 @@ class LineupValueTests(unittest.TestCase):
         model['exported_at']='2026-10-30T12:00:00+00:00'
         self.assertEqual(lineup_associations(model,event,players,rosters,payload,now,now)['status'],'lineup_model_unavailable')
         self.assertIsNone(rotation_value({'features':[],'weights':[],'player_training_minutes':{}},{'players':[{'player_id':'missing','minutes':24.}]}))
+
+    def test_unknown_out_player_does_not_get_a_fabricated_replacement_delta(self):
+        model,event,players,rosters,payload,now=self.fixture()
+        payload['players'][0]['status_code']='out'
+        idx=model['features'].index('1');model['features'].pop(idx);model['weights'].pop(idx)
+        del model['player_training_minutes']['1']
+        result=lineup_associations(model,event,players,rosters,payload,now,now)
+        self.assertEqual(result['status'],'lineup_associations_available')
+        self.assertFalse(result['counterfactual_available'])
+        self.assertIsNone(result['scenarios'][0]['change_from_all_available_counterfactual'])

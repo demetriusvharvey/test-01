@@ -28,7 +28,7 @@ def rotation_value(model,rotation):
 def lineup_associations(model,event,players,rosters,payload,observed_at,now):
     try:
         current=aware(now)
-        if (model.get('model_version')!='nba-stint-ridge-v1' or model.get('promoted') is not False
+        if (model.get('model_version') not in ('nba-stint-ridge-v1','nba-full-stint-ridge-v1') or model.get('promoted') is not False
                 or aware(model['exported_at'])>current
                 or date.fromisoformat(model['trained_before_date'])>current.astimezone(ET).date()):
             raise ValueError('rating artifact unavailable')
@@ -71,7 +71,7 @@ def lineup_associations(model,event,players,rosters,payload,observed_at,now):
                 'model_input_hash':model['input_hash'],'model_exported_at':model['exported_at'],
                 'model_trained_before_date':model['trained_before_date'],'injury_observed_at':observed_at,
                 'counterfactual_available':all(v is not None for v in baseline.values()),
-                'units':'net points per 48 minutes; learned first-quarter lineup association',
+                'units':model.get('units','net points per 48 minutes; learned lineup association'),
                 'used_in_public_picks':False,
                 'limitations':'observational association, inferred minutes, incomplete defense; counterfactual delta is not a causal injury effect or win probability'}
     except (KeyError,ValueError,TypeError,OverflowError):return {'status':'lineup_model_unavailable','scenarios':[]}

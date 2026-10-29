@@ -53,6 +53,8 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
     ensemble_path=Path(root)/'observations/nba_ensemble/current_candidate.json'
     ensemble_model=json.loads(ensemble_path.read_text()) if ensemble_path.exists() else None
     stint_model_path=Path(root)/'observations/nba_lineups/current_candidate.json'
+    full_stint_path=Path(root)/'observations/nba_full_lineups/current_candidate.json'
+    if full_stint_path.exists():stint_model_path=full_stint_path
     stint_model=json.loads(stint_model_path.read_text()) if stint_model_path.exists() else None
     players=[];rosters={}
     if (rotation_model or player_model or stint_model) and injury_payload:

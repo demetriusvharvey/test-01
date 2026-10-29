@@ -450,6 +450,9 @@ def main():
     previous_board_path=ROOT/'dist'/'board.json'
     try:previous_board=json.loads(previous_board_path.read_text()) if previous_board_path.exists() else None
     except (OSError,ValueError):previous_board=None
+    from .injury_changes import annotate_injury_changes
+    injury_changes=annotate_injury_changes(board,previous_board)
+    print('Changed aggregate injury reports:',injury_changes)
     board=protect_last_success(board,previous_board,now.isoformat())
     (ROOT/'dist'/'board.json').write_text(json.dumps(board,indent=2)+'\n')
     print('Board:',len(board['picks']),'active picks;',board['accuracy']['wins'],'wins;',board['accuracy']['losses'],'losses;',len(errors),'source warnings')

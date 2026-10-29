@@ -30,6 +30,7 @@ from .research_dashboard import research_dashboard
 from .reproducibility import attach_prediction_checks
 from .watchlist import render_watchlist
 from .winners import make_daily_winners, render_winners
+from .slate_archive import archive_slate
 from .nba_injury_feed import fetch_nba_injuries, fetch_nfl_injuries, attach_nba_summaries, attach_nfl_summaries, injury_quality_counts
 from .propline_scores import fetch_scores, fetch_events, parse_scores, parse_event_starts, restrict_public_results, use_provider, reserve_call
 
@@ -303,7 +304,24 @@ def main():
                     or home not in reverse[sport] or away not in reverse[sport] or home==away):continue
             scheduled.append({'id':identifier,'league':sport,'home':reverse[sport][home],
                               'away':reverse[sport][away],'starts_at':when.isoformat()})
+            if sport=='NFL' and identifier in nfl_locations:
+                scheduled[-1]['neutral']=nfl_locations[identifier]
         except (TypeError,ValueError,AttributeError):continue
+    # Learning observations must not depend on whether three books price a game.
+    # This archive is separate from the selected-winner accuracy ledger.
+    if data_root and archive_ok and not day_rolled:
+        try:
+            slate_injuries={}
+            for game in scheduled:
+                if game['league']!='NFL' or not nfl_csv or not nfl_observed_at:continue
+                _,_,away,home=game['id'].split(':')
+                event={**game,'home':home,'away':away,'home_name':game['home'],'away_name':game['away']}
+                context=nfl_report_context(data_root,event,nfl_csv,nfl_observed_at,now.isoformat(),max_players=1000)
+                features=nfl_position_features(event,context,now.isoformat())
+                if features:slate_injuries[game['id']]=features
+            print('Independent slate archive:',json.dumps(archive_slate(
+                data_root,scheduled,models,finals,now.isoformat(),blocked,slate_injuries),sort_keys=True))
+        except Exception as exc:errors.append('Independent slate archive unavailable ('+type(exc).__name__+')')
     # Prices within 20 minutes of start are still useful as labeled snapshots
     # on the game slate, but the selection market keeps its stricter cutoff.
     display_markets=build_market(selected,now,min_lead_minutes=0)

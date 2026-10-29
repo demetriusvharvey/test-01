@@ -72,6 +72,28 @@ def load_availability_rows(root,as_of,feature_key='availability',schema='availab
                          'home_win':int(out['home_score']>out['away_score']),'rights_verified':rights,
                          'baseline_probability':forecast['pure_probability'],'features':status['features']})
         except (KeyError,TypeError,ValueError):continue
+    if feature_key=='nfl_position_status':
+        path=Path(root)/'observations'/'slate_archive.sqlite'
+        if path.exists():
+            with closing(sqlite3.connect(path)) as db:
+                db.row_factory=sqlite3.Row
+                for record in db.execute("""SELECT f.*, o.observed_at AS final_at, o.home_score,
+                        o.away_score,o.source FROM slate_forecasts f JOIN slate_outcomes o
+                        ON f.game_id=o.game_id AND f.home=o.home AND f.away=o.away"""):
+                    try:
+                        r=dict(record);snapshot=json.loads(r['snapshot']);status=snapshot.get('injury_features')
+                        if r['league']!='NFL' or r['home_score']==r['away_score'] or not status or status.get('schema')!=schema:continue
+                        if status.get('used_in_prediction') is not False:continue
+                        day=aware(r['starts_at']).astimezone(ET).date()
+                        year=day.year if day.month>=8 else day.year-1
+                        rights=(r['source']=='nflverse' and status.get('source')=='nflverse injury and practice reports'
+                                and bool(snapshot.get('source_hashes',{}).get('games.csv')))
+                        rows.append({'game_id':r['game_id'],'league':'NFL','season':str(year),
+                            'feature_observed_at':status['observed_at'],'forecast_at':r['captured_at'],
+                            'starts_at':r['starts_at'],'final_observed_at':r['final_at'],
+                            'home_win':int(r['home_score']>r['away_score']),'rights_verified':rights,
+                            'baseline_probability':r['probability'],'features':status['features']})
+                    except (KeyError,TypeError,ValueError):continue
     return rows
 
 

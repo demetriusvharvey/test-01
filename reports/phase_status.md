@@ -13,7 +13,7 @@ Completed deployment and passing tests do not imply a completed prediction engin
 | 3: NFL ML | Partial | Elo and position-status research path exist. All-position player contributions are not trained or active. |
 | 4: injuries/player impact | Partial | Current roster/injury IDs, independent uncertain-player scenarios and conserved projected minutes work. NBA multi-stat player features are connected to training and live scenarios. Complete defensive/causal player values, validated replacements, confirmed lineups and justified scenario weights remain unavailable. |
 | 5: simulations | Partial | Seeded NBA scoring-unit and NFL drive simulators execute. They lost to Elo on exploratory samples and lack validated player inputs. |
-| 6: ensemble | Partial | Calibration/blend research helpers exist. No learned ensemble has demonstrated improvement or been promoted. |
+| 6: ensemble | Partial | Chronological convex blending of Elo and three separately calibrated NBA statistical models is implemented. Learned weights are evaluated on later seasons; no ensemble has earned public promotion. Market and simulation inputs remain excluded. |
 | 7: odds | Partial; scope changed | Attributed snapshots and payout/EV mathematics work. Full historical coverage absent; manual-entry UI intentionally removed. |
 | 8: selection | Partial; scope changed | Odds-independent top-three winner ranking works per newer request. Full uncertainty-aware, injury-adjusted selection is not established. |
 | 9: historical testing | Partial | Chronological Elo/simulator replays and prospective paired evaluation work. Historical injury/odds coverage, untouched tests and verified ROI are unavailable. |

@@ -18,6 +18,8 @@ on:
       - scripts/line_lab/nba_rotation.py
       - scripts/line_lab/nba_player_features.py
       - scripts/research_nba_player_features.py
+      - scripts/research_nba_ensemble.py
+      - scripts/line_lab/nba_ensemble.py
       - scripts/line_lab/nba_efficiency.py
       - scripts/line_lab/nba_statistical.py
       - scripts/line_lab/player_impact.py
@@ -67,6 +69,7 @@ jobs:
           OMP_NUM_THREADS=2 python -m scripts.research_nba_rotation --data-root "$PICKS_DATA_ROOT" --output reports/nba_rotation_validation.md
           OMP_NUM_THREADS=2 python -m scripts.research_nba_boosting --data-root "$PICKS_DATA_ROOT" --output reports/nba_boosting_validation.md
           OMP_NUM_THREADS=2 python -m scripts.research_nba_player_features --data-root "$PICKS_DATA_ROOT" --output reports/nba_player_box_validation.md
+          python -m scripts.research_nba_ensemble --data-root "$PICKS_DATA_ROOT" --output reports/nba_ensemble_validation.md
           python -m scripts.verify_nba_inference --data-root "$PICKS_DATA_ROOT" --output reports/nba_inference_verification.md
           python -m scripts.research_nba_statistical --data-root "$PICKS_DATA_ROOT" --output reports/nba_statistical_validation.md
           python -m scripts.research_player_impact --data-root "$PICKS_DATA_ROOT" --output reports/player_training_status.md
@@ -91,7 +94,7 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add reports/nba_player_box_validation.md reports/nba_inference_verification.md reports/nba_rotation_validation.md reports/nba_boosting_validation.md reports/nba_statistical_validation.md PATTERN_REPORT.md reports/model_registry.md reports/player_training_status.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md reports/simulation_validation.md reports/simulator_source_schema.md reports/scoring_process_validation.md reports/winner_accuracy_replay.md
+          git add reports/nba_ensemble_validation.md reports/nba_player_box_validation.md reports/nba_inference_verification.md reports/nba_rotation_validation.md reports/nba_boosting_validation.md reports/nba_statistical_validation.md PATTERN_REPORT.md reports/model_registry.md reports/player_training_status.md reports/challenger_forward.md reports/paper_backtest.md reports/trust_timing.md reports/simulation_validation.md reports/simulator_source_schema.md reports/scoring_process_validation.md reports/winner_accuracy_replay.md
           if ! git diff --cached --quiet; then
             git commit -m 'Update weekly research summaries'
             git pull --rebase origin main

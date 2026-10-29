@@ -49,6 +49,8 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
     rotation_model=json.loads(rotation_model_path.read_text()) if rotation_model_path.exists() else None
     player_model_path=Path(root)/'observations/nba_player_box/current_candidate.json'
     player_model=json.loads(player_model_path.read_text()) if player_model_path.exists() else None
+    ensemble_path=Path(root)/'observations/nba_ensemble/current_candidate.json'
+    ensemble_model=json.loads(ensemble_path.read_text()) if ensemble_path.exists() else None
     players=[];rosters={}
     if (rotation_model or player_model) and injury_payload:
         from .nba_rotation import parse_players
@@ -84,6 +86,10 @@ def record_nba_predictions(root,games,scheduled,now,injury_payload=None,injury_o
             from .nba_scenarios import conditional_forecasts
             predictions[-1]['player_box_scenarios']=conditional_forecasts(
                 player_model,row['vector'],event,players,rosters,injury_payload,injury_observed_at,now,probability)
+        if ensemble_model:
+            from .nba_ensemble import conditional_ensemble
+            predictions[-1]['ensemble_scenarios']=conditional_ensemble(ensemble_model,p,row['elo'],
+                predictions[-1].get('availability_scenarios'),predictions[-1].get('player_box_scenarios'),event,now)
     folder=Path(root)/'observations/nba_ml_predictions';folder.mkdir(parents=True,exist_ok=True)
     with sqlite3.connect(folder/(current.date().isoformat()+'.sqlite')) as db:
         db.executescript("""CREATE TABLE IF NOT EXISTS predictions (key TEXT PRIMARY KEY,payload TEXT NOT NULL);

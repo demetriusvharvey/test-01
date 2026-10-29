@@ -41,3 +41,14 @@ supported scenario weights and NFL all-position player-value integration.
 Box-score events do not measure every defensive contribution. Source-use
 qualifications remain unresolved for broader NBA wagering deployment. No
 public-model promotion or profit claim follows from this implementation.
+
+
+H023 has now run on 114,003 played-player rows and 4,758 identical matched
+modeling examples. The extra statistics did not consistently improve later
+results. The model remains separate from public picks. H024 follows this
+negative result explicitly: a convex ensemble learns weights from earlier
+held-out component predictions and is evaluated in a subsequent season.
+Weights never come from the season being scored. Related H023/H024 day-block
+tests receive a joint multiple-test adjustment. Conditional ensemble outputs
+require aligned injury scenarios; an ensemble using only team/Elo inputs is
+explicitly marked team-only.

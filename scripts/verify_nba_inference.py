@@ -47,6 +47,9 @@ if __name__=='__main__':
         bounds=context.get('home_scenario_range')
         interval=f'{bounds[0]:.4f}–{bounds[1]:.4f}' if bounds else 'unavailable'
         lines.append(f"| {row['away']} at {row['home']} | {context.get('status','model_unavailable')} | {context.get('scenario_count',0)} | {interval} | {context.get('consistent_winner') or 'unresolved'} |")
+    lines+=['## Ensemble scenario status','']
+    from collections import Counter
+    lines.append(json.dumps(dict(Counter(row.get('ensemble_scenarios',{}).get('status','model_unavailable') for row in result['predictions'])),sort_keys=True))
     lines+=['## Implementation acceptance','',f"Status: {acceptance['status']}; today’s games checked: {acceptance['games_checked']}.",
             'This verifies model inference and conditional injury integration. It does not establish causal injury impacts, confirmed lineups, predictive interval coverage, wagering permissions, profitability or production promotion.','']
     lines.extend(f"- {'PASS' if c['passed'] else 'MISSING'}: {c['check']}" for c in acceptance['checks'])

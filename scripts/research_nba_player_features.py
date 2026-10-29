@@ -36,12 +36,13 @@ def run(root,output):
     names=list(TEAM_FEATURES)+list(METRICS)+list(PLAYER_FEATURES)
     digest=hashlib.sha256(json.dumps(extended,sort_keys=True,separators=(',',':')).encode()).hexdigest()
     folder=root/'observations/nba_player_box'/digest;folder.mkdir(parents=True,exist_ok=True)
-    results=[]
+    results=[];component_predictions=[]
     for season in sorted({r['season'] for r in rows})[2:]:
-        team=evaluate(rows,season)
+        team=evaluate(rows,season,folder/'team')
         old_result=evaluate(rotation,season,folder/'rotation',list(TEAM_FEATURES)+list(METRICS)+list(PLAYER_FEATURES[:3]))
         candidate=evaluate(extended,season,folder/'multistat',names,model_version='nba-player-box-logistic-v1')
         if not (team and old_result and candidate):continue
+        team_model=json.loads((folder/'team'/season/'logistic.json').read_text())
         old_model=json.loads((folder/'rotation'/season/'logistic.json').read_text())
         new_model=json.loads((folder/'multistat'/season/'logistic.json').read_text())
         byday=defaultdict(list)
@@ -49,6 +50,10 @@ def run(root,output):
         loss=lambda p,y:-(y*math.log(max(1e-6,min(1-1e-6,p)))+(1-y)*math.log(max(1e-6,min(1-1e-6,1-p))))
         for r in extended:
             if r['season']!=season:continue
+            component_predictions.append({'game_id':r['game_id'],'date':r['date'],'season':r['season'],'home_win':r['home_win'],
+                                          'probabilities':{'elo':r['elo'],'team':probability(team_model,r['vector'][:14]),
+                                                           'rotation':probability(old_model,old_rows[r['game_id']]['vector']),
+                                                           'multi_stat':probability(new_model,r['vector'])}})
             byday[r['date']].append(loss(probability(new_model,r['vector']),r['home_win'])-
                                     loss(probability(old_model,old_rows[r['game_id']]['vector']),r['home_win']))
         test=paired_block_test(byday)
@@ -60,6 +65,8 @@ def run(root,output):
             'parsed_players':len(players),'matched_games':len(rows),'sources':sources,'results':results,
             'promoted':False,'missing':['verified historical pregame rosters/injuries','complete defensive impact',
                                         'validated replacement effects','untouched forward confirmation','qualified wagering use']}
+    (folder/'component_predictions.json').write_text(json.dumps(component_predictions,sort_keys=True))
+    (folder.parent/'component_predictions.json').write_text(json.dumps({'input_hash':digest,'rows':component_predictions},sort_keys=True))
     (folder/'evaluation.json').write_text(json.dumps(report,indent=2))
     if results:
         latest=results[-1]['season'];model=json.loads((folder/'multistat'/latest/'logistic.json').read_text())

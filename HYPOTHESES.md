@@ -321,3 +321,12 @@ under supported current roster scenarios, including how redistributing minutes
 to known replacements changes the estimate. Unknown-player values stay unknown.
 Do not convert a strength delta into a winning probability without a separately
 trained and evaluated outcome model.
+
+H025 implementation clarification before the first successful fit: the initial
+recursive filtering produced zero training rows and therefore fitted no models.
+Retain every observed training player as a regularized nuisance column so
+low-sample participants are controlled rather than assumed zero. Publish only
+effects backed by 120 actual training minutes; validation/test rows must contain
+only those supported players. Unknown test players remain excluded. No penalty
+grid, metric, evaluation boundary or sample threshold is relaxed. Record the
+number of unpublished nuisance columns separately from supported player values.

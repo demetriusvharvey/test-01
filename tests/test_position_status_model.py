@@ -110,6 +110,21 @@ class PositionStatusTests(unittest.TestCase):
             result=next(r for r in evaluate(baseline,candidates,trials,outcomes,settled)
                         if r['model_version']==fit['model_version'])
             self.assertEqual(result['games'],1);self.assertFalse(result['promoted'])
+            # Reports older than the model's 30-hour eligibility window
+            # must also be rejected at final scoring time, not just fitting.
+            stale=dict(candidates[0])
+            stale_features=json.loads(stale['feature_json'])
+            stale_features['availability_observed_at']=(self.now-timedelta(hours=31)).isoformat()
+            stale['feature_json']=json.dumps(stale_features)
+            stale_baselines=[dict(row) for row in baseline]
+            for row in stale_baselines:
+                if row['game_id']==event['id']:
+                    frozen=json.loads(row['feature_snapshot'])
+                    frozen['shadow_context']['nfl_position_status']['observed_at']=stale_features['availability_observed_at']
+                    row['feature_snapshot']=json.dumps(frozen)
+            rejected=next(r for r in evaluate(stale_baselines,[stale],trials,outcomes,settled)
+                          if r['model_version']==fit['model_version'])
+            self.assertEqual(rejected['games'],0)
             candidates[0]['feature_json']=json.dumps({'line_out_difference':99})
             result=next(r for r in evaluate(baseline,candidates,trials,outcomes,settled)
                         if r['model_version']==fit['model_version'])

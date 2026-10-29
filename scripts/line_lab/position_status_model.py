@@ -17,7 +17,7 @@ VERSION='nfl-position-status-logistic-v1'
 
 
 def eligible_rows(rows,cutoff):
-    current=aware(cutoff);valid={}
+    current=aware(cutoff);valid={};conflicts=set()
     for row in rows:
         try:
             observed,forecast,start,final=(aware(row[k]) for k in
@@ -31,7 +31,20 @@ def eligible_rows(rows,cutoff):
             if not 0<base<1 or any(not math.isfinite(x) or abs(x)>16 for x in vector):continue
             key=row['game_id']
             candidate={**row,'baseline_probability':base,'vector':vector}
-            if key not in valid or forecast<aware(valid[key]['forecast_at']):valid[key]=candidate
+            if key in conflicts:continue
+            prior=valid.get(key)
+            if prior is not None:
+                # Contradictory outcomes or same-time features invalidate the
+                # entire game rather than make training order-dependent.
+                mismatch=(prior['home_win']!=candidate['home_win']
+                          or prior['season']!=candidate['season']
+                          or aware(prior['starts_at'])!=start)
+                if aware(prior['forecast_at'])==forecast:
+                    mismatch=mismatch or (prior['baseline_probability']!=base
+                                         or prior['vector']!=vector)
+                if mismatch:
+                    valid.pop(key,None);conflicts.add(key);continue
+            if prior is None or forecast<aware(prior['forecast_at']):valid[key]=candidate
         except (KeyError,TypeError,ValueError,OverflowError):continue
     return sorted(valid.values(),key=lambda r:(aware(r['forecast_at']),r['game_id']))
 

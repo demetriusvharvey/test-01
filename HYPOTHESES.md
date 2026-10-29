@@ -268,3 +268,25 @@ value; minutes redistribution is a proxy, not validated replacement impact.
 Unknown historical availability, source-use qualifications, market performance
 and independent forward validation remain explicit limitations. No sportsbook
 prices enter the learner and no public pick switches based on these tests.
+
+## H024 — NBA convex ensemble of chronological component predictions
+
+Registered after inspecting H023's negative/mixed results, before this test.
+This is related follow-up research, not independent confirmation. Components:
+fixed Elo and the team, scoring-rotation and multi-stat calibrated logistic
+models. Fit nonnegative weights summing to one on a 0.1 grid using only
+component predictions from earlier held-out seasons. Require 500 earlier games
+and 30 days. Minimize earlier log loss; deterministic ties favor fewer nonzero
+weights. Evaluate the following season once on identical games, without
+changing the grid after observing its results. Compare Brier/log loss/accuracy
+against every component and a component selected using earlier log loss only.
+Direction: lower later log loss than Elo. Report a fixed-seed paired day-block
+test vs Elo with BH correction across H023 and H024 season tests together.
+
+No market input or price edge is claimed. The already inspected archive is
+exploratory, not an untouched final test. Do not promote based on this report.
+If current injury scenarios are available, apply the learned convex weights to
+matching component scenarios; otherwise withhold a scenario requiring a
+missing component. Do not assign participation weights or claim that weighting
+correlated components creates independent evidence. An ensemble selecting only
+Elo/team inputs must not be described as injury-adjusted.

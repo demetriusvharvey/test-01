@@ -1,38 +1,38 @@
 {
-  "evaluated_at": "2026-10-30T00:54:35.639885+00:00",
+  "evaluated_at": "2026-10-30T07:03:39.504373+00:00",
   "data_coverage": {
     "nba-efficiency-logistic-v1": {
-      "audited_attempts": 13,
-      "audited_days": 1,
-      "decision_days": 1,
+      "audited_attempts": 14,
+      "audited_days": 2,
+      "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-rotation-logistic-v1": {
-      "audited_attempts": 13,
-      "audited_days": 1,
-      "decision_days": 1,
+      "audited_attempts": 14,
+      "audited_days": 2,
+      "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-player-box-logistic-v1": {
-      "audited_attempts": 13,
-      "audited_days": 1,
-      "decision_days": 1,
+      "audited_attempts": 14,
+      "audited_days": 2,
+      "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-convex-ensemble-v1": {
-      "audited_attempts": 13,
-      "audited_days": 1,
-      "decision_days": 1,
+      "audited_attempts": 14,
+      "audited_days": 2,
+      "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-partial-stint-logistic-v1": {
-      "audited_attempts": 13,
-      "audited_days": 1,
-      "decision_days": 1,
+      "audited_attempts": 14,
+      "audited_days": 2,
+      "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     }
@@ -40,153 +40,153 @@
   "policy_version": "nba-top3-scenario-v1",
   "models": {
     "nba-convex-ensemble-v1": {
-      "decisions": 1,
+      "decisions": 2,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "matched_elo_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "fully_settled_day_comparison": {
-        "complete_days": 0,
-        "model_wins": 0,
-        "model_settled": 0,
-        "elo_wins": 0,
-        "elo_settled": 0,
-        "accuracy_difference": null
+        "complete_days": 1,
+        "model_wins": 2,
+        "model_settled": 3,
+        "elo_wins": 2,
+        "elo_settled": 3,
+        "accuracy_difference": 0.0
       },
-      "review_status": "awaiting_outcomes",
+      "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
     },
     "nba-efficiency-logistic-v1": {
-      "decisions": 1,
+      "decisions": 2,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "matched_elo_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "fully_settled_day_comparison": {
-        "complete_days": 0,
-        "model_wins": 0,
-        "model_settled": 0,
-        "elo_wins": 0,
-        "elo_settled": 0,
-        "accuracy_difference": null
+        "complete_days": 1,
+        "model_wins": 2,
+        "model_settled": 3,
+        "elo_wins": 2,
+        "elo_settled": 3,
+        "accuracy_difference": 0.0
       },
-      "review_status": "awaiting_outcomes",
+      "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
     },
     "nba-partial-stint-logistic-v1": {
-      "decisions": 1,
+      "decisions": 2,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "matched_elo_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "fully_settled_day_comparison": {
-        "complete_days": 0,
-        "model_wins": 0,
-        "model_settled": 0,
-        "elo_wins": 0,
-        "elo_settled": 0,
-        "accuracy_difference": null
+        "complete_days": 1,
+        "model_wins": 2,
+        "model_settled": 3,
+        "elo_wins": 2,
+        "elo_settled": 3,
+        "accuracy_difference": 0.0
       },
-      "review_status": "awaiting_outcomes",
+      "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
     },
     "nba-player-box-logistic-v1": {
-      "decisions": 1,
+      "decisions": 2,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "matched_elo_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "fully_settled_day_comparison": {
-        "complete_days": 0,
-        "model_wins": 0,
-        "model_settled": 0,
-        "elo_wins": 0,
-        "elo_settled": 0,
-        "accuracy_difference": null
+        "complete_days": 1,
+        "model_wins": 2,
+        "model_settled": 3,
+        "elo_wins": 2,
+        "elo_settled": 3,
+        "accuracy_difference": 0.0
       },
-      "review_status": "awaiting_outcomes",
+      "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
     },
     "nba-rotation-logistic-v1": {
-      "decisions": 1,
+      "decisions": 2,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "matched_elo_record": {
-        "wins": 0,
-        "losses": 0,
+        "wins": 2,
+        "losses": 1,
         "pending": 3,
         "voids": 0,
         "excluded": 0,
-        "accuracy": null
+        "accuracy": 0.6666666666666666
       },
       "fully_settled_day_comparison": {
-        "complete_days": 0,
-        "model_wins": 0,
-        "model_settled": 0,
-        "elo_wins": 0,
-        "elo_settled": 0,
-        "accuracy_difference": null
+        "complete_days": 1,
+        "model_wins": 2,
+        "model_settled": 3,
+        "elo_wins": 2,
+        "elo_settled": 3,
+        "accuracy_difference": 0.0
       },
-      "review_status": "awaiting_outcomes",
+      "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
     }
   },

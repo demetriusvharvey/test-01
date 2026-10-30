@@ -1,70 +1,70 @@
 {
-  "evaluated_at": "2026-10-30T00:54:35.639885+00:00",
+  "evaluated_at": "2026-10-30T07:03:39.504373+00:00",
   "invalid_forecasts": 500,
   "models": {
     "nba-efficiency-logistic-v1": {
-      "pending": 58,
+      "pending": 61,
       "void": 0,
       "excluded": 0,
-      "scenario_agreement": 0,
+      "scenario_agreement": 3,
       "scenario_disagreement": 0,
       "model": {
-        "games": 0,
-        "accuracy": null,
-        "brier": null,
-        "log_loss": null
+        "games": 3,
+        "accuracy": 0.6666666666666666,
+        "brier": 0.3466726752429094,
+        "log_loss": 1.027484294338171
       },
       "elo": {
-        "games": 0,
-        "accuracy": null,
-        "brier": null,
-        "log_loss": null
+        "games": 3,
+        "accuracy": 0.6666666666666666,
+        "brier": 0.31190410163015364,
+        "log_loss": 0.8369650075889012
       },
-      "brier_difference": null,
-      "log_loss_difference": null,
-      "status": "awaiting_confirmed_finals"
+      "brier_difference": 0.03476857361275576,
+      "log_loss_difference": 0.19051928674926977,
+      "status": "forward_results_available"
     }
   },
   "conditional_winner_records": {
     "nba-convex-ensemble-v1": {
-      "wins": 0,
-      "losses": 0,
-      "pending": 58,
+      "wins": 2,
+      "losses": 1,
+      "pending": 61,
       "abstained": 0,
       "void": 0,
       "excluded": 0,
-      "settled_predictions": 0,
-      "accuracy": null
+      "settled_predictions": 3,
+      "accuracy": 0.6666666666666666
     },
     "nba-partial-stint-logistic-v1": {
-      "wins": 0,
-      "losses": 0,
-      "pending": 58,
+      "wins": 2,
+      "losses": 1,
+      "pending": 61,
       "abstained": 0,
       "void": 0,
       "excluded": 0,
-      "settled_predictions": 0,
-      "accuracy": null
+      "settled_predictions": 3,
+      "accuracy": 0.6666666666666666
     },
     "nba-player-box-logistic-v1": {
-      "wins": 0,
-      "losses": 0,
-      "pending": 58,
+      "wins": 2,
+      "losses": 1,
+      "pending": 61,
       "abstained": 0,
       "void": 0,
       "excluded": 0,
-      "settled_predictions": 0,
-      "accuracy": null
+      "settled_predictions": 3,
+      "accuracy": 0.6666666666666666
     },
     "nba-rotation-logistic-v1": {
-      "wins": 0,
-      "losses": 0,
-      "pending": 58,
+      "wins": 2,
+      "losses": 1,
+      "pending": 61,
       "abstained": 0,
       "void": 0,
       "excluded": 0,
-      "settled_predictions": 0,
-      "accuracy": null
+      "settled_predictions": 3,
+      "accuracy": 0.6666666666666666
     }
   },
   "promoted": false,

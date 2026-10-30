@@ -1,36 +1,36 @@
 {
-  "evaluated_at": "2026-10-30T19:18:43.102551+00:00",
+  "evaluated_at": "2026-10-30T23:42:24.317522+00:00",
   "data_coverage": {
     "nba-efficiency-logistic-v1": {
-      "audited_attempts": 16,
+      "audited_attempts": 17,
       "audited_days": 2,
       "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-rotation-logistic-v1": {
-      "audited_attempts": 16,
+      "audited_attempts": 17,
       "audited_days": 2,
       "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-player-box-logistic-v1": {
-      "audited_attempts": 16,
+      "audited_attempts": 17,
       "audited_days": 2,
       "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-convex-ensemble-v1": {
-      "audited_attempts": 16,
+      "audited_attempts": 17,
       "audited_days": 2,
       "decision_days": 2,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-partial-stint-logistic-v1": {
-      "audited_attempts": 16,
+      "audited_attempts": 17,
       "audited_days": 2,
       "decision_days": 2,
       "audited_days_without_decision": 0,

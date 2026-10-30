@@ -183,7 +183,7 @@
     "pick_day": "2026-10-29",
     "predicted_at": "2026-10-29T07:00:40.344336+00:00",
     "probability": 0.74329723,
-    "outcome": "pending",
+    "outcome": "loss",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -223,7 +223,12 @@
     },
     "feature_snapshot_hash": "66168c7f13e6ae164ddaf14351d826bf5ee0e44a1f82cf7c03f8d92b02f6c3f9",
     "model_only_probability": 0.7432972297160214,
-    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-30T07:03:36.511632+00:00",
+    "final_score": {
+      "home": 103,
+      "away": 124
+    }
   },
   {
     "id": "nfl:2026-10-29:CAR:GB",
@@ -235,7 +240,7 @@
     "pick_day": "2026-10-29",
     "predicted_at": "2026-10-29T07:00:40.344336+00:00",
     "probability": 0.66582202,
-    "outcome": "pending",
+    "outcome": "win",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -274,7 +279,12 @@
     },
     "feature_snapshot_hash": "84d96d66e9beb8ab33effe8a6db2832c40c976e258f552c2fca1310e82f39835",
     "model_only_probability": 0.6658220166031706,
-    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-30T07:03:36.511632+00:00",
+    "final_score": {
+      "home": 27,
+      "away": 19
+    }
   },
   {
     "id": "nba:2026-10-29:SAC:NOP",
@@ -286,7 +296,7 @@
     "pick_day": "2026-10-29",
     "predicted_at": "2026-10-29T07:00:40.344336+00:00",
     "probability": 0.58762877,
-    "outcome": "pending",
+    "outcome": "win",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -326,6 +336,174 @@
     },
     "feature_snapshot_hash": "f3a0c5dd254bc60cdb3d7a013c630a8295dc01893163180f73223805580090c2",
     "model_only_probability": 0.5876287718866917,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-30T07:03:36.511632+00:00",
+    "final_score": {
+      "home": 132,
+      "away": 120
+    }
+  },
+  {
+    "id": "nba:2026-10-30:CHI:BOS",
+    "league": "NBA",
+    "team_code": "BOS",
+    "team": "Boston Celtics",
+    "opponent": "Chicago Bulls",
+    "starts_at": "2026-10-30T23:40:00+00:00",
+    "pick_day": "2026-10-30",
+    "predicted_at": "2026-10-30T07:03:36.511632+00:00",
+    "probability": 0.84032937,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "BOS",
+      "away": "CHI",
+      "starts_at": "2026-10-30T23:40:00+00:00",
+      "home_rating": 1632.719822531519,
+      "away_rating": 1384.2300255053096,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-27",
+      "away_last": "2026-10-28",
+      "home_margins": [
+        -8,
+        4,
+        35,
+        1
+      ],
+      "away_margins": [
+        -43,
+        7,
+        -4,
+        -35,
+        -6
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "e786108261eb1044225c34f4e3beb0f7115399ce83f01e9017e3cf4ec22dcb6e"
+      }
+    },
+    "feature_snapshot_hash": "cf69fe5653bc3a4fcb93ac0bb3c4a6b2c086dd3e224bc856d0fb1e528fbff429",
+    "model_only_probability": 0.8403293665300728,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  },
+  {
+    "id": "nba:2026-10-30:DET:BKN",
+    "league": "NBA",
+    "team_code": "DET",
+    "team": "Detroit Pistons",
+    "opponent": "Brooklyn Nets",
+    "starts_at": "2026-10-30T23:40:00+00:00",
+    "pick_day": "2026-10-30",
+    "predicted_at": "2026-10-30T07:03:36.511632+00:00",
+    "probability": 0.83009419,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "BKN",
+      "away": "DET",
+      "starts_at": "2026-10-30T23:40:00+00:00",
+      "home_rating": 1321.2384338060117,
+      "away_rating": 1636.806087350932,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-27",
+      "away_last": "2026-10-28",
+      "home_margins": [
+        -7,
+        -4,
+        -27,
+        -1
+      ],
+      "away_margins": [
+        8,
+        17,
+        13,
+        -14,
+        8
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "e786108261eb1044225c34f4e3beb0f7115399ce83f01e9017e3cf4ec22dcb6e"
+      }
+    },
+    "feature_snapshot_hash": "92d1ae471062fecdc25ec41c0ee14d24e18975889af0d9af92377fbea76bff43",
+    "model_only_probability": 0.8300941866587236,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  },
+  {
+    "id": "nba:2026-10-30:CHA:WAS",
+    "league": "NBA",
+    "team_code": "CHA",
+    "team": "Charlotte Hornets",
+    "opponent": "Washington Wizards",
+    "starts_at": "2026-10-30T23:10:00+00:00",
+    "pick_day": "2026-10-30",
+    "predicted_at": "2026-10-30T07:03:36.511632+00:00",
+    "probability": 0.74671731,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "WAS",
+      "away": "CHA",
+      "starts_at": "2026-10-30T23:10:00+00:00",
+      "home_rating": 1319.6265791182514,
+      "away_rating": 1547.4468667063707,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-28",
+      "away_last": "2026-10-28",
+      "home_margins": [
+        12,
+        -10,
+        4,
+        -7,
+        -10
+      ],
+      "away_margins": [
+        7,
+        -47,
+        5,
+        7,
+        -8
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "e786108261eb1044225c34f4e3beb0f7115399ce83f01e9017e3cf4ec22dcb6e"
+      }
+    },
+    "feature_snapshot_hash": "832ea4263618aea7f0289c509dc9cecf7bc8870730a49d45de231d111ab00145",
+    "model_only_probability": 0.7467173143245022,
     "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
   }
 ]

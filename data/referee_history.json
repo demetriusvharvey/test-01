@@ -583,5 +583,135 @@
     ],
     "observed_at": "2026-10-30T14:04:22.899635+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Charlotte @ Washington",
+    "game_date": "2026-10-31",
+    "matchup": "Charlotte @ Washington",
+    "crew": [
+      "James Capers (#19)",
+      "Sean Corbin (#33)",
+      "Brandon Schwab (#49)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Chicago @ Boston",
+    "game_date": "2026-10-31",
+    "matchup": "Chicago @ Boston",
+    "crew": [
+      "Pat Fraher (#26)",
+      "Nate Green (#41)",
+      "Scott Twardoski (#52)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Detroit @ Brooklyn",
+    "game_date": "2026-10-31",
+    "matchup": "Detroit @ Brooklyn",
+    "crew": [
+      "Marc Davis (#8)",
+      "Ed Malloy (#7)",
+      "Biniam Maru (#94)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:New York @ Philadelphia",
+    "game_date": "2026-10-31",
+    "matchup": "New York @ Philadelphia",
+    "crew": [
+      "Kevin Scott (#24)",
+      "Bill Kennedy (#55)",
+      "Simone Jelks (#81)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Orlando @ Toronto",
+    "game_date": "2026-10-31",
+    "matchup": "Orlando @ Toronto",
+    "crew": [
+      "Sean Wright (#4)",
+      "Mitchell Ervin (#27)",
+      "Tyler Ricks (#95)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Indiana @ Miami",
+    "game_date": "2026-10-31",
+    "matchup": "Indiana @ Miami",
+    "crew": [
+      "Brent Barnaky (#36)",
+      "Eric Lewis (#42)",
+      "Brett Nansel (#44)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Houston @ Dallas",
+    "game_date": "2026-10-31",
+    "matchup": "Houston @ Dallas",
+    "crew": [
+      "Zach Zarba (#15)",
+      "Ashley Moyer-Gleich (#13)",
+      "Robert Hussey (#85)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:LA Clippers @ Minnesota",
+    "game_date": "2026-10-31",
+    "matchup": "LA Clippers @ Minnesota",
+    "crew": [
+      "JB DeRosa (#14)",
+      "Marat Kogut (#32)",
+      "Che Flores (#91)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:L.A. Lakers @ Golden State",
+    "game_date": "2026-10-31",
+    "matchup": "L.A. Lakers @ Golden State",
+    "crew": [
+      "Tony Brothers (#25)",
+      "John Butler (#30)",
+      "Jenna Schroeder (#20)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Denver @ Phoenix",
+    "game_date": "2026-10-31",
+    "matchup": "Denver @ Phoenix",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Brian Forte (#45)",
+      "Mousa Dagher (#28)",
+      ""
+    ],
+    "observed_at": "2026-10-31T05:30:17.251050+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

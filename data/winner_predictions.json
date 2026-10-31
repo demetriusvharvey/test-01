@@ -353,7 +353,7 @@
     "pick_day": "2026-10-30",
     "predicted_at": "2026-10-30T07:03:36.511632+00:00",
     "probability": 0.84032937,
-    "outcome": "pending",
+    "outcome": "win",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -395,7 +395,12 @@
     },
     "feature_snapshot_hash": "cf69fe5653bc3a4fcb93ac0bb3c4a6b2c086dd3e224bc856d0fb1e528fbff429",
     "model_only_probability": 0.8403293665300728,
-    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-31T05:30:20.211124+00:00",
+    "final_score": {
+      "home": 125,
+      "away": 111
+    }
   },
   {
     "id": "nba:2026-10-30:DET:BKN",
@@ -407,7 +412,7 @@
     "pick_day": "2026-10-30",
     "predicted_at": "2026-10-30T07:03:36.511632+00:00",
     "probability": 0.83009419,
-    "outcome": "pending",
+    "outcome": "win",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -449,7 +454,12 @@
     },
     "feature_snapshot_hash": "92d1ae471062fecdc25ec41c0ee14d24e18975889af0d9af92377fbea76bff43",
     "model_only_probability": 0.8300941866587236,
-    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-31T05:30:20.211124+00:00",
+    "final_score": {
+      "home": 94,
+      "away": 110
+    }
   },
   {
     "id": "nba:2026-10-30:CHA:WAS",
@@ -461,7 +471,7 @@
     "pick_day": "2026-10-30",
     "predicted_at": "2026-10-30T07:03:36.511632+00:00",
     "probability": 0.74671731,
-    "outcome": "pending",
+    "outcome": "loss",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -504,6 +514,175 @@
     },
     "feature_snapshot_hash": "832ea4263618aea7f0289c509dc9cecf7bc8870730a49d45de231d111ab00145",
     "model_only_probability": 0.7467173143245022,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-31T05:30:20.211124+00:00",
+    "final_score": {
+      "home": 95,
+      "away": 79
+    }
+  },
+  {
+    "id": "nba:2026-10-31:POR:UTA",
+    "league": "NBA",
+    "team_code": "POR",
+    "team": "Portland Trail Blazers",
+    "opponent": "Utah Jazz",
+    "starts_at": "2026-10-31T19:00:00+00:00",
+    "pick_day": "2026-10-31",
+    "predicted_at": "2026-10-31T05:30:20.211124+00:00",
+    "probability": 0.72038873,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "UTA",
+      "away": "POR",
+      "starts_at": "2026-10-31T19:00:00+00:00",
+      "home_rating": 1327.4069502720727,
+      "away_rating": 1531.8118433089264,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-28",
+      "away_last": "2026-10-29",
+      "home_margins": [
+        -20,
+        1,
+        -9,
+        -5,
+        -6
+      ],
+      "away_margins": [
+        41,
+        8,
+        7,
+        -21
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "e077cfdfc275c09b9abdd43f88d839a7352ccba32cd3cc57169052fbe99bad23"
+      }
+    },
+    "feature_snapshot_hash": "e41dc678f9f830912886fc550b756ca634f3387233cfa9f8bf02202ee4bd7b4a",
+    "model_only_probability": 0.7203887275509528,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  },
+  {
+    "id": "nba:2026-10-31:CLE:MIL",
+    "league": "NBA",
+    "team_code": "CLE",
+    "team": "Cleveland Cavaliers",
+    "opponent": "Milwaukee Bucks",
+    "starts_at": "2026-11-01T00:00:00+00:00",
+    "pick_day": "2026-10-31",
+    "predicted_at": "2026-10-31T05:30:20.211124+00:00",
+    "probability": 0.69315997,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "MIL",
+      "away": "CLE",
+      "starts_at": "2026-11-01T00:00:00+00:00",
+      "home_rating": 1401.4933205514874,
+      "away_rating": 1583.0619065459882,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-28",
+      "away_last": "2026-10-29",
+      "home_margins": [
+        -12,
+        -7,
+        -11,
+        8,
+        -32
+      ],
+      "away_margins": [
+        -8,
+        4,
+        2,
+        10,
+        -3
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "e077cfdfc275c09b9abdd43f88d839a7352ccba32cd3cc57169052fbe99bad23"
+      }
+    },
+    "feature_snapshot_hash": "886414a41418d0c6f229cfe755b570a8fb1f59a9e2d586b07da23f0d5a30ef3b",
+    "model_only_probability": 0.693159973559967,
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+  },
+  {
+    "id": "nba:2026-10-31:MIN:SAS",
+    "league": "NBA",
+    "team_code": "SAS",
+    "team": "San Antonio Spurs",
+    "opponent": "Minnesota Timberwolves",
+    "starts_at": "2026-11-01T00:00:00+00:00",
+    "pick_day": "2026-10-31",
+    "predicted_at": "2026-10-31T05:30:20.211124+00:00",
+    "probability": 0.66695489,
+    "outcome": "pending",
+    "model": "pure-elo-v1",
+    "winner_selection": true,
+    "ledger_version": 2,
+    "selection_rule": "top-elo-winner-v1",
+    "feature_snapshot": {
+      "schema": "pure-elo-input-v1.1",
+      "model": "pure-elo-v1",
+      "home": "SAS",
+      "away": "MIN",
+      "starts_at": "2026-11-01T00:00:00+00:00",
+      "home_rating": 1636.9328274592817,
+      "away_rating": 1556.2954677534717,
+      "home_advantage": 40,
+      "neutral": false,
+      "rest_weight": 0,
+      "form_weight": 0,
+      "home_last": "2026-10-28",
+      "away_last": "2026-10-28",
+      "home_margins": [
+        -12,
+        -4,
+        16,
+        27,
+        6
+      ],
+      "away_margins": [
+        25,
+        22,
+        23,
+        -2,
+        -5
+      ],
+      "source_text_sha256": {
+        "2022-23": "40b9a2c4f50d040396c53a45e86d174dcfcb0af3d8105a1c53f33432cf088a86",
+        "2023-24": "3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce",
+        "2024-25": "61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b",
+        "2025-26": "f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1",
+        "2026-27": "e077cfdfc275c09b9abdd43f88d839a7352ccba32cd3cc57169052fbe99bad23"
+      }
+    },
+    "feature_snapshot_hash": "2de736f2f2603aa5fb3a5b9cf5959b16b794a57d2c7bba53ff9a4a275f419911",
+    "model_only_probability": 0.6669548898043212,
     "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
   }
 ]

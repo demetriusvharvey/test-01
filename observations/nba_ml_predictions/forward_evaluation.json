@@ -1,27 +1,34 @@
 {
-  "evaluated_at": "2026-10-31T20:14:48.645442+00:00",
-  "invalid_forecasts": 500,
+  "evaluated_at": "2026-10-31T20:16:45.676621+00:00",
+  "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
-      "pending": 70,
+      "benchmark_missing": 3,
+      "pending": 75,
       "void": 0,
       "excluded": 10,
-      "scenario_agreement": 3,
+      "scenario_agreement": 0,
       "scenario_disagreement": 0,
       "model": {
         "games": 3,
         "accuracy": 0.6666666666666666,
-        "brier": 0.3466726752429094,
-        "log_loss": 1.027484294338171
+        "brier": 0.3466726752429086,
+        "log_loss": 1.0274842943381608
       },
       "elo": {
-        "games": 3,
-        "accuracy": 0.6666666666666666,
-        "brier": 0.31190410163015364,
-        "log_loss": 0.8369650075889012
+        "games": 0,
+        "accuracy": null,
+        "brier": null,
+        "log_loss": null
       },
-      "brier_difference": 0.03476857361275576,
-      "log_loss_difference": 0.19051928674926977,
+      "matched_model": {
+        "games": 0,
+        "accuracy": null,
+        "brier": null,
+        "log_loss": null
+      },
+      "brier_difference": null,
+      "log_loss_difference": null,
       "status": "forward_results_available"
     }
   },
@@ -68,7 +75,7 @@
     }
   },
   "promoted": false,
-  "policy": "earliest eligible immutable forecast per game/version; identical paired Elo sample; confirmed finals only",
+  "policy": "earliest eligible immutable forecast per game/version; all valid model forecasts scored; Elo comparisons use only matched benchmarks; confirmed finals only",
   "limitations": [
     "pipeline versions may contain retrained artifacts; not a fixed-artifact trial",
     "conditional scenarios are not an unconditional calibrated prediction; only scenario-consistent winner accuracy is graded",

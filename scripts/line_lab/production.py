@@ -168,6 +168,7 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
         for text,stamp,sha in assets(root,'nba_team_game_boxscores',now):stats['NBA'].update(parse_team_stats(text))
     valid_games=[g for g in games if g['date']<current.astimezone(ET).date()]
     for game in board.get('games',[]):
+        game.pop('predicted_winner',None)
         try:
             if not current<aware(game['starts_at']):continue
             if game['league']=='NFL' and 'neutral' not in game:

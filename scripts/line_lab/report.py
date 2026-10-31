@@ -54,7 +54,10 @@ def render_board(markets,ledger,now,errors,models=None,training_counts=None,adde
                **({'neutral':e['neutral']} if 'neutral' in e else {})}
               for e in markets.values() if datetime.fromisoformat(e['starts_at'])>now]
     listed={e['id'] for e in upcoming}
+    by_id={e['id']:e for e in upcoming}
     for e in scheduled or []:
+        if e['id'] in by_id and 'neutral' in e:
+            by_id[e['id']]['neutral']=e['neutral']
         if e['id'] not in listed and datetime.fromisoformat(e['starts_at'])>now:
             upcoming.append({**e,'books':{}});listed.add(e['id'])
     upcoming.sort(key=lambda e:(e['starts_at'],e['id']))

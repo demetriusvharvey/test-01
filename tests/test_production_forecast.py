@@ -149,11 +149,21 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(b['picks'],[]);self.assertEqual(b['accuracy']['losses'],5)
 
     def test_same_teams_separate_leagues_do_not_share_models_or_venue_defaults(self):
-        board={'games':[{'id':'nfl:2026-10-31:BUF:NYJ','league':'NFL','starts_at':START,'home':'Jets','away':'Bills'}],
+        board={'games':[{'id':'nfl:2026-10-31:BUF:NYJ','league':'NFL','starts_at':START,'home':'Jets','away':'Bills','predicted_winner':'Jets'}],
                'errors':[],'picks':[]}
         apply_pipeline(board,{},[],NOW)
         self.assertEqual(board['games'][0]['forecast_status'],'venue_status_unverified')
+        self.assertNotIn('predicted_winner',board['games'][0])
         self.assertEqual(board['picks'],[])
+
+    def test_priced_nfl_slate_retains_schedule_venue_metadata(self):
+        from scripts.line_lab.report import render_board
+        event={'id':'nfl:2026-10-31:BUF:NYJ','league':'NFL','starts_at':START,
+               'home_name':'Jets','away_name':'Bills','books':{}}
+        for neutral in (True,False):
+            scheduled=[{'id':event['id'],'league':'NFL','starts_at':START,'home':'Jets','away':'Bills','neutral':neutral}]
+            b=render_board({event['id']:event},[],datetime.fromisoformat(NOW),[],scheduled=scheduled)
+            self.assertIs(b['games'][0]['neutral'],neutral)
 
     def test_benchmark_and_candidate_are_scored_on_frozen_matched_games(self):
         f={'id':'nba:2026-10-31:BOS:NYK','artifact_hash':'a','model_version':'m','starts_at':START,

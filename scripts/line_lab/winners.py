@@ -10,7 +10,7 @@ from .model import project_home
 from .reproducibility import verify_paper_pick
 
 
-def make_daily_winners(scheduled, models, now, prior, limit=3):
+def legacy_daily_winners(scheduled, models, now, prior, limit=3):
     """Save up to three most favored teams on today's unstarted slate, once.
 
     Only a missing/unusable schedule or model can produce no daily winners;
@@ -47,6 +47,24 @@ def make_daily_winners(scheduled, models, now, prior, limit=3):
     return candidates[:max(0,limit-len(existing_ids))]
 
 
+def make_daily_winners(scheduled,models,now,prior,limit=None):
+    """Return only independently validated value selections; no forced quota.
+
+    Legacy snapshots are reproduced by legacy_daily_winners, never by this
+    production entry point. The all-game pipeline supplies frozen forecasts.
+    """
+    from .production import decision
+    existing={r['id'] for r in prior};selected=[]
+    for event in scheduled:
+        forecast=event.get('forecast')
+        if not forecast or event['id'] in existing:continue
+        result=decision(forecast,event,now.isoformat(),models.get(event['league'],{}).get('validation'))
+        if result['eligible']:
+            selected.append({**forecast,'decision':result,'recommendation_eligible':True})
+    selected.sort(key=lambda r:(-r['decision']['pricing']['uncertainty_adjusted_ev'],r['id']))
+    return selected if limit is None else selected[:max(0,limit)]
+
+
 def render_winners(board, ledger, now, models):
     """Use the real game slate for optional prices and injury context."""
     day=now.astimezone(ET).date().isoformat();games={g['id']:g for g in board['games']}
@@ -64,10 +82,11 @@ def render_winners(board, ledger, now, models):
         status=verify_paper_pick(row)
         if status!='verified':
             board['errors'].append('A winner forecast failed its frozen input check')
-            continue
         item={key:row.get(key) for key in ('id','league','team','opponent','starts_at','pick_day','predicted_at','outcome','graded_at')}
-        item['model']='pure-elo-v1';item['winner_selection']=True
+        item['model']=row.get('model','pure-elo-v1');item['winner_selection']=True
+        item['recommendation_eligible']=False;item['prediction_integrity']=status
         history.append(item)
+        if status!='verified':continue
         if row['pick_day']!=day or row['outcome']!='pending' or datetime.fromisoformat(row['starts_at'])<=now:continue
         game=games.get(row['id'])
         if game is None:continue

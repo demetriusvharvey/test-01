@@ -2,13 +2,14 @@ name: Update picks and scorecard
 on:
   workflow_dispatch:
   schedule:
-    - cron: '9 * * * *'
+    - cron: '9,24,39,54 * * * *'
   push:
     branches: [main]
     paths:
       - 'scripts/pipeline.py'
       - 'scripts/line_lab/**'
       - 'tests/**'
+      - 'data/models/**'
       - '.github/workflows/daily-picks.yml'
 permissions:
   contents: write

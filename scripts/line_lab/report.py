@@ -50,7 +50,8 @@ def render_board(markets,ledger,now,errors,models=None,training_counts=None,adde
                          'candidate_name':model.get('candidate_name'),'candidate_passed':model.get('candidate_passed',False),
                          'candidate_testing':model.get('candidate_testing','disabled')}
     upcoming=[{'id':e['id'],'league':e['league'],'home':e['home_name'],'away':e['away_name'],
-               'starts_at':e['starts_at'],'books':e['books']}
+               'starts_at':e['starts_at'],'books':e['books'],
+               **({'neutral':e['neutral']} if 'neutral' in e else {})}
               for e in markets.values() if datetime.fromisoformat(e['starts_at'])>now]
     listed={e['id'] for e in upcoming}
     for e in scheduled or []:

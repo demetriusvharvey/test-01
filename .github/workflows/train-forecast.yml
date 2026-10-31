@@ -1,0 +1,43 @@
+name: Train chronological forecast challengers
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '51 11 * * 3'
+permissions:
+  contents: write
+concurrency:
+  group: line-lab-data
+  cancel-in-progress: false
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: main
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683
+        with:
+          ref: data/observations
+          path: .data-store
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065
+        with:
+          python-version: '3.12'
+      - run: pip install -r requirements-research.txt
+      - run: python -m unittest discover -s tests
+      - name: Train and evaluate without automatic promotion
+        env:
+          OMP_NUM_THREADS: 2
+        run: python scripts/train_forecast.py --data-root .data-store
+      - name: Verify portable inference
+        run: python -m unittest tests.test_production_forecast
+      - name: Save evaluated artifacts
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/models
+          if ! git diff --cached --quiet; then
+            git commit -m 'Evaluate chronological league forecast challengers'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi

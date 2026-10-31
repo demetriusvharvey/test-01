@@ -4,6 +4,7 @@ This is descriptive context only, not a validated model input. The provider's
 terms require the user to obtain a key and agree to them before enabling calls.
 """
 import json
+import hashlib
 import os
 import re
 from datetime import datetime, timezone
@@ -16,7 +17,7 @@ from .propline_quota import record_headers
 
 URL = 'https://api.prop-line.com/v1/sports/basketball_nba/injuries'
 STATUSES = {'out', 'out_first_half', 'doubtful', 'questionable', 'probable',
-            'game_time_decision', 'day_to_day', 'injured_list', 'suspended', 'other'}
+            'game_time_decision', 'day_to_day', 'injured_list', 'suspended', 'other', 'available'}
 PROVIDER_TEAM_ALIASES = {
     'NBA': {'GS':'GSW','NY':'NYK','NO':'NOP','SA':'SAS','UTAH':'UTA','WSH':'WAS'},
     'NFL': {'WSH':'WAS'},
@@ -83,7 +84,7 @@ def summarize_by_team(payload, observed_at, league='NBA'):
         raise ValueError('incomplete injury response')
     teams = set((NBA_TEAMS if league=='NBA' else NFL_TEAMS).values())
     candidates = {}
-    incomplete = False
+    incomplete = bool(payload.get('parse_errors',0))
     for row in rows:
         if not isinstance(row, dict):
             incomplete = True
@@ -197,6 +198,13 @@ def pregame_injury_readiness(event, observed_at, evaluated_at, coverage_complete
             'confirmed_starters':False,'real_time':False}
 
 
+def status_fingerprint(payload,event,league):
+    teams={event['home'],event['away']}
+    rows=[{k:r.get(k) for k in ('player_id','team_abbr','status_code','source_updated_at','status_since')}
+          for r in payload.get('players',[]) if provider_team_code(r.get('team_abbr'),league) in teams]
+    return hashlib.sha256(json.dumps(sorted(rows,key=lambda r:str(r['player_id'])),sort_keys=True).encode()).hexdigest()
+
+
 def attach_nba_summaries(board, markets, payload, observed_at):
     summaries, incomplete = summarize_by_team(payload, observed_at)
     positions = summarize_positions_by_team(payload, observed_at, 'NBA')
@@ -217,10 +225,12 @@ def attach_nba_summaries(board, markets, payload, observed_at):
                 sides[side] = {'team': event[side + '_name'], 'counts': summaries[code], 'positions': positions[code], 'report_present': bool(sum(summaries[code].values()))}
             complete=not incomplete and all(v['report_present'] for v in sides.values())
             pick['nba_availability_context'] = {
-                'teams': sides, 'source': 'PropLine, ESPN-sourced',
+                'teams': sides, 'source': payload.get('source','PropLine, ESPN-sourced'),
                 'observed_at': observed.isoformat(), 'incomplete': not complete,
                 'pregame_readiness': pregame_injury_readiness(event,observed, max(checked,observed),complete),
                 'used_in_prediction': False,
+                'status_fingerprint':status_fingerprint(payload,event,'NBA'),
+                'source_timestamp':payload.get('source_timestamp'),
             }
         except (KeyError, TypeError, ValueError):
             continue
@@ -244,9 +254,11 @@ def attach_nfl_summaries(board, markets, payload, observed_at):
                 sides[side]={'team':event[side+'_name'],'counts':summaries[code],'positions':positions[code],'report_present':bool(sum(summaries[code].values()))}
             complete=not incomplete and all(v['report_present'] for v in sides.values())
             pick['nfl_provider_availability_context']={
-                'teams':sides,'source':'PropLine, ESPN-sourced',
+                'teams':sides,'source':payload.get('source','PropLine, ESPN-sourced'),
                 'observed_at':observed.isoformat(),'incomplete':not complete,
                 'pregame_readiness':pregame_injury_readiness(event,observed,max(checked,observed),complete),
                 'used_in_prediction':False,
+                'status_fingerprint':status_fingerprint(payload,event,'NFL'),
+                'source_timestamp':payload.get('source_timestamp'),
             }
         except (KeyError,TypeError,ValueError):continue

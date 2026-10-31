@@ -22,6 +22,13 @@ def protect_last_success(current,previous,now):
         saved['errors']=list(errors)+['Current schedule refresh unavailable; showing the last successful slate.']
         saved['source_status']={**saved.get('source_status',{}),'scoreboard_status':'unavailable','serving_last_success':True}
         saved['picks']=[{**p,'data_stale':True} for p in saved.get('picks',[]) if aware(p['starts_at'])>stamp]
+        if current.get('selection_policy') or saved.get('selection_policy'):
+            saved['picks']=[]
+            saved['selection_policy']={**current.get('selection_policy',saved.get('selection_policy',{})),
+                                       'status':'refresh_unavailable','recommendations':0}
+            # Settlement may have succeeded even if the slate fetch failed.
+            for key in ('accuracy','history','legacy_accuracy_details','forecast_evaluation'):
+                if key in current:saved[key]=current[key]
         for game in saved.get('games',[]):game['data_stale']=True
         return saved
     except (TypeError,KeyError,ValueError):return current

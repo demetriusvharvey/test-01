@@ -135,10 +135,10 @@
       const link='<a href="https://official.nba.com/nba-injury-report-2026-27-season/" target="_blank" rel="noopener noreferrer">latest NBA player report</a>',c=p.nba_availability_context;
       if(!c||!c.teams)return `<p>NBA injuries and projected lineups are not included in this prediction. Check the ${link}; starters are unconfirmed.</p>`;
       const entries=['away','home'].map(side=>c.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.counts.out)} out, ${Number(team.counts.questionable)} questionable or game-time decision, ${Number(team.counts.doubtful)} doubtful`).join(' · ');
-      return `<p>Player-status counts from PropLine (ESPN), checked ${displayTime(c.observed_at)}: ${entries}. Reports may be incomplete and a missing name does not mean healthy. Check the ${link}; this information has not changed the prediction.</p>${injuryFreshnessNote(c)}${injuryChangeNote(p)}${positionMarkup(c)}`;
+      return `<p>Player-status counts from ${escape(c.source||'source unavailable')}, checked ${displayTime(c.observed_at)}: ${entries}. Reports may be incomplete and a missing name does not mean healthy. Check the ${link}; this information has not changed the prediction.</p>${injuryFreshnessNote(c)}${injuryChangeNote(p)}${positionMarkup(c)}`;
     }
     const current=p.nfl_provider_availability_context;
-    const currentSummary=current&&current.teams?`<p>Player-status counts from PropLine (ESPN), checked ${displayTime(current.observed_at)}: ${['away','home'].map(side=>current.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.counts.out)} out, ${Number(team.counts.questionable)} questionable or game-time decision, ${Number(team.counts.doubtful)} doubtful`).join(' · ')}. Reports may be incomplete; no listing does not mean healthy.</p>${injuryFreshnessNote(current)}${injuryChangeNote(p)}${positionMarkup(current)}`:'';
+    const currentSummary=current&&current.teams?`<p>Player-status counts from ${escape(current.source||'source unavailable')}, checked ${displayTime(current.observed_at)}: ${['away','home'].map(side=>current.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.counts.out)} out, ${Number(team.counts.questionable)} questionable or game-time decision, ${Number(team.counts.doubtful)} doubtful`).join(' · ')}. Reports may be incomplete; no listing does not mean healthy.</p>${injuryFreshnessNote(current)}${injuryChangeNote(p)}${positionMarkup(current)}`:'';
     const c=p.availability_context;
     if(!c||!c.teams)return `${currentSummary}<p>NFL starting quarterback and inactive list: unconfirmed. Injury information has not changed this prediction.</p>`;
     const entries=['away','home'].map(side=>c.teams[side]).filter(Boolean).map(team=>{
@@ -151,7 +151,7 @@
     const historical=!p.current;
     const statuses={win:'WON',loss:'LOST',void:'VOID',pending:'PENDING'};
     const status=Object.hasOwn(statuses,p.outcome)?p.outcome:'pending';
-    const badge=historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:p.watching?'<span class="result-badge">WATCHING</span>':p.close_forecast?'<span class="result-badge">CLOSE CALL</span>':!historical&&p.rank?`<span class="result-badge">RANK #${Number(p.rank)}</span>`:'';
+    const badge=p.recommendation_eligible===false&&status==='pending'?'<span class="result-badge">SAVED FORECAST · RESEARCH</span>':historical&&status!=='pending'?`<span class="result-badge ${status}">${statuses[status]}</span>`:p.watching?'<span class="result-badge">WATCHING</span>':p.close_forecast?'<span class="result-badge">CLOSE CALL</span>':!historical&&p.rank?`<span class="result-badge">RANK #${Number(p.rank)}</span>`:'';
     const title=`<div class="pick-head"><div class="team-info"><h3>${escape(p.team)}<span>Moneyline</span></h3><p>${escape(p.league)} · vs ${escape(p.opponent)} · ${displayTime(p.starts_at)}</p></div><div class="pick-extra">${badge}</div></div>`;
     const injuryNotice=p.injury_report_after_forecast?'<p class="forecast-alert">Injury report updated after this winner was picked. This forecast did not account for that report; review the current status before relying on it.</p>':'';
     const context=`<details class="pick-context"><summary>Game details</summary>${availabilityMarkup(p)}${refereeMarkup(p)}${restMarkup(p.schedule_context)}${lineHistoryMarkup(p.line_history)}</details>`;
@@ -159,6 +159,14 @@
     const recorded=Array.isArray(p.initial_books)?p.initial_books.filter(b=>Number.isFinite(b.odds)):[];
     if(recorded.length){const asofs=recorded.map(b=>new Date(b.as_of).valueOf()).filter(Number.isFinite);const stamp=asofs.length?' · '+displayTime(new Date(Math.min(...asofs))):'';return `<article class="pick">${title}<div class="price-caption">Odds at time of pick${stamp}</div>${booksMarkup(p.initial_books)}</article>`;}
     return `<article class="pick">${title}<div class="single-odds">Best odds recorded at time of pick${Number.isFinite(p.initial_best_odds)?' <strong>'+odds(p.initial_best_odds)+'</strong>':' unavailable'}</div></article>`;
+  }
+  function forecastMarkup(g){
+    const f=g.forecast;
+    if(!f)return '<p>Forecast unavailable: usable history or inputs are missing.</p>';
+    const scenario=f.availability_scenarios;
+    const news=scenario?`<p>Injury-aware research: ${Number(scenario.scenario_count)} availability scenario(s), observed ${displayTime(scenario.injury_observed_at)}. ${scenario.consistent_winner?'The listed scenarios agree on a winner.':'The winner changes across availability scenarios.'} These are sensitivity scenarios; their probabilities have not earned betting validation.</p>`:'<p>Player adjustment unavailable; the team forecast does not assume missing injury information means healthy.</p>';
+    const candidate=f.research_model?`<p>Challenger: ${escape(f.research_model.model_version)} · retrospective calibration only · awaiting independent promotion.</p>`:'';
+    return `<p>Incumbent: ${escape(f.model_version)} · research forecast. ${f.decision&&f.decision.eligible?'Qualified value selection.':'No qualified bet: model validation, availability and current-price requirements must all pass.'}</p>${candidate}${news}`;
   }
   function slateMarkup(g){
     const books=Object.entries(g.books||{});
@@ -169,7 +177,7 @@
     };
     const gameDay=dayString(new Date(g.starts_at));
     const when=gameDay===today()?displayTime(g.starts_at):`${displayDay(gameDay)} · ${displayTime(g.starts_at)}`;
-    return `<details class="slate-row"><summary><span class="slate-matchup"><strong>${escape(g.away)} at ${escape(g.home)}</strong><small>${escape(g.league)} · ${when}</small></span><span class="slate-winner">${g.predicted_winner?`Model: ${escape(g.predicted_winner)}${g.prediction_uncertain?' · close call':''}`:'Model unavailable'}</span></summary><div class="slate-row-detail"><p>${escape(g.away)}: ${best('away')}</p><p>${escape(g.home)}: ${best('home')}</p>${availabilityMarkup(g)}</div></details>`;
+    return `<details class="slate-row"><summary><span class="slate-matchup"><strong>${escape(g.away)} at ${escape(g.home)}</strong><small>${escape(g.league)} · ${when}</small></span><span class="slate-winner">${g.predicted_winner?`Model: ${escape(g.predicted_winner)}${g.prediction_uncertain?' · close call':''}`:'Model unavailable'}</span></summary><div class="slate-row-detail"><p>${escape(g.away)}: ${best('away')}</p><p>${escape(g.home)}: ${best('home')}</p>${forecastMarkup(g)}${availabilityMarkup(g)}</div></details>`;
   }
   $('slate-filter').addEventListener('change',()=>{slateLimit=6;render();});
   $('slate-more').addEventListener('click',()=>{slateLimit+=6;render();});
@@ -198,11 +206,12 @@
       }
       return new Date(a.starts_at)-new Date(b.starts_at);
     });
-    $('count').textContent=picks.length===1?'1 pick':picks.length+' picks';
+    $('count').textContent=selectedDay===today()?active.length+' recommendations · '+history.length+' saved forecasts':history.length+' saved forecasts';
+    if($('selection-status'))$('selection-status').textContent=selectedDay===today()&&board.selection_policy?(active.length?'Only selections passing the validation and value requirements appear as recommendations.':'No qualified bets. Research forecasts remain in Upcoming games. The historical record below is preserved.'):'Saved forecasts and their original outcomes.';
     const freshness=$('freshness');freshness.classList.toggle('stale',selectedDay===today()&&stale);
     freshness.textContent=selectedDay!==today()?'Saved picks and results · '+displayDay(selectedDay):stale?'Update delayed · saved picks shown':oldest?'Odds observed '+displayTime(new Date(oldest)):validDate?'Last checked '+displayTime(generated):'Waiting for data';
     if(!picks.length){
-      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved winners for this day.</strong><p>The forecast history grows as each day is recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No unstarted games with usable model data right now.</strong><p>Predicted winners appear when the next slate and ratings are available.</p></div>';
+      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved winners for this day.</strong><p>The forecast history grows as each day is recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No qualified betting recommendations.</strong><p>See Upcoming games for research forecasts. Missing evidence or prices can rule out every game.</p></div>';
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
     $('saved-section').hidden=!earlier.length;
     $('saved-list').innerHTML=earlier.map(p=>pickMarkup(Object.assign({},p,{current:false}))).join('');

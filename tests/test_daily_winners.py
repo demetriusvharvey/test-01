@@ -1,10 +1,11 @@
 import unittest
 from datetime import date,datetime,timedelta,timezone
-from scripts.line_lab.winners import make_daily_winners,render_winners
+from scripts.line_lab.winners import legacy_daily_winners as make_daily_winners,render_winners
 from scripts.line_lab.ledger import grade_ledger
 from scripts.line_lab.ledger_v2 import validate_transition
 
 
+# Replay original policy solely to verify immutable legacy forecasts.
 class WinnerForecastTests(unittest.TestCase):
     def setUp(self):
         self.now=datetime(2026,10,28,15,tzinfo=timezone.utc)

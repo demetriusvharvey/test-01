@@ -1,5 +1,5 @@
 """Runner components for the picks pipeline."""
-import copy, hashlib, json, os
+import copy, hashlib, json, os, sqlite3
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from statistics import median
@@ -39,16 +39,21 @@ from .propline_scores import fetch_scores, fetch_events, parse_scores, parse_eve
 
 def main():
     now=datetime.now(timezone.utc); started_at=now.isoformat(); today=now.astimezone(ET).date(); errors=[]; games=[]; nfl_locations={};nfl_csv='';nfl_observed_at=None;source_hashes={'NBA':{},'NFL':{}}
+    from .public_fetch import prefetch
+    public_urls=[f'https://boxscorelab.com/downloads/{season}-team-game-results.csv' for season in NBA_SEASONS]
+    public_urls+=['https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv']
+    public_urls += [f'https://agentbets.ai/odds/{slug}/{league.lower()}' for slug,name in BOOKS for league in ('NBA','NFL')]
+    fetch=prefetch(public_urls,get)
     for season in NBA_SEASONS:
         try:
-            text=get(f'https://boxscorelab.com/downloads/{season}-team-game-results.csv')
+            text=fetch(f'https://boxscorelab.com/downloads/{season}-team-game-results.csv')
             result=parse_nba_csv(text)
             if not result: raise ValueError('empty NBA season')
             games.extend(result)
             source_hashes['NBA'][season]=hashlib.sha256(text.encode('utf-8')).hexdigest()
         except Exception as e: errors.append('NBA historical data unavailable: '+season+' ('+type(e).__name__+')')
     try:
-        nfl_csv=get('https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv')
+        nfl_csv=fetch('https://raw.githubusercontent.com/nflverse/nfldata/master/data/games.csv')
         nfl_observed_at=datetime.now(timezone.utc).isoformat()
         nfl=parse_nfl_csv(nfl_csv); nfl_locations=parse_nfl_locations(nfl_csv)
         if not nfl: raise ValueError('empty NFL data')
@@ -61,7 +66,7 @@ def main():
     for slug,name in BOOKS:
         for league in ('NBA','NFL'):
             try:
-                rows,asof=parse_book_html(get(f'https://agentbets.ai/odds/{slug}/{league.lower()}'),name,league,now)
+                rows,asof=parse_book_html(fetch(f'https://agentbets.ai/odds/{slug}/{league.lower()}'),name,league,now)
                 fetched=datetime.now(timezone.utc).isoformat()
                 for row in rows: row.update({'provider':'agentbets','provider_event_id':row['id'],'fetched_at':fetched})
                 raw.extend(rows)
@@ -85,7 +90,7 @@ def main():
     refs=json.loads(refs_path.read_text()) if refs_path.exists() else []
     ref_report=None;ref_observed_at=None
     try:
-        ref_report=parse_referees(get(NBA_REFS),today)
+        ref_report=parse_referees(fetch(NBA_REFS),today)
         observed_at=datetime.now(timezone.utc)
         ref_observed_at=observed_at.isoformat()
         print('NBA referees:',ref_report['status'],'new/changed:',append_referee_assignments(refs,ref_report,observed_at))
@@ -133,10 +138,25 @@ def main():
             for days_ago in range(0,4):
                 day=(today-timedelta(days=days_ago)).strftime('%Y%m%d')
                 try:
-                    payload=json.loads(get(f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}',10))
+                    payload=json.loads(fetch(f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}',10))
                     result=parse_espn_results(payload,league)
                     explicit_finals.extend(result);starts_by_game.update(parse_espn_starts(payload,league))
                 except Exception as e:errors.append(f'{league} scores {day} unavailable ({type(e).__name__})')
+    if not propline_enabled:
+        # The public scoreboard accepts individual dates; multi-date ranges
+        # are not a reliable contract for these endpoints.
+        upcoming_urls=[f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={(today+timedelta(days=lead)).strftime("%Y%m%d")}'
+                       for league,sport in [('NBA','basketball/nba'),('NFL','football/nfl')] for lead in range(1,8)]
+        upcoming_fetch=prefetch(upcoming_urls,get)
+        for league,sport in [('NBA','basketball/nba'),('NFL','football/nfl')]:
+            failed_days=0
+            for lead in range(1,8):
+                try:
+                    day=(today+timedelta(days=lead)).strftime('%Y%m%d')
+                    payload=json.loads(upcoming_fetch(f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}',10))
+                    starts_by_game.update(parse_espn_starts(payload,league))
+                except Exception:failed_days+=1
+            if failed_days:errors.append(f'{league} upcoming schedule unavailable for {failed_days} date(s)')
     now=datetime.now(timezone.utc)
     day_rolled=now.astimezone(ET).date()!=today
     if day_rolled: errors.append('ET date changed during update; new picks suppressed')
@@ -193,6 +213,14 @@ def main():
             nfl_provider_payload,nfl_provider_observed_at=fetch_nfl_injuries(propline_key,True)
             print('NFL injury report quality:',json.dumps(injury_quality_counts(nfl_provider_payload,nfl_provider_observed_at,'NFL'),sort_keys=True))
         except Exception as e:errors.append('NFL injury context unavailable ('+type(e).__name__+')')
+    # Free public fallback; never bypass a refusal or provider authentication.
+    from .espn_injuries import fetch as fetch_public_injuries
+    if injury_payload is None and any(k.startswith('nba:') for k in starts_by_game):
+        try:injury_payload,injury_observed_at=fetch_public_injuries('NBA',fetch)
+        except Exception as exc:errors.append('NBA public injury report unavailable ('+type(exc).__name__+')')
+    if nfl_provider_payload is None and any(k.startswith('nfl:') for k in starts_by_game):
+        try:nfl_provider_payload,nfl_provider_observed_at=fetch_public_injuries('NFL',fetch)
+        except Exception as exc:errors.append('NFL public injury report unavailable ('+type(exc).__name__+')')
     now=datetime.now(timezone.utc)
     if now.astimezone(ET).date()!=today and not day_rolled:
         day_rolled=True;errors.append('ET date changed during update; new picks suppressed')
@@ -309,6 +337,7 @@ def main():
             if sport=='NFL' and identifier in nfl_locations:
                 scheduled[-1]['neutral']=nfl_locations[identifier]
         except (TypeError,ValueError,AttributeError):continue
+    ml={'predictions':[]}
     # Learning observations must not depend on whether three books price a game.
     # This archive is separate from the selected-winner accuracy ledger.
     if data_root and archive_ok and not day_rolled:
@@ -339,7 +368,10 @@ def main():
                 ml=record_nba_predictions(data_root,games,scheduled,ml_now,injury_payload,injury_observed_at)
                 print('NBA ML inference:',ml['status'],'forecasts:',len(ml['predictions']))
                 from .nba_forward import evaluate_saved
-                forward=evaluate_saved(data_root,confirmed_finals,ml_now)
+                try:forward=evaluate_saved(data_root,confirmed_finals,ml_now)
+                except ValueError:
+                    errors.append('NBA research grading reported conflicting confirmed outcomes; existing outcomes preserved')
+                    forward=evaluate_saved(data_root,[],ml_now)
                 print('NBA ML forward evaluation:',json.dumps(forward,sort_keys=True))
                 from .nba_ranked_forward import record_ranked,evaluate_ranked
                 print('NBA daily policy archive:',json.dumps(record_ranked(data_root,ml['predictions'],scheduled,ml_now,schedule_available=not any(e.startswith('NBA score source unavailable') for e in errors)),sort_keys=True))
@@ -433,17 +465,27 @@ def main():
         winner_ledger=json.loads(winner_path.read_text()) if winner_path.exists() else []
         previous_winners=copy.deepcopy(winner_ledger)
         grade_ledger(winner_ledger,confirmed_finals,now)
-        winner_ledger.extend(make_daily_winners(board['games'],models,now,winner_ledger))
+        # Retain legacy forecasts exactly; v2 forecasts/decisions are separate.
+        # No new uncalibrated top-three selections are appended.
         validate_transition(previous_winners,winner_ledger)
         winner_path.write_text(json.dumps(winner_ledger,indent=2)+'\n')
         render_winners(board,winner_ledger,now,models)
     except (OSError,ValueError,KeyError,TypeError) as exc:
         board['errors'].append('Winner forecast record unavailable ('+type(exc).__name__+')')
         board['picks']=[]
+    now=datetime.now(timezone.utc)
+    from .production import apply_pipeline,legacy_metrics
+    board['legacy_accuracy_details']=legacy_metrics(winner_ledger)
+    try:
+        apply_pipeline(board,models,games,now.isoformat(),
+                       data_root or None,ml.get('predictions',[]),blocked,confirmed_finals)
+    except (OSError,ValueError,KeyError,TypeError,sqlite3.Error) as exc:
+        board['picks']=[]
+        board['errors'].append('Production forecast unavailable ('+type(exc).__name__+')')
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
-                            'nba_injury_context':'configured' if nba_injury_key and nba_injury_enabled else 'not_configured',
-                            'nfl_provider_injury_context':'configured' if propline_key and propline_enabled else 'not_configured',
+                            'nba_injury_context':injury_payload.get('source','PropLine') if injury_payload else 'unavailable',
+                            'nfl_provider_injury_context':nfl_provider_payload.get('source','PropLine') if nfl_provider_payload else 'unavailable',
                             'scoreboard_source':score_source,
                             'cross_check_independent':False}
     from .board_freshness import protect_last_success

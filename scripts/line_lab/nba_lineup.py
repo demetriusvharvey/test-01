@@ -28,6 +28,7 @@ def map_injury_statuses(payload,roster,observed_at):
     """Explicit espn: ID mapping; missing listings remain unknown."""
     now=aware(observed_at);ids=set(roster['player_ids']);statuses={};unmatched=0;invalid=0
     diagnostics={'unknown_namespace':0,'missing_from_roster':0,'explicit_id_conflict':0}
+    if payload.get('parse_errors'):return None
     if payload.get('sport')!='basketball_nba' or payload.get('count')!=len(payload.get('players',[])):return None
     for row in payload['players']:
         try:

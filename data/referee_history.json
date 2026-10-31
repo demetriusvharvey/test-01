@@ -713,5 +713,96 @@
     ],
     "observed_at": "2026-10-31T05:30:17.251050+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Portland @ Utah",
+    "game_date": "2026-10-31",
+    "matchup": "Portland @ Utah",
+    "crew": [
+      "Tre Maddox (#23)",
+      "Jason Goldenberg (#35)",
+      "Brent Haskill (#92)",
+      ""
+    ],
+    "observed_at": "2026-10-31T17:41:30.413538+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Philadelphia @ Charlotte",
+    "game_date": "2026-10-31",
+    "matchup": "Philadelphia @ Charlotte",
+    "crew": [
+      "Ben Taylor (#46)",
+      "Andy Nagy (#18)",
+      "Italo Araujo (#86)",
+      ""
+    ],
+    "observed_at": "2026-10-31T17:41:30.413538+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Atlanta @ New Orleans",
+    "game_date": "2026-10-31",
+    "matchup": "Atlanta @ New Orleans",
+    "crew": [
+      "Scott Foster (#48)",
+      "Natalie Sago (#9)",
+      "Dannica Baroody (#89)",
+      ""
+    ],
+    "observed_at": "2026-10-31T17:41:30.413538+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Sacramento @ Memphis",
+    "game_date": "2026-10-31",
+    "matchup": "Sacramento @ Memphis",
+    "crew": [
+      "John Goble (#10)",
+      "Eric Dalen (#37)",
+      "CJ Washington (#12)",
+      ""
+    ],
+    "observed_at": "2026-10-31T17:41:30.413538+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Cleveland @ Milwaukee",
+    "game_date": "2026-10-31",
+    "matchup": "Cleveland @ Milwaukee",
+    "crew": [
+      "Karl Lane (#77)",
+      "Marat Kogut (#32)",
+      "Evan Scott (#22)",
+      ""
+    ],
+    "observed_at": "2026-10-31T17:41:30.413538+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Minnesota @ San Antonio",
+    "game_date": "2026-10-31",
+    "matchup": "Minnesota @ San Antonio",
+    "crew": [
+      "Courtney Kirkland (#61)",
+      "Ray Acosta (#54)",
+      "Matt Kallio (#53)",
+      ""
+    ],
+    "observed_at": "2026-10-31T17:41:30.413538+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-10-31:Oklahoma City @ Houston",
+    "game_date": "2026-10-31",
+    "matchup": "Oklahoma City @ Houston",
+    "crew": [
+      "Mark Lindsay (#29)",
+      "Aaron Smith (#51)",
+      "Sha'Rae Mitchell (#98)",
+      ""
+    ],
+    "observed_at": "2026-10-31T17:41:30.413538+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

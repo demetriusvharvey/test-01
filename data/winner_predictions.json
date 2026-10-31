@@ -531,7 +531,7 @@
     "pick_day": "2026-10-31",
     "predicted_at": "2026-10-31T05:30:20.211124+00:00",
     "probability": 0.72038873,
-    "outcome": "pending",
+    "outcome": "win",
     "model": "pure-elo-v1",
     "winner_selection": true,
     "ledger_version": 2,
@@ -573,7 +573,12 @@
     },
     "feature_snapshot_hash": "e41dc678f9f830912886fc550b756ca634f3387233cfa9f8bf02202ee4bd7b4a",
     "model_only_probability": 0.7203887275509528,
-    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated."
+    "limitations": "Injuries, lineups, weather and player-specific effects are not model inputs; probability is not calibrated.",
+    "graded_at": "2026-10-31T23:28:57.355642+00:00",
+    "final_score": {
+      "home": 90,
+      "away": 112
+    }
   },
   {
     "id": "nba:2026-10-31:CLE:MIL",

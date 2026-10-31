@@ -1,65 +1,67 @@
 # NBA trained-model inference verification
 
-Run: 2026-10-29T20:16:09.043862+00:00. Status: research_forecasts_recorded.
+Run: 2026-10-31T20:11:32.181947+00:00. Status: research_forecasts_recorded.
 Actual scheduled games and trained efficiency logistic artifact. The baseline columns are team-only probabilities; availability ranges come from the separately trained rotation model. Conditional ranges are sensitivity checks, not confidence intervals or weighted predictions. These outputs do not replace public picks.
 
 | Game | Baseline home probability | Baseline away probability | Availability status | Scenarios | Conditional home range | Consistent winner |
 |---|---:|---:|---|---:|---|---|
-| CLE at ATL | 0.5777 | 0.4223 | conditional_research_only | 4 | 0.5681–0.6069 | ATL |
-| MEM at POR | 0.8341 | 0.1659 | conditional_research_only | 2 | 0.8601–0.8632 | POR |
-| SAC at NOP | 0.6536 | 0.3464 | conditional_research_only | 2 | 0.7198–0.7270 | NOP |
-| CHA at WAS | 0.2379 | 0.7621 | conditional_research_only | 2 | 0.1879–0.1921 | CHA |
-| CHI at BOS | 0.8751 | 0.1249 | conditional_research_only | 4 | 0.8571–0.8670 | BOS |
-| DEN at PHX | 0.5348 | 0.4652 | conditional_research_only | 2 | 0.5534–0.5631 | PHX |
-| DET at BKN | 0.1622 | 0.8378 | conditional_research_only | 2 | 0.0916–0.1031 | DET |
-| HOU at DAL | 0.2755 | 0.7245 | conditional_research_only | 8 | 0.2439–0.2661 | HOU |
-| IND at MIA | 0.6558 | 0.3442 | conditional_research_only | 4 | 0.6772–0.6842 | MIA |
-| LAC at MIN | 0.6252 | 0.3748 | conditional_research_only | 2 | 0.7218–0.7535 | MIN |
-| LAL at GSW | 0.3133 | 0.6867 | conditional_research_only | 8 | 0.3035–0.3688 | LAL |
-| NYK at PHI | 0.4944 | 0.5056 | conditional_research_only | 2 | 0.4060–0.4060 | NYK |
-| ORL at TOR | 0.7238 | 0.2762 | conditional_research_only | 1 | 0.6760–0.6760 | TOR |
-| ATL at NOP | 0.3207 | 0.6793 | conditional_research_only | 2 | 0.3393–0.3475 | ATL |
-| CLE at MIL | 0.2645 | 0.7355 | conditional_research_only | 4 | 0.2726–0.3056 | CLE |
-| MIN at SAS | 0.6765 | 0.3235 | conditional_research_only | 1 | 0.6788–0.6788 | SAS |
-| OKC at HOU | 0.4777 | 0.5223 | conditional_research_only | 4 | 0.4832–0.5041 | unresolved |
-| PHI at CHA | 0.6156 | 0.3844 | conditional_research_only | 2 | 0.6740–0.6740 | CHA |
-| POR at UTA | 0.1997 | 0.8003 | conditional_research_only | 4 | 0.1481–0.1536 | POR |
-| SAC at MEM | 0.6044 | 0.3956 | conditional_research_only | 1 | 0.6106–0.6106 | MEM |
-| BKN at IND | 0.6947 | 0.3053 | conditional_research_only | 2 | 0.7739–0.7775 | IND |
-| BOS at ORL | 0.3181 | 0.6819 | conditional_research_only | 1 | 0.4160–0.4160 | BOS |
-| LAC at GSW | 0.4080 | 0.5920 | conditional_research_only | 4 | 0.4567–0.4978 | LAC |
-| TOR at LAL | 0.5710 | 0.4290 | conditional_research_only | 4 | 0.4867–0.5595 | unresolved |
-| ATL at IND | 0.3233 | 0.6767 | conditional_research_only | 2 | 0.3503–0.3549 | ATL |
-| BKN at NYK | 0.8459 | 0.1541 | conditional_research_only | 1 | 0.9085–0.9085 | NYK |
-| BOS at HOU | 0.5284 | 0.4716 | conditional_research_only | 2 | 0.5783–0.5923 | HOU |
-| CHI at PHI | 0.7599 | 0.2401 | conditional_research_only | 8 | 0.7252–0.7415 | PHI |
-| DET at CHA | 0.4401 | 0.5599 | conditional_research_only | 2 | 0.4032–0.4351 | DET |
-| MIA at LAL | 0.7299 | 0.2701 | conditional_research_only | 8 | 0.6415–0.7082 | LAL |
-| MIL at MIN | 0.8301 | 0.1699 | conditional_research_only | 1 | 0.8632–0.8632 | MIN |
-| NOP at MEM | 0.5097 | 0.4903 | conditional_research_only | 2 | 0.4296–0.4386 | NOP |
-| OKC at CLE | 0.3940 | 0.6060 | conditional_research_only | 8 | 0.3277–0.3699 | OKC |
-| PHX at GSW | 0.3719 | 0.6281 | conditional_research_only | 4 | 0.3983–0.4080 | PHX |
-| POR at DEN | 0.5242 | 0.4758 | conditional_research_only | 2 | 0.4804–0.4869 | POR |
-| SAC at DAL | 0.6674 | 0.3326 | conditional_research_only | 4 | 0.7310–0.7424 | DAL |
-| TOR at LAC | 0.4684 | 0.5316 | conditional_research_only | 2 | 0.3584–0.3969 | TOR |
-| UTA at SAS | 0.9022 | 0.0978 | conditional_research_only | 2 | 0.9468–0.9476 | SAS |
-| WAS at ORL | 0.7729 | 0.2271 | conditional_research_only | 2 | 0.8436–0.8471 | ORL |
-| ATL at WAS | 0.2102 | 0.7898 | conditional_research_only | 2 | 0.1962–0.2005 | ATL |
-| CHA at BKN | 0.2402 | 0.7598 | conditional_research_only | 1 | 0.1604–0.1604 | CHA |
-| CHI at NYK | 0.8061 | 0.1939 | conditional_research_only | 4 | 0.8316–0.8430 | NYK |
-| CLE at OKC | 0.7171 | 0.2829 | conditional_research_only | 8 | 0.7361–0.7706 | OKC |
-| DAL at SAS | 0.8425 | 0.1575 | conditional_research_only | 4 | 0.8683–0.8749 | SAS |
-| IND at MEM | 0.4723 | 0.5277 | conditional_research_only | 2 | 0.3860–0.3909 | IND |
-| LAL at SAC | 0.2165 | 0.7835 | conditional_research_only | 4 | 0.1606–0.2041 | LAL |
-| MIA at LAC | 0.6414 | 0.3586 | conditional_research_only | 4 | 0.5133–0.5571 | LAC |
-| MIL at BOS | 0.8808 | 0.1192 | conditional_research_only | 1 | 0.8695–0.8695 | BOS |
-| MIN at HOU | 0.6289 | 0.3711 | conditional_research_only | 2 | 0.5914–0.6053 | HOU |
-| PHI at DET | 0.7234 | 0.2766 | conditional_research_only | 4 | 0.7745–0.7965 | DET |
-| POR at PHX | 0.4622 | 0.5378 | conditional_research_only | 4 | 0.4356–0.4517 | POR |
-| TOR at DEN | 0.5340 | 0.4660 | conditional_research_only | 1 | 0.4535–0.4535 | TOR |
-| UTA at NOP | 0.6757 | 0.3243 | conditional_research_only | 4 | 0.7546–0.7642 | NOP |
-| MIA at GSW | 0.4898 | 0.5102 | conditional_research_only | 4 | 0.4494–0.4527 | MIA |
-| ORL at PHX | 0.6137 | 0.3863 | conditional_research_only | 2 | 0.4934–0.5033 | unresolved |
+| ATL at NOP | 0.3300 | 0.6700 | conditional_research_only | 1 | 0.3499–0.3499 | ATL |
+| CLE at MIL | 0.3122 | 0.6878 | conditional_research_only | 2 | 0.2643–0.2999 | CLE |
+| MIN at SAS | 0.6765 | 0.3235 | conditional_research_only | 4 | 0.6832–0.6981 | SAS |
+| OKC at HOU | 0.4777 | 0.5223 | conditional_research_only | 1 | 0.4719–0.4719 | OKC |
+| PHI at CHA | 0.6156 | 0.3844 | conditional_research_only | 2 | 0.6018–0.6234 | CHA |
+| SAC at MEM | 0.6147 | 0.3853 | conditional_research_only | 8 | 0.6078–0.6300 | MEM |
+| BKN at IND | 0.6947 | 0.3053 | conditional_research_only | 2 | 0.7095–0.7260 | IND |
+| BOS at ORL | 0.3181 | 0.6819 | conditional_research_only | 1 | 0.3588–0.3588 | BOS |
+| LAC at GSW | 0.4080 | 0.5920 | conditional_research_only | 2 | 0.4367–0.4368 | LAC |
+| TOR at LAL | 0.5710 | 0.4290 | conditional_research_only | 2 | 0.4990–0.5486 | unresolved |
+| ATL at IND | 0.3489 | 0.6511 | conditional_research_only | 2 | 0.3774–0.3966 | ATL |
+| BKN at NYK | 0.8459 | 0.1541 | conditional_research_only | 1 | 0.8785–0.8785 | NYK |
+| BOS at HOU | 0.5284 | 0.4716 | conditional_research_only | 1 | 0.4966–0.4966 | BOS |
+| CHI at PHI | 0.7599 | 0.2401 | conditional_research_only | 4 | 0.7832–0.7983 | PHI |
+| DET at CHA | 0.4401 | 0.5599 | conditional_research_only | 1 | 0.4293–0.4293 | DET |
+| MIA at LAL | 0.7299 | 0.2701 | conditional_research_only | 2 | 0.6774–0.7193 | LAL |
+| MIL at MIN | 0.8301 | 0.1699 | conditional_research_only | 2 | 0.8606–0.8608 | MIN |
+| NOP at MEM | 0.4578 | 0.5422 | conditional_research_only | 8 | 0.4434–0.4667 | NOP |
+| OKC at CLE | 0.3400 | 0.6600 | conditional_research_only | 2 | 0.3336–0.3738 | OKC |
+| PHX at GSW | 0.3719 | 0.6281 | conditional_research_only | 2 | 0.3988–0.3989 | PHX |
+| POR at DEN | 0.6198 | 0.3802 | conditional_research_only | 1 | 0.6381–0.6381 | DEN |
+| SAC at DAL | 0.7349 | 0.2651 | conditional_research_only | 1 | 0.7638–0.7638 | DAL |
+| TOR at LAC | 0.4684 | 0.5316 | conditional_research_only | 1 | 0.3993–0.3993 | TOR |
+| UTA at SAS | 0.9022 | 0.0978 | conditional_research_only | 2 | 0.9476–0.9509 | SAS |
+| WAS at ORL | 0.7729 | 0.2271 | conditional_research_only | 1 | 0.8484–0.8484 | ORL |
+| ATL at WAS | 0.2299 | 0.7701 | conditional_research_only | 1 | 0.2229–0.2229 | ATL |
+| CHA at BKN | 0.2402 | 0.7598 | conditional_research_only | 1 | 0.1938–0.1938 | CHA |
+| CHI at NYK | 0.8061 | 0.1939 | conditional_research_only | 2 | 0.8323–0.8323 | NYK |
+| CLE at OKC | 0.7619 | 0.2381 | conditional_research_only | 2 | 0.7328–0.7658 | OKC |
+| DAL at SAS | 0.8425 | 0.1575 | conditional_research_only | 2 | 0.8607–0.8688 | SAS |
+| IND at MEM | 0.4370 | 0.5630 | conditional_research_only | 16 | 0.3948–0.4373 | IND |
+| LAL at SAC | 0.1667 | 0.8333 | conditional_research_only | 2 | 0.1483–0.1753 | LAL |
+| MIA at LAC | 0.6414 | 0.3586 | conditional_research_only | 1 | 0.5836–0.5836 | LAC |
+| MIL at BOS | 0.8808 | 0.1192 | conditional_research_only | 1 | 0.8985–0.8985 | BOS |
+| MIN at HOU | 0.6289 | 0.3711 | conditional_research_only | 2 | 0.5853–0.5857 | HOU |
+| PHI at DET | 0.7234 | 0.2766 | conditional_research_only | 2 | 0.7200–0.7379 | DET |
+| POR at PHX | 0.5598 | 0.4402 | conditional_research_only | 1 | 0.5269–0.5269 | PHX |
+| TOR at DEN | 0.5340 | 0.4660 | conditional_research_only | 1 | 0.5147–0.5147 | DEN |
+| UTA at NOP | 0.6596 | 0.3404 | conditional_research_only | 1 | 0.7422–0.7422 | NOP |
+| MIA at GSW | 0.4898 | 0.5102 | conditional_research_only | 2 | 0.4592–0.4593 | MIA |
+| ORL at PHX | 0.6137 | 0.3863 | conditional_research_only | 1 | 0.4962–0.4962 | ORL |
+| BOS at CHA | 0.4538 | 0.5462 | conditional_research_only | 1 | 0.4664–0.4664 | BOS |
+| MIN at NOP | 0.3351 | 0.6649 | conditional_research_only | 2 | 0.2850–0.2853 | MIN |
+| OKC at MEM | 0.1517 | 0.8483 | conditional_research_only | 8 | 0.1358–0.1472 | OKC |
+| PHI at CLE | 0.6158 | 0.3842 | conditional_research_only | 4 | 0.5625–0.6266 | CLE |
+| POR at LAL | 0.6227 | 0.3773 | conditional_research_only | 2 | 0.5881–0.6354 | LAL |
+| SAS at SAC | 0.1407 | 0.8593 | conditional_research_only | 2 | 0.1019–0.1084 | SAS |
+| TOR at MIL | 0.2314 | 0.7686 | conditional_research_only | 1 | 0.1987–0.1987 | TOR |
+| UTA at DAL | 0.6889 | 0.3111 | conditional_research_only | 1 | 0.7891–0.7891 | DAL |
+| WAS at ATL | 0.8637 | 0.1363 | conditional_research_only | 1 | 0.8688–0.8688 | ATL |
+| BKN at ATL | 0.8778 | 0.1222 | conditional_research_only | 1 | 0.8740–0.8740 | ATL |
+| DEN at IND | 0.3232 | 0.6768 | conditional_research_only | 2 | 0.3043–0.3217 | DEN |
+| HOU at PHX | 0.3981 | 0.6019 | conditional_research_only | 1 | 0.3584–0.3584 | HOU |
+| NYK at CLE | 0.5497 | 0.4503 | conditional_research_only | 2 | 0.5061–0.5499 | CLE |
+| ORL at GSW | 0.4911 | 0.5089 | conditional_research_only | 2 | 0.4072–0.4073 | ORL |
+| SAS at POR | 0.4161 | 0.5839 | conditional_research_only | 2 | 0.3454–0.3611 | SAS |
+| WAS at OKC | 0.9199 | 0.0801 | conditional_research_only | 1 | 0.9339–0.9339 | OKC |
 
 Each saved forecast carries model/input hashes, model and input observation times, missing inputs and uncertainty. Source freshness is limited to the archived assets. No unseen player/lineup data is manufactured.
 
@@ -67,88 +69,111 @@ Each saved forecast carries model/input hashes, model and input observation time
 
 | Game | Status | Scenarios | Home sensitivity range | Consistent winner |
 |---|---|---:|---|---|
-| CLE at ATL | conditional_research_only | 4 | 0.6144–0.6486 | ATL |
-| MEM at POR | conditional_research_only | 2 | 0.8468–0.8550 | POR |
-| SAC at NOP | conditional_research_only | 2 | 0.7548–0.7666 | NOP |
-| CHA at WAS | conditional_research_only | 2 | 0.1881–0.1904 | CHA |
-| CHI at BOS | conditional_research_only | 4 | 0.8834–0.9000 | BOS |
-| DEN at PHX | conditional_research_only | 2 | 0.6056–0.6066 | PHX |
-| DET at BKN | conditional_research_only | 2 | 0.1052–0.1211 | DET |
-| HOU at DAL | conditional_research_only | 8 | 0.2663–0.3104 | HOU |
-| IND at MIA | conditional_research_only | 4 | 0.6800–0.6846 | MIA |
-| LAC at MIN | conditional_research_only | 2 | 0.7325–0.7737 | MIN |
-| LAL at GSW | conditional_research_only | 8 | 0.2898–0.3763 | LAL |
-| NYK at PHI | conditional_research_only | 2 | 0.3889–0.3902 | NYK |
-| ORL at TOR | conditional_research_only | 1 | 0.6124–0.6124 | TOR |
-| ATL at NOP | conditional_research_only | 2 | 0.3791–0.3944 | ATL |
-| CLE at MIL | conditional_research_only | 4 | 0.3569–0.3912 | CLE |
-| MIN at SAS | conditional_research_only | 1 | 0.6681–0.6681 | SAS |
-| OKC at HOU | conditional_research_only | 4 | 0.5453–0.5863 | HOU |
-| PHI at CHA | conditional_research_only | 2 | 0.6605–0.6618 | CHA |
-| POR at UTA | conditional_research_only | 4 | 0.1575–0.1755 | POR |
-| SAC at MEM | conditional_research_only | 1 | 0.6843–0.6843 | MEM |
-| BKN at IND | conditional_research_only | 2 | 0.7456–0.7495 | IND |
-| BOS at ORL | conditional_research_only | 1 | 0.4232–0.4232 | BOS |
-| LAC at GSW | conditional_research_only | 4 | 0.4451–0.5099 | unresolved |
-| TOR at LAL | conditional_research_only | 4 | 0.4925–0.5800 | unresolved |
-| ATL at IND | conditional_research_only | 2 | 0.3828–0.3877 | ATL |
-| BKN at NYK | conditional_research_only | 1 | 0.9007–0.9007 | NYK |
-| BOS at HOU | conditional_research_only | 2 | 0.5279–0.5628 | HOU |
-| CHI at PHI | conditional_research_only | 8 | 0.7375–0.7703 | PHI |
-| DET at CHA | conditional_research_only | 2 | 0.3860–0.4244 | DET |
-| MIA at LAL | conditional_research_only | 8 | 0.6260–0.7044 | LAL |
-| MIL at MIN | conditional_research_only | 1 | 0.8587–0.8587 | MIN |
-| NOP at MEM | conditional_research_only | 2 | 0.4584–0.4745 | NOP |
-| OKC at CLE | conditional_research_only | 8 | 0.3232–0.3621 | OKC |
-| PHX at GSW | conditional_research_only | 4 | 0.3786–0.3886 | PHX |
-| POR at DEN | conditional_research_only | 2 | 0.4135–0.4293 | POR |
-| SAC at DAL | conditional_research_only | 4 | 0.7862–0.7984 | DAL |
-| TOR at LAC | conditional_research_only | 2 | 0.3600–0.4126 | TOR |
-| UTA at SAS | conditional_research_only | 2 | 0.9327–0.9367 | SAS |
-| WAS at ORL | conditional_research_only | 2 | 0.8762–0.8778 | ORL |
-| ATL at WAS | conditional_research_only | 2 | 0.2078–0.2102 | ATL |
-| CHA at BKN | conditional_research_only | 1 | 0.1934–0.1934 | CHA |
-| CHI at NYK | conditional_research_only | 4 | 0.8499–0.8705 | NYK |
-| CLE at OKC | conditional_research_only | 8 | 0.7435–0.7750 | OKC |
-| DAL at SAS | conditional_research_only | 4 | 0.8442–0.8537 | SAS |
-| IND at MEM | conditional_research_only | 2 | 0.4290–0.4342 | IND |
-| LAL at SAC | conditional_research_only | 4 | 0.1435–0.1925 | LAL |
-| MIA at LAC | conditional_research_only | 4 | 0.4924–0.5479 | unresolved |
-| MIL at BOS | conditional_research_only | 1 | 0.8807–0.8807 | BOS |
-| MIN at HOU | conditional_research_only | 2 | 0.5759–0.6099 | HOU |
-| PHI at DET | conditional_research_only | 4 | 0.7719–0.7997 | DET |
-| POR at PHX | conditional_research_only | 4 | 0.4214–0.4383 | POR |
-| TOR at DEN | conditional_research_only | 1 | 0.4349–0.4349 | TOR |
-| UTA at NOP | conditional_research_only | 4 | 0.7182–0.7438 | NOP |
-| MIA at GSW | conditional_research_only | 4 | 0.4310–0.4405 | MIA |
-| ORL at PHX | conditional_research_only | 2 | 0.4580–0.4591 | ORL |
+| ATL at NOP | conditional_research_only | 1 | 0.3869–0.3869 | ATL |
+| CLE at MIL | conditional_research_only | 2 | 0.3182–0.3484 | CLE |
+| MIN at SAS | conditional_research_only | 4 | 0.6348–0.6609 | SAS |
+| OKC at HOU | conditional_research_only | 1 | 0.4878–0.4878 | OKC |
+| PHI at CHA | conditional_research_only | 2 | 0.5643–0.6112 | CHA |
+| SAC at MEM | conditional_research_only | 8 | 0.6979–0.7056 | MEM |
+| BKN at IND | conditional_research_only | 2 | 0.6662–0.6754 | IND |
+| BOS at ORL | conditional_research_only | 1 | 0.3817–0.3817 | BOS |
+| LAC at GSW | conditional_research_only | 2 | 0.4361–0.4385 | LAC |
+| TOR at LAL | conditional_research_only | 2 | 0.4900–0.5312 | unresolved |
+| ATL at IND | conditional_research_only | 2 | 0.3986–0.4087 | ATL |
+| BKN at NYK | conditional_research_only | 1 | 0.8634–0.8634 | NYK |
+| BOS at HOU | conditional_research_only | 1 | 0.4098–0.4098 | BOS |
+| CHI at PHI | conditional_research_only | 4 | 0.7772–0.8089 | PHI |
+| DET at CHA | conditional_research_only | 1 | 0.4003–0.4003 | DET |
+| MIA at LAL | conditional_research_only | 2 | 0.6421–0.6791 | LAL |
+| MIL at MIN | conditional_research_only | 2 | 0.8747–0.8755 | MIN |
+| NOP at MEM | conditional_research_only | 8 | 0.4961–0.5054 | unresolved |
+| OKC at CLE | conditional_research_only | 2 | 0.3647–0.3967 | OKC |
+| PHX at GSW | conditional_research_only | 2 | 0.3769–0.3791 | PHX |
+| POR at DEN | conditional_research_only | 1 | 0.6002–0.6002 | DEN |
+| SAC at DAL | conditional_research_only | 1 | 0.8024–0.8024 | DAL |
+| TOR at LAC | conditional_research_only | 1 | 0.4016–0.4016 | TOR |
+| UTA at SAS | conditional_research_only | 2 | 0.9367–0.9427 | SAS |
+| WAS at ORL | conditional_research_only | 1 | 0.8779–0.8779 | ORL |
+| ATL at WAS | conditional_research_only | 1 | 0.2402–0.2402 | ATL |
+| CHA at BKN | conditional_research_only | 1 | 0.2333–0.2333 | CHA |
+| CHI at NYK | conditional_research_only | 2 | 0.8332–0.8332 | NYK |
+| CLE at OKC | conditional_research_only | 2 | 0.7145–0.7414 | OKC |
+| DAL at SAS | conditional_research_only | 2 | 0.8486–0.8618 | SAS |
+| IND at MEM | conditional_research_only | 16 | 0.4733–0.4930 | IND |
+| LAL at SAC | conditional_research_only | 2 | 0.1469–0.1688 | LAL |
+| MIA at LAC | conditional_research_only | 1 | 0.5562–0.5562 | LAC |
+| MIL at BOS | conditional_research_only | 1 | 0.9042–0.9042 | BOS |
+| MIN at HOU | conditional_research_only | 2 | 0.4822–0.4842 | MIN |
+| PHI at DET | conditional_research_only | 2 | 0.7134–0.7513 | DET |
+| POR at PHX | conditional_research_only | 1 | 0.5341–0.5341 | PHX |
+| TOR at DEN | conditional_research_only | 1 | 0.4924–0.4924 | TOR |
+| UTA at NOP | conditional_research_only | 1 | 0.7151–0.7151 | NOP |
+| MIA at GSW | conditional_research_only | 2 | 0.4304–0.4328 | MIA |
+| ORL at PHX | conditional_research_only | 1 | 0.4502–0.4502 | ORL |
+| BOS at CHA | conditional_research_only | 1 | 0.4203–0.4203 | BOS |
+| MIN at NOP | conditional_research_only | 2 | 0.2546–0.2561 | MIN |
+| OKC at MEM | conditional_research_only | 8 | 0.2115–0.2177 | OKC |
+| PHI at CLE | conditional_research_only | 4 | 0.5008–0.5825 | CLE |
+| POR at LAL | conditional_research_only | 2 | 0.5620–0.6021 | LAL |
+| SAS at SAC | conditional_research_only | 2 | 0.0881–0.0971 | SAS |
+| TOR at MIL | conditional_research_only | 1 | 0.2206–0.2206 | TOR |
+| UTA at DAL | conditional_research_only | 1 | 0.7720–0.7720 | DAL |
+| WAS at ATL | conditional_research_only | 1 | 0.8577–0.8577 | ATL |
+| BKN at ATL | conditional_research_only | 1 | 0.8383–0.8383 | ATL |
+| DEN at IND | conditional_research_only | 2 | 0.3314–0.3407 | DEN |
+| HOU at PHX | conditional_research_only | 1 | 0.4213–0.4213 | HOU |
+| NYK at CLE | conditional_research_only | 2 | 0.4595–0.4934 | NYK |
+| ORL at GSW | conditional_research_only | 2 | 0.3413–0.3434 | ORL |
+| SAS at POR | conditional_research_only | 2 | 0.3450–0.3694 | SAS |
+| WAS at OKC | conditional_research_only | 1 | 0.9159–0.9159 | OKC |
 ## Ensemble scenario status
 
-{"conditional_research_only": 55}
+{"conditional_research_only": 57}
 ## Implementation acceptance
 
-Status: passed; today’s games checked: 3.
+Status: passed; today’s games checked: 6.
 This verifies model inference and conditional injury integration. It does not establish causal injury impacts, confirmed lineups, predictive interval coverage, wagering permissions, profitability or production promotion.
 
 - PASS: today_has_forecasts
-- PASS: nba:2026-10-29:CLE:ATL:probabilities
-- PASS: nba:2026-10-29:CLE:ATL:pregame
-- PASS: nba:2026-10-29:CLE:ATL:provenance
-- PASS: nba:2026-10-29:CLE:ATL:missingness_and_uncertainty
-- PASS: nba:2026-10-29:CLE:ATL:live_roster_injury_join
-- PASS: nba:2026-10-29:CLE:ATL:scenario_reproducibility
-- PASS: nba:2026-10-29:CLE:ATL:scenario_probabilities
-- PASS: nba:2026-10-29:MEM:POR:probabilities
-- PASS: nba:2026-10-29:MEM:POR:pregame
-- PASS: nba:2026-10-29:MEM:POR:provenance
-- PASS: nba:2026-10-29:MEM:POR:missingness_and_uncertainty
-- PASS: nba:2026-10-29:MEM:POR:live_roster_injury_join
-- PASS: nba:2026-10-29:MEM:POR:scenario_reproducibility
-- PASS: nba:2026-10-29:MEM:POR:scenario_probabilities
-- PASS: nba:2026-10-29:SAC:NOP:probabilities
-- PASS: nba:2026-10-29:SAC:NOP:pregame
-- PASS: nba:2026-10-29:SAC:NOP:provenance
-- PASS: nba:2026-10-29:SAC:NOP:missingness_and_uncertainty
-- PASS: nba:2026-10-29:SAC:NOP:live_roster_injury_join
-- PASS: nba:2026-10-29:SAC:NOP:scenario_reproducibility
-- PASS: nba:2026-10-29:SAC:NOP:scenario_probabilities
+- PASS: nba:2026-10-31:ATL:NOP:probabilities
+- PASS: nba:2026-10-31:ATL:NOP:pregame
+- PASS: nba:2026-10-31:ATL:NOP:provenance
+- PASS: nba:2026-10-31:ATL:NOP:missingness_and_uncertainty
+- PASS: nba:2026-10-31:ATL:NOP:live_roster_injury_join
+- PASS: nba:2026-10-31:ATL:NOP:scenario_reproducibility
+- PASS: nba:2026-10-31:ATL:NOP:scenario_probabilities
+- PASS: nba:2026-10-31:CLE:MIL:probabilities
+- PASS: nba:2026-10-31:CLE:MIL:pregame
+- PASS: nba:2026-10-31:CLE:MIL:provenance
+- PASS: nba:2026-10-31:CLE:MIL:missingness_and_uncertainty
+- PASS: nba:2026-10-31:CLE:MIL:live_roster_injury_join
+- PASS: nba:2026-10-31:CLE:MIL:scenario_reproducibility
+- PASS: nba:2026-10-31:CLE:MIL:scenario_probabilities
+- PASS: nba:2026-10-31:MIN:SAS:probabilities
+- PASS: nba:2026-10-31:MIN:SAS:pregame
+- PASS: nba:2026-10-31:MIN:SAS:provenance
+- PASS: nba:2026-10-31:MIN:SAS:missingness_and_uncertainty
+- PASS: nba:2026-10-31:MIN:SAS:live_roster_injury_join
+- PASS: nba:2026-10-31:MIN:SAS:scenario_reproducibility
+- PASS: nba:2026-10-31:MIN:SAS:scenario_probabilities
+- PASS: nba:2026-10-31:OKC:HOU:probabilities
+- PASS: nba:2026-10-31:OKC:HOU:pregame
+- PASS: nba:2026-10-31:OKC:HOU:provenance
+- PASS: nba:2026-10-31:OKC:HOU:missingness_and_uncertainty
+- PASS: nba:2026-10-31:OKC:HOU:live_roster_injury_join
+- PASS: nba:2026-10-31:OKC:HOU:scenario_reproducibility
+- PASS: nba:2026-10-31:OKC:HOU:scenario_probabilities
+- PASS: nba:2026-10-31:PHI:CHA:probabilities
+- PASS: nba:2026-10-31:PHI:CHA:pregame
+- PASS: nba:2026-10-31:PHI:CHA:provenance
+- PASS: nba:2026-10-31:PHI:CHA:missingness_and_uncertainty
+- PASS: nba:2026-10-31:PHI:CHA:live_roster_injury_join
+- PASS: nba:2026-10-31:PHI:CHA:scenario_reproducibility
+- PASS: nba:2026-10-31:PHI:CHA:scenario_probabilities
+- PASS: nba:2026-10-31:SAC:MEM:probabilities
+- PASS: nba:2026-10-31:SAC:MEM:pregame
+- PASS: nba:2026-10-31:SAC:MEM:provenance
+- PASS: nba:2026-10-31:SAC:MEM:missingness_and_uncertainty
+- PASS: nba:2026-10-31:SAC:MEM:live_roster_injury_join
+- PASS: nba:2026-10-31:SAC:MEM:scenario_reproducibility
+- PASS: nba:2026-10-31:SAC:MEM:scenario_probabilities

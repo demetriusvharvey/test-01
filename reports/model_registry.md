@@ -1,7 +1,7 @@
 # Weekly model challenger registry
 
-Run 2026-10-29T20:15:45.319190+00:00: 4115 forecast snapshots, 12 outcome records, 573 matched rows before eligibility.
-Availability: 81 team-status and 0 NFL position-status matched snapshots before time and source eligibility checks.
+Run 2026-10-31T20:11:04.594077+00:00: 6631 forecast snapshots, 26 outcome records, 1666 matched rows before eligibility.
+Availability: 452 team-status and 50 NFL position-status matched snapshots before time and source eligibility checks.
 
 | League | Model | Status | Eligible training games | Validation season | Promoted |
 | --- | --- | --- | ---: | --- | --- |
@@ -16,6 +16,6 @@ Availability: 81 team-status and 0 NFL position-status matched snapshots before 
 
 Both pure challengers use rating difference, home advantage and games-played difference, without odds, an anchor, spreads or totals. The fixed-grid monotonic boosted-stump model is a standard-library research implementation, not XGBoost, LightGBM, CatBoost or Optuna. Inner validation uses a later prior season; the artifact is refit only on data settled before this run, then may produce separately logged future shadow forecasts. It is never automatically promoted by training alone.
 
-The availability challengers have 81 team-count and 0 NFL position-group snapshots before time and rights screening. They learn from frozen pregame listed statuses on top of Elo; neither has individual player value, is a complete lineup model, or changes picks.
+The availability challengers have 452 team-count and 50 NFL position-group snapshots before time and rights screening. They learn from frozen pregame listed statuses on top of Elo; neither has individual player value, is a complete lineup model, or changes picks.
 
 The default training gate requires at least 500 earlier training games, 100 validation games and three seasons with eligible point-in-time data. Eligibility and missingness can make the useful sample much smaller than raw snapshot counts. NBA inputs are blocked pending rights review. No model-vs-sharp or profit result is assumed.

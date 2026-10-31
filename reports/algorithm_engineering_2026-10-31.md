@@ -102,8 +102,21 @@ Production target: https://nba-nfl-moneylines.vercel.app (existing Vercel projec
 
 Release checks, commit and deployment identifiers will be appended after verification.
 
-Final local checks: **241 tests passed** (`python -m unittest discover -s tests`); browser JavaScript syntax and Git whitespace checks passed. Portable sklearn exports were compared to sklearn probabilities to 1e-12 during fitting.
+Final local checks: **242 tests passed** (`python -m unittest discover -s tests`); browser JavaScript syntax and Git whitespace checks passed. Portable sklearn exports were compared to sklearn probabilities to 1e-12 during fitting.
 
 Live keyless run: 71 scheduled games, 57 NBA conditional injury scenario forecasts, 119 valid archived quote observations, zero recommendations. ESPN injury adapter independently parsed 87 NBA and 800 NFL entries with zero parsing errors. Captured-slate replay verified all 71 incumbent predictions (57 NBA, 14 NFL) against frozen Elo snapshots to 1e-12, preserved 5–4 / 55.6%, and appended new observations without changing the source-refresh timestamp.
 
 The raw source quotes in that run were too old for the stricter 20-minute value gate; they remain labeled snapshots rather than invented current prices.
+
+## Verified release identifiers
+
+- Implementation commit: `11a5980027999513224aaa39b57ec6302ceb1961`.
+- Immutable operational-observation commit: `531f36a33ce8c94a96c9d2d7688a1212b09adfe5` on `data/observations`.
+- Initial GitHub CI: [successful run 41237527861](https://github.com/demetriusvharvey/test-01/actions/runs/41237527861); Python and JavaScript checks both passed.
+- Initial production deployment: `dpl_EyViJTD4eX76AwhudL8fhGJxiuXL`, READY, exact implementation SHA confirmed.
+- Production homepage and board both returned HTTP 200. Live board contained 71 research forecasts (57 NBA, 14 NFL), 57 conditional injury scenario sets, zero recommendations, all 12 legacy rows and unchanged 55.6%.
+- Browser checks verified upcoming NBA/NFL controls, explicit unconfirmed NFL QBs, research-only labeling, zero recommendations and the original record. Final copy cleanup labels the section Recommendations and saved forecasts.
+
+A further audit found 500 older research snapshots were rejected solely because their saved Elo benchmark was missing. The evaluator now preserves their first valid model prediction and scores it; paired Elo comparisons have their own matched sample and missing-benchmark count. It never reconstructs a missing old benchmark or substitutes a later prediction. In the available confirmed sample, three scored model forecasts have no original matched benchmark; paired differences are therefore unavailable. The ten existing start-time confirmation mismatches remain explicitly excluded from that separate research evaluation rather than being treated as losses or fabricated finals. These are not the original nine public results.
+
+The first hosted refresh successfully executed predictions, but its publish step encountered a binary add/add conflict with the operational-observation commit made during that run. The snapshot was preserved, and the refresh is being rerun from the updated observation head. This was a release synchronization collision; the final refresh status is reported in the delivery message.

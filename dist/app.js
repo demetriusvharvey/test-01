@@ -62,7 +62,7 @@
   $('pick-date').addEventListener('change',e=>chooseDay(e.target.value));
   function renderDates(){
     const nowDay=today(),yesterday=shiftDay(nowDay,-1),isToday=selectedDay===nowDay;
-    $('picks-title').textContent=isToday?'Today’s predicted winners':selectedDay===yesterday?'Yesterday’s predicted winners':displayDay(selectedDay);
+    $('picks-title').textContent=isToday?'Recommendations and saved forecasts':selectedDay===yesterday?'Yesterday’s saved forecasts':displayDay(selectedDay);
     $('today-button').classList.toggle('is-active',isToday);
     $('yesterday-button').classList.toggle('is-active',selectedDay===yesterday);
     $('pick-date').value=selectedDay;

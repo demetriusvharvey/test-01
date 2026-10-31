@@ -18,7 +18,7 @@ def _valid(row,now):
         if not row.get('model_input_hash') or not row.get('features') or not row.get('model_version'):return False
         if not row['game_id'].startswith('nba:') or row['home']==row['away']:return False
         if aware(row['input_data_observed_at'])>predicted:return False
-        for key in ('home_probability','baseline_elo_probability'):
+        for key in ('home_probability','away_probability'):
             p=row[key]
             if isinstance(p,bool) or not isinstance(p,(int,float)) or not math.isfinite(p) or not 0<p<1:return False
         return math.isclose(row['home_probability']+row['away_probability'],1,abs_tol=1e-12)
@@ -99,7 +99,7 @@ def evaluate_saved(root,confirmed_finals,now):
         group['accuracy']=group['wins']/settled if settled else None
     grouped={}
     for (game,version),row in sorted(first.items()):
-        group=grouped.setdefault(version,{'model':[],'elo':[],'pending':0,'void':0,'excluded':0,'scenario_agreement':0,'scenario_disagreement':0})
+        group=grouped.setdefault(version,{'model':[],'matched_model':[],'elo':[],'benchmark_missing':0,'pending':0,'void':0,'excluded':0,'scenario_agreement':0,'scenario_disagreement':0})
         final=outcomes.get(game)
         if not final:group['pending']+=1;continue
         if (row['home'],row['away'],aware(row['starts_at']))!=(final['home'],final['away'],aware(final['starts_at'])):
@@ -107,20 +107,25 @@ def evaluate_saved(root,confirmed_finals,now):
         if final['home_score']==final['away_score']:group['void']+=1;continue
         y=int(final['home_score']>final['away_score'])
         group['model'].append({'probability':row['home_probability'],'outcome':y})
-        group['elo'].append({'probability':row['baseline_elo_probability'],'outcome':y})
+        baseline=row.get('baseline_elo_probability')
+        if type(baseline) in (int,float) and math.isfinite(baseline) and 0<baseline<1:
+            group['elo'].append({'probability':baseline,'outcome':y})
+            group['matched_model'].append({'probability':row['home_probability'],'outcome':y})
+        else:group['benchmark_missing']+=1
         context=row.get('availability_scenarios') or {}
         if context.get('exhaustive_listed_uncertainty'):
             group['scenario_agreement' if context.get('consistent_winner') else 'scenario_disagreement']+=1
     result={'evaluated_at':now,'invalid_forecasts':excluded,'models':{},'conditional_winner_records':conditional,'promoted':False,
-            'policy':'earliest eligible immutable forecast per game/version; identical paired Elo sample; confirmed finals only',
+            'policy':'earliest eligible immutable forecast per game/version; all valid model forecasts scored; Elo comparisons use only matched benchmarks; confirmed finals only',
             'limitations':['pipeline versions may contain retrained artifacts; not a fixed-artifact trial',
                           'conditional scenarios are not an unconditional calibrated prediction; only scenario-consistent winner accuracy is graded',
                           'no causal player-effect validation, market comparison or profitability claim']}
     for version,g in grouped.items():
         model,elo=score_metrics(g.pop('model')),score_metrics(g.pop('elo'))
-        result['models'][version]={**g,'model':model,'elo':elo,
-                                  'brier_difference':model['brier']-elo['brier'] if model['games'] else None,
-                                  'log_loss_difference':model['log_loss']-elo['log_loss'] if model['games'] else None,
+        paired=score_metrics(g.pop('matched_model'))
+        result['models'][version]={**g,'model':model,'elo':elo,'matched_model':paired,
+                                  'brier_difference':paired['brier']-elo['brier'] if paired['games'] else None,
+                                  'log_loss_difference':paired['log_loss']-elo['log_loss'] if paired['games'] else None,
                                   'status':'forward_results_available' if model['games'] else 'awaiting_confirmed_finals'}
     (folder/'forward_evaluation.json').write_text(json.dumps(result,indent=2)+'\n')
     return result

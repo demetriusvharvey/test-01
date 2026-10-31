@@ -124,3 +124,14 @@ The first hosted refresh successfully executed predictions, but its publish step
 Production refresh verification uncovered a further NFL integration bug: recreating display-market rows dropped venue metadata even though the schedule had confirmed it. The board renderer now rejoins explicit schedule neutral/home values for priced games. Unknown venue cases also clear any legacy winner label. The live hosted refresh recovered successfully on attempt 2; the follow-up venue test covers both true neutral-site and explicit false home-site values.
 
 The deployed-pipeline refresh on GitHub succeeded after the release synchronization retry. The final venue fix was also smoke-tested against the larger live captured slate: 90 reproducible forecasts, with the original accuracy unchanged. This smoke run preserved the captured source timestamp and was not substituted into historical results.
+
+## Final hosted verification
+
+- Final engine fix commit: `07150edabb102fa87c07e1df5cdb7b4dfd9f9832`.
+- [Final CI run 41238314472](https://github.com/demetriusvharvey/test-01/actions/runs/41238314472): successful; 243 tests and browser-script syntax passed.
+- [Hosted refresh run 41238314429](https://github.com/demetriusvharvey/test-01/actions/runs/41238314429): successful, including actual inference, append-only observation commit and board publication. The earlier synchronization collision recovered successfully on attempt 2 of run 41237527840.
+- Published data commit: `d0dbe2eacb45016df08036361f0eb203fdbac410`. Production deployment `dpl_EPS77FVXm17Eeq9UHiwW6neceTZv`: READY and exact commit verified.
+- Production board HTTP 200 at snapshot `2026-10-31T20:19:13.280035+00:00`: 90 scheduled games analyzed; 84 usable research forecasts (62 NBA, 22 NFL); 57 NBA conditional injury scenario sets; zero qualified recommendations. Six additional NFL games had unverified venue metadata in the current schedule source and were explicitly withheld rather than assuming home-field advantage.
+- All 12 original public forecasts remain, with 5 wins / 4 losses / 3 pending and unchanged 55.6% accuracy. One conflicting/invalid source quote was quarantined.
+
+No higher live prediction accuracy, positive paper ROI, fully calibrated injury-aware champion or completion of the missing independent validation is claimed. Those evidence requirements remain open; unqualified forecasts cannot bypass the recommendation gate.

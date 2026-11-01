@@ -49,3 +49,17 @@ The existing 20-minute freshness and independent evidence gates remain in force.
 - Sixteen additional tests exercise outcome serialization, first-instant selection, as-of leakage, matched denominators, conflicting confirmations, invalid finals, ties, changed start times, stale forecasts, actual production benchmarks, approved-model serialization, historical leakage and reproducible intervals.
 
 Deployment and hosted-refresh evidence is recorded after the release checks; a successful code build alone does not prove refreshed data used the new engine.
+
+## Verified hosted release
+
+- Implementation commit: `88e8d36b10809914ac105ed8150f049cc566f647`.
+- [CI run 41262714615](https://github.com/demetriusvharvey/test-01/actions/runs/41262714615): successful.
+- [Actual hosted refresh 41262714647](https://github.com/demetriusvharvey/test-01/actions/runs/41262714647): successful, including 259 tests, real inference, append-only observation publication and board publication.
+- Observation commit: `934e668` on `data/observations`. Published board commit: `36f4c3763389f06981a7362a3aabfa7369224cde`.
+- Initial implementation deployment: `dpl_9PFj1pZAgpb8EcTyu1H54xSjcTns`, READY. Refreshed-data deployment: `dpl_FZbFfAsUyzmCi45hapKLPpEXGZyR`, READY; production alias confirmed on the exact board commit.
+- Production board returned HTTP 200. It contains 88 current forecasts (61 NBA, 27 NFL), 88 unapproved research challengers, explicit fallback reasons, one withheld NFL venue, zero recommendations and the preserved 6–4 / 2 pending public record.
+- Before release, all 88 board forecasts had a mislabeled fixed-Elo benchmark different from the actual published probability. After release, all 88 new snapshots freeze the exact actual incumbent probability. Every live incumbent probability reproduced from its frozen rating snapshot with zero numerical error, and every prediction preceded its scheduled start.
+- Older first forecasts still retain their old benchmark and are reported separately; later correctly matched snapshots do not replace them. The new matched prospective series needs newly observed games and settled outcomes before it can support promotion.
+- Remaining live source warnings: FanDuel, BetMGM and Fanatics NBA odds unavailable in this refresh; a scheduling-gap warning is also exposed. These gaps are not hidden or treated as fresh prices.
+
+No higher winner accuracy or betting return is attributed to this patch. The completed change fixes production comparison and scoring integrity; validated player-aware probabilities and profitable priced recommendations remain unproven.

@@ -1,36 +1,36 @@
 {
-  "evaluated_at": "2026-11-01T04:26:02.566621+00:00",
+  "evaluated_at": "2026-11-01T04:33:04.374297+00:00",
   "data_coverage": {
     "nba-efficiency-logistic-v1": {
-      "audited_attempts": 25,
+      "audited_attempts": 26,
       "audited_days": 4,
       "decision_days": 4,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-rotation-logistic-v1": {
-      "audited_attempts": 25,
+      "audited_attempts": 26,
       "audited_days": 4,
       "decision_days": 4,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-player-box-logistic-v1": {
-      "audited_attempts": 25,
+      "audited_attempts": 26,
       "audited_days": 4,
       "decision_days": 4,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-convex-ensemble-v1": {
-      "audited_attempts": 25,
+      "audited_attempts": 26,
       "audited_days": 4,
       "decision_days": 4,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-partial-stint-logistic-v1": {
-      "audited_attempts": 25,
+      "audited_attempts": 26,
       "audited_days": 4,
       "decision_days": 4,
       "audited_days_without_decision": 0,
@@ -103,12 +103,12 @@
       "decisions": 4,
       "scenario_abstentions": 1,
       "winner_record": {
-        "wins": 4,
+        "wins": 5,
         "losses": 1,
-        "pending": 4,
+        "pending": 3,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.8
+        "accuracy": 0.8333333333333334
       },
       "matched_elo_record": {
         "wins": 5,
@@ -119,11 +119,11 @@
         "accuracy": 0.8333333333333334
       },
       "fully_settled_day_comparison": {
-        "complete_days": 1,
-        "model_wins": 2,
-        "model_settled": 3,
-        "elo_wins": 2,
-        "elo_settled": 3,
+        "complete_days": 2,
+        "model_wins": 5,
+        "model_settled": 6,
+        "elo_wins": 5,
+        "elo_settled": 6,
         "accuracy_difference": 0.0
       },
       "review_status": "insufficient_forward_sample",
@@ -133,12 +133,12 @@
       "decisions": 4,
       "scenario_abstentions": 1,
       "winner_record": {
-        "wins": 4,
+        "wins": 5,
         "losses": 1,
-        "pending": 4,
+        "pending": 3,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.8
+        "accuracy": 0.8333333333333334
       },
       "matched_elo_record": {
         "wins": 5,
@@ -149,11 +149,11 @@
         "accuracy": 0.8333333333333334
       },
       "fully_settled_day_comparison": {
-        "complete_days": 1,
-        "model_wins": 2,
-        "model_settled": 3,
-        "elo_wins": 2,
-        "elo_settled": 3,
+        "complete_days": 2,
+        "model_wins": 5,
+        "model_settled": 6,
+        "elo_wins": 5,
+        "elo_settled": 6,
         "accuracy_difference": 0.0
       },
       "review_status": "insufficient_forward_sample",

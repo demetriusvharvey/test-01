@@ -1,19 +1,19 @@
 {
-  "evaluated_at": "2026-11-01T04:26:02.566621+00:00",
+  "evaluated_at": "2026-11-01T04:33:04.374297+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
-      "benchmark_missing": 8,
-      "pending": 77,
+      "benchmark_missing": 10,
+      "pending": 75,
       "void": 0,
       "excluded": 10,
       "scenario_agreement": 0,
       "scenario_disagreement": 0,
       "model": {
-        "games": 8,
-        "accuracy": 0.625,
-        "brier": 0.24539930056766635,
-        "log_loss": 0.7244653365342594
+        "games": 10,
+        "accuracy": 0.6,
+        "brier": 0.2511860183466391,
+        "log_loss": 0.728025858908722
       },
       "elo": {
         "games": 0,
@@ -34,44 +34,44 @@
   },
   "conditional_winner_records": {
     "nba-convex-ensemble-v1": {
-      "wins": 5,
+      "wins": 7,
       "losses": 3,
-      "pending": 72,
+      "pending": 70,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 8,
-      "accuracy": 0.625
+      "settled_predictions": 10,
+      "accuracy": 0.7
     },
     "nba-partial-stint-logistic-v1": {
-      "wins": 5,
+      "wins": 7,
       "losses": 3,
-      "pending": 72,
+      "pending": 70,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 8,
-      "accuracy": 0.625
+      "settled_predictions": 10,
+      "accuracy": 0.7
     },
     "nba-player-box-logistic-v1": {
-      "wins": 5,
+      "wins": 7,
       "losses": 3,
-      "pending": 72,
+      "pending": 70,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 8,
-      "accuracy": 0.625
+      "settled_predictions": 10,
+      "accuracy": 0.7
     },
     "nba-rotation-logistic-v1": {
       "wins": 5,
-      "losses": 3,
-      "pending": 72,
+      "losses": 5,
+      "pending": 70,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 8,
-      "accuracy": 0.625
+      "settled_predictions": 10,
+      "accuracy": 0.5
     }
   },
   "promoted": false,

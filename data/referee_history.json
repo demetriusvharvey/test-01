@@ -895,5 +895,57 @@
     ],
     "observed_at": "2026-11-01T04:32:58.642599+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-01:Boston @ Orlando",
+    "game_date": "2026-11-01",
+    "matchup": "Boston @ Orlando",
+    "crew": [
+      "Curtis Blair (#74)",
+      "Gediminas Petraitis (#50)",
+      "Che Flores (#91)",
+      ""
+    ],
+    "observed_at": "2026-11-01T16:28:43.384372+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-01:Brooklyn @ Indiana",
+    "game_date": "2026-11-01",
+    "matchup": "Brooklyn @ Indiana",
+    "crew": [
+      "Bill Kennedy (#55)",
+      "Robert Hussey (#85)",
+      "Matt Myers (#43)",
+      ""
+    ],
+    "observed_at": "2026-11-01T16:28:43.384372+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-01:LA Clippers @ Golden State",
+    "game_date": "2026-11-01",
+    "matchup": "LA Clippers @ Golden State",
+    "crew": [
+      "Nick Buchert (#3)",
+      "Justin Van Duyne (#64)",
+      "Derrick Collins (#11)",
+      ""
+    ],
+    "observed_at": "2026-11-01T16:28:43.384372+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-01:Toronto @ L.A. Lakers",
+    "game_date": "2026-11-01",
+    "matchup": "Toronto @ L.A. Lakers",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Brian Forte (#45)",
+      "Catherine Chang (#83)",
+      ""
+    ],
+    "observed_at": "2026-11-01T16:28:43.384372+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

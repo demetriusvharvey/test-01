@@ -1,19 +1,19 @@
 {
-  "evaluated_at": "2026-10-31T23:29:01.224378+00:00",
+  "evaluated_at": "2026-11-01T01:50:38.678432+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
-      "benchmark_missing": 4,
-      "pending": 76,
+      "benchmark_missing": 6,
+      "pending": 77,
       "void": 0,
       "excluded": 10,
       "scenario_agreement": 0,
       "scenario_disagreement": 0,
       "model": {
-        "games": 4,
-        "accuracy": 0.75,
-        "brier": 0.267001338480283,
-        "log_loss": 0.8163819218833975
+        "games": 6,
+        "accuracy": 0.5,
+        "brier": 0.3004884205466791,
+        "log_loss": 0.8550279976209358
       },
       "elo": {
         "games": 0,
@@ -35,43 +35,43 @@
   "conditional_winner_records": {
     "nba-convex-ensemble-v1": {
       "wins": 3,
-      "losses": 1,
-      "pending": 71,
+      "losses": 3,
+      "pending": 72,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 4,
-      "accuracy": 0.75
+      "settled_predictions": 6,
+      "accuracy": 0.5
     },
     "nba-partial-stint-logistic-v1": {
       "wins": 3,
-      "losses": 1,
-      "pending": 71,
+      "losses": 3,
+      "pending": 72,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 4,
-      "accuracy": 0.75
+      "settled_predictions": 6,
+      "accuracy": 0.5
     },
     "nba-player-box-logistic-v1": {
       "wins": 3,
-      "losses": 1,
-      "pending": 71,
+      "losses": 3,
+      "pending": 72,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 4,
-      "accuracy": 0.75
+      "settled_predictions": 6,
+      "accuracy": 0.5
     },
     "nba-rotation-logistic-v1": {
       "wins": 3,
-      "losses": 1,
-      "pending": 71,
+      "losses": 3,
+      "pending": 72,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 4,
-      "accuracy": 0.75
+      "settled_predictions": 6,
+      "accuracy": 0.5
     }
   },
   "promoted": false,

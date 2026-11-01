@@ -1,6 +1,6 @@
 'use strict';
 const assert=require('node:assert/strict');
-const {activePick,readiness}=require('../dist/eligibility.js');
+const {activePick,readiness,labels}=require('../dist/eligibility.js');
 const now=new Date('2026-11-01T20:00:00Z');
 const p={recommendation_eligible:true,starts_at:'2026-11-01T23:00:00Z',predicted_at:'2026-11-01T19:55:00Z',expires_at:'2026-11-01T20:05:00Z'};
 assert.equal(activePick(p,now),true);
@@ -19,3 +19,36 @@ const approved={...game,forecast:{...game.forecast,decision:{eligible:true,reaso
 assert.equal(readiness({games:[approved]},now).qualified,1);
 assert.equal(readiness({games:[approved]},later).qualified,0);
 console.log('Browser eligibility: expiry, ET day, missing data, validation and no-edge cases passed.');
+
+// Exercise the actual page renderer during a feed outage. A delayed source
+// must keep its forecasts visible as expired research, with no promoted bet.
+const fs=require('node:fs'),vm=require('node:vm');
+class Clock extends Date {
+  constructor(...args){super(...(args.length?args:[now]));}
+  static now(){return +now;}
+}
+const elements=new Map();
+function element(id){
+  if(!elements.has(id))elements.set(id,{hidden:false,value:id==='slate-filter'?'today':'',textContent:'',innerHTML:'',
+    classList:{toggle(){}},setAttribute(){},getAttribute(){return 'true';},addEventListener(){},focus(){}});
+  return elements.get(id);
+}
+const delayed={generated_at:'2026-11-01T17:00:00Z',selection_policy:{},picks:[],history:[],games:[{
+  ...game,league:'NBA',home:'Knicks',away:'Celtics',predicted_winner:'Knicks',
+  forecast:{...game.forecast,model_version:'test-research',predicted_at:'2026-11-01T17:00:00Z'}}]};
+vm.runInNewContext(fs.readFileSync(require.resolve('../dist/app.js'),'utf8'),{
+  Intl,Date:Clock,PickEligibility:{readiness,activePick,labels},
+  document:{getElementById:element,querySelector:()=>element('tabs')},localStorage:{getItem:()=>null},
+  fetch:async()=>({ok:true,json:async()=>delayed}),setInterval(){}
+});
+setImmediate(()=>{
+  assert.match(element('selection-status').textContent,/Update delayed/);
+  assert.equal(element('slate-section').hidden,false);
+  assert.equal(element('slate-section').open,true);
+  assert.match(element('game-slate').innerHTML,/Model: Knicks/);
+  assert.match(element('game-slate').innerHTML,/EXPIRED/);
+  assert.equal(element('eligibility-details').hidden,false);
+  assert.match(element('eligibility-reasons').innerHTML,/validation/);
+  assert.equal(element('count').textContent,'0 recommendations · 0 saved forecasts');
+  console.log('Delayed-board renderer: visible expired research, exact blockers and zero bets passed.');
+});

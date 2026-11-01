@@ -1,5 +1,5 @@
 {
-  "evaluated_at": "2026-11-01T01:50:38.678432+00:00",
+  "evaluated_at": "2026-11-01T02:31:50.877940+00:00",
   "data_coverage": {
     "nba-efficiency-logistic-v1": {
       "audited_attempts": 24,
@@ -43,27 +43,27 @@
       "decisions": 3,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 3,
+        "wins": 5,
         "losses": 1,
-        "pending": 2,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8333333333333334
       },
       "matched_elo_record": {
-        "wins": 3,
+        "wins": 5,
         "losses": 1,
-        "pending": 2,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8333333333333334
       },
       "fully_settled_day_comparison": {
-        "complete_days": 1,
-        "model_wins": 2,
-        "model_settled": 3,
-        "elo_wins": 2,
-        "elo_settled": 3,
+        "complete_days": 2,
+        "model_wins": 5,
+        "model_settled": 6,
+        "elo_wins": 5,
+        "elo_settled": 6,
         "accuracy_difference": 0.0
       },
       "review_status": "insufficient_forward_sample",
@@ -73,27 +73,27 @@
       "decisions": 3,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 3,
+        "wins": 5,
         "losses": 1,
-        "pending": 2,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8333333333333334
       },
       "matched_elo_record": {
-        "wins": 3,
+        "wins": 5,
         "losses": 1,
-        "pending": 2,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8333333333333334
       },
       "fully_settled_day_comparison": {
-        "complete_days": 1,
-        "model_wins": 2,
-        "model_settled": 3,
-        "elo_wins": 2,
-        "elo_settled": 3,
+        "complete_days": 2,
+        "model_wins": 5,
+        "model_settled": 6,
+        "elo_wins": 5,
+        "elo_settled": 6,
         "accuracy_difference": 0.0
       },
       "review_status": "insufficient_forward_sample",
@@ -103,20 +103,20 @@
       "decisions": 3,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 3,
+        "wins": 4,
         "losses": 1,
-        "pending": 2,
+        "pending": 1,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8
       },
       "matched_elo_record": {
-        "wins": 3,
+        "wins": 5,
         "losses": 1,
-        "pending": 2,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8333333333333334
       },
       "fully_settled_day_comparison": {
         "complete_days": 1,
@@ -133,20 +133,20 @@
       "decisions": 3,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 3,
+        "wins": 4,
         "losses": 1,
-        "pending": 2,
+        "pending": 1,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8
       },
       "matched_elo_record": {
-        "wins": 3,
+        "wins": 5,
         "losses": 1,
-        "pending": 2,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8333333333333334
       },
       "fully_settled_day_comparison": {
         "complete_days": 1,
@@ -163,27 +163,27 @@
       "decisions": 3,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 3,
+        "wins": 5,
         "losses": 1,
-        "pending": 2,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8333333333333334
       },
       "matched_elo_record": {
-        "wins": 3,
+        "wins": 5,
         "losses": 1,
-        "pending": 2,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.75
+        "accuracy": 0.8333333333333334
       },
       "fully_settled_day_comparison": {
-        "complete_days": 1,
-        "model_wins": 2,
-        "model_settled": 3,
-        "elo_wins": 2,
-        "elo_settled": 3,
+        "complete_days": 2,
+        "model_wins": 5,
+        "model_settled": 6,
+        "elo_wins": 5,
+        "elo_settled": 6,
         "accuracy_difference": 0.0
       },
       "review_status": "insufficient_forward_sample",

@@ -100,7 +100,7 @@ def archive_forecasts(root,forecasts,finals,now):
     folder=Path(root)/'observations/production_forecasts';folder.mkdir(parents=True,exist_ok=True)
     file=folder/'ledger.sqlite'
     with sqlite3.connect(file) as db:
-        for table in ('forecasts','outcomes'):
+        for table in ('forecasts','outcomes','outcome_confirmations'):
             db.execute(f'CREATE TABLE IF NOT EXISTS {table} (key TEXT PRIMARY KEY,payload TEXT NOT NULL)')
             for operation in ('UPDATE','DELETE'):
                 db.execute(f"CREATE TRIGGER IF NOT EXISTS {table}_no_{operation} BEFORE {operation} ON {table} BEGIN SELECT RAISE(ABORT,'immutable'); END")
@@ -116,35 +116,34 @@ def archive_forecasts(root,forecasts,finals,now):
             text=json.dumps(row,sort_keys=True,allow_nan=False)
             db.execute('INSERT OR IGNORE INTO forecasts VALUES (?,?)',(snapshot_hash(row),text))
         for row in finals:
-            if row.get('home_score') is None or row.get('away_score') is None:continue
-            # Caller supplies only parser-qualified confirmed finals. The
-            # earliest frozen forecast start must already be in the past.
-            existing=[json.loads(v[0]) for v in db.execute("SELECT payload FROM forecasts WHERE json_extract(payload,'$.id')=?",(row['id'],))]
-            matching=[f for f in existing if f['id']==row['id'] and aware(f['starts_at'])<=aware(now)]
-            if not matching:continue
-            db.execute('INSERT OR IGNORE INTO outcomes VALUES (?,?)',(row['id'],json.dumps({**row,'observed_at':now},sort_keys=True)))
+            try:
+                # Finals arrive only from the runner's explicit-final parser.
+                # Validate identity and timing here too: no arbitrary score-only
+                # payload can settle a forecast at this storage boundary.
+                prefix,day,away,home=row['id'].split(':')
+                if row['home']!=home or row['away']!=away or home==away:continue
+                if row.get('league',prefix.upper())!=prefix.upper():continue
+                if any(type(row[key]) is not int or row[key]<0 for key in ('home_score','away_score')):continue
+                start=aware(row['starts_at']) if isinstance(row['starts_at'],str) else row['starts_at']
+                if start.tzinfo is None or start>aware(now) or not row.get('source'):continue
+                existing=[json.loads(v[0]) for v in db.execute("SELECT payload FROM forecasts WHERE json_extract(payload,'$.id')=?",(row['id'],))]
+                matching=[f for f in existing if aware(f['predicted_at'])<aware(f['starts_at'])<=aware(now)]
+                if not matching:continue
+                payload={key:row[key] for key in ('id','home','away','home_score','away_score','source')}
+                payload.update(starts_at=start.isoformat(),observed_at=now)
+                text=json.dumps(payload,sort_keys=True,allow_nan=False)
+                db.execute('INSERT OR IGNORE INTO outcomes VALUES (?,?)',(row['id'],text))
+                # Preserve later confirmations, including contradictions, rather
+                # than silently accepting whichever result arrived first.
+                identity={k:v for k,v in payload.items() if k!='observed_at'}
+                db.execute('INSERT OR IGNORE INTO outcome_confirmations VALUES (?,?)',(snapshot_hash(identity),text))
+            except (KeyError,ValueError,TypeError,AttributeError):continue
         records=[json.loads(v[0]) for v in db.execute('SELECT payload FROM forecasts')]
         outcomes={v[0]:json.loads(v[1]) for v in db.execute('SELECT key,payload FROM outcomes')}
-    first={}
-    for r in sorted(records,key=lambda r:r['predicted_at']):
-        identity=r.get('model_identity_hash',r['artifact_hash'])
-        first.setdefault((r['id'],identity),r)
-        candidate=r.get('research_model')
-        if candidate:
-            key=candidate.get('model_identity_hash',candidate['artifact_hash'])
-            first.setdefault((r['id'],key),{**r,**candidate})
-    groups={}
-    for r in first.values():
-        result=outcomes.get(r['id']);y=None
-        if result and result['home_score']!=result['away_score']:y=int(result['home_score']>result['away_score'])
-        # Score home probabilities against home outcomes (not selected winners).
-        groups.setdefault(r['model_version']+':'+r.get('model_identity_hash',r['artifact_hash'])[:12],[]).append(
-            {'probability':r['home_probability'],'baseline_probability':r.get('baseline_elo_probability'),
-             'outcome':'pending' if y is None else 'win' if y else 'loss'})
-    return {'policy':'first pregame forecast per game/artifact; refreshed snapshots never overwrite it',
-            'mode':'forward_paper_forecasts','models':{k:{**metrics(v),'matched_elo':metrics([{**r,'probability':r['baseline_probability']} for r in v if r['baseline_probability'] is not None])} for k,v in groups.items()},
-            'paper_roi':None,'closing_line_value':None,'maximum_drawdown':None,
-            'wager_metrics_reason':'no qualified frozen priced recommendations yet','snapshots':len(records)}
+        confirmations=[json.loads(v[0]) for v in db.execute('SELECT payload FROM outcome_confirmations')]
+    from .forecast_evaluation import evaluate
+    return evaluate(records, list(outcomes.values())+confirmations, now)
+
 
 
 def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked=(),finals=()):
@@ -168,7 +167,8 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
         for text,stamp,sha in assets(root,'nba_team_game_boxscores',now):stats['NBA'].update(parse_team_stats(text))
     valid_games=[g for g in games if g['date']<current.astimezone(ET).date()]
     for game in board.get('games',[]):
-        game.pop('predicted_winner',None)
+        for key in ('predicted_winner','forecast','forecast_status','prediction_uncertain'):
+            game.pop(key,None)
         try:
             if not current<aware(game['starts_at']):continue
             if game['league']=='NFL' and 'neutral' not in game:
@@ -191,28 +191,36 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
         public.pop('predicted_winner',None)
         if not row:
             public['forecast_status']='history_or_features_unavailable';continue
+        artifact=artifacts.get(event['league']);fallback_reason='artifact_missing' if not artifact else None
         try:
-            artifact=artifacts.get(event['league']);estimate=infer(artifact,row,now) if artifact else None
-        except (KeyError,ValueError,TypeError,OverflowError):estimate=None
+            estimate=infer(artifact,row,now) if artifact else None
+        except (KeyError,ValueError,TypeError,OverflowError) as exc:
+            estimate=None;fallback_reason='artifact_inference_rejected:'+type(exc).__name__+':'+str(exc)
         candidate=estimate
+        incumbent_model=models.get(event['league'])
+        incumbent=project_home(incumbent_model,event['home'],event['away'],aware(event['starts_at']),event.get('neutral',False)) if incumbent_model is not None else None
         # No challenger has earned independent forward promotion. Publish its
         # output as research alongside the incumbent, never silently replace it.
-        if estimate is None or artifact.get('validation',{}).get('prediction_approved') is not True:
-            incumbent=project_home(models[event['league']],event['home'],event['away'],aware(event['starts_at']),event.get('neutral',False))
+        if estimate is None or estimate.get('degraded_reason') or artifact.get('validation',{}).get('prediction_approved') is not True:
+            if candidate is not None:
+                fallback_reason=candidate.get('degraded_reason') or 'challenger_not_approved'
             if incumbent is None:public['forecast_status']='model_unavailable';continue
             snapshot=feature_snapshot(event,models[event['league']])
             identity=snapshot_hash({'league':event['league'],'version':'pure-elo-v1','parameters':{key:models[event['league']].get(key) for key in ('k','home_advantage','rest_weight','form_weight')}})
             estimate={'incumbent_snapshot':snapshot,'incumbent_snapshot_hash':snapshot_hash(snapshot),
                       'model_identity_hash':identity,'home_probability':incumbent,'away_probability':1-incumbent,'components':{'elo':incumbent},
                       'model_version':event['league'].lower()+'-elo-research-v2','artifact_hash':identity,
-                      'calibration_status':'uncalibrated','validation':{},'availability_used':False}
-        if candidate is not None:estimate['research_model']=candidate
+                      'calibration_status':'uncalibrated','validation':{},'availability_used':False,
+                      'fallback_reason':fallback_reason}
+        if candidate is not None and candidate is not estimate:estimate['research_model']=candidate
         context=public.get('nba_availability_context') or public.get('nfl_provider_availability_context') or {}
         estimate.update({'id':event['id'],'league':event['league'],'starts_at':event['starts_at'],'predicted_at':now,
                          'feature_snapshot':row,'availability':{'verified':False,'incomplete':context.get('incomplete',True),
                                                                'observed_at':context.get('observed_at'),'source':context.get('source'),
             'status_fingerprint':context.get('status_fingerprint')},
-                         'mode':'research','baseline_elo_probability':row['elo']})
+                         'mode':'research','baseline_elo_probability':incumbent,
+                         'baseline_elo_kind':'production_incumbent',
+                         'baseline_fixed_elo_probability':row['elo']})
         advanced=nba.get(event['id'],{})
         scenarios=next((advanced[field] for field in ('ensemble_scenarios','availability_scenarios','player_box_scenarios')
                         if advanced.get(field,{}).get('status')=='conditional_research_only'),None)
@@ -238,6 +246,12 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
                     {'name':name,'odds':b[side],'as_of':b['as_of']} for name,b in event.get('books',{}).items()],
                 'recommendation_eligible':True,'pricing':estimate['decision']['pricing']})
     board['research_forecasts']=forecasts;board['picks']=picks
+    from collections import Counter
+    board['inference_diagnostics']={'active_models':dict(Counter(f['model_version'] for f in forecasts)),
+        'fallback_reasons':dict(Counter(f['fallback_reason'] for f in forecasts if f.get('fallback_reason'))),
+        'withheld_reasons':dict(Counter(g['forecast_status'] for g in board.get('games',[]) if g.get('forecast_status') not in (None,'qualified','research_only'))),
+        'challenger_forecasts':sum('research_model' in f for f in forecasts),
+        'baseline_policy':'actual production incumbent frozen at prediction time; fixed Elo is separate'}
     board['model_evaluation']={league:{'artifact_hash':a['artifact_hash'],'calibration_status':a['calibration_status'],
         'evaluation_season':a['evaluation_season'],'validation':a['validation']} for league,a in artifacts.items()}
     board['selection_policy']={'version':'validated-value-v2','minimum_edge':.03,'minimum_ev':.02,

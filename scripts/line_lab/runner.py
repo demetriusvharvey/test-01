@@ -479,6 +479,8 @@ def main():
     try:
         apply_pipeline(board,models,games,now.isoformat(),
                        data_root or None,ml.get('predictions',[]),blocked,confirmed_finals)
+        print(json.dumps({'event':'production_inference','predicted_at':now.isoformat(),
+                          **board.get('inference_diagnostics',{})},sort_keys=True))
     except (OSError,ValueError,KeyError,TypeError,sqlite3.Error) as exc:
         board['picks']=[]
         board['errors'].append('Production forecast unavailable ('+type(exc).__name__+')')

@@ -1,0 +1,3364 @@
+{
+  "source_sha256": "ffb8dab7cac9453b4c117e8d93169d058a683c895a6ecb9c10f134fc9e30f5d4",
+  "protocol": "recompute frozen exploratory historical folds; no model selection or promotion",
+  "leagues": {
+    "NBA": {
+      "folds": [
+        {
+          "season": "2024-25",
+          "test_start": "2024-10-22",
+          "test_end": "2025-04-13",
+          "candidate": {
+            "wins": 808,
+            "losses": 417,
+            "sample_size": 1225,
+            "accuracy": 0.6595918367346939,
+            "brier": 0.21268235805212948,
+            "log_loss": 0.6129110695726457,
+            "probability_sample": 1225,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 625,
+                "mean_probability": 0.35569714853762563,
+                "observed_rate": 0.3872,
+                "winner_accuracy": 0.6128
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 241,
+                "mean_probability": 0.5510716930306092,
+                "observed_rate": 0.6016597510373444,
+                "winner_accuracy": 0.6016597510373444
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 179,
+                "mean_probability": 0.6473772307037866,
+                "observed_rate": 0.7318435754189944,
+                "winner_accuracy": 0.7318435754189944
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 139,
+                "mean_probability": 0.7447362320680998,
+                "observed_rate": 0.7913669064748201,
+                "winner_accuracy": 0.7913669064748201
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 39,
+                "mean_probability": 0.8429068871218752,
+                "observed_rate": 0.9487179487179487,
+                "winner_accuracy": 0.9487179487179487
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 2,
+                "mean_probability": 0.9088911290891233,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6325948374156464,
+              0.685591041806917
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 808,
+            "losses": 417,
+            "sample_size": 1225,
+            "accuracy": 0.6595918367346939,
+            "brier": 0.21386880947359882,
+            "log_loss": 0.6154385240967701,
+            "probability_sample": 1225,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 437,
+                "mean_probability": 0.36563104833257587,
+                "observed_rate": 0.33867276887871856,
+                "winner_accuracy": 0.6613272311212814
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 224,
+                "mean_probability": 0.5543597095909566,
+                "observed_rate": 0.5401785714285714,
+                "winner_accuracy": 0.5401785714285714
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 236,
+                "mean_probability": 0.6469310433768962,
+                "observed_rate": 0.614406779661017,
+                "winner_accuracy": 0.614406779661017
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 195,
+                "mean_probability": 0.7512365391922695,
+                "observed_rate": 0.7128205128205128,
+                "winner_accuracy": 0.7128205128205128
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 116,
+                "mean_probability": 0.8395711028421176,
+                "observed_rate": 0.853448275862069,
+                "winner_accuracy": 0.853448275862069
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 17,
+                "mean_probability": 0.9181657755781114,
+                "observed_rate": 0.8823529411764706,
+                "winner_accuracy": 0.8823529411764706
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6325948374156464,
+              0.685591041806917
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 1225,
+            "wins": 667,
+            "accuracy": 0.5444897959183673,
+            "accuracy_interval_95": [
+              0.5165055705993268,
+              0.5721958637619505
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.005556197629147667,
+              0.0035231425191627297
+            ],
+            "log_loss_difference": [
+              -0.01208316659537581,
+              0.007677027068244933
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 162,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2025-26",
+          "test_start": "2025-10-21",
+          "test_end": "2026-04-12",
+          "candidate": {
+            "wins": 833,
+            "losses": 392,
+            "sample_size": 1225,
+            "accuracy": 0.68,
+            "brier": 0.2073211245668608,
+            "log_loss": 0.6025655740755808,
+            "probability_sample": 1225,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 480,
+                "mean_probability": 0.326550972835577,
+                "observed_rate": 0.33958333333333335,
+                "winner_accuracy": 0.6604166666666667
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 179,
+                "mean_probability": 0.547213663080463,
+                "observed_rate": 0.5810055865921788,
+                "winner_accuracy": 0.5810055865921788
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 188,
+                "mean_probability": 0.6484097470598745,
+                "observed_rate": 0.6117021276595744,
+                "winner_accuracy": 0.6117021276595744
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 177,
+                "mean_probability": 0.7470399187783221,
+                "observed_rate": 0.7457627118644068,
+                "winner_accuracy": 0.7457627118644068
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 142,
+                "mean_probability": 0.8484582103699473,
+                "observed_rate": 0.8098591549295775,
+                "winner_accuracy": 0.8098591549295775
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 59,
+                "mean_probability": 0.9270353099661354,
+                "observed_rate": 0.847457627118644,
+                "winner_accuracy": 0.847457627118644
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6533499135557872,
+              0.7055246970251603
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 830,
+            "losses": 395,
+            "sample_size": 1225,
+            "accuracy": 0.6775510204081633,
+            "brier": 0.20923149737528227,
+            "log_loss": 0.6068910155920766,
+            "probability_sample": 1225,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 451,
+                "mean_probability": 0.36889458318547613,
+                "observed_rate": 0.3325942350332594,
+                "winner_accuracy": 0.6674057649667405
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 191,
+                "mean_probability": 0.5520996971044273,
+                "observed_rate": 0.5654450261780105,
+                "winner_accuracy": 0.5654450261780105
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 235,
+                "mean_probability": 0.6480025265157017,
+                "observed_rate": 0.6340425531914894,
+                "winner_accuracy": 0.6340425531914894
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 211,
+                "mean_probability": 0.7454556754496853,
+                "observed_rate": 0.7677725118483413,
+                "winner_accuracy": 0.7677725118483413
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 120,
+                "mean_probability": 0.8413480506566074,
+                "observed_rate": 0.8,
+                "winner_accuracy": 0.8
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 17,
+                "mean_probability": 0.9138958708278929,
+                "observed_rate": 0.8235294117647058,
+                "winner_accuracy": 0.8235294117647058
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6508563418262365,
+              0.703135620991705
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 1225,
+            "wins": 679,
+            "accuracy": 0.5542857142857143,
+            "accuracy_interval_95": [
+              0.5263250635129177,
+              0.5819069619003838
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.005772187986007159,
+              0.002147377942681871
+            ],
+            "log_loss_difference": [
+              -0.01351610003830637,
+              0.005474532868709285
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 163,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2026-27",
+          "test_start": "2026-10-20",
+          "test_end": "2026-10-29",
+          "candidate": {
+            "wins": 45,
+            "losses": 26,
+            "sample_size": 71,
+            "accuracy": 0.6338028169014085,
+            "brier": 0.21777342682488535,
+            "log_loss": 0.6240134445688698,
+            "probability_sample": 71,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 22,
+                "mean_probability": 0.247730502792088,
+                "observed_rate": 0.2727272727272727,
+                "winner_accuracy": 0.7272727272727273
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 18,
+                "mean_probability": 0.5447003073109216,
+                "observed_rate": 0.5555555555555556,
+                "winner_accuracy": 0.5555555555555556
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 10,
+                "mean_probability": 0.6559157988573968,
+                "observed_rate": 0.3,
+                "winner_accuracy": 0.3
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 6,
+                "mean_probability": 0.7671686291851474,
+                "observed_rate": 0.6666666666666666,
+                "winner_accuracy": 0.6666666666666666
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 10,
+                "mean_probability": 0.8472243844131986,
+                "observed_rate": 0.7,
+                "winner_accuracy": 0.7
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 5,
+                "mean_probability": 0.9138216017445314,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5175721979631125,
+              0.7362977866602549
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 43,
+            "losses": 28,
+            "sample_size": 71,
+            "accuracy": 0.6056338028169014,
+            "brier": 0.21711730942151977,
+            "log_loss": 0.6205347350547081,
+            "probability_sample": 71,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 18,
+                "mean_probability": 0.35153508000331996,
+                "observed_rate": 0.2777777777777778,
+                "winner_accuracy": 0.7222222222222222
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 16,
+                "mean_probability": 0.5501930349362216,
+                "observed_rate": 0.375,
+                "winner_accuracy": 0.375
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 19,
+                "mean_probability": 0.6551200614575448,
+                "observed_rate": 0.5263157894736842,
+                "winner_accuracy": 0.5263157894736842
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 11,
+                "mean_probability": 0.7595158696729684,
+                "observed_rate": 0.6363636363636364,
+                "winner_accuracy": 0.6363636363636364
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 7,
+                "mean_probability": 0.8522514601625527,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.48935768499400845,
+              0.711065987077071
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 71,
+            "wins": 35,
+            "accuracy": 0.49295774647887325,
+            "accuracy_interval_95": [
+              0.38005150511212876,
+              0.6065869167497993
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.014198510236996099,
+              0.018620539249916083
+            ],
+            "log_loss_difference": [
+              -0.04097568097556834,
+              0.05648063333235779
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 10,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        }
+      ],
+      "promoted": false
+    },
+    "NFL": {
+      "folds": [
+        {
+          "season": "2012",
+          "test_start": "2012-09-05",
+          "test_end": "2013-02-03",
+          "candidate": {
+            "wins": 165,
+            "losses": 101,
+            "sample_size": 266,
+            "accuracy": 0.6203007518796992,
+            "brier": 0.22479228241025115,
+            "log_loss": 0.6392426747797858,
+            "probability_sample": 266,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 101,
+                "mean_probability": 0.3796330216450519,
+                "observed_rate": 0.43564356435643564,
+                "winner_accuracy": 0.5643564356435643
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 61,
+                "mean_probability": 0.5467557927965306,
+                "observed_rate": 0.5245901639344263,
+                "winner_accuracy": 0.5245901639344263
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 52,
+                "mean_probability": 0.6422082630123447,
+                "observed_rate": 0.6346153846153846,
+                "winner_accuracy": 0.6346153846153846
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 41,
+                "mean_probability": 0.7438797788309675,
+                "observed_rate": 0.8292682926829268,
+                "winner_accuracy": 0.8292682926829268
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 11,
+                "mean_probability": 0.8284068991328843,
+                "observed_rate": 0.8181818181818182,
+                "winner_accuracy": 0.8181818181818182
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5606580038369222,
+              0.676518300648324
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 159,
+            "losses": 107,
+            "sample_size": 266,
+            "accuracy": 0.5977443609022557,
+            "brier": 0.22729559211999253,
+            "log_loss": 0.6454102212158412,
+            "probability_sample": 266,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 87,
+                "mean_probability": 0.4175172620052597,
+                "observed_rate": 0.45977011494252873,
+                "winner_accuracy": 0.5402298850574713
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 69,
+                "mean_probability": 0.5449083208023963,
+                "observed_rate": 0.463768115942029,
+                "winner_accuracy": 0.463768115942029
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 72,
+                "mean_probability": 0.6385351564587791,
+                "observed_rate": 0.6666666666666666,
+                "winner_accuracy": 0.6666666666666666
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 38,
+                "mean_probability": 0.7421757326320492,
+                "observed_rate": 0.8421052631578947,
+                "winner_accuracy": 0.8421052631578947
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5378300377279794,
+              0.6548757096662832
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 266,
+            "wins": 152,
+            "accuracy": 0.5714285714285714,
+            "accuracy_interval_95": [
+              0.511357523814629,
+              0.6294659069734859
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.01027901033657587,
+              0.005281630885532512
+            ],
+            "log_loss_difference": [
+              -0.02300239638610592,
+              0.010962654660843969
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 54,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2013",
+          "test_start": "2013-09-05",
+          "test_end": "2014-02-02",
+          "candidate": {
+            "wins": 174,
+            "losses": 92,
+            "sample_size": 266,
+            "accuracy": 0.6541353383458647,
+            "brier": 0.22057918900441004,
+            "log_loss": 0.6302521567226312,
+            "probability_sample": 266,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 97,
+                "mean_probability": 0.41032921961341723,
+                "observed_rate": 0.422680412371134,
+                "winner_accuracy": 0.5773195876288659
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 65,
+                "mean_probability": 0.543968096457499,
+                "observed_rate": 0.6615384615384615,
+                "winner_accuracy": 0.6615384615384615
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 57,
+                "mean_probability": 0.6459982670355404,
+                "observed_rate": 0.631578947368421,
+                "winner_accuracy": 0.631578947368421
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 40,
+                "mean_probability": 0.7450457890512706,
+                "observed_rate": 0.8,
+                "winner_accuracy": 0.8
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 7,
+                "mean_probability": 0.8298256709926403,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5951467336392186,
+              0.7087354064825032
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 166,
+            "losses": 100,
+            "sample_size": 266,
+            "accuracy": 0.6240601503759399,
+            "brier": 0.22397503613736458,
+            "log_loss": 0.6381162524781487,
+            "probability_sample": 266,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 93,
+                "mean_probability": 0.4282178756580734,
+                "observed_rate": 0.46236559139784944,
+                "winner_accuracy": 0.5376344086021505
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 77,
+                "mean_probability": 0.5454806834728853,
+                "observed_rate": 0.5974025974025974,
+                "winner_accuracy": 0.5974025974025974
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 60,
+                "mean_probability": 0.6473863929183676,
+                "observed_rate": 0.6833333333333333,
+                "winner_accuracy": 0.6833333333333333
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 33,
+                "mean_probability": 0.7380640996040032,
+                "observed_rate": 0.7878787878787878,
+                "winner_accuracy": 0.7878787878787878
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 3,
+                "mean_probability": 0.8235003458366467,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5644752601035234,
+              0.6801128038968869
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 266,
+            "wins": 159,
+            "accuracy": 0.5977443609022557,
+            "accuracy_interval_95": [
+              0.5378300377279794,
+              0.6548757096662832
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.005357325131482928,
+              -0.0015229637920459022
+            ],
+            "log_loss_difference": [
+              -0.011953127062118674,
+              -0.0037665032988374474
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 54,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2014",
+          "test_start": "2014-09-04",
+          "test_end": "2015-02-01",
+          "candidate": {
+            "wins": 179,
+            "losses": 87,
+            "sample_size": 266,
+            "accuracy": 0.6729323308270677,
+            "brier": 0.20360291649066367,
+            "log_loss": 0.5938526098618292,
+            "probability_sample": 266,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 82,
+                "mean_probability": 0.3765729491462394,
+                "observed_rate": 0.34146341463414637,
+                "winner_accuracy": 0.6585365853658537
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 48,
+                "mean_probability": 0.5517816714084055,
+                "observed_rate": 0.375,
+                "winner_accuracy": 0.375
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 57,
+                "mean_probability": 0.6514585739400108,
+                "observed_rate": 0.7368421052631579,
+                "winner_accuracy": 0.7368421052631579
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 51,
+                "mean_probability": 0.7530475497359379,
+                "observed_rate": 0.8235294117647058,
+                "winner_accuracy": 0.8235294117647058
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 25,
+                "mean_probability": 0.8352747326913734,
+                "observed_rate": 0.8,
+                "winner_accuracy": 0.8
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 3,
+                "mean_probability": 0.911855530455158,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6144408217401415,
+              0.7265001159574002
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 177,
+            "losses": 89,
+            "sample_size": 266,
+            "accuracy": 0.6654135338345865,
+            "brier": 0.21213098345300624,
+            "log_loss": 0.6135295537295508,
+            "probability_sample": 266,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 82,
+                "mean_probability": 0.40075320347193577,
+                "observed_rate": 0.35365853658536583,
+                "winner_accuracy": 0.6463414634146342
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 78,
+                "mean_probability": 0.5486961070225748,
+                "observed_rate": 0.5128205128205128,
+                "winner_accuracy": 0.5128205128205128
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 69,
+                "mean_probability": 0.6436810499206419,
+                "observed_rate": 0.7681159420289855,
+                "winner_accuracy": 0.7681159420289855
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 30,
+                "mean_probability": 0.7376044674892934,
+                "observed_rate": 0.8,
+                "winner_accuracy": 0.8
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 7,
+                "mean_probability": 0.8206504957424858,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6067113804087866,
+              0.719406038258427
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 266,
+            "wins": 153,
+            "accuracy": 0.575187969924812,
+            "accuracy_interval_95": [
+              0.5151289308448403,
+              0.6331062594584387
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.01710729452018513,
+              -0.0011844511697710084
+            ],
+            "log_loss_difference": [
+              -0.03972126308288212,
+              -0.002076056111105358
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 56,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2015",
+          "test_start": "2015-09-10",
+          "test_end": "2016-02-07",
+          "candidate": {
+            "wins": 167,
+            "losses": 100,
+            "sample_size": 267,
+            "accuracy": 0.6254681647940075,
+            "brier": 0.22879752430124675,
+            "log_loss": 0.6490218554436217,
+            "probability_sample": 267,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 88,
+                "mean_probability": 0.3969621062422479,
+                "observed_rate": 0.375,
+                "winner_accuracy": 0.625
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 57,
+                "mean_probability": 0.5529599881061288,
+                "observed_rate": 0.543859649122807,
+                "winner_accuracy": 0.543859649122807
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 58,
+                "mean_probability": 0.6466904423457511,
+                "observed_rate": 0.603448275862069,
+                "winner_accuracy": 0.603448275862069
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 56,
+                "mean_probability": 0.7488157044430788,
+                "observed_rate": 0.6785714285714286,
+                "winner_accuracy": 0.6785714285714286
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 8,
+                "mean_probability": 0.850527305578494,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5660193386265774,
+              0.6813578549970775
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 181,
+            "losses": 86,
+            "sample_size": 267,
+            "accuracy": 0.6779026217228464,
+            "brier": 0.22520732418478215,
+            "log_loss": 0.642637403454026,
+            "probability_sample": 267,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 100,
+                "mean_probability": 0.41343001047325956,
+                "observed_rate": 0.32,
+                "winner_accuracy": 0.68
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 75,
+                "mean_probability": 0.5566306591748148,
+                "observed_rate": 0.6933333333333334,
+                "winner_accuracy": 0.6933333333333334
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 51,
+                "mean_probability": 0.6469258095440892,
+                "observed_rate": 0.6666666666666666,
+                "winner_accuracy": 0.6666666666666666
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 33,
+                "mean_probability": 0.7484953997222266,
+                "observed_rate": 0.6363636363636364,
+                "winner_accuracy": 0.6363636363636364
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 8,
+                "mean_probability": 0.8376801138626934,
+                "observed_rate": 0.75,
+                "winner_accuracy": 0.75
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6196718453145635,
+              0.7310868620622606
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 267,
+            "wins": 145,
+            "accuracy": 0.5430711610486891,
+            "accuracy_interval_95": [
+              0.4831313780169767,
+              0.6017891511374124
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.004813512761365378,
+              0.012638877841637013
+            ],
+            "log_loss_difference": [
+              -0.012599907285742278,
+              0.026875276330579304
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 57,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2016",
+          "test_start": "2016-09-08",
+          "test_end": "2017-02-05",
+          "candidate": {
+            "wins": 170,
+            "losses": 95,
+            "sample_size": 265,
+            "accuracy": 0.6415094339622641,
+            "brier": 0.22219284045160895,
+            "log_loss": 0.6344356403403256,
+            "probability_sample": 265,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 85,
+                "mean_probability": 0.4094837027416014,
+                "observed_rate": 0.4117647058823529,
+                "winner_accuracy": 0.5882352941176471
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 79,
+                "mean_probability": 0.5539574270963584,
+                "observed_rate": 0.5569620253164557,
+                "winner_accuracy": 0.5569620253164557
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 65,
+                "mean_probability": 0.6497869537392901,
+                "observed_rate": 0.7076923076923077,
+                "winner_accuracy": 0.7076923076923077
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 33,
+                "mean_probability": 0.7510169151547825,
+                "observed_rate": 0.8181818181818182,
+                "winner_accuracy": 0.8181818181818182
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 3,
+                "mean_probability": 0.8319190331563893,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5821272530205319,
+              0.6968475759697461
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 169,
+            "losses": 96,
+            "sample_size": 265,
+            "accuracy": 0.6377358490566037,
+            "brier": 0.22281640099738428,
+            "log_loss": 0.6360302593001247,
+            "probability_sample": 265,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 90,
+                "mean_probability": 0.4076203637233034,
+                "observed_rate": 0.4222222222222222,
+                "winner_accuracy": 0.5777777777777777
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 74,
+                "mean_probability": 0.5517957679945399,
+                "observed_rate": 0.5675675675675675,
+                "winner_accuracy": 0.5675675675675675
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 67,
+                "mean_probability": 0.6494055793076248,
+                "observed_rate": 0.7014925373134329,
+                "winner_accuracy": 0.7014925373134329
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 31,
+                "mean_probability": 0.7515823872661518,
+                "observed_rate": 0.8064516129032258,
+                "winner_accuracy": 0.8064516129032258
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 3,
+                "mean_probability": 0.8282681188758588,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.578278359559042,
+              0.6932571406581617
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 265,
+            "wins": 155,
+            "accuracy": 0.5849056603773585,
+            "accuracy_interval_95": [
+              0.5247798207162251,
+              0.6426050766779416
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.0025084437349655055,
+              0.001320116481384292
+            ],
+            "log_loss_difference": [
+              -0.005578524861227975,
+              0.0024190536859433668
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 57,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2017",
+          "test_start": "2017-09-07",
+          "test_end": "2018-02-04",
+          "candidate": {
+            "wins": 177,
+            "losses": 90,
+            "sample_size": 267,
+            "accuracy": 0.6629213483146067,
+            "brier": 0.22009022848234444,
+            "log_loss": 0.6300591352757562,
+            "probability_sample": 267,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 79,
+                "mean_probability": 0.40074165567470654,
+                "observed_rate": 0.34177215189873417,
+                "winner_accuracy": 0.6582278481012658
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 77,
+                "mean_probability": 0.5521435720231571,
+                "observed_rate": 0.6233766233766234,
+                "winner_accuracy": 0.6233766233766234
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 64,
+                "mean_probability": 0.6481981751945498,
+                "observed_rate": 0.671875,
+                "winner_accuracy": 0.671875
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 40,
+                "mean_probability": 0.7429852747075307,
+                "observed_rate": 0.675,
+                "winner_accuracy": 0.675
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 6,
+                "mean_probability": 0.8228002866435395,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 1,
+                "mean_probability": 0.9041143330536123,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6042659162871786,
+              0.716955215731597
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 171,
+            "losses": 96,
+            "sample_size": 267,
+            "accuracy": 0.6404494382022472,
+            "brier": 0.22481618428086256,
+            "log_loss": 0.6397989957321017,
+            "probability_sample": 267,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 77,
+                "mean_probability": 0.39430940142585613,
+                "observed_rate": 0.37662337662337664,
+                "winner_accuracy": 0.6233766233766234
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 85,
+                "mean_probability": 0.5464268689922546,
+                "observed_rate": 0.6470588235294118,
+                "winner_accuracy": 0.6470588235294118
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 67,
+                "mean_probability": 0.6508167644031764,
+                "observed_rate": 0.5970149253731343,
+                "winner_accuracy": 0.5970149253731343
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 32,
+                "mean_probability": 0.7449071962106688,
+                "observed_rate": 0.6875,
+                "winner_accuracy": 0.6875
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 5,
+                "mean_probability": 0.8176008409153379,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 1,
+                "mean_probability": 0.9162150979019498,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5812731116561027,
+              0.6956416573256006
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 267,
+            "wins": 152,
+            "accuracy": 0.5692883895131086,
+            "accuracy_interval_95": [
+              0.5093248963701376,
+              0.6272863896608358
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.010743165070611637,
+              0.001031034320530628
+            ],
+            "log_loss_difference": [
+              -0.022738342434733917,
+              0.0030739584630601335
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 56,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2018",
+          "test_start": "2018-09-06",
+          "test_end": "2019-02-03",
+          "candidate": {
+            "wins": 171,
+            "losses": 94,
+            "sample_size": 265,
+            "accuracy": 0.6452830188679245,
+            "brier": 0.22101392595365882,
+            "log_loss": 0.6315867166201595,
+            "probability_sample": 265,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 69,
+                "mean_probability": 0.39266686962640035,
+                "observed_rate": 0.4057971014492754,
+                "winner_accuracy": 0.5942028985507246
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 73,
+                "mean_probability": 0.5511791759905051,
+                "observed_rate": 0.5753424657534246,
+                "winner_accuracy": 0.5753424657534246
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 80,
+                "mean_probability": 0.645377968520493,
+                "observed_rate": 0.6125,
+                "winner_accuracy": 0.6125
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 36,
+                "mean_probability": 0.7420937364124981,
+                "observed_rate": 0.9166666666666666,
+                "winner_accuracy": 0.9166666666666666
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 7,
+                "mean_probability": 0.8320965204316512,
+                "observed_rate": 0.8571428571428571,
+                "winner_accuracy": 0.8571428571428571
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5859799429184216,
+              0.7004342148449305
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 165,
+            "losses": 100,
+            "sample_size": 265,
+            "accuracy": 0.6226415094339622,
+            "brier": 0.22927224420784456,
+            "log_loss": 0.6490767194408494,
+            "probability_sample": 265,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 75,
+                "mean_probability": 0.402465723924167,
+                "observed_rate": 0.4533333333333333,
+                "winner_accuracy": 0.5466666666666666
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 85,
+                "mean_probability": 0.5541340759856852,
+                "observed_rate": 0.5647058823529412,
+                "winner_accuracy": 0.5647058823529412
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 76,
+                "mean_probability": 0.6409383296252376,
+                "observed_rate": 0.6578947368421053,
+                "winner_accuracy": 0.6578947368421053
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 25,
+                "mean_probability": 0.7396442972572339,
+                "observed_rate": 0.88,
+                "winner_accuracy": 0.88
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 4,
+                "mean_probability": 0.8217194778239905,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5629202534630433,
+              0.6788579316618641
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 265,
+            "wins": 158,
+            "accuracy": 0.5962264150943396,
+            "accuracy_interval_95": [
+              0.536184447747433,
+              0.6535184359659559
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.014133210027470687,
+              -0.0024365955264518935
+            ],
+            "log_loss_difference": [
+              -0.03004084302060666,
+              -0.005083552183990648
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 56,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2019",
+          "test_start": "2019-09-05",
+          "test_end": "2020-02-02",
+          "candidate": {
+            "wins": 170,
+            "losses": 96,
+            "sample_size": 266,
+            "accuracy": 0.6390977443609023,
+            "brier": 0.22596871413140696,
+            "log_loss": 0.6434115051697791,
+            "probability_sample": 266,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 85,
+                "mean_probability": 0.3853152348526193,
+                "observed_rate": 0.3176470588235294,
+                "winner_accuracy": 0.6823529411764706
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 58,
+                "mean_probability": 0.5550680158453865,
+                "observed_rate": 0.5344827586206896,
+                "winner_accuracy": 0.5344827586206896
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 59,
+                "mean_probability": 0.6439189027200608,
+                "observed_rate": 0.5932203389830508,
+                "winner_accuracy": 0.5932203389830508
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 52,
+                "mean_probability": 0.7483888082105832,
+                "observed_rate": 0.6923076923076923,
+                "winner_accuracy": 0.6923076923076923
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 11,
+                "mean_probability": 0.8452832780574201,
+                "observed_rate": 0.8181818181818182,
+                "winner_accuracy": 0.8181818181818182
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 1,
+                "mean_probability": 0.909215763628034,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5797810281086506,
+              0.6944540739524154
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 170,
+            "losses": 96,
+            "sample_size": 266,
+            "accuracy": 0.6390977443609023,
+            "brier": 0.2273465081572027,
+            "log_loss": 0.6466686294890025,
+            "probability_sample": 266,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 89,
+                "mean_probability": 0.4110841380828597,
+                "observed_rate": 0.3258426966292135,
+                "winner_accuracy": 0.6741573033707865
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 69,
+                "mean_probability": 0.5540529281395318,
+                "observed_rate": 0.5797101449275363,
+                "winner_accuracy": 0.5797101449275363
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 68,
+                "mean_probability": 0.6475311794113525,
+                "observed_rate": 0.6029411764705882,
+                "winner_accuracy": 0.6029411764705882
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 34,
+                "mean_probability": 0.7315192773465363,
+                "observed_rate": 0.7352941176470589,
+                "winner_accuracy": 0.7352941176470589
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 6,
+                "mean_probability": 0.827940804820793,
+                "observed_rate": 0.6666666666666666,
+                "winner_accuracy": 0.6666666666666666
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5797810281086506,
+              0.6944540739524154
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 266,
+            "wins": 139,
+            "accuracy": 0.5225563909774437,
+            "accuracy_interval_95": [
+              0.4626378281266199,
+              0.5818327289643639
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.00873729312668649,
+              0.005675474267156778
+            ],
+            "log_loss_difference": [
+              -0.020223969713056116,
+              0.012492300005621319
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 55,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2020",
+          "test_start": "2020-09-10",
+          "test_end": "2021-02-07",
+          "candidate": {
+            "wins": 178,
+            "losses": 90,
+            "sample_size": 268,
+            "accuracy": 0.664179104477612,
+            "brier": 0.21993824693458183,
+            "log_loss": 0.6315517996356766,
+            "probability_sample": 268,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 90,
+                "mean_probability": 0.40203351775224727,
+                "observed_rate": 0.25555555555555554,
+                "winner_accuracy": 0.7444444444444445
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 52,
+                "mean_probability": 0.5491388067523398,
+                "observed_rate": 0.5,
+                "winner_accuracy": 0.5
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 76,
+                "mean_probability": 0.6454419952314108,
+                "observed_rate": 0.5789473684210527,
+                "winner_accuracy": 0.5789473684210527
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 35,
+                "mean_probability": 0.7445608054073308,
+                "observed_rate": 0.8571428571428571,
+                "winner_accuracy": 0.8571428571428571
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 15,
+                "mean_probability": 0.8437035719330257,
+                "observed_rate": 0.7333333333333333,
+                "winner_accuracy": 0.7333333333333333
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.605669283066055,
+              0.7180488149082667
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 172,
+            "losses": 96,
+            "sample_size": 268,
+            "accuracy": 0.6417910447761194,
+            "brier": 0.22253511303660786,
+            "log_loss": 0.6367384223883773,
+            "probability_sample": 268,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 96,
+                "mean_probability": 0.40902902493871696,
+                "observed_rate": 0.3020833333333333,
+                "winner_accuracy": 0.6979166666666666
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 62,
+                "mean_probability": 0.5485302260421733,
+                "observed_rate": 0.5,
+                "winner_accuracy": 0.5
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 67,
+                "mean_probability": 0.6439584992958607,
+                "observed_rate": 0.582089552238806,
+                "winner_accuracy": 0.582089552238806
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 30,
+                "mean_probability": 0.7385889180046209,
+                "observed_rate": 0.8333333333333334,
+                "winner_accuracy": 0.8333333333333334
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 13,
+                "mean_probability": 0.8247785171379718,
+                "observed_rate": 0.7692307692307693,
+                "winner_accuracy": 0.7692307692307693
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5827547204326364,
+              0.6968200005451868
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 268,
+            "wins": 134,
+            "accuracy": 0.5,
+            "accuracy_interval_95": [
+              0.44056253900484543,
+              0.5594374609951546
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.008310106255021613,
+              0.0029180643802008614
+            ],
+            "log_loss_difference": [
+              -0.017381830914559214,
+              0.006454979010866194
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 58,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2021",
+          "test_start": "2021-09-09",
+          "test_end": "2022-02-13",
+          "candidate": {
+            "wins": 172,
+            "losses": 112,
+            "sample_size": 284,
+            "accuracy": 0.6056338028169014,
+            "brier": 0.23317927086409235,
+            "log_loss": 0.6589001698765204,
+            "probability_sample": 284,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 95,
+                "mean_probability": 0.3821997177207209,
+                "observed_rate": 0.3684210526315789,
+                "winner_accuracy": 0.631578947368421
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 61,
+                "mean_probability": 0.5554565526748548,
+                "observed_rate": 0.4262295081967213,
+                "winner_accuracy": 0.4262295081967213
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 63,
+                "mean_probability": 0.6506649815199971,
+                "observed_rate": 0.5396825396825397,
+                "winner_accuracy": 0.5396825396825397
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 44,
+                "mean_probability": 0.7504105218703877,
+                "observed_rate": 0.7954545454545454,
+                "winner_accuracy": 0.7954545454545454
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 21,
+                "mean_probability": 0.8324053973659434,
+                "observed_rate": 0.8095238095238095,
+                "winner_accuracy": 0.8095238095238095
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5477483358422424,
+              0.6606997461186539
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 174,
+            "losses": 110,
+            "sample_size": 284,
+            "accuracy": 0.6126760563380281,
+            "brier": 0.2299586442792769,
+            "log_loss": 0.6518718223124275,
+            "probability_sample": 284,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 99,
+                "mean_probability": 0.40840953519922996,
+                "observed_rate": 0.36363636363636365,
+                "winner_accuracy": 0.6363636363636364
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 68,
+                "mean_probability": 0.5542558133223188,
+                "observed_rate": 0.36764705882352944,
+                "winner_accuracy": 0.36764705882352944
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 75,
+                "mean_probability": 0.6488083031715272,
+                "observed_rate": 0.7066666666666667,
+                "winner_accuracy": 0.7066666666666667
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 35,
+                "mean_probability": 0.7485216224798906,
+                "observed_rate": 0.7714285714285715,
+                "winner_accuracy": 0.7714285714285715
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 7,
+                "mean_probability": 0.8243913422980248,
+                "observed_rate": 0.8571428571428571,
+                "winner_accuracy": 0.8571428571428571
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5548761166019419,
+              0.6674685041563474
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 284,
+            "wins": 147,
+            "accuracy": 0.5176056338028169,
+            "accuracy_interval_95": [
+              0.45964412044261205,
+              0.5750972265508707
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.0031782523316209984,
+              0.010157050978903204
+            ],
+            "log_loss_difference": [
+              -0.007180757207961752,
+              0.022831743483934915
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 62,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2022",
+          "test_start": "2022-09-08",
+          "test_end": "2023-02-12",
+          "candidate": {
+            "wins": 175,
+            "losses": 107,
+            "sample_size": 282,
+            "accuracy": 0.6205673758865248,
+            "brier": 0.22791148330909283,
+            "log_loss": 0.6470748763647336,
+            "probability_sample": 282,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 95,
+                "mean_probability": 0.4136173676653861,
+                "observed_rate": 0.42105263157894735,
+                "winner_accuracy": 0.5789473684210527
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 71,
+                "mean_probability": 0.5533974423549856,
+                "observed_rate": 0.5352112676056338,
+                "winner_accuracy": 0.5352112676056338
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 71,
+                "mean_probability": 0.6474389034704711,
+                "observed_rate": 0.676056338028169,
+                "winner_accuracy": 0.676056338028169
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 40,
+                "mean_probability": 0.7342914379815617,
+                "observed_rate": 0.725,
+                "winner_accuracy": 0.725
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 5,
+                "mean_probability": 0.8289452363337754,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5626705179987039,
+              0.6752235939350579
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 173,
+            "losses": 109,
+            "sample_size": 282,
+            "accuracy": 0.6134751773049646,
+            "brier": 0.23020794135405487,
+            "log_loss": 0.6520401081505599,
+            "probability_sample": 282,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 91,
+                "mean_probability": 0.40965192793873734,
+                "observed_rate": 0.42857142857142855,
+                "winner_accuracy": 0.5714285714285714
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 76,
+                "mean_probability": 0.5506676732833412,
+                "observed_rate": 0.5526315789473685,
+                "winner_accuracy": 0.5526315789473685
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 72,
+                "mean_probability": 0.6462698500131561,
+                "observed_rate": 0.6666666666666666,
+                "winner_accuracy": 0.6666666666666666
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 39,
+                "mean_probability": 0.7361364608199212,
+                "observed_rate": 0.6923076923076923,
+                "winner_accuracy": 0.6923076923076923
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 4,
+                "mean_probability": 0.8380743192376663,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5554784409491071,
+              0.6684218996944336
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 282,
+            "wins": 160,
+            "accuracy": 0.5673758865248227,
+            "accuracy_interval_95": [
+              0.5090283223373631,
+              0.6239125049197392
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.00429527287881431,
+              -0.0002892404513167468
+            ],
+            "log_loss_difference": [
+              -0.009276888463970049,
+              -0.0006104961404875163
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 61,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2023",
+          "test_start": "2023-09-07",
+          "test_end": "2024-02-11",
+          "candidate": {
+            "wins": 175,
+            "losses": 110,
+            "sample_size": 285,
+            "accuracy": 0.6140350877192983,
+            "brier": 0.23156046961699212,
+            "log_loss": 0.6566462867582097,
+            "probability_sample": 285,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 88,
+                "mean_probability": 0.36557834837718756,
+                "observed_rate": 0.42045454545454547,
+                "winner_accuracy": 0.5795454545454546
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 51,
+                "mean_probability": 0.5541203366735606,
+                "observed_rate": 0.45098039215686275,
+                "winner_accuracy": 0.45098039215686275
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 64,
+                "mean_probability": 0.6524718888166864,
+                "observed_rate": 0.703125,
+                "winner_accuracy": 0.703125
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 58,
+                "mean_probability": 0.7458129611640416,
+                "observed_rate": 0.6551724137931034,
+                "winner_accuracy": 0.6551724137931034
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 22,
+                "mean_probability": 0.8440923018121683,
+                "observed_rate": 0.7272727272727273,
+                "winner_accuracy": 0.7272727272727273
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 2,
+                "mean_probability": 0.9089478523443129,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5563558691234377,
+              0.6686810776687139
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 177,
+            "losses": 108,
+            "sample_size": 285,
+            "accuracy": 0.6210526315789474,
+            "brier": 0.23262512932433055,
+            "log_loss": 0.658369917656212,
+            "probability_sample": 285,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 88,
+                "mean_probability": 0.4156816882545824,
+                "observed_rate": 0.4090909090909091,
+                "winner_accuracy": 0.5909090909090909
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 87,
+                "mean_probability": 0.5508194081083876,
+                "observed_rate": 0.5402298850574713,
+                "winner_accuracy": 0.5402298850574713
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 71,
+                "mean_probability": 0.6412018918944495,
+                "observed_rate": 0.7183098591549296,
+                "winner_accuracy": 0.7183098591549296
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 36,
+                "mean_probability": 0.7331933689090622,
+                "observed_rate": 0.6944444444444444,
+                "winner_accuracy": 0.6944444444444444
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 3,
+                "mean_probability": 0.8372201335947057,
+                "observed_rate": 0.6666666666666666,
+                "winner_accuracy": 0.6666666666666666
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5634731493792559,
+              0.6754122249077975
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 285,
+            "wins": 161,
+            "accuracy": 0.5649122807017544,
+            "accuracy_interval_95": [
+              0.5068686349256624,
+              0.6212293194021778
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.0124021578780624,
+              0.010923338874976693
+            ],
+            "log_loss_difference": [
+              -0.027204520488236395,
+              0.02586363958322782
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 63,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2024",
+          "test_start": "2024-09-05",
+          "test_end": "2025-02-09",
+          "candidate": {
+            "wins": 185,
+            "losses": 100,
+            "sample_size": 285,
+            "accuracy": 0.6491228070175439,
+            "brier": 0.22008269096936298,
+            "log_loss": 0.6302468612859795,
+            "probability_sample": 285,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 91,
+                "mean_probability": 0.4186144076857514,
+                "observed_rate": 0.34065934065934067,
+                "winner_accuracy": 0.6593406593406593
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 79,
+                "mean_probability": 0.5416594344685283,
+                "observed_rate": 0.5189873417721519,
+                "winner_accuracy": 0.5189873417721519
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 73,
+                "mean_probability": 0.6445928504773778,
+                "observed_rate": 0.684931506849315,
+                "winner_accuracy": 0.684931506849315
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 37,
+                "mean_probability": 0.7438555030664091,
+                "observed_rate": 0.7837837837837838,
+                "winner_accuracy": 0.7837837837837838
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 5,
+                "mean_probability": 0.8309427599600351,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5920662404339383,
+              0.7022128438327215
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 193,
+            "losses": 92,
+            "sample_size": 285,
+            "accuracy": 0.6771929824561403,
+            "brier": 0.21449222195161538,
+            "log_loss": 0.6182299268930779,
+            "probability_sample": 285,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 99,
+                "mean_probability": 0.41712713008683233,
+                "observed_rate": 0.31313131313131315,
+                "winner_accuracy": 0.6868686868686869
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 79,
+                "mean_probability": 0.551579887807918,
+                "observed_rate": 0.5443037974683544,
+                "winner_accuracy": 0.5443037974683544
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 59,
+                "mean_probability": 0.6482185036909891,
+                "observed_rate": 0.711864406779661,
+                "winner_accuracy": 0.711864406779661
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 41,
+                "mean_probability": 0.7371787044676695,
+                "observed_rate": 0.8048780487804879,
+                "winner_accuracy": 0.8048780487804879
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 7,
+                "mean_probability": 0.8365753042559408,
+                "observed_rate": 1.0,
+                "winner_accuracy": 1.0
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.6208654015984222,
+              0.7288073926478441
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 285,
+            "wins": 156,
+            "accuracy": 0.5473684210526316,
+            "accuracy_interval_95": [
+              0.48933251066000183,
+              0.6041443749305843
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.0034875404717629502,
+              0.014190077015587596
+            ],
+            "log_loss_difference": [
+              -0.008000119298629704,
+              0.030752414088509355
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 65,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2025",
+          "test_start": "2025-09-04",
+          "test_end": "2026-02-08",
+          "candidate": {
+            "wins": 177,
+            "losses": 107,
+            "sample_size": 284,
+            "accuracy": 0.6232394366197183,
+            "brier": 0.22730396907637035,
+            "log_loss": 0.6454327345638643,
+            "probability_sample": 284,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 103,
+                "mean_probability": 0.40119219000092093,
+                "observed_rate": 0.3786407766990291,
+                "winner_accuracy": 0.6213592233009708
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 74,
+                "mean_probability": 0.5492058733359457,
+                "observed_rate": 0.527027027027027,
+                "winner_accuracy": 0.527027027027027
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 61,
+                "mean_probability": 0.6495362399515189,
+                "observed_rate": 0.639344262295082,
+                "winner_accuracy": 0.639344262295082
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 34,
+                "mean_probability": 0.7376351121635729,
+                "observed_rate": 0.7058823529411765,
+                "winner_accuracy": 0.7058823529411765
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 12,
+                "mean_probability": 0.8178990266170052,
+                "observed_rate": 0.9166666666666666,
+                "winner_accuracy": 0.9166666666666666
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5655907250928818,
+              0.677598703861497
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 182,
+            "losses": 102,
+            "sample_size": 284,
+            "accuracy": 0.6408450704225352,
+            "brier": 0.22774473065225576,
+            "log_loss": 0.6471083462727236,
+            "probability_sample": 284,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 100,
+                "mean_probability": 0.400524723489366,
+                "observed_rate": 0.35,
+                "winner_accuracy": 0.65
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 71,
+                "mean_probability": 0.5490369380904512,
+                "observed_rate": 0.5352112676056338,
+                "winner_accuracy": 0.5352112676056338
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 68,
+                "mean_probability": 0.6459745594826384,
+                "observed_rate": 0.6323529411764706,
+                "winner_accuracy": 0.6323529411764706
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 34,
+                "mean_probability": 0.7391014760879738,
+                "observed_rate": 0.7941176470588235,
+                "winner_accuracy": 0.7941176470588235
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 11,
+                "mean_probability": 0.8189435303510052,
+                "observed_rate": 0.8181818181818182,
+                "winner_accuracy": 0.8181818181818182
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.5835106718035757,
+              0.694420104144286
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 284,
+            "wins": 152,
+            "accuracy": 0.5352112676056338,
+            "accuracy_interval_95": [
+              0.47712094547434525,
+              0.59236174851262
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.004183825425381645,
+              0.0032694128321159293
+            ],
+            "log_loss_difference": [
+              -0.009617159231979555,
+              0.006186523479844575
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 64,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        },
+        {
+          "season": "2026",
+          "test_start": "2026-09-09",
+          "test_end": "2026-10-26",
+          "candidate": {
+            "wins": 63,
+            "losses": 43,
+            "sample_size": 106,
+            "accuracy": 0.5943396226415094,
+            "brier": 0.23257342297573508,
+            "log_loss": 0.6555804816798331,
+            "probability_sample": 106,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 39,
+                "mean_probability": 0.3959118824349716,
+                "observed_rate": 0.358974358974359,
+                "winner_accuracy": 0.6410256410256411
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 16,
+                "mean_probability": 0.547093111093284,
+                "observed_rate": 0.375,
+                "winner_accuracy": 0.375
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 28,
+                "mean_probability": 0.6475344931422005,
+                "observed_rate": 0.5,
+                "winner_accuracy": 0.5
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 16,
+                "mean_probability": 0.7554561662846212,
+                "observed_rate": 0.75,
+                "winner_accuracy": 0.75
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 7,
+                "mean_probability": 0.8246586711848103,
+                "observed_rate": 0.8571428571428571,
+                "winner_accuracy": 0.8571428571428571
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.49915549296528633,
+              0.6829251186246246
+            ]
+          },
+          "simple_fixed_elo": {
+            "wins": 62,
+            "losses": 44,
+            "sample_size": 106,
+            "accuracy": 0.5849056603773585,
+            "brier": 0.2344409957323037,
+            "log_loss": 0.6606938103800024,
+            "probability_sample": 106,
+            "calibration": [
+              {
+                "range": [
+                  0,
+                  0.5
+                ],
+                "sample_size": 36,
+                "mean_probability": 0.4077329498616216,
+                "observed_rate": 0.3611111111111111,
+                "winner_accuracy": 0.6388888888888888
+              },
+              {
+                "range": [
+                  0.5,
+                  0.6
+                ],
+                "sample_size": 27,
+                "mean_probability": 0.5514893150101047,
+                "observed_rate": 0.5185185185185185,
+                "winner_accuracy": 0.5185185185185185
+              },
+              {
+                "range": [
+                  0.6,
+                  0.7
+                ],
+                "sample_size": 23,
+                "mean_probability": 0.6409698189205918,
+                "observed_rate": 0.4782608695652174,
+                "winner_accuracy": 0.4782608695652174
+              },
+              {
+                "range": [
+                  0.7,
+                  0.8
+                ],
+                "sample_size": 20,
+                "mean_probability": 0.7350009711391664,
+                "observed_rate": 0.7,
+                "winner_accuracy": 0.7
+              },
+              {
+                "range": [
+                  0.8,
+                  0.9
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              },
+              {
+                "range": [
+                  0.9,
+                  1
+                ],
+                "sample_size": 0,
+                "mean_probability": null,
+                "observed_rate": null,
+                "winner_accuracy": null
+              }
+            ],
+            "accuracy_interval_95": [
+              0.4897414310888927,
+              0.6741311193420271
+            ]
+          },
+          "always_home_winner": {
+            "sample_size": 106,
+            "wins": 52,
+            "accuracy": 0.49056603773584906,
+            "accuracy_interval_95": [
+              0.39740700785165506,
+              0.5843849309893538
+            ],
+            "probability_metrics": null,
+            "reason": "winner rule, no fitted probability"
+          },
+          "paired_intervals_95": {
+            "brier_difference": [
+              -0.016589952938993163,
+              0.011485459480004167
+            ],
+            "log_loss_difference": [
+              -0.03727553065656059,
+              0.024268586674740716
+            ],
+            "method": "paired day-block percentile bootstrap",
+            "iterations": 2000,
+            "seed": 20261101,
+            "game_days": 22,
+            "interpretation": "candidate minus fixed Elo; negative favors candidate; exploratory"
+          },
+          "reported_metrics_reproduced": true,
+          "market_baseline": null,
+          "betting_roi": null,
+          "preferred_odds_segment": null,
+          "missing_price_reason": "historical observation timestamps absent; no prices or returns synthesized"
+        }
+      ],
+      "promoted": false
+    }
+  }
+}

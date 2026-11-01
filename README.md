@@ -66,21 +66,28 @@ The current acceptance-by-acceptance implementation status, archived season
 counts, negative score-simulator result, and remaining data blockers are in
 [reports/implementation_status.md](reports/implementation_status.md).
 
-### Daily predicted winners
+### Production forecasts and the preserved winner record
 
-The dashboard now publishes up to three **top-ranked Elo winners** on each
-ET game date, independently of sportsbook prices or expected value. The
-hourly GitHub Actions workflow evaluates the scheduled NBA and NFL slate,
-saves each selected forecast once in `data/winner_predictions.json`, and
-grades it only from confirmed final scores. The predictions and original
-feature snapshots remain immutable. The expandable slate displays the model's
-predicted side for every scheduled game with sufficient rating history;
-prices are optional and never decide the predicted winner. The accuracy
-counter for this new series starts fresh and excludes older price-screened
-research selections. No games or missing historical model inputs can mean
-no winner forecast. A top rank is relative to that day's available games,
-not a calibrated probability of success or evidence of profitable betting.
-Current Elo does not model game-day injuries, lineups or all-position player
-impact; those are presented as observed context when available. The independent
-possession/drive challenger remains disabled after losing to Elo on its
-exploratory test.
+The original top-three Elo series is frozen in `data/winner_predictions.json`.
+New confirmed outcomes can settle those records; no original forecast or loss
+is replaced and no new unvalidated top-three selections are appended.
+
+`scripts/line_lab/production.py` publishes the actual incumbent Elo forecast
+alongside the league-specific trained challenger, which remains in shadow mode.
+Each refresh records model identities, explicit fallback reasons and the actual
+production Elo probability at that same time. The separate fixed-parameter Elo
+feature is not mislabeled as the production benchmark. Missing efficiency inputs
+cannot silently promote a degraded challenger. No qualified edge means zero bets.
+
+The append-only production ledger scores the earliest forecast per game/model,
+compares timestamp instants, keeps conflicting result confirmations, and reports
+pending and void outcomes separately. Older fixed-Elo benchmarks retain their own
+label; they are not retroactively upgraded into production-incumbent evidence.
+The public original winner record remains separate from these research metrics.
+
+Run `python -m scripts.audit_forecast_evaluation` to reproduce the saved historical
+folds, verify chronological boundaries and denominators, and report home-team
+baselines, calibration bands, accuracy intervals and paired day-block Brier/log-loss
+intervals. This does not retrain or promote models. The historical archive has
+already been inspected, so these results remain exploratory. Source observation
+timestamps for historical prices are absent; no market ROI is invented.

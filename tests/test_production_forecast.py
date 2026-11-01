@@ -103,12 +103,12 @@ class InjuryTests(unittest.TestCase):
 class ArchiveTests(unittest.TestCase):
     def test_immutable_forecasts_grade_first_prediction_and_no_fabricated_roi(self):
         f={'id':'nba:2026-10-31:BOS:NYK','artifact_hash':'a','model_version':'m','starts_at':START,
-           'predicted_at':NOW,'home_probability':.8,'baseline_elo_probability':.6}
+           'predicted_at':NOW,'home_probability':.8,'baseline_elo_probability':.6,'baseline_elo_kind':'production_incumbent'}
         with tempfile.TemporaryDirectory() as root:
             archive_forecasts(root,[f],[],NOW)
             other={**f,'predicted_at':'2026-10-31T18:10:00+00:00','home_probability':.2}
             archive_forecasts(root,[other],[],other['predicted_at'])
-            final={'id':f['id'],'home_score':90,'away_score':100}
+            final={'id':f['id'],'home':'NYK','away':'BOS','starts_at':START,'source':'ESPN final','home_score':90,'away_score':100}
             r=archive_forecasts(root,[],[final],'2026-11-01T03:00:00Z')
             self.assertEqual(r['snapshots'],2);self.assertEqual(r['models']['m:a']['losses'],1)
             self.assertAlmostEqual(r['models']['m:a']['brier'],.64)
@@ -167,11 +167,11 @@ class IntegrationTests(unittest.TestCase):
 
     def test_benchmark_and_candidate_are_scored_on_frozen_matched_games(self):
         f={'id':'nba:2026-10-31:BOS:NYK','artifact_hash':'a','model_version':'m','starts_at':START,
-           'predicted_at':NOW,'home_probability':.8,'baseline_elo_probability':.6,
+           'predicted_at':NOW,'home_probability':.8,'baseline_elo_probability':.6,'baseline_elo_kind':'production_incumbent',
            'research_model':{'artifact_hash':'c','model_identity_hash':'fixed','model_version':'challenger','home_probability':.3}}
         with tempfile.TemporaryDirectory() as root:
             archive_forecasts(root,[f],[],NOW)
-            report=archive_forecasts(root,[],[{'id':f['id'],'home_score':100,'away_score':90}], '2026-11-01T03:00:00Z')
+            report=archive_forecasts(root,[],[{'id':f['id'],'home':'NYK','away':'BOS','starts_at':START,'source':'ESPN final','home_score':100,'away_score':90}], '2026-11-01T03:00:00Z')
             self.assertEqual(report['models']['challenger:fixed']['sample_size'],1)
             self.assertAlmostEqual(report['models']['challenger:fixed']['brier'],.49)
             self.assertAlmostEqual(report['models']['m:a']['matched_elo']['brier'],.16)

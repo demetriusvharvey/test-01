@@ -167,7 +167,7 @@ class StorageAndSourceTests(unittest.TestCase):
         self.assertFalse(status['used_in_prediction'])
         self.assertNotIn('Do Not Publish',snapshot);self.assertNotIn('secret-test-key',snapshot)
 
-    def test_combined_free_source_uses_one_key_without_direct_espn_requests(self):
+    def test_combined_source_preserves_scores_with_bounded_lineup_lookup(self):
         from scripts.line_lab import runner
         class FixedDateTime(datetime):
             @classmethod
@@ -181,6 +181,7 @@ class StorageAndSourceTests(unittest.TestCase):
             if 'nflverse/nfldata' in url:return nfl
             if 'agentbets.ai/odds/' in url:return book if url.endswith('/nba') else book.replace('Portland Trail Blazers @ Los Angeles Lakers','Unknown @ Unknown')
             if 'official.nba.com' in url:return refs
+            if url=='https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261027':return json.dumps({'events':[]})
             raise AssertionError('unexpected direct source: '+url)
         scoreboard=[{'id':'123','sport_key':'basketball_nba','home_team':'Los Angeles Lakers',
                      'away_team':'Portland Trail Blazers','commence_time':'2026-10-28T03:00:00Z',

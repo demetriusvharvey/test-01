@@ -10,7 +10,7 @@ from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from .constants import NFL_TEAMS
 from .history import aware
-from .nba_injury_feed import provider_team_code
+from .nba_injury_feed import provider_team_code,STATUSES
 from .public_fetch import prefetch
 
 BASE='https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/'
@@ -67,7 +67,11 @@ def collect_depth(events,now,getter,root=None):
             for team in sorted(teams):
                 rows=db.execute('SELECT observed_at,payload FROM snapshots WHERE team=?',(team,)).fetchall()
                 rows=[r for r in rows if current-timedelta(hours=1)<=aware(r[0])<=current]
-                if rows:result[team]=json.loads(max(rows,key=lambda r:aware(r[0]))[1])
+                if rows:
+                    cached=json.loads(max(rows,key=lambda r:aware(r[0]))[1])
+                    # Refresh old capture schemas rather than hide player names
+                    # behind identifiers until the one-hour cache expires.
+                    if 'projected_name' in cached and 'training_eligible' in cached:result[team]=cached
         finally:db.close()
     urls={team:team_url(team) for team in sorted(teams-result.keys())}
     fetch=prefetch(urls.values(),getter,timeout=6,workers=6)
@@ -92,6 +96,17 @@ def _recent(stamp,now,age):
     except (TypeError,ValueError):return False
 
 
+def explicit_espn_id(row):
+    """Accept only a declared ESPN namespace; never coerce a provider ID."""
+    raw=str(row.get('player_id') or '')
+    prefixed=raw[5:] if raw.startswith('espn:') and raw[5:].isdigit() else ''
+    explicit=str(row.get('espn_athlete_id') or '').strip()
+    if explicit and not explicit.isdigit():return None
+    if explicit and prefixed and explicit!=prefixed:return None
+    value=explicit or prefixed
+    return 'espn:'+value if value else None
+
+
 def game_context(event,depth,injuries,prediction_at):
     """Join explicit team/ESPN IDs; no fuzzy player-name or GSIS matching."""
     now,start=aware(prediction_at),aware(event['starts_at'])
@@ -102,18 +117,30 @@ def game_context(event,depth,injuries,prediction_at):
     for side in ('away','home'):
         chart=depth.get(event[side]);status='unknown';updated=None;last_status=None;reason='not_listed_or_feed_unavailable'
         if chart and (chart.get('team')!=event[side] or not now-timedelta(hours=1)<=aware(chart['observed_at'])<=now):chart=None
+        match_count=0;identity_conflicts=0
         if chart and injuries:
-            rows=[r for r in injuries.get('players',[]) if r.get('player_id')==chart['projected_player_id']
-                  and provider_team_code(r.get('team_abbr'),'NFL')==event[side]]
+            rows=[]
+            for r in injuries.get('players',[]):
+                if not isinstance(r,dict) or provider_team_code(r.get('team_abbr'),'NFL')!=event[side]:continue
+                identity=explicit_espn_id(r)
+                if identity==chart['projected_player_id']:rows.append(r)
+                elif (r.get('player_id')==chart['projected_player_id'] or
+                      str(r.get('espn_athlete_id') or '')==chart['projected_player_id'][5:]):identity_conflicts+=1
+            match_count=len(rows)
             values={r.get('status_code') for r in rows}
-            if len(values)==1 and rows:
+            if identity_conflicts:reason='player_identity_conflict'
+            elif len(values)>1:reason='conflicting_reported_statuses'
+            elif rows and (len(values)!=1 or not values<=STATUSES):reason='invalid_reported_status'
+            elif rows:
                 times=[r.get('source_updated_at') or r.get('status_since') for r in rows]
-                if all(_recent(t,now,timedelta(days=3650)) for t in times):
+                if not all(_recent(t,now,timedelta(days=3650)) for t in times):reason='invalid_or_future_report_timestamp'
+                else:
                     last_status=next(iter(values));updated=max(times,key=aware)
                     if all(_recent(t,now,timedelta(hours=30)) for t in times):
                         status=last_status;reason='recent_reported_status'
                     else:reason='report_stale'
         sides[side]={'team':event[side],'depth':chart,'availability_status':status,
+                     'matched_report_rows':match_count,'identity_conflicts':identity_conflicts,
                      'status_updated_at':updated,'last_reported_status':last_status,'availability_reason':reason,'injury_observed_at':injuries.get('observation_timestamp') if injuries else None}
     return {'game_id':event['id'],'teams':sides,'observed_at':prediction_at,
             'starter_status':'projected' if all(v['depth'] for v in sides.values()) else 'unknown',

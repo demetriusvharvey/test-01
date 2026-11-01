@@ -439,6 +439,13 @@ def main():
         _,_,away,home=game['id'].split(':')
         all_events[game['id']]={'id':game['id'],'league':game['league'],'away':away,'home':home,
                                  'away_name':game['away'],'home_name':game['home'],'starts_at':game['starts_at']}
+    from .pregame_lineups import collect as collect_pregame_lineups
+    try:
+        lineup_evidence=collect_pregame_lineups(list(all_events.values()),datetime.now(timezone.utc).isoformat(),fetch,data_root or None)
+    except (OSError,ValueError,KeyError,TypeError,sqlite3.Error) as exc:
+        lineup_evidence={};board['errors'].append('Pregame lineup collection unavailable ('+type(exc).__name__+')')
+    for game in board['games']:
+        if game['id'] in lineup_evidence:game['nba_lineup_evidence']=lineup_evidence[game['id']]
     context_board={'picks':[{'id':game['id']} for game in board['games']]}
     if injury_payload is not None:
         try:attach_nba_summaries(context_board,all_events,injury_payload,injury_observed_at)
@@ -529,6 +536,7 @@ def main():
     from .injury_changes import annotate_injury_changes
     injury_changes=annotate_injury_changes(board,previous_board)
     print('Changed aggregate injury reports:',injury_changes)
+    board['generated_at']=now.isoformat()
     board=protect_last_success(board,previous_board,now.isoformat())
     (ROOT/'dist'/'board.json').write_text(json.dumps(board,indent=2)+'\n')
     print('Board:',len(board['picks']),'active picks;',board['accuracy']['wins'],'wins;',board['accuracy']['losses'],'losses;',len(errors),'source warnings')

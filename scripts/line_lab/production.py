@@ -234,7 +234,7 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
                          'incomplete':context.get('incomplete',True),'observed_at':context.get('observed_at'),
                          'lineup_status':context.get('lineup_status','unknown'),
                          'starting_quarterbacks_confirmed':False,'game_id':event['id']},
-                         'mode':'research','quarterback_context':public.get('nfl_qb_availability'),
+                         'mode':'research','lineup_evidence':public.get('nba_lineup_evidence'),'quarterback_context':public.get('nfl_qb_availability'),
                          'baseline_elo_probability':incumbent,
                          'baseline_elo_kind':'production_incumbent',
                          'baseline_fixed_elo_probability':row['elo']})
@@ -273,6 +273,11 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
             'with_source':sum(f['league']==league and bool(f['availability'].get('source')) for f in forecasts),
             'complete':sum(f['league']==league and f['availability'].get('incomplete') is False for f in forecasts)}
             for league in ('NBA','NFL')},
+        'lineup_collection':dict(Counter((f.get('lineup_evidence') or {}).get('reason','evidence_unavailable')
+            for f in forecasts if f['league']=='NBA')),
+        'quarterback_report_matching':dict(Counter(team.get('availability_reason','unknown')
+            for f in forecasts if f['league']=='NFL'
+            for team in (f.get('quarterback_context') or {}).get('teams',{}).values())),
         'baseline_policy':'actual production incumbent frozen at prediction time; fixed Elo is separate'}
     board['model_evaluation']={league:{'artifact_hash':a['artifact_hash'],'calibration_status':a['calibration_status'],
         'evaluation_season':a['evaluation_season'],'validation':a['validation']} for league,a in artifacts.items()}

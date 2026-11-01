@@ -112,3 +112,21 @@ remain research context. A missing availability timestamp no longer prevents
 reporting independent odds, lineup and validation failures. The manual FanDuel
 calculator retains its timestamped local-storage behavior. No newly introduced
 data source establishes a validated model edge or changes historical predictions.
+
+### Near-game starter-list collection
+
+For NBA games within two hours of the scheduled start, the refresh attempts an
+ESPN scoreboard identity match and a per-event summary lookup. Explicit starter
+flags are recorded only from a scheduled pregame summary with matching game,
+teams and start time. Exactly five flags on each side produce
+`listed_unconfirmed`, never confirmed availability. Missing, partial, conflicting,
+stale, future or post-start evidence cannot approve a recommendation. The
+observations branch preserves snapshots in `observations/pregame_lineups`, and
+production forecasts freeze their own copies. Games outside the window are
+explicitly labeled as not yet due for collection. No new historical injury or
+lineup data are backfilled. This collection does not change live probabilities.
+
+NFL QB reports join either an `espn:` player ID or an explicitly declared
+`espn_athlete_id`; an unqualified provider ID is never guessed to be ESPN.
+Identity/status conflicts stay unknown with explicit reasons. Old depth-cache
+schemas are refreshed so projected player names are available.

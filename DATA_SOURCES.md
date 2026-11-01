@@ -101,3 +101,23 @@ scheduled every 15 minutes, subject to Actions delays. Snapshots are append-only
 on the observations branch. These data are descriptive and not training-eligible;
 no starter confirmation, healthy status, player value or historical availability
 is inferred. The existing source-rights review requirements remain applicable.
+
+## ESPN game-specific NBA starter-list observations
+
+The optional near-game collector uses the existing public ESPN scoreboard and
+`https://site.api.espn.com/apis/site/v2/sports/basketball/nba/summary?event={id}`.
+It runs only for scheduled games within two hours, with one scoreboard lookup
+per game date and at most one summary lookup per matched game per refresh,
+using four concurrent unmetered requests. The existing 15-minute Actions cadence
+and provider latency limit timeliness. `meta.lastUpdatedAt` is retained when
+present and must be no more than 20 minutes old; absent publication metadata
+is preserved as null rather than replaced with retrieval time.
+
+The summary's `starter` flags support only `listed_unconfirmed` evidence.
+They do not establish an official confirmed-lineup contract, all-player health,
+replacement value, permitted training rights or a betting edge. Postgame/live
+summaries and mismatched game/team/start identities are rejected. Raw summary
+bodies are not stored; source hashes and reduced explicit-ID evidence are
+append-only. Current NBA CDN schedule/scoreboard probes returned HTTP 403; no
+access restriction was bypassed. The live ESPN pregame summary inspected on
+November 1 had no starter list and was correctly labeled unknown.

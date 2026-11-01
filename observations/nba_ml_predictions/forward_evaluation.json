@@ -1,19 +1,19 @@
 {
-  "evaluated_at": "2026-11-01T20:48:06.281714+00:00",
+  "evaluated_at": "2026-11-01T23:57:36.890545+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
-      "benchmark_missing": 10,
-      "pending": 75,
+      "benchmark_missing": 11,
+      "pending": 74,
       "void": 0,
       "excluded": 10,
       "scenario_agreement": 0,
       "scenario_disagreement": 0,
       "model": {
-        "games": 10,
-        "accuracy": 0.6,
-        "brier": 0.2511860183466391,
-        "log_loss": 0.728025858908722
+        "games": 11,
+        "accuracy": 0.6363636363636364,
+        "brier": 0.24225825229842635,
+        "log_loss": 0.7069458827380969
       },
       "elo": {
         "games": 0,
@@ -34,44 +34,44 @@
   },
   "conditional_winner_records": {
     "nba-convex-ensemble-v1": {
-      "wins": 7,
+      "wins": 8,
       "losses": 3,
-      "pending": 70,
+      "pending": 69,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 10,
-      "accuracy": 0.7
+      "settled_predictions": 11,
+      "accuracy": 0.7272727272727273
     },
     "nba-partial-stint-logistic-v1": {
-      "wins": 7,
+      "wins": 8,
       "losses": 3,
-      "pending": 70,
+      "pending": 69,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 10,
-      "accuracy": 0.7
+      "settled_predictions": 11,
+      "accuracy": 0.7272727272727273
     },
     "nba-player-box-logistic-v1": {
-      "wins": 7,
+      "wins": 8,
       "losses": 3,
-      "pending": 70,
+      "pending": 69,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 10,
-      "accuracy": 0.7
+      "settled_predictions": 11,
+      "accuracy": 0.7272727272727273
     },
     "nba-rotation-logistic-v1": {
       "wins": 5,
-      "losses": 5,
-      "pending": 70,
+      "losses": 6,
+      "pending": 69,
       "abstained": 0,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 10,
-      "accuracy": 0.5
+      "settled_predictions": 11,
+      "accuracy": 0.45454545454545453
     }
   },
   "promoted": false,

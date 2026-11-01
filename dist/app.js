@@ -139,13 +139,18 @@
     }
     const current=p.nfl_provider_availability_context;
     const currentSummary=current&&current.teams?`<p>Player-status counts from ${escape(current.source||'source unavailable')}, checked ${displayTime(current.observed_at)}: ${['away','home'].map(side=>current.teams[side]).filter(Boolean).map(team=>`${escape(team.team)}: ${Number(team.counts.out)} out, ${Number(team.counts.questionable)} questionable or game-time decision, ${Number(team.counts.doubtful)} doubtful`).join(' · ')}. Reports may be incomplete; no listing does not mean healthy.</p>${injuryFreshnessNote(current)}${injuryChangeNote(p)}${positionMarkup(current)}`:'';
+    const qb=p.nfl_qb_availability;
+    const qbSummary=qb&&qb.teams?['away','home'].map(side=>qb.teams[side]).filter(Boolean).map(team=>{
+      const d=team.depth;
+      return `<p>${escape(team.team)} QB: ${d?`${escape(d.projected_name||d.projected_player_id)} projected by depth-chart order, checked ${displayTime(d.observed_at)}`:'projection unavailable'}. Reported availability: ${escape(team.availability_status||'unknown')}. Starter unconfirmed.</p>`;
+    }).join(''):'';
     const c=p.availability_context;
-    if(!c||!c.teams)return `${currentSummary}<p>NFL starting quarterback and inactive list: unconfirmed. Injury information has not changed this prediction.</p>`;
+    if(!c||!c.teams)return `${currentSummary}${qbSummary}<p>NFL starting quarterback and inactive list: unconfirmed. Injury information has not changed this prediction.</p>`;
     const entries=['away','home'].map(side=>c.teams[side]).filter(Boolean).map(team=>{
       const players=(team.entries||[]).map(x=>`${escape(x.name)}${x.position?' ('+escape(x.position)+')':''}: ${escape(x.report_status||x.practice_status||'unknown')}`);
       return `<p>${escape(team.team)} report: ${players.length?players.join(' · '):'no captured entries; health unknown'}${team.total_entries>players.length?' · '+(team.total_entries-players.length)+' more entries':''}.</p>`;
     }).join('');
-    return `${currentSummary}<p>NFL report captured ${c.latest_observed_at?displayTime(c.latest_observed_at):'at an unavailable time'} from <a href="https://nflreadr.nflverse.com/reference/load_injuries.html" target="_blank" rel="noopener noreferrer">nflverse</a>. Starting QBs and inactive lists are unconfirmed; these reports may be incomplete. Injury information has not changed this prediction.</p>${entries}`;
+    return `${currentSummary}${qbSummary}<p>NFL report captured ${c.latest_observed_at?displayTime(c.latest_observed_at):'at an unavailable time'} from <a href="https://nflreadr.nflverse.com/reference/load_injuries.html" target="_blank" rel="noopener noreferrer">nflverse</a>. Starting QBs and inactive lists are unconfirmed; these reports may be incomplete. Injury information has not changed this prediction.</p>${entries}`;
   }
   function pickMarkup(p){
     const historical=!p.current;

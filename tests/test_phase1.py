@@ -146,7 +146,7 @@ class StorageAndSourceTests(unittest.TestCase):
             if 'basketball/nba' in url:return json.dumps(scoreboard)
             if 'football/nfl' in url:return json.dumps({'events':[]})
             raise AssertionError(url)
-        payload={'sport':'basketball_nba','count':2,'players':[
+        payload={'sport':'basketball_nba','complete_availability':True,'count':2,'players':[
             {'team_abbr':'LAL','player_id':'espn:1','player_name':'Do Not Publish One','status_code':'out','status_since':NOW.isoformat()},
             {'team_abbr':'POR','player_id':'espn:2','player_name':'Do Not Publish Two','status_code':'questionable','status_since':NOW.isoformat()}]}
         (self.root/'dist').mkdir();(self.root/'data').mkdir()
@@ -190,7 +190,7 @@ class StorageAndSourceTests(unittest.TestCase):
                      'status':'upcoming','home_score':None,'away_score':None}]
         def fake_scores(key,league):return [],NOW.isoformat()
         def fake_events(key,league):return (scoreboard if league=='NBA' else []),NOW.isoformat()
-        injuries={'sport':'basketball_nba','count':4,'players':[
+        injuries={'complete_availability':True,'sport':'basketball_nba','count':4,'players':[
             {'team_abbr':'LAL','player_id':'espn:1','position':'C','status_code':'out','status_since':NOW.isoformat()},
             {'team_abbr':'POR','player_id':'espn:2','position':'G','status_code':'questionable','status_since':NOW.isoformat()},
             {'team_abbr':'NY','player_id':'espn:3','position':'F','status_code':'out','status_since':NOW.isoformat()},

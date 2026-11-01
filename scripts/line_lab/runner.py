@@ -33,7 +33,7 @@ from .watchlist import render_watchlist
 from .winners import make_daily_winners, render_winners
 from .slate_archive import archive_slate
 from .nba_inference import record_nba_predictions
-from .nba_injury_feed import fetch_nba_injuries, fetch_nfl_injuries, attach_nba_summaries, attach_nfl_summaries, injury_quality_counts
+from .nba_injury_feed import fetch_nba_injuries, fetch_nfl_injuries, attach_nba_summaries, attach_nfl_summaries, injury_quality_counts, summarize_by_team
 from .propline_scores import fetch_scores, fetch_events, parse_scores, parse_event_starts, restrict_public_results, use_provider, reserve_call
 
 
@@ -62,15 +62,23 @@ def main():
     except Exception as e: errors.append('NFL historical data unavailable ('+type(e).__name__+')')
     models={league:train_model(games,today,league) for league in ('NBA','NFL')}
     for league,model in models.items():model['source_hashes']=source_hashes[league]
-    raw=[]; data_root=os.environ.get('PICKS_DATA_ROOT','').strip()
+    raw=[];odds_diagnostics=[]; data_root=os.environ.get('PICKS_DATA_ROOT','').strip()
     for slug,name in BOOKS:
         for league in ('NBA','NFL'):
             try:
                 rows,asof=parse_book_html(fetch(f'https://agentbets.ai/odds/{slug}/{league.lower()}'),name,league,now)
                 fetched=datetime.now(timezone.utc).isoformat()
-                for row in rows: row.update({'provider':'agentbets','provider_event_id':row['id'],'fetched_at':fetched})
+                for row in rows: row.update({'provider':'agentbets','provider_event_id':row['id'],'fetched_at':fetched,'source_url':f'https://agentbets.ai/odds/{slug}/{league.lower()}'})
                 raw.extend(rows)
-            except Exception as e: errors.append(f'{name} {league} odds unavailable ({type(e).__name__})')
+                odds_diagnostics.append({'book':name,'league':league,'provider':'agentbets',
+                    'source_url':f'https://agentbets.ai/odds/{slug}/{league.lower()}',
+                    'source_at':asof.isoformat(),'observed_at':fetched,'records':len(rows),'status':'available' if rows else 'empty'})
+            except Exception as e:
+                errors.append(f'{name} {league} odds unavailable ({type(e).__name__})')
+                odds_diagnostics.append({'book':name,'league':league,'provider':'agentbets',
+                    'source_url':f'https://agentbets.ai/odds/{slug}/{league.lower()}',
+                    'status':'unavailable','error_type':type(e).__name__,
+                    'reason':str(e) if isinstance(e,ValueError) else 'source_request_failed'})
     api_key=os.environ.get('ODDS_API_KEY','').strip()
     if data_root:
         try:
@@ -202,7 +210,10 @@ def main():
         try:
             if not reserve_call(data_root,'injuries_nba',datetime.now(timezone.utc).isoformat()):
                 raise ValueError('provider request budget unavailable')
-            injury_payload,injury_observed_at=fetch_nba_injuries(nba_injury_key,True)
+            payload,observed=fetch_nba_injuries(nba_injury_key,True)
+            summarize_by_team(payload,observed,'NBA')
+            if not payload['players']:raise ValueError('empty injury feed')
+            injury_payload,injury_observed_at={**payload,'observation_timestamp':observed},observed
             print('NBA injury report quality:',json.dumps(injury_quality_counts(injury_payload,injury_observed_at,'NBA'),sort_keys=True))
         except Exception as e:errors.append('NBA injury context unavailable ('+type(e).__name__+')')
     nfl_provider_payload=None;nfl_provider_observed_at=None
@@ -210,7 +221,10 @@ def main():
         try:
             if not reserve_call(data_root,'injuries_nfl',datetime.now(timezone.utc).isoformat()):
                 raise ValueError('provider request budget unavailable')
-            nfl_provider_payload,nfl_provider_observed_at=fetch_nfl_injuries(propline_key,True)
+            payload,observed=fetch_nfl_injuries(propline_key,True)
+            summarize_by_team(payload,observed,'NFL')
+            if not payload['players']:raise ValueError('empty injury feed')
+            nfl_provider_payload,nfl_provider_observed_at={**payload,'observation_timestamp':observed},observed
             print('NFL injury report quality:',json.dumps(injury_quality_counts(nfl_provider_payload,nfl_provider_observed_at,'NFL'),sort_keys=True))
         except Exception as e:errors.append('NFL injury context unavailable ('+type(e).__name__+')')
     # Free public fallback; never bypass a refusal or provider authentication.
@@ -221,6 +235,17 @@ def main():
     if nfl_provider_payload is None and any(k.startswith('nfl:') for k in starts_by_game):
         try:nfl_provider_payload,nfl_provider_observed_at=fetch_public_injuries('NFL',fetch)
         except Exception as exc:errors.append('NFL public injury report unavailable ('+type(exc).__name__+')')
+    from .nfl_depth import collect_depth,game_context as qb_game_context
+    depth_events=[]
+    for identifier,start in starts_by_game.items():
+        if identifier.startswith('nfl:'):
+            _,_,away,home=identifier.split(':')
+            depth_events.append({'id':identifier,'league':'NFL','starts_at':start,'home':home,'away':away})
+    try:
+        qb_depth,depth_errors=collect_depth(depth_events,datetime.now(timezone.utc).isoformat(),fetch,data_root or None)
+        errors.extend(depth_errors)
+    except (OSError,ValueError,KeyError,TypeError,sqlite3.Error) as exc:
+        qb_depth={};errors.append('NFL QB depth collection unavailable ('+type(exc).__name__+')')
     now=datetime.now(timezone.utc)
     if now.astimezone(ET).date()!=today and not day_rolled:
         day_rolled=True;errors.append('ET date changed during update; new picks suppressed')
@@ -423,6 +448,9 @@ def main():
         except Exception as e:board['errors'].append('Scheduled NFL injury context unavailable ('+type(e).__name__+')')
     all_context={row['id']:row for row in context_board['picks']}
     for game in board['games']:
+        if game['league']=='NFL':
+            game['nfl_qb_availability']=qb_game_context(all_events[game['id']],qb_depth,nfl_provider_payload,now.isoformat())
+    for game in board['games']:
         for key in ('nba_availability_context','nfl_provider_availability_context'):
             if key in all_context.get(game['id'],{}):game[key]=all_context[game['id']][key]
         if game['id'] in simulations_by_game:
@@ -484,6 +512,10 @@ def main():
     except (OSError,ValueError,KeyError,TypeError,sqlite3.Error) as exc:
         board['picks']=[]
         board['errors'].append('Production forecast unavailable ('+type(exc).__name__+')')
+    for source in odds_diagnostics:
+        if source['status']=='available':
+            source['status']='fresh' if now-aware(source['source_at'])<=timedelta(minutes=20) else 'stale_for_bet_eligibility'
+    board['odds_source_diagnostics']=odds_diagnostics
     board['source_status']={'the_odds_api':'configured' if api_key else 'missing_api_key',
                             'odds_history':'available' if archive_ok else 'unavailable',
                             'nba_injury_context':injury_payload.get('source','PropLine') if injury_payload else 'unavailable',

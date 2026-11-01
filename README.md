@@ -48,7 +48,7 @@ The preregistered validation bar requires at least 300 settled prospective paper
 
 ## Data and architecture
 
-The standard-library Python program is `scripts/pipeline.py`, a compatibility entry point to `scripts/line_lab/` components. GitHub Actions updates approximately hourly; the static Vercel page checks for a newer snapshot each minute, but the underlying AgentBets source itself updates about hourly. Runs may be delayed, and stale, incomplete, conflicting or unverified prices suppress affected picks. To compare books fairly, a game displays only prices within 15 minutes of its most recent available source snapshot; the raw observed quotes are separately retained for research.
+The standard-library Python program is `scripts/pipeline.py`, a compatibility entry point to `scripts/line_lab/` components. GitHub Actions is scheduled every 15 minutes (runs may be delayed); the static Vercel page checks for a newer snapshot each minute, but the underlying AgentBets source itself updates about hourly. Runs may be delayed, and stale, incomplete, conflicting or unverified prices suppress affected picks. To compare books fairly, a game displays only prices within 15 minutes of its most recent available source snapshot; the raw observed quotes are separately retained for research.
 
 `data/observations` is a separate Git branch containing date-partitioned append-only SQLite quote observations, paper forecasts and clearly labeled last-observed pregame price proxies. The proxy is not necessarily the true closing line or a sharp close. The branch also stores attributed retrospective source files in season/dataset SQLite shards. Run the separate GitHub Actions backfill workflow, or set `PICKS_DATA_ROOT` to a research-data checkout and run `python scripts/backfill.py`. Historical backfill is **retrospective**, not a record of what was known at prediction time.
 
@@ -91,3 +91,24 @@ baselines, calibration bands, accuracy intervals and paired day-block Brier/log-
 intervals. This does not retrain or promote models. The historical archive has
 already been inspected, so these results remain exploratory. Source observation
 timestamps for historical prices are absent; no market ROI is invented.
+
+### Availability evidence and FanDuel eligibility
+
+Each production forecast now freezes game-specific aggregate availability
+evidence, source URL/hash, source timestamp when supplied, retrieval time,
+and the paired market snapshot. Parser validity and full roster coverage are
+separate: listing one injured player on each team does not establish complete
+availability. Conflicting ESPN player statuses are quarantined in every order.
+
+For NFL teams playing within 24 hours, a free ESPN depth-chart adapter captures
+explicit player IDs and provider-order QB projections, cached for at most one
+hour. These are **projected**, never confirmed starters. Injury-list omissions
+remain unknown; projections and listed statuses do not adjust live probabilities.
+NBA starting lineups remain unconfirmed when no verified source is available.
+
+Bet eligibility uses only a fresh, paired **FanDuel** moneyline quote whose
+game, league, teams, bookmaker and market identity match. Other bookmakers
+remain research context. A missing availability timestamp no longer prevents
+reporting independent odds, lineup and validation failures. The manual FanDuel
+calculator retains its timestamped local-storage behavior. No newly introduced
+data source establishes a validated model edge or changes historical predictions.

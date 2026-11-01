@@ -48,7 +48,10 @@ def valid_observation(item, fetched_at, max_age=timedelta(minutes=95)):
         if source>observed or observed-source>max_age or start<=observed: return False
         if any(not isinstance(item[k],int) or isinstance(item[k],bool) or abs(item[k])<100 for k in ('home_odds','away_odds')): return False
         if not all(item.get(k) for k in ('id','league','home','away','book','provider')): return False
-        return item['home']!=item['away'] and item['league'] in ('NBA','NFL')
+        from .constants import ET,game_id
+        return (item['home']!=item['away'] and item['league'] in ('NBA','NFL')
+                and item.get('market','h2h')=='h2h'
+                and item['id']==game_id(item['league'],start.astimezone(ET).date(),item['away'],item['home']))
     except (KeyError,TypeError,ValueError,OverflowError): return False
 
 def _open(path,schema):

@@ -9,10 +9,10 @@ class LineMovementTests(unittest.TestCase):
     def setUp(self):
         self.tmp=tempfile.TemporaryDirectory();self.addCleanup(self.tmp.cleanup);self.root=self.tmp.name
         self.now=datetime(2026,10,28,20,tzinfo=timezone.utc);self.start=self.now+timedelta(hours=3)
-        self.event={'id':'nba:g','league':'NBA','home':'A','away':'B','starts_at':self.start.isoformat(),'books':{}}
+        self.event={'id':'nba:2026-10-28:B:A','league':'NBA','home':'A','away':'B','starts_at':self.start.isoformat(),'books':{}}
     def quote(self,hours_ago,home=-110,provider='feed'):
         stamp=(self.now-timedelta(hours=hours_ago)).isoformat()
-        return {'id':'nba:g','league':'NBA','home':'A','away':'B','book':'FanDuel','provider':provider,
+        return {'id':'nba:2026-10-28:B:A','league':'NBA','home':'A','away':'B','book':'FanDuel','provider':provider,
                 'home_odds':home,'away_odds':100,'as_of':stamp,'fetched_at':stamp,'starts_at':self.start.isoformat()}
     def test_returns_only_observed_same_source_pregame_prices(self):
         one=self.quote(2,-110);two=self.quote(0,-120);other=self.quote(1,-130,'other')

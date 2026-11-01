@@ -13,9 +13,10 @@ class ProductionDecisionTests(unittest.TestCase):
     def setUp(self):
         self.event={'id':'nba:2026-10-31:BOS:NYK','league':'NBA','starts_at':START,'home':'NYK','away':'BOS',
                     'books':{'FanDuel':{'home':-150,'away':130,'as_of':NOW,'fetched_at':NOW,'provider':'manual-verified'}}}
+        self.event['books']['FanDuel'].update(game_id=self.event['id'],league='NBA',book='FanDuel',market='h2h',home_team='NYK',away_team='BOS')
         self.f={'home_probability':.8,'artifact_hash':'a','predicted_at':NOW,'availability_used':True,
                 'probability_lower_bound':.72,'probability_upper_bound':.88,
-                'availability':{'verified':True,'incomplete':False,'observed_at':NOW}}
+                'availability':{'verified':True,'incomplete':False,'observed_at':NOW,'lineup_status':'confirmed'}}
         self.v={'betting_approved':True,'artifact_hash':'a','league':'NBA','out_of_sample_games':500,
                 'calibration_passed':True,'positive_edge_validated':True,'evidence_hash':'e','evaluated_at':NOW,
                 'uncertainty_validated':True}

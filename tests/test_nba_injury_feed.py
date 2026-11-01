@@ -80,7 +80,8 @@ class NbaInjuryFeedTests(unittest.TestCase):
         context=board['picks'][0]['nfl_provider_availability_context']
         self.assertEqual(context['teams']['away']['counts']['out'],1)
         self.assertEqual(context['teams']['home']['counts']['questionable'],1)
-        self.assertFalse(context['used_in_prediction']);self.assertFalse(context['incomplete'])
+        self.assertFalse(context['used_in_prediction']);self.assertTrue(context['incomplete'])
+        self.assertEqual(context['coverage_status'],'unverified')
         self.assertNotIn('Private One',json.dumps(board));self.assertNotIn('espn:1',json.dumps(board))
         board={'picks':[{'id':'nfl:test'}]}
         attach_nfl_summaries(board,{'nfl:test':event},payload,'2026-10-28T23:00:00Z')

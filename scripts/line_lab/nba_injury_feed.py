@@ -205,6 +205,11 @@ def status_fingerprint(payload,event,league):
     return hashlib.sha256(json.dumps(sorted(rows,key=lambda r:str(r['player_id'])),sort_keys=True).encode()).hexdigest()
 
 
+def _valid_time(value,observed):
+    try:return aware(value)<=observed
+    except (TypeError,ValueError):return False
+
+
 def attach_nba_summaries(board, markets, payload, observed_at):
     summaries, incomplete = summarize_by_team(payload, observed_at)
     positions = summarize_positions_by_team(payload, observed_at, 'NBA')
@@ -223,7 +228,7 @@ def attach_nba_summaries(board, markets, payload, observed_at):
                 if code not in summaries:
                     raise ValueError('unknown team')
                 sides[side] = {'team': event[side + '_name'], 'counts': summaries[code], 'positions': positions[code], 'report_present': bool(sum(summaries[code].values()))}
-            complete=not incomplete and all(v['report_present'] for v in sides.values())
+            complete=payload.get('complete_availability') is True and not incomplete and all(v['report_present'] for v in sides.values())
             pick['nba_availability_context'] = {
                 'teams': sides, 'source': payload.get('source','PropLine, ESPN-sourced'),
                 'observed_at': observed.isoformat(), 'incomplete': not complete,
@@ -231,6 +236,16 @@ def attach_nba_summaries(board, markets, payload, observed_at):
                 'used_in_prediction': False,
                 'status_fingerprint':status_fingerprint(payload,event,'NBA'),
                 'source_timestamp':payload.get('source_timestamp'),
+                'source_url':payload.get('source_url') or ('https://api.prop-line.com/v1/sports/'+payload['sport']+'/injuries'),
+                'source_sha256':payload.get('source_sha256') or hashlib.sha256(json.dumps(payload,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
+                'coverage_status':'complete' if complete else 'unverified',
+                'parse_errors':payload.get('parse_errors',0),
+                'game_id':event['id'],
+                'reported_status_updated_at':max((r.get('source_updated_at') or r.get('status_since') for r in payload.get('players',[])
+                    if isinstance(r,dict) and provider_team_code(r.get('team_abbr'),event['league']) in (event['home'],event['away'])
+                    and (r.get('source_updated_at') or r.get('status_since'))
+                    and _valid_time(r.get('source_updated_at') or r.get('status_since'),observed)),key=aware,default=None),
+                'lineup_status':'unknown', 'starting_quarterbacks_confirmed':False,
             }
         except (KeyError, TypeError, ValueError):
             continue
@@ -252,7 +267,7 @@ def attach_nfl_summaries(board, markets, payload, observed_at):
                 code=event[side]
                 if code not in summaries:raise ValueError('unknown team')
                 sides[side]={'team':event[side+'_name'],'counts':summaries[code],'positions':positions[code],'report_present':bool(sum(summaries[code].values()))}
-            complete=not incomplete and all(v['report_present'] for v in sides.values())
+            complete=payload.get('complete_availability') is True and not incomplete and all(v['report_present'] for v in sides.values())
             pick['nfl_provider_availability_context']={
                 'teams':sides,'source':payload.get('source','PropLine, ESPN-sourced'),
                 'observed_at':observed.isoformat(),'incomplete':not complete,
@@ -260,5 +275,15 @@ def attach_nfl_summaries(board, markets, payload, observed_at):
                 'used_in_prediction':False,
                 'status_fingerprint':status_fingerprint(payload,event,'NFL'),
                 'source_timestamp':payload.get('source_timestamp'),
+                'source_url':payload.get('source_url') or ('https://api.prop-line.com/v1/sports/'+payload['sport']+'/injuries'),
+                'source_sha256':payload.get('source_sha256') or hashlib.sha256(json.dumps(payload,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
+                'coverage_status':'complete' if complete else 'unverified',
+                'parse_errors':payload.get('parse_errors',0),
+                'game_id':event['id'],
+                'reported_status_updated_at':max((r.get('source_updated_at') or r.get('status_since') for r in payload.get('players',[])
+                    if isinstance(r,dict) and provider_team_code(r.get('team_abbr'),event['league']) in (event['home'],event['away'])
+                    and (r.get('source_updated_at') or r.get('status_since'))
+                    and _valid_time(r.get('source_updated_at') or r.get('status_since'),observed)),key=aware,default=None),
+                'lineup_status':'unknown', 'starting_quarterbacks_confirmed':False,
             }
         except (KeyError,TypeError,ValueError):continue

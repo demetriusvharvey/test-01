@@ -41,6 +41,11 @@ def legacy_metrics(rows):
             'policy':'original top-three Elo selections; no retroactive exclusions'}
 
 
+def _fresh_at(value,earliest,latest):
+    try:return earliest<=aware(value)<=latest
+    except (TypeError,ValueError):return False
+
+
 def decision(forecast,event,now,validation=None,min_edge=.03,min_ev=.02,max_odds_minutes=20):
     """Fail closed using independent model evidence, current news and prices.
 
@@ -51,17 +56,20 @@ def decision(forecast,event,now,validation=None,min_edge=.03,min_ev=.02,max_odds
     try:
         current,start=aware(now),aware(event['starts_at']);predicted=aware(forecast['predicted_at'])
         if not predicted<=current<start or current-predicted>timedelta(minutes=20):reasons.append('forecast_not_fresh_pregame')
+        if forecast.get('id',event['id'])!=event['id']:reasons.append('forecast_game_mismatch')
         v=validation or {}
         if (v.get('betting_approved') is not True or v.get('artifact_hash')!=forecast.get('artifact_hash')
             or v.get('league')!=event['league'] or v.get('out_of_sample_games',0)<300
             or v.get('calibration_passed') is not True or v.get('positive_edge_validated') is not True
-            or not v.get('evidence_hash') or aware(v['evaluated_at'])>predicted):reasons.append('validation_insufficient')
-        p=forecast['home_probability'];side='home' if p>=.5 else 'away';p=p if side=='home' else 1-p
+            or not v.get('evidence_hash') or not _fresh_at(v.get('evaluated_at'),aware('1970-01-01T00:00:00Z'),predicted)):reasons.append('validation_insufficient')
+        p=forecast['home_probability']
         if type(p) not in (int,float) or not math.isfinite(p) or not 0<p<1:raise ValueError('probability')
+        side='home' if p>=.5 else 'away';p=p if side=='home' else 1-p
         result.update({'side':side,'probability':p})
         news=forecast.get('availability') or {}
-        if (news.get('verified') is not True or news.get('incomplete') is not False
-            or not current-timedelta(minutes=20)<=aware(news['observed_at'])<=predicted):reasons.append('injury_information_unverified')
+        if (news.get('verified') is not True or news.get('incomplete') is not False or news.get('game_id',event['id'])!=event['id']
+            or not _fresh_at(news.get('observed_at'),current-timedelta(minutes=20),predicted)):reasons.append('injury_information_unverified')
+        if event['league']=='NBA' and news.get('lineup_status')!='confirmed':reasons.append('starting_lineups_unconfirmed')
         if event['league']=='NFL' and news.get('starting_quarterbacks_confirmed') is not True:reasons.append('starting_quarterbacks_unconfirmed')
         if not forecast.get('availability_used'):reasons.append('availability_model_unvalidated')
         # A bound must come from a validated error procedure for this artifact,
@@ -73,7 +81,13 @@ def decision(forecast,event,now,validation=None,min_edge=.03,min_ev=.02,max_odds
             reasons.append('validated_uncertainty_unavailable');lower=None
         quotes=[]
         for name,book in event.get('books',{}).items():
+            # Other books remain research context; this user wagers at FanDuel.
+            if name!='FanDuel':continue
             try:
+                if any(book.get(k)!=value for k,value in {
+                        'game_id':event['id'],'league':event['league'],'book':name,'market':'h2h',
+                        'home_team':event['home'],'away_team':event['away']}.items()):
+                    reasons.append('odds_identity_mismatch');continue
                 source,fetched=aware(book['as_of']),aware(book['fetched_at'])
                 if not current-timedelta(minutes=max_odds_minutes)<=source<=fetched<=predicted:continue
                 if source>=start or not book.get('provider'):continue
@@ -86,7 +100,8 @@ def decision(forecast,event,now,validation=None,min_edge=.03,min_ev=.02,max_odds
             conservative_ev=lower*calc['decimal_odds']-1 if lower is not None else None
             conservative_edge=lower-calc['break_even'] if lower is not None else None
             result['pricing']={**calc,'book':name,'american_odds':book[side],'source_at':book['as_of'],
-                               'observed_at':book['fetched_at'],'uncertainty_adjusted_edge':conservative_edge,
+                               'observed_at':book['fetched_at'],'provider':book['provider'],'game_id':event['id'],
+                               'market':'h2h','source_url':book.get('source_url'),'uncertainty_adjusted_edge':conservative_edge,
                                'uncertainty_adjusted_ev':conservative_ev}
             if lower is None or conservative_edge<min_edge or conservative_ev<min_ev:reasons.append('positive_edge_not_established')
         result['eligible']=not reasons
@@ -215,10 +230,12 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
         if candidate is not None and candidate is not estimate:estimate['research_model']=candidate
         context=public.get('nba_availability_context') or public.get('nfl_provider_availability_context') or {}
         estimate.update({'id':event['id'],'league':event['league'],'starts_at':event['starts_at'],'predicted_at':now,
-                         'feature_snapshot':row,'availability':{'verified':False,'incomplete':context.get('incomplete',True),
-                                                               'observed_at':context.get('observed_at'),'source':context.get('source'),
-            'status_fingerprint':context.get('status_fingerprint')},
-                         'mode':'research','baseline_elo_probability':incumbent,
+                         'feature_snapshot':row,'market_snapshot':event.get('books',{}),'availability':{**context,'verified':False,
+                         'incomplete':context.get('incomplete',True),'observed_at':context.get('observed_at'),
+                         'lineup_status':context.get('lineup_status','unknown'),
+                         'starting_quarterbacks_confirmed':False,'game_id':event['id']},
+                         'mode':'research','quarterback_context':public.get('nfl_qb_availability'),
+                         'baseline_elo_probability':incumbent,
                          'baseline_elo_kind':'production_incumbent',
                          'baseline_fixed_elo_probability':row['elo']})
         advanced=nba.get(event['id'],{})
@@ -251,13 +268,18 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
         'fallback_reasons':dict(Counter(f['fallback_reason'] for f in forecasts if f.get('fallback_reason'))),
         'withheld_reasons':dict(Counter(g['forecast_status'] for g in board.get('games',[]) if g.get('forecast_status') not in (None,'qualified','research_only'))),
         'challenger_forecasts':sum('research_model' in f for f in forecasts),
+        'eligibility_reasons':dict(Counter(reason for f in forecasts for reason in f['decision']['reasons'])),
+        'availability_coverage':{league:{'forecasts':sum(f['league']==league for f in forecasts),
+            'with_source':sum(f['league']==league and bool(f['availability'].get('source')) for f in forecasts),
+            'complete':sum(f['league']==league and f['availability'].get('incomplete') is False for f in forecasts)}
+            for league in ('NBA','NFL')},
         'baseline_policy':'actual production incumbent frozen at prediction time; fixed Elo is separate'}
     board['model_evaluation']={league:{'artifact_hash':a['artifact_hash'],'calibration_status':a['calibration_status'],
         'evaluation_season':a['evaluation_season'],'validation':a['validation']} for league,a in artifacts.items()}
     board['selection_policy']={'version':'validated-value-v2','minimum_edge':.03,'minimum_ev':.02,
         'recommendations':len(picks),'research_forecasts':len(forecasts),'automatic_top_three':False,
         'status':'no_qualified_bets' if not picks else 'qualified','odds_max_age_minutes':20,
-        'injury_max_age_minutes':20,'refresh_latency':'scheduled snapshots; not real-time'}
+        'injury_max_age_minutes':20,'recommendation_book':'FanDuel','refresh_latency':'scheduled snapshots; not real-time'}
     board['model']='League-specific chronological research forecasts; validated value gate'
     if root:
         board['forecast_evaluation']=archive_forecasts(root,forecasts,finals,now)

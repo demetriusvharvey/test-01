@@ -87,3 +87,17 @@ excludes overtime. ESPN exports contain ambiguous action/clock sequences;
 low reconstruction coverage is disclosed rather than treated as full coverage.
 Publisher attribution and upstream-use qualifications remain unchanged.
 This research import grants no claimed NBA wagering-data permission.
+
+## Public NFL depth-chart projections
+
+`https://site.api.espn.com/apis/site/v2/sports/football/nfl/teams/{team}/depthcharts`
+is a best-effort keyless source, without a completeness or latency guarantee.
+The adapter validates team identity, timestamp and explicit QB IDs, preserves
+source URL/hash and retrieval time, and records a provider-order projection.
+The source timestamp describes the response, not a verified starter announcement.
+Only teams playing within 24 hours are fetched, at most once per team per run,
+with a one-hour cache and six concurrent public fetches. The pipeline is
+scheduled every 15 minutes, subject to Actions delays. Snapshots are append-only
+on the observations branch. These data are descriptive and not training-eligible;
+no starter confirmation, healthy status, player value or historical availability
+is inferred. The existing source-rights review requirements remain applicable.

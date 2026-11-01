@@ -44,7 +44,10 @@ def build_market(events,now,min_lead_minutes=20):
         if now-asof>timedelta(minutes=95) or start<=now+timedelta(minutes=min_lead_minutes): continue
         rec=merged.setdefault(x['id'],{k:x[k] for k in ('id','league','home','away','home_name','away_name','starts_at')})
         rec.setdefault('books',{})[x['book']]={'home':x['home_odds'],'away':x['away_odds'],'as_of':x['as_of'],
-                                              'fetched_at':x.get('fetched_at'),'provider':x.get('provider')}
+                                              'fetched_at':x.get('fetched_at'),'provider':x.get('provider'),
+                                              'game_id':x['id'],'league':x['league'],'book':x['book'],'market':'h2h',
+                                              'home_team':x['home'],'away_team':x['away'],
+                                              'provider_event_id':x.get('provider_event_id'),'source_url':x.get('source_url')}
     # Do not compare an older book snapshot with an hour-newer one as though
     # they were simultaneous. The full verified feed is archived separately.
     for event in merged.values():

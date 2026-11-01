@@ -3,7 +3,7 @@
 This endpoint is best-effort, not a contracted real-time/complete inactive feed.
 A missing listing is never a confirmation that a player is available.
 """
-import json,re
+import hashlib,json,re
 from .ingest import get
 from .constants import team_code
 from .nba_injury_feed import provider_team_code
@@ -19,11 +19,13 @@ STATUS={'out':'out','doubtful':'doubtful','questionable':'questionable','probabl
 
 def parse(payload,league,observed_at):
     observed=aware(observed_at)
+    if league not in URLS or not isinstance(payload,dict):raise ValueError('injury schema')
     if payload.get('status')!='success' or not isinstance(payload.get('injuries'),list):raise ValueError('injury schema')
     source=aware(payload['timestamp'])
     if not observed-timedelta(minutes=20)<=source<=observed:raise ValueError('stale or future injury snapshot')
-    rows=[];unknown=0;seen={}
+    rows=[];unknown=0;seen={};conflicts=set()
     for group in payload['injuries']:
+        if not isinstance(group,dict):unknown+=1;continue
         team=team_code(group.get('displayName'),league)
         if not team or not isinstance(group.get('injuries'),list):unknown+=1;continue
         for injury in group['injuries']:
@@ -43,16 +45,28 @@ def parse(payload,league,observed_at):
                 if stamp>observed or not status:raise ValueError('unknown status or future report')
                 key=(team,identity)
                 if key in seen:
-                    if seen[key]!=status:raise ValueError('conflicting player statuses')
+                    if seen[key]!=status:
+                        conflicts.add(key)
+                        raise ValueError('conflicting player statuses')
                     continue
                 seen[key]=status
                 rows.append({'player_id':'espn:'+identity,'espn_athlete_id':identity,'team_abbr':team,
                              'status_code':status,'source_updated_at':stamp.isoformat(),'status_since':stamp.isoformat(),
                              'position':a.get('position',{}).get('abbreviation','UNKNOWN')})
-            except (KeyError,TypeError,ValueError):unknown+=1
+            except (KeyError,TypeError,ValueError,AttributeError):unknown+=1
+    # Quarantine every version of a conflicting identity, including the first
+    # row; row order must never choose the reported status.
+    membership={}
+    for r in rows:membership.setdefault(r['espn_athlete_id'],set()).add(r['team_abbr'])
+    for identity,teams in membership.items():
+        if len(teams)>1:
+            conflicts.update((team,identity) for team in teams);unknown+=1
+    rows=[r for r in rows if (r['team_abbr'],r['espn_athlete_id']) not in conflicts]
     return {'sport':'basketball_nba' if league=='NBA' else 'football_nfl','players':rows,'count':len(rows),
             'source':'ESPN public injury endpoint','source_url':URLS[league],'source_timestamp':source.isoformat(),
-            'observation_timestamp':observed_at,'parse_errors':unknown,'complete_availability':False}
+            'observation_timestamp':observed_at,'parse_errors':unknown,'conflicting_players':len(conflicts),
+            'source_sha256':hashlib.sha256(json.dumps(payload,sort_keys=True,separators=(',',':')).encode()).hexdigest(),
+            'complete_availability':False}
 
 
 def fetch(league,getter=get):

@@ -1,57 +1,36 @@
 {
-  "generated_at": "2026-11-01T01:16:20.433837+00:00",
+  "generated_at": "2026-11-01T18:59:04.957781+00:00",
   "nba_referees": {
     "source": "https://official.nba.com/referee-assignments/",
     "status": "ok",
-    "date_expected": "2026-10-31",
+    "date_expected": "2026-11-01",
     "games": [
       {
-        "matchup": "Portland @ Utah",
-        "crew_chief": "Tre Maddox (#23)",
-        "referee": "Jason Goldenberg (#35)",
-        "umpire": "Brent Haskill (#92)",
+        "matchup": "Boston @ Orlando",
+        "crew_chief": "Curtis Blair (#74)",
+        "referee": "Gediminas Petraitis (#50)",
+        "umpire": "Che Flores (#91)",
         "alternate": ""
       },
       {
-        "matchup": "Philadelphia @ Charlotte",
-        "crew_chief": "Ben Taylor (#46)",
-        "referee": "Andy Nagy (#18)",
-        "umpire": "Italo Araujo (#86)",
+        "matchup": "Brooklyn @ Indiana",
+        "crew_chief": "Bill Kennedy (#55)",
+        "referee": "Robert Hussey (#85)",
+        "umpire": "Matt Myers (#43)",
         "alternate": ""
       },
       {
-        "matchup": "Atlanta @ New Orleans",
-        "crew_chief": "Scott Foster (#48)",
-        "referee": "Natalie Sago (#9)",
-        "umpire": "Dannica Baroody (#89)",
+        "matchup": "LA Clippers @ Golden State",
+        "crew_chief": "Nick Buchert (#3)",
+        "referee": "Justin Van Duyne (#64)",
+        "umpire": "Derrick Collins (#11)",
         "alternate": ""
       },
       {
-        "matchup": "Sacramento @ Memphis",
-        "crew_chief": "John Goble (#10)",
-        "referee": "Eric Dalen (#37)",
-        "umpire": "CJ Washington (#12)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Cleveland @ Milwaukee",
-        "crew_chief": "Karl Lane (#77)",
-        "referee": "Marat Kogut (#32)",
-        "umpire": "Evan Scott (#22)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Minnesota @ San Antonio",
-        "crew_chief": "Courtney Kirkland (#61)",
-        "referee": "Ray Acosta (#54)",
-        "umpire": "Matt Kallio (#53)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Oklahoma City @ Houston",
-        "crew_chief": "Mark Lindsay (#29)",
-        "referee": "Aaron Smith (#51)",
-        "umpire": "Sha'Rae Mitchell (#98)",
+        "matchup": "Toronto @ L.A. Lakers",
+        "crew_chief": "Tyler Ford (#39)",
+        "referee": "Brian Forte (#45)",
+        "umpire": "Catherine Chang (#83)",
         "alternate": ""
       }
     ]

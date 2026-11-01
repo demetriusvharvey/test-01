@@ -171,7 +171,8 @@
     const scenario=f.availability_scenarios;
     const news=scenario?`<p>Injury-aware research: ${Number(scenario.scenario_count)} availability scenario(s), observed ${displayTime(scenario.injury_observed_at)}. ${scenario.consistent_winner?'The listed scenarios agree on a winner.':'The winner changes across availability scenarios.'} These are sensitivity scenarios; their probabilities have not earned betting validation.</p>`:'<p>Player adjustment unavailable; the team forecast does not assume missing injury information means healthy.</p>';
     const candidate=f.research_model?`<p>Challenger: ${escape(f.research_model.model_version)} · retrospective calibration only · awaiting independent promotion.</p>`:'';
-    return `<p>Incumbent: ${escape(f.model_version)} · research forecast. ${f.decision&&f.decision.eligible?'Qualified value selection.':'No qualified bet: model validation, availability and current-price requirements must all pass.'}</p>${candidate}${news}`;
+    const expired=!Number.isFinite(Date.parse(f.predicted_at))||Date.now()-Date.parse(f.predicted_at)>20*60000||Date.parse(f.predicted_at)>Date.now();
+    return `<p>Incumbent: ${escape(f.model_version)} · research forecast${f.predicted_at?' · saved '+displayTime(f.predicted_at):''}. ${expired?'EXPIRED — saved research only; a fresh pregame update is required.':f.decision&&f.decision.eligible&&Date.parse(f.decision.expires_at)>Date.now()?'Qualified value selection.':'No qualified bet: model validation, availability and current-price requirements must all pass.'}</p>${candidate}${news}`;
   }
   function slateMarkup(g){
     const books=Object.entries(g.books||{});
@@ -216,20 +217,20 @@
     $('count').textContent=selectedDay===today()?active.length+' recommendations · '+history.length+' saved forecasts':history.length+' saved forecasts';
     const ready=PickEligibility.readiness(board,now);
     const messages={validation_pending:'Bet recommendations are pending model validation. Today’s winner forecasts are shown below; data checks may also be incomplete.',data_unavailable:'Recommendations are blocked by missing or expired game data. Today’s available winner forecasts are shown below.',no_qualified_edge:'No game passed the conservative value requirements. Today’s winner forecasts are shown below.',no_upcoming_games:'No remaining games are scheduled for today. Use the league filters to see later games.',qualified:'Only selections passing the validation and value requirements appear as recommendations.'};
-    if($('selection-status'))$('selection-status').textContent=selectedDay===today()&&board.selection_policy?messages[ready.status]:'Saved forecasts and their original outcomes.';
-    $('eligibility-details').hidden=selectedDay!==today()||!!active.length||stale||!Object.keys(ready.blockers).length;
+    if($('selection-status'))$('selection-status').textContent=selectedDay===today()&&board.selection_policy?(stale?'Update delayed. Saved research forecasts are shown below; recommendations require a fresh update.':messages[ready.status]):'Saved forecasts and their original outcomes.';
+    $('eligibility-details').hidden=selectedDay!==today()||!!active.length||!Object.keys(ready.blockers).length;
     $('eligibility-summary').textContent=`${ready.forecasts} of ${ready.games} remaining games today have winner forecasts. These are the checks preventing bets:`;
     $('eligibility-reasons').innerHTML=Object.entries(ready.blockers).map(([reason,count])=>`<li>${escape(PickEligibility.labels[reason]||reason.replaceAll('_',' '))} · ${count} game${count===1?'':'s'}</li>`).join('');
     const freshness=$('freshness');freshness.classList.toggle('stale',selectedDay===today()&&stale);
     freshness.textContent=selectedDay!==today()?'Saved picks and results · '+displayDay(selectedDay):stale?'Update delayed · saved picks shown':oldest?'Odds observed '+displayTime(new Date(oldest)):validDate?'Last checked '+displayTime(generated):'Waiting for data';
     if(!picks.length){
       const emptyTitle=ready.status==='validation_pending'?'Bet recommendations await validation.':ready.status==='data_unavailable'?'Required game data is unavailable or expired.':ready.status==='no_upcoming_games'?'No remaining games today.':'No qualified betting recommendations.';
-      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved winners for this day.</strong><p>The forecast history grows as each day is recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':`<div class="empty"><strong>${emptyTitle}</strong><p>${ready.forecasts?'Today’s model winners are in the expanded Upcoming slate below.':'Check Upcoming slate for later games.'}</p></div>`;
+      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved winners for this day.</strong><p>The forecast history grows as each day is recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>Saved research forecasts are in Upcoming slate. They are expired and cannot qualify as bets.</p></div>':`<div class="empty"><strong>${emptyTitle}</strong><p>${ready.forecasts?'Today’s model winners are in the expanded Upcoming slate below.':'Check Upcoming slate for later games.'}</p></div>`;
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
     $('saved-section').hidden=!earlier.length;
     $('saved-list').innerHTML=earlier.map(p=>pickMarkup(Object.assign({},p,{current:false}))).join('');
     const shownIds=new Set(picks.filter(p=>p.current).map(p=>p.id));
-    const allSlate=selectedDay===today()&&!stale?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now&&!shownIds.has(g.id)):[];
+    const allSlate=selectedDay===today()?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now&&!shownIds.has(g.id)):[];
     const filter=$('slate-filter').value;
     const slate=allSlate.filter(g=>filter==='today'?dayString(new Date(g.starts_at))===today():g.league===filter.toUpperCase());
     $('slate-section').hidden=!allSlate.length;

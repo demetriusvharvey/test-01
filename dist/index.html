@@ -56,11 +56,12 @@
     <section id="panel-picks" role="tabpanel" aria-labelledby="tab-picks">
       <div class="section-top"><div><p class="section-kicker">THE BOARD</p><h2 id="picks-title">Recommendations and saved forecasts</h2></div><div class="date-controls" aria-label="Choose a pick date"><button type="button" id="today-button" class="date-button is-active">Today</button><button type="button" id="yesterday-button" class="date-button">Yesterday</button><label class="date-picker"><span class="sr-only">Choose another date</span><input type="date" id="pick-date" aria-label="Choose another date"></label></div></div>
       <p id="selection-status" class="slate-note" aria-live="polite"></p>
+      <details id="eligibility-details" class="manual-tool" hidden><summary>Why recommendations are unavailable</summary><p id="eligibility-summary"></p><ul id="eligibility-reasons"></ul><p>Winner forecasts appear below. They remain research forecasts until the required evidence and current prices qualify.</p></details>
       <div class="list-header"><p id="freshness" aria-live="polite">Loading today’s winners…</p><span id="count"></span></div>
       <section id="picks" class="pick-list" aria-label="Predicted winners" aria-live="polite"><div class="loading">Loading winners…</div></section>
       <section id="saved-section" class="watch-section" hidden><h2>Saved earlier</h2><p>Previous forecasts appear in the date history. This section shows any earlier selections separately.</p><div id="saved-list" class="pick-list"></div></section>
       <details id="slate-section" class="manual-tool slate-tool" hidden>
-        <summary>Upcoming slate <span class="slate-summary-note">Tap for other game forecasts</span></summary>
+        <summary>Upcoming slate <span class="slate-summary-note">Winner forecasts · research only</span></summary>
         <div class="slate-toolbar"><label for="slate-filter">Show</label><select id="slate-filter" aria-label="Filter upcoming games"><option value="today">Today</option><option value="nba">Upcoming NBA</option><option value="nfl">Upcoming NFL</option></select><span id="slate-count" aria-live="polite"></span></div>
         <div id="game-slate" class="slate-list" aria-label="Upcoming model forecasts"></div>
         <button type="button" id="slate-more" class="slate-more" hidden>Show more games</button>
@@ -81,6 +82,7 @@
 
     <footer class="sources"><p>The refresh job targets 15-minute snapshots; source data and scheduled jobs can be delayed. Verify the price with the sportsbook.</p><p>Odds: <a href="https://agentbets.ai/odds/" target="_blank" rel="noopener noreferrer">AgentBets</a> · NBA data: <a href="https://boxscorelab.com/downloads/" target="_blank" rel="noopener noreferrer">BoxScore Lab</a> · NFL data: <a href="https://nflreadr.nflverse.com/" target="_blank" rel="noopener noreferrer">nflverse</a></p><p>Winner accuracy preserves the original settled daily forecasts. New model studies are evaluated separately. It does not measure betting profit or guarantee future results.</p><details class="photo-credits"><summary>Photo credits</summary><p><a href="https://commons.wikimedia.org/wiki/File:Kobe_Bryant_2014.jpg">Kobe Bryant</a> and <a href="https://commons.wikimedia.org/wiki/File:Stephen_Curry_(16454505719).jpg">Stephen Curry</a> by Keith Allison; <a href="https://commons.wikimedia.org/wiki/File:LeBron_James_Lakers.jpg">LeBron James</a>, <a href="https://commons.wikimedia.org/wiki/File:Tom_Brady_WFT-Buccaneers_NOV2021_(cropped).jpg">Tom Brady</a>, and <a href="https://commons.wikimedia.org/wiki/File:Lamar_Jackson_2020.jpg">Lamar Jackson</a> by All-Pro Reels, via Wikimedia Commons. Photos are cropped and desaturated on the page. <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC BY-SA 2.0</a>.</p></details></footer>
   </main>
+  <script src="eligibility.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

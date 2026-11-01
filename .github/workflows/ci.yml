@@ -17,4 +17,7 @@ jobs:
       - name: Test pipeline and research guards
         run: python -m unittest discover -s tests
       - name: Check browser script syntax
-        run: node --check dist/app.js
+        run: |
+          node --check dist/app.js
+          node --check dist/eligibility.js
+          node tests/test_browser_eligibility.cjs

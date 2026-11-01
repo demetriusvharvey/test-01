@@ -41,8 +41,11 @@ def build_market(events,now,min_lead_minutes=20):
     merged={}
     for x in events:
         asof=datetime.fromisoformat(x['as_of']); start=datetime.fromisoformat(x['starts_at'])
-        if now-asof>timedelta(minutes=95) or start<=now+timedelta(minutes=min_lead_minutes): continue
+        if asof>now or now-asof>timedelta(minutes=95) or start<=now+timedelta(minutes=min_lead_minutes): continue
         rec=merged.setdefault(x['id'],{k:x[k] for k in ('id','league','home','away','home_name','away_name','starts_at')})
+        prior=rec.setdefault('books',{}).get(x['book'])
+        # Input ordering must not replace a recent quote with an older source.
+        if prior and datetime.fromisoformat(prior['as_of'])>asof:continue
         rec.setdefault('books',{})[x['book']]={'home':x['home_odds'],'away':x['away_odds'],'as_of':x['as_of'],
                                               'fetched_at':x.get('fetched_at'),'provider':x.get('provider'),
                                               'game_id':x['id'],'league':x['league'],'book':x['book'],'market':'h2h',

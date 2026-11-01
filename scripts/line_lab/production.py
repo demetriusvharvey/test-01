@@ -52,7 +52,7 @@ def decision(forecast,event,now,validation=None,min_edge=.03,min_ev=.02,max_odds
     No-vig is a comparison benchmark; break-even at the actual wager price
     determines EV. A scenario envelope is NOT a statistical confidence bound.
     """
-    result={'eligible':False,'reasons':[],'pricing':None};reasons=result['reasons']
+    result={'eligible':False,'reasons':[],'pricing':None,'expires_at':None};reasons=result['reasons']
     try:
         current,start=aware(now),aware(event['starts_at']);predicted=aware(forecast['predicted_at'])
         if not predicted<=current<start or current-predicted>timedelta(minutes=20):reasons.append('forecast_not_fresh_pregame')
@@ -103,6 +103,10 @@ def decision(forecast,event,now,validation=None,min_edge=.03,min_ev=.02,max_odds
                                'observed_at':book['fetched_at'],'provider':book['provider'],'game_id':event['id'],
                                'market':'h2h','source_url':book.get('source_url'),'uncertainty_adjusted_edge':conservative_edge,
                                'uncertainty_adjusted_ev':conservative_ev}
+            if news.get('observed_at'):
+                result['expires_at']=min(start,predicted+timedelta(minutes=20),
+                    aware(news['observed_at'])+timedelta(minutes=20),
+                    aware(book['as_of'])+timedelta(minutes=max_odds_minutes)).isoformat()
             if lower is None or conservative_edge<min_edge or conservative_ev<min_ev:reasons.append('positive_edge_not_established')
         result['eligible']=not reasons
     except (KeyError,TypeError,ValueError,OverflowError):
@@ -261,7 +265,8 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
                 'pick_day':current.astimezone(ET).date().isoformat(),'model':estimate['model_version'],'current':True,
                 'outcome':'pending','probability':estimate['decision']['probability'],'books':[
                     {'name':name,'odds':b[side],'as_of':b['as_of']} for name,b in event.get('books',{}).items()],
-                'recommendation_eligible':True,'pricing':estimate['decision']['pricing']})
+                'recommendation_eligible':True,'pricing':estimate['decision']['pricing'],
+                'expires_at':estimate['decision']['expires_at']})
     board['research_forecasts']=forecasts;board['picks']=picks
     from collections import Counter
     board['inference_diagnostics']={'active_models':dict(Counter(f['model_version'] for f in forecasts)),
@@ -285,6 +290,8 @@ def apply_pipeline(board,models,games,now,root=None,nba_predictions=None,blocked
         'recommendations':len(picks),'research_forecasts':len(forecasts),'automatic_top_three':False,
         'status':'no_qualified_bets' if not picks else 'qualified','odds_max_age_minutes':20,
         'injury_max_age_minutes':20,'recommendation_book':'FanDuel','refresh_latency':'scheduled snapshots; not real-time'}
+    from .readiness import summarize
+    board['recommendation_readiness']=summarize(board.get('games',[]),now)
     board['model']='League-specific chronological research forecasts; validated value gate'
     if root:
         board['forecast_evaluation']=archive_forecasts(root,forecasts,finals,now)

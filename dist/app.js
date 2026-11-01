@@ -35,7 +35,7 @@
     'Believe in what you’re building.',
     'Fresh day, fresh energy, clear goals.'
   ];
-  let board=null,selectedDay=dayString(),followToday=true,slateLimit=6;
+  let board=null,selectedDay=dayString(),followToday=true,slateLimit=6,slateInitialized=false;
   const today=()=>dayString();
   function setDailyDetails(){
     const day=today();if(followToday)selectedDay=day;
@@ -178,11 +178,13 @@
     const best=side=>{
       const quotes=books.filter(([,b])=>Number.isFinite(b[side])).sort((a,b)=>b[1][side]-a[1][side]);
       if(!quotes.length)return 'Odds unavailable';
-      const [name,b]=quotes[0];return `${odds(b[side])} · ${escape(name)} · observed ${displayTime(b.as_of)}`;
+      const [name,b]=quotes[0],age=Math.max(0,Math.floor((Date.now()-Date.parse(b.as_of))/60000));return `${odds(b[side])} · ${escape(name)} · source ${displayTime(b.as_of)}${age>20?' · expired for betting':''}`;
     };
     const gameDay=dayString(new Date(g.starts_at));
     const when=gameDay===today()?displayTime(g.starts_at):`${displayDay(gameDay)} · ${displayTime(g.starts_at)}`;
-    return `<details class="slate-row"><summary><span class="slate-matchup"><strong>${escape(g.away)} at ${escape(g.home)}</strong><small>${escape(g.league)} · ${when}</small></span><span class="slate-winner">${g.predicted_winner?`Model: ${escape(g.predicted_winner)}${g.prediction_uncertain?' · close call':''}`:'Model unavailable'}</span></summary><div class="slate-row-detail"><p>${escape(g.away)}: ${best('away')}</p><p>${escape(g.home)}: ${best('home')}</p>${forecastMarkup(g)}${availabilityMarkup(g)}</div></details>`;
+    const reasons=((g.forecast||{}).decision||{}).reasons||[];
+    const blockers=reasons.length?`<p>Not eligible: ${reasons.map(r=>escape(PickEligibility.labels[r]||r.replaceAll('_',' '))).join('; ')}.</p>`:'';
+    return `<details class="slate-row"><summary><span class="slate-matchup"><strong>${escape(g.away)} at ${escape(g.home)}</strong><small>${escape(g.league)} · ${when}</small></span><span class="slate-winner">${g.predicted_winner?`Model: ${escape(g.predicted_winner)}${g.prediction_uncertain?' · close call':''}`:'Model unavailable'}</span></summary><div class="slate-row-detail"><p>${escape(g.away)}: ${best('away')}</p><p>${escape(g.home)}: ${best('home')}</p>${blockers}${forecastMarkup(g)}${availabilityMarkup(g)}</div></details>`;
   }
   $('slate-filter').addEventListener('change',()=>{slateLimit=6;render();});
   $('slate-more').addEventListener('click',()=>{slateLimit+=6;render();});
@@ -193,7 +195,7 @@
     $('record').textContent=(accuracy.wins||0)+'W – '+(accuracy.losses||0)+'L · '+((accuracy.wins||0)+(accuracy.losses||0))+' settled'+(accuracy.pending?' · '+accuracy.pending+' pending':'');
     const now=new Date(),generated=new Date(board.generated_at),validDate=Number.isFinite(generated.valueOf());
     const all=Array.isArray(board.picks)?board.picks:[];
-    const upcoming=all.filter(p=>new Date(p.starts_at)>now);
+    const upcoming=all.filter(p=>PickEligibility.activePick(p,now));
     const times=upcoming.flatMap(p=>(p.books||[]).filter(b=>b.as_of).map(b=>new Date(b.as_of).valueOf())).filter(Number.isFinite);
     const oldest=times.length?Math.min(...times):null;
     const stale=!validDate||now.valueOf()-generated.valueOf()>95*60*1000||generated.valueOf()-now.valueOf()>5*60*1000;
@@ -212,11 +214,17 @@
       return new Date(a.starts_at)-new Date(b.starts_at);
     });
     $('count').textContent=selectedDay===today()?active.length+' recommendations · '+history.length+' saved forecasts':history.length+' saved forecasts';
-    if($('selection-status'))$('selection-status').textContent=selectedDay===today()&&board.selection_policy?(active.length?'Only selections passing the validation and value requirements appear as recommendations.':'No qualified bets. Research forecasts remain in Upcoming games. The historical record below is preserved.'):'Saved forecasts and their original outcomes.';
+    const ready=PickEligibility.readiness(board,now);
+    const messages={validation_pending:'Bet recommendations are pending model validation. Today’s winner forecasts are shown below; data checks may also be incomplete.',data_unavailable:'Recommendations are blocked by missing or expired game data. Today’s available winner forecasts are shown below.',no_qualified_edge:'No game passed the conservative value requirements. Today’s winner forecasts are shown below.',no_upcoming_games:'No remaining games are scheduled for today. Use the league filters to see later games.',qualified:'Only selections passing the validation and value requirements appear as recommendations.'};
+    if($('selection-status'))$('selection-status').textContent=selectedDay===today()&&board.selection_policy?messages[ready.status]:'Saved forecasts and their original outcomes.';
+    $('eligibility-details').hidden=selectedDay!==today()||!!active.length||stale||!Object.keys(ready.blockers).length;
+    $('eligibility-summary').textContent=`${ready.forecasts} of ${ready.games} remaining games today have winner forecasts. These are the checks preventing bets:`;
+    $('eligibility-reasons').innerHTML=Object.entries(ready.blockers).map(([reason,count])=>`<li>${escape(PickEligibility.labels[reason]||reason.replaceAll('_',' '))} · ${count} game${count===1?'':'s'}</li>`).join('');
     const freshness=$('freshness');freshness.classList.toggle('stale',selectedDay===today()&&stale);
     freshness.textContent=selectedDay!==today()?'Saved picks and results · '+displayDay(selectedDay):stale?'Update delayed · saved picks shown':oldest?'Odds observed '+displayTime(new Date(oldest)):validDate?'Last checked '+displayTime(generated):'Waiting for data';
     if(!picks.length){
-      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved winners for this day.</strong><p>The forecast history grows as each day is recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':'<div class="empty"><strong>No qualified betting recommendations.</strong><p>See Upcoming games for research forecasts. Missing evidence or prices can rule out every game.</p></div>';
+      const emptyTitle=ready.status==='validation_pending'?'Bet recommendations await validation.':ready.status==='data_unavailable'?'Required game data is unavailable or expired.':ready.status==='no_upcoming_games'?'No remaining games today.':'No qualified betting recommendations.';
+      $('picks').innerHTML=selectedDay!==today()?'<div class="empty"><strong>No saved winners for this day.</strong><p>The forecast history grows as each day is recorded.</p></div>':stale?'<div class="empty"><strong>Data update delayed.</strong><p>We’ll show picks when the necessary feeds are available.</p></div>':`<div class="empty"><strong>${emptyTitle}</strong><p>${ready.forecasts?'Today’s model winners are in the expanded Upcoming slate below.':'Check Upcoming slate for later games.'}</p></div>`;
     }else $('picks').innerHTML=picks.map(pickMarkup).join('');
     $('saved-section').hidden=!earlier.length;
     $('saved-list').innerHTML=earlier.map(p=>pickMarkup(Object.assign({},p,{current:false}))).join('');
@@ -225,6 +233,7 @@
     const filter=$('slate-filter').value;
     const slate=allSlate.filter(g=>filter==='today'?dayString(new Date(g.starts_at))===today():g.league===filter.toUpperCase());
     $('slate-section').hidden=!allSlate.length;
+    if(!slateInitialized&&allSlate.length){$('slate-section').open=!active.length;slateInitialized=true;}
     $('slate-count').textContent=`${slate.length} game${slate.length===1?'':'s'}`;
     $('game-slate').innerHTML=slate.length?slate.slice(0,slateLimit).map(slateMarkup).join(''):'<p class="slate-empty">No games in this view.</p>';
     $('slate-more').hidden=slateLimit>=slate.length;

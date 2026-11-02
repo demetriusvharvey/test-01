@@ -1,19 +1,19 @@
 {
-  "evaluated_at": "2026-11-02T00:00:23.014494+00:00",
+  "evaluated_at": "2026-11-02T05:52:59.712365+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
-      "benchmark_missing": 11,
-      "pending": 77,
+      "benchmark_missing": 14,
+      "pending": 79,
       "void": 0,
       "excluded": 10,
       "scenario_agreement": 0,
       "scenario_disagreement": 0,
       "model": {
-        "games": 11,
-        "accuracy": 0.6363636363636364,
-        "brier": 0.24225825229842635,
-        "log_loss": 0.7069458827380969
+        "games": 14,
+        "accuracy": 0.5714285714285714,
+        "brier": 0.2682568912398124,
+        "log_loss": 0.7558055668384174
       },
       "elo": {
         "games": 0,
@@ -35,43 +35,43 @@
   "conditional_winner_records": {
     "nba-convex-ensemble-v1": {
       "wins": 8,
-      "losses": 3,
-      "pending": 72,
-      "abstained": 0,
+      "losses": 4,
+      "pending": 74,
+      "abstained": 2,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 11,
-      "accuracy": 0.7272727272727273
+      "settled_predictions": 12,
+      "accuracy": 0.6666666666666666
     },
     "nba-partial-stint-logistic-v1": {
       "wins": 8,
-      "losses": 3,
-      "pending": 72,
-      "abstained": 0,
+      "losses": 4,
+      "pending": 74,
+      "abstained": 2,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 11,
-      "accuracy": 0.7272727272727273
+      "settled_predictions": 12,
+      "accuracy": 0.6666666666666666
     },
     "nba-player-box-logistic-v1": {
       "wins": 8,
-      "losses": 3,
-      "pending": 72,
-      "abstained": 0,
+      "losses": 4,
+      "pending": 74,
+      "abstained": 2,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 11,
-      "accuracy": 0.7272727272727273
+      "settled_predictions": 12,
+      "accuracy": 0.6666666666666666
     },
     "nba-rotation-logistic-v1": {
       "wins": 5,
-      "losses": 6,
-      "pending": 72,
-      "abstained": 0,
+      "losses": 7,
+      "pending": 74,
+      "abstained": 2,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 11,
-      "accuracy": 0.45454545454545453
+      "settled_predictions": 12,
+      "accuracy": 0.4166666666666667
     }
   },
   "promoted": false,

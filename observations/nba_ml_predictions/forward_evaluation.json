@@ -1,19 +1,19 @@
 {
-  "evaluated_at": "2026-11-02T22:44:13.079774+00:00",
+  "evaluated_at": "2026-11-03T03:45:02.101059+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
-      "benchmark_missing": 14,
-      "pending": 79,
+      "benchmark_missing": 23,
+      "pending": 75,
       "void": 0,
       "excluded": 10,
       "scenario_agreement": 0,
       "scenario_disagreement": 0,
       "model": {
-        "games": 14,
-        "accuracy": 0.5714285714285714,
-        "brier": 0.2682568912398124,
-        "log_loss": 0.7558055668384174
+        "games": 23,
+        "accuracy": 0.6521739130434783,
+        "brier": 0.23633513069143183,
+        "log_loss": 0.6795127391139753
       },
       "elo": {
         "games": 0,
@@ -34,44 +34,44 @@
   },
   "conditional_winner_records": {
     "nba-convex-ensemble-v1": {
-      "wins": 8,
-      "losses": 4,
-      "pending": 74,
+      "wins": 15,
+      "losses": 6,
+      "pending": 70,
       "abstained": 2,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 12,
-      "accuracy": 0.6666666666666666
+      "settled_predictions": 21,
+      "accuracy": 0.7142857142857143
     },
     "nba-partial-stint-logistic-v1": {
-      "wins": 8,
-      "losses": 4,
-      "pending": 74,
+      "wins": 15,
+      "losses": 6,
+      "pending": 70,
       "abstained": 2,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 12,
-      "accuracy": 0.6666666666666666
+      "settled_predictions": 21,
+      "accuracy": 0.7142857142857143
     },
     "nba-player-box-logistic-v1": {
-      "wins": 8,
-      "losses": 4,
-      "pending": 74,
+      "wins": 15,
+      "losses": 6,
+      "pending": 70,
       "abstained": 2,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 12,
-      "accuracy": 0.6666666666666666
+      "settled_predictions": 21,
+      "accuracy": 0.7142857142857143
     },
     "nba-rotation-logistic-v1": {
-      "wins": 5,
-      "losses": 7,
-      "pending": 74,
+      "wins": 12,
+      "losses": 9,
+      "pending": 70,
       "abstained": 2,
       "void": 0,
       "excluded": 10,
-      "settled_predictions": 12,
-      "accuracy": 0.4166666666666667
+      "settled_predictions": 21,
+      "accuracy": 0.5714285714285714
     }
   },
   "promoted": false,

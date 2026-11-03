@@ -1,7 +1,7 @@
 {
   "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_rosters/rosters_2027.csv",
-  "sha256": "c94c4635018a8a3515e318d0205ef266ce655fc5717b4322ee99afe6775767b9",
-  "observed_at": "2026-10-31T12:17:38.183942+00:00",
+  "sha256": "0a73c44c2ccb4c2c83dc10dbbe6cd78eab5f71d3ab5c31045eb62cab47dffba0",
+  "observed_at": "2026-11-02T22:44:13.067699+00:00",
   "columns": [
     "season",
     "team_id",
@@ -40,9 +40,9 @@
     "status_name",
     "status_type"
   ],
-  "rows": 522,
+  "rows": 521,
   "teams_parsed": 30,
-  "current_ids_with_box_history": 502,
-  "current_ids_without_box_history": 20,
+  "current_ids_with_box_history": 504,
+  "current_ids_without_box_history": 17,
   "injury_identity_crosswalk_verified": false
 }

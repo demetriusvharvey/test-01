@@ -1,12 +1,12 @@
 # NBA chronological statistical ensemble
 
-Run: 2026-10-31T20:11:31.346834+00:00. H024 was registered after inspecting H023.
+Run: 2026-11-03T18:02:22.937705+00:00. H024 was registered after inspecting H023.
 Weights are learned from earlier held-out component predictions only. All test comparisons use identical games. The previously inspected archive is exploratory, not independent confirmation.
 
 | Season | Games | Ensemble Brier | Elo Brier | Ensemble log loss | Elo log loss | Earlier-selected component | Raw p | Joint BH p |
 |---|---:|---:|---:|---:|---:|---|---:|---:|
-| 2025-26 | 1209 | 0.20490 | 0.20848 | 0.59642 | 0.60505 | rotation | 0.00590 | 0.01770 |
-| 2026-27 | 55 | 0.23080 | 0.22053 | 0.65053 | 0.62783 | rotation | unavailable | unavailable |
+| 2025-26 | 1209 | 0.20490 | 0.20848 | 0.59642 | 0.60505 | rotation | 0.00590 | 0.02950 |
+| 2026-27 | 76 | 0.24018 | 0.22263 | 0.67021 | 0.63218 | rotation | 0.21758 | 0.39313 |
 
 ## Learned weights
 
@@ -17,4 +17,4 @@ Weights are nonnegative and sum to one. A ten-percentage-point grid is fixed bef
 
 This is a statistical ensemble, not the full market/simulation ensemble from the master prompt. Market and simulator inputs have not earned inclusion. Current injury scenarios are combined only when required components have matching scenarios and timestamps. A team-only result is explicitly labeled and is not claimed injury-adjusted. No public pick changes.
 
-Artifact: observations/nba_ensemble/52afe312e1788325c3bb9d79f58314d0428761e01fb2f7cfb92afd301a6f582f/evaluation.json.
+Artifact: observations/nba_ensemble/32541312672f0c60e1a22a5b15eb3c659a405fc6c1915fcd58cf883a0224a1d9/evaluation.json.

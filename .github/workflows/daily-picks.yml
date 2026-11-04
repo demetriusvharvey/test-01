@@ -50,8 +50,13 @@ jobs:
           git -C .data-store add observations
           if ! git -C .data-store diff --cached --quiet; then
             git -C .data-store commit -m 'Append observed odds and closing proxies'
-            git -C .data-store pull --rebase origin data/observations
-            git -C .data-store push origin HEAD:data/observations
+            # Retry transient remote write failures; never force or overwrite conflicts.
+            for attempt in 1 2 3; do
+              git -C .data-store pull --rebase origin data/observations
+              if git -C .data-store push origin HEAD:data/observations; then break; fi
+              if [ "$attempt" = 3 ]; then exit 1; fi
+              sleep "$attempt"
+            done
           fi
       - name: Publish snapshot
         run: |
@@ -60,6 +65,11 @@ jobs:
           git add dist/board.json data/predictions.json data/winner_predictions.json data/referee_history.json
           if ! git diff --cached --quiet; then
             git commit -m 'Update picks and scorecard'
-            git pull --rebase origin main
-            git push origin HEAD:main
+            # Retry transient remote write failures; never force or overwrite conflicts.
+            for attempt in 1 2 3; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then break; fi
+              if [ "$attempt" = 3 ]; then exit 1; fi
+              sleep "$attempt"
+            done
           fi

@@ -1,106 +1,22 @@
 {
-  "generated_at": "2026-11-05T02:33:51.930480+00:00",
+  "generated_at": "2026-11-05T21:07:44.334860+00:00",
   "nba_referees": {
     "source": "https://official.nba.com/referee-assignments/",
     "status": "ok",
-    "date_expected": "2026-11-04",
+    "date_expected": "2026-11-05",
     "games": [
       {
-        "matchup": "Philadelphia @ Detroit",
-        "crew_chief": "Marc Davis (#8)",
-        "referee": "Natalie Sago (#9)",
-        "umpire": "Nate Green (#41)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Atlanta @ Washington",
-        "crew_chief": "Gediminas Petraitis (#50)",
-        "referee": "Andy Nagy (#18)",
-        "umpire": "Brandon Adair (#67)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Milwaukee @ Boston",
-        "crew_chief": "James Capers (#19)",
-        "referee": "Dedric Taylor (#21)",
-        "umpire": "Julian Scott (#76)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Charlotte @ Brooklyn",
-        "crew_chief": "Zach Zarba (#15)",
-        "referee": "Eric Lewis (#42)",
-        "umpire": "Klajdi Mulla (#97)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Chicago @ New York",
-        "crew_chief": "Brian Forte (#45)",
-        "referee": "Ray Acosta (#54)",
-        "umpire": "Brent Haskill (#92)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Indiana @ Memphis",
-        "crew_chief": "Ben Taylor (#46)",
-        "referee": "Mousa Dagher (#28)",
-        "umpire": "Agon Abazi (#88)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Utah @ New Orleans",
-        "crew_chief": "Courtney Kirkland (#61)",
-        "referee": "JB DeRosa (#14)",
-        "umpire": "Intae Hwang (#73)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Cleveland @ Oklahoma City",
-        "crew_chief": "John Goble (#10)",
-        "referee": "John Butler (#30)",
-        "umpire": "Jonathan Sterling (#17)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Minnesota @ Houston",
-        "crew_chief": "Tyler Ford (#39)",
-        "referee": "Justin Van Duyne (#64)",
-        "umpire": "Gina Catanzariti (#75)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Toronto @ Denver",
+        "matchup": "Orlando @ Phoenix",
         "crew_chief": "Karl Lane (#77)",
-        "referee": "Kevin Cutler (#34)",
+        "referee": "Mark Lindsay (#29)",
         "umpire": "Dannica Baroody (#89)",
         "alternate": ""
       },
       {
-        "matchup": "Portland @ Phoenix",
-        "crew_chief": "Nick Buchert (#3)",
-        "referee": "Jacyn Goble (#68)",
-        "umpire": "Robert Hussey (#85)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Dallas @ San Antonio",
-        "crew_chief": "Curtis Blair (#74)",
-        "referee": "Brent Barnaky (#36)",
-        "umpire": "Simone Jelks (#81)",
-        "alternate": ""
-      },
-      {
-        "matchup": "L.A. Lakers @ Sacramento",
-        "crew_chief": "Ed Malloy (#7)",
+        "matchup": "Miami @ Golden State",
+        "crew_chief": "Bill Kennedy (#55)",
         "referee": "Jason Goldenberg (#35)",
         "umpire": "Chelisa Painter (#79)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Miami @ LA Clippers",
-        "crew_chief": "Sean Wright (#4)",
-        "referee": "Sha'Rae Mitchell (#98)",
-        "umpire": "Matt Kallio (#53)",
         "alternate": ""
       }
     ]

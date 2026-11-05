@@ -1558,5 +1558,31 @@
     ],
     "observed_at": "2026-11-05T06:33:13.434439+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-05:Orlando @ Phoenix",
+    "game_date": "2026-11-05",
+    "matchup": "Orlando @ Phoenix",
+    "crew": [
+      "Karl Lane (#77)",
+      "Mark Lindsay (#29)",
+      "Dannica Baroody (#89)",
+      ""
+    ],
+    "observed_at": "2026-11-05T14:56:08.509679+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-05:Miami @ Golden State",
+    "game_date": "2026-11-05",
+    "matchup": "Miami @ Golden State",
+    "crew": [
+      "Bill Kennedy (#55)",
+      "Jason Goldenberg (#35)",
+      "Chelisa Painter (#79)",
+      ""
+    ],
+    "observed_at": "2026-11-05T14:56:08.509679+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

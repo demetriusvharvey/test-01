@@ -181,7 +181,9 @@ class StorageAndSourceTests(unittest.TestCase):
             if 'nflverse/nfldata' in url:return nfl
             if 'agentbets.ai/odds/' in url:return book if url.endswith('/nba') else book.replace('Portland Trail Blazers @ Los Angeles Lakers','Unknown @ Unknown')
             if 'official.nba.com' in url:return refs
-            if url=='https://site.api.espn.com/apis/site/v2/sports/basketball/nba/scoreboard?dates=20261027':return json.dumps({'events':[]})
+            if url in {f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}'
+                       for sport in ('basketball/nba','football/nfl') for day in ('20261027','20261028')}:
+                return json.dumps({'events':[]})
             raise AssertionError('unexpected direct source: '+url)
         scoreboard=[{'id':'123','sport_key':'basketball_nba','home_team':'Los Angeles Lakers',
                      'away_team':'Portland Trail Blazers','commence_time':'2026-10-28T03:00:00Z',
@@ -202,6 +204,8 @@ class StorageAndSourceTests(unittest.TestCase):
             runner.main()
         board=json.loads((self.root/'dist/board.json').read_text())
         self.assertEqual(board['source_status']['scoreboard_source'],'PropLine')
+        self.assertEqual(len(board['schedule_verification']),4)
+        self.assertTrue(all(r['status']=='checked' for r in board['schedule_verification']))
         self.assertIn('PropLine scoreboard',board['source'])
         self.assertEqual(board['picks'],[])
         self.assertEqual(board['selection_policy']['status'],'no_qualified_bets')
@@ -232,6 +236,9 @@ class StorageAndSourceTests(unittest.TestCase):
             if 'nflverse/nfldata' in url:return nfl
             if 'agentbets.ai/odds/' in url:return book if url.endswith('/nba') else book.replace('Portland Trail Blazers @ Los Angeles Lakers','Unknown @ Unknown')
             if 'official.nba.com' in url:return '<p>October 27, 2026</p>'
+            if url in {f'https://site.api.espn.com/apis/site/v2/sports/{sport}/scoreboard?dates={day}'
+                       for sport in ('basketball/nba','football/nfl') for day in ('20261027','20261028')}:
+                return json.dumps({'events':[]})
             raise AssertionError(url)
         event={'id':'123','sport_key':'basketball_nba','home_team':'Los Angeles Lakers',
                'away_team':'Portland Trail Blazers','commence_time':'2026-10-28T03:00:00Z'}

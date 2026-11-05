@@ -165,6 +165,16 @@ def main():
                     starts_by_game.update(parse_espn_starts(payload,league))
                 except Exception:failed_days+=1
             if failed_days:errors.append(f'{league} upcoming schedule unavailable for {failed_days} date(s)')
+    # Provider event times can reflect an estimated tipoff rather than the
+    # published schedule. Corroborate near-term starts without extending them.
+    schedule_verification=[]
+    if propline_enabled:
+        from .schedule_verification import collect as verify_schedule
+        starts_by_game,schedule_verification=verify_schedule(starts_by_game,datetime.now(timezone.utc).isoformat(),get)
+        if any(r['status']=='unavailable' for r in schedule_verification):
+            errors.append('Public schedule corroboration partially unavailable')
+        if any(r.get('quarantined_games') for r in schedule_verification):
+            errors.append('Conflicting scheduled starts quarantined')
     now=datetime.now(timezone.utc)
     day_rolled=now.astimezone(ET).date()!=today
     if day_rolled: errors.append('ET date changed during update; new picks suppressed')
@@ -417,6 +427,7 @@ def main():
     display_markets=build_market(selected,now,min_lead_minutes=0)
     board=render_board(display_markets,ledger,now,errors,models,training_counts,added_finals,scheduled)
     board['source']='AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; '+score_source+' scoreboard'
+    board['schedule_verification']=schedule_verification
     attach_prediction_checks(board,ledger)
     try:
         watch_path=data_dir/'watchlist.json'

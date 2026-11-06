@@ -1,22 +1,71 @@
 {
-  "generated_at": "2026-11-06T02:33:38.667129+00:00",
+  "generated_at": "2026-11-06T20:28:30.999912+00:00",
   "nba_referees": {
     "source": "https://official.nba.com/referee-assignments/",
     "status": "ok",
-    "date_expected": "2026-11-05",
+    "date_expected": "2026-11-06",
     "games": [
       {
-        "matchup": "Orlando @ Phoenix",
-        "crew_chief": "Karl Lane (#77)",
-        "referee": "Mark Lindsay (#29)",
-        "umpire": "Dannica Baroody (#89)",
+        "matchup": "Washington @ Atlanta",
+        "crew_chief": "Ray Acosta (#54)",
+        "referee": "John Butler (#30)",
+        "umpire": "Phenizee Ransom (#70)",
         "alternate": ""
       },
       {
-        "matchup": "Miami @ Golden State",
-        "crew_chief": "Bill Kennedy (#55)",
-        "referee": "Jason Goldenberg (#35)",
-        "umpire": "Chelisa Painter (#79)",
+        "matchup": "Boston @ Charlotte",
+        "crew_chief": "Tony Brothers (#25)",
+        "referee": "Marat Kogut (#32)",
+        "umpire": "Brent Haskill (#92)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Philadelphia @ Cleveland",
+        "crew_chief": "Kevin Scott (#24)",
+        "referee": "JB DeRosa (#14)",
+        "umpire": "Pat O'Connell (#90)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Utah @ Dallas",
+        "crew_chief": "Tyler Ford (#39)",
+        "referee": "Nick Buchert (#3)",
+        "umpire": "Che Flores (#91)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Oklahoma City @ Memphis",
+        "crew_chief": "Justin Van Duyne (#64)",
+        "referee": "Brent Barnaky (#36)",
+        "umpire": "Brett Nansel (#44)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Toronto @ Milwaukee",
+        "crew_chief": "Scott Foster (#48)",
+        "referee": "Mousa Dagher (#28)",
+        "umpire": "Leon Wood (#40)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Minnesota @ New Orleans",
+        "crew_chief": "James Williams (#60)",
+        "referee": "Aaron Smith (#51)",
+        "umpire": "Simone Jelks (#81)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Portland @ L.A. Lakers",
+        "crew_chief": "Sean Wright (#4)",
+        "referee": "Sean Corbin (#33)",
+        "umpire": "JT Orr (#72)",
+        "alternate": ""
+      },
+      {
+        "matchup": "San Antonio @ Sacramento",
+        "crew_chief": "Jacyn Goble (#68)",
+        "referee": "Nate Green (#41)",
+        "umpire": "Robert Hussey (#85)",
         "alternate": ""
       }
     ]

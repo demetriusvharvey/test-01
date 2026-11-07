@@ -1701,5 +1701,122 @@
     ],
     "observed_at": "2026-11-06T16:14:56.375232+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Washington @ Atlanta",
+    "game_date": "2026-11-07",
+    "matchup": "Washington @ Atlanta",
+    "crew": [
+      "Ray Acosta (#54)",
+      "John Butler (#30)",
+      "Phenizee Ransom (#70)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Boston @ Charlotte",
+    "game_date": "2026-11-07",
+    "matchup": "Boston @ Charlotte",
+    "crew": [
+      "Tony Brothers (#25)",
+      "Marat Kogut (#32)",
+      "Brent Haskill (#92)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Philadelphia @ Cleveland",
+    "game_date": "2026-11-07",
+    "matchup": "Philadelphia @ Cleveland",
+    "crew": [
+      "Kevin Scott (#24)",
+      "JB DeRosa (#14)",
+      "Pat O'Connell (#90)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Utah @ Dallas",
+    "game_date": "2026-11-07",
+    "matchup": "Utah @ Dallas",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Nick Buchert (#3)",
+      "Che Flores (#91)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Oklahoma City @ Memphis",
+    "game_date": "2026-11-07",
+    "matchup": "Oklahoma City @ Memphis",
+    "crew": [
+      "Justin Van Duyne (#64)",
+      "Brent Barnaky (#36)",
+      "Brett Nansel (#44)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Toronto @ Milwaukee",
+    "game_date": "2026-11-07",
+    "matchup": "Toronto @ Milwaukee",
+    "crew": [
+      "Scott Foster (#48)",
+      "Mousa Dagher (#28)",
+      "Leon Wood (#40)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Minnesota @ New Orleans",
+    "game_date": "2026-11-07",
+    "matchup": "Minnesota @ New Orleans",
+    "crew": [
+      "James Williams (#60)",
+      "Aaron Smith (#51)",
+      "Simone Jelks (#81)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Portland @ L.A. Lakers",
+    "game_date": "2026-11-07",
+    "matchup": "Portland @ L.A. Lakers",
+    "crew": [
+      "Sean Wright (#4)",
+      "Sean Corbin (#33)",
+      "JT Orr (#72)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:San Antonio @ Sacramento",
+    "game_date": "2026-11-07",
+    "matchup": "San Antonio @ Sacramento",
+    "crew": [
+      "Jacyn Goble (#68)",
+      "Nate Green (#41)",
+      "Robert Hussey (#85)",
+      ""
+    ],
+    "observed_at": "2026-11-07T07:20:07.221068+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

@@ -1818,5 +1818,96 @@
     ],
     "observed_at": "2026-11-07T07:20:07.221068+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Denver @ Indiana",
+    "game_date": "2026-11-07",
+    "matchup": "Denver @ Indiana",
+    "crew": [
+      "Gediminas Petraitis (#50)",
+      "Brian Forte (#45)",
+      "Brandon Schwab (#49)",
+      "Evan Scott (#22)"
+    ],
+    "observed_at": "2026-11-07T14:11:34.756441+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Brooklyn @ Atlanta",
+    "game_date": "2026-11-07",
+    "matchup": "Brooklyn @ Atlanta",
+    "crew": [
+      "Mark Lindsay (#29)",
+      "Eric Dalen (#37)",
+      "Biniam Maru (#94)",
+      ""
+    ],
+    "observed_at": "2026-11-07T14:11:34.756441+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:New York @ Cleveland",
+    "game_date": "2026-11-07",
+    "matchup": "New York @ Cleveland",
+    "crew": [
+      "Zach Zarba (#15)",
+      "Ed Malloy (#7)",
+      "Ashley Moyer-Gleich (#13)",
+      ""
+    ],
+    "observed_at": "2026-11-07T14:11:34.756441+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Washington @ Oklahoma City",
+    "game_date": "2026-11-07",
+    "matchup": "Washington @ Oklahoma City",
+    "crew": [
+      "Nick Buchert (#3)",
+      "Karl Lane (#77)",
+      "Scott Twardoski (#52)",
+      ""
+    ],
+    "observed_at": "2026-11-07T14:11:34.756441+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Orlando @ Golden State",
+    "game_date": "2026-11-07",
+    "matchup": "Orlando @ Golden State",
+    "crew": [
+      "Curtis Blair (#74)",
+      "Robert Hussey (#85)",
+      "Intae Hwang (#73)",
+      ""
+    ],
+    "observed_at": "2026-11-07T14:11:34.756441+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:Houston @ Phoenix",
+    "game_date": "2026-11-07",
+    "matchup": "Houston @ Phoenix",
+    "crew": [
+      "Ben Taylor (#46)",
+      "Jason Goldenberg (#35)",
+      "Jenna Reneau (#93)",
+      ""
+    ],
+    "observed_at": "2026-11-07T14:11:34.756441+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-07:San Antonio @ Portland",
+    "game_date": "2026-11-07",
+    "matchup": "San Antonio @ Portland",
+    "crew": [
+      "Bill Kennedy (#55)",
+      "Tre Maddox (#23)",
+      "Dannica Baroody (#89)",
+      ""
+    ],
+    "observed_at": "2026-11-07T14:11:34.756441+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

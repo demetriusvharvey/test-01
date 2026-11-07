@@ -1,71 +1,57 @@
 {
-  "generated_at": "2026-11-07T01:59:46.931834+00:00",
+  "generated_at": "2026-11-07T18:51:29.017498+00:00",
   "nba_referees": {
     "source": "https://official.nba.com/referee-assignments/",
     "status": "ok",
-    "date_expected": "2026-11-06",
+    "date_expected": "2026-11-07",
     "games": [
       {
-        "matchup": "Washington @ Atlanta",
-        "crew_chief": "Ray Acosta (#54)",
-        "referee": "John Butler (#30)",
-        "umpire": "Phenizee Ransom (#70)",
+        "matchup": "Denver @ Indiana",
+        "crew_chief": "Gediminas Petraitis (#50)",
+        "referee": "Brian Forte (#45)",
+        "umpire": "Brandon Schwab (#49)",
+        "alternate": "Evan Scott (#22)"
+      },
+      {
+        "matchup": "Brooklyn @ Atlanta",
+        "crew_chief": "Mark Lindsay (#29)",
+        "referee": "Eric Dalen (#37)",
+        "umpire": "Biniam Maru (#94)",
         "alternate": ""
       },
       {
-        "matchup": "Boston @ Charlotte",
-        "crew_chief": "Tony Brothers (#25)",
-        "referee": "Marat Kogut (#32)",
-        "umpire": "Brent Haskill (#92)",
+        "matchup": "New York @ Cleveland",
+        "crew_chief": "Zach Zarba (#15)",
+        "referee": "Ed Malloy (#7)",
+        "umpire": "Ashley Moyer-Gleich (#13)",
         "alternate": ""
       },
       {
-        "matchup": "Philadelphia @ Cleveland",
-        "crew_chief": "Kevin Scott (#24)",
-        "referee": "JB DeRosa (#14)",
-        "umpire": "Pat O'Connell (#90)",
+        "matchup": "Washington @ Oklahoma City",
+        "crew_chief": "Nick Buchert (#3)",
+        "referee": "Karl Lane (#77)",
+        "umpire": "Scott Twardoski (#52)",
         "alternate": ""
       },
       {
-        "matchup": "Utah @ Dallas",
-        "crew_chief": "Tyler Ford (#39)",
-        "referee": "Nick Buchert (#3)",
-        "umpire": "Che Flores (#91)",
+        "matchup": "Orlando @ Golden State",
+        "crew_chief": "Curtis Blair (#74)",
+        "referee": "Robert Hussey (#85)",
+        "umpire": "Intae Hwang (#73)",
         "alternate": ""
       },
       {
-        "matchup": "Oklahoma City @ Memphis",
-        "crew_chief": "Justin Van Duyne (#64)",
-        "referee": "Brent Barnaky (#36)",
-        "umpire": "Brett Nansel (#44)",
+        "matchup": "Houston @ Phoenix",
+        "crew_chief": "Ben Taylor (#46)",
+        "referee": "Jason Goldenberg (#35)",
+        "umpire": "Jenna Reneau (#93)",
         "alternate": ""
       },
       {
-        "matchup": "Toronto @ Milwaukee",
-        "crew_chief": "Scott Foster (#48)",
-        "referee": "Mousa Dagher (#28)",
-        "umpire": "Leon Wood (#40)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Minnesota @ New Orleans",
-        "crew_chief": "James Williams (#60)",
-        "referee": "Aaron Smith (#51)",
-        "umpire": "Simone Jelks (#81)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Portland @ L.A. Lakers",
-        "crew_chief": "Sean Wright (#4)",
-        "referee": "Sean Corbin (#33)",
-        "umpire": "JT Orr (#72)",
-        "alternate": ""
-      },
-      {
-        "matchup": "San Antonio @ Sacramento",
-        "crew_chief": "Jacyn Goble (#68)",
-        "referee": "Nate Green (#41)",
-        "umpire": "Robert Hussey (#85)",
+        "matchup": "San Antonio @ Portland",
+        "crew_chief": "Bill Kennedy (#55)",
+        "referee": "Tre Maddox (#23)",
+        "umpire": "Dannica Baroody (#89)",
         "alternate": ""
       }
     ]

@@ -18,6 +18,9 @@ assert.equal(readiness(b,later).blockers.forecast_not_fresh_pregame,1);
 const approved={...game,forecast:{...game.forecast,decision:{eligible:true,reasons:[],expires_at:p.expires_at}}};
 assert.equal(readiness({games:[approved]},now).qualified,1);
 assert.equal(readiness({games:[approved]},later).qualified,0);
+const closed=new Date('2026-11-01T23:10:00Z');
+assert.equal(activePick({...p,scheduled_starts_at:'2026-11-01T23:20:00Z'},closed),false);
+assert.equal(readiness({games:[{...game,scheduled_starts_at:'2026-11-01T23:20:00Z'}]},closed).games,1);
 console.log('Browser eligibility: expiry, ET day, missing data, validation and no-edge cases passed.');
 
 // Exercise the actual page renderer during a feed outage. A delayed source
@@ -34,7 +37,7 @@ function element(id){
   return elements.get(id);
 }
 const delayed={generated_at:'2026-11-01T17:00:00Z',selection_policy:{},picks:[],history:[],games:[{
-  ...game,league:'NBA',home:'Knicks',away:'Celtics',predicted_winner:'Knicks',
+  ...game,league:'NBA',home:'Knicks',away:'Celtics',predicted_winner:'Knicks',scheduled_starts_at:'2026-11-01T23:20:00Z',
   forecast:{...game.forecast,model_version:'test-research',predicted_at:'2026-11-01T17:00:00Z'}}]};
 vm.runInNewContext(fs.readFileSync(require.resolve('../dist/app.js'),'utf8'),{
   Intl,Date:Clock,PickEligibility:{readiness,activePick,labels},
@@ -47,6 +50,8 @@ setImmediate(()=>{
   assert.equal(element('slate-section').open,true);
   assert.match(element('game-slate').innerHTML,/Model: Knicks/);
   assert.match(element('game-slate').innerHTML,/EXPIRED/);
+  assert.match(element('game-slate').innerHTML,/Scheduled start:/);
+  assert.match(element('game-slate').innerHTML,/eligibility closes at the earlier/);
   assert.equal(element('eligibility-details').hidden,false);
   assert.match(element('eligibility-reasons').innerHTML,/validation/);
   assert.equal(element('count').textContent,'0 recommendations · 0 saved forecasts');

@@ -181,10 +181,12 @@
       if(!quotes.length)return 'Odds unavailable';
       const [name,b]=quotes[0],age=Math.max(0,Math.floor((Date.now()-Date.parse(b.as_of))/60000));return `${odds(b[side])} · ${escape(name)} · source ${displayTime(b.as_of)}${age>20?' · expired for betting':''}`;
     };
-    const gameDay=dayString(new Date(g.starts_at));
-    const when=gameDay===today()?displayTime(g.starts_at):`${displayDay(gameDay)} · ${displayTime(g.starts_at)}`;
+    const scheduled=g.scheduled_starts_at||g.starts_at;
+    const gameDay=dayString(new Date(scheduled));
+    const when=gameDay===today()?displayTime(scheduled):`${displayDay(gameDay)} · ${displayTime(scheduled)}`;
     const reasons=((g.forecast||{}).decision||{}).reasons||[];
-    const blockers=reasons.length?`<p>Not eligible: ${reasons.map(r=>escape(PickEligibility.labels[r]||r.replaceAll('_',' '))).join('; ')}.</p>`:'';
+    const timing=Date.parse(scheduled)!==Date.parse(g.starts_at)?`<p>Scheduled start: ${displayTime(scheduled)}. Feeds disagree; betting eligibility closes at the earlier ${displayTime(g.starts_at)}.</p>`:'';
+    const blockers=timing+(reasons.length?`<p>Not eligible: ${reasons.map(r=>escape(PickEligibility.labels[r]||r.replaceAll('_',' '))).join('; ')}.</p>`:'');
     return `<details class="slate-row"><summary><span class="slate-matchup"><strong>${escape(g.away)} at ${escape(g.home)}</strong><small>${escape(g.league)} · ${when}</small></span><span class="slate-winner">${g.predicted_winner?`Model: ${escape(g.predicted_winner)}${g.prediction_uncertain?' · close call':''}`:'Model unavailable'}</span></summary><div class="slate-row-detail"><p>${escape(g.away)}: ${best('away')}</p><p>${escape(g.home)}: ${best('home')}</p>${blockers}${forecastMarkup(g)}${availabilityMarkup(g)}</div></details>`;
   }
   $('slate-filter').addEventListener('change',()=>{slateLimit=6;render();});
@@ -230,9 +232,9 @@
     $('saved-section').hidden=!earlier.length;
     $('saved-list').innerHTML=earlier.map(p=>pickMarkup(Object.assign({},p,{current:false}))).join('');
     const shownIds=new Set(picks.filter(p=>p.current).map(p=>p.id));
-    const allSlate=selectedDay===today()?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.starts_at)>now&&!shownIds.has(g.id)):[];
+    const allSlate=selectedDay===today()?(Array.isArray(board.games)?board.games:[]).filter(g=>new Date(g.scheduled_starts_at||g.starts_at)>now&&!shownIds.has(g.id)):[];
     const filter=$('slate-filter').value;
-    const slate=allSlate.filter(g=>filter==='today'?dayString(new Date(g.starts_at))===today():g.league===filter.toUpperCase());
+    const slate=allSlate.filter(g=>filter==='today'?dayString(new Date(g.scheduled_starts_at||g.starts_at))===today():g.league===filter.toUpperCase());
     $('slate-section').hidden=!allSlate.length;
     if(!slateInitialized&&allSlate.length){$('slate-section').open=!active.length;slateInitialized=true;}
     $('slate-count').textContent=`${slate.length} game${slate.length===1?'':'s'}`;

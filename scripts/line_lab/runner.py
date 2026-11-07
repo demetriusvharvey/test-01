@@ -428,6 +428,8 @@ def main():
     board=render_board(display_markets,ledger,now,errors,models,training_counts,added_finals,scheduled)
     board['source']='AgentBets odds snapshots; BoxScore Lab NBA results; nflverse NFL schedules and results; '+score_source+' scoreboard'
     board['schedule_verification']=schedule_verification
+    from .schedule_verification import attach_published_starts
+    attach_published_starts(board,schedule_verification)
     attach_prediction_checks(board,ledger)
     try:
         watch_path=data_dir/'watchlist.json'

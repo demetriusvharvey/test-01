@@ -18,7 +18,7 @@ def summarize(games, now):
     due = []
     for game in games:
         try:
-            start = aware(game['starts_at'])
+            start = aware(game.get('scheduled_starts_at') or game['starts_at'])
             if current < start and start.astimezone(ET).date() == today:
                 due.append(game)
         except (KeyError, ValueError, TypeError):
@@ -26,7 +26,8 @@ def summarize(games, now):
     reasons = Counter(reason for game in due
                       for reason in (game.get('forecast') or {}).get('decision', {}).get('reasons', []))
     decisions = [(g.get('forecast') or {}).get('decision', {}) for g in due]
-    qualified = sum(d.get('eligible') is True for d in decisions)
+    qualified = sum(d.get('eligible') is True and current < aware(g['starts_at'])
+                    for g, d in zip(due, decisions))
     missing = sum(not g.get('forecast') for g in due)
     # A price rejection is not evidence of no value when prerequisite evidence
     # is missing. The distinction is central to the public empty-state message.

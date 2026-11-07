@@ -42,11 +42,32 @@ def collect(starts, now, getter):
                 raise ValueError('scoreboard schema')
             reference = parse_espn_starts(payload, league)
             result, changes, conflicts = reconcile(result, reference, observed)
+            published = {key: value for key, value in reference.items()
+                         if key in result and key in starts and aware(starts[key]) > aware(observed)
+                         and aware(value) > aware(observed)}
             report.update(status='checked', observed_at=observed,
                           source_sha256=hashlib.sha256(text.encode()).hexdigest(),
                           reference_games=len(reference), timing_corrections=changes,
-                          quarantined_games=conflicts)
+                          quarantined_games=conflicts, published_starts=published)
         except (OSError, ValueError, TypeError, KeyError) as exc:
             report['error_type'] = type(exc).__name__
         reports.append(report)
     return result, reports
+
+
+def attach_published_starts(board, reports):
+    """Display corroborated schedules while retaining the earlier bet cutoff."""
+    games = {game['id']: game for game in board.get('games', [])}
+    for report in reports:
+        if report.get('status') != 'checked':
+            continue
+        for key, value in report.get('published_starts', {}).items():
+            game = games.get(key)
+            if not game:
+                continue
+            # Never use display metadata to extend the inference/decision start.
+            delta = aware(value) - aware(game['starts_at'])
+            if timedelta(0) <= delta <= timedelta(minutes=20):
+                game['scheduled_starts_at'] = value
+                game['schedule_source_url'] = report['source_url']
+                game['schedule_observed_at'] = report['observed_at']

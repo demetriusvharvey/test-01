@@ -23,7 +23,7 @@
       Number.isFinite(predicted)&&predicted<=current&&current-predicted<=20*60000;
   }
   function readiness(board,now){
-    const games=(board.games||[]).filter(g=>Date.parse(g.starts_at)>+now&&day(new Date(g.starts_at))===day(now));
+    const games=(board.games||[]).filter(g=>Date.parse(g.scheduled_starts_at||g.starts_at)>+now&&day(new Date(g.scheduled_starts_at||g.starts_at))===day(now));
     const blockers={};let forecasts=0,qualified=0;
     for(const g of games){
       const f=g.forecast;if(!f)continue;forecasts++;
@@ -32,7 +32,7 @@
       if(!Number.isFinite(predicted)||predicted>+now||+now-predicted>20*60000)reasons.add('forecast_not_fresh_pregame');
       const price=g.books&&g.books.FanDuel,source=Date.parse(price&&price.as_of);
       if(!Number.isFinite(source)||source>+now||+now-source>20*60000)reasons.add('odds_missing_stale_or_unverified');
-      if(d.eligible===true&&reasons.size===0&&Date.parse(d.expires_at)>+now)qualified++;
+      if(d.eligible===true&&Date.parse(g.starts_at)>+now&&reasons.size===0&&Date.parse(d.expires_at)>+now)qualified++;
       for(const reason of reasons)blockers[reason]=(blockers[reason]||0)+1;
     }
     const pending=Object.keys(blockers).some(r=>validation.has(r));

@@ -1909,5 +1909,96 @@
     ],
     "observed_at": "2026-11-07T14:11:34.756441+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-08:Philadelphia @ Chicago",
+    "game_date": "2026-11-08",
+    "matchup": "Philadelphia @ Chicago",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Che Flores (#91)",
+      "Matt Myers (#43)",
+      ""
+    ],
+    "observed_at": "2026-11-08T15:03:48.708617+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-08:L.A. Lakers @ Detroit",
+    "game_date": "2026-11-08",
+    "matchup": "L.A. Lakers @ Detroit",
+    "crew": [
+      "James Capers (#19)",
+      "Brent Barnaky (#36)",
+      "Brett Nansel (#44)",
+      ""
+    ],
+    "observed_at": "2026-11-08T15:03:48.708617+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-08:Utah @ Minnesota",
+    "game_date": "2026-11-08",
+    "matchup": "Utah @ Minnesota",
+    "crew": [
+      "Mitchell Ervin (#27)",
+      "Mousa Dagher (#28)",
+      "John Conley (#56)",
+      ""
+    ],
+    "observed_at": "2026-11-08T15:03:48.708617+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-08:Brooklyn @ Dallas",
+    "game_date": "2026-11-08",
+    "matchup": "Brooklyn @ Dallas",
+    "crew": [
+      "Marc Davis (#8)",
+      "Dedric Taylor (#21)",
+      "Kastine Evans (#78)",
+      ""
+    ],
+    "observed_at": "2026-11-08T15:03:48.708617+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-08:Boston @ Milwaukee",
+    "game_date": "2026-11-08",
+    "matchup": "Boston @ Milwaukee",
+    "crew": [
+      "Kevin Scott (#24)",
+      "Jonathan Sterling (#17)",
+      "Pat O'Connell (#90)",
+      ""
+    ],
+    "observed_at": "2026-11-08T15:03:48.708617+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-08:New Orleans @ LA Clippers",
+    "game_date": "2026-11-08",
+    "matchup": "New Orleans @ LA Clippers",
+    "crew": [
+      "Kevin Cutler (#34)",
+      "Sean Corbin (#33)",
+      "Nate Cearley (#84)",
+      ""
+    ],
+    "observed_at": "2026-11-08T15:03:48.708617+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-08:Miami @ Sacramento",
+    "game_date": "2026-11-08",
+    "matchup": "Miami @ Sacramento",
+    "crew": [
+      "Curtis Blair (#74)",
+      "Eric Lewis (#42)",
+      "Rodney Mott (#71)",
+      ""
+    ],
+    "observed_at": "2026-11-08T15:03:48.708617+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

@@ -1,36 +1,36 @@
 {
-  "evaluated_at": "2026-11-08T19:35:36.931309+00:00",
+  "evaluated_at": "2026-11-08T23:06:58.213717+00:00",
   "data_coverage": {
     "nba-efficiency-logistic-v1": {
-      "audited_attempts": 62,
+      "audited_attempts": 63,
       "audited_days": 10,
       "decision_days": 10,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-rotation-logistic-v1": {
-      "audited_attempts": 62,
+      "audited_attempts": 63,
       "audited_days": 10,
       "decision_days": 10,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-player-box-logistic-v1": {
-      "audited_attempts": 62,
+      "audited_attempts": 63,
       "audited_days": 10,
       "decision_days": 10,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-convex-ensemble-v1": {
-      "audited_attempts": 62,
+      "audited_attempts": 63,
       "audited_days": 10,
       "decision_days": 10,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-partial-stint-logistic-v1": {
-      "audited_attempts": 62,
+      "audited_attempts": 63,
       "audited_days": 10,
       "decision_days": 10,
       "audited_days_without_decision": 0,
@@ -103,12 +103,12 @@
       "decisions": 10,
       "scenario_abstentions": 3,
       "winner_record": {
-        "wins": 17,
+        "wins": 18,
         "losses": 6,
-        "pending": 3,
+        "pending": 2,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.7391304347826086
+        "accuracy": 0.75
       },
       "matched_elo_record": {
         "wins": 20,

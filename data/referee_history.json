@@ -2000,5 +2000,109 @@
     ],
     "observed_at": "2026-11-08T15:03:48.708617+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-09:L.A. Lakers @ Atlanta",
+    "game_date": "2026-11-09",
+    "matchup": "L.A. Lakers @ Atlanta",
+    "crew": [
+      "James Williams (#60)",
+      "Brian Forte (#45)",
+      "Che Flores (#91)",
+      ""
+    ],
+    "observed_at": "2026-11-09T20:52:20.352119+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-09:Cleveland @ Charlotte",
+    "game_date": "2026-11-09",
+    "matchup": "Cleveland @ Charlotte",
+    "crew": [
+      "Ray Acosta (#54)",
+      "Aaron Smith (#51)",
+      "Suyash Mehta (#47)",
+      ""
+    ],
+    "observed_at": "2026-11-09T20:52:20.352119+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-09:Washington @ Detroit",
+    "game_date": "2026-11-09",
+    "matchup": "Washington @ Detroit",
+    "crew": [
+      "Tony Brothers (#25)",
+      "Jacyn Goble (#68)",
+      "Pat O'Connell (#90)",
+      ""
+    ],
+    "observed_at": "2026-11-09T20:52:20.352119+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-09:Memphis @ Toronto",
+    "game_date": "2026-11-09",
+    "matchup": "Memphis @ Toronto",
+    "crew": [
+      "John Goble (#10)",
+      "Ashley Moyer-Gleich (#13)",
+      "Derrick Collins (#11)",
+      ""
+    ],
+    "observed_at": "2026-11-09T20:52:20.352119+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-09:Indiana @ Dallas",
+    "game_date": "2026-11-09",
+    "matchup": "Indiana @ Dallas",
+    "crew": [
+      "Sean Wright (#4)",
+      "JB DeRosa (#14)",
+      "JD Ralls (#80)",
+      ""
+    ],
+    "observed_at": "2026-11-09T20:52:20.352119+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-09:Denver @ Houston",
+    "game_date": "2026-11-09",
+    "matchup": "Denver @ Houston",
+    "crew": [
+      "Nick Buchert (#3)",
+      "John Butler (#30)",
+      "Robert Hussey (#85)",
+      ""
+    ],
+    "observed_at": "2026-11-09T20:52:20.352119+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-09:San Antonio @ Phoenix",
+    "game_date": "2026-11-09",
+    "matchup": "San Antonio @ Phoenix",
+    "crew": [
+      "Justin Van Duyne (#64)",
+      "Natalie Sago (#9)",
+      "Brandon Adair (#67)",
+      ""
+    ],
+    "observed_at": "2026-11-09T20:52:20.352119+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-09:New Orleans @ Golden State",
+    "game_date": "2026-11-09",
+    "matchup": "New Orleans @ Golden State",
+    "crew": [
+      "Ben Taylor (#46)",
+      "Nate Green (#41)",
+      "Brandon Schwab (#49)",
+      ""
+    ],
+    "observed_at": "2026-11-09T20:52:20.352119+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

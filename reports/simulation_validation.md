@@ -4,7 +4,7 @@ The score bootstrap draws paired historical score variation around earlier team 
 
 | League | Test seasons | Games | Simulator accuracy | Simulator Brier | Simulator log loss | Elo games | Elo Brier | Home baseline Brier |
 |---|---|---:|---:|---:|---:|---:|---:|---:|
-| NBA | 2025-26, 2026-27 | 1317 | 0.5915 | 0.2368 | 0.6667 | 1317 | 0.2100 | 0.2500 |
+| NBA | 2025-26, 2026-27 | 1370 | 0.5934 | 0.2358 | 0.6645 | 1370 | 0.2089 | 0.2500 |
 | NFL | 2024, 2025, 2026 | 675 | 0.5941 | 0.2380 | 0.6697 | 675 | 0.2231 | 0.2500 |
 
 These baselines may cover a slightly different set when ratings are unavailable; compare only matched games before promoting. Historical odds, lineup and injury timing are insufficient for a betting ROI or validated edge. The tested seasons have been inspected in prior research, so they are not untouched.
@@ -15,7 +15,7 @@ Archived source files (each read as the most recently archived retrospective ver
 - https://boxscorelab.com/downloads/2023-24-team-game-results.csv — 1230 games; archived 2026-10-28T04:04:05.850963+00:00; SHA-256 `3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce`
 - https://boxscorelab.com/downloads/2024-25-team-game-results.csv — 1225 games; archived 2026-10-28T04:04:06.000392+00:00; SHA-256 `61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b`
 - https://boxscorelab.com/downloads/2025-26-team-game-results.csv — 1225 games; archived 2026-10-28T04:04:06.133243+00:00; SHA-256 `f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1`
-- https://boxscorelab.com/downloads/2026-27-team-game-results.csv — 92 games; archived 2026-11-02T22:44:12.627464+00:00; SHA-256 `535341d1c1befceeb2048bc69fa6a0e0a93936ec4d280e36811d73c18c2a81f2`
+- https://boxscorelab.com/downloads/2026-27-team-game-results.csv — 145 games; archived 2026-11-09T20:52:25.472204+00:00; SHA-256 `77c9d76d28854d396b60752004530f2e4cf2692ae9d3a575d90c21df6e55a528`
 - https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv — 4470 games; archived 2026-10-28T04:03:50.008929+00:00; SHA-256 `5357a754c00d97c448ba366226b024afb96afbae980a88f0c1a188c456b8033d`
 
 ## Machine-readable results
@@ -23,30 +23,30 @@ Archived source files (each read as the most recently archived retrospective ver
 ```json
 {
   "NBA": {
-    "comparison_games": 1317,
+    "comparison_games": 1370,
     "draws_per_game": 5000,
     "elo": {
-      "accuracy": 0.6727410782080486,
-      "brier": 0.20996869867117884,
-      "games": 1317,
-      "log_loss": 0.6082314411322698
+      "accuracy": 0.6759124087591241,
+      "brier": 0.20889182875047976,
+      "games": 1370,
+      "log_loss": 0.6056458823056847
     },
     "first_test_season": "2025-26",
     "notes": "Retrospective final-score inputs; time-ordered within the dataset, no documented pregame publication timestamps. No historical NBA odds or matched-time market comparison. This is not an untouched holdout or evidence of ROI.",
     "score_bootstrap": {
-      "accuracy": 0.5914958238420653,
-      "brier": 0.23683946250569476,
-      "games": 1317,
-      "log_loss": 0.6666841919339491
+      "accuracy": 0.5934306569343065,
+      "brier": 0.23584566610218977,
+      "games": 1370,
+      "log_loss": 0.6645341922846576
     },
     "seasons": [
       "2025-26",
       "2026-27"
     ],
     "uninformative_home_baseline": {
-      "accuracy": 0.5520121488230828,
+      "accuracy": 0.5503649635036496,
       "brier": 0.25,
-      "games": 1317,
+      "games": 1370,
       "log_loss": 0.6931471805599453
     }
   },

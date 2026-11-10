@@ -4,18 +4,18 @@ A chronological day-start replay of fixed NBA/NFL Elo on archived final scores. 
 
 | Selection | Games | Accuracy | Brier | Log loss |
 |---|---:|---:|---:|---:|
-| Three highest-ranked per day | 1406 | 0.7475 | 0.1781 | 0.5368 |
-| Every model favorite | 3996 | 0.6592 | 0.2147 | 0.6178 |
-| 50% baseline on selected games | 1406 | 0.7475 | 0.2500 | 0.6931 |
+| Three highest-ranked per day | 1423 | 0.7491 | 0.1772 | 0.5348 |
+| Every model favorite | 4049 | 0.6604 | 0.2143 | 0.6168 |
+| 50% baseline on selected games | 1423 | 0.7491 | 0.2500 | 0.6931 |
 
-Selected days: 500. Day-block accuracy interval: [0.7254763585038815, 0.7703081232492998].
+Selected days: 506. Day-block accuracy interval: [0.7270833333333333, 0.7711686494051785].
 
 | Winner forecast range | Games | Mean forecast | Observed win rate |
 |---|---:|---:|---:|
-| 0.50–0.60 | 95 | 0.5597 | 0.5368 |
-| 0.60–0.70 | 277 | 0.6591 | 0.6101 |
-| 0.70–0.80 | 582 | 0.7514 | 0.7663 |
-| 0.80–1.00 | 452 | 0.8494 | 0.8518 |
+| 0.50–0.60 | 97 | 0.5597 | 0.5464 |
+| 0.60–0.70 | 278 | 0.6589 | 0.6079 |
+| 0.70–0.80 | 586 | 0.7515 | 0.7679 |
+| 0.80–1.00 | 462 | 0.8492 | 0.8528 |
 
 Selection favors strong favorites and accuracy alone does not establish a pricing advantage. Sources lack original pregame publication timestamps; NBA upstream gambling-use rights remain unresolved. No old outcome is added to the site’s forward winner record.
 
@@ -25,7 +25,7 @@ Selection favors strong favorites and accuracy alone does not establish a pricin
 - https://boxscorelab.com/downloads/2023-24-team-game-results.csv — 1230 games, SHA-256 `3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce`, archived 2026-10-28T04:04:05.850963+00:00
 - https://boxscorelab.com/downloads/2024-25-team-game-results.csv — 1225 games, SHA-256 `61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b`, archived 2026-10-28T04:04:06.000392+00:00
 - https://boxscorelab.com/downloads/2025-26-team-game-results.csv — 1225 games, SHA-256 `f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1`, archived 2026-10-28T04:04:06.133243+00:00
-- https://boxscorelab.com/downloads/2026-27-team-game-results.csv — 92 games, SHA-256 `535341d1c1befceeb2048bc69fa6a0e0a93936ec4d280e36811d73c18c2a81f2`, archived 2026-11-02T22:44:12.627464+00:00
+- https://boxscorelab.com/downloads/2026-27-team-game-results.csv — 145 games, SHA-256 `77c9d76d28854d396b60752004530f2e4cf2692ae9d3a575d90c21df6e55a528`, archived 2026-11-09T20:52:25.472204+00:00
 - https://github.com/nflverse/nflverse-data/releases/download/schedules/games.csv — 4470 games, SHA-256 `5357a754c00d97c448ba366226b024afb96afbae980a88f0c1a188c456b8033d`, archived 2026-10-28T04:03:50.008929+00:00
 
 ## Machine-readable results
@@ -33,14 +33,14 @@ Selection favors strong favorites and accuracy alone does not establish a pricin
 ```json
 {
   "accuracy_day_block_interval": [
-    0.7254763585038815,
-    0.7703081232492998
+    0.7270833333333333,
+    0.7711686494051785
   ],
   "all_model_favorites": {
-    "accuracy": 0.6591591591591591,
-    "brier": 0.2146938128769715,
-    "games": 3996,
-    "log_loss": 0.617753211980167
+    "accuracy": 0.6604099777722895,
+    "brier": 0.2142675982945401,
+    "games": 4049,
+    "log_loss": 0.6167537381724711
   },
   "by_calendar_year": {
     "2024": {
@@ -56,18 +56,18 @@ Selection favors strong favorites and accuracy alone does not establish a pricin
       "log_loss": 0.5545914891820531
     },
     "2026": {
-      "accuracy": 0.7633802816901408,
-      "brier": 0.16428223238870135,
-      "games": 355,
-      "log_loss": 0.5074170557207768
+      "accuracy": 0.7688172043010753,
+      "brier": 0.16169275493752183,
+      "games": 372,
+      "log_loss": 0.5010018886983818
     }
   },
   "by_league": {
     "NBA": {
-      "accuracy": 0.7553017944535073,
-      "brier": 0.17502103023000457,
-      "games": 1226,
-      "log_loss": 0.5299329511278094
+      "accuracy": 0.7570394207562349,
+      "brier": 0.17409919179465386,
+      "games": 1243,
+      "log_loss": 0.527705105307817
     },
     "NFL": {
       "accuracy": 0.6944444444444444,
@@ -79,27 +79,27 @@ Selection favors strong favorites and accuracy alone does not establish a pricin
   "first_test_date": "2024-01-01",
   "reliability": [
     {
-      "actual_win_rate": 0.5368421052631579,
-      "games": 95,
-      "mean_forecast": 0.5596929005178977,
+      "actual_win_rate": 0.5463917525773195,
+      "games": 97,
+      "mean_forecast": 0.5597173640784364,
       "range": "0.50\u20130.60"
     },
     {
-      "actual_win_rate": 0.6101083032490975,
-      "games": 277,
-      "mean_forecast": 0.6591367993860787,
+      "actual_win_rate": 0.6079136690647482,
+      "games": 278,
+      "mean_forecast": 0.6589306961782795,
       "range": "0.60\u20130.70"
     },
     {
-      "actual_win_rate": 0.7663230240549829,
-      "games": 582,
-      "mean_forecast": 0.7514200226048516,
+      "actual_win_rate": 0.7679180887372014,
+      "games": 586,
+      "mean_forecast": 0.7515213649776509,
       "range": "0.70\u20130.80"
     },
     {
-      "actual_win_rate": 0.8517699115044248,
-      "games": 452,
-      "mean_forecast": 0.8493520650276762,
+      "actual_win_rate": 0.8528138528138528,
+      "games": 462,
+      "mean_forecast": 0.8492383277292297,
       "range": "0.80\u20131.00"
     }
   ],
@@ -111,17 +111,17 @@ Selection favors strong favorites and accuracy alone does not establish a pricin
     "nba:2024-01-02:SAS:MEM"
   ],
   "selected": {
-    "accuracy": 0.7475106685633002,
-    "brier": 0.17808266198233236,
-    "games": 1406,
-    "log_loss": 0.5368018064478391
+    "accuracy": 0.7491215741391427,
+    "brier": 0.17724085389032218,
+    "games": 1423,
+    "log_loss": 0.5347737088408883
   },
-  "selected_days": 500,
-  "source_games": 9472,
+  "selected_days": 506,
+  "source_games": 9525,
   "uninformative_50_percent": {
-    "accuracy": 0.7475106685633002,
+    "accuracy": 0.7491215741391427,
     "brier": 0.25,
-    "games": 1406,
+    "games": 1423,
     "log_loss": 0.6931471805599453
   }
 }

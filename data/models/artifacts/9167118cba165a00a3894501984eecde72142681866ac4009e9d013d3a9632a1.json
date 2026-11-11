@@ -1,0 +1,85 @@
+{
+  "league": "NBA",
+  "model_version": "nba-chronological-ensemble-v1",
+  "components": {
+    "score-0.01": {
+      "mean": [
+        0.3133436282213588,
+        1.0,
+        -0.009231952178089494,
+        -0.009027517068666256,
+        -0.007745987504186822,
+        0.0014859646739026782,
+        0.014455782312925202,
+        -0.030045351473922902,
+        -0.0002143133676234723
+      ],
+      "scale": [
+        0.76683723072276,
+        1.0,
+        0.42544280293222253,
+        0.4158881989803128,
+        0.3384985264441604,
+        0.3416204118504303,
+        0.15341748033620692,
+        0.49738978335173895,
+        0.00899860972888188
+      ],
+      "weights": [
+        0.37298249182886134,
+        0.0,
+        0.15087930454111537,
+        0.14911289661080546,
+        0.0943326352083317,
+        -0.09442953376259462,
+        0.022877412337392513,
+        -0.1471529602074204,
+        -0.027949307906101877
+      ],
+      "intercept": 0.2428969788951535,
+      "extended": false,
+      "C": 0.01
+    }
+  },
+  "weights": {
+    "elo": 0.19999999999999996,
+    "score-0.01": 0.8
+  },
+  "calibration": {
+    "intercept": -0.24563663040285724,
+    "weight": 1.4032809714568113
+  },
+  "training_cutoff": "2026-04-12",
+  "feature_names": [
+    "elo_logit",
+    "home_court",
+    "margin",
+    "opponent_adjusted_margin",
+    "offense",
+    "defense",
+    "rest",
+    "back_to_back",
+    "games_played"
+  ],
+  "calibration_status": "retrospective_only",
+  "validation": {
+    "prediction_approved": false,
+    "betting_approved": false,
+    "reason": "prospective calibration and priced edge evidence pending"
+  },
+  "limitations": [
+    "retrospective source revisions possible",
+    "player news not a trained input",
+    "no verified contemporaneous historical odds"
+  ],
+  "exported_at": "2026-11-11T18:54:18.316429+00:00",
+  "input_data_hash": "5f6ab13952b5dde6920da57244d6b114404bc2bff5d46b74d62273cb39d66b02",
+  "source_observed_at": "2026-11-10T23:43:12.047964+00:00",
+  "evaluation_season": "2026-27",
+  "random_seed": 17,
+  "sklearn_version": "1.8.0",
+  "trainer_source_hash": "90fe6e3bb830d9202bbd5a5564bef8e343d35179e7f247ed0c92699d987f652e",
+  "feature_source_hash": "189f6847692db035bfc9f47e7181910cddca85a2f496297d2a813718e1b93141",
+  "model_identity_hash": "5ede2482b56b46f0cf0804c8ac11783016d48b4e3555464f7817366c86a3988d",
+  "artifact_hash": "9167118cba165a00a3894501984eecde72142681866ac4009e9d013d3a9632a1"
+}

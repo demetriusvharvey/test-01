@@ -1,0 +1,85 @@
+{
+  "league": "NFL",
+  "model_version": "nfl-chronological-ensemble-v1",
+  "components": {
+    "score-0.01": {
+      "mean": [
+        0.24597683360149877,
+        0.983,
+        -0.0015324507833436407,
+        -0.0013537470481029832,
+        0.001375494099154816,
+        0.0029079448824984476,
+        -0.0030714285714285587,
+        0.0,
+        -8.841463414634145e-05
+      ],
+      "scale": [
+        0.5459255899701146,
+        0.12927103310487068,
+        0.6124355663448444,
+        0.6218880867837945,
+        0.43972116669330635,
+        0.3585145942560239,
+        0.36554509897926324,
+        1.0,
+        0.0175677385245791
+      ],
+      "weights": [
+        0.25143949277171035,
+        0.021397256981839058,
+        0.1525285488886111,
+        0.1388041903847818,
+        0.16678681271965395,
+        -0.055992745248953556,
+        0.0599032477175241,
+        0.0,
+        0.04905610663065181
+      ],
+      "intercept": 0.2618637894147013,
+      "extended": false,
+      "C": 0.01
+    }
+  },
+  "weights": {
+    "elo": 0.0,
+    "score-0.01": 1.0
+  },
+  "calibration": {
+    "intercept": 0.0,
+    "weight": 1.0
+  },
+  "training_cutoff": "2026-02-08",
+  "feature_names": [
+    "elo_logit",
+    "home_court",
+    "margin",
+    "opponent_adjusted_margin",
+    "offense",
+    "defense",
+    "rest",
+    "back_to_back",
+    "games_played"
+  ],
+  "calibration_status": "retrospective_only",
+  "validation": {
+    "prediction_approved": false,
+    "betting_approved": false,
+    "reason": "prospective calibration and priced edge evidence pending"
+  },
+  "limitations": [
+    "retrospective source revisions possible",
+    "player news not a trained input",
+    "no verified contemporaneous historical odds"
+  ],
+  "exported_at": "2026-11-11T18:54:18.316429+00:00",
+  "input_data_hash": "5f6ab13952b5dde6920da57244d6b114404bc2bff5d46b74d62273cb39d66b02",
+  "source_observed_at": "2026-11-10T23:43:12.047964+00:00",
+  "evaluation_season": "2026",
+  "random_seed": 17,
+  "sklearn_version": "1.8.0",
+  "trainer_source_hash": "90fe6e3bb830d9202bbd5a5564bef8e343d35179e7f247ed0c92699d987f652e",
+  "feature_source_hash": "189f6847692db035bfc9f47e7181910cddca85a2f496297d2a813718e1b93141",
+  "model_identity_hash": "8829ff3499581ac7f123ff53e775cfcb970b4b229de96551378a4cf823ee5dc4",
+  "artifact_hash": "30778547ddae082914c9530be1e5a202ad38aef171839e5e9404ca9b138c7c24"
+}

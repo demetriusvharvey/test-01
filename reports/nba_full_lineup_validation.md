@@ -1,6 +1,6 @@
 # NBA uniquely reconstructed regulation-game lineup associations
 
-Run 2026-11-04T18:46:02.141018+00:00. H026. Source failures: 0.
+Run 2026-11-11T18:50:21.776949+00:00. H026. Source failures: 0.
 Source IDs, unique period constraints and explicit substitutions reconstruct stints. Ambiguous games are rejected. Scope: uniquely reconstructed regulation-game. Full-game mode also validates each player against box minutes and excludes overtime. This is postgame training data, not historical pregame availability. No public pick changes.
 
 | Source season | Games seen | Accepted | Rejected | Stints |
@@ -9,7 +9,7 @@ Source IDs, unique period constraints and explicit substitutions reconstruct sti
 | 2024 | 1320 | 107 | 1213 | 3017 |
 | 2025 | 1324 | 91 | 1233 | 2654 |
 | 2026 | 1325 | 85 | 1240 | 2670 |
-| 2027 | 107 | 4 | 103 | 147 |
+| 2027 | 160 | 5 | 155 | 183 |
 
 | Test season | Status | Matched games | Stints | Player MSE | Team MSE | League MSE | BH p |
 |---|---|---:|---:|---:|---:|---:|---:|
@@ -21,4 +21,4 @@ MSE is minute-weighted squared error in net points per 48 minutes; lower is bett
 
 Ratings control observed teammates/opponents but remain observational associations. H026 tests are jointly corrected with H025. They are not possession RAPM, complete defensive ratings or causal injury effects. Full-game replacement and probability conversion require separate evaluation. All rejected-game reasons, source hashes, thresholds and fold artifacts are retained. No wagering-source approval or profit is established.
 
-Artifact: observations/nba_full_lineups/b7891cc7f91655c7d78d73e0e7b4e722be9628cbcf5bd4dfe483598308ebf370/evaluation.json.
+Artifact: observations/nba_full_lineups/c26e6e4706640dabb328f47f560e0c57acdbeaed580493baee0af74ff2caeb03/evaluation.json.

@@ -1,0 +1,234 @@
+{
+  "hypothesis": "H025",
+  "evaluated_at": "2026-11-11T18:49:47.625714+00:00",
+  "input_hash": "002cc5bd875d16da8077fdb89706dd624d939a5cd6e37c8e909b053951d9b337",
+  "sources": [
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2023.parquet",
+      "sha256": "f3fac3a58cf1be8813f1f4332edb7fc8d83936df703892a700095d62f71da886",
+      "observed_at": "2026-10-29T19:36:30.936342+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2023.csv",
+        "sha256": "1b797107d4a0b2fbc98862bd283b9e807a05aa11c671b89a471b25591a589493",
+        "observed_at": "2026-10-29T14:10:45.265164+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2024.parquet",
+      "sha256": "bda57bcb4f8aae57428979ac4a0f766f67c52c770d85b0e7fcf7237a333704b0",
+      "observed_at": "2026-10-29T19:36:38.586500+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2024.csv",
+        "sha256": "c52a708ac80542baa0711f166154e0a647543036854e29aa903bd2fc27b49ae2",
+        "observed_at": "2026-10-29T14:10:46.133144+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2025.parquet",
+      "sha256": "71d7d02671268f793f13a13d1a8a271cba1241cd9ba28c3a363a3f16ad56acc7",
+      "observed_at": "2026-10-29T19:36:45.857157+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2025.csv",
+        "sha256": "8e34c5b1b7629dda89483356b5ec40f76a0b534aa273a5ddd8d9ef23f3e0e4f7",
+        "observed_at": "2026-10-29T14:10:46.989532+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2026.parquet",
+      "sha256": "f7051c5c0c5b605419fcc0e0c13dd90df7803f96dab290554c1ef737433a98b2",
+      "observed_at": "2026-10-29T19:36:53.443573+00:00",
+      "cached": true,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2026.csv",
+        "sha256": "7a4868da67ae7f6ebfba23389e04220be2e3f69d2e56a3942c02aa56f1becc89",
+        "observed_at": "2026-10-29T14:10:47.847710+00:00"
+      }
+    },
+    {
+      "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2027.parquet",
+      "sha256": "2e6f70b9b9d71243042518d2c41a8290ac8c3bc9fa942604b1257325176bf477",
+      "observed_at": "2026-11-11T18:49:44.411168+00:00",
+      "cached": false,
+      "starter_source": {
+        "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2027.csv",
+        "sha256": "e271b03763ef26915cb520c687b11197c15a1289a9e94d59af79dce5e51fbf2d",
+        "observed_at": "2026-11-11T13:43:30.951028+00:00"
+      }
+    }
+  ],
+  "coverage": [
+    {
+      "season_file": 2023,
+      "games_seen": 1321,
+      "accepted_games": 811,
+      "rejected_games": 510,
+      "rejections": {
+        "clock_order": 392,
+        "zero_duration_scoring": 19,
+        "score_order": 3,
+        "substitution_membership": 3,
+        "no_final_marker": 3,
+        "non_regular_season": 90
+      },
+      "stints": 5151,
+      "scope": "verified first quarter only; later period starters unknown"
+    },
+    {
+      "season_file": 2024,
+      "games_seen": 1320,
+      "accepted_games": 800,
+      "rejected_games": 520,
+      "rejections": {
+        "clock_order": 411,
+        "zero_duration_scoring": 15,
+        "substitution_membership": 3,
+        "substitution_score_change": 1,
+        "score_order": 1,
+        "no_final_marker": 1,
+        "non_regular_season": 88
+      },
+      "stints": 5073,
+      "scope": "verified first quarter only; later period starters unknown"
+    },
+    {
+      "season_file": 2025,
+      "games_seen": 1324,
+      "accepted_games": 734,
+      "rejected_games": 590,
+      "rejections": {
+        "clock_order": 471,
+        "substitution_membership": 8,
+        "zero_duration_scoring": 16,
+        "score_order": 2,
+        "no_final_marker": 3,
+        "non_regular_season": 90
+      },
+      "stints": 4698,
+      "scope": "verified first quarter only; later period starters unknown"
+    },
+    {
+      "season_file": 2026,
+      "games_seen": 1325,
+      "accepted_games": 760,
+      "rejected_games": 565,
+      "rejections": {
+        "clock_order": 437,
+        "zero_duration_scoring": 14,
+        "substitution_membership": 15,
+        "score_order": 1,
+        "substitution_score_change": 2,
+        "malformed_event": 1,
+        "no_final_marker": 4,
+        "non_regular_season": 91
+      },
+      "stints": 5207,
+      "scope": "verified first quarter only; later period starters unknown"
+    },
+    {
+      "season_file": 2027,
+      "games_seen": 160,
+      "accepted_games": 94,
+      "rejected_games": 66,
+      "rejections": {
+        "clock_order": 60,
+        "score_order": 1,
+        "zero_duration_scoring": 4,
+        "substitution_membership": 1
+      },
+      "stints": 691,
+      "scope": "verified first quarter only; later period starters unknown"
+    }
+  ],
+  "failures": [],
+  "stints": 20820,
+  "results": [
+    {
+      "season": "2024-25",
+      "status": "evaluated",
+      "training_stints": 4957,
+      "validation_stints": 600,
+      "test_stints": 141,
+      "test_games": 95,
+      "test_minutes": 459.565,
+      "players": 298,
+      "nuisance_players": 204,
+      "alpha": {
+        "player": 1000,
+        "team": 1000
+      },
+      "player_mse": 4866.623852151569,
+      "team_mse": 4913.502150626565,
+      "league_mse": 4825.575302986266,
+      "paired_day_test": {
+        "games": 141,
+        "game_days": 75,
+        "mean_difference": -152.79166835930292,
+        "p_value": 0.38136186381361864,
+        "iterations": 10000,
+        "seed": 20261028
+      },
+      "raw_p": 0.38136186381361864,
+      "adjusted_p": 0.5720427957204279
+    },
+    {
+      "season": "2025-26",
+      "status": "evaluated",
+      "training_stints": 9802,
+      "validation_stints": 855,
+      "test_stints": 222,
+      "test_games": 122,
+      "test_minutes": 571.6716666666666,
+      "players": 386,
+      "nuisance_players": 210,
+      "alpha": {
+        "player": 1000,
+        "team": 1000
+      },
+      "player_mse": 6071.154361346255,
+      "team_mse": 6087.744423947971,
+      "league_mse": 6086.975117581135,
+      "paired_day_test": {
+        "games": 222,
+        "game_days": 92,
+        "mean_difference": -42.72103034967089,
+        "p_value": 0.7464253574642535,
+        "iterations": 10000,
+        "seed": 20261028
+      },
+      "raw_p": 0.7464253574642535,
+      "adjusted_p": 0.7464253574642535
+    },
+    {
+      "season": "2026-27",
+      "status": "evaluated",
+      "training_stints": 14305,
+      "validation_stints": 734,
+      "test_stints": 49,
+      "test_games": 25,
+      "test_minutes": 114.395,
+      "players": 454,
+      "nuisance_players": 242,
+      "alpha": {
+        "player": 10000,
+        "team": 1000
+      },
+      "player_mse": 6545.33590301697,
+      "team_mse": 6449.70018756016,
+      "league_mse": 6537.433638401734,
+      "paired_day_test": {
+        "games": 49,
+        "game_days": 14,
+        "mean_difference": 223.2703606057517,
+        "p_value": 0.2415758424157584,
+        "iterations": 10000,
+        "seed": 20261028
+      },
+      "raw_p": 0.2415758424157584,
+      "adjusted_p": 0.5720427957204279
+    }
+  ],
+  "promoted": false
+}

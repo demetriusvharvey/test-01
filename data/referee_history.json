@@ -2312,5 +2312,57 @@
     ],
     "observed_at": "2026-11-12T01:04:41.650640+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-12:Toronto @ Philadelphia",
+    "game_date": "2026-11-12",
+    "matchup": "Toronto @ Philadelphia",
+    "crew": [
+      "Ray Acosta (#54)",
+      "Marat Kogut (#32)",
+      "Tyler Ricks (#95)",
+      ""
+    ],
+    "observed_at": "2026-11-12T16:54:02.608803+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-12:Detroit @ Washington",
+    "game_date": "2026-11-12",
+    "matchup": "Detroit @ Washington",
+    "crew": [
+      "JB DeRosa (#14)",
+      "Aaron Smith (#51)",
+      "Jenna Schroeder (#20)",
+      ""
+    ],
+    "observed_at": "2026-11-12T16:54:02.608803+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-12:Dallas @ Minnesota",
+    "game_date": "2026-11-12",
+    "matchup": "Dallas @ Minnesota",
+    "crew": [
+      "James Capers (#19)",
+      "Sean Corbin (#33)",
+      "Brent Haskill (#92)",
+      ""
+    ],
+    "observed_at": "2026-11-12T16:54:02.608803+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-12:Charlotte @ Phoenix",
+    "game_date": "2026-11-12",
+    "matchup": "Charlotte @ Phoenix",
+    "crew": [
+      "Scott Foster (#48)",
+      "Eric Dalen (#37)",
+      "Matt Myers (#43)",
+      ""
+    ],
+    "observed_at": "2026-11-12T16:54:02.608803+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

@@ -1,5 +1,5 @@
 {
-  "evaluated_at": "2026-11-12T22:30:22.692333+00:00",
+  "evaluated_at": "2026-11-13T02:53:08.080275+00:00",
   "data_coverage": {
     "nba-efficiency-logistic-v1": {
       "audited_attempts": 79,
@@ -81,12 +81,12 @@
         "accuracy": 0.9142857142857143
       },
       "matched_elo_record": {
-        "wins": 30,
+        "wins": 31,
         "losses": 5,
-        "pending": 3,
+        "pending": 2,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.8571428571428571
+        "accuracy": 0.8611111111111112
       },
       "fully_settled_day_comparison": {
         "complete_days": 12,

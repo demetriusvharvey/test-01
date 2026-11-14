@@ -1,77 +1,77 @@
 {
-  "evaluated_at": "2026-11-13T23:01:00.778605+00:00",
+  "evaluated_at": "2026-11-14T03:06:36.444013+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
       "benchmark_missing": 45,
-      "pending": 79,
+      "pending": 82,
       "void": 0,
-      "excluded": 12,
-      "scenario_agreement": 48,
+      "excluded": 13,
+      "scenario_agreement": 49,
       "scenario_disagreement": 1,
       "model": {
-        "games": 94,
-        "accuracy": 0.7340425531914894,
-        "brier": 0.18745513153289037,
-        "log_loss": 0.5576444780265046
+        "games": 95,
+        "accuracy": 0.7368421052631579,
+        "brier": 0.18625887919236156,
+        "log_loss": 0.5551115639364042
       },
       "elo": {
-        "games": 49,
-        "accuracy": 0.7755102040816326,
-        "brier": 0.15929619276770846,
-        "log_loss": 0.49404815171047345
+        "games": 50,
+        "accuracy": 0.78,
+        "brier": 0.15758719672660446,
+        "log_loss": 0.4905093218632667
       },
       "matched_model": {
-        "games": 49,
-        "accuracy": 0.7959183673469388,
-        "brier": 0.15710565952423108,
-        "log_loss": 0.4872533938690448
+        "games": 50,
+        "accuracy": 0.8,
+        "brier": 0.15543976951739957,
+        "log_loss": 0.4838486787810032
       },
-      "brier_difference": -0.0021905332434773717,
-      "log_loss_difference": -0.006794757841428634,
+      "brier_difference": -0.002147427209204883,
+      "log_loss_difference": -0.0066606430822634954,
       "status": "forward_results_available"
     }
   },
   "conditional_winner_records": {
     "nba-convex-ensemble-v1": {
-      "wins": 67,
+      "wins": 68,
       "losses": 21,
-      "pending": 73,
+      "pending": 76,
       "abstained": 6,
       "void": 0,
-      "excluded": 12,
-      "settled_predictions": 88,
-      "accuracy": 0.7613636363636364
+      "excluded": 13,
+      "settled_predictions": 89,
+      "accuracy": 0.7640449438202247
     },
     "nba-partial-stint-logistic-v1": {
-      "wins": 70,
+      "wins": 71,
       "losses": 20,
-      "pending": 73,
+      "pending": 76,
       "abstained": 4,
       "void": 0,
-      "excluded": 12,
-      "settled_predictions": 90,
-      "accuracy": 0.7777777777777778
+      "excluded": 13,
+      "settled_predictions": 91,
+      "accuracy": 0.7802197802197802
     },
     "nba-player-box-logistic-v1": {
-      "wins": 70,
+      "wins": 71,
       "losses": 21,
-      "pending": 73,
+      "pending": 76,
       "abstained": 3,
       "void": 0,
-      "excluded": 12,
-      "settled_predictions": 91,
-      "accuracy": 0.7692307692307693
+      "excluded": 13,
+      "settled_predictions": 92,
+      "accuracy": 0.7717391304347826
     },
     "nba-rotation-logistic-v1": {
-      "wins": 64,
+      "wins": 65,
       "losses": 26,
-      "pending": 73,
+      "pending": 76,
       "abstained": 4,
       "void": 0,
-      "excluded": 12,
-      "settled_predictions": 90,
-      "accuracy": 0.7111111111111111
+      "excluded": 13,
+      "settled_predictions": 91,
+      "accuracy": 0.7142857142857143
     }
   },
   "promoted": false,

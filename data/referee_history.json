@@ -2481,5 +2481,70 @@
     ],
     "observed_at": "2026-11-13T17:53:37.233968+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-14:Denver @ New Orleans",
+    "game_date": "2026-11-14",
+    "matchup": "Denver @ New Orleans",
+    "crew": [
+      "James Capers (#19)",
+      "Kevin Scott (#24)",
+      "Tyler Ricks (#95)",
+      ""
+    ],
+    "observed_at": "2026-11-14T16:38:57.035099+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-14:Dallas @ Cleveland",
+    "game_date": "2026-11-14",
+    "matchup": "Dallas @ Cleveland",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Brian Forte (#45)",
+      "Eric Lewis (#42)",
+      ""
+    ],
+    "observed_at": "2026-11-14T16:38:57.035099+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-14:Detroit @ Miami",
+    "game_date": "2026-11-14",
+    "matchup": "Detroit @ Miami",
+    "crew": [
+      "Mitchell Ervin (#27)",
+      "Jonathan Sterling (#17)",
+      "Suyash Mehta (#47)",
+      ""
+    ],
+    "observed_at": "2026-11-14T16:38:57.035099+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-14:Brooklyn @ Memphis",
+    "game_date": "2026-11-14",
+    "matchup": "Brooklyn @ Memphis",
+    "crew": [
+      "Josh Tiven (#58)",
+      "Nate Green (#41)",
+      "John Conley (#56)",
+      ""
+    ],
+    "observed_at": "2026-11-14T16:38:57.035099+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-14:Chicago @ Minnesota",
+    "game_date": "2026-11-14",
+    "matchup": "Chicago @ Minnesota",
+    "crew": [
+      "Nick Buchert (#3)",
+      "Jason Goldenberg (#35)",
+      "Scott Twardoski (#52)",
+      ""
+    ],
+    "observed_at": "2026-11-14T16:38:57.035099+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

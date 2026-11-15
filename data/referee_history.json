@@ -2663,5 +2663,122 @@
     ],
     "observed_at": "2026-11-15T07:47:30.215164+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:Indiana @ Philadelphia",
+    "game_date": "2026-11-15",
+    "matchup": "Indiana @ Philadelphia",
+    "crew": [
+      "Karl Lane (#77)",
+      "Sean Corbin (#33)",
+      "Matt Myers (#43)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:L.A. Lakers @ Phoenix",
+    "game_date": "2026-11-15",
+    "matchup": "L.A. Lakers @ Phoenix",
+    "crew": [
+      "James Williams (#60)",
+      "John Butler (#30)",
+      "Sha'Rae Mitchell (#98)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:Charlotte @ LA Clippers",
+    "game_date": "2026-11-15",
+    "matchup": "Charlotte @ LA Clippers",
+    "crew": [
+      "Marc Davis (#8)",
+      "Andy Nagy (#18)",
+      "Biniam Maru (#94)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:San Antonio @ Utah",
+    "game_date": "2026-11-15",
+    "matchup": "San Antonio @ Utah",
+    "crew": [
+      "Zach Zarba (#15)",
+      "Dedric Taylor (#21)",
+      "Pat O'Connell (#90)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:Dallas @ Boston",
+    "game_date": "2026-11-15",
+    "matchup": "Dallas @ Boston",
+    "crew": [
+      "JB DeRosa (#14)",
+      "Ray Acosta (#54)",
+      "Derrick Collins (#11)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:New York @ Toronto",
+    "game_date": "2026-11-15",
+    "matchup": "New York @ Toronto",
+    "crew": [
+      "Tony Brothers (#25)",
+      "Jason Goldenberg (#35)",
+      "Phenizee Ransom (#70)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:Houston @ Washington",
+    "game_date": "2026-11-15",
+    "matchup": "Houston @ Washington",
+    "crew": [
+      "Bill Kennedy (#55)",
+      "Jacyn Goble (#68)",
+      "Simone Jelks (#81)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:Atlanta @ Milwaukee",
+    "game_date": "2026-11-15",
+    "matchup": "Atlanta @ Milwaukee",
+    "crew": [
+      "Ben Taylor (#46)",
+      "Kevin Cutler (#34)",
+      "Gina Catanzariti (#75)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-15:Oklahoma City @ Sacramento",
+    "game_date": "2026-11-15",
+    "matchup": "Oklahoma City @ Sacramento",
+    "crew": [
+      "Justin Van Duyne (#64)",
+      "Tre Maddox (#23)",
+      "Dannica Baroody (#89)",
+      ""
+    ],
+    "observed_at": "2026-11-15T15:00:38.967769+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

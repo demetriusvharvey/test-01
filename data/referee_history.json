@@ -2897,5 +2897,109 @@
     ],
     "observed_at": "2026-11-16T06:14:35.258024+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-16:Orlando @ Boston",
+    "game_date": "2026-11-16",
+    "matchup": "Orlando @ Boston",
+    "crew": [
+      "Kevin Scott (#24)",
+      "Nate Green (#41)",
+      "Matt Kallio (#53)",
+      ""
+    ],
+    "observed_at": "2026-11-16T16:07:04.898586+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-16:Chicago @ Cleveland",
+    "game_date": "2026-11-16",
+    "matchup": "Chicago @ Cleveland",
+    "crew": [
+      "Curtis Blair (#74)",
+      "Ray Acosta (#54)",
+      "Rodney Mott (#71)",
+      ""
+    ],
+    "observed_at": "2026-11-16T16:07:04.898586+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-16:Memphis @ Washington",
+    "game_date": "2026-11-16",
+    "matchup": "Memphis @ Washington",
+    "crew": [
+      "Sean Wright (#4)",
+      "Mousa Dagher (#28)",
+      "Tyler Ricks (#95)",
+      ""
+    ],
+    "observed_at": "2026-11-16T16:07:04.898586+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-16:Philadelphia @ Brooklyn",
+    "game_date": "2026-11-16",
+    "matchup": "Philadelphia @ Brooklyn",
+    "crew": [
+      "JB DeRosa (#14)",
+      "Jacyn Goble (#68)",
+      "Jenna Reneau (#93)",
+      ""
+    ],
+    "observed_at": "2026-11-16T16:07:04.898586+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-16:Houston @ Miami",
+    "game_date": "2026-11-16",
+    "matchup": "Houston @ Miami",
+    "crew": [
+      "Gediminas Petraitis (#50)",
+      "Marat Kogut (#32)",
+      "John Conley (#56)",
+      ""
+    ],
+    "observed_at": "2026-11-16T16:07:04.898586+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-16:Portland @ Minnesota",
+    "game_date": "2026-11-16",
+    "matchup": "Portland @ Minnesota",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Eric Dalen (#37)",
+      "JD Ralls (#80)",
+      ""
+    ],
+    "observed_at": "2026-11-16T16:07:04.898586+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-16:Golden State @ New Orleans",
+    "game_date": "2026-11-16",
+    "matchup": "Golden State @ New Orleans",
+    "crew": [
+      "Brian Forte (#45)",
+      "Mark Lindsay (#29)",
+      "Michael Smith (#38)",
+      ""
+    ],
+    "observed_at": "2026-11-16T16:07:04.898586+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-16:Phoenix @ Denver",
+    "game_date": "2026-11-16",
+    "matchup": "Phoenix @ Denver",
+    "crew": [
+      "Nick Buchert (#3)",
+      "Dedric Taylor (#21)",
+      "Suyash Mehta (#47)",
+      ""
+    ],
+    "observed_at": "2026-11-16T16:07:04.898586+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

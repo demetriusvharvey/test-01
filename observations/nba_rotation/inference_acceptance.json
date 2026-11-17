@@ -1,177 +1,149 @@
 {
-  "status": "passed",
-  "games_checked": 6,
+  "status": "incomplete",
+  "games_checked": 5,
   "checks": [
     {
       "check": "today_has_forecasts",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:BOS:PHI:probabilities",
+      "check": "nba:2026-11-17:CHA:LAL:probabilities",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:BOS:PHI:pregame",
+      "check": "nba:2026-11-17:CHA:LAL:pregame",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:BOS:PHI:provenance",
+      "check": "nba:2026-11-17:CHA:LAL:provenance",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:BOS:PHI:missingness_and_uncertainty",
+      "check": "nba:2026-11-17:CHA:LAL:missingness_and_uncertainty",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:BOS:PHI:live_roster_injury_join",
+      "check": "nba:2026-11-17:CHA:LAL:live_roster_injury_join",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:BOS:PHI:scenario_reproducibility",
+      "check": "nba:2026-11-17:CHA:LAL:scenario_reproducibility",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:BOS:PHI:scenario_probabilities",
+      "check": "nba:2026-11-17:CHA:LAL:scenario_probabilities",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:LAC:PHX:probabilities",
+      "check": "nba:2026-11-17:DET:SAS:probabilities",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:LAC:PHX:pregame",
+      "check": "nba:2026-11-17:DET:SAS:pregame",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:LAC:PHX:provenance",
+      "check": "nba:2026-11-17:DET:SAS:provenance",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:LAC:PHX:missingness_and_uncertainty",
+      "check": "nba:2026-11-17:DET:SAS:missingness_and_uncertainty",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:LAC:PHX:live_roster_injury_join",
+      "check": "nba:2026-11-17:DET:SAS:live_roster_injury_join",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:LAC:PHX:scenario_reproducibility",
+      "check": "nba:2026-11-17:DET:SAS:scenario_reproducibility",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:LAC:PHX:scenario_probabilities",
+      "check": "nba:2026-11-17:DET:SAS:scenario_probabilities",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIA:UTA:probabilities",
+      "check": "nba:2026-11-17:NYK:TOR:probabilities",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIA:UTA:pregame",
+      "check": "nba:2026-11-17:NYK:TOR:pregame",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIA:UTA:provenance",
+      "check": "nba:2026-11-17:NYK:TOR:provenance",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIA:UTA:missingness_and_uncertainty",
+      "check": "nba:2026-11-17:NYK:TOR:missingness_and_uncertainty",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIA:UTA:live_roster_injury_join",
+      "check": "nba:2026-11-17:NYK:TOR:live_roster_injury_join",
+      "passed": false
+    },
+    {
+      "check": "nba:2026-11-17:NYK:TOR:scenario_reproducibility",
+      "passed": false
+    },
+    {
+      "check": "nba:2026-11-17:NYK:TOR:scenario_probabilities",
+      "passed": false
+    },
+    {
+      "check": "nba:2026-11-17:POR:MIN:probabilities",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIA:UTA:scenario_reproducibility",
+      "check": "nba:2026-11-17:POR:MIN:pregame",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIA:UTA:scenario_probabilities",
+      "check": "nba:2026-11-17:POR:MIN:provenance",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIL:NYK:probabilities",
+      "check": "nba:2026-11-17:POR:MIN:missingness_and_uncertainty",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIL:NYK:pregame",
+      "check": "nba:2026-11-17:POR:MIN:live_roster_injury_join",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIL:NYK:provenance",
+      "check": "nba:2026-11-17:POR:MIN:scenario_reproducibility",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIL:NYK:missingness_and_uncertainty",
+      "check": "nba:2026-11-17:POR:MIN:scenario_probabilities",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIL:NYK:live_roster_injury_join",
+      "check": "nba:2026-11-17:UTA:LAC:probabilities",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIL:NYK:scenario_reproducibility",
+      "check": "nba:2026-11-17:UTA:LAC:pregame",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:MIL:NYK:scenario_probabilities",
+      "check": "nba:2026-11-17:UTA:LAC:provenance",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:OKC:POR:probabilities",
+      "check": "nba:2026-11-17:UTA:LAC:missingness_and_uncertainty",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:OKC:POR:pregame",
+      "check": "nba:2026-11-17:UTA:LAC:live_roster_injury_join",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:OKC:POR:provenance",
+      "check": "nba:2026-11-17:UTA:LAC:scenario_reproducibility",
       "passed": true
     },
     {
-      "check": "nba:2026-11-10:OKC:POR:missingness_and_uncertainty",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:OKC:POR:live_roster_injury_join",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:OKC:POR:scenario_reproducibility",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:OKC:POR:scenario_probabilities",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:ORL:SAC:probabilities",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:ORL:SAC:pregame",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:ORL:SAC:provenance",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:ORL:SAC:missingness_and_uncertainty",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:ORL:SAC:live_roster_injury_join",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:ORL:SAC:scenario_reproducibility",
-      "passed": true
-    },
-    {
-      "check": "nba:2026-11-10:ORL:SAC:scenario_probabilities",
+      "check": "nba:2026-11-17:UTA:LAC:scenario_probabilities",
       "passed": true
     }
   ],

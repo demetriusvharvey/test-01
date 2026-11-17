@@ -1,64 +1,43 @@
 {
-  "generated_at": "2026-11-16T23:25:32.760663+00:00",
+  "generated_at": "2026-11-17T22:28:18.056694+00:00",
   "nba_referees": {
     "source": "https://official.nba.com/referee-assignments/",
     "status": "ok",
-    "date_expected": "2026-11-16",
+    "date_expected": "2026-11-17",
     "games": [
       {
-        "matchup": "Orlando @ Boston",
-        "crew_chief": "Kevin Scott (#24)",
-        "referee": "Nate Green (#41)",
-        "umpire": "Matt Kallio (#53)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Chicago @ Cleveland",
-        "crew_chief": "Curtis Blair (#74)",
-        "referee": "Ray Acosta (#54)",
-        "umpire": "Rodney Mott (#71)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Memphis @ Washington",
-        "crew_chief": "Sean Wright (#4)",
-        "referee": "Mousa Dagher (#28)",
-        "umpire": "Tyler Ricks (#95)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Philadelphia @ Brooklyn",
-        "crew_chief": "JB DeRosa (#14)",
-        "referee": "Jacyn Goble (#68)",
-        "umpire": "Jenna Reneau (#93)",
-        "alternate": ""
-      },
-      {
-        "matchup": "Houston @ Miami",
-        "crew_chief": "Gediminas Petraitis (#50)",
-        "referee": "Marat Kogut (#32)",
-        "umpire": "John Conley (#56)",
+        "matchup": "New York @ Toronto",
+        "crew_chief": "Mitchell Ervin (#27)",
+        "referee": "Eric Lewis (#42)",
+        "umpire": "Evan Scott (#22)",
         "alternate": ""
       },
       {
         "matchup": "Portland @ Minnesota",
-        "crew_chief": "Tyler Ford (#39)",
-        "referee": "Eric Dalen (#37)",
-        "umpire": "JD Ralls (#80)",
+        "crew_chief": "Josh Tiven (#58)",
+        "referee": "Brent Barnaky (#36)",
+        "umpire": "Derrick Collins (#11)",
         "alternate": ""
       },
       {
-        "matchup": "Golden State @ New Orleans",
-        "crew_chief": "Brian Forte (#45)",
-        "referee": "Mark Lindsay (#29)",
-        "umpire": "Michael Smith (#38)",
+        "matchup": "Detroit @ San Antonio",
+        "crew_chief": "James Capers (#19)",
+        "referee": "Che Flores (#91)",
+        "umpire": "Biniam Maru (#94)",
         "alternate": ""
       },
       {
-        "matchup": "Phoenix @ Denver",
-        "crew_chief": "Nick Buchert (#3)",
-        "referee": "Dedric Taylor (#21)",
-        "umpire": "Suyash Mehta (#47)",
+        "matchup": "Charlotte @ L.A. Lakers",
+        "crew_chief": "Zach Zarba (#15)",
+        "referee": "Nick Buchert (#3)",
+        "umpire": "Jonathan Sterling (#17)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Utah @ LA Clippers",
+        "crew_chief": "James Williams (#60)",
+        "referee": "Andy Nagy (#18)",
+        "umpire": "Agon Abazi (#88)",
         "alternate": ""
       }
     ]

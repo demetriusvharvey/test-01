@@ -1,6 +1,6 @@
 # Player-impact training status
 
-Checked 2026-11-10T18:15:53.682297+00:00.
+Checked 2026-11-17T19:23:40.722791+00:00.
 This job never changes public picks. Counts are unique eligible games, not repeated forecast snapshots.
 
 | League | Input records | Eligible games | Seasons | Status |

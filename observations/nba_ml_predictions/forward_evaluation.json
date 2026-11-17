@@ -1,10 +1,10 @@
 {
-  "evaluated_at": "2026-11-16T16:07:09.663204+00:00",
+  "evaluated_at": "2026-11-17T00:12:12.690767+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
       "benchmark_missing": 45,
-      "pending": 78,
+      "pending": 79,
       "void": 0,
       "excluded": 14,
       "scenario_agreement": 69,
@@ -36,7 +36,7 @@
     "nba-convex-ensemble-v1": {
       "wins": 81,
       "losses": 28,
-      "pending": 69,
+      "pending": 72,
       "abstained": 6,
       "void": 0,
       "excluded": 14,
@@ -46,7 +46,7 @@
     "nba-partial-stint-logistic-v1": {
       "wins": 84,
       "losses": 25,
-      "pending": 69,
+      "pending": 72,
       "abstained": 6,
       "void": 0,
       "excluded": 14,
@@ -56,7 +56,7 @@
     "nba-player-box-logistic-v1": {
       "wins": 84,
       "losses": 28,
-      "pending": 69,
+      "pending": 72,
       "abstained": 3,
       "void": 0,
       "excluded": 14,
@@ -66,7 +66,7 @@
     "nba-rotation-logistic-v1": {
       "wins": 78,
       "losses": 33,
-      "pending": 69,
+      "pending": 72,
       "abstained": 4,
       "void": 0,
       "excluded": 14,

@@ -1,7 +1,7 @@
 {
   "hypothesis": "H026",
-  "evaluated_at": "2026-11-11T18:50:21.776949+00:00",
-  "input_hash": "c26e6e4706640dabb328f47f560e0c57acdbeaed580493baee0af74ff2caeb03",
+  "evaluated_at": "2026-11-18T19:30:04.243327+00:00",
+  "input_hash": "8e0e26e81efabb20102ac5e6afb66eea8e6607cc07254a0fb5b1f21f93474be5",
   "sources": [
     {
       "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2023.parquet",
@@ -49,13 +49,13 @@
     },
     {
       "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2027.parquet",
-      "sha256": "2e6f70b9b9d71243042518d2c41a8290ac8c3bc9fa942604b1257325176bf477",
-      "observed_at": "2026-11-11T18:49:44.411168+00:00",
+      "sha256": "4ea2a423634e118a1761bc9ca14c9b870a67effa84f9ad5ce5ed8ebd4b33c682",
+      "observed_at": "2026-11-18T19:29:24.946307+00:00",
       "cached": true,
       "starter_source": {
         "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2027.csv",
-        "sha256": "e271b03763ef26915cb520c687b11197c15a1289a9e94d59af79dce5e51fbf2d",
-        "observed_at": "2026-11-11T13:43:30.951028+00:00"
+        "sha256": "92747d1e7c8a66a2a8d1f29548ffc8905a87d77bb960d895c475251a6755bed9",
+        "observed_at": "2026-11-18T13:08:14.850268+00:00"
       }
     }
   ],
@@ -127,21 +127,21 @@
     },
     {
       "season_file": 2027,
-      "games_seen": 160,
-      "accepted_games": 5,
-      "rejected_games": 155,
+      "games_seen": 210,
+      "accepted_games": 6,
+      "rejected_games": 204,
       "rejections": {
-        "action_off_court": 71,
-        "period_replay_failure": 58,
-        "ambiguous_substitution": 18,
-        "overtime_or_incomplete": 8
+        "period_replay_failure": 78,
+        "action_off_court": 92,
+        "overtime_or_incomplete": 12,
+        "ambiguous_substitution": 22
       },
-      "stints": 183,
+      "stints": 207,
       "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
     }
   ],
   "failures": [],
-  "stints": 12366,
+  "stints": 12390,
   "results": [
     {
       "season": "2024-25",
@@ -162,7 +162,7 @@
       "status": "insufficient_matched_stints",
       "train": 9061,
       "validation": 263,
-      "test": 1
+      "test": 3
     }
   ],
   "promoted": false

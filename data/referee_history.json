@@ -3131,5 +3131,161 @@
     ],
     "observed_at": "2026-11-18T07:14:49.617805+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Memphis @ Cleveland",
+    "game_date": "2026-11-18",
+    "matchup": "Memphis @ Cleveland",
+    "crew": [
+      "Marc Davis (#8)",
+      "Sean Corbin (#33)",
+      "Jenna Schroeder (#20)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Houston @ Indiana",
+    "game_date": "2026-11-18",
+    "matchup": "Houston @ Indiana",
+    "crew": [
+      "Kevin Scott (#24)",
+      "Jason Goldenberg (#35)",
+      "Rodney Mott (#71)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Milwaukee @ Miami",
+    "game_date": "2026-11-18",
+    "matchup": "Milwaukee @ Miami",
+    "crew": [
+      "Tony Brothers (#25)",
+      "Natalie Sago (#9)",
+      "Tyler Ricks (#95)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Philadelphia @ Orlando",
+    "game_date": "2026-11-18",
+    "matchup": "Philadelphia @ Orlando",
+    "crew": [
+      "Scott Foster (#48)",
+      "Gediminas Petraitis (#50)",
+      "Mousa Dagher (#28)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Chicago @ Brooklyn",
+    "game_date": "2026-11-18",
+    "matchup": "Chicago @ Brooklyn",
+    "crew": [
+      "Sean Wright (#4)",
+      "Aaron Smith (#51)",
+      "Matt Kallio (#53)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Washington @ Toronto",
+    "game_date": "2026-11-18",
+    "matchup": "Washington @ Toronto",
+    "crew": [
+      "Curtis Blair (#74)",
+      "Nate Green (#41)",
+      "Robert Hussey (#85)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Detroit @ New Orleans",
+    "game_date": "2026-11-18",
+    "matchup": "Detroit @ New Orleans",
+    "crew": [
+      "Ben Taylor (#46)",
+      "Sha'Rae Mitchell (#98)",
+      "Matt Myers (#43)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Atlanta @ Oklahoma City",
+    "game_date": "2026-11-18",
+    "matchup": "Atlanta @ Oklahoma City",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Dedric Taylor (#21)",
+      "Phenizee Ransom (#70)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Boston @ Denver",
+    "game_date": "2026-11-18",
+    "matchup": "Boston @ Denver",
+    "crew": [
+      "John Goble (#10)",
+      "Eric Dalen (#37)",
+      "Chelisa Painter (#79)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Golden State @ Dallas",
+    "game_date": "2026-11-18",
+    "matchup": "Golden State @ Dallas",
+    "crew": [
+      "Ed Malloy (#7)",
+      "Ashley Moyer-Gleich (#13)",
+      "Suyash Mehta (#47)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Utah @ L.A. Lakers",
+    "game_date": "2026-11-18",
+    "matchup": "Utah @ L.A. Lakers",
+    "crew": [
+      "Karl Lane (#77)",
+      "Tre Maddox (#23)",
+      "Dannica Baroody (#89)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-18:Phoenix @ Sacramento",
+    "game_date": "2026-11-18",
+    "matchup": "Phoenix @ Sacramento",
+    "crew": [
+      "Zach Zarba (#15)",
+      "John Butler (#30)",
+      "Jonathan Sterling (#17)",
+      ""
+    ],
+    "observed_at": "2026-11-18T16:34:28.945874+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

@@ -1,40 +1,40 @@
 {
-  "evaluated_at": "2026-11-20T02:34:25.093960+00:00",
+  "evaluated_at": "2026-11-20T10:25:57.889556+00:00",
   "data_coverage": {
     "nba-efficiency-logistic-v1": {
-      "audited_attempts": 107,
-      "audited_days": 21,
-      "decision_days": 21,
+      "audited_attempts": 108,
+      "audited_days": 22,
+      "decision_days": 22,
       "audited_days_without_decision": 0,
       "unavailable_attempts": 0
     },
     "nba-rotation-logistic-v1": {
-      "audited_attempts": 107,
-      "audited_days": 21,
+      "audited_attempts": 108,
+      "audited_days": 22,
       "decision_days": 17,
-      "audited_days_without_decision": 4,
-      "unavailable_attempts": 22
+      "audited_days_without_decision": 5,
+      "unavailable_attempts": 23
     },
     "nba-player-box-logistic-v1": {
-      "audited_attempts": 107,
-      "audited_days": 21,
+      "audited_attempts": 108,
+      "audited_days": 22,
       "decision_days": 17,
-      "audited_days_without_decision": 4,
-      "unavailable_attempts": 22
+      "audited_days_without_decision": 5,
+      "unavailable_attempts": 23
     },
     "nba-convex-ensemble-v1": {
-      "audited_attempts": 107,
-      "audited_days": 21,
+      "audited_attempts": 108,
+      "audited_days": 22,
       "decision_days": 17,
-      "audited_days_without_decision": 4,
-      "unavailable_attempts": 22
+      "audited_days_without_decision": 5,
+      "unavailable_attempts": 23
     },
     "nba-partial-stint-logistic-v1": {
-      "audited_attempts": 107,
-      "audited_days": 21,
+      "audited_attempts": 108,
+      "audited_days": 22,
       "decision_days": 17,
-      "audited_days_without_decision": 4,
-      "unavailable_attempts": 22
+      "audited_days_without_decision": 5,
+      "unavailable_attempts": 23
     }
   },
   "policy_version": "nba-top3-scenario-v1",
@@ -43,58 +43,58 @@
       "decisions": 17,
       "scenario_abstentions": 4,
       "winner_record": {
-        "wins": 36,
-        "losses": 7,
-        "pending": 3,
+        "wins": 38,
+        "losses": 8,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.8372093023255814
+        "accuracy": 0.8260869565217391
       },
       "matched_elo_record": {
-        "wins": 35,
-        "losses": 7,
-        "pending": 3,
+        "wins": 37,
+        "losses": 8,
+        "pending": 0,
         "voids": 0,
         "excluded": 4,
-        "accuracy": 0.8333333333333334
+        "accuracy": 0.8222222222222222
       },
       "fully_settled_day_comparison": {
-        "complete_days": 14,
-        "model_wins": 34,
-        "model_settled": 40,
-        "elo_wins": 33,
-        "elo_settled": 40,
-        "accuracy_difference": 0.025000000000000022
+        "complete_days": 15,
+        "model_wins": 36,
+        "model_settled": 43,
+        "elo_wins": 35,
+        "elo_settled": 43,
+        "accuracy_difference": 0.023255813953488413
       },
       "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
     },
     "nba-efficiency-logistic-v1": {
-      "decisions": 21,
+      "decisions": 22,
       "scenario_abstentions": 0,
       "winner_record": {
-        "wins": 45,
-        "losses": 10,
-        "pending": 3,
-        "voids": 0,
-        "excluded": 4,
-        "accuracy": 0.8181818181818182
-      },
-      "matched_elo_record": {
-        "wins": 44,
+        "wins": 47,
         "losses": 11,
         "pending": 3,
         "voids": 0,
         "excluded": 4,
-        "accuracy": 0.8
+        "accuracy": 0.8103448275862069
+      },
+      "matched_elo_record": {
+        "wins": 46,
+        "losses": 12,
+        "pending": 3,
+        "voids": 0,
+        "excluded": 4,
+        "accuracy": 0.7931034482758621
       },
       "fully_settled_day_comparison": {
-        "complete_days": 18,
-        "model_wins": 44,
-        "model_settled": 53,
-        "elo_wins": 42,
-        "elo_settled": 53,
-        "accuracy_difference": 0.037735849056603765
+        "complete_days": 19,
+        "model_wins": 46,
+        "model_settled": 56,
+        "elo_wins": 44,
+        "elo_settled": 56,
+        "accuracy_difference": 0.0357142857142857
       },
       "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
@@ -103,28 +103,28 @@
       "decisions": 17,
       "scenario_abstentions": 5,
       "winner_record": {
-        "wins": 33,
-        "losses": 9,
-        "pending": 3,
+        "wins": 35,
+        "losses": 10,
+        "pending": 0,
         "voids": 0,
         "excluded": 4,
-        "accuracy": 0.7857142857142857
+        "accuracy": 0.7777777777777778
       },
       "matched_elo_record": {
-        "wins": 35,
-        "losses": 7,
-        "pending": 3,
+        "wins": 37,
+        "losses": 8,
+        "pending": 0,
         "voids": 0,
         "excluded": 4,
-        "accuracy": 0.8333333333333334
+        "accuracy": 0.8222222222222222
       },
       "fully_settled_day_comparison": {
-        "complete_days": 14,
-        "model_wins": 31,
-        "model_settled": 40,
-        "elo_wins": 33,
-        "elo_settled": 40,
-        "accuracy_difference": -0.04999999999999993
+        "complete_days": 15,
+        "model_wins": 33,
+        "model_settled": 43,
+        "elo_wins": 35,
+        "elo_settled": 43,
+        "accuracy_difference": -0.046511627906976716
       },
       "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
@@ -133,28 +133,28 @@
       "decisions": 17,
       "scenario_abstentions": 7,
       "winner_record": {
-        "wins": 35,
-        "losses": 8,
-        "pending": 3,
+        "wins": 37,
+        "losses": 9,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.813953488372093
+        "accuracy": 0.8043478260869565
       },
       "matched_elo_record": {
-        "wins": 35,
-        "losses": 7,
-        "pending": 3,
+        "wins": 37,
+        "losses": 8,
+        "pending": 0,
         "voids": 0,
         "excluded": 4,
-        "accuracy": 0.8333333333333334
+        "accuracy": 0.8222222222222222
       },
       "fully_settled_day_comparison": {
-        "complete_days": 14,
-        "model_wins": 32,
-        "model_settled": 40,
-        "elo_wins": 33,
-        "elo_settled": 40,
-        "accuracy_difference": -0.02499999999999991
+        "complete_days": 15,
+        "model_wins": 34,
+        "model_settled": 43,
+        "elo_wins": 35,
+        "elo_settled": 43,
+        "accuracy_difference": -0.023255813953488413
       },
       "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300
@@ -163,28 +163,28 @@
       "decisions": 17,
       "scenario_abstentions": 3,
       "winner_record": {
-        "wins": 36,
-        "losses": 7,
-        "pending": 3,
+        "wins": 38,
+        "losses": 8,
+        "pending": 0,
         "voids": 0,
         "excluded": 3,
-        "accuracy": 0.8372093023255814
+        "accuracy": 0.8260869565217391
       },
       "matched_elo_record": {
-        "wins": 35,
-        "losses": 7,
-        "pending": 3,
+        "wins": 37,
+        "losses": 8,
+        "pending": 0,
         "voids": 0,
         "excluded": 4,
-        "accuracy": 0.8333333333333334
+        "accuracy": 0.8222222222222222
       },
       "fully_settled_day_comparison": {
-        "complete_days": 14,
-        "model_wins": 34,
-        "model_settled": 40,
-        "elo_wins": 33,
-        "elo_settled": 40,
-        "accuracy_difference": 0.025000000000000022
+        "complete_days": 15,
+        "model_wins": 36,
+        "model_settled": 43,
+        "elo_wins": 35,
+        "elo_settled": 43,
+        "accuracy_difference": 0.023255813953488413
       },
       "review_status": "insufficient_forward_sample",
       "minimum_settled_review_sample": 300

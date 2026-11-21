@@ -3573,5 +3573,83 @@
     ],
     "observed_at": "2026-11-21T07:27:53.112964+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Milwaukee @ Philadelphia",
+    "game_date": "2026-11-21",
+    "matchup": "Milwaukee @ Philadelphia",
+    "crew": [
+      "Tre Maddox (#23)",
+      "Jason Goldenberg (#35)",
+      "Jonathan Sterling (#17)",
+      ""
+    ],
+    "observed_at": "2026-11-21T15:35:34.613241+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Portland @ New York",
+    "game_date": "2026-11-21",
+    "matchup": "Portland @ New York",
+    "crew": [
+      "Gediminas Petraitis (#50)",
+      "John Butler (#30)",
+      "Matt Myers (#43)",
+      ""
+    ],
+    "observed_at": "2026-11-21T15:35:34.613241+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:LA Clippers @ Dallas",
+    "game_date": "2026-11-21",
+    "matchup": "LA Clippers @ Dallas",
+    "crew": [
+      "Tony Brothers (#25)",
+      "Karl Lane (#77)",
+      "John Conley (#56)",
+      ""
+    ],
+    "observed_at": "2026-11-21T15:35:34.613241+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Memphis @ Minnesota",
+    "game_date": "2026-11-21",
+    "matchup": "Memphis @ Minnesota",
+    "crew": [
+      "Brian Forte (#45)",
+      "Kevin Cutler (#34)",
+      "Brandon Adair (#67)",
+      ""
+    ],
+    "observed_at": "2026-11-21T15:35:34.613241+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:New Orleans @ San Antonio",
+    "game_date": "2026-11-21",
+    "matchup": "New Orleans @ San Antonio",
+    "crew": [
+      "Justin Van Duyne (#64)",
+      "Mousa Dagher (#28)",
+      "Suyash Mehta (#47)",
+      ""
+    ],
+    "observed_at": "2026-11-21T15:35:34.613241+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Boston @ Sacramento",
+    "game_date": "2026-11-21",
+    "matchup": "Boston @ Sacramento",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Sean Corbin (#33)",
+      "Brett Nansel (#44)",
+      ""
+    ],
+    "observed_at": "2026-11-21T15:35:34.613241+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

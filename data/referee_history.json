@@ -3456,5 +3456,122 @@
     ],
     "observed_at": "2026-11-20T18:47:42.629450+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Charlotte @ Atlanta",
+    "game_date": "2026-11-21",
+    "matchup": "Charlotte @ Atlanta",
+    "crew": [
+      "Josh Tiven (#58)",
+      "Jacyn Goble (#68)",
+      "Leon Wood (#40)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Orlando @ Brooklyn",
+    "game_date": "2026-11-21",
+    "matchup": "Orlando @ Brooklyn",
+    "crew": [
+      "Bill Kennedy (#55)",
+      "Mark Lindsay (#29)",
+      "Sha'Rae Mitchell (#98)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Indiana @ Cleveland",
+    "game_date": "2026-11-21",
+    "matchup": "Indiana @ Cleveland",
+    "crew": [
+      "Sean Wright (#4)",
+      "Nick Buchert (#3)",
+      "Tyler Ricks (#95)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Toronto @ Detroit",
+    "game_date": "2026-11-21",
+    "matchup": "Toronto @ Detroit",
+    "crew": [
+      "James Williams (#60)",
+      "JB DeRosa (#14)",
+      "Dedric Taylor (#21)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Washington @ Chicago",
+    "game_date": "2026-11-21",
+    "matchup": "Washington @ Chicago",
+    "crew": [
+      "James Capers (#19)",
+      "Eric Lewis (#42)",
+      "Derrick Collins (#11)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:New Orleans @ Oklahoma City",
+    "game_date": "2026-11-21",
+    "matchup": "New Orleans @ Oklahoma City",
+    "crew": [
+      "Ed Malloy (#7)",
+      "Andy Nagy (#18)",
+      "Intae Hwang (#73)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Phoenix @ Utah",
+    "game_date": "2026-11-21",
+    "matchup": "Phoenix @ Utah",
+    "crew": [
+      "Tyler Ford (#39)",
+      "Brent Barnaky (#36)",
+      "Che Flores (#91)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Houston @ Denver",
+    "game_date": "2026-11-21",
+    "matchup": "Houston @ Denver",
+    "crew": [
+      "Zach Zarba (#15)",
+      "Karl Lane (#77)",
+      "Dannica Baroody (#89)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-21:Sacramento @ L.A. Lakers",
+    "game_date": "2026-11-21",
+    "matchup": "Sacramento @ L.A. Lakers",
+    "crew": [
+      "John Goble (#10)",
+      "Ashley Moyer-Gleich (#13)",
+      "Robert Hussey (#85)",
+      ""
+    ],
+    "observed_at": "2026-11-21T07:27:53.112964+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

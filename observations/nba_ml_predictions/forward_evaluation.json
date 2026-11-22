@@ -1,5 +1,5 @@
 {
-  "evaluated_at": "2026-11-22T16:27:00.969111+00:00",
+  "evaluated_at": "2026-11-22T21:59:29.007730+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
@@ -36,7 +36,7 @@
     "nba-convex-ensemble-v1": {
       "wins": 103,
       "losses": 46,
-      "pending": 65,
+      "pending": 67,
       "abstained": 6,
       "void": 0,
       "excluded": 18,
@@ -46,7 +46,7 @@
     "nba-partial-stint-logistic-v1": {
       "wins": 106,
       "losses": 41,
-      "pending": 65,
+      "pending": 67,
       "abstained": 8,
       "void": 0,
       "excluded": 18,
@@ -56,7 +56,7 @@
     "nba-player-box-logistic-v1": {
       "wins": 106,
       "losses": 44,
-      "pending": 65,
+      "pending": 67,
       "abstained": 5,
       "void": 0,
       "excluded": 18,
@@ -66,7 +66,7 @@
     "nba-rotation-logistic-v1": {
       "wins": 100,
       "losses": 51,
-      "pending": 65,
+      "pending": 67,
       "abstained": 4,
       "void": 0,
       "excluded": 18,

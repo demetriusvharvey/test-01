@@ -4,7 +4,7 @@ Research-only challenger. The NBA model estimates possessions from box scores ra
 
 | League | Archived source games | Matched test games | Simulator Brier | Elo Brier | Simulator log loss | Elo log loss |
 |---|---:|---:|---:|---:|---:|---:|
-| NBA | 5106 | 196 | 0.2287 | 0.1997 | 0.6488 | 0.5817 |
+| NBA | 5167 | 257 | 0.2361 | 0.2126 | 0.6645 | 0.6122 |
 | NFL | 1263 | 326 | 0.2473 | 0.2338 | 0.6886 | 0.6597 |
 
 Matched chronological evaluation uses the same games for Elo and challenger. The seasons and sources have been inspected before; this is exploratory, not a fresh untouched holdout. Simulation count reduces sampling noise, not estimation error. NBA upstream data rights for wagering remain unresolved, so this asset is not connected to published betting opportunities. NFL pregame roster and all-position injury scenarios are missing; NFL challenger also stays research-only. No historical betting ROI is claimed.
@@ -15,7 +15,7 @@ Matched chronological evaluation uses the same games for Elo and challenger. The
 - NBA https://boxscorelab.com/downloads/2023-24-team-game-results.csv — 1230 parsed games, 2460 rows, archived 2026-10-28T04:04:05.850963+00:00, SHA-256 `3f181cbcc8bda22aa878e59e34f638fc10961a9af9b6aaf2d622cccb8028afce`, license `CC-BY-4.0; upstream NBA gambling-use terms unresolved`
 - NBA https://boxscorelab.com/downloads/2024-25-team-game-results.csv — 1225 parsed games, 2460 rows, archived 2026-10-28T04:04:06.000392+00:00, SHA-256 `61d696baa530a865f06169be4cfc0992de731c400317e484f9fa146cd6c2321b`, license `CC-BY-4.0; upstream NBA gambling-use terms unresolved`
 - NBA https://boxscorelab.com/downloads/2025-26-team-game-results.csv — 1225 parsed games, 2460 rows, archived 2026-10-28T04:04:06.133243+00:00, SHA-256 `f2872cc98025595469847db9da3210521d7ea52ab5d43ce39ffd4f1e6ffbacf1`, license `CC-BY-4.0; upstream NBA gambling-use terms unresolved`
-- NBA https://boxscorelab.com/downloads/2026-27-team-game-results.csv — 196 parsed games, 394 rows, archived 2026-11-16T16:07:08.833458+00:00, SHA-256 `b2cf7285abba5c3c755bedaa0febe1a871556ce579b16be0fb924af9bf80bb03`, license `CC-BY-4.0; upstream NBA gambling-use terms unresolved`
+- NBA https://boxscorelab.com/downloads/2026-27-team-game-results.csv — 257 parsed games, 516 rows, archived 2026-11-24T13:16:37.491531+00:00, SHA-256 `7b71f8186b050bcc59f9b5f2fc0aded6d64c4baa5ca4b99dcf036c15d42130c6`, license `CC-BY-4.0; upstream NBA gambling-use terms unresolved`
 - NFL https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2021.csv.gz — 233 parsed games, 49922 rows, archived 2026-10-28T04:03:50.621124+00:00, SHA-256 `e8743a568f99667a8bdcd29ba12224ee1782ad2b7916bee78ee335c099383739`, license `CC-BY-4.0`
 - NFL https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2022.csv.gz — 232 parsed games, 49434 rows, archived 2026-10-28T04:03:53.220290+00:00, SHA-256 `0c69a71eb39498956c7b1d5c1ca52ce7fe679934a95d1af249facb5ea9829ea4`, license `CC-BY-4.0`
 - NFL https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_2023.csv.gz — 229 parsed games, 49665 rows, archived 2026-10-28T04:03:55.819849+00:00, SHA-256 `4649804ee0f0a40b41e51ec75a1ce921949d7fab5459213488656b92f78560e8`, license `CC-BY-4.0`
@@ -31,24 +31,24 @@ Matched chronological evaluation uses the same games for Elo and challenger. The
     "evaluation": {
       "draws_per_game": 5000,
       "elo_matched": {
-        "accuracy": 0.6836734693877551,
-        "brier": 0.19967110876106547,
-        "games": 196,
-        "log_loss": 0.5816792538156871
+        "accuracy": 0.6614785992217899,
+        "brier": 0.21258806008541484,
+        "games": 257,
+        "log_loss": 0.612162157837009
       },
-      "forecasted_games": 196,
+      "forecasted_games": 257,
       "simulator": {
-        "accuracy": 0.6377551020408163,
-        "brier": 0.2287004767346939,
-        "games": 196,
-        "log_loss": 0.6487921379616479
+        "accuracy": 0.6108949416342413,
+        "brier": 0.236053226770428,
+        "games": 257,
+        "log_loss": 0.6644706957055703
       },
       "test_seasons": [
         "2026-27"
       ],
       "winner": "elo_or_insufficient"
     },
-    "observations": 5106,
+    "observations": 5167,
     "sources": [
       {
         "license": "CC-BY-4.0; upstream NBA gambling-use terms unresolved",
@@ -84,10 +84,10 @@ Matched chronological evaluation uses the same games for Elo and challenger. The
       },
       {
         "license": "CC-BY-4.0; upstream NBA gambling-use terms unresolved",
-        "parsed_games": 196,
-        "retrieved_at": "2026-11-16T16:07:08.833458+00:00",
-        "sha256": "b2cf7285abba5c3c755bedaa0febe1a871556ce579b16be0fb924af9bf80bb03",
-        "source_rows": 394,
+        "parsed_games": 257,
+        "retrieved_at": "2026-11-24T13:16:37.491531+00:00",
+        "sha256": "7b71f8186b050bcc59f9b5f2fc0aded6d64c4baa5ca4b99dcf036c15d42130c6",
+        "source_rows": 516,
         "url": "https://boxscorelab.com/downloads/2026-27-team-game-results.csv"
       }
     ]

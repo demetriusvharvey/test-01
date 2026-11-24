@@ -3872,5 +3872,135 @@
     ],
     "observed_at": "2026-11-23T22:45:16.982812+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:Memphis @ Charlotte",
+    "game_date": "2026-11-24",
+    "matchup": "Memphis @ Charlotte",
+    "crew": [
+      "James Williams (#60)",
+      "Tre Maddox (#23)",
+      "JP Primm (#82)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:Portland @ Philadelphia",
+    "game_date": "2026-11-24",
+    "matchup": "Portland @ Philadelphia",
+    "crew": [
+      "Kevin Cutler (#34)",
+      "Sha'Rae Mitchell (#98)",
+      "Scott Twardoski (#52)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:Oklahoma City @ Indiana",
+    "game_date": "2026-11-24",
+    "matchup": "Oklahoma City @ Indiana",
+    "crew": [
+      "Tony Brothers (#25)",
+      "Ashley Moyer-Gleich (#13)",
+      "John Conley (#56)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:Milwaukee @ Toronto",
+    "game_date": "2026-11-24",
+    "matchup": "Milwaukee @ Toronto",
+    "crew": [
+      "Sean Wright (#4)",
+      "Jacyn Goble (#68)",
+      "Matt Myers (#43)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:Brooklyn @ Minnesota",
+    "game_date": "2026-11-24",
+    "matchup": "Brooklyn @ Minnesota",
+    "crew": [
+      "Scott Foster (#48)",
+      "John Butler (#30)",
+      "Agon Abazi (#88)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:Cleveland @ Chicago",
+    "game_date": "2026-11-24",
+    "matchup": "Cleveland @ Chicago",
+    "crew": [
+      "Ed Malloy (#7)",
+      "Natalie Sago (#9)",
+      "Brent Haskill (#92)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:Phoenix @ New Orleans",
+    "game_date": "2026-11-24",
+    "matchup": "Phoenix @ New Orleans",
+    "crew": [
+      "JB DeRosa (#14)",
+      "Eric Dalen (#37)",
+      "Brandon Adair (#67)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:LA Clippers @ Houston",
+    "game_date": "2026-11-24",
+    "matchup": "LA Clippers @ Houston",
+    "crew": [
+      "Justin Van Duyne (#64)",
+      "Mousa Dagher (#28)",
+      "Jonathan Sterling (#17)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:Utah @ L.A. Lakers",
+    "game_date": "2026-11-24",
+    "matchup": "Utah @ L.A. Lakers",
+    "crew": [
+      "Mark Lindsay (#29)",
+      "Sean Corbin (#33)",
+      "Simone Jelks (#81)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-24:San Antonio @ Sacramento",
+    "game_date": "2026-11-24",
+    "matchup": "San Antonio @ Sacramento",
+    "crew": [
+      "Brent Barnaky (#36)",
+      "CJ Washington (#12)",
+      "JT Orr (#72)",
+      ""
+    ],
+    "observed_at": "2026-11-24T06:31:38.512792+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

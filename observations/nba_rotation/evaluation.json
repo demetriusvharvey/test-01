@@ -327,9 +327,9 @@
     },
     {
       "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2027.csv",
-      "sha256": "da36007d3e5492988607ff216f17eaab2f36fd7228847f84a6a3b6734c70d7be",
-      "observed_at": "2026-11-17T19:21:59.539050+00:00",
-      "parsed_player_rows": 4604,
+      "sha256": "9964590579a3bda1495f3cc853dc76e575d413fc5c43a484b64f1aa7c8e05e0c",
+      "observed_at": "2026-11-24T13:16:37.678493+00:00",
+      "parsed_player_rows": 5755,
       "columns": [
         "game_id",
         "season",
@@ -631,37 +631,37 @@
         "promoted": false,
         "uncertainty": "predictive intervals not established",
         "elo": {
-          "games": 180,
-          "accuracy": 0.6944444444444444,
-          "brier": 0.19898255936131867,
-          "log_loss": 0.580017379906253
+          "games": 241,
+          "accuracy": 0.6680497925311203,
+          "brier": 0.2129313477585898,
+          "log_loss": 0.612944685474532
         },
         "logistic": {
           "raw": {
-            "games": 180,
-            "accuracy": 0.6777777777777778,
-            "brier": 0.20358968387036763,
-            "log_loss": 0.5904647805630874
+            "games": 241,
+            "accuracy": 0.6514522821576764,
+            "brier": 0.21659891941166426,
+            "log_loss": 0.6214081790491182
           },
           "calibrated": {
-            "games": 180,
-            "accuracy": 0.6777777777777778,
-            "brier": 0.20366219478463457,
-            "log_loss": 0.5905242229219065
+            "games": 241,
+            "accuracy": 0.6514522821576764,
+            "brier": 0.21685912798840842,
+            "log_loss": 0.6220906776568481
           }
         },
         "boosting": {
           "raw": {
-            "games": 180,
-            "accuracy": 0.6722222222222223,
-            "brier": 0.20478623368668253,
-            "log_loss": 0.5907076282260938
+            "games": 241,
+            "accuracy": 0.6556016597510373,
+            "brier": 0.21551269685784677,
+            "log_loss": 0.6180743751886015
           },
           "calibrated": {
-            "games": 180,
-            "accuracy": 0.6777777777777778,
-            "brier": 0.2038136499069272,
-            "log_loss": 0.5895937512935784
+            "games": 241,
+            "accuracy": 0.6597510373443983,
+            "brier": 0.21325418123819723,
+            "log_loss": 0.6121701257389087
           }
         }
       },
@@ -685,37 +685,37 @@
         "promoted": false,
         "uncertainty": "predictive intervals not established",
         "elo": {
-          "games": 180,
-          "accuracy": 0.6944444444444444,
-          "brier": 0.19898255936131867,
-          "log_loss": 0.580017379906253
+          "games": 241,
+          "accuracy": 0.6680497925311203,
+          "brier": 0.2129313477585898,
+          "log_loss": 0.612944685474532
         },
         "logistic": {
           "raw": {
-            "games": 180,
-            "accuracy": 0.65,
-            "brier": 0.20572052857920475,
-            "log_loss": 0.5945505477057105
+            "games": 241,
+            "accuracy": 0.6265560165975104,
+            "brier": 0.21643121700554002,
+            "log_loss": 0.6197258976153777
           },
           "calibrated": {
-            "games": 180,
-            "accuracy": 0.65,
-            "brier": 0.205887196784689,
-            "log_loss": 0.5948877369941291
+            "games": 241,
+            "accuracy": 0.6307053941908713,
+            "brier": 0.21671617400229423,
+            "log_loss": 0.6204391128091212
           }
         },
         "boosting": {
           "raw": {
-            "games": 180,
-            "accuracy": 0.7111111111111111,
-            "brier": 0.2055360053709398,
-            "log_loss": 0.5972540938198272
+            "games": 241,
+            "accuracy": 0.6763485477178424,
+            "brier": 0.21415499239730937,
+            "log_loss": 0.6173076619623405
           },
           "calibrated": {
-            "games": 180,
-            "accuracy": 0.7111111111111111,
-            "brier": 0.20481488142989596,
-            "log_loss": 0.5947326638745376
+            "games": 241,
+            "accuracy": 0.6804979253112033,
+            "brier": 0.21242324182061945,
+            "log_loss": 0.611792036227849
           }
         }
       }

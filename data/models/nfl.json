@@ -27,16 +27,16 @@
       ],
       "weights": [
         0.25143949277171035,
-        0.02139725698183885,
-        0.15252854888861114,
-        0.13880419038478173,
-        0.166786812719654,
-        -0.05599274524895353,
-        0.05990324771752428,
+        0.021397256981839058,
+        0.1525285488886111,
+        0.1388041903847818,
+        0.16678681271965395,
+        -0.055992745248953556,
+        0.0599032477175241,
         0.0,
-        0.04905610663065204
+        0.04905610663065181
       ],
-      "intercept": 0.26186378941470123,
+      "intercept": 0.2618637894147013,
       "extended": false,
       "C": 0.01
     }
@@ -72,14 +72,14 @@
     "player news not a trained input",
     "no verified contemporaneous historical odds"
   ],
-  "exported_at": "2026-11-18T19:39:37.803275+00:00",
-  "input_data_hash": "84b6b5eab38e9cfc52413f1aebc7fdc74f7091bc8795dd977ffd096bb300e64f",
-  "source_observed_at": "2026-11-16T16:07:08.833458+00:00",
+  "exported_at": "2026-11-25T20:45:08.180591+00:00",
+  "input_data_hash": "d461c696caa5e53bd22f5a0e6c0e635ebe911508aade8c2b422061d80c781f78",
+  "source_observed_at": "2026-11-25T20:43:17.633175+00:00",
   "evaluation_season": "2026",
   "random_seed": 17,
   "sklearn_version": "1.8.0",
   "trainer_source_hash": "90fe6e3bb830d9202bbd5a5564bef8e343d35179e7f247ed0c92699d987f652e",
   "feature_source_hash": "189f6847692db035bfc9f47e7181910cddca85a2f496297d2a813718e1b93141",
-  "model_identity_hash": "40a11f4fbe35e3dcbbe2e53502c8b30f0b43d66908188ce7871c641181b3ff35",
-  "artifact_hash": "11c4c111441ef08d791737aacb9b73dace177280433cc2a55a5891fd82e3964b"
+  "model_identity_hash": "8829ff3499581ac7f123ff53e775cfcb970b4b229de96551378a4cf823ee5dc4",
+  "artifact_hash": "fe03b56d00ed0bccb8e22dbac950cbf6141ace2bc8c86716ec77d942cd624955"
 }

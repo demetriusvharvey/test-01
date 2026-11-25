@@ -1,6 +1,6 @@
 # NBA uniquely reconstructed regulation-game lineup associations
 
-Run 2026-11-18T19:30:04.243327+00:00. H026. Source failures: 0.
+Run 2026-11-25T20:34:23.377597+00:00. H026. Source failures: 0.
 Source IDs, unique period constraints and explicit substitutions reconstruct stints. Ambiguous games are rejected. Scope: uniquely reconstructed regulation-game. Full-game mode also validates each player against box minutes and excludes overtime. This is postgame training data, not historical pregame availability. No public pick changes.
 
 | Source season | Games seen | Accepted | Rejected | Stints |
@@ -9,16 +9,16 @@ Source IDs, unique period constraints and explicit substitutions reconstruct sti
 | 2024 | 1320 | 107 | 1213 | 3017 |
 | 2025 | 1324 | 91 | 1233 | 2654 |
 | 2026 | 1325 | 85 | 1240 | 2670 |
-| 2027 | 210 | 6 | 204 | 207 |
+| 2027 | 261 | 10 | 251 | 332 |
 
 | Test season | Status | Matched games | Stints | Player MSE | Team MSE | League MSE | BH p |
 |---|---|---:|---:|---:|---:|---:|---:|
 | 2024-25 | insufficient_matched_stints | — | 7 | — | — | — | — |
 | 2025-26 | insufficient_matched_stints | — | 89 | — | — | — | — |
-| 2026-27 | insufficient_matched_stints | — | 3 | — | — | — | — |
+| 2026-27 | insufficient_matched_stints | — | 27 | — | — | — | — |
 
 MSE is minute-weighted squared error in net points per 48 minutes; lower is better. These are stint-rate errors, not game-winner accuracy. Ridge penalties are selected on a distinct prior season. Low-sample players are nuisance controls in training; only effects backed by 120 actual training minutes are published or admitted to validation/test rows. Unknown-player test rows are excluded. This selective coverage must not be described as all-game validation.
 
 Ratings control observed teammates/opponents but remain observational associations. H026 tests are jointly corrected with H025. They are not possession RAPM, complete defensive ratings or causal injury effects. Full-game replacement and probability conversion require separate evaluation. All rejected-game reasons, source hashes, thresholds and fold artifacts are retained. No wagering-source approval or profit is established.
 
-Artifact: observations/nba_full_lineups/8e0e26e81efabb20102ac5e6afb66eea8e6607cc07254a0fb5b1f21f93474be5/evaluation.json.
+Artifact: observations/nba_full_lineups/caa5b1ec79a5a5a33e76f03e9f9815080c7d65fefeadd246533a9b3ebf7c8275/evaluation.json.

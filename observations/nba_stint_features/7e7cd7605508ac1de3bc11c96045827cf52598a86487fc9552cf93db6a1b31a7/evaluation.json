@@ -1,7 +1,7 @@
 {
   "hypothesis": "H027",
   "partial_coverage": false,
-  "evaluated_at": "2026-10-29T20:53:48.091186+00:00",
+  "evaluated_at": "2026-11-25T20:35:08.610281+00:00",
   "matched_games": 6,
   "season_counts": {
     "2023-24": 5,
@@ -72,13 +72,13 @@
     },
     {
       "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2027.parquet",
-      "sha256": "98d3932ea47501b45a627ff8f1a3144b01b3980ce660d70b8940fdeddfebbecf",
-      "observed_at": "2026-10-29T19:37:00.453048+00:00",
+      "sha256": "2c12e8f46514aa08f5c438c4e57c131ab25fe1fca082f192c35261aa73132311",
+      "observed_at": "2026-11-25T20:33:52.229112+00:00",
       "cached": true,
       "starter_source": {
         "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2027.csv",
-        "sha256": "93806629508d8b7cdaea54e6c2cea43bfd29a33700646b88a1ad35dd7b1112dd",
-        "observed_at": "2026-10-29T14:10:48.504523+00:00"
+        "sha256": "9964590579a3bda1495f3cc853dc76e575d413fc5c43a484b64f1aa7c8e05e0c",
+        "observed_at": "2026-11-24T13:16:37.678493+00:00"
       }
     }
   ],
@@ -166,16 +166,17 @@
     },
     {
       "season_file": 2027,
-      "games_seen": 68,
-      "accepted_games": 1,
-      "rejected_games": 67,
+      "games_seen": 261,
+      "accepted_games": 10,
+      "rejected_games": 251,
       "rejections": {
-        "ambiguous_substitution": 11,
-        "period_replay_failure": 24,
-        "action_off_court": 28,
-        "overtime_or_incomplete": 4
+        "missing_box_context": 3,
+        "period_replay_failure": 99,
+        "ambiguous_substitution": 29,
+        "action_off_court": 106,
+        "overtime_or_incomplete": 14
       },
-      "stints": 33,
+      "stints": 332,
       "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
     }
   ],

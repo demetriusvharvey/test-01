@@ -1,7 +1,7 @@
 {
   "hypothesis": "H029",
-  "evaluated_at": "2026-11-18T19:32:10.096387+00:00",
-  "source_input_hash": "943578d9d6269b466af85ba969dfc5d85f762a9298b78bffd3c80dff9677f9cc",
+  "evaluated_at": "2026-11-25T20:36:02.175273+00:00",
+  "source_input_hash": "cf1ba45e43781ee2802152a66848f88e98ac927ff36bc3a09a42045e22af6b8a",
   "policy": "up to three highest model winner probabilities, threshold 0.50; 50/50 abstains",
   "results": [
     {
@@ -187,7 +187,7 @@
               "games": 451,
               "accuracy": 0.753880266075388,
               "brier": 0.17295226428089497,
-              "log_loss": 0.5223618730222225
+              "log_loss": 0.5223618730222226
             },
             {
               "threshold": 0.7,
@@ -215,14 +215,14 @@
             "seed": 20261029
           },
           "raw_p": 0.28687131286871315,
-          "adjusted_p_related_tests": 0.8624512548745126
+          "adjusted_p_related_tests": 1.0
         },
         "player27": {
           "primary": {
             "games": 466,
             "accuracy": 0.7682403433476395,
             "brier": 0.16830907422215682,
-            "log_loss": 0.5124118388845843
+            "log_loss": 0.5124118388845842
           },
           "accuracy_interval": {
             "lower": 0.7276595744680852,
@@ -239,7 +239,7 @@
                 0.6
               ],
               "picks": 21,
-              "mean_estimate": 0.5600722229685123,
+              "mean_estimate": 0.5600722229685141,
               "win_fraction": 0.47619047619047616
             },
             {
@@ -248,7 +248,7 @@
                 0.7
               ],
               "picks": 90,
-              "mean_estimate": 0.6573285268566912,
+              "mean_estimate": 0.6573285268566901,
               "win_fraction": 0.6888888888888889
             },
             {
@@ -257,7 +257,7 @@
                 0.8
               ],
               "picks": 191,
-              "mean_estimate": 0.7528392948384763,
+              "mean_estimate": 0.752839294838477,
               "win_fraction": 0.7539267015706806
             },
             {
@@ -266,7 +266,7 @@
                 0.9
               ],
               "picks": 141,
-              "mean_estimate": 0.8408622647652368,
+              "mean_estimate": 0.8408622647652367,
               "win_fraction": 0.8439716312056738
             },
             {
@@ -286,31 +286,31 @@
               "games": 466,
               "accuracy": 0.7682403433476395,
               "brier": 0.16830907422215682,
-              "log_loss": 0.5124118388845843
+              "log_loss": 0.5124118388845842
             },
             {
               "threshold": 0.6,
               "selected_days": 158,
               "games": 445,
               "accuracy": 0.7820224719101123,
-              "brier": 0.16380529104077474,
-              "log_loss": 0.5025680331723278
+              "brier": 0.1638052910407747,
+              "log_loss": 0.5025680331723275
             },
             {
               "threshold": 0.7,
               "selected_days": 151,
               "games": 355,
               "accuracy": 0.8056338028169014,
-              "brier": 0.15170441341932658,
-              "log_loss": 0.4743907733664429
+              "brier": 0.15170441341932622,
+              "log_loss": 0.474390773366442
             },
             {
               "threshold": 0.8,
               "selected_days": 99,
               "games": 164,
               "accuracy": 0.8658536585365854,
-              "brier": 0.11225684502990624,
-              "log_loss": 0.3768409998607405
+              "brier": 0.11225684502990611,
+              "log_loss": 0.37684099986074004
             }
           ],
           "paired_accuracy_test_vs_elo": {
@@ -328,8 +328,8 @@
           "primary": {
             "games": 466,
             "accuracy": 0.7575107296137339,
-            "brier": 0.17137802433699628,
-            "log_loss": 0.519104455276501
+            "brier": 0.17137802433699625,
+            "log_loss": 0.5191044552765008
           },
           "accuracy_interval": {
             "lower": 0.7164502164502164,
@@ -346,7 +346,7 @@
                 0.6
               ],
               "picks": 20,
-              "mean_estimate": 0.560088227965569,
+              "mean_estimate": 0.5600882279655691,
               "win_fraction": 0.4
             },
             {
@@ -364,7 +364,7 @@
                 0.8
               ],
               "picks": 194,
-              "mean_estimate": 0.748901603968071,
+              "mean_estimate": 0.7489016039680714,
               "win_fraction": 0.7319587628865979
             },
             {
@@ -373,7 +373,7 @@
                 0.9
               ],
               "picks": 120,
-              "mean_estimate": 0.8372660217233778,
+              "mean_estimate": 0.8372660217233779,
               "win_fraction": 0.8833333333333333
             },
             {
@@ -382,7 +382,7 @@
                 1
               ],
               "picks": 22,
-              "mean_estimate": 0.9147087089185985,
+              "mean_estimate": 0.9147087089185987,
               "win_fraction": 0.9545454545454546
             }
           ],
@@ -392,32 +392,32 @@
               "selected_days": 159,
               "games": 466,
               "accuracy": 0.7575107296137339,
-              "brier": 0.17137802433699628,
-              "log_loss": 0.519104455276501
+              "brier": 0.17137802433699625,
+              "log_loss": 0.5191044552765008
             },
             {
               "threshold": 0.6,
               "selected_days": 159,
               "games": 446,
               "accuracy": 0.773542600896861,
-              "brier": 0.1671114308344695,
-              "log_loss": 0.5098034813118197
+              "brier": 0.16711143083446944,
+              "log_loss": 0.5098034813118196
             },
             {
               "threshold": 0.7,
               "selected_days": 147,
               "games": 336,
               "accuracy": 0.8005952380952381,
-              "brier": 0.15304562061913035,
-              "log_loss": 0.47681871636240053
+              "brier": 0.1530456206191303,
+              "log_loss": 0.4768187163624004
             },
             {
               "threshold": 0.8,
               "selected_days": 93,
               "games": 142,
               "accuracy": 0.8943661971830986,
-              "brier": 0.09341556553431862,
-              "log_loss": 0.3322604627798141
+              "brier": 0.09341556553431861,
+              "log_loss": 0.33226046277981397
             }
           ],
           "paired_accuracy_test_vs_elo": {
@@ -429,7 +429,7 @@
             "seed": 20261029
           },
           "raw_p": 0.32826717328267174,
-          "adjusted_p_related_tests": 0.8624512548745126
+          "adjusted_p_related_tests": 1.0
         }
       }
     },
@@ -543,8 +543,8 @@
           "primary": {
             "games": 475,
             "accuracy": 0.7684210526315789,
-            "brier": 0.17382182952521247,
-            "log_loss": 0.5286097293676029
+            "brier": 0.17382182952521336,
+            "log_loss": 0.5286097293676046
           },
           "accuracy_interval": {
             "lower": 0.7320675105485233,
@@ -561,7 +561,7 @@
                 0.6
               ],
               "picks": 19,
-              "mean_estimate": 0.5710306408947087,
+              "mean_estimate": 0.5710306408947002,
               "win_fraction": 0.631578947368421
             },
             {
@@ -570,7 +570,7 @@
                 0.7
               ],
               "picks": 98,
-              "mean_estimate": 0.6593467567762042,
+              "mean_estimate": 0.6593467567761963,
               "win_fraction": 0.7244897959183674
             },
             {
@@ -579,7 +579,7 @@
                 0.8
               ],
               "picks": 197,
-              "mean_estimate": 0.7524320438911274,
+              "mean_estimate": 0.7524320438911256,
               "win_fraction": 0.7360406091370558
             },
             {
@@ -588,7 +588,7 @@
                 0.9
               ],
               "picks": 137,
-              "mean_estimate": 0.8421067861468944,
+              "mean_estimate": 0.8421067861468897,
               "win_fraction": 0.8540145985401459
             },
             {
@@ -597,7 +597,7 @@
                 1
               ],
               "picks": 24,
-              "mean_estimate": 0.9196255621389637,
+              "mean_estimate": 0.9196255621389614,
               "win_fraction": 0.8333333333333334
             }
           ],
@@ -607,32 +607,32 @@
               "selected_days": 160,
               "games": 475,
               "accuracy": 0.7684210526315789,
-              "brier": 0.17382182952521247,
-              "log_loss": 0.5286097293676029
+              "brier": 0.17382182952521336,
+              "log_loss": 0.5286097293676046
             },
             {
               "threshold": 0.6,
               "selected_days": 160,
               "games": 456,
               "accuracy": 0.7741228070175439,
-              "brier": 0.1710384333824226,
-              "log_loss": 0.5225431232806965
+              "brier": 0.17103843338242383,
+              "log_loss": 0.5225431232806992
             },
             {
               "threshold": 0.7,
               "selected_days": 152,
               "games": 358,
               "accuracy": 0.7877094972067039,
-              "brier": 0.16329318665022852,
-              "log_loss": 0.5045477325928776
+              "brier": 0.16329318665022957,
+              "log_loss": 0.5045477325928797
             },
             {
               "threshold": 0.8,
               "selected_days": 104,
               "games": 161,
               "accuracy": 0.8509316770186336,
-              "brier": 0.12570362422853076,
-              "log_loss": 0.4164351994654505
+              "brier": 0.12570362422853018,
+              "log_loss": 0.4164351994654475
             }
           ],
           "paired_accuracy_test_vs_elo": {
@@ -650,8 +650,8 @@
           "primary": {
             "games": 475,
             "accuracy": 0.7705263157894737,
-            "brier": 0.1721235255466973,
-            "log_loss": 0.5228188667560468
+            "brier": 0.17212352554669935,
+            "log_loss": 0.5228188667560532
           },
           "accuracy_interval": {
             "lower": 0.7316561844863732,
@@ -677,7 +677,7 @@
                 0.7
               ],
               "picks": 95,
-              "mean_estimate": 0.6605049825075275,
+              "mean_estimate": 0.6605049825075329,
               "win_fraction": 0.6631578947368421
             },
             {
@@ -686,7 +686,7 @@
                 0.8
               ],
               "picks": 203,
-              "mean_estimate": 0.7527726782805761,
+              "mean_estimate": 0.7527726782805699,
               "win_fraction": 0.7438423645320197
             },
             {
@@ -695,7 +695,7 @@
                 0.9
               ],
               "picks": 136,
-              "mean_estimate": 0.841617116688922,
+              "mean_estimate": 0.8416171166889157,
               "win_fraction": 0.8529411764705882
             },
             {
@@ -704,7 +704,7 @@
                 1
               ],
               "picks": 23,
-              "mean_estimate": 0.9172791503078853,
+              "mean_estimate": 0.917279150307882,
               "win_fraction": 0.9130434782608695
             }
           ],
@@ -714,32 +714,32 @@
               "selected_days": 160,
               "games": 475,
               "accuracy": 0.7705263157894737,
-              "brier": 0.1721235255466973,
-              "log_loss": 0.5228188667560468
+              "brier": 0.17212352554669935,
+              "log_loss": 0.5228188667560532
             },
             {
               "threshold": 0.6,
               "selected_days": 160,
               "games": 457,
               "accuracy": 0.7680525164113785,
-              "brier": 0.1706443695793323,
-              "log_loss": 0.5193150122449255
+              "brier": 0.17064436957933476,
+              "log_loss": 0.5193150122449327
             },
             {
               "threshold": 0.7,
               "selected_days": 150,
               "games": 362,
               "accuracy": 0.7955801104972375,
-              "brier": 0.15748946852133328,
-              "log_loss": 0.4894396236152695
+              "brier": 0.1574894685213355,
+              "log_loss": 0.48943962361527643
             },
             {
               "threshold": 0.8,
               "selected_days": 104,
               "games": 159,
               "accuracy": 0.8616352201257862,
-              "brier": 0.11663988202866503,
-              "log_loss": 0.39135781115070417
+              "brier": 0.11663988202866679,
+              "log_loss": 0.39135781115071083
             }
           ],
           "paired_accuracy_test_vs_elo": {
@@ -757,8 +757,8 @@
           "primary": {
             "games": 475,
             "accuracy": 0.7684210526315789,
-            "brier": 0.171795039840436,
-            "log_loss": 0.5223685628349252
+            "brier": 0.17179503984040922,
+            "log_loss": 0.5223685628348549
           },
           "accuracy_interval": {
             "lower": 0.7305263157894737,
@@ -775,7 +775,7 @@
                 0.6
               ],
               "picks": 22,
-              "mean_estimate": 0.5670342041249432,
+              "mean_estimate": 0.5670342041248608,
               "win_fraction": 0.6818181818181818
             },
             {
@@ -784,7 +784,7 @@
                 0.7
               ],
               "picks": 85,
-              "mean_estimate": 0.6571598753532581,
+              "mean_estimate": 0.6571598753533081,
               "win_fraction": 0.6470588235294118
             },
             {
@@ -793,7 +793,7 @@
                 0.8
               ],
               "picks": 202,
-              "mean_estimate": 0.7514947518878009,
+              "mean_estimate": 0.7514947518877919,
               "win_fraction": 0.7524752475247525
             },
             {
@@ -802,7 +802,7 @@
                 0.9
               ],
               "picks": 144,
-              "mean_estimate": 0.8405051907408033,
+              "mean_estimate": 0.8405051907408297,
               "win_fraction": 0.8541666666666666
             },
             {
@@ -811,7 +811,7 @@
                 1
               ],
               "picks": 22,
-              "mean_estimate": 0.9207278259111848,
+              "mean_estimate": 0.9207278259111977,
               "win_fraction": 0.9090909090909091
             }
           ],
@@ -821,32 +821,32 @@
               "selected_days": 160,
               "games": 475,
               "accuracy": 0.7684210526315789,
-              "brier": 0.171795039840436,
-              "log_loss": 0.5223685628349252
+              "brier": 0.17179503984040922,
+              "log_loss": 0.5223685628348549
             },
             {
               "threshold": 0.6,
               "selected_days": 160,
               "games": 453,
               "accuracy": 0.7726269315673289,
-              "brier": 0.16942988912611287,
-              "log_loss": 0.516967496149033
+              "brier": 0.1694298891260861,
+              "log_loss": 0.516967496148962
             },
             {
               "threshold": 0.7,
               "selected_days": 153,
               "games": 368,
               "accuracy": 0.8016304347826086,
-              "brier": 0.15592548330253503,
-              "log_loss": 0.4866334307611017
+              "brier": 0.15592548330251568,
+              "log_loss": 0.4866334307610439
             },
             {
               "threshold": 0.8,
               "selected_days": 106,
               "games": 166,
               "accuracy": 0.8614457831325302,
-              "brier": 0.11726586677683493,
-              "log_loss": 0.39345809433859025
+              "brier": 0.11726586677682727,
+              "log_loss": 0.39345809433855633
             }
           ],
           "paired_accuracy_test_vs_elo": {
@@ -864,25 +864,25 @@
     },
     {
       "season": "2026-27",
-      "archived_days": 26,
-      "complete_days": 23,
+      "archived_days": 34,
+      "complete_days": 31,
       "excluded_incomplete_days": 3,
-      "complete_games": 180,
+      "complete_games": 241,
       "models": {
         "elo": {
           "primary": {
-            "games": 68,
-            "accuracy": 0.8088235294117647,
-            "brier": 0.1455601913556865,
-            "log_loss": 0.45624871370115316
+            "games": 92,
+            "accuracy": 0.7717391304347826,
+            "brier": 0.1645100480004387,
+            "log_loss": 0.5035254431850318
           },
           "accuracy_interval": {
-            "lower": 0.7246376811594203,
-            "upper": 0.8840579710144928,
+            "lower": 0.6956521739130435,
+            "upper": 0.8478260869565217,
             "draws": 2000,
             "seed": 20261029,
             "unit": "calendar day",
-            "days": 23
+            "days": 31
           },
           "calibration": [
             {
@@ -890,79 +890,79 @@
                 0.5,
                 0.6
               ],
-              "picks": 4,
-              "mean_estimate": 0.5495760762502714,
-              "win_fraction": 1.0
+              "picks": 5,
+              "mean_estimate": 0.5594383170555586,
+              "win_fraction": 0.8
             },
             {
               "range": [
                 0.6,
                 0.7
               ],
-              "picks": 13,
-              "mean_estimate": 0.6563492390872027,
-              "win_fraction": 0.46153846153846156
+              "picks": 15,
+              "mean_estimate": 0.6575402010253473,
+              "win_fraction": 0.4
             },
             {
               "range": [
                 0.7,
                 0.8
               ],
-              "picks": 22,
-              "mean_estimate": 0.7502477552866474,
-              "win_fraction": 0.8181818181818182
+              "picks": 31,
+              "mean_estimate": 0.7547809506839147,
+              "win_fraction": 0.8064516129032258
             },
             {
               "range": [
                 0.8,
                 0.9
               ],
-              "picks": 28,
-              "mean_estimate": 0.8404218015104093,
-              "win_fraction": 0.9285714285714286
+              "picks": 38,
+              "mean_estimate": 0.842475387494411,
+              "win_fraction": 0.8947368421052632
             },
             {
               "range": [
                 0.9,
                 1
               ],
-              "picks": 1,
-              "mean_estimate": 0.9132133882647644,
-              "win_fraction": 1.0
+              "picks": 3,
+              "mean_estimate": 0.9087732331151935,
+              "win_fraction": 0.6666666666666666
             }
           ],
           "coverage_curve": [
             {
               "threshold": 0.5,
-              "selected_days": 23,
-              "games": 68,
-              "accuracy": 0.8088235294117647,
-              "brier": 0.1455601913556865,
-              "log_loss": 0.45624871370115316
+              "selected_days": 31,
+              "games": 92,
+              "accuracy": 0.7717391304347826,
+              "brier": 0.1645100480004387,
+              "log_loss": 0.5035254431850318
             },
             {
               "threshold": 0.6,
-              "selected_days": 22,
-              "games": 64,
-              "accuracy": 0.796875,
-              "brier": 0.141918398703298,
-              "log_loss": 0.447250298385135
+              "selected_days": 30,
+              "games": 87,
+              "accuracy": 0.7701149425287356,
+              "brier": 0.16047060857916684,
+              "log_loss": 0.49436706371705935
             },
             {
               "threshold": 0.7,
-              "selected_days": 21,
-              "games": 51,
-              "accuracy": 0.8823529411764706,
-              "brier": 0.10650862699043429,
-              "log_loss": 0.3682291270285077
+              "selected_days": 29,
+              "games": 72,
+              "accuracy": 0.8472222222222222,
+              "brier": 0.13090111479357225,
+              "log_loss": 0.430229902154646
             },
             {
               "threshold": 0.8,
-              "selected_days": 17,
-              "games": 29,
-              "accuracy": 0.9310344827586207,
-              "brier": 0.06872795921976957,
-              "log_loss": 0.27272671464544546
+              "selected_days": 23,
+              "games": 41,
+              "accuracy": 0.8780487804878049,
+              "brier": 0.10643665828957859,
+              "log_loss": 0.3698909242400176
             }
           ],
           "paired_accuracy_test_vs_elo": null,
@@ -970,18 +970,18 @@
         },
         "team14": {
           "primary": {
-            "games": 68,
-            "accuracy": 0.8235294117647058,
-            "brier": 0.14667829429629456,
-            "log_loss": 0.46156020211058413
+            "games": 92,
+            "accuracy": 0.7717391304347826,
+            "brier": 0.17033800525080423,
+            "log_loss": 0.5189770884538298
           },
           "accuracy_interval": {
-            "lower": 0.7536231884057971,
-            "upper": 0.8970588235294118,
+            "lower": 0.6956521739130435,
+            "upper": 0.8461538461538461,
             "draws": 2000,
             "seed": 20261029,
             "unit": "calendar day",
-            "days": 23
+            "days": 31
           },
           "calibration": [
             {
@@ -989,85 +989,85 @@
                 0.5,
                 0.6
               ],
-              "picks": 6,
-              "mean_estimate": 0.5681117319428711,
-              "win_fraction": 0.8333333333333334
+              "picks": 7,
+              "mean_estimate": 0.5698016590801456,
+              "win_fraction": 0.7142857142857143
             },
             {
               "range": [
                 0.6,
                 0.7
               ],
-              "picks": 7,
-              "mean_estimate": 0.6719693312639439,
-              "win_fraction": 0.7142857142857143
+              "picks": 9,
+              "mean_estimate": 0.6694384645894753,
+              "win_fraction": 0.5555555555555556
             },
             {
               "range": [
                 0.7,
                 0.8
               ],
-              "picks": 17,
-              "mean_estimate": 0.7553008120314687,
-              "win_fraction": 0.7647058823529411
+              "picks": 25,
+              "mean_estimate": 0.7578211947114855,
+              "win_fraction": 0.76
             },
             {
               "range": [
                 0.8,
                 0.9
               ],
-              "picks": 34,
-              "mean_estimate": 0.8523506696530132,
-              "win_fraction": 0.8529411764705882
+              "picks": 46,
+              "mean_estimate": 0.8532831836921749,
+              "win_fraction": 0.8043478260869565
             },
             {
               "range": [
                 0.9,
                 1
               ],
-              "picks": 4,
-              "mean_estimate": 0.9102222297864102,
+              "picks": 5,
+              "mean_estimate": 0.9097636293476139,
               "win_fraction": 1.0
             }
           ],
           "coverage_curve": [
             {
               "threshold": 0.5,
-              "selected_days": 23,
-              "games": 68,
-              "accuracy": 0.8235294117647058,
-              "brier": 0.14667829429629456,
-              "log_loss": 0.46156020211058413
+              "selected_days": 31,
+              "games": 92,
+              "accuracy": 0.7717391304347826,
+              "brier": 0.17033800525080423,
+              "log_loss": 0.5189770884538298
             },
             {
               "threshold": 0.6,
-              "selected_days": 22,
-              "games": 62,
-              "accuracy": 0.8225806451612904,
-              "brier": 0.14058602026539793,
-              "log_loss": 0.44703496536113735
+              "selected_days": 30,
+              "games": 85,
+              "accuracy": 0.7764705882352941,
+              "brier": 0.16561145772373376,
+              "log_loss": 0.5083365366702912
             },
             {
               "threshold": 0.7,
-              "selected_days": 22,
-              "games": 55,
-              "accuracy": 0.8363636363636363,
-              "brier": 0.13218346723884847,
-              "log_loss": 0.42707504585166506
+              "selected_days": 30,
+              "games": 76,
+              "accuracy": 0.8026315789473685,
+              "brier": 0.15469737658195298,
+              "log_loss": 0.4844248895459876
             },
             {
               "threshold": 0.8,
-              "selected_days": 19,
-              "games": 38,
-              "accuracy": 0.868421052631579,
-              "brier": 0.11067308240262459,
-              "log_loss": 0.3739036276730046
+              "selected_days": 26,
+              "games": 51,
+              "accuracy": 0.8235294117647058,
+              "brier": 0.14234769094865887,
+              "log_loss": 0.4553438466364398
             }
           ],
           "paired_accuracy_test_vs_elo": {
-            "games": 68,
-            "game_days": 23,
-            "mean_difference": 0.014705882352941176,
+            "games": 92,
+            "game_days": 31,
+            "mean_difference": 0.0,
             "p_value": 1.0,
             "iterations": 10000,
             "seed": 20261029
@@ -1077,18 +1077,18 @@
         },
         "player27": {
           "primary": {
-            "games": 68,
-            "accuracy": 0.8529411764705882,
-            "brier": 0.12826445781330278,
-            "log_loss": 0.41918051582374977
+            "games": 92,
+            "accuracy": 0.8043478260869565,
+            "brier": 0.14992672712772984,
+            "log_loss": 0.4702807681389836
           },
           "accuracy_interval": {
-            "lower": 0.782608695652174,
-            "upper": 0.927536231884058,
+            "lower": 0.7311827956989247,
+            "upper": 0.8709677419354839,
             "draws": 2000,
             "seed": 20261029,
             "unit": "calendar day",
-            "days": 23
+            "days": 31
           },
           "calibration": [
             {
@@ -1096,143 +1096,36 @@
                 0.5,
                 0.6
               ],
-              "picks": 3,
-              "mean_estimate": 0.5527804260869572,
-              "win_fraction": 0.6666666666666666
+              "picks": 4,
+              "mean_estimate": 0.5538931156469757,
+              "win_fraction": 0.5
             },
             {
               "range": [
                 0.6,
                 0.7
               ],
-              "picks": 8,
-              "mean_estimate": 0.6628005244831913,
-              "win_fraction": 0.75
+              "picks": 9,
+              "mean_estimate": 0.6596003164043099,
+              "win_fraction": 0.6666666666666666
             },
             {
               "range": [
                 0.7,
                 0.8
               ],
-              "picks": 19,
-              "mean_estimate": 0.7574627266603425,
-              "win_fraction": 0.8947368421052632
-            },
-            {
-              "range": [
-                0.8,
-                0.9
-              ],
-              "picks": 32,
-              "mean_estimate": 0.8509468629193317,
-              "win_fraction": 0.84375
-            },
-            {
-              "range": [
-                0.9,
-                1
-              ],
-              "picks": 6,
-              "mean_estimate": 0.9215998675373287,
-              "win_fraction": 1.0
-            }
-          ],
-          "coverage_curve": [
-            {
-              "threshold": 0.5,
-              "selected_days": 23,
-              "games": 68,
-              "accuracy": 0.8529411764705882,
-              "brier": 0.12826445781330278,
-              "log_loss": 0.41918051582374977
-            },
-            {
-              "threshold": 0.6,
-              "selected_days": 22,
-              "games": 65,
-              "accuracy": 0.8615384615384616,
-              "brier": 0.1240669227743834,
-              "log_loss": 0.40939793940450536
-            },
-            {
-              "threshold": 0.7,
-              "selected_days": 21,
-              "games": 57,
-              "accuracy": 0.8771929824561403,
-              "brier": 0.11213307208714281,
-              "log_loss": 0.381033430961911
-            },
-            {
-              "threshold": 0.8,
-              "selected_days": 20,
-              "games": 38,
-              "accuracy": 0.868421052631579,
-              "brier": 0.10870267486721433,
-              "log_loss": 0.36504498694340953
-            }
-          ],
-          "paired_accuracy_test_vs_elo": {
-            "games": 68,
-            "game_days": 23,
-            "mean_difference": 0.04411764705882353,
-            "p_value": 0.5863413658634137,
-            "iterations": 10000,
-            "seed": 20261029
-          },
-          "raw_p": 0.5863413658634137,
-          "adjusted_p_related_tests": 1.0
-        },
-        "lineup30": {
-          "primary": {
-            "games": 68,
-            "accuracy": 0.8382352941176471,
-            "brier": 0.13065688095467953,
-            "log_loss": 0.4204295103559837
-          },
-          "accuracy_interval": {
-            "lower": 0.7647058823529411,
-            "upper": 0.9130434782608695,
-            "draws": 2000,
-            "seed": 20261029,
-            "unit": "calendar day",
-            "days": 23
-          },
-          "calibration": [
-            {
-              "range": [
-                0.5,
-                0.6
-              ],
-              "picks": 3,
-              "mean_estimate": 0.5672295828875696,
-              "win_fraction": 0.6666666666666666
-            },
-            {
-              "range": [
-                0.6,
-                0.7
-              ],
-              "picks": 5,
-              "mean_estimate": 0.6763413576591568,
+              "picks": 30,
+              "mean_estimate": 0.7577538086354011,
               "win_fraction": 0.8
             },
             {
               "range": [
-                0.7,
-                0.8
-              ],
-              "picks": 24,
-              "mean_estimate": 0.752055223895407,
-              "win_fraction": 0.7083333333333334
-            },
-            {
-              "range": [
                 0.8,
                 0.9
               ],
-              "picks": 30,
-              "mean_estimate": 0.8546293611097939,
-              "win_fraction": 0.9333333333333333
+              "picks": 43,
+              "mean_estimate": 0.8517575886574705,
+              "win_fraction": 0.8372093023255814
             },
             {
               "range": [
@@ -1240,53 +1133,160 @@
                 1
               ],
               "picks": 6,
-              "mean_estimate": 0.9274408875853011,
+              "mean_estimate": 0.9216139829529028,
               "win_fraction": 1.0
             }
           ],
           "coverage_curve": [
             {
               "threshold": 0.5,
-              "selected_days": 23,
-              "games": 68,
-              "accuracy": 0.8382352941176471,
-              "brier": 0.13065688095467953,
-              "log_loss": 0.4204295103559837
+              "selected_days": 31,
+              "games": 92,
+              "accuracy": 0.8043478260869565,
+              "brier": 0.14992672712772984,
+              "log_loss": 0.4702807681389836
             },
             {
               "threshold": 0.6,
-              "selected_days": 22,
-              "games": 65,
-              "accuracy": 0.8461538461538461,
-              "brier": 0.12495204129254353,
-              "log_loss": 0.40741157951955376
+              "selected_days": 30,
+              "games": 88,
+              "accuracy": 0.8181818181818182,
+              "brier": 0.1457399903635792,
+              "log_loss": 0.46088311531962795
             },
             {
               "threshold": 0.7,
-              "selected_days": 22,
-              "games": 60,
-              "accuracy": 0.85,
-              "brier": 0.12075632068238493,
-              "log_loss": 0.39654304105853605
+              "selected_days": 29,
+              "games": 79,
+              "accuracy": 0.8354430379746836,
+              "brier": 0.13608121667311907,
+              "log_loss": 0.4387426631527289
             },
             {
               "threshold": 0.8,
-              "selected_days": 20,
-              "games": 36,
-              "accuracy": 0.9444444444444444,
-              "brier": 0.06004196272462906,
-              "log_loss": 0.24833005389347398
+              "selected_days": 26,
+              "games": 49,
+              "accuracy": 0.8571428571428571,
+              "brier": 0.1186555793179231,
+              "log_loss": 0.3930672738210519
             }
           ],
           "paired_accuracy_test_vs_elo": {
-            "games": 68,
-            "game_days": 23,
-            "mean_difference": 0.029411764705882353,
-            "p_value": 0.7806219378062194,
+            "games": 92,
+            "game_days": 31,
+            "mean_difference": 0.03260869565217391,
+            "p_value": 0.5895410458954105,
             "iterations": 10000,
             "seed": 20261029
           },
-          "raw_p": 0.7806219378062194,
+          "raw_p": 0.5895410458954105,
+          "adjusted_p_related_tests": 1.0
+        },
+        "lineup30": {
+          "primary": {
+            "games": 92,
+            "accuracy": 0.7934782608695652,
+            "brier": 0.15224929791905967,
+            "log_loss": 0.47297068021590755
+          },
+          "accuracy_interval": {
+            "lower": 0.7204301075268817,
+            "upper": 0.8681318681318682,
+            "draws": 2000,
+            "seed": 20261029,
+            "unit": "calendar day",
+            "days": 31
+          },
+          "calibration": [
+            {
+              "range": [
+                0.5,
+                0.6
+              ],
+              "picks": 4,
+              "mean_estimate": 0.5634375240030598,
+              "win_fraction": 0.5
+            },
+            {
+              "range": [
+                0.6,
+                0.7
+              ],
+              "picks": 7,
+              "mean_estimate": 0.6716161183414746,
+              "win_fraction": 0.7142857142857143
+            },
+            {
+              "range": [
+                0.7,
+                0.8
+              ],
+              "picks": 34,
+              "mean_estimate": 0.7557503645460055,
+              "win_fraction": 0.6764705882352942
+            },
+            {
+              "range": [
+                0.8,
+                0.9
+              ],
+              "picks": 41,
+              "mean_estimate": 0.8528781418690109,
+              "win_fraction": 0.9024390243902439
+            },
+            {
+              "range": [
+                0.9,
+                1
+              ],
+              "picks": 6,
+              "mean_estimate": 0.9273763452668904,
+              "win_fraction": 1.0
+            }
+          ],
+          "coverage_curve": [
+            {
+              "threshold": 0.5,
+              "selected_days": 31,
+              "games": 92,
+              "accuracy": 0.7934782608695652,
+              "brier": 0.15224929791905967,
+              "log_loss": 0.47297068021590755
+            },
+            {
+              "threshold": 0.6,
+              "selected_days": 30,
+              "games": 88,
+              "accuracy": 0.8068181818181818,
+              "brier": 0.14703839155015028,
+              "log_loss": 0.46139488127767936
+            },
+            {
+              "threshold": 0.7,
+              "selected_days": 30,
+              "games": 81,
+              "accuracy": 0.8148148148148148,
+              "brier": 0.14266303769379074,
+              "log_loss": 0.4508262727553103
+            },
+            {
+              "threshold": 0.8,
+              "selected_days": 26,
+              "games": 47,
+              "accuracy": 0.9148936170212766,
+              "brier": 0.08231528526763006,
+              "log_loss": 0.30719006342607863
+            }
+          ],
+          "paired_accuracy_test_vs_elo": {
+            "games": 92,
+            "game_days": 31,
+            "mean_difference": 0.021739130434782608,
+            "p_value": 0.786021397860214,
+            "iterations": 10000,
+            "seed": 20261029
+          },
+          "raw_p": 0.786021397860214,
           "adjusted_p_related_tests": 1.0
         }
       }

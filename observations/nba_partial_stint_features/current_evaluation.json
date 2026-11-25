@@ -1,14 +1,14 @@
 {
   "hypothesis": "H028",
   "partial_coverage": true,
-  "evaluated_at": "2026-11-18T19:32:03.397520+00:00",
-  "matched_games": 4886,
+  "evaluated_at": "2026-11-25T20:35:57.020835+00:00",
+  "matched_games": 4947,
   "season_counts": {
     "2022-23": 1073,
     "2023-24": 1215,
     "2024-25": 1209,
     "2025-26": 1209,
-    "2026-27": 180
+    "2026-27": 241
   },
   "rating_seasons": [
     "2022-23",
@@ -75,13 +75,13 @@
     },
     {
       "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_pbp/play_by_play_2027.parquet",
-      "sha256": "4ea2a423634e118a1761bc9ca14c9b870a67effa84f9ad5ce5ed8ebd4b33c682",
-      "observed_at": "2026-11-18T19:29:24.946307+00:00",
+      "sha256": "2c12e8f46514aa08f5c438c4e57c131ab25fe1fca082f192c35261aa73132311",
+      "observed_at": "2026-11-25T20:33:52.229112+00:00",
       "cached": true,
       "starter_source": {
         "url": "https://github.com/sportsdataverse/sportsdataverse-data/releases/download/espn_nba_player_boxscores/player_box_2027.csv",
-        "sha256": "92747d1e7c8a66a2a8d1f29548ffc8905a87d77bb960d895c475251a6755bed9",
-        "observed_at": "2026-11-18T13:08:14.850268+00:00"
+        "sha256": "9964590579a3bda1495f3cc853dc76e575d413fc5c43a484b64f1aa7c8e05e0c",
+        "observed_at": "2026-11-24T13:16:37.678493+00:00"
       }
     }
   ],
@@ -169,16 +169,17 @@
     },
     {
       "season_file": 2027,
-      "games_seen": 210,
-      "accepted_games": 6,
-      "rejected_games": 204,
+      "games_seen": 261,
+      "accepted_games": 10,
+      "rejected_games": 251,
       "rejections": {
-        "period_replay_failure": 78,
-        "action_off_court": 92,
-        "overtime_or_incomplete": 12,
-        "ambiguous_substitution": 22
+        "missing_box_context": 3,
+        "period_replay_failure": 99,
+        "ambiguous_substitution": 29,
+        "action_off_court": 106,
+        "overtime_or_incomplete": 14
       },
-      "stints": 207,
+      "stints": 332,
       "scope": "unique regulation lineups; per-player box-minute validation; overtime excluded"
     }
   ],
@@ -214,14 +215,14 @@
           "raw": {
             "games": 1209,
             "accuracy": 0.6608767576509512,
-            "brier": 0.21106779432664738,
-            "log_loss": 0.6088452309883805
+            "brier": 0.21106779432664774,
+            "log_loss": 0.6088452309883813
           },
           "calibrated": {
             "games": 1209,
             "accuracy": 0.6650124069478908,
-            "brier": 0.21044659653696032,
-            "log_loss": 0.6074126563891078
+            "brier": 0.2104465965369607,
+            "log_loss": 0.6074126563891086
           }
         },
         "boosting": {
@@ -267,13 +268,13 @@
             "games": 1209,
             "accuracy": 0.6600496277915633,
             "brier": 0.21280474466184396,
-            "log_loss": 0.6126578397597052
+            "log_loss": 0.6126578397597051
           },
           "calibrated": {
             "games": 1209,
             "accuracy": 0.6683209263854425,
-            "brier": 0.21064807369252814,
-            "log_loss": 0.607765123627509
+            "brier": 0.2106480736925281,
+            "log_loss": 0.6077651236275089
           }
         },
         "boosting": {
@@ -294,7 +295,7 @@
       "day_block_test": {
         "games": 1209,
         "game_days": 159,
-        "mean_difference": 0.0003524672384011989,
+        "mean_difference": 0.0003524672384003121,
         "p_value": 0.901009899010099,
         "iterations": 10000,
         "seed": 20261028
@@ -333,14 +334,14 @@
           "raw": {
             "games": 1209,
             "accuracy": 0.6889991728701406,
-            "brier": 0.20457882128977903,
-            "log_loss": 0.5954529686620592
+            "brier": 0.20457882128978105,
+            "log_loss": 0.5954529686620647
           },
           "calibrated": {
             "games": 1209,
             "accuracy": 0.6881720430107527,
-            "brier": 0.2048493613299238,
-            "log_loss": 0.5959670333376816
+            "brier": 0.2048493613299257,
+            "log_loss": 0.5959670333376867
           }
         },
         "boosting": {
@@ -386,14 +387,14 @@
           "raw": {
             "games": 1209,
             "accuracy": 0.6832092638544252,
-            "brier": 0.20574995236353644,
-            "log_loss": 0.5982043288180028
+            "brier": 0.20574995236352392,
+            "log_loss": 0.5982043288179678
           },
           "calibrated": {
             "games": 1209,
             "accuracy": 0.6782464846980976,
-            "brier": 0.2059805876590229,
-            "log_loss": 0.5985254635607979
+            "brier": 0.20598058765901175,
+            "log_loss": 0.5985254635607694
           }
         },
         "boosting": {
@@ -414,13 +415,13 @@
       "day_block_test": {
         "games": 1209,
         "game_days": 160,
-        "mean_difference": 0.0025584302231162646,
+        "mean_difference": 0.0025584302230826535,
         "p_value": 0.1705829417058294,
         "iterations": 10000,
         "seed": 20261028
       },
       "raw_p": 0.1705829417058294,
-      "adjusted_p_related_outcome_tests": 0.6493750624937507
+      "adjusted_p_related_outcome_tests": 0.6823317668233176
     },
     {
       "season": "2026-27",
@@ -445,37 +446,37 @@
         "promoted": false,
         "uncertainty": "predictive intervals not established",
         "elo": {
-          "games": 180,
-          "accuracy": 0.6944444444444444,
-          "brier": 0.19898255936131867,
-          "log_loss": 0.580017379906253
+          "games": 241,
+          "accuracy": 0.6680497925311203,
+          "brier": 0.2129313477585898,
+          "log_loss": 0.612944685474532
         },
         "logistic": {
           "raw": {
-            "games": 180,
-            "accuracy": 0.6277777777777778,
-            "brier": 0.20583848514961045,
-            "log_loss": 0.5937359855638772
+            "games": 241,
+            "accuracy": 0.6058091286307054,
+            "brier": 0.217202377850219,
+            "log_loss": 0.6201238665157314
           },
           "calibrated": {
-            "games": 180,
-            "accuracy": 0.6277777777777778,
-            "brier": 0.206016764395683,
-            "log_loss": 0.594037750904505
+            "games": 241,
+            "accuracy": 0.6058091286307054,
+            "brier": 0.21752666873659715,
+            "log_loss": 0.6208638471802395
           }
         },
         "boosting": {
           "raw": {
-            "games": 180,
-            "accuracy": 0.6888888888888889,
-            "brier": 0.1979758345448988,
-            "log_loss": 0.5780775424421554
+            "games": 241,
+            "accuracy": 0.6721991701244814,
+            "brier": 0.2135887908551295,
+            "log_loss": 0.6164728584721166
           },
           "calibrated": {
-            "games": 180,
-            "accuracy": 0.6944444444444444,
-            "brier": 0.19791904120977552,
-            "log_loss": 0.578317164590193
+            "games": 241,
+            "accuracy": 0.6763485477178424,
+            "brier": 0.21188708316673532,
+            "log_loss": 0.6112593736954185
           }
         }
       },
@@ -499,56 +500,56 @@
         "promoted": false,
         "uncertainty": "predictive intervals not established",
         "elo": {
-          "games": 180,
-          "accuracy": 0.6944444444444444,
-          "brier": 0.19898255936131867,
-          "log_loss": 0.580017379906253
+          "games": 241,
+          "accuracy": 0.6680497925311203,
+          "brier": 0.2129313477585898,
+          "log_loss": 0.612944685474532
         },
         "logistic": {
           "raw": {
-            "games": 180,
-            "accuracy": 0.65,
-            "brier": 0.20422403515888413,
-            "log_loss": 0.5897856371023805
+            "games": 241,
+            "accuracy": 0.6224066390041494,
+            "brier": 0.21663334565474707,
+            "log_loss": 0.6187541595892355
           },
           "calibrated": {
-            "games": 180,
-            "accuracy": 0.6555555555555556,
-            "brier": 0.20421111327744645,
-            "log_loss": 0.5898364296536615
+            "games": 241,
+            "accuracy": 0.6224066390041494,
+            "brier": 0.21658268570062547,
+            "log_loss": 0.6186730552592314
           }
         },
         "boosting": {
           "raw": {
-            "games": 180,
-            "accuracy": 0.7111111111111111,
-            "brier": 0.18860911138843311,
-            "log_loss": 0.557304632607344
+            "games": 241,
+            "accuracy": 0.6887966804979253,
+            "brier": 0.20508579420182335,
+            "log_loss": 0.5980310322565725
           },
           "calibrated": {
-            "games": 180,
-            "accuracy": 0.7166666666666667,
-            "brier": 0.18995454848516624,
-            "log_loss": 0.5611456729173735
+            "games": 241,
+            "accuracy": 0.6929460580912863,
+            "brier": 0.20448941454775169,
+            "log_loss": 0.5953511586841943
           }
         }
       },
       "day_block_test": {
-        "games": 180,
-        "game_days": 23,
-        "mean_difference": -0.004201321250843537,
-        "p_value": 0.40075992400759924,
+        "games": 241,
+        "game_days": 31,
+        "mean_difference": -0.002190791921008069,
+        "p_value": 0.5822417758224178,
         "iterations": 10000,
         "seed": 20261028
       },
-      "raw_p": 0.40075992400759924,
-      "adjusted_p_related_outcome_tests": 0.6493750624937507
+      "raw_p": 0.5822417758224178,
+      "adjusted_p_related_outcome_tests": 0.9315868413158684
     }
   ],
   "promoted": false,
   "coverage_summary": {
-    "mean_home_supported_fraction": 0.7435536302500949,
-    "mean_away_supported_fraction": 0.7428450807847613,
+    "mean_home_supported_fraction": 0.7441219455072671,
+    "mean_away_supported_fraction": 0.7432212379668924,
     "fully_supported_games": 6
   }
 }

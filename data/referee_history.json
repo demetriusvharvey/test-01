@@ -4041,5 +4041,122 @@
     ],
     "observed_at": "2026-11-24T18:14:58.610415+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:Miami @ Philadelphia",
+    "game_date": "2026-11-25",
+    "matchup": "Miami @ Philadelphia",
+    "crew": [
+      "Marc Davis (#8)",
+      "Nick Buchert (#3)",
+      "Che Flores (#91)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:Chicago @ Charlotte",
+    "game_date": "2026-11-25",
+    "matchup": "Chicago @ Charlotte",
+    "crew": [
+      "Tony Brothers (#25)",
+      "Ashley Moyer-Gleich (#13)",
+      "John Conley (#56)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:Cleveland @ New York",
+    "game_date": "2026-11-25",
+    "matchup": "Cleveland @ New York",
+    "crew": [
+      "Josh Tiven (#58)",
+      "Tre Maddox (#23)",
+      "Biniam Maru (#94)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:Minnesota @ Oklahoma City",
+    "game_date": "2026-11-25",
+    "matchup": "Minnesota @ Oklahoma City",
+    "crew": [
+      "Kevin Scott (#24)",
+      "Jason Goldenberg (#35)",
+      "Pat O'Connell (#90)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:LA Clippers @ Memphis",
+    "game_date": "2026-11-25",
+    "matchup": "LA Clippers @ Memphis",
+    "crew": [
+      "Zach Zarba (#15)",
+      "JB DeRosa (#14)",
+      "Robert Hussey (#85)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:Brooklyn @ Milwaukee",
+    "game_date": "2026-11-25",
+    "matchup": "Brooklyn @ Milwaukee",
+    "crew": [
+      "Gediminas Petraitis (#50)",
+      "Ray Acosta (#54)",
+      "Intae Hwang (#73)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:Phoenix @ Houston",
+    "game_date": "2026-11-25",
+    "matchup": "Phoenix @ Houston",
+    "crew": [
+      "Mitchell Ervin (#27)",
+      "Andy Nagy (#18)",
+      "CJ Washington (#12)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:Sacramento @ Golden State",
+    "game_date": "2026-11-25",
+    "matchup": "Sacramento @ Golden State",
+    "crew": [
+      "Bill Kennedy (#55)",
+      "Mark Lindsay (#29)",
+      "Matt Kallio (#53)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-25:San Antonio @ Portland",
+    "game_date": "2026-11-25",
+    "matchup": "San Antonio @ Portland",
+    "crew": [
+      "Curtis Blair (#74)",
+      "Sean Corbin (#33)",
+      "Jenna Schroeder (#20)",
+      ""
+    ],
+    "observed_at": "2026-11-25T20:43:13.975397+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]

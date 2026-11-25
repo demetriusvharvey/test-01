@@ -1,12 +1,12 @@
 {
-  "evaluated_at": "2026-11-25T02:37:35.110819+00:00",
+  "evaluated_at": "2026-11-25T11:42:33.555914+00:00",
   "invalid_forecasts": 0,
   "models": {
     "nba-efficiency-logistic-v1": {
       "benchmark_missing": 45,
-      "pending": 77,
+      "pending": 76,
       "void": 0,
-      "excluded": 18,
+      "excluded": 20,
       "scenario_agreement": 124,
       "scenario_disagreement": 1,
       "model": {
@@ -36,40 +36,40 @@
     "nba-convex-ensemble-v1": {
       "wins": 112,
       "losses": 54,
-      "pending": 72,
+      "pending": 71,
       "abstained": 7,
       "void": 0,
-      "excluded": 18,
+      "excluded": 20,
       "settled_predictions": 166,
       "accuracy": 0.6746987951807228
     },
     "nba-partial-stint-logistic-v1": {
       "wins": 115,
       "losses": 50,
-      "pending": 72,
+      "pending": 71,
       "abstained": 8,
       "void": 0,
-      "excluded": 18,
+      "excluded": 20,
       "settled_predictions": 165,
       "accuracy": 0.696969696969697
     },
     "nba-player-box-logistic-v1": {
       "wins": 115,
       "losses": 52,
-      "pending": 72,
+      "pending": 71,
       "abstained": 6,
       "void": 0,
-      "excluded": 18,
+      "excluded": 20,
       "settled_predictions": 167,
       "accuracy": 0.688622754491018
     },
     "nba-rotation-logistic-v1": {
       "wins": 110,
       "losses": 59,
-      "pending": 72,
+      "pending": 71,
       "abstained": 4,
       "void": 0,
-      "excluded": 18,
+      "excluded": 20,
       "settled_predictions": 169,
       "accuracy": 0.650887573964497
     }

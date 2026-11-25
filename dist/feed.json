@@ -1,29 +1,71 @@
 {
-  "generated_at": "2026-11-24T23:30:50.422917+00:00",
+  "generated_at": "2026-11-25T23:09:25.683539+00:00",
   "nba_referees": {
     "source": "https://official.nba.com/referee-assignments/",
     "status": "ok",
-    "date_expected": "2026-11-24",
+    "date_expected": "2026-11-25",
     "games": [
       {
-        "matchup": "Detroit @ Orlando",
-        "crew_chief": "John Goble (#10)",
-        "referee": "Karl Lane (#77)",
-        "umpire": "Evan Scott (#22)",
+        "matchup": "Miami @ Philadelphia",
+        "crew_chief": "Marc Davis (#8)",
+        "referee": "Nick Buchert (#3)",
+        "umpire": "Che Flores (#91)",
         "alternate": ""
       },
       {
-        "matchup": "Boston @ Washington",
-        "crew_chief": "Ben Taylor (#46)",
-        "referee": "Marat Kogut (#32)",
-        "umpire": "Jenna Reneau (#93)",
+        "matchup": "Chicago @ Charlotte",
+        "crew_chief": "Tony Brothers (#25)",
+        "referee": "Ashley Moyer-Gleich (#13)",
+        "umpire": "John Conley (#56)",
         "alternate": ""
       },
       {
-        "matchup": "Dallas @ Denver",
-        "crew_chief": "Justin Van Duyne (#64)",
+        "matchup": "Cleveland @ New York",
+        "crew_chief": "Josh Tiven (#58)",
+        "referee": "Tre Maddox (#23)",
+        "umpire": "Biniam Maru (#94)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Minnesota @ Oklahoma City",
+        "crew_chief": "Kevin Scott (#24)",
+        "referee": "Jason Goldenberg (#35)",
+        "umpire": "Pat O'Connell (#90)",
+        "alternate": ""
+      },
+      {
+        "matchup": "LA Clippers @ Memphis",
+        "crew_chief": "Zach Zarba (#15)",
+        "referee": "JB DeRosa (#14)",
+        "umpire": "Robert Hussey (#85)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Brooklyn @ Milwaukee",
+        "crew_chief": "Gediminas Petraitis (#50)",
+        "referee": "Ray Acosta (#54)",
+        "umpire": "Intae Hwang (#73)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Phoenix @ Houston",
+        "crew_chief": "Mitchell Ervin (#27)",
         "referee": "Andy Nagy (#18)",
-        "umpire": "Nate Green (#41)",
+        "umpire": "CJ Washington (#12)",
+        "alternate": ""
+      },
+      {
+        "matchup": "Sacramento @ Golden State",
+        "crew_chief": "Bill Kennedy (#55)",
+        "referee": "Mark Lindsay (#29)",
+        "umpire": "Matt Kallio (#53)",
+        "alternate": ""
+      },
+      {
+        "matchup": "San Antonio @ Portland",
+        "crew_chief": "Curtis Blair (#74)",
+        "referee": "Sean Corbin (#33)",
+        "umpire": "Jenna Schroeder (#20)",
         "alternate": ""
       }
     ]

@@ -4158,5 +4158,148 @@
     ],
     "observed_at": "2026-11-25T20:43:13.975397+00:00",
     "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Miami @ New York",
+    "game_date": "2026-11-27",
+    "matchup": "Miami @ New York",
+    "crew": [
+      "Scott Foster (#48)",
+      "Jacyn Goble (#68)",
+      "Nate Cearley (#84)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Milwaukee @ Detroit",
+    "game_date": "2026-11-27",
+    "matchup": "Milwaukee @ Detroit",
+    "crew": [
+      "Marc Davis (#8)",
+      "Eric Dalen (#37)",
+      "Rodney Mott (#71)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Philadelphia @ Indiana",
+    "game_date": "2026-11-27",
+    "matchup": "Philadelphia @ Indiana",
+    "crew": [
+      "Ben Taylor (#46)",
+      "Robert Hussey (#85)",
+      "Jenna Reneau (#93)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Brooklyn @ Toronto",
+    "game_date": "2026-11-27",
+    "matchup": "Brooklyn @ Toronto",
+    "crew": [
+      "James Capers (#19)",
+      "Tre Maddox (#23)",
+      "Scott Twardoski (#52)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Atlanta @ Boston",
+    "game_date": "2026-11-27",
+    "matchup": "Atlanta @ Boston",
+    "crew": [
+      "Mitchell Ervin (#27)",
+      "Karl Lane (#77)",
+      "Che Flores (#91)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Memphis @ Minnesota",
+    "game_date": "2026-11-27",
+    "matchup": "Memphis @ Minnesota",
+    "crew": [
+      "Ed Malloy (#7)",
+      "Natalie Sago (#9)",
+      "Brandon Schwab (#49)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Dallas @ Phoenix",
+    "game_date": "2026-11-27",
+    "matchup": "Dallas @ Phoenix",
+    "crew": [
+      "Kevin Scott (#24)",
+      "John Butler (#30)",
+      "Leon Wood (#40)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:L.A. Lakers @ San Antonio",
+    "game_date": "2026-11-27",
+    "matchup": "L.A. Lakers @ San Antonio",
+    "crew": [
+      "John Goble (#10)",
+      "Andy Nagy (#18)",
+      "Aaron Smith (#51)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Denver @ Utah",
+    "game_date": "2026-11-27",
+    "matchup": "Denver @ Utah",
+    "crew": [
+      "Bill Kennedy (#55)",
+      "Ray Acosta (#54)",
+      "CJ Washington (#12)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:New Orleans @ LA Clippers",
+    "game_date": "2026-11-27",
+    "matchup": "New Orleans @ LA Clippers",
+    "crew": [
+      "Curtis Blair (#74)",
+      "Sha'Rae Mitchell (#98)",
+      "Jenna Schroeder (#20)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
+  },
+  {
+    "key": "2026-11-27:Golden State @ Portland",
+    "game_date": "2026-11-27",
+    "matchup": "Golden State @ Portland",
+    "crew": [
+      "James Williams (#60)",
+      "Justin Van Duyne (#64)",
+      "Derrick Collins (#11)",
+      ""
+    ],
+    "observed_at": "2026-11-27T22:39:43.251888+00:00",
+    "source": "https://official.nba.com/referee-assignments/"
   }
 ]
